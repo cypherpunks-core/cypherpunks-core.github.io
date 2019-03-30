@@ -6,8 +6,8 @@
 
 ## 資源庫
 * [區塊鏈隱私資源  Blockchain privacy resources](https://github.com/cypherpunks-core/blockchain_privacy_resources_zh)
-* [:zap:閃電網路資源整理  :zap:Lightning network resources](https://github.com/cypherpunks-core/Lightning_network_resources_zh)
-* [Schnorr簽名資源  Schnorr Signature Resources](https://github.com/cypherpunks-core/Schnorr_Signature_Resources_zh)
+* [閃電網路資源整理  Lightning network resources](https://github.com/cypherpunks-core/Lightning_network_resources_zh)
+* [Schnorr 簽名資源  Schnorr Signature Resources](https://github.com/cypherpunks-core/Schnorr_Signature_Resources_zh)
 
 ## 論文
 * [Ethereum White Paper - 繁中](https://github.com/cypherpunks-core/ethereum_whitepaper_zh)
