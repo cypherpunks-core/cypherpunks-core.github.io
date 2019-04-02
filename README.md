@@ -15,6 +15,7 @@
 ## 論文
 * [Ethereum White Paper - 繁中](https://github.com/cypherpunks-core/ethereum_whitepaper_zh)
 * [比特幣：一種點對點的電子現金系統 - 繁中](https://github.com/cypherpunks-core/bitcoin_whitepaper_zh)
+* [比特幣閃電網路：可擴展的 off-chain 即時支付](https://github.com/cypherpunks-core/lightning_network_whitepaper_zh)
 
 ## 書籍
 * [Mastering Bitcoin 2nd Edition - 繁中](https://github.com/cypherpunks-core/bitcoinbook_2nd_zh)
