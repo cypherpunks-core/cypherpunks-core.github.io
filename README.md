@@ -3,8 +3,8 @@
 * [Cypherpunks Github](https://github.com/cypherpunks-core)
 * [Cypherpunks 官方網站(Official website)](https://cypherpunks.tech/)
 * [Cypherpunks Facebook 粉絲專頁(Facebook fan page)](https://www.facebook.com/CypherpunksTW/)
-* [Cypherpunks 論壇](https://forum.cypherpunks.tech/)
-* [Cypherpunks Youtube 頻道(forum)](https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA)
+* [Cypherpunks 論壇(forum)](https://forum.cypherpunks.tech/)
+* [Cypherpunks Youtube 頻道(Youtube channel)](https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA)
 * [Cypherpunks Hackmd](https://hackmd.io/team/cypherpunks)
 
 ## 資源庫 Resource
