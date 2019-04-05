@@ -1,4 +1,7 @@
+
 # Cypherpunks-core
+密碼學使自由和隱私再次偉大。    
+Cryptography makes freedom and privacy great again.
 
 * [Cypherpunks Github](https://github.com/cypherpunks-core)
 * [Cypherpunks 官方網站(Official website)](https://cypherpunks.tech/)
@@ -28,3 +31,7 @@
 
 ## 專案 Project
 * [衛星計畫-發送比特幣交易到衛星(Satellite Project - Send Bitcoin transactions to satellites)](https://github.com/cypherpunks-core/Satellite-project)
+
+## 相關新聞 related news
+* 「區塊鏈的再審視，回歸密碼龐克初衷」[動區動趨 BlockTEMPO](https://www.blocktempo.com/cypherpunk-blockchain-re-evaluation-2/)、[巴比特](https://www.8btc.com/article/356346)、[陀螺财经](https://www.tuoluocaijing.cn/article/detail-28371.html)
+* 台灣成立新社群平台「密碼龐克」— 從比特幣核心精神進行「在鏈上的交流」[動區動趨 BlockTEMPO](https://www.blocktempo.com/cypher-punk-taiwan-forum/)、[浮云网](http://fuyun.one/block-3063.html)
