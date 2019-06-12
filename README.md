@@ -8,7 +8,7 @@ Cryptography makes freedom and privacy great again.
 * [Cypherpunks Facebook 粉絲專頁(Facebook fan page)](https://www.facebook.com/CypherpunksTW/)
 * [Cypherpunks 論壇(forum)](https://forum.cypherpunks.tech/)
 * [Cypherpunks Youtube 頻道(Youtube channel)](https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA)
-* [Cypherpunks Hackmd](https://hackmd.io/team/cypherpunks)
+* [Cypherpunks 講者投影片](http://sc.piee.pw/F9Z9V)
 
 ## 資源庫 Resource
 * [區塊鏈隱私資源  (Blockchain privacy resources)](https://github.com/cypherpunks-core/blockchain_privacy_resources_zh)
