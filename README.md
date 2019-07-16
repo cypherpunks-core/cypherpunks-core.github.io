@@ -35,3 +35,6 @@ Cryptography makes freedom and privacy great again.
 ## 相關新聞 related news
 * 「區塊鏈的再審視，回歸密碼龐克初衷」[動區動趨 BlockTEMPO](https://www.blocktempo.com/cypherpunk-blockchain-re-evaluation-2/)、[巴比特](https://www.8btc.com/article/356346)、[陀螺财经](https://www.tuoluocaijing.cn/article/detail-28371.html)
 * 台灣成立新社群平台「密碼龐克」— 從比特幣核心精神進行「在鏈上的交流」[動區動趨 BlockTEMPO](https://www.blocktempo.com/cypher-punk-taiwan-forum/)、[浮云网](http://fuyun.one/block-3063.html)
+* 區塊鏈技術公司 Blockstream 在台北：深入比特幣衛星計畫 [動區動趨 BlockTEMPO](https://www.blocktempo.com/blockstream-in-taiwna-sharing-their-blockstream-satellite-project/) 
+* 區塊鏈技術公司 Blockstream 在台北：深入比特幣側鏈 Liquid Network [動區動趨 BlockTEMPO](https://www.blocktempo.com/blockstream-explained-liquid-network-in-cypherpunks-taiwan/)
+* 發文互動賺比特幣，台灣論壇「密碼龐克」將透過閃電網路分發獎勵 [動區動趨 BlockTEMPO](https://www.blocktempo.com/cypherpunk-taiwan-lightning-tipping/)
