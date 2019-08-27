@@ -1,9 +1,3 @@
----
-title: Cypherpunks-core 首頁
-tags: Cypherpunks-core
-GA: UA-131051587-2
----
-
 # Cypherpunks-core
 密碼學使自由和隱私再次偉大。    
 Cryptography makes freedom and privacy great again.
