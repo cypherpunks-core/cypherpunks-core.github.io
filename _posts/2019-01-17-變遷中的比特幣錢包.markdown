@@ -1,0 +1,41 @@
+---
+layout: post
+title:  "變遷中的比特幣錢包"
+date:   2019-01-17
+categories: news
+description: "比特幣硬體錢包 Trezor 共同創辦人 Alena Vranova，同時也是 SatoshiLabs 的共同創辦人，今年 1 月 8 日在 Medium 平台上，以「The Evolution of Bitcoin Key Management」（暫譯：比特幣錢包管理的演進）一文，發表她對比特幣錢包的技術發展及演進的看法。"
+image: '/img/17.png'
+published: true
+---
+
+原文標題： The Evolution of Bitcoin Key Management
+
+作者：Alena Vranova
+
+文章來源：[https://medium.com/casa/the-evolution-of-bitcoin-key-management-c2fd29ba35d6](https://medium.com/casa/the-evolution-of-bitcoin-key-management-c2fd29ba35d6)
+
+比特幣硬體錢包 Trezor 共同創辦人 Alena Vranova，同時也是 SatoshiLabs 的共同創辦人，今年 1 月 8 日在 Medium 平台上，以「The Evolution of Bitcoin Key Management」（暫譯：比特幣錢包管理的演進）一文，發表她對比特幣錢包的技術發展及演進的看法。
+
+精華摘要：
+
+* 早期比特幣私鑰都是以純文本的形式，存在電腦硬碟 wallet.dat 文件中，並沒有密碼保護，沒有輸入和輸出私鑰的方式，當時的私鑰是用 Python 指令碼生成的。這種儲存方式有大量安全風險，一直到比特幣核心開發者開始提交比特幣改進提案（BIP），這一切才有了改變。
+* 非確定性錢包（Nondeterministic wallets，又稱隨機錢包）指每個密鑰都是從隨機數獨立生成的。第一款比特幣錢包 App 就是屬於非確定性桌上型錢包（desktop wallets），能夠隨機產生一組比特幣地址和對應的私鑰（密鑰對）。使用者在每筆交易完成後都需要備份密鑰對，以確保資金安全。然而，使用者經常會遇到各式各樣的問題，例如，獨立地址數量有限、地址備份失敗，或因糟糕的使用者體驗（在手續費欄誤輸入交易金額）而丟失資金。
+* 第一款桌上型軟體錢包，對於不懂程式開發的使用者來說，是一個重要的里程碑。因為這使最早期的比特幣使用者，不再需要特別了解指命碼也可以使用。
+* 單密鑰錢包（single key wallet）可以建立紙錢包，外出時方便攜帶，其便利性與信用卡相似，你可以用它來買咖啡，或是在離線時收款。Peter Kroll 的 [bitaddress.org](http://bitaddress.org/) 就是第一個推出人氣使用者友善紙錢包生成網站。
+
+![](/img/14.png)
+
+[bitaddress.org](http://bitaddress.org/) 網站推出可列印的紙錢包，帶有公鑰（Load & Verify）和私鑰（Spend）。
+
+* 不過，線上生成錢包是不安全的。一個鍵盤記錄器就能讓你電腦上的比特幣暴露在風險之中。線下生成密鑰是可行的，但卻需要寫指令碼一定的程式知識。第一個率先解決這個問題的是一款硬體裝置––紙錢包印表機 Piper。由樹莓派（Raspberry Pi）驅動的印表機，可以根據特定需求打造紙錢包。
+* 時至今日，現在的比特幣錢包都以確定的方式生成地址。獲得原始輸入（密碼學家稱之為 seed 種子）之後，能夠從中再生成多組地址。2011年底時，推出了第一款確定性軟體錢包「Electrum」。使用者終於從頻繁備份的那些麻煩中解脫出來，變成只需要使用一串種子。
+* 第一款確定性錢包相對來說比較基礎。一個主密鑰可以再生成多個地址（如圖A），但無法處理更複雜的分層——例如一個主密鑰包含多個子密鑰（child keys）。
+
+![](/img/15.png)
+
+* 2012年，BIP-32 提案為我們帶來了 HD 錢包，與高畫質的 HD 沒有關係。HD 錢包可為確定性錢包添加分層結構（如圖B），全名是分層確定性錢包（Hierarchical Deterministic wallets），HD 錢包是它的簡寫。
+
+![](/img/16.png)
+
+* 2012 年，SatoshiLabs 的創辦團隊打造了第一款商用硬體錢包 Trezor 的產品原型。Trezor 硬體錢包的特色例如，HD 錢包結構支持多幣種及帳戶、可簡易恢復錢包的種子、額外的密碼加密等。
+* 多重簽名由比特幣開發者 Gavin Andresen 在 BIP-11 提出，2011年完成部署，有時也被叫做 M-of-N 標準交易協議。第一款商用多重簽名錢包是基於 BitGo 在 2013 年推出的 BIP-16（P2SH）。多家大型交易所都曾受益，包括 Bitstamp、Kraken 和 Bitfinex；Greenaddress 也接著推出了針對終端使用者的多重簽名方案，使用 2-of-2 和 2-of-3 多重簽名方案。

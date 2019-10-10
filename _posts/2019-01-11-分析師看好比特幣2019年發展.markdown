@@ -1,0 +1,26 @@
+---
+layout: post
+title:  "分析師看好比特幣2019年發展"
+date:   2019-01-11
+categories: news
+description: "比特幣分析師 Arjun Balaji，同時也是紐約加密資產投資顧問新創公司 Shomei Capital 創辦人，今年 1 月 2 日在 Medium 平台上發表「Crypto Theses for 2019」一文，描寫加密貨幣發展現況，以及預測多個與比特幣及加密貨幣相關的未來成長趨勢。"
+image: '/img/11.png'
+published: true
+---
+
+原文標題：Crypto Theses for 2019  作者：Arjun Balaji
+
+文章來源：[https://medium.com/@arjunblj/crypto-theses-for-2019-dd20cb7f9895](https://medium.com/@arjunblj/crypto-theses-for-2019-dd20cb7f9895)
+
+比特幣分析師 Arjun Balaji，同時也是紐約加密資產投資顧問新創公司 Shomei Capital 創辦人，今年 1 月 2 日在 Medium 平台上發表「Crypto Theses for 2019」一文，描寫加密貨幣發展現況，以及預測多個與比特幣及加密貨幣相關的未來成長趨勢。
+
+![](/img/11.png)
+
+精華摘要：
+
+* 預測今年 2019 年將看到閃電網路（Lightning Network）持續增長，看好閃電網路已建立交易通道的節點數量，將不會少於 10,000，目前數量為 2,100（60% 信心）。
+* 預期今年將看到網路容量大幅成長，從 200 萬美元，增長到超過 2500 萬美元（75% 信心）。
+* 隨著網路穩定性和安全性不斷提升，今年 2019 年預期至少會有一家主流加密貨幣交易所推出閃點網路中心（50% 信心）。
+* 比特幣 Bitcoin Core 開發者、Blockstream 公司共同創辦人 Pieter Wuille，去年七月發表了一份比特幣改進提案（BIP），提出了有關 Schnorr 數位簽章的機制設計，今年預期將能看到此份 BIP 提案有更多的推展與實作。
+* 預期將看到 Wuille 這份 BIP 提案在2019年底前，通過軟分叉引入比特幣，節點採用率將不低於 5%（75% 信心）。
+* 對於比特幣而言，去年 2018 年是一個重要里程碑，因為這年在比特幣隱私性和可替代性（fungibility）技術上有所突破。例如，去年第一季由比特幣知名開發者 Gregory Maxwell 推出的「Taproot」及「Graftroot」改進提案、去年五月出現的「Dandelion」BIP 改進提案，以及為軟分叉升級到基於 Schnorr 數位簽章框架的新路徑。

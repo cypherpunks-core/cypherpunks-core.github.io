@@ -1,0 +1,36 @@
+---
+layout: post
+title:  "幣虎CoinGecko發表2018加密貨幣市場年度報告"
+date:   2019-01-28
+categories: news
+description: "「CoinGecko Yearly Report for 2018」（幣虎2018加密貨幣市場年度報告）"
+image: '/img/30.png'
+published: true
+---
+
+> 「CoinGecko Yearly Report for 2018」（幣虎2018加密貨幣市場年度報告），下載完整報告 PDF 檔案：https://assets.coingecko.com/reports/2018-Full-Year-Report/2018-CoinGecko-Report.pdf
+
+加密貨幣排名網站[幣虎 CoinGecko](https://www.coingecko.com/zh-tw) 今年 1 月中旬，在網路上發表了一份多達 83 頁的 2018 年加密貨幣市場回顧報告（CoinGecko Yearly Report for 2018），從市場動態、加密貨幣交易所到去年在加密貨幣圈內發生的重要事件等角度切入，集結了 TokenMarket、Dapp.com、Masternodes Online 及 Nonfungible.com 平台數據，回顧過去一年的市場和分析未來發展。
+
+* 在市場動態方面，2018 年對加密貨幣市場來說不是特別幸運的一年。前 30 大加密貨幣的市值在去年平均下跌了 78.85％。（報告第7頁）
+
+![](/img/25.png)
+
+![](/img/26.png)
+
+* 去年，從五大加密貨幣來看，比特幣價格狂跌了 73％，以太幣價格下跌了 82％，Ripple的瑞波幣 XRP 價格跌了 84％，比特幣現金價格下跌了 93％，前五大加密資產中最不穩定的虛擬貨幣 EOS 價格則下降了 66％。（報告第9頁）
+* 以前 30 大加密貨幣來看，比特幣在市場的主導地位提升，從去年年初的 40％ 上升到年底時的 55％ 以上。（報告第10頁）
+
+![](/img/27.png)
+
+* 依幣虎報告數據顯示，就去年 2018 年中位數交易量的數據統計，排名全球前 30 大的加密貨幣交易所，韓國加密貨幣交易所 Bithumb 位居榜首，中國加密貨幣交易所 ZB.com 排名第二，全球知名的加密貨幣交易所幣安 Binance 排名第三。（報告第17頁）
+
+![](/img/28.png)
+
+* 去年 ICO（首次代幣發行）融資活動觀察，透過 ICO 募集資金金額有成功達到募資硬上限（hard cap） 的 ICO 比例，從去年 1 月的約 53%，下降到去年 12 月的 10%。影響 ICO越來越難達到募資硬上限的原因有幾個，包括加密貨幣投資市場情緒越來越低落、政府對 ICO 融資活動的加強監管，以及比特幣價格和以太幣價格的下跌等。（報告第28頁）
+* DApp 去中心化應用程式的部分，去年 DApp 去中心化應用程式市場增長非常迅速，尤其集中在一級戰區遊戲和博弈類的應用。（報告第44頁）
+* 整體來看，以太坊仍是 DApp 的領頭羊，擁有最多 DApp 去中心化應用。值得關注的是，EOS 在去年 6 月推出主網，TRON 也緊接著在去年 6 月下旬時推出主網，在未來市場具潛力，值得期待。（第45頁）
+
+![](/img/29.png)
+
+* Masternodes 的部分，儘管價格下跌，Masternode coins 的總市值從去年年初的 125 億美元，下跌到年底的 5.3 億美元，Masternodes 和 Masternode coins 的數量皆呈現顯著增長。（第59頁、第60頁） 

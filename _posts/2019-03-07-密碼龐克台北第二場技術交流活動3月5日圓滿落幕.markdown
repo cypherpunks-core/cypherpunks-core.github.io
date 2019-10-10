@@ -1,0 +1,32 @@
+---
+layout: post
+title:  "密碼龐克台北第二場技術交流活動3月5日圓滿落幕"
+date:   2019-03-07
+categories: news
+description: "資訊工程研究所碩二生 Brian 分享「比特幣交易手續費的預測」以及日本比特幣創業家東晃慈（Koji Higashi）談有關閃電網路（Lighting Network）和第二層技術的重要性。"
+image: '/img/36.png'
+published: true
+---
+
+由[「Cypherpunks Taiwan 密碼龐克」](https://cypherpunks.tech/)網站平台主辦、[摩茲工寮 Mozilla Community Space Taipei](https://moztw.org/space/) 場地空間贊助的第二次密碼龐克台北實體技術交流聚會活動，於 3 月 5 日星期二晚上 19:00 – 21:30 舉行，現場吸引 30 多位朋友來到台北市八德路摩茲工寮的空間，聆聽資訊工程研究所碩二生 Brian 分享「比特幣交易手續費的預測」以及日本比特幣創業家東晃慈（Koji Higashi）談有關閃電網路（Lighting Network）和第二層技術的重要性。
+
+![](/img/36.png)
+
+* 密碼龐克社群第二次[活動資訊網頁](https://www.meetup.com/Taipei-Bitcoin-Meetup-Group/events/259290822/)在 Meetup.com 平台上。
+* 點選連結觀賞活動錄影 YouTube 影片：https://youtu.be/w00SteBL_5c
+* 點此連結觀看東晃慈談閃電網路（Lighting Network）的[演講簡報](https://docs.google.com/presentation/d/1NLzaGHvu7BP69WAm5WDVbj6eqEpE3-fp5Ov-AHStyVM/edit?usp=sharing)
+* 點此連結觀看研究生 Brian 的談手續費「Bitcoin Transaction Fee Prediction Using
+Machine Learning Algorithm」的[演講簡報](https://docs.google.com/presentation/d/1SMpAjS8G004oDLdYVY874yoNIYmL7tDW1Spo5NtKVZQ/edit#slide=id.p1)
+* 點此連結參與本次活動在密碼龐克[論壇上的討論](https://forum.cypherpunks.tech/t/topic/123/6)
+
+![](/img/37.jpg)
+
+Cypherpunks Taiwan 密碼龐克邀請到台灣大學資訊工程學系研究所碩士二年級研究生 Brian 在活動中分享比特幣交易手續費的預測。
+
+![](/img/38.jpg)
+
+Cypherpunks Taiwan 密碼龐克創辦人東晃慈（Koji Higashi）擔任本次技術社群交流活動講者。
+
+![](/img/39.jpg)
+
+![](/img/40.jpg)

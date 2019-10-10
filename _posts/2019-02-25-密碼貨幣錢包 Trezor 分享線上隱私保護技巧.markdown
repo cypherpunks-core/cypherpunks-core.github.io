@@ -1,0 +1,23 @@
+---
+layout: post
+title:  "密碼貨幣錢包 Trezor 分享線上隱私保護技巧"
+date:   2019-02-25
+categories: news
+description: "推薦錢包使用者幾個保護自己資料隱私的技巧（本文分享了五個技巧），並以此文表示慶祝近期的國際資料隱私日(Data Privacy Day)"
+image: '/img/42.png'
+published: true
+---
+
+原文標題：Trezor Data Privacy Series — 10 Tips on How to Stay Safe Online (Part One)
+
+作者：SatoshiLabs
+
+文章來源：https://blog.trezor.io/trezor-data-privacy-series-10-tips-on-how-to-stay-safe-online-part-one-dbe9a94be36e
+
+知名密碼貨幣硬體錢包 Trezor 的製造商 [SatoshiLabs](https://blog.trezor.io/@satoshilabs) 今年二月4日在官方部落格網站上發表文章，以「 Trezor Data Privacy Series — 10 Tips on How to Stay Safe Online (Part One)」（暫譯： 密碼貨幣錢包 Trezor 資料隱私系列文章–– 線上隱私保護 10 招技巧 [上集]）為標題，推薦錢包使用者幾個保護自己資料隱私的技巧（本文分享了五個技巧），並以此文表示慶祝近期的國際資料隱私日(Data Privacy Day)。
+
+* 第一個技巧：確保你的裝置處於最新狀態。留意保持行動裝置及電腦的安全，最好能夠定期更新你的作業系統。
+* 第二個技巧：儘量只使用可信的網路。我們強烈建議不要使用公共 Wi-Fi 網路。
+* 第三個技巧：調整你的線上隱私設定。開始使用不會追蹤你線上活動的瀏覽器，例如 火狐 Firefox 瀏覽器或 Tor。啟動推特 Twitter 和臉書 Facebook 上的最高隱私設定，隱藏你的重要個人資訊。
+* 第四個技巧：確保你在網路上的身份和重要資訊的私密性和專業度。你的社交媒體帳戶容易暴露你的各種重要資料，陌生人可以藉臉書、推特等社交網路平台掌握你的重要資訊，例如你的交友關係，你居住的地方等。因此需特別留意在網路上釋放出的資訊，需確保沒有任何資訊會傷害你的聲譽，或透露太多關於你個人的訊息。
+* 第五個技巧：請避免從不熟悉的網站下載內容，包括下載影音內容或軟體，尤其是沒有加裝 SSL 憑證的網站，我們建議請勿輕易造訪陌生網站，或下載任何未知網站的資料。 

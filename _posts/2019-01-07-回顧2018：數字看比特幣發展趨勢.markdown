@@ -1,0 +1,32 @@
+---
+layout: post
+title:  "回顧 2018：數字看比特幣發展趨勢"
+date:   2019-01-07 20:00:07
+categories: news
+description: "比特幣軟體工程師 Jameson Lopp，同時也是知名加密貨幣數據分析網站 Statoshi.info 的創辦人，今年1月1日在Medium平台發表文章「Bitcoin By the Numbers: 2018 Recap」"
+image: '/img/2.png'
+published: true
+canonical_url: 
+---
+
+> 原文標題：Bitcoin By the Numbers: 2018 Recap 作者：Jameson Lopp
+> 來源：[https://medium.com/@lopp/bitcoin-by-the-numbers-2018-recap-68a91789d804](https://medium.com/@lopp/bitcoin-by-the-numbers-2018-recap-68a91789d804)
+
+比特幣軟體工程師 Jameson Lopp，同時也是知名加密貨幣數據分析網站 Statoshi.info 的創辦人，今年1月1日在Medium平台發表文章「Bitcoin By the Numbers: 2018 Recap」，藉收集數據、統計分析，回顧了2018年一整年，以及展望比特幣未來的發展趨勢。文中指出，比特幣在日益複雜的生態系統中走在最前端，並在各個面向持續成長。比特幣發展走了十年，來到第十年，仍固執地拒絕倒下。
+
+精華摘要：
+
+* 開發中國家對比特幣相關的搜尋熱度不減
+
+<div align="center"><img width="400" src="/img/2.png"/></div>
+
+* 幣價大跌後，在美國熱門網路論壇 Reddit 比特幣版（/r/bitcoin）新加入的訂閱數，成長腳步明顯放緩，但仍然增長了 38 萬新訂閱使用者， 2018 年增長 61％。
+* 學術圈有關比特幣的學術文章發表篇數持續增長。2018 年發表多達 14,400 篇比特幣相關學術文章。
+
+<div align="center"><img width="400" src="/img/3.png"/></div>
+
+* 比特幣市值在加密貨幣市場中仍擁有主導地位（儘管這是可疑價值的高操作性指標）在2018 年 1 月達到年度最低 32.5％，但在第四季全都超過了 50％。
+* 過去一年，比特幣礦工收取的交易費下降，跌幅高達99.5%。
+* 比特幣可訪問的節點數（如果你在家使用路由器跑節點的話不會算在內），2018 年底約有9,600 個，降幅為 19%。
+* 儘管比特幣幣價暴跌導致許多礦工因無利可圖而下線，但比特幣的哈希值（每秒運算能力）在去年，從 19 exahashes/s 增加到 38 exahashes/s。
+* 去年，比特幣ATM提款機的數量翻倍成長，數量突破 4,000 台，保持 3 年來每年 100% 的增長率。

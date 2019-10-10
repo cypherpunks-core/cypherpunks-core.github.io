@@ -1,0 +1,36 @@
+---
+layout: post
+title:  "Dapp.com發表報告回顧 2018 DApp市場"
+date:   2019-01-22
+categories: news
+description: "Dapp.com 平台新創公司今年1月15日在官方網站上，發表了一份 2018 年去中心化應用程式 DApp （Decentralized application，可簡寫為 Dapp、dApp 或 DApp）的市場報告，回顧過去一年，加密貨幣生態系統最活躍的四大公鏈"
+image: '/img/23.png'
+published: true
+---
+
+> 原文標題：Dapp.com 2018 Dapp Market Report
+> 作者：[dapp.com](http://dapp.com/)
+> 文章來源：https://www.dapp.com/article/annual-dapp-market-report-2018
+
+Dapp.com 平台新創公司今年1月15日在官方網站上，發表了一份 2018 年去中心化應用程式 DApp （Decentralized application，可簡寫為 Dapp、dApp 或 DApp）的市場報告，回顧過去一年，加密貨幣生態系統最活躍的四大公鏈––以太坊、EOS、TRON、STEEM 在去中心化應用程式 DApp 市場的最新發展態勢，帶領讀者走在 DApp 市場最前線。
+
+精華摘要：
+
+![](/img/18.png)
+
+* 去年加密貨幣市場出現劇烈波動，儘管如此，去中心化應用 DApp 市場在去年的表現，仍創下佳績，產值高達 67 億美元，共出現了 1423 個 DApp，因此 2018 年可以說是去中心化應用（DApp）的元年。
+* 去年 2018 年去中心化交易所（DEX）是主要的貢獻者，占了市場總額的比例達到近 40%，DEX 是 DApp 殺手級應用，擁有最多的使用者。
+* 去年第四季度，博弈投注類的去中心化應用程式（Betting DApps）在市場上占據主導地位，第四季度總交易量接近 30 億美元，幾乎占 2018 年總交易量比重的 44%。
+
+![](/img/19.png)
+
+![](/img/20.png)
+
+* 博弈應用百花齊放，儼然成為區塊鏈中的殺手級應用程式（Killer apps），主要由 EOS 和 TRON 兩個為 DApp 開發的高速 DPoS 公鏈，帶動了區塊鏈技術在博彩業蓬勃發展。
+* 區塊鏈遊戲類的 DApp 數量依然領先，占市場比重多達 35％，其次是資金盤（20％）和博弈投注（約20％）。總的來說，主要驅動 DApp 市場的動能仍是娛樂和博彩業。
+* 加密貨幣市場劇烈波動對以太坊有很大的影響，因為在所有以太坊 DApps 當中，去中心化交易所（DEX）是最常使用的應用。其中又以 [ForkDelta](https://forkdelta.app/) 的使用者最多，占整個以太坊 DApp 使用者數量比重的 35％。
+* 2018 年的兩個季度內，EOS 已成為交易金額和交易量最大的公鏈。其中有 97% 的交易來自博彩，75% 的交易量來自博弈遊戲。
+
+![](/img/21.png)
+
+![](/img/22.png)

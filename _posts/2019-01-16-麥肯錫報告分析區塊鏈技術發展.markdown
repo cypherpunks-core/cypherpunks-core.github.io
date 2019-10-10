@@ -1,0 +1,33 @@
+---
+layout: post
+title:  "麥肯錫報告分析區塊鏈技術發展"
+date:   2019-01-16
+categories: news
+description: "比特幣分析師 Arjun Balaji，同時也是紐約加密資產投資顧問新創公司 Shomei Capital 創辦人，今年 1 月 2 日在 Medium 平台上發表「Crypto Theses for 2019」一文，描寫加密貨幣發展現況，以及預測多個與比特幣及加密貨幣相關的未來成長趨勢。"
+image: '/img/13.png'
+published: true
+---
+
+原文標題： Blockchain’s Occam problem
+
+作者：Matt Higginson、Marie-Claude Nadeau、Kausik Rajgopal
+
+文章來源：[https://www.mckinsey.com/industries/financial-services/our-insights/blockchains-occam-problem](https://www.mckinsey.com/industries/financial-services/our-insights/blockchains-occam-problem).
+
+美國管理顧問公司麥肯錫公司（McKinsey & Company）今年1月初在官方網站上發表針對區塊鏈發展的報告，以「 Blockchain’s Occam problem」（暫譯：區塊鏈的 Occam 問題）為標題，分析下一波區塊鏈技術的發展方向。作者群有麥肯錫波士頓辦公室合夥 Matt Higginson、麥肯錫舊金山辦公室合夥 Marie-Claude Nadeau，以及麥肯錫美國矽谷辦公室資深合夥 Kausik Rajgopal。
+
+精華摘要：
+
+* 區塊鏈尚未成為有些人預期帶來改變遊戲規則（game-changer）的技術。找到其價值的關鍵在於，當區塊鏈技術能成功應用在簡易實用的應用解決方案時。
+* 看好區塊鏈技術具有潛力的其中一個指標是，大量投資資金湧入區塊鏈。2017 年，區塊鏈新創圈獲得的創投資金就高達 10 億美元。IBM 在物聯網及區塊鏈數據共享解決方案等專案上，已經投資超過 2 億美元；亦有報導指出，Google 早在 2016 年便已開始研究區塊鏈技術。 
+* 區塊鏈還處於技術發展初期（Infant technology）。根據典型的生命週期理論，任何產業或產品的演變可分為四個階段：導入期、成長期、成熟期、衰退期。區塊鏈技術目前還在努力擺脫第一階段導入期（the pioneering stage）。
+
+![](/img/13.png)
+
+* 在區塊鏈眾多應用中，區塊鏈技術目前還卡在生命週期的第一階段（除了少數案例之外）。絕大多數的概念驗證（Proof of Concepts，PoCs）還在導入期階段，且很多專案在還沒獲得 C 輪募資前便已陣亡。
+* 從區塊鏈發展現況來看，似乎在 X-Y 圖左下角停滯不前，而非照著典型的產業生命週期向上的曲線發展。對於許多人來說，區塊鏈技術的第二階段（成長期）尚未發生。
+* 邁入 2019 年，區塊鏈技術可以在三個特定領域中看到其應用價值：小眾應用（Niche applications）、現代化價值（Modernization value）、聲譽價值（Reputational value）。
+* 小眾應用（Niche applications）：區塊鏈技術特別適合用在一些特定領域的應用，包括應用在追蹤資產所有權和資產狀態的數據整合的應用。例如，在保險業、供應鏈和資本市場，已經可以看到案例，利用分散式帳本的技術，解決業者們當前面對的效率低、流程不透明、詐欺等痛點。
+* 現代化價值（Modernization value）：區塊鏈技術對於在策略上追求現代化的產業具有吸引力。這些產業將區塊鏈視為一種追求數位化、流程簡化及合作的強大利器。特別在全球航運合約、貿易融資、支付應用等領域，也搭上區塊鏈潮流重新獲得關注。
+* 聲譽價值（Reputational value）：越來越多的公司正積極建置區塊鏈試驗專案（pilots），期望為公司帶來正面的聲譽價值；向股東和競爭者展示創新能力，並不特別關心是否能開創出具有商業規模的應用。
+* 組織需從問題作為切入點。必須正視真正的問題或痛點（pain point），區塊鏈才有機會成為一個實際的解決方案。奧坎的剃刀（Occam’s Razor）–– 必須選擇最簡單的解決辦法。公司企業必須誠實地評估自身的風險回報比、教育水平及潛在收益，同時還需評估所有專案可能帶來的影響及支持性商業案例。
