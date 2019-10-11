@@ -1,0 +1,13 @@
+---
+layout: post
+title:  "test"
+date:   2019-10-10
+categories: news
+description: "test"
+image: '/img/36.png'
+published: true
+---
+
+哈哈哈
+
+ {% youtube "https://www.youtube.com/watch?v=GPnymcrXgX0" %}

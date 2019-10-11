@@ -7,7 +7,7 @@ baseurl:
 url: 
 permalink: pretty
 
-paginate: 5
+paginate: 7
 paginate_path: "/blog/page:num"
 
 plugins:
@@ -17,6 +17,7 @@ plugins:
   - jekyll-seo-tag
   - kramdown
   - rouge
+  - jekyll-youtube
 
 exclude: 
   - Gemfile
@@ -34,7 +35,7 @@ sass:
   style: compressed
   source_dir: _sass
 
-#google_analytics: UA-code-here
+google_analytics: UA-131051587-3
 
 defaults:
   -
