@@ -47,3 +47,5 @@ hero_image: /img/hero.png
 影片：
 
  https://www.youtube.com/watch?v=wpYYd8xMFVg
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wpYYd8xMFVg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
