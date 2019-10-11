@@ -2,7 +2,8 @@
 title: Cypherpunks Taiwan
 subtitle: 密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.
 layout: page
-callouts: home_callouts
+# callouts: home_callouts
+hide_hero: true
 show_sidebar: true
 ---
 歡迎來到密碼龐克網站！
