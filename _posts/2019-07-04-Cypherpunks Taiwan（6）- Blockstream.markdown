@@ -42,6 +42,6 @@ Samson Mow 目前於 Blockstream 擔任策略長（CSO）。他是比特幣社�
 「Cypherpunks Taiwan 密碼龐克」沿用了「密碼龐克」一詞背後延伸的理念，期待可以建立一個針對區塊鏈、比特幣、以太坊技術學習資源網站，讓學習資源、最新訊息可以廣為流通與分享。
 
 影片：
-```
- {% youtube "https://www.youtube.com/watch?v=y2pKAX0qq0c" %}
- ```
+
+ https://www.youtube.com/watch?v=y2pKAX0qq0c
+ 
