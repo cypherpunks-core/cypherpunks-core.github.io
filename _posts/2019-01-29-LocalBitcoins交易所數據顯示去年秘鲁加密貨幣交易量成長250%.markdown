@@ -6,6 +6,7 @@ categories: news
 description: "Crypto Panda 今年 1 月 16 日在新加坡區塊鏈加速器 LongHash 網站平台上，發表了一篇標題為「Peru’s LocalBitcoins Transaction Volume Grew 250% in 2018」（暫譯：秘魯的 LocalBitcoins 交易量 2018 年成長 250%）的文章，指出拉丁美洲的加密貨幣市場去年表現亮眼，點對點加密貨幣交易量出現飛速成長。"
 image: '/img/35.png'
 published: true
+hero_image: /img/hero.png
 ---
 
 > 原文標題：Peru’s LocalBitcoins Transaction Volume Grew 250% in 2018

@@ -6,6 +6,7 @@ categories: news
 description: "利用 Coin Metrics 製作的圖表，觀察比特幣價格與其他密碼貨幣（Altcoins）價格有極高的相關性，圖表分析顯示比特幣價格與其他密碼貨幣價格呈現正相關。"
 image: '/img/43.png'
 published: true
+hero_image: /img/hero.png
 ---
 
 原文標題：Altcoin Prices Have Never Been More Closely Correlated with Bitcoin

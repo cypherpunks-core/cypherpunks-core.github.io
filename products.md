@@ -3,6 +3,8 @@ title: 書籍 & 論文
 subtitle: Books & papers
 layout: product-category
 show_sidebar: false
+# hide_hero: true
+hero_image: /img/hero.png
 sort: price
 ---
 

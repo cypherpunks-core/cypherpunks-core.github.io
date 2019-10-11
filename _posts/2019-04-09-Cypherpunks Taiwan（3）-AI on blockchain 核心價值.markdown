@@ -6,6 +6,7 @@ categories: meetup
 description: "AI on blockchain 核心價值"
 image: '/img/54.png'
 published: true
+hero_image: /img/hero.png
 ---
 
 * 時間：2019年4月9日（星期二） 晚上7:00到10:00

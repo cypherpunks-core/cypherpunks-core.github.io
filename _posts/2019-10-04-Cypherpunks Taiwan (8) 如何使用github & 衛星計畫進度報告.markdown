@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "Cypherpunks Taiwan (8) -如何使用github & 衛星計畫進度報告"
+title:  "Cypherpunks Taiwan (8) -如何使用github & 衛星計畫進度"
 date:   2019-10-04
 categories: meetup
 description: "如何使用github & 衛星計畫進度報告"
 image: '/img/50.png'
 published: true
+hero_image: /img/hero.png
 ---
 
 活動訊息：

@@ -6,6 +6,7 @@ categories: news
 description: "「CoinGecko Yearly Report for 2018」（幣虎2018加密貨幣市場年度報告）"
 image: '/img/30.png'
 published: true
+hero_image: /img/hero.png
 ---
 
 > 「CoinGecko Yearly Report for 2018」（幣虎2018加密貨幣市場年度報告），下載完整報告 PDF 檔案：https://assets.coingecko.com/reports/2018-Full-Year-Report/2018-CoinGecko-Report.pdf

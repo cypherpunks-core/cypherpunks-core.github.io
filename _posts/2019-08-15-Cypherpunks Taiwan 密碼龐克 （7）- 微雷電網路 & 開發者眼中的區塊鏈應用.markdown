@@ -6,6 +6,7 @@ categories: meetup
 description: " 微雷電網路 & 開發者眼中的區塊鏈應用"
 image: '/img/47.png'
 published: true
+hero_image: /img/hero.png
 ---
 
 議程：

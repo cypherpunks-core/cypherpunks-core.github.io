@@ -6,6 +6,7 @@ categories: news
 description: "比特幣分析師 Arjun Balaji，同時也是紐約加密資產投資顧問新創公司 Shomei Capital 創辦人，今年 1 月 2 日在 Medium 平台上發表「Crypto Theses for 2019」一文，描寫加密貨幣發展現況，以及預測多個與比特幣及加密貨幣相關的未來成長趨勢。"
 image: '/img/11.png'
 published: true
+hero_image: /img/hero.png
 ---
 
 原文標題：Crypto Theses for 2019  作者：Arjun Balaji

@@ -6,6 +6,7 @@ categories: meetup
 description: "比特幣基礎設施公司 Blockstream 首次登台，與 Cypherpunks Taiwan 聯手舉辦線下聚會！一個雇用了大量 Bitcoin Core 開發者的公司，究竟他們開發出的產品，能夠怎樣的影響比特幣及區塊鏈，甚至是整個世界呢？"
 image: '/img/49.png'
 published: true
+hero_image: /img/hero.png
 ---
 
 比特幣基礎設施公司 Blockstream 首次登台，與 Cypherpunks Taiwan 聯手舉辦線下聚會！一個雇用了大量 Bitcoin Core 開發者的公司，究竟他們開發出的產品，能夠怎樣的影響比特幣及區塊鏈，甚至是整個世界呢？

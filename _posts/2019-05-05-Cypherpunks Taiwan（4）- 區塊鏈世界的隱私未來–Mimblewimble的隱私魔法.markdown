@@ -6,6 +6,7 @@ categories: meetup
 description: "區塊鏈世界的隱私未來–Mimblewimble的隱私魔法"
 image: '/img/53.png'
 published: true
+hero_image: /img/hero.png
 ---
 
 * 時間：2019年5月5日（星期日） 晚上7:00到10:00

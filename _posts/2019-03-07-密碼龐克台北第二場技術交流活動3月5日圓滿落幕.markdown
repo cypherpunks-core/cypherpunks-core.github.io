@@ -6,6 +6,7 @@ categories: news
 description: "資訊工程研究所碩二生 Brian 分享「比特幣交易手續費的預測」以及日本比特幣創業家東晃慈（Koji Higashi）談有關閃電網路（Lighting Network）和第二層技術的重要性。"
 image: '/img/36.png'
 published: true
+hero_image: /img/hero.png
 ---
 
 由[「Cypherpunks Taiwan 密碼龐克」](https://cypherpunks.tech/)網站平台主辦、[摩茲工寮 Mozilla Community Space Taipei](https://moztw.org/space/) 場地空間贊助的第二次密碼龐克台北實體技術交流聚會活動，於 3 月 5 日星期二晚上 19:00 – 21:30 舉行，現場吸引 30 多位朋友來到台北市八德路摩茲工寮的空間，聆聽資訊工程研究所碩二生 Brian 分享「比特幣交易手續費的預測」以及日本比特幣創業家東晃慈（Koji Higashi）談有關閃電網路（Lighting Network）和第二層技術的重要性。

@@ -6,6 +6,7 @@ categories: meetup
 description: "區塊鏈存在證明與抗審查性 & 零知識證明"
 image: '/img/52.png'
 published: true
+hero_image: /img/hero.png
 ---
 
 時間：2019年6月11日（星期二） 晚上7:15到10:00

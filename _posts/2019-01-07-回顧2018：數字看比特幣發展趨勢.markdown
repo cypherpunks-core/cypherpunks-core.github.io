@@ -7,6 +7,7 @@ description: "比特幣軟體工程師 Jameson Lopp，同時也是知名加密�
 image: '/img/2.png'
 published: true
 canonical_url: 
+hero_image: /img/hero.png
 ---
 
 > 原文標題：Bitcoin By the Numbers: 2018 Recap 作者：Jameson Lopp

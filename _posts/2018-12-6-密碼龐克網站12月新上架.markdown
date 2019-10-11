@@ -6,6 +6,7 @@ categories: news
 description: "「Cypherpunks Taiwan 密碼龐克」網站 2018年12月新開張。"
 image: "/img/1.jpg"
 published: true
+hero_image: /img/hero.png
 ---
 
 

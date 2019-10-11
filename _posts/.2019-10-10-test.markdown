@@ -6,6 +6,7 @@ categories: news
 description: "test"
 image: '/img/36.png'
 published: true
+hero_image: /img/hero.png
 ---
 
 哈哈哈

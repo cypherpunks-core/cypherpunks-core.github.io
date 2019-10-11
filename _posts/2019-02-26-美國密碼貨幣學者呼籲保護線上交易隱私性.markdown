@@ -6,6 +6,7 @@ categories: news
 description: "針對 Coin Center 密碼貨幣研究機構今年二月最新發布的論文「The Case for Electronic Cash: Why Private Peer-to-Peer Payments are Essential to an Open Society（暫譯：電子現金案例：為什麼點對點支付的隱私保護對於開放社會未來發展至關重要）」，進一步說明並引介最新獨立發表的論文。"
 image: '/img/41.png'
 published: true
+hero_image: /img/hero.png
 ---
 原文標題：We must protect our ability to transact privately online
 

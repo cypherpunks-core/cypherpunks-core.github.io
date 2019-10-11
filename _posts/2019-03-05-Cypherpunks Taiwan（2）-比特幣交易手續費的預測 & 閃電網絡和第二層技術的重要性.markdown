@@ -6,6 +6,7 @@ categories: meetup
 description: "比特幣交易手續費的預測 & 閃電網絡和第二層技術的重要性"
 image: '/img/55.png'
 published: true
+hero_image: /img/hero.png
 ---
 
 Cypherpunks Taiwan 密碼龐克 - crypto文化的聚集地   

@@ -4,6 +4,7 @@ subtitle: 密碼學使自由和隱私再次偉大。Cryptography makes freedom a
 layout: page
 # callouts: home_callouts
 hide_hero: true
+hero_image: /img/hero.png
 show_sidebar: true
 ---
 歡迎來到密碼龐克網站！
