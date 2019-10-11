@@ -10,4 +10,4 @@ published: true
 
 哈哈哈
 
- {% youtube "https://www.youtube.com/watch?v=GPnymcrXgX0" %}
+https://www.youtube.com/watch?v=GPnymcrXgX0

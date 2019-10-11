@@ -26,9 +26,9 @@ Cypherpunks Taiwan 密碼龐克 - crypto文化的聚集地
 
 影片：
 
-```
- {% youtube "https://www.youtube.com/watch?v=w00SteBL_5c" %}
-```
+
+ https://www.youtube.com/watch?v=w00SteBL_5c
+
 
 目標：
 * 創造一個 crypto 論壇

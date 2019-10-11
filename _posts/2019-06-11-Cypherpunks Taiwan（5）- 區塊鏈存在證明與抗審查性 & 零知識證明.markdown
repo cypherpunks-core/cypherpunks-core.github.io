@@ -41,9 +41,9 @@ ps. 原價屋隔壁，藍色助聽器招牌，一樓樓梯口有 Mozilla 字樣�
 講者簡介：擁有10年軟體開發經驗，2017年進入區塊鏈領域，主要都在Ethereum上做Dapp開發及區塊鏈上新技術的研究。Medium上Taipei Ethereum Meetup的寫手之一
 
 影片：
-```
- {% youtube "https://www.youtube.com/watch?v=SU3D89FPv9o" %}
-```
+
+ https://www.youtube.com/watch?v=SU3D89FPv9o
+
 
 ### Cypherpunks 相關資訊：
 * Github：[https://cypherpunks-core.github.io/](https://cypherpunks-core.github.io/)
