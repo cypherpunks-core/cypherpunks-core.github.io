@@ -7,7 +7,7 @@ baseurl:
 url: 
 permalink: pretty
 
-paginate: 5
+paginate: 7
 paginate_path: "/blog/page:num"
 
 plugins:
