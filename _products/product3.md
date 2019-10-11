@@ -1,6 +1,6 @@
 ---
 title: 密碼龐克
-subtitle: Freedom and the Future of the Internet
+subtitle: Freedom and the Future
 product_code: C001
 layout: product
 image: /img/46.png

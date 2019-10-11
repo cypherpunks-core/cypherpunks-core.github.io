@@ -1,4 +1,336 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-10T22:31:54+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">密碼龐克台北第二場技術交流活動3月5日圓滿落幕</title><link href="http://localhost:4000/news/2019/03/07/%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E5%8C%97%E7%AC%AC%E4%BA%8C%E5%A0%B4%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81%E6%B4%BB%E5%8B%953%E6%9C%885%E6%97%A5%E5%9C%93%E6%BB%BF%E8%90%BD%E5%B9%95/" rel="alternate" type="text/html" title="密碼龐克台北第二場技術交流活動3月5日圓滿落幕" /><published>2019-03-07T00:00:00+08:00</published><updated>2019-03-07T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/03/07/%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E5%8C%97%E7%AC%AC%E4%BA%8C%E5%A0%B4%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81%E6%B4%BB%E5%8B%953%E6%9C%885%E6%97%A5%E5%9C%93%E6%BB%BF%E8%90%BD%E5%B9%95</id><content type="html" xml:base="http://localhost:4000/news/2019/03/07/%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E5%8C%97%E7%AC%AC%E4%BA%8C%E5%A0%B4%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81%E6%B4%BB%E5%8B%953%E6%9C%885%E6%97%A5%E5%9C%93%E6%BB%BF%E8%90%BD%E5%B9%95/">&lt;p&gt;由&lt;a href=&quot;https://cypherpunks.tech/&quot;&gt;「Cypherpunks Taiwan 密碼龐克」&lt;/a&gt;網站平台主辦、&lt;a href=&quot;https://moztw.org/space/&quot;&gt;摩茲工寮 Mozilla Community Space Taipei&lt;/a&gt; 場地空間贊助的第二次密碼龐克台北實體技術交流聚會活動，於 3 月 5 日星期二晚上 19:00 – 21:30 舉行，現場吸引 30 多位朋友來到台北市八德路摩茲工寮的空間，聆聽資訊工程研究所碩二生 Brian 分享「比特幣交易手續費的預測」以及日本比特幣創業家東晃慈（Koji Higashi）談有關閃電網路（Lighting Network）和第二層技術的重要性。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-11T17:35:13+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">Cypherpunks Taiwan (8) -如何使用github &amp;amp; 衛星計畫進度報告</title><link href="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/" rel="alternate" type="text/html" title="Cypherpunks Taiwan (8) -如何使用github &amp; 衛星計畫進度報告" /><published>2019-10-04T00:00:00+08:00</published><updated>2019-10-04T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/10/04/Cypherpunks%20Taiwan%20(8)%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%20&amp;%20%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A</id><content type="html" xml:base="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&amp;-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/">&lt;p&gt;活動訊息：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;地點：Taipei Hackerspace&lt;/li&gt;
+  &lt;li&gt;時間：19:00-22:00&lt;/li&gt;
+  &lt;li&gt;日期：10月4日&lt;/li&gt;
+  &lt;li&gt;性質：小聚，希望手把手讓大家一起玩起來，不排斥大家帶酒來&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;主題一：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;講者： &lt;a href=&quot;https://www.facebook.com/milochen0418&quot;&gt;Milo Chen&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;講題：如何使用github&lt;/li&gt;
+  &lt;li&gt;主旨：基礎說明如何使用git以及一些使用技巧，提高大家在github的貢獻量。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;主題二：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;講者： &lt;a href=&quot;https://www.facebook.com/pw.chen.bitcoiner&quot;&gt;陳伯韋 （Po Chen）&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;講題：比特幣衛星計畫運作與計畫進度&lt;/li&gt;
+  &lt;li&gt;主旨：因為太多人不是很明白比特幣衛星計畫在做些什麼東西，已經不知道該如何幫忙，所以會大致把roadmap 說完，以及如何參與說清楚&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;大家可以順便玩玩調酒機，了解一下 &lt;a href=&quot;https://www.facebook.com/groups/tpehack/&quot;&gt;台北創客空間 Taipei Hackerspace&lt;/a&gt; 的文化風氣，包括焊接、四軸飛行器…等的 創客文化&lt;/p&gt;
+
+&lt;p&gt;Facebook 活動連結：&lt;a href=&quot;https://www.facebook.com/events/523580818418580/&quot;&gt;https://www.facebook.com/events/523580818418580/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;影片：&lt;/p&gt;
+
+&lt;h3 id=&quot;cypherpunks-相關資訊&quot;&gt;Cypherpunks 相關資訊：&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Github：&lt;a href=&quot;https://cypherpunks-core.github.io/&quot;&gt;https://cypherpunks-core.github.io/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;論壇：&lt;a href=&quot;https://forum.cypherpunks.tech/&quot;&gt;https://forum.cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;官網：&lt;a href=&quot;https://cypherpunks.tech/&quot;&gt;https://cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Telegram：&lt;a href=&quot;https://t.me/CypherpunksTW&quot;&gt;https://t.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;FB粉專：&lt;a href=&quot;https://fb.me/CypherpunksTW&quot;&gt;https://fb.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Youtuber頻道：&lt;a href=&quot;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&quot;&gt;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;PPT：&lt;a href=&quot;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&quot;&gt;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">活動訊息： 地點：Taipei Hackerspace 時間：19:00-22:00 日期：10月4日 性質：小聚，希望手把手讓大家一起玩起來，不排斥大家帶酒來</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/50.png" /></entry><entry><title type="html">Cypherpunks Taiwan (7) -微雷電網路 &amp;amp; 開發者眼中的區塊鏈應用</title><link href="http://localhost:4000/meetup/2019/08/15/Cypherpunks-Taiwan-%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B-7-%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF-&-%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8/" rel="alternate" type="text/html" title="Cypherpunks Taiwan (7) -微雷電網路 &amp; 開發者眼中的區塊鏈應用" /><published>2019-08-15T00:00:00+08:00</published><updated>2019-08-15T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/08/15/Cypherpunks%20Taiwan%20%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%20(7)-%20%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF%20&amp;%20%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8</id><content type="html" xml:base="http://localhost:4000/meetup/2019/08/15/Cypherpunks-Taiwan-%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B-7-%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF-&amp;-%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8/">&lt;p&gt;議程：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;18:30 - 19:00 開放入場&lt;/li&gt;
+  &lt;li&gt;19:00 - 19:10 簡述密碼龐克社群現況 10min&lt;/li&gt;
+  &lt;li&gt;19:10 - 19:50 Ethereum 微雷電網路 的美麗與哀愁 by 江柏憲 Jambo 40min&lt;/li&gt;
+  &lt;li&gt;19:50 - 20:05 中場休息&lt;/li&gt;
+  &lt;li&gt;20:05 - 20:45 讓區塊鏈有價值的應用落地 - 以一位創新應用開發者的視角 by Milo 40min&lt;/li&gt;
+  &lt;li&gt;20:45 - 21:30 交流時間&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/47.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;主題一-ethereum-微雷電網路-的美麗與哀愁&quot;&gt;主題一-Ethereum 微雷電網路 的美麗與哀愁&lt;/h3&gt;
+
+&lt;p&gt;講題摘要：
+「您好這杯飲料，我想用虛擬貨幣付款。」多麼希望未來像買飲料這類的的小額交易，也能夠拿虛擬貨幣來支付，想要安全的付款就得要等礦工驗證還要付高額的手續費；想要快速又便宜的消費就得要把錢放到別人口袋裡面。有沒有一種方式，可以讓我又快又便宜又安全的使用虛擬貨幣執行小額支付呢？那麼來看看mirco raiden怎麼運作的吧！&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;micro raiden 概念簡述&lt;/li&gt;
+  &lt;li&gt;micro raiden 運作原理&lt;/li&gt;
+  &lt;li&gt;micro raiden &amp;amp; raiden network的未來發展&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;講者：江柏憲 Jambo&lt;/li&gt;
+  &lt;li&gt;講者摘要：2016年因求學過程接觸到比特幣，對其無國界、無需中介與信任的交易形式感到讚嘆不已，因此畢業後一腳跨入了虛擬貨幣交易的產業中，期待某天能看到區塊鏈支付、交易都能夠頻繁的在世界上的每個小角落發生。我是Jambo，一個為了虛擬貨幣支付默默努力的菜鳥PM。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;主題二-讓區塊鏈有價值的應用落地---以一位創新應用開發者的視角&quot;&gt;主題二-讓區塊鏈有價值的應用落地 - 以一位創新應用開發者的視角&lt;/h3&gt;
+&lt;p&gt;講題摘要：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;創新研發者面臨的取捨 ? - 應用落地&lt;/li&gt;
+  &lt;li&gt;目前的學習歷程小分享 ? - 小小分享&lt;/li&gt;
+  &lt;li&gt;選哪個區塊鏈來作應用 ? - 研發觀點&lt;/li&gt;
+  &lt;li&gt;要如何避免見樹不見林 ? - 生態觀點&lt;/li&gt;
+  &lt;li&gt;讓台灣成為區塊鏈部落 ? - 創新部落&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;講者：Milo&lt;/li&gt;
+  &lt;li&gt;講者摘要：擁抱全人類的是 Milo 的信念。他自幼困苦，從技職練工程，再到台大學法律，是 Mensa 及 Cypherpunks Taiwan的一員，喜歡人之間的平權，所以他迷戀穿藍白拖走入東區、世界並擁抱國際。
+他是工程界的藝術家，他有強烈 IFSP 天生藝術家性格，有數學天份及藝術嗜好，他成功克服性格弱點成為強者工程師，擁有 AI 應用創新 Intel 獎, 好學新科技並喜愛交友，時常在各產業實現跨領域研發並應用落地。  &lt;br /&gt;
+擁有 LinkedIn 十萬追隨者但卻不擅面對人群的他，目前正與全球醫療體系共努力，運用新科技讓人民擁有更好的醫療。而他的業餘志業也是醫療，但對象社會的結構，他想先讓台灣未來能成為一個區塊鏈應用部落，路程中也就成立 ÐApp 101 讀書會。  &lt;br /&gt;
+對他而言，比特幣讓貨幣的去中心化，是一個有轉動世界的契機，配合現有網路優勢，再配合一個成熟的區塊鏈應用落地生態，可讓懂科技並且對社會有抱負的人，藉由創意及新科技來解決的社會結構問題，好讓弱勢族群於成長中有更多好的路可以選。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cypherpunks-相關資訊&quot;&gt;Cypherpunks 相關資訊：&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Github：&lt;a href=&quot;https://cypherpunks-core.github.io/&quot;&gt;https://cypherpunks-core.github.io/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;論壇：&lt;a href=&quot;https://forum.cypherpunks.tech/&quot;&gt;https://forum.cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;官網：&lt;a href=&quot;https://cypherpunks.tech/&quot;&gt;https://cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Telegram：&lt;a href=&quot;https://t.me/CypherpunksTW&quot;&gt;https://t.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;FB粉專：&lt;a href=&quot;https://fb.me/CypherpunksTW&quot;&gt;https://fb.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Youtuber頻道：&lt;a href=&quot;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&quot;&gt;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;PPT：&lt;a href=&quot;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&quot;&gt;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">議程： 18:30 - 19:00 開放入場 19:00 - 19:10 簡述密碼龐克社群現況 10min 19:10 - 19:50 Ethereum 微雷電網路 的美麗與哀愁 by 江柏憲 Jambo 40min 19:50 - 20:05 中場休息 20:05 - 20:45 讓區塊鏈有價值的應用落地 - 以一位創新應用開發者的視角 by Milo 40min 20:45 - 21:30 交流時間</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/47.png" /></entry><entry><title type="html">活動-Make Privacy Protected Again | 找出你遺失很久的【隱私】</title><link href="http://localhost:4000/meetup/2019/07/05/Make-Privacy-Protected-Again-Maskbook-%E5%8F%B0%E5%8C%97%E9%A6%96%E6%AC%A1%E7%B7%9A%E4%B8%8B-Meetup/" rel="alternate" type="text/html" title="活動-Make Privacy Protected Again | 找出你遺失很久的【隱私】" /><published>2019-07-05T00:00:00+08:00</published><updated>2019-07-05T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/07/05/Make%20Privacy%20Protected%20Again%20%7C%20Maskbook%20%E5%8F%B0%E5%8C%97%E9%A6%96%E6%AC%A1%E7%B7%9A%E4%B8%8B%20Meetup</id><content type="html" xml:base="http://localhost:4000/meetup/2019/07/05/Make-Privacy-Protected-Again-Maskbook-%E5%8F%B0%E5%8C%97%E9%A6%96%E6%AC%A1%E7%B7%9A%E4%B8%8B-Meetup/">&lt;ul&gt;
+  &lt;li&gt;時間：2019年7月5日（星期五）19:00-22:00&lt;/li&gt;
+  &lt;li&gt;地點：台北市中正區重慶南路一段105號2F (天瓏圖書2樓)&lt;/li&gt;
+  &lt;li&gt;報名連結：&lt;a href=&quot;https://l.facebook.com/l.php?u=https%3A%2F%2Flihi1.cc%2FBLOFd&quot;&gt;https://lihi1.cc/BLOFd&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;當天請攜帶電腦，手把手帶你體驗 Maskbook！&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/48.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;📌活動介紹
+隨著資訊科技的快速發展，在日漸開放、透明、方便的時代，我們將越來越多的資訊儲存到無法控制的網際網路上，但個資外洩、隱私事件的紛爭卻層出不窮。每次 Facebook 對隱私政策的調整都會引來社會各界對其背後意義的討論，而你對自己的隱私又了解多少呢？&lt;/p&gt;
+
+&lt;p&gt;團隊成員們將以過去的經驗，為台灣社區成員介紹 Maskbook 產品的起源及構想，同時帶來對於隱私、加密最前沿的發展方向以及實例分享，歡迎有興趣的朋友們到場交流討論！&lt;/p&gt;
+
+&lt;p&gt;📌活動議程：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;(1830 - 1900) 入場簽到&lt;/li&gt;
+  &lt;li&gt;(1900 - 1910) 開場+介紹來賓&lt;/li&gt;
+  &lt;li&gt;(1910 - 1950) 密碼隱私的重要以及應用場景&lt;/li&gt;
+  &lt;li&gt;(2000 - 2010) 休息&lt;/li&gt;
+  &lt;li&gt;(2010 - 2050) Maskbook 產品起源以及介紹&lt;/li&gt;
+  &lt;li&gt;(2050 - 2130) 手把手教你使用 Maskbook&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;📌講者資訊：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Suji Yan, Dimension CEO
+&lt;a href=&quot;https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.linkedin.com%2Fin%2Ftedkoyan%2F&quot;&gt;https://www.linkedin.com/in/tedkoyan/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Yisi Liu, Dimension CTO
+&lt;a href=&quot;https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fcachemiss%2F&quot;&gt;https://www.linkedin.com/in/cachemiss/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Neruthes, Dimension CPO, Manager-General of Maskbook
+&lt;a href=&quot;https://l.facebook.com/l.php?u=https%3A%2F%2Fneruthes.xyz%2F&quot;&gt;https://neruthes.xyz/&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;團隊成員皆在相關領域有非常優秀的發展表現，更獲邀 coscup 等其他大型活動擔任分享講者。（更多資訊請點擊購票連結查看）&lt;/p&gt;
+
+&lt;p&gt;📌關於主辦&amp;amp;協辦：  &lt;br /&gt;
+&lt;a href=&quot;https://www.facebook.com/realmaskbook/&quot;&gt;Maskbook&lt;/a&gt;
+Maskbook 是適用於 Chrome、Edge、Brave、Vivaldi 和所有基於 Chromium 瀏覽器的免費開源擴充插件，Maskbook 允許使用者在 Facebook 上發佈加密的貼文。只有使用者和使用者的朋友可以解密，簡單來說，只有你許可的使用者才可以查看你發布的內容，就連 Facebook 和 Maskbook 的開發者都無法查看。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.facebook.com/Grenadelab2019/&quot;&gt;Grenade Lab&lt;/a&gt;
+致力於推廣區塊鏈相關的整合公司，統籌區塊鏈相關之活動策劃、社區運營、教育推廣、行銷策劃等。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.facebook.com/CypherpunksTW/&quot;&gt;Cypherpunks Taiwan 密碼龐克&lt;/a&gt;
+致力建立最具影響力的區塊鏈、比特幣、以太坊技術中文交流平台，掌握技術開發最新資訊，成為開發者、研究員的最佳利器的社群。&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">時間：2019年7月5日（星期五）19:00-22:00 地點：台北市中正區重慶南路一段105號2F (天瓏圖書2樓) 報名連結：https://lihi1.cc/BLOFd 當天請攜帶電腦，手把手帶你體驗 Maskbook！</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/48.png" /></entry><entry><title type="html">Cypherpunks Taiwan （6）- Blockstream</title><link href="http://localhost:4000/meetup/2019/07/04/Cypherpunks-Taiwan-6-Blockstream/" rel="alternate" type="text/html" title="Cypherpunks Taiwan （6）- Blockstream" /><published>2019-07-04T00:00:00+08:00</published><updated>2019-07-04T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/07/04/Cypherpunks%20Taiwan(6)-%20Blockstream</id><content type="html" xml:base="http://localhost:4000/meetup/2019/07/04/Cypherpunks-Taiwan-6-Blockstream/">&lt;p&gt;比特幣基礎設施公司 Blockstream 首次登台，與 Cypherpunks Taiwan 聯手舉辦線下聚會！一個雇用了大量 Bitcoin Core 開發者的公司，究竟他們開發出的產品，能夠怎樣的影響比特幣及區塊鏈，甚至是整個世界呢？&lt;/p&gt;
+
+&lt;p&gt;Bitcoin Development company, Blockstream is here in Taipei to share their latest work on Bitcoin. Join us on July 4th to learn more about it!&lt;/p&gt;
+
+&lt;p&gt;活動簡介&lt;/p&gt;
+
+&lt;p&gt;【活動日期】：2019/07/04
+【活動時間】：19:00 - 22:00
+【活動地點】：台北市信義區基隆路一段178號4樓（AppWorks 4樓）
+【主辦單位】：Cypherpunks Taiwan &amp;amp; Blockstream
+【活動流程】：
+19:00 - 19:30 ：入場
+19:30 - 20:00 ：Cypherpunks Taiwan 社群介紹
+20:00 - 20:15 ：休息交流
+20:15 - 21:00 ：Blockstream 的使命 - 延伸比特幣（衛星計畫 &amp;amp; Liquid Network）by Samson Mow
+21:00 - 22:00 : 交流 散場&lt;/p&gt;
+
+&lt;p&gt;【活動介紹】：
+Cypherpunks Taiwan 此次聚會邀請到了 Blockstream 策略長 Samson Mow 來當講者，他將透過這次機會向台灣社群介紹 Blockstream 所主導的兩項核心產品 - 「衛星計畫 Blockstream Satellite」以及「比特幣側鏈網路 Liquid Network」。&lt;/p&gt;
+
+&lt;p&gt;「衛星計畫 Blockstream Satellite」
+由 Blockstream 公司在去年八月推出，旨在將比特幣區塊鏈透過「衛星訊號」廣播到全世界，降低了比特幣對網際網路（Internet）的依賴。只要在其衛星訊號覆蓋範圍內，都能自行架設接收器來接收並同步比特幣區塊鏈。&lt;/p&gt;
+
+&lt;p&gt;「比特幣側鏈網路 Liquid Network」
+Liquid Network 由 Blockstream 所推出的側鏈網路，除了可以實現跨區塊鏈之間不同貨幣之間的交易，為眾多的幣種創造更多的流動性，也能在側鏈中發行代幣，在封閉體系中運行（若遭受攻擊也不影響主鏈）。測鏈透過「雙向錨定」的方式，讓更高頻率的交易留在主鏈之外處理，除了可以提供用戶所需的隱私性、高吞吐量，同時又能發揮主鏈的安全性優勢。&lt;/p&gt;
+
+&lt;p&gt;【講者介紹】：
+Samson Mow 目前於 Blockstream 擔任策略長（CSO）。他是比特幣社區中知名的貢獻者，提倡去中心化的重要性，以及在協議開發時，將安全性擺在第一優先的必要。而 Blockstream 即是區塊鏈領域中具有領導地位的公司，以開發出下個世代的金融基礎設施為其產品願景。
+過去 Samson Mow 也曾擔任過 BTCC 的營運長（COO）- BTCC 是世界上最大的比特幣交易所及礦池之一。在 BTCC 任職期間，Samson Mow 負責公司整體每日的營運，並直接管理交易所及礦池的各項業務。&lt;/p&gt;
+
+&lt;p&gt;【主辦單位介紹】：
+「Cypherpunks Taiwan 密碼龐克」沿用了「密碼龐克」一詞背後延伸的理念，期待可以建立一個針對區塊鏈、比特幣、以太坊技術學習資源網站，讓學習資源、最新訊息可以廣為流通與分享。&lt;/p&gt;
+
+&lt;h3 id=&quot;cypherpunks-相關資訊&quot;&gt;Cypherpunks 相關資訊：&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Github：&lt;a href=&quot;https://cypherpunks-core.github.io/&quot;&gt;https://cypherpunks-core.github.io/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;論壇：&lt;a href=&quot;https://forum.cypherpunks.tech/&quot;&gt;https://forum.cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;官網：&lt;a href=&quot;https://cypherpunks.tech/&quot;&gt;https://cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Telegram：&lt;a href=&quot;https://t.me/CypherpunksTW&quot;&gt;https://t.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;FB粉專：&lt;a href=&quot;https://fb.me/CypherpunksTW&quot;&gt;https://fb.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Youtuber頻道：&lt;a href=&quot;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&quot;&gt;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;PPT：&lt;a href=&quot;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&quot;&gt;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">比特幣基礎設施公司 Blockstream 首次登台，與 Cypherpunks Taiwan 聯手舉辦線下聚會！一個雇用了大量 Bitcoin Core 開發者的公司，究竟他們開發出的產品，能夠怎樣的影響比特幣及區塊鏈，甚至是整個世界呢？</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/49.png" /></entry><entry><title type="html">Cypherpunks Taiwan（5）- 區塊鏈存在證明與抗審查性 &amp;amp; 零知識證明</title><link href="http://localhost:4000/meetup/2019/06/11/Cypherpunks-Taiwan-5-%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7-&-%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E/" rel="alternate" type="text/html" title="Cypherpunks Taiwan（5）- 區塊鏈存在證明與抗審查性 &amp; 零知識證明" /><published>2019-06-11T00:00:00+08:00</published><updated>2019-06-11T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/06/11/Cypherpunks%20Taiwan(5)-%20%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7%20&amp;%20%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E</id><content type="html" xml:base="http://localhost:4000/meetup/2019/06/11/Cypherpunks-Taiwan-5-%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7-&amp;-%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E/">&lt;p&gt;時間：2019年6月11日（星期二） 晚上7:15到10:00
+ps. 千萬不要提早到&lt;/p&gt;
+
+&lt;p&gt;地點：摩茲工寮（ 100 台北市中正區八德路一段 94 號 3F ）
+ps. 原價屋隔壁，藍色助聽器招牌，一樓樓梯口有 Mozilla 字樣標示&lt;/p&gt;
+
+&lt;p&gt;議程：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;(19:15~19:30) 開放入場&lt;/li&gt;
+  &lt;li&gt;(19:30~19:45) Mozilla及場地介紹 15min&lt;/li&gt;
+  &lt;li&gt;(19:45~19:55) 簡述密碼龐克社群現況 10min&lt;/li&gt;
+  &lt;li&gt;(20:00~20:30) 區塊鏈存在證明與抗審查性 by 陳品 30min&lt;/li&gt;
+  &lt;li&gt;(20:40~21:10) 零知識證明 by Kimi 30min&lt;/li&gt;
+  &lt;li&gt;(21:10~22:00) 交流時間&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;演講摘要：&lt;/p&gt;
+
+&lt;p&gt;&amp;lt; 區塊鏈存在證明與抗審查性 &amp;gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;為什麼區塊鏈可以作為存在證明？&lt;/li&gt;
+  &lt;li&gt;區塊鏈存在證明案例探討&lt;/li&gt;
+  &lt;li&gt;落實言論自由抗審查的平台&lt;/li&gt;
+  &lt;li&gt;利弊權衡探討&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;講者名稱：陳品 Ping Chen
+講者簡介：區塊鏈企業級解決方案公司 Pelith 創辦人暨執行長；CryptoCow 技術共筆創辦人；Taipei Ethereum Meetup 早期參與者；三年以上 Ethereum DAPP 開發經驗&lt;/p&gt;
+
+&lt;p&gt;&amp;lt; 零知識證明 &amp;gt;
+隱私是區塊鏈在應用上的一個大問題，而零知識證明(zero knowledge proof)可以解決隱私的問題，達到交易是保密的且交易同時能被驗證。
+本次演講會從最基本的何謂零知識證明，進而介紹零知識證明背後的基本數學原理，並且實際在區塊鏈上應用的例子。&lt;/p&gt;
+
+&lt;p&gt;講者名稱：Kimi Wu
+講者簡介：擁有10年軟體開發經驗，2017年進入區塊鏈領域，主要都在Ethereum上做Dapp開發及區塊鏈上新技術的研究。Medium上Taipei Ethereum Meetup的寫手之一&lt;/p&gt;
+
+&lt;h3 id=&quot;cypherpunks-相關資訊&quot;&gt;Cypherpunks 相關資訊：&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Github：&lt;a href=&quot;https://cypherpunks-core.github.io/&quot;&gt;https://cypherpunks-core.github.io/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;論壇：&lt;a href=&quot;https://forum.cypherpunks.tech/&quot;&gt;https://forum.cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;官網：&lt;a href=&quot;https://cypherpunks.tech/&quot;&gt;https://cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Telegram：&lt;a href=&quot;https://t.me/CypherpunksTW&quot;&gt;https://t.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;FB粉專：&lt;a href=&quot;https://fb.me/CypherpunksTW&quot;&gt;https://fb.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Youtuber頻道：&lt;a href=&quot;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&quot;&gt;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;PPT：&lt;a href=&quot;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&quot;&gt;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">時間：2019年6月11日（星期二） 晚上7:15到10:00 ps. 千萬不要提早到</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/52.png" /></entry><entry><title type="html">Cypherpunks Taiwan（4）- 區塊鏈世界的隱私未來–Mimblewimble的隱私魔法</title><link href="http://localhost:4000/meetup/2019/05/05/Cypherpunks-Taiwan-4-%E5%8D%80%E5%A1%8A%E9%8F%88%E4%B8%96%E7%95%8C%E7%9A%84%E9%9A%B1%E7%A7%81%E6%9C%AA%E4%BE%86-Mimblewimble%E7%9A%84%E9%9A%B1%E7%A7%81%E9%AD%94%E6%B3%95/" rel="alternate" type="text/html" title="Cypherpunks Taiwan（4）- 區塊鏈世界的隱私未來–Mimblewimble的隱私魔法" /><published>2019-05-05T00:00:00+08:00</published><updated>2019-05-05T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/05/05/Cypherpunks%20Taiwan(4)-%20%E5%8D%80%E5%A1%8A%E9%8F%88%E4%B8%96%E7%95%8C%E7%9A%84%E9%9A%B1%E7%A7%81%E6%9C%AA%E4%BE%86%E2%80%93Mimblewimble%E7%9A%84%E9%9A%B1%E7%A7%81%E9%AD%94%E6%B3%95</id><content type="html" xml:base="http://localhost:4000/meetup/2019/05/05/Cypherpunks-Taiwan-4-%E5%8D%80%E5%A1%8A%E9%8F%88%E4%B8%96%E7%95%8C%E7%9A%84%E9%9A%B1%E7%A7%81%E6%9C%AA%E4%BE%86-Mimblewimble%E7%9A%84%E9%9A%B1%E7%A7%81%E9%AD%94%E6%B3%95/">&lt;ul&gt;
+  &lt;li&gt;時間：2019年5月5日（星期日） 晚上7:00到10:00&lt;/li&gt;
+  &lt;li&gt;地址：100 台北市中正區八德路一段 94 號 3F&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ps. 原價屋隔壁，藍色助聽器招牌，一樓樓梯口有 Mozilla 字樣標示&lt;/p&gt;
+
+&lt;p&gt;議程：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;(19:00~19:20) 開放入場&lt;/li&gt;
+  &lt;li&gt;(19:20~19:35) Mozilla及場地介紹 15min&lt;/li&gt;
+  &lt;li&gt;(19:35~20:00) 簡述密碼龐克社群現況 + 閃電網路錢包介紹 25min&lt;/li&gt;
+  &lt;li&gt;(20:00~20:30) MimbleWimble 介紹 30min&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;演講題目：區塊鏈世界的隱私未來–Mimblewimble的隱私魔法  &lt;br /&gt;
+演講摘要：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;MimbleWimble的來龍去脈&lt;/li&gt;
+  &lt;li&gt;MimbleWimble的機制運作&lt;/li&gt;
+  &lt;li&gt;MimbleWimble的發展限制與區塊鏈隱私的未來&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;如果有興趣的朋友可以先參閱我的Medium（https://pse.is/CypherpunksMeetup4）
+其他資料我會盡快補上&lt;/p&gt;
+
+&lt;p&gt;講者名稱：Williams Lai 賴佳祈  &lt;br /&gt;
+講者簡介：Cypherpunks core成員，最近有興趣的主題是Mimblewimble等隱私協議，以及基進市場(Radical Markets)這種更為公平的加密經濟學。曾經在社交Dapp公司擔任過一段時間的產品運營。&lt;/p&gt;
+
+&lt;p&gt;這是「Cypherpunks Taiwan 密碼龐克」主題圍繞在 bitcoin是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由。&lt;/p&gt;
+
+&lt;p&gt;目標：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;創造一個 crypto 論壇&lt;/li&gt;
+  &lt;li&gt;學習crypto&lt;/li&gt;
+  &lt;li&gt;多元crypto議題分享會（一個月一次)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cypherpunks-相關資訊&quot;&gt;Cypherpunks 相關資訊：&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Github：&lt;a href=&quot;https://cypherpunks-core.github.io/&quot;&gt;https://cypherpunks-core.github.io/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;論壇：&lt;a href=&quot;https://forum.cypherpunks.tech/&quot;&gt;https://forum.cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;官網：&lt;a href=&quot;https://cypherpunks.tech/&quot;&gt;https://cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Telegram：&lt;a href=&quot;https://t.me/CypherpunksTW&quot;&gt;https://t.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;FB粉專：&lt;a href=&quot;https://fb.me/CypherpunksTW&quot;&gt;https://fb.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Youtuber頻道：&lt;a href=&quot;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&quot;&gt;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;PPT：&lt;a href=&quot;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&quot;&gt;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">時間：2019年5月5日（星期日） 晚上7:00到10:00 地址：100 台北市中正區八德路一段 94 號 3F</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/53.png" /></entry><entry><title type="html">Cypherpunks Taiwan（3）-AI on blockchain 核心價值</title><link href="http://localhost:4000/meetup/2019/04/09/Cypherpunks-Taiwan-3-AI-on-blockchain-%E6%A0%B8%E5%BF%83%E5%83%B9%E5%80%BC/" rel="alternate" type="text/html" title="Cypherpunks Taiwan（3）-AI on blockchain 核心價值" /><published>2019-04-09T00:00:00+08:00</published><updated>2019-04-09T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/04/09/Cypherpunks%20Taiwan(3)-AI%20on%20blockchain%20%E6%A0%B8%E5%BF%83%E5%83%B9%E5%80%BC</id><content type="html" xml:base="http://localhost:4000/meetup/2019/04/09/Cypherpunks-Taiwan-3-AI-on-blockchain-%E6%A0%B8%E5%BF%83%E5%83%B9%E5%80%BC/">&lt;ul&gt;
+  &lt;li&gt;時間：2019年4月9日（星期二） 晚上7:00到10:00&lt;/li&gt;
+  &lt;li&gt;地點：People Squared 台北（中正區信義路二段253號）捷運東門站7號出https://goo.gl/maps/sfzdVEf6VTJ2&lt;/li&gt;
+  &lt;li&gt;費用：100元現場收（場地費+飲料） &lt;br /&gt;
+ps. 關於飲料的部分，大家自備環保杯喔
+團隊官網：https://www.cortexlabs.ai/&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;第三次活動議程：&lt;/p&gt;
+
+&lt;p&gt;簡述密碼龐克社群現況&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;講題：AI on blockchain 核心價值&amp;amp;鏈上AI的挑戰與發展&lt;/td&gt;
+      &lt;td&gt;Cortex— What’s the catch？&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;講題摘要：
+智能合約是以太重要的技術之一，被視為區塊鏈的2.0版本。然而，目前智能合約的協議並非完美，侷限於有限的計算能力和尚有缺陷的制度。現在的智慧合約編成大多相當簡單，也不夠智慧來擔起它的稱號。Cortex團隊認為最優質的解決方案就是-在區塊鏈上啟用AI並將AI整合到智慧合約。&lt;/p&gt;
+
+&lt;p&gt;人工智慧正在改變我們日常生活的方式，各行各業都在為人工智慧領域鋪路。區塊鏈技術發展除了本身需要更多群眾的共識之外，如果想邁向更普及、更多的應用場景也必須結合人工智慧，這就是為什麼智慧合約到目前為止還不是很成功的真正原因。作為第一個支援鏈上AI的底層區塊鏈，Cortex將如何實現AI智慧合約，並建立一個開源的開發者社群，在人工智慧和區塊鏈的開發基礎上，建立強大的開源平臺，以整個生態系統促進AI和區塊鏈技術的未來發展。&lt;/p&gt;
+
+&lt;p&gt;講者名稱：Amy Chen、田甲  &lt;br /&gt;
+講者簡介 ：  &lt;br /&gt;
+(1) Cortex運營長－Amy Chen&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Amy Chen畢業於哥倫比亞大學電機工程碩士學位&lt;/li&gt;
+  &lt;li&gt;2012年創辦aSolar Inc太陽能項目開發公司，旨在提供太陽能可再生能源系統的全方位服務；&lt;/li&gt;
+  &lt;li&gt;2017年於全球生態交通盛典上舉辦區塊鏈與低碳循環經濟未來展望論壇。&lt;/li&gt;
+  &lt;li&gt;目前擔任Cortex Labs COO，致力於推廣人工智能的民主化進程，構建去中心化的人工智能自治系統。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(2) Cortex的首席技術長－田甲&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Bitfinex的投資者；&lt;/li&gt;
+  &lt;li&gt;Bitfund的有限合夥人;&lt;/li&gt;
+  &lt;li&gt;Zhenfund的創業合伙人;&lt;/li&gt;
+  &lt;li&gt;hydrogenesis@ bitcointalk;&lt;/li&gt;
+  &lt;li&gt;2011年開始接觸挖礦。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;這是「Cypherpunks Taiwan 密碼龐克」主題圍繞在 bitcoin是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由。&lt;/p&gt;
+
+&lt;p&gt;目標：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;創造一個 crypto 論壇&lt;/li&gt;
+  &lt;li&gt;學習crypto&lt;/li&gt;
+  &lt;li&gt;多元crypto議題分享會（一個月一次)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cypherpunks-相關資訊&quot;&gt;Cypherpunks 相關資訊：&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Github：&lt;a href=&quot;https://cypherpunks-core.github.io/&quot;&gt;https://cypherpunks-core.github.io/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;論壇：&lt;a href=&quot;https://forum.cypherpunks.tech/&quot;&gt;https://forum.cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;官網：&lt;a href=&quot;https://cypherpunks.tech/&quot;&gt;https://cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Telegram：&lt;a href=&quot;https://t.me/CypherpunksTW&quot;&gt;https://t.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;FB粉專：&lt;a href=&quot;https://fb.me/CypherpunksTW&quot;&gt;https://fb.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Youtuber頻道：&lt;a href=&quot;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&quot;&gt;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;PPT：&lt;a href=&quot;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&quot;&gt;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">時間：2019年4月9日（星期二） 晚上7:00到10:00 地點：People Squared 台北（中正區信義路二段253號）捷運東門站7號出https://goo.gl/maps/sfzdVEf6VTJ2 費用：100元現場收（場地費+飲料） ps. 關於飲料的部分，大家自備環保杯喔 團隊官網：https://www.cortexlabs.ai/</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/54.png" /></entry><entry><title type="html">密碼龐克台北第二場技術交流活動3月5日圓滿落幕</title><link href="http://localhost:4000/news/2019/03/07/%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E5%8C%97%E7%AC%AC%E4%BA%8C%E5%A0%B4%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81%E6%B4%BB%E5%8B%953%E6%9C%885%E6%97%A5%E5%9C%93%E6%BB%BF%E8%90%BD%E5%B9%95/" rel="alternate" type="text/html" title="密碼龐克台北第二場技術交流活動3月5日圓滿落幕" /><published>2019-03-07T00:00:00+08:00</published><updated>2019-03-07T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/03/07/%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E5%8C%97%E7%AC%AC%E4%BA%8C%E5%A0%B4%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81%E6%B4%BB%E5%8B%953%E6%9C%885%E6%97%A5%E5%9C%93%E6%BB%BF%E8%90%BD%E5%B9%95</id><content type="html" xml:base="http://localhost:4000/news/2019/03/07/%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E5%8C%97%E7%AC%AC%E4%BA%8C%E5%A0%B4%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81%E6%B4%BB%E5%8B%953%E6%9C%885%E6%97%A5%E5%9C%93%E6%BB%BF%E8%90%BD%E5%B9%95/">&lt;p&gt;由&lt;a href=&quot;https://cypherpunks.tech/&quot;&gt;「Cypherpunks Taiwan 密碼龐克」&lt;/a&gt;網站平台主辦、&lt;a href=&quot;https://moztw.org/space/&quot;&gt;摩茲工寮 Mozilla Community Space Taipei&lt;/a&gt; 場地空間贊助的第二次密碼龐克台北實體技術交流聚會活動，於 3 月 5 日星期二晚上 19:00 – 21:30 舉行，現場吸引 30 多位朋友來到台北市八德路摩茲工寮的空間，聆聽資訊工程研究所碩二生 Brian 分享「比特幣交易手續費的預測」以及日本比特幣創業家東晃慈（Koji Higashi）談有關閃電網路（Lighting Network）和第二層技術的重要性。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/img/36.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -21,7 +353,39 @@ Machine Learning Algorithm」的&lt;a href=&quot;https://docs.google.com/present
 
 &lt;p&gt;&lt;img src=&quot;/img/39.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/40.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">由「Cypherpunks Taiwan 密碼龐克」網站平台主辦、摩茲工寮 Mozilla Community Space Taipei 場地空間贊助的第二次密碼龐克台北實體技術交流聚會活動，於 3 月 5 日星期二晚上 19:00 – 21:30 舉行，現場吸引 30 多位朋友來到台北市八德路摩茲工寮的空間，聆聽資訊工程研究所碩二生 Brian 分享「比特幣交易手續費的預測」以及日本比特幣創業家東晃慈（Koji Higashi）談有關閃電網路（Lighting Network）和第二層技術的重要性。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/36.png" /></entry><entry><title type="html">美國密碼貨幣學者呼籲保護線上交易隱私性</title><link href="http://localhost:4000/news/2019/02/26/%E7%BE%8E%E5%9C%8B%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E5%AD%B8%E8%80%85%E5%91%BC%E7%B1%B2%E4%BF%9D%E8%AD%B7%E7%B7%9A%E4%B8%8A%E4%BA%A4%E6%98%93%E9%9A%B1%E7%A7%81%E6%80%A7/" rel="alternate" type="text/html" title="美國密碼貨幣學者呼籲保護線上交易隱私性" /><published>2019-02-26T00:00:00+08:00</published><updated>2019-02-26T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/02/26/%E7%BE%8E%E5%9C%8B%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E5%AD%B8%E8%80%85%E5%91%BC%E7%B1%B2%E4%BF%9D%E8%AD%B7%E7%B7%9A%E4%B8%8A%E4%BA%A4%E6%98%93%E9%9A%B1%E7%A7%81%E6%80%A7</id><content type="html" xml:base="http://localhost:4000/news/2019/02/26/%E7%BE%8E%E5%9C%8B%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E5%AD%B8%E8%80%85%E5%91%BC%E7%B1%B2%E4%BF%9D%E8%AD%B7%E7%B7%9A%E4%B8%8A%E4%BA%A4%E6%98%93%E9%9A%B1%E7%A7%81%E6%80%A7/">&lt;p&gt;原文標題：We must protect our ability to transact privately online&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/40.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">由「Cypherpunks Taiwan 密碼龐克」網站平台主辦、摩茲工寮 Mozilla Community Space Taipei 場地空間贊助的第二次密碼龐克台北實體技術交流聚會活動，於 3 月 5 日星期二晚上 19:00 – 21:30 舉行，現場吸引 30 多位朋友來到台北市八德路摩茲工寮的空間，聆聽資訊工程研究所碩二生 Brian 分享「比特幣交易手續費的預測」以及日本比特幣創業家東晃慈（Koji Higashi）談有關閃電網路（Lighting Network）和第二層技術的重要性。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/36.png" /></entry><entry><title type="html">Cypherpunks Taiwan（2）-比特幣交易手續費的預測 &amp;amp; 閃電網絡和第二層技術的重要性</title><link href="http://localhost:4000/meetup/2019/03/05/Cypherpunks-Taiwan-2-%E6%AF%94%E7%89%B9%E5%B9%A3%E4%BA%A4%E6%98%93%E6%89%8B%E7%BA%8C%E8%B2%BB%E7%9A%84%E9%A0%90%E6%B8%AC-&-%E9%96%83%E9%9B%BB%E7%B6%B2%E7%B5%A1%E5%92%8C%E7%AC%AC%E4%BA%8C%E5%B1%A4%E6%8A%80%E8%A1%93%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7/" rel="alternate" type="text/html" title="Cypherpunks Taiwan（2）-比特幣交易手續費的預測 &amp; 閃電網絡和第二層技術的重要性" /><published>2019-03-05T00:00:00+08:00</published><updated>2019-03-05T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/03/05/Cypherpunks%20Taiwan(2)-%E6%AF%94%E7%89%B9%E5%B9%A3%E4%BA%A4%E6%98%93%E6%89%8B%E7%BA%8C%E8%B2%BB%E7%9A%84%E9%A0%90%E6%B8%AC%20&amp;%20%E9%96%83%E9%9B%BB%E7%B6%B2%E7%B5%A1%E5%92%8C%E7%AC%AC%E4%BA%8C%E5%B1%A4%E6%8A%80%E8%A1%93%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7</id><content type="html" xml:base="http://localhost:4000/meetup/2019/03/05/Cypherpunks-Taiwan-2-%E6%AF%94%E7%89%B9%E5%B9%A3%E4%BA%A4%E6%98%93%E6%89%8B%E7%BA%8C%E8%B2%BB%E7%9A%84%E9%A0%90%E6%B8%AC-&amp;-%E9%96%83%E9%9B%BB%E7%B6%B2%E7%B5%A1%E5%92%8C%E7%AC%AC%E4%BA%8C%E5%B1%A4%E6%8A%80%E8%A1%93%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7/">&lt;p&gt;Cypherpunks Taiwan 密碼龐克 - crypto文化的聚集地&lt;/p&gt;
+
+&lt;p&gt;注意：七點開放入場，不要提早到&lt;/p&gt;
+
+&lt;p&gt;這是“Cypherpunks Taiwan 密碼龐克“，主題圍繞在 bitcoin是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由。&lt;/p&gt;
+
+&lt;p&gt;第二次活動議程:&lt;/p&gt;
+
+&lt;p&gt;講題：比特幣交易手續費的預測(30 分鐘)  &lt;br /&gt;
+講者：Brian 研究生&lt;/p&gt;
+
+&lt;p&gt;講題：閃電網絡和第二層技術的重要性”(30 分鐘) &lt;br /&gt;
+講者：Koji Higashi&lt;/p&gt;
+
+&lt;p&gt;活動最前面15分鐘做場地跟 Mozilla 簡介&lt;/p&gt;
+
+&lt;p&gt;目標：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;創造一個 crypto 論壇&lt;/li&gt;
+  &lt;li&gt;學習crypto&lt;/li&gt;
+  &lt;li&gt;多元crypto議題分享會（一個月一次)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cypherpunks-相關資訊&quot;&gt;Cypherpunks 相關資訊：&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Github：&lt;a href=&quot;https://cypherpunks-core.github.io/&quot;&gt;https://cypherpunks-core.github.io/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;論壇：&lt;a href=&quot;https://forum.cypherpunks.tech/&quot;&gt;https://forum.cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;官網：&lt;a href=&quot;https://cypherpunks.tech/&quot;&gt;https://cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Telegram：&lt;a href=&quot;https://t.me/CypherpunksTW&quot;&gt;https://t.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;FB粉專：&lt;a href=&quot;https://fb.me/CypherpunksTW&quot;&gt;https://fb.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Youtuber頻道：&lt;a href=&quot;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&quot;&gt;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;PPT：&lt;a href=&quot;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&quot;&gt;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">Cypherpunks Taiwan 密碼龐克 - crypto文化的聚集地</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/55.png" /></entry><entry><title type="html">美國密碼貨幣學者呼籲保護線上交易隱私性</title><link href="http://localhost:4000/news/2019/02/26/%E7%BE%8E%E5%9C%8B%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E5%AD%B8%E8%80%85%E5%91%BC%E7%B1%B2%E4%BF%9D%E8%AD%B7%E7%B7%9A%E4%B8%8A%E4%BA%A4%E6%98%93%E9%9A%B1%E7%A7%81%E6%80%A7/" rel="alternate" type="text/html" title="美國密碼貨幣學者呼籲保護線上交易隱私性" /><published>2019-02-26T00:00:00+08:00</published><updated>2019-02-26T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/02/26/%E7%BE%8E%E5%9C%8B%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E5%AD%B8%E8%80%85%E5%91%BC%E7%B1%B2%E4%BF%9D%E8%AD%B7%E7%B7%9A%E4%B8%8A%E4%BA%A4%E6%98%93%E9%9A%B1%E7%A7%81%E6%80%A7</id><content type="html" xml:base="http://localhost:4000/news/2019/02/26/%E7%BE%8E%E5%9C%8B%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E5%AD%B8%E8%80%85%E5%91%BC%E7%B1%B2%E4%BF%9D%E8%AD%B7%E7%B7%9A%E4%B8%8A%E4%BA%A4%E6%98%93%E9%9A%B1%E7%A7%81%E6%80%A7/">&lt;p&gt;原文標題：We must protect our ability to transact privately online&lt;/p&gt;
 
 &lt;p&gt;作者：Jerry Brito&lt;/p&gt;
 
@@ -37,223 +401,4 @@ Machine Learning Algorithm」的&lt;a href=&quot;https://docs.google.com/present
   &lt;li&gt;中介（Intermediation）有很多好處，包括效率和便利性。從金融中介的特權地位收集來的資訊，民眾可以享受更好的信貸服務，能預防詐騙，並且能幫助當局打擊犯罪。但正如本文想闡述的，企業和政府亦有可能大肆濫用中介的特性。如果沒有辦法避免中介，那麼個人就無法保護自己的隱私或自主權。&lt;/li&gt;
   &lt;li&gt;現金是一項古老的技術，它使我們能夠避免中介，從而保護個人自由和人類尊嚴所必需的價值。雖然現在我們距離無現金和完全中介的實現還有很長的路要走，至少在美國是如此。這篇論文也將表明，世界上其他地區已經有齊心努力消除現金的成功案例。&lt;/li&gt;
   &lt;li&gt;在網路世界日益蓬勃發展的時代，現金紙幣對許多交易來說是不實際的，我們還必須開發如現金一樣可以保護隱私（privacy-preserving）及無需許可（permissionless）的電子現金。雖然這會帶來成本和收益，但我們認為解決成本問題的方法並不是禁止使用電子現金，而是將其使用方式進行規範，建立一個讓電子現金擁有與現金同等強而有力的制度。&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文標題：We must protect our ability to transact privately online</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/41.png" /></entry><entry><title type="html">密碼貨幣錢包 Trezor 分享線上隱私保護技巧</title><link href="http://localhost:4000/news/2019/02/25/%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E9%8C%A2%E5%8C%85-Trezor-%E5%88%86%E4%BA%AB%E7%B7%9A%E4%B8%8A%E9%9A%B1%E7%A7%81%E4%BF%9D%E8%AD%B7%E6%8A%80%E5%B7%A7/" rel="alternate" type="text/html" title="密碼貨幣錢包 Trezor 分享線上隱私保護技巧" /><published>2019-02-25T00:00:00+08:00</published><updated>2019-02-25T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/02/25/%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E9%8C%A2%E5%8C%85%20Trezor%20%E5%88%86%E4%BA%AB%E7%B7%9A%E4%B8%8A%E9%9A%B1%E7%A7%81%E4%BF%9D%E8%AD%B7%E6%8A%80%E5%B7%A7</id><content type="html" xml:base="http://localhost:4000/news/2019/02/25/%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E9%8C%A2%E5%8C%85-Trezor-%E5%88%86%E4%BA%AB%E7%B7%9A%E4%B8%8A%E9%9A%B1%E7%A7%81%E4%BF%9D%E8%AD%B7%E6%8A%80%E5%B7%A7/">&lt;p&gt;原文標題：Trezor Data Privacy Series — 10 Tips on How to Stay Safe Online (Part One)&lt;/p&gt;
-
-&lt;p&gt;作者：SatoshiLabs&lt;/p&gt;
-
-&lt;p&gt;文章來源：https://blog.trezor.io/trezor-data-privacy-series-10-tips-on-how-to-stay-safe-online-part-one-dbe9a94be36e&lt;/p&gt;
-
-&lt;p&gt;知名密碼貨幣硬體錢包 Trezor 的製造商 &lt;a href=&quot;https://blog.trezor.io/@satoshilabs&quot;&gt;SatoshiLabs&lt;/a&gt; 今年二月4日在官方部落格網站上發表文章，以「 Trezor Data Privacy Series — 10 Tips on How to Stay Safe Online (Part One)」（暫譯： 密碼貨幣錢包 Trezor 資料隱私系列文章–– 線上隱私保護 10 招技巧 [上集]）為標題，推薦錢包使用者幾個保護自己資料隱私的技巧（本文分享了五個技巧），並以此文表示慶祝近期的國際資料隱私日(Data Privacy Day)。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;第一個技巧：確保你的裝置處於最新狀態。留意保持行動裝置及電腦的安全，最好能夠定期更新你的作業系統。&lt;/li&gt;
-  &lt;li&gt;第二個技巧：儘量只使用可信的網路。我們強烈建議不要使用公共 Wi-Fi 網路。&lt;/li&gt;
-  &lt;li&gt;第三個技巧：調整你的線上隱私設定。開始使用不會追蹤你線上活動的瀏覽器，例如 火狐 Firefox 瀏覽器或 Tor。啟動推特 Twitter 和臉書 Facebook 上的最高隱私設定，隱藏你的重要個人資訊。&lt;/li&gt;
-  &lt;li&gt;第四個技巧：確保你在網路上的身份和重要資訊的私密性和專業度。你的社交媒體帳戶容易暴露你的各種重要資料，陌生人可以藉臉書、推特等社交網路平台掌握你的重要資訊，例如你的交友關係，你居住的地方等。因此需特別留意在網路上釋放出的資訊，需確保沒有任何資訊會傷害你的聲譽，或透露太多關於你個人的訊息。&lt;/li&gt;
-  &lt;li&gt;第五個技巧：請避免從不熟悉的網站下載內容，包括下載影音內容或軟體，尤其是沒有加裝 SSL 憑證的網站，我們建議請勿輕易造訪陌生網站，或下載任何未知網站的資料。&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文標題：Trezor Data Privacy Series — 10 Tips on How to Stay Safe Online (Part One)</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/42.png" /></entry><entry><title type="html">美分析師：比特幣與其他密碼貨幣具有高相關性</title><link href="http://localhost:4000/news/2019/02/12/%E7%BE%8E%E5%88%86%E6%9E%90%E5%B8%AB-%E6%AF%94%E7%89%B9%E5%B9%A3%E8%88%87%E5%85%B6%E4%BB%96%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E5%85%B7%E6%9C%89%E9%AB%98%E7%9B%B8%E9%97%9C%E6%80%A7/" rel="alternate" type="text/html" title="美分析師：比特幣與其他密碼貨幣具有高相關性" /><published>2019-02-12T00:00:00+08:00</published><updated>2019-02-12T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/02/12/%E7%BE%8E%E5%88%86%E6%9E%90%E5%B8%AB:%E6%AF%94%E7%89%B9%E5%B9%A3%E8%88%87%E5%85%B6%E4%BB%96%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E5%85%B7%E6%9C%89%E9%AB%98%E7%9B%B8%E9%97%9C%E6%80%A7</id><content type="html" xml:base="http://localhost:4000/news/2019/02/12/%E7%BE%8E%E5%88%86%E6%9E%90%E5%B8%AB-%E6%AF%94%E7%89%B9%E5%B9%A3%E8%88%87%E5%85%B6%E4%BB%96%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E5%85%B7%E6%9C%89%E9%AB%98%E7%9B%B8%E9%97%9C%E6%80%A7/">&lt;p&gt;原文標題：Altcoin Prices Have Never Been More Closely Correlated with Bitcoin&lt;/p&gt;
-
-&lt;p&gt;作者：Kyle Torpey&lt;/p&gt;
-
-&lt;p&gt;文章來源：https://www.longhash.com/news/altcoin-prices-have-never-been-more-closely-correlated-with-bitcoin&lt;/p&gt;
-
-&lt;p&gt;美籍比特幣專欄作家 Kyle Torpey 今年二月 6 日在 LongHash 網站上發表文章，以「Altcoin Prices Have Never Been More Closely Correlated with Bitcoin」（暫譯：比特幣與其他密碼貨幣關係從未如此密切）為標題，利用 Coin Metrics 製作的圖表，觀察比特幣價格與其他密碼貨幣（Altcoins）價格有極高的相關性，圖表分析顯示比特幣價格與其他密碼貨幣價格呈現正相關。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/43.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Coin Metrics 圖表中測量了比特幣和各種密碼貨幣之間的相關程度，其他密碼貨幣（Altcoins，又譯競爭幣）與比特幣呈現高度相關。&lt;/li&gt;
-  &lt;li&gt;簡易說明此圖表：接近 1 的其他密碼貨幣與比特幣密切相關，0 左右的其他密碼貨幣與比特幣無關，接近 -1 的其他密碼貨幣與比特幣的關係則呈現負相關。這裡使用的測量方法為斯皮爾曼等級相關係數（Spearman’s rank correlation coefficient）。&lt;/li&gt;
-  &lt;li&gt;正如圖表所示，幾乎所有主要的其他密碼貨幣都朝著比特幣移動的方向發展，顯示比特幣連動其他密碼貨幣的走勢。&lt;/li&gt;
-  &lt;li&gt;近期，幾乎所有主要的其他密碼貨幣都隨比特幣的走勢發展暫陷熊市。如圖所示，可以看到其他密碼貨幣從未與比特幣如此密切相關 – 至少整體來看是如此。&lt;/li&gt;
-  &lt;li&gt;當然，目前還沒有太多數據可以做統計分析，因為相關的其他密碼貨幣大概都等到 2015年或之後才出現。&lt;/li&gt;
-  &lt;li&gt;萊特幣（Litecoin）在 2011 年推出後，幾年來一直是與比特幣關係最密切的其他密碼貨幣，其主打的目標是成為繼比特幣出現之後最重要的密碼貨幣；一說法是，如果比特幣是密碼貨幣世界的黃金，萊特幣就是白銀。&lt;/li&gt;
-  &lt;li&gt;萊特幣的重要性已是顯而易見，現在有許多比特幣開發者，將萊特幣看為比特幣開發的測試平台；萊特幣可說是在正式成為比特幣功能前的重要測試網路。&lt;/li&gt;
-  &lt;li&gt;其中一個例子是，擴展解決方案隔離見證 Segregated Witness（SegWit）在比特幣網路上正式啟動前，已經在萊特幣上先行應用。&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文標題：Altcoin Prices Have Never Been More Closely Correlated with Bitcoin</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/43.png" /></entry><entry><title type="html">LocalBitcoins交易所數據顯示去年秘鲁加密貨幣交易量成長250%</title><link href="http://localhost:4000/news/2019/01/29/LocalBitcoins%E4%BA%A4%E6%98%93%E6%89%80%E6%95%B8%E6%93%9A%E9%A1%AF%E7%A4%BA%E5%8E%BB%E5%B9%B4%E7%A7%98%E9%B2%81%E5%8A%A0%E5%AF%86%E8%B2%A8%E5%B9%A3%E4%BA%A4%E6%98%93%E9%87%8F%E6%88%90%E9%95%B7250/" rel="alternate" type="text/html" title="LocalBitcoins交易所數據顯示去年秘鲁加密貨幣交易量成長250%" /><published>2019-01-29T00:00:00+08:00</published><updated>2019-01-29T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/01/29/LocalBitcoins%E4%BA%A4%E6%98%93%E6%89%80%E6%95%B8%E6%93%9A%E9%A1%AF%E7%A4%BA%E5%8E%BB%E5%B9%B4%E7%A7%98%E9%B2%81%E5%8A%A0%E5%AF%86%E8%B2%A8%E5%B9%A3%E4%BA%A4%E6%98%93%E9%87%8F%E6%88%90%E9%95%B7250%25</id><content type="html" xml:base="http://localhost:4000/news/2019/01/29/LocalBitcoins%E4%BA%A4%E6%98%93%E6%89%80%E6%95%B8%E6%93%9A%E9%A1%AF%E7%A4%BA%E5%8E%BB%E5%B9%B4%E7%A7%98%E9%B2%81%E5%8A%A0%E5%AF%86%E8%B2%A8%E5%B9%A3%E4%BA%A4%E6%98%93%E9%87%8F%E6%88%90%E9%95%B7250/">&lt;blockquote&gt;
-  &lt;p&gt;原文標題：Peru’s LocalBitcoins Transaction Volume Grew 250% in 2018
-作者：Cypto Panda
-文章來源：http://www.longhash.com/news/perus-localbitcoins-transaction-volume-grew-250-in-2018&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Crypto Panda 今年 1 月 16 日在新加坡區塊鏈加速器 LongHash 網站平台上，發表了一篇標題為「Peru’s LocalBitcoins Transaction Volume Grew 250% in 2018」（暫譯：秘魯的 LocalBitcoins 交易量 2018 年成長 250%）的文章，指出拉丁美洲的加密貨幣市場去年表現亮眼，點對點加密貨幣交易量出現飛速成長。&lt;/p&gt;
-
-&lt;p&gt;文中以資料圖表的方式，呈現出 P2P 點對點加密交易平台 &lt;a href=&quot;https://localbitcoins.com/&quot;&gt;LocalBitcoins&lt;/a&gt; 全球交易量統計數據顯示，以法定貨幣轉換成加密貨幣來計算，秘魯、委內瑞拉等地，過去一年的加密貨幣交易量創下新高，光秘魯在去年加密貨幣交易量就增長了 250%。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/31.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如圖所示，2017 年 LocalBitcoins 的交易量僅由三個國家主導。美國、中國和英國占 LocalBitcoins 全球交易量的 61％。&lt;/li&gt;
-  &lt;li&gt;2018 年卻出現截然不同的景象。 2017 年只有三個國家掌握了一半以上的市場；去年2018年則有五個國家占同一塊市場：美國、中國、英國，以及新成員委內瑞拉和奈及利亞。&lt;/li&gt;
-  &lt;li&gt;2017 年和 2018 年出現的重大轉變，反映了幾個變化因素。一個是委內瑞拉的交易量大幅上升，另一個影響因素是美國、英國和中國的交易量大幅縮水。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/32.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;在此列出每個國家在去年 2018 年的成長率：呈現負成長的美國（-73.3％）、中國（-72.9％）、英國（-64.6％），正成長的委內瑞拉（+ 63.7％），以及負成長的奈及利亞（-34.5％）。&lt;/li&gt;
-  &lt;li&gt;在幾個主流市場中，只有看到委內瑞拉的成長勢頭不減。據數據顯示，秘魯（250％）、伊朗、東非坦尚尼亞（Tanzania）的增長率均高於委內瑞拉，不過他們在全球總交易量中占的比例很小。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/33.png&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/img/34.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;透過比較北美洲和南美洲過去的歷史交易紀錄，可以更清楚地看到美國交易量的下降，以及委內瑞拉交易量的增加。 去年，南美洲的交易量增長了 37.1％，而北美洲的交易量則下降了 69.1％。&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文標題：Peru’s LocalBitcoins Transaction Volume Grew 250% in 2018 作者：Cypto Panda 文章來源：http://www.longhash.com/news/perus-localbitcoins-transaction-volume-grew-250-in-2018</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/35.png" /></entry><entry><title type="html">幣虎CoinGecko發表2018加密貨幣市場年度報告</title><link href="http://localhost:4000/news/2019/01/28/%E5%B9%A3%E8%99%8ECoinGecko%E7%99%BC%E8%A1%A82018%E5%8A%A0%E5%AF%86%E8%B2%A8%E5%B9%A3%E5%B8%82%E5%A0%B4%E5%B9%B4%E5%BA%A6%E5%A0%B1%E5%91%8A/" rel="alternate" type="text/html" title="幣虎CoinGecko發表2018加密貨幣市場年度報告" /><published>2019-01-28T00:00:00+08:00</published><updated>2019-01-28T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/01/28/%E5%B9%A3%E8%99%8ECoinGecko%E7%99%BC%E8%A1%A82018%E5%8A%A0%E5%AF%86%E8%B2%A8%E5%B9%A3%E5%B8%82%E5%A0%B4%E5%B9%B4%E5%BA%A6%E5%A0%B1%E5%91%8A</id><content type="html" xml:base="http://localhost:4000/news/2019/01/28/%E5%B9%A3%E8%99%8ECoinGecko%E7%99%BC%E8%A1%A82018%E5%8A%A0%E5%AF%86%E8%B2%A8%E5%B9%A3%E5%B8%82%E5%A0%B4%E5%B9%B4%E5%BA%A6%E5%A0%B1%E5%91%8A/">&lt;blockquote&gt;
-  &lt;p&gt;「CoinGecko Yearly Report for 2018」（幣虎2018加密貨幣市場年度報告），下載完整報告 PDF 檔案：https://assets.coingecko.com/reports/2018-Full-Year-Report/2018-CoinGecko-Report.pdf&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;加密貨幣排名網站&lt;a href=&quot;https://www.coingecko.com/zh-tw&quot;&gt;幣虎 CoinGecko&lt;/a&gt; 今年 1 月中旬，在網路上發表了一份多達 83 頁的 2018 年加密貨幣市場回顧報告（CoinGecko Yearly Report for 2018），從市場動態、加密貨幣交易所到去年在加密貨幣圈內發生的重要事件等角度切入，集結了 TokenMarket、Dapp.com、Masternodes Online 及 Nonfungible.com 平台數據，回顧過去一年的市場和分析未來發展。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;在市場動態方面，2018 年對加密貨幣市場來說不是特別幸運的一年。前 30 大加密貨幣的市值在去年平均下跌了 78.85％。（報告第7頁）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/25.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/26.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;去年，從五大加密貨幣來看，比特幣價格狂跌了 73％，以太幣價格下跌了 82％，Ripple的瑞波幣 XRP 價格跌了 84％，比特幣現金價格下跌了 93％，前五大加密資產中最不穩定的虛擬貨幣 EOS 價格則下降了 66％。（報告第9頁）&lt;/li&gt;
-  &lt;li&gt;以前 30 大加密貨幣來看，比特幣在市場的主導地位提升，從去年年初的 40％ 上升到年底時的 55％ 以上。（報告第10頁）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/27.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;依幣虎報告數據顯示，就去年 2018 年中位數交易量的數據統計，排名全球前 30 大的加密貨幣交易所，韓國加密貨幣交易所 Bithumb 位居榜首，中國加密貨幣交易所 ZB.com 排名第二，全球知名的加密貨幣交易所幣安 Binance 排名第三。（報告第17頁）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/28.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;去年 ICO（首次代幣發行）融資活動觀察，透過 ICO 募集資金金額有成功達到募資硬上限（hard cap） 的 ICO 比例，從去年 1 月的約 53%，下降到去年 12 月的 10%。影響 ICO越來越難達到募資硬上限的原因有幾個，包括加密貨幣投資市場情緒越來越低落、政府對 ICO 融資活動的加強監管，以及比特幣價格和以太幣價格的下跌等。（報告第28頁）&lt;/li&gt;
-  &lt;li&gt;DApp 去中心化應用程式的部分，去年 DApp 去中心化應用程式市場增長非常迅速，尤其集中在一級戰區遊戲和博弈類的應用。（報告第44頁）&lt;/li&gt;
-  &lt;li&gt;整體來看，以太坊仍是 DApp 的領頭羊，擁有最多 DApp 去中心化應用。值得關注的是，EOS 在去年 6 月推出主網，TRON 也緊接著在去年 6 月下旬時推出主網，在未來市場具潛力，值得期待。（第45頁）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/29.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Masternodes 的部分，儘管價格下跌，Masternode coins 的總市值從去年年初的 125 億美元，下跌到年底的 5.3 億美元，Masternodes 和 Masternode coins 的數量皆呈現顯著增長。（第59頁、第60頁）&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">「CoinGecko Yearly Report for 2018」（幣虎2018加密貨幣市場年度報告），下載完整報告 PDF 檔案：https://assets.coingecko.com/reports/2018-Full-Year-Report/2018-CoinGecko-Report.pdf</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/30.png" /></entry><entry><title type="html">活動 – Cypherpunks Taiwan 密碼龐克 （1）</title><link href="http://localhost:4000/news/2019/01/23/%E6%B4%BB%E5%8B%95-Cypherpunks-Taiwan-%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B-1/" rel="alternate" type="text/html" title="活動 – Cypherpunks Taiwan 密碼龐克 （1）" /><published>2019-01-23T00:00:00+08:00</published><updated>2019-01-23T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/01/23/%E6%B4%BB%E5%8B%95%20%E2%80%93%20Cypherpunks%20Taiwan%20%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%20(1)</id><content type="html" xml:base="http://localhost:4000/news/2019/01/23/%E6%B4%BB%E5%8B%95-Cypherpunks-Taiwan-%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B-1/">&lt;p&gt;注意：不要提早到，要到meetup網站報名，限20人&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.meetup.com/Taipei-Bitcoin-Meetup-Group/events/258294713/&quot;&gt;https://www.meetup.com/Taipei-Bitcoin-Meetup-Group/events/258294713/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;這是“Cypherpunks Taiwan 密碼龐克“第一次舉辦線下聚會，主題圍繞在 bitcoin 是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由。&lt;/p&gt;
-
-&lt;p&gt;第一次活動，介紹“Cypherpunks Taiwan 密碼龐克”與目標
-活動最前面15分鐘做場地跟 Mozilla 簡介&lt;/p&gt;
-
-&lt;p&gt;目標：&lt;/p&gt;
-
-&lt;p&gt;＊ 創造一個 crypto 論壇網站
-＊ 學習crypto
-＊ 多元crypto議題分享會（一個月一次)&lt;/p&gt;
-
-&lt;p&gt;時間：2019年1月29日，星期二，晚上7:30到晚上10:00
-地點：摩茲工寮-原價屋隔壁，藍色助聽器招牌，一樓樓梯口有 Mozilla 字樣標示&lt;/p&gt;
-
-&lt;p&gt;Telegram：https://t.me/CypherpunksTW&lt;/p&gt;
-
-&lt;p&gt;官網：https://cypherpunks.tech/&lt;/p&gt;
-
-&lt;p&gt;論壇：https://forum.cypherpunks.tech/&lt;/p&gt;
-
-&lt;p&gt;粉專：https://fb.me/CypherpunksTW&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">注意：不要提早到，要到meetup網站報名，限20人</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/24.png" /></entry><entry><title type="html">Dapp.com發表報告回顧 2018 DApp市場</title><link href="http://localhost:4000/news/2019/01/22/Dapp.com%E7%99%BC%E8%A1%A8%E5%A0%B1%E5%91%8A%E5%9B%9E%E9%A1%A7-2018-DApp%E5%B8%82%E5%A0%B4/" rel="alternate" type="text/html" title="Dapp.com發表報告回顧 2018 DApp市場" /><published>2019-01-22T00:00:00+08:00</published><updated>2019-01-22T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/01/22/Dapp.com%E7%99%BC%E8%A1%A8%E5%A0%B1%E5%91%8A%E5%9B%9E%E9%A1%A7%202018%20DApp%E5%B8%82%E5%A0%B4</id><content type="html" xml:base="http://localhost:4000/news/2019/01/22/Dapp.com%E7%99%BC%E8%A1%A8%E5%A0%B1%E5%91%8A%E5%9B%9E%E9%A1%A7-2018-DApp%E5%B8%82%E5%A0%B4/">&lt;blockquote&gt;
-  &lt;p&gt;原文標題：Dapp.com 2018 Dapp Market Report
-作者：&lt;a href=&quot;http://dapp.com/&quot;&gt;dapp.com&lt;/a&gt;
-文章來源：https://www.dapp.com/article/annual-dapp-market-report-2018&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Dapp.com 平台新創公司今年1月15日在官方網站上，發表了一份 2018 年去中心化應用程式 DApp （Decentralized application，可簡寫為 Dapp、dApp 或 DApp）的市場報告，回顧過去一年，加密貨幣生態系統最活躍的四大公鏈––以太坊、EOS、TRON、STEEM 在去中心化應用程式 DApp 市場的最新發展態勢，帶領讀者走在 DApp 市場最前線。&lt;/p&gt;
-
-&lt;p&gt;精華摘要：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/18.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;去年加密貨幣市場出現劇烈波動，儘管如此，去中心化應用 DApp 市場在去年的表現，仍創下佳績，產值高達 67 億美元，共出現了 1423 個 DApp，因此 2018 年可以說是去中心化應用（DApp）的元年。&lt;/li&gt;
-  &lt;li&gt;去年 2018 年去中心化交易所（DEX）是主要的貢獻者，占了市場總額的比例達到近 40%，DEX 是 DApp 殺手級應用，擁有最多的使用者。&lt;/li&gt;
-  &lt;li&gt;去年第四季度，博弈投注類的去中心化應用程式（Betting DApps）在市場上占據主導地位，第四季度總交易量接近 30 億美元，幾乎占 2018 年總交易量比重的 44%。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/19.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/20.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;博弈應用百花齊放，儼然成為區塊鏈中的殺手級應用程式（Killer apps），主要由 EOS 和 TRON 兩個為 DApp 開發的高速 DPoS 公鏈，帶動了區塊鏈技術在博彩業蓬勃發展。&lt;/li&gt;
-  &lt;li&gt;區塊鏈遊戲類的 DApp 數量依然領先，占市場比重多達 35％，其次是資金盤（20％）和博弈投注（約20％）。總的來說，主要驅動 DApp 市場的動能仍是娛樂和博彩業。&lt;/li&gt;
-  &lt;li&gt;加密貨幣市場劇烈波動對以太坊有很大的影響，因為在所有以太坊 DApps 當中，去中心化交易所（DEX）是最常使用的應用。其中又以 &lt;a href=&quot;https://forkdelta.app/&quot;&gt;ForkDelta&lt;/a&gt; 的使用者最多，占整個以太坊 DApp 使用者數量比重的 35％。&lt;/li&gt;
-  &lt;li&gt;2018 年的兩個季度內，EOS 已成為交易金額和交易量最大的公鏈。其中有 97% 的交易來自博彩，75% 的交易量來自博弈遊戲。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/21.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/22.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文標題：Dapp.com 2018 Dapp Market Report 作者：dapp.com 文章來源：https://www.dapp.com/article/annual-dapp-market-report-2018</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/23.png" /></entry><entry><title type="html">變遷中的比特幣錢包</title><link href="http://localhost:4000/news/2019/01/17/%E8%AE%8A%E9%81%B7%E4%B8%AD%E7%9A%84%E6%AF%94%E7%89%B9%E5%B9%A3%E9%8C%A2%E5%8C%85/" rel="alternate" type="text/html" title="變遷中的比特幣錢包" /><published>2019-01-17T00:00:00+08:00</published><updated>2019-01-17T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/01/17/%E8%AE%8A%E9%81%B7%E4%B8%AD%E7%9A%84%E6%AF%94%E7%89%B9%E5%B9%A3%E9%8C%A2%E5%8C%85</id><content type="html" xml:base="http://localhost:4000/news/2019/01/17/%E8%AE%8A%E9%81%B7%E4%B8%AD%E7%9A%84%E6%AF%94%E7%89%B9%E5%B9%A3%E9%8C%A2%E5%8C%85/">&lt;p&gt;原文標題： The Evolution of Bitcoin Key Management&lt;/p&gt;
-
-&lt;p&gt;作者：Alena Vranova&lt;/p&gt;
-
-&lt;p&gt;文章來源：&lt;a href=&quot;https://medium.com/casa/the-evolution-of-bitcoin-key-management-c2fd29ba35d6&quot;&gt;https://medium.com/casa/the-evolution-of-bitcoin-key-management-c2fd29ba35d6&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;比特幣硬體錢包 Trezor 共同創辦人 Alena Vranova，同時也是 SatoshiLabs 的共同創辦人，今年 1 月 8 日在 Medium 平台上，以「The Evolution of Bitcoin Key Management」（暫譯：比特幣錢包管理的演進）一文，發表她對比特幣錢包的技術發展及演進的看法。&lt;/p&gt;
-
-&lt;p&gt;精華摘要：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;早期比特幣私鑰都是以純文本的形式，存在電腦硬碟 wallet.dat 文件中，並沒有密碼保護，沒有輸入和輸出私鑰的方式，當時的私鑰是用 Python 指令碼生成的。這種儲存方式有大量安全風險，一直到比特幣核心開發者開始提交比特幣改進提案（BIP），這一切才有了改變。&lt;/li&gt;
-  &lt;li&gt;非確定性錢包（Nondeterministic wallets，又稱隨機錢包）指每個密鑰都是從隨機數獨立生成的。第一款比特幣錢包 App 就是屬於非確定性桌上型錢包（desktop wallets），能夠隨機產生一組比特幣地址和對應的私鑰（密鑰對）。使用者在每筆交易完成後都需要備份密鑰對，以確保資金安全。然而，使用者經常會遇到各式各樣的問題，例如，獨立地址數量有限、地址備份失敗，或因糟糕的使用者體驗（在手續費欄誤輸入交易金額）而丟失資金。&lt;/li&gt;
-  &lt;li&gt;第一款桌上型軟體錢包，對於不懂程式開發的使用者來說，是一個重要的里程碑。因為這使最早期的比特幣使用者，不再需要特別了解指命碼也可以使用。&lt;/li&gt;
-  &lt;li&gt;單密鑰錢包（single key wallet）可以建立紙錢包，外出時方便攜帶，其便利性與信用卡相似，你可以用它來買咖啡，或是在離線時收款。Peter Kroll 的 &lt;a href=&quot;http://bitaddress.org/&quot;&gt;bitaddress.org&lt;/a&gt; 就是第一個推出人氣使用者友善紙錢包生成網站。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/14.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://bitaddress.org/&quot;&gt;bitaddress.org&lt;/a&gt; 網站推出可列印的紙錢包，帶有公鑰（Load &amp;amp; Verify）和私鑰（Spend）。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;不過，線上生成錢包是不安全的。一個鍵盤記錄器就能讓你電腦上的比特幣暴露在風險之中。線下生成密鑰是可行的，但卻需要寫指令碼一定的程式知識。第一個率先解決這個問題的是一款硬體裝置––紙錢包印表機 Piper。由樹莓派（Raspberry Pi）驅動的印表機，可以根據特定需求打造紙錢包。&lt;/li&gt;
-  &lt;li&gt;時至今日，現在的比特幣錢包都以確定的方式生成地址。獲得原始輸入（密碼學家稱之為 seed 種子）之後，能夠從中再生成多組地址。2011年底時，推出了第一款確定性軟體錢包「Electrum」。使用者終於從頻繁備份的那些麻煩中解脫出來，變成只需要使用一串種子。&lt;/li&gt;
-  &lt;li&gt;第一款確定性錢包相對來說比較基礎。一個主密鑰可以再生成多個地址（如圖A），但無法處理更複雜的分層——例如一個主密鑰包含多個子密鑰（child keys）。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/15.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;2012年，BIP-32 提案為我們帶來了 HD 錢包，與高畫質的 HD 沒有關係。HD 錢包可為確定性錢包添加分層結構（如圖B），全名是分層確定性錢包（Hierarchical Deterministic wallets），HD 錢包是它的簡寫。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/16.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;2012 年，SatoshiLabs 的創辦團隊打造了第一款商用硬體錢包 Trezor 的產品原型。Trezor 硬體錢包的特色例如，HD 錢包結構支持多幣種及帳戶、可簡易恢復錢包的種子、額外的密碼加密等。&lt;/li&gt;
-  &lt;li&gt;多重簽名由比特幣開發者 Gavin Andresen 在 BIP-11 提出，2011年完成部署，有時也被叫做 M-of-N 標準交易協議。第一款商用多重簽名錢包是基於 BitGo 在 2013 年推出的 BIP-16（P2SH）。多家大型交易所都曾受益，包括 Bitstamp、Kraken 和 Bitfinex；Greenaddress 也接著推出了針對終端使用者的多重簽名方案，使用 2-of-2 和 2-of-3 多重簽名方案。&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文標題： The Evolution of Bitcoin Key Management</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/17.png" /></entry><entry><title type="html">麥肯錫報告分析區塊鏈技術發展</title><link href="http://localhost:4000/news/2019/01/16/%E9%BA%A5%E8%82%AF%E9%8C%AB%E5%A0%B1%E5%91%8A%E5%88%86%E6%9E%90%E5%8D%80%E5%A1%8A%E9%8F%88%E6%8A%80%E8%A1%93%E7%99%BC%E5%B1%95/" rel="alternate" type="text/html" title="麥肯錫報告分析區塊鏈技術發展" /><published>2019-01-16T00:00:00+08:00</published><updated>2019-01-16T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/01/16/%E9%BA%A5%E8%82%AF%E9%8C%AB%E5%A0%B1%E5%91%8A%E5%88%86%E6%9E%90%E5%8D%80%E5%A1%8A%E9%8F%88%E6%8A%80%E8%A1%93%E7%99%BC%E5%B1%95</id><content type="html" xml:base="http://localhost:4000/news/2019/01/16/%E9%BA%A5%E8%82%AF%E9%8C%AB%E5%A0%B1%E5%91%8A%E5%88%86%E6%9E%90%E5%8D%80%E5%A1%8A%E9%8F%88%E6%8A%80%E8%A1%93%E7%99%BC%E5%B1%95/">&lt;p&gt;原文標題： Blockchain’s Occam problem&lt;/p&gt;
-
-&lt;p&gt;作者：Matt Higginson、Marie-Claude Nadeau、Kausik Rajgopal&lt;/p&gt;
-
-&lt;p&gt;文章來源：&lt;a href=&quot;https://www.mckinsey.com/industries/financial-services/our-insights/blockchains-occam-problem&quot;&gt;https://www.mckinsey.com/industries/financial-services/our-insights/blockchains-occam-problem&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;美國管理顧問公司麥肯錫公司（McKinsey &amp;amp; Company）今年1月初在官方網站上發表針對區塊鏈發展的報告，以「 Blockchain’s Occam problem」（暫譯：區塊鏈的 Occam 問題）為標題，分析下一波區塊鏈技術的發展方向。作者群有麥肯錫波士頓辦公室合夥 Matt Higginson、麥肯錫舊金山辦公室合夥 Marie-Claude Nadeau，以及麥肯錫美國矽谷辦公室資深合夥 Kausik Rajgopal。&lt;/p&gt;
-
-&lt;p&gt;精華摘要：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;區塊鏈尚未成為有些人預期帶來改變遊戲規則（game-changer）的技術。找到其價值的關鍵在於，當區塊鏈技術能成功應用在簡易實用的應用解決方案時。&lt;/li&gt;
-  &lt;li&gt;看好區塊鏈技術具有潛力的其中一個指標是，大量投資資金湧入區塊鏈。2017 年，區塊鏈新創圈獲得的創投資金就高達 10 億美元。IBM 在物聯網及區塊鏈數據共享解決方案等專案上，已經投資超過 2 億美元；亦有報導指出，Google 早在 2016 年便已開始研究區塊鏈技術。 &lt;/li&gt;
-  &lt;li&gt;區塊鏈還處於技術發展初期（Infant technology）。根據典型的生命週期理論，任何產業或產品的演變可分為四個階段：導入期、成長期、成熟期、衰退期。區塊鏈技術目前還在努力擺脫第一階段導入期（the pioneering stage）。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/13.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;在區塊鏈眾多應用中，區塊鏈技術目前還卡在生命週期的第一階段（除了少數案例之外）。絕大多數的概念驗證（Proof of Concepts，PoCs）還在導入期階段，且很多專案在還沒獲得 C 輪募資前便已陣亡。&lt;/li&gt;
-  &lt;li&gt;從區塊鏈發展現況來看，似乎在 X-Y 圖左下角停滯不前，而非照著典型的產業生命週期向上的曲線發展。對於許多人來說，區塊鏈技術的第二階段（成長期）尚未發生。&lt;/li&gt;
-  &lt;li&gt;邁入 2019 年，區塊鏈技術可以在三個特定領域中看到其應用價值：小眾應用（Niche applications）、現代化價值（Modernization value）、聲譽價值（Reputational value）。&lt;/li&gt;
-  &lt;li&gt;小眾應用（Niche applications）：區塊鏈技術特別適合用在一些特定領域的應用，包括應用在追蹤資產所有權和資產狀態的數據整合的應用。例如，在保險業、供應鏈和資本市場，已經可以看到案例，利用分散式帳本的技術，解決業者們當前面對的效率低、流程不透明、詐欺等痛點。&lt;/li&gt;
-  &lt;li&gt;現代化價值（Modernization value）：區塊鏈技術對於在策略上追求現代化的產業具有吸引力。這些產業將區塊鏈視為一種追求數位化、流程簡化及合作的強大利器。特別在全球航運合約、貿易融資、支付應用等領域，也搭上區塊鏈潮流重新獲得關注。&lt;/li&gt;
-  &lt;li&gt;聲譽價值（Reputational value）：越來越多的公司正積極建置區塊鏈試驗專案（pilots），期望為公司帶來正面的聲譽價值；向股東和競爭者展示創新能力，並不特別關心是否能開創出具有商業規模的應用。&lt;/li&gt;
-  &lt;li&gt;組織需從問題作為切入點。必須正視真正的問題或痛點（pain point），區塊鏈才有機會成為一個實際的解決方案。奧坎的剃刀（Occam’s Razor）–– 必須選擇最簡單的解決辦法。公司企業必須誠實地評估自身的風險回報比、教育水平及潛在收益，同時還需評估所有專案可能帶來的影響及支持性商業案例。&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文標題： Blockchain’s Occam problem</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/13.png" /></entry></feed>
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文標題：We must protect our ability to transact privately online</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/41.png" /></entry></feed>
