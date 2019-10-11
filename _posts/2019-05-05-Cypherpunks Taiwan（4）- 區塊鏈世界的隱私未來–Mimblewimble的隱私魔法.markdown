@@ -32,7 +32,9 @@ ps. 原價屋隔壁，藍色助聽器招牌，一樓樓梯口有 Mozilla 字樣�
 講者簡介：Cypherpunks core成員，最近有興趣的主題是Mimblewimble等隱私協議，以及基進市場(Radical Markets)這種更為公平的加密經濟學。曾經在社交Dapp公司擔任過一段時間的產品運營。
 
 影片：
+```
  {% youtube "https://www.youtube.com/watch?v=mymtw4DUOsU" %}
+```
 
 這是「Cypherpunks Taiwan 密碼龐克」主題圍繞在 bitcoin是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由。
 

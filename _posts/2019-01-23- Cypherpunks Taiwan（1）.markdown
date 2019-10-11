@@ -27,4 +27,6 @@ published: true
 地點：摩茲工寮-原價屋隔壁，藍色助聽器招牌，一樓樓梯口有 Mozilla 字樣標示
 
 影片：
+```
 {% youtube "https://www.youtube.com/watch?v=Yois-l5x-sk&t=891s" %}
+```

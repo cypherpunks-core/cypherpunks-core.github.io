@@ -41,7 +41,9 @@ ps. 關於飲料的部分，大家自備環保杯喔
 * 2011年開始接觸挖礦。
 
 影片：
+```
  {% youtube "https://www.youtube.com/watch?v=UhqOdAre5mo" %}
+```
 
 這是「Cypherpunks Taiwan 密碼龐克」主題圍繞在 bitcoin是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由。
 
