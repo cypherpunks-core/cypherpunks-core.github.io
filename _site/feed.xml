@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-11T17:35:13+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">Cypherpunks Taiwan (8) -如何使用github &amp;amp; 衛星計畫進度報告</title><link href="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/" rel="alternate" type="text/html" title="Cypherpunks Taiwan (8) -如何使用github &amp; 衛星計畫進度報告" /><published>2019-10-04T00:00:00+08:00</published><updated>2019-10-04T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/10/04/Cypherpunks%20Taiwan%20(8)%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%20&amp;%20%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A</id><content type="html" xml:base="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&amp;-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/">&lt;p&gt;活動訊息：&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-11T17:53:52+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">Cypherpunks Taiwan (8) -如何使用github &amp;amp; 衛星計畫進度報告</title><link href="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/" rel="alternate" type="text/html" title="Cypherpunks Taiwan (8) -如何使用github &amp; 衛星計畫進度報告" /><published>2019-10-04T00:00:00+08:00</published><updated>2019-10-04T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/10/04/Cypherpunks%20Taiwan%20(8)%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%20&amp;%20%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A</id><content type="html" xml:base="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&amp;-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/">&lt;p&gt;活動訊息：&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;地點：Taipei Hackerspace&lt;/li&gt;
   &lt;li&gt;時間：19:00-22:00&lt;/li&gt;
@@ -24,18 +24,7 @@
 
 &lt;p&gt;Facebook 活動連結：&lt;a href=&quot;https://www.facebook.com/events/523580818418580/&quot;&gt;https://www.facebook.com/events/523580818418580/&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;影片：&lt;/p&gt;
-
-&lt;h3 id=&quot;cypherpunks-相關資訊&quot;&gt;Cypherpunks 相關資訊：&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Github：&lt;a href=&quot;https://cypherpunks-core.github.io/&quot;&gt;https://cypherpunks-core.github.io/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;論壇：&lt;a href=&quot;https://forum.cypherpunks.tech/&quot;&gt;https://forum.cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;官網：&lt;a href=&quot;https://cypherpunks.tech/&quot;&gt;https://cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Telegram：&lt;a href=&quot;https://t.me/CypherpunksTW&quot;&gt;https://t.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;FB粉專：&lt;a href=&quot;https://fb.me/CypherpunksTW&quot;&gt;https://fb.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Youtuber頻道：&lt;a href=&quot;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&quot;&gt;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;PPT：&lt;a href=&quot;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&quot;&gt;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">活動訊息： 地點：Taipei Hackerspace 時間：19:00-22:00 日期：10月4日 性質：小聚，希望手把手讓大家一起玩起來，不排斥大家帶酒來</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/50.png" /></entry><entry><title type="html">Cypherpunks Taiwan (7) -微雷電網路 &amp;amp; 開發者眼中的區塊鏈應用</title><link href="http://localhost:4000/meetup/2019/08/15/Cypherpunks-Taiwan-%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B-7-%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF-&-%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8/" rel="alternate" type="text/html" title="Cypherpunks Taiwan (7) -微雷電網路 &amp; 開發者眼中的區塊鏈應用" /><published>2019-08-15T00:00:00+08:00</published><updated>2019-08-15T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/08/15/Cypherpunks%20Taiwan%20%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%20(7)-%20%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF%20&amp;%20%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8</id><content type="html" xml:base="http://localhost:4000/meetup/2019/08/15/Cypherpunks-Taiwan-%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B-7-%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF-&amp;-%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8/">&lt;p&gt;議程：&lt;/p&gt;
+&lt;p&gt;影片：&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">活動訊息： 地點：Taipei Hackerspace 時間：19:00-22:00 日期：10月4日 性質：小聚，希望手把手讓大家一起玩起來，不排斥大家帶酒來</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/50.png" /></entry><entry><title type="html">Cypherpunks Taiwan (7) -微雷電網路 &amp;amp; 開發者眼中的區塊鏈應用</title><link href="http://localhost:4000/meetup/2019/08/15/Cypherpunks-Taiwan-%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B-7-%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF-&-%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8/" rel="alternate" type="text/html" title="Cypherpunks Taiwan (7) -微雷電網路 &amp; 開發者眼中的區塊鏈應用" /><published>2019-08-15T00:00:00+08:00</published><updated>2019-08-15T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/08/15/Cypherpunks%20Taiwan%20%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%20(7)-%20%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF%20&amp;%20%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8</id><content type="html" xml:base="http://localhost:4000/meetup/2019/08/15/Cypherpunks-Taiwan-%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B-7-%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF-&amp;-%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8/">&lt;p&gt;議程：&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;18:30 - 19:00 開放入場&lt;/li&gt;
   &lt;li&gt;19:00 - 19:10 簡述密碼龐克社群現況 10min&lt;/li&gt;
@@ -80,16 +69,9 @@
 對他而言，比特幣讓貨幣的去中心化，是一個有轉動世界的契機，配合現有網路優勢，再配合一個成熟的區塊鏈應用落地生態，可讓懂科技並且對社會有抱負的人，藉由創意及新科技來解決的社會結構問題，好讓弱勢族群於成長中有更多好的路可以選。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;cypherpunks-相關資訊&quot;&gt;Cypherpunks 相關資訊：&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Github：&lt;a href=&quot;https://cypherpunks-core.github.io/&quot;&gt;https://cypherpunks-core.github.io/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;論壇：&lt;a href=&quot;https://forum.cypherpunks.tech/&quot;&gt;https://forum.cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;官網：&lt;a href=&quot;https://cypherpunks.tech/&quot;&gt;https://cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Telegram：&lt;a href=&quot;https://t.me/CypherpunksTW&quot;&gt;https://t.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;FB粉專：&lt;a href=&quot;https://fb.me/CypherpunksTW&quot;&gt;https://fb.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Youtuber頻道：&lt;a href=&quot;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&quot;&gt;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;PPT：&lt;a href=&quot;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&quot;&gt;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">議程： 18:30 - 19:00 開放入場 19:00 - 19:10 簡述密碼龐克社群現況 10min 19:10 - 19:50 Ethereum 微雷電網路 的美麗與哀愁 by 江柏憲 Jambo 40min 19:50 - 20:05 中場休息 20:05 - 20:45 讓區塊鏈有價值的應用落地 - 以一位創新應用開發者的視角 by Milo 40min 20:45 - 21:30 交流時間</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/47.png" /></entry><entry><title type="html">活動-Make Privacy Protected Again | 找出你遺失很久的【隱私】</title><link href="http://localhost:4000/meetup/2019/07/05/Make-Privacy-Protected-Again-Maskbook-%E5%8F%B0%E5%8C%97%E9%A6%96%E6%AC%A1%E7%B7%9A%E4%B8%8B-Meetup/" rel="alternate" type="text/html" title="活動-Make Privacy Protected Again | 找出你遺失很久的【隱私】" /><published>2019-07-05T00:00:00+08:00</published><updated>2019-07-05T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/07/05/Make%20Privacy%20Protected%20Again%20%7C%20Maskbook%20%E5%8F%B0%E5%8C%97%E9%A6%96%E6%AC%A1%E7%B7%9A%E4%B8%8B%20Meetup</id><content type="html" xml:base="http://localhost:4000/meetup/2019/07/05/Make-Privacy-Protected-Again-Maskbook-%E5%8F%B0%E5%8C%97%E9%A6%96%E6%AC%A1%E7%B7%9A%E4%B8%8B-Meetup/">&lt;ul&gt;
+&lt;p&gt;影片：&lt;/p&gt;
+&lt;style&gt;.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }&lt;/style&gt;
+&lt;div class=&quot;embed-container&quot;&gt;    &lt;iframe title=&quot;YouTube video player&quot; width=&quot;640&quot; height=&quot;390&quot; src=&quot;//www.youtube.com/embed/wpYYd8xMFVg&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">議程： 18:30 - 19:00 開放入場 19:00 - 19:10 簡述密碼龐克社群現況 10min 19:10 - 19:50 Ethereum 微雷電網路 的美麗與哀愁 by 江柏憲 Jambo 40min 19:50 - 20:05 中場休息 20:05 - 20:45 讓區塊鏈有價值的應用落地 - 以一位創新應用開發者的視角 by Milo 40min 20:45 - 21:30 交流時間</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/47.png" /></entry><entry><title type="html">活動-Make Privacy Protected Again | 找出你遺失很久的【隱私】</title><link href="http://localhost:4000/meetup/2019/07/05/Make-Privacy-Protected-Again-Maskbook-%E5%8F%B0%E5%8C%97%E9%A6%96%E6%AC%A1%E7%B7%9A%E4%B8%8B-Meetup/" rel="alternate" type="text/html" title="活動-Make Privacy Protected Again | 找出你遺失很久的【隱私】" /><published>2019-07-05T00:00:00+08:00</published><updated>2019-07-05T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/07/05/Make%20Privacy%20Protected%20Again%20%7C%20Maskbook%20%E5%8F%B0%E5%8C%97%E9%A6%96%E6%AC%A1%E7%B7%9A%E4%B8%8B%20Meetup</id><content type="html" xml:base="http://localhost:4000/meetup/2019/07/05/Make-Privacy-Protected-Again-Maskbook-%E5%8F%B0%E5%8C%97%E9%A6%96%E6%AC%A1%E7%B7%9A%E4%B8%8B-Meetup/">&lt;ul&gt;
   &lt;li&gt;時間：2019年7月5日（星期五）19:00-22:00&lt;/li&gt;
   &lt;li&gt;地點：台北市中正區重慶南路一段105號2F (天瓏圖書2樓)&lt;/li&gt;
   &lt;li&gt;報名連結：&lt;a href=&quot;https://l.facebook.com/l.php?u=https%3A%2F%2Flihi1.cc%2FBLOFd&quot;&gt;https://lihi1.cc/BLOFd&lt;/a&gt;&lt;/li&gt;
@@ -166,16 +148,9 @@ Samson Mow 目前於 Blockstream 擔任策略長（CSO）。他是比特幣社�
 &lt;p&gt;【主辦單位介紹】：
 「Cypherpunks Taiwan 密碼龐克」沿用了「密碼龐克」一詞背後延伸的理念，期待可以建立一個針對區塊鏈、比特幣、以太坊技術學習資源網站，讓學習資源、最新訊息可以廣為流通與分享。&lt;/p&gt;
 
-&lt;h3 id=&quot;cypherpunks-相關資訊&quot;&gt;Cypherpunks 相關資訊：&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Github：&lt;a href=&quot;https://cypherpunks-core.github.io/&quot;&gt;https://cypherpunks-core.github.io/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;論壇：&lt;a href=&quot;https://forum.cypherpunks.tech/&quot;&gt;https://forum.cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;官網：&lt;a href=&quot;https://cypherpunks.tech/&quot;&gt;https://cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Telegram：&lt;a href=&quot;https://t.me/CypherpunksTW&quot;&gt;https://t.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;FB粉專：&lt;a href=&quot;https://fb.me/CypherpunksTW&quot;&gt;https://fb.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Youtuber頻道：&lt;a href=&quot;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&quot;&gt;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;PPT：&lt;a href=&quot;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&quot;&gt;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">比特幣基礎設施公司 Blockstream 首次登台，與 Cypherpunks Taiwan 聯手舉辦線下聚會！一個雇用了大量 Bitcoin Core 開發者的公司，究竟他們開發出的產品，能夠怎樣的影響比特幣及區塊鏈，甚至是整個世界呢？</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/49.png" /></entry><entry><title type="html">Cypherpunks Taiwan（5）- 區塊鏈存在證明與抗審查性 &amp;amp; 零知識證明</title><link href="http://localhost:4000/meetup/2019/06/11/Cypherpunks-Taiwan-5-%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7-&-%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E/" rel="alternate" type="text/html" title="Cypherpunks Taiwan（5）- 區塊鏈存在證明與抗審查性 &amp; 零知識證明" /><published>2019-06-11T00:00:00+08:00</published><updated>2019-06-11T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/06/11/Cypherpunks%20Taiwan(5)-%20%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7%20&amp;%20%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E</id><content type="html" xml:base="http://localhost:4000/meetup/2019/06/11/Cypherpunks-Taiwan-5-%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7-&amp;-%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E/">&lt;p&gt;時間：2019年6月11日（星期二） 晚上7:15到10:00
+&lt;p&gt;影片：&lt;/p&gt;
+&lt;style&gt;.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }&lt;/style&gt;
+&lt;div class=&quot;embed-container&quot;&gt;    &lt;iframe title=&quot;YouTube video player&quot; width=&quot;640&quot; height=&quot;390&quot; src=&quot;//www.youtube.com/embed/y2pKAX0qq0c&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">比特幣基礎設施公司 Blockstream 首次登台，與 Cypherpunks Taiwan 聯手舉辦線下聚會！一個雇用了大量 Bitcoin Core 開發者的公司，究竟他們開發出的產品，能夠怎樣的影響比特幣及區塊鏈，甚至是整個世界呢？</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/49.png" /></entry><entry><title type="html">Cypherpunks Taiwan（5）- 區塊鏈存在證明與抗審查性 &amp;amp; 零知識證明</title><link href="http://localhost:4000/meetup/2019/06/11/Cypherpunks-Taiwan-5-%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7-&-%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E/" rel="alternate" type="text/html" title="Cypherpunks Taiwan（5）- 區塊鏈存在證明與抗審查性 &amp; 零知識證明" /><published>2019-06-11T00:00:00+08:00</published><updated>2019-06-11T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/06/11/Cypherpunks%20Taiwan(5)-%20%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7%20&amp;%20%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E</id><content type="html" xml:base="http://localhost:4000/meetup/2019/06/11/Cypherpunks-Taiwan-5-%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7-&amp;-%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E/">&lt;p&gt;時間：2019年6月11日（星期二） 晚上7:15到10:00
 ps. 千萬不要提早到&lt;/p&gt;
 
 &lt;p&gt;地點：摩茲工寮（ 100 台北市中正區八德路一段 94 號 3F ）
@@ -210,6 +185,10 @@ ps. 原價屋隔壁，藍色助聽器招牌，一樓樓梯口有 Mozilla 字樣�
 
 &lt;p&gt;講者名稱：Kimi Wu
 講者簡介：擁有10年軟體開發經驗，2017年進入區塊鏈領域，主要都在Ethereum上做Dapp開發及區塊鏈上新技術的研究。Medium上Taipei Ethereum Meetup的寫手之一&lt;/p&gt;
+
+&lt;p&gt;影片：&lt;/p&gt;
+&lt;style&gt;.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }&lt;/style&gt;
+&lt;div class=&quot;embed-container&quot;&gt;    &lt;iframe title=&quot;YouTube video player&quot; width=&quot;640&quot; height=&quot;390&quot; src=&quot;//www.youtube.com/embed/SU3D89FPv9o&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;cypherpunks-相關資訊&quot;&gt;Cypherpunks 相關資訊：&lt;/h3&gt;
 &lt;ul&gt;
@@ -249,6 +228,10 @@ ps. 原價屋隔壁，藍色助聽器招牌，一樓樓梯口有 Mozilla 字樣�
 &lt;p&gt;講者名稱：Williams Lai 賴佳祈  &lt;br /&gt;
 講者簡介：Cypherpunks core成員，最近有興趣的主題是Mimblewimble等隱私協議，以及基進市場(Radical Markets)這種更為公平的加密經濟學。曾經在社交Dapp公司擔任過一段時間的產品運營。&lt;/p&gt;
 
+&lt;p&gt;影片：&lt;/p&gt;
+&lt;style&gt;.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }&lt;/style&gt;
+&lt;div class=&quot;embed-container&quot;&gt;    &lt;iframe title=&quot;YouTube video player&quot; width=&quot;640&quot; height=&quot;390&quot; src=&quot;//www.youtube.com/embed/mymtw4DUOsU&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+
 &lt;p&gt;這是「Cypherpunks Taiwan 密碼龐克」主題圍繞在 bitcoin是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由。&lt;/p&gt;
 
 &lt;p&gt;目標：&lt;/p&gt;
@@ -256,17 +239,6 @@ ps. 原價屋隔壁，藍色助聽器招牌，一樓樓梯口有 Mozilla 字樣�
   &lt;li&gt;創造一個 crypto 論壇&lt;/li&gt;
   &lt;li&gt;學習crypto&lt;/li&gt;
   &lt;li&gt;多元crypto議題分享會（一個月一次)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;cypherpunks-相關資訊&quot;&gt;Cypherpunks 相關資訊：&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Github：&lt;a href=&quot;https://cypherpunks-core.github.io/&quot;&gt;https://cypherpunks-core.github.io/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;論壇：&lt;a href=&quot;https://forum.cypherpunks.tech/&quot;&gt;https://forum.cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;官網：&lt;a href=&quot;https://cypherpunks.tech/&quot;&gt;https://cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Telegram：&lt;a href=&quot;https://t.me/CypherpunksTW&quot;&gt;https://t.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;FB粉專：&lt;a href=&quot;https://fb.me/CypherpunksTW&quot;&gt;https://fb.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Youtuber頻道：&lt;a href=&quot;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&quot;&gt;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;PPT：&lt;a href=&quot;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&quot;&gt;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">時間：2019年5月5日（星期日） 晚上7:00到10:00 地址：100 台北市中正區八德路一段 94 號 3F</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/53.png" /></entry><entry><title type="html">Cypherpunks Taiwan（3）-AI on blockchain 核心價值</title><link href="http://localhost:4000/meetup/2019/04/09/Cypherpunks-Taiwan-3-AI-on-blockchain-%E6%A0%B8%E5%BF%83%E5%83%B9%E5%80%BC/" rel="alternate" type="text/html" title="Cypherpunks Taiwan（3）-AI on blockchain 核心價值" /><published>2019-04-09T00:00:00+08:00</published><updated>2019-04-09T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/04/09/Cypherpunks%20Taiwan(3)-AI%20on%20blockchain%20%E6%A0%B8%E5%BF%83%E5%83%B9%E5%80%BC</id><content type="html" xml:base="http://localhost:4000/meetup/2019/04/09/Cypherpunks-Taiwan-3-AI-on-blockchain-%E6%A0%B8%E5%BF%83%E5%83%B9%E5%80%BC/">&lt;ul&gt;
   &lt;li&gt;時間：2019年4月9日（星期二） 晚上7:00到10:00&lt;/li&gt;
   &lt;li&gt;地點：People Squared 台北（中正區信義路二段253號）捷運東門站7號出https://goo.gl/maps/sfzdVEf6VTJ2&lt;/li&gt;
@@ -312,6 +284,10 @@ ps. 關於飲料的部分，大家自備環保杯喔
   &lt;li&gt;2011年開始接觸挖礦。&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;p&gt;影片：&lt;/p&gt;
+&lt;style&gt;.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }&lt;/style&gt;
+&lt;div class=&quot;embed-container&quot;&gt;    &lt;iframe title=&quot;YouTube video player&quot; width=&quot;640&quot; height=&quot;390&quot; src=&quot;//www.youtube.com/embed/UhqOdAre5mo&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+
 &lt;p&gt;這是「Cypherpunks Taiwan 密碼龐克」主題圍繞在 bitcoin是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由。&lt;/p&gt;
 
 &lt;p&gt;目標：&lt;/p&gt;
@@ -319,17 +295,6 @@ ps. 關於飲料的部分，大家自備環保杯喔
   &lt;li&gt;創造一個 crypto 論壇&lt;/li&gt;
   &lt;li&gt;學習crypto&lt;/li&gt;
   &lt;li&gt;多元crypto議題分享會（一個月一次)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;cypherpunks-相關資訊&quot;&gt;Cypherpunks 相關資訊：&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Github：&lt;a href=&quot;https://cypherpunks-core.github.io/&quot;&gt;https://cypherpunks-core.github.io/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;論壇：&lt;a href=&quot;https://forum.cypherpunks.tech/&quot;&gt;https://forum.cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;官網：&lt;a href=&quot;https://cypherpunks.tech/&quot;&gt;https://cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Telegram：&lt;a href=&quot;https://t.me/CypherpunksTW&quot;&gt;https://t.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;FB粉專：&lt;a href=&quot;https://fb.me/CypherpunksTW&quot;&gt;https://fb.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Youtuber頻道：&lt;a href=&quot;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&quot;&gt;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;PPT：&lt;a href=&quot;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&quot;&gt;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">時間：2019年4月9日（星期二） 晚上7:00到10:00 地點：People Squared 台北（中正區信義路二段253號）捷運東門站7號出https://goo.gl/maps/sfzdVEf6VTJ2 費用：100元現場收（場地費+飲料） ps. 關於飲料的部分，大家自備環保杯喔 團隊官網：https://www.cortexlabs.ai/</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/54.png" /></entry><entry><title type="html">密碼龐克台北第二場技術交流活動3月5日圓滿落幕</title><link href="http://localhost:4000/news/2019/03/07/%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E5%8C%97%E7%AC%AC%E4%BA%8C%E5%A0%B4%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81%E6%B4%BB%E5%8B%953%E6%9C%885%E6%97%A5%E5%9C%93%E6%BB%BF%E8%90%BD%E5%B9%95/" rel="alternate" type="text/html" title="密碼龐克台北第二場技術交流活動3月5日圓滿落幕" /><published>2019-03-07T00:00:00+08:00</published><updated>2019-03-07T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/03/07/%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E5%8C%97%E7%AC%AC%E4%BA%8C%E5%A0%B4%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81%E6%B4%BB%E5%8B%953%E6%9C%885%E6%97%A5%E5%9C%93%E6%BB%BF%E8%90%BD%E5%B9%95</id><content type="html" xml:base="http://localhost:4000/news/2019/03/07/%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E5%8C%97%E7%AC%AC%E4%BA%8C%E5%A0%B4%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81%E6%B4%BB%E5%8B%953%E6%9C%885%E6%97%A5%E5%9C%93%E6%BB%BF%E8%90%BD%E5%B9%95/">&lt;p&gt;由&lt;a href=&quot;https://cypherpunks.tech/&quot;&gt;「Cypherpunks Taiwan 密碼龐克」&lt;/a&gt;網站平台主辦、&lt;a href=&quot;https://moztw.org/space/&quot;&gt;摩茲工寮 Mozilla Community Space Taipei&lt;/a&gt; 場地空間贊助的第二次密碼龐克台北實體技術交流聚會活動，於 3 月 5 日星期二晚上 19:00 – 21:30 舉行，現場吸引 30 多位朋友來到台北市八德路摩茲工寮的空間，聆聽資訊工程研究所碩二生 Brian 分享「比特幣交易手續費的預測」以及日本比特幣創業家東晃慈（Koji Higashi）談有關閃電網路（Lighting Network）和第二層技術的重要性。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/img/36.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
@@ -369,22 +334,15 @@ Machine Learning Algorithm」的&lt;a href=&quot;https://docs.google.com/present
 
 &lt;p&gt;活動最前面15分鐘做場地跟 Mozilla 簡介&lt;/p&gt;
 
+&lt;p&gt;影片：&lt;/p&gt;
+&lt;style&gt;.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }&lt;/style&gt;
+&lt;div class=&quot;embed-container&quot;&gt;    &lt;iframe title=&quot;YouTube video player&quot; width=&quot;640&quot; height=&quot;390&quot; src=&quot;//www.youtube.com/embed/w00SteBL_5c&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+
 &lt;p&gt;目標：&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;創造一個 crypto 論壇&lt;/li&gt;
   &lt;li&gt;學習crypto&lt;/li&gt;
   &lt;li&gt;多元crypto議題分享會（一個月一次)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;cypherpunks-相關資訊&quot;&gt;Cypherpunks 相關資訊：&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Github：&lt;a href=&quot;https://cypherpunks-core.github.io/&quot;&gt;https://cypherpunks-core.github.io/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;論壇：&lt;a href=&quot;https://forum.cypherpunks.tech/&quot;&gt;https://forum.cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;官網：&lt;a href=&quot;https://cypherpunks.tech/&quot;&gt;https://cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Telegram：&lt;a href=&quot;https://t.me/CypherpunksTW&quot;&gt;https://t.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;FB粉專：&lt;a href=&quot;https://fb.me/CypherpunksTW&quot;&gt;https://fb.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Youtuber頻道：&lt;a href=&quot;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&quot;&gt;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;PPT：&lt;a href=&quot;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&quot;&gt;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">Cypherpunks Taiwan 密碼龐克 - crypto文化的聚集地</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/55.png" /></entry><entry><title type="html">美國密碼貨幣學者呼籲保護線上交易隱私性</title><link href="http://localhost:4000/news/2019/02/26/%E7%BE%8E%E5%9C%8B%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E5%AD%B8%E8%80%85%E5%91%BC%E7%B1%B2%E4%BF%9D%E8%AD%B7%E7%B7%9A%E4%B8%8A%E4%BA%A4%E6%98%93%E9%9A%B1%E7%A7%81%E6%80%A7/" rel="alternate" type="text/html" title="美國密碼貨幣學者呼籲保護線上交易隱私性" /><published>2019-02-26T00:00:00+08:00</published><updated>2019-02-26T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/02/26/%E7%BE%8E%E5%9C%8B%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E5%AD%B8%E8%80%85%E5%91%BC%E7%B1%B2%E4%BF%9D%E8%AD%B7%E7%B7%9A%E4%B8%8A%E4%BA%A4%E6%98%93%E9%9A%B1%E7%A7%81%E6%80%A7</id><content type="html" xml:base="http://localhost:4000/news/2019/02/26/%E7%BE%8E%E5%9C%8B%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E5%AD%B8%E8%80%85%E5%91%BC%E7%B1%B2%E4%BF%9D%E8%AD%B7%E7%B7%9A%E4%B8%8A%E4%BA%A4%E6%98%93%E9%9A%B1%E7%A7%81%E6%80%A7/">&lt;p&gt;原文標題：We must protect our ability to transact privately online&lt;/p&gt;
 
 &lt;p&gt;作者：Jerry Brito&lt;/p&gt;

@@ -41,11 +41,5 @@ Samson Mow 目前於 Blockstream 擔任策略長（CSO）。他是比特幣社�
 【主辦單位介紹】：
 「Cypherpunks Taiwan 密碼龐克」沿用了「密碼龐克」一詞背後延伸的理念，期待可以建立一個針對區塊鏈、比特幣、以太坊技術學習資源網站，讓學習資源、最新訊息可以廣為流通與分享。
 
-### Cypherpunks 相關資訊：
-* Github：[https://cypherpunks-core.github.io/](https://cypherpunks-core.github.io/)
-* 論壇：[https://forum.cypherpunks.tech/](https://forum.cypherpunks.tech/)
-* 官網：[https://cypherpunks.tech/](https://cypherpunks.tech/)
-* Telegram：[https://t.me/CypherpunksTW](https://t.me/CypherpunksTW)
-* FB粉專：[https://fb.me/CypherpunksTW](https://fb.me/CypherpunksTW)
-* Youtuber頻道：[https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA](https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA)
-* PPT：[https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy](https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy)
+影片：
+ {% youtube "https://www.youtube.com/watch?v=y2pKAX0qq0c" %}

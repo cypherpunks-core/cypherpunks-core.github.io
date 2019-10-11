@@ -30,13 +30,3 @@ published: true
 Facebook 活動連結：[https://www.facebook.com/events/523580818418580/](https://www.facebook.com/events/523580818418580/)
 
 影片：
-
-
-### Cypherpunks 相關資訊：
-* Github：[https://cypherpunks-core.github.io/](https://cypherpunks-core.github.io/)
-* 論壇：[https://forum.cypherpunks.tech/](https://forum.cypherpunks.tech/)
-* 官網：[https://cypherpunks.tech/](https://cypherpunks.tech/)
-* Telegram：[https://t.me/CypherpunksTW](https://t.me/CypherpunksTW)
-* FB粉專：[https://fb.me/CypherpunksTW](https://fb.me/CypherpunksTW)
-* Youtuber頻道：[https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA](https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA)
-* PPT：[https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy](https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy)

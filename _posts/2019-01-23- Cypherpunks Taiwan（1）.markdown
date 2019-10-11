@@ -28,13 +28,3 @@ published: true
 
 影片：
 {% youtube "https://www.youtube.com/watch?v=Yois-l5x-sk&t=891s" %}
-
-
-### Cypherpunks 相關資訊：
-* Github：[https://cypherpunks-core.github.io/](https://cypherpunks-core.github.io/)
-* 論壇：[https://forum.cypherpunks.tech/](https://forum.cypherpunks.tech/)
-* 官網：[https://cypherpunks.tech/](https://cypherpunks.tech/)
-* Telegram：[https://t.me/CypherpunksTW](https://t.me/CypherpunksTW)
-* FB粉專：[https://fb.me/CypherpunksTW](https://fb.me/CypherpunksTW)
-* Youtuber頻道：[https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA](https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA)
-* PPT：[https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy](https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy)

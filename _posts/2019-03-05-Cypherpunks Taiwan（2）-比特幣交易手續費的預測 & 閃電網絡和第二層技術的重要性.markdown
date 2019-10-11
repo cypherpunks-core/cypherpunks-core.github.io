@@ -24,17 +24,10 @@ Cypherpunks Taiwan 密碼龐克 - crypto文化的聚集地
 
 活動最前面15分鐘做場地跟 Mozilla 簡介
 
+影片：
+ {% youtube "https://www.youtube.com/watch?v=w00SteBL_5c" %}
 
 目標：
 * 創造一個 crypto 論壇
 * 學習crypto
 * 多元crypto議題分享會（一個月一次)
-
-### Cypherpunks 相關資訊：
-* Github：[https://cypherpunks-core.github.io/](https://cypherpunks-core.github.io/)
-* 論壇：[https://forum.cypherpunks.tech/](https://forum.cypherpunks.tech/)
-* 官網：[https://cypherpunks.tech/](https://cypherpunks.tech/)
-* Telegram：[https://t.me/CypherpunksTW](https://t.me/CypherpunksTW)
-* FB粉專：[https://fb.me/CypherpunksTW](https://fb.me/CypherpunksTW)
-* Youtuber頻道：[https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA](https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA)
-* PPT：[https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy](https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy)

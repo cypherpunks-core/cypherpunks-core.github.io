@@ -43,11 +43,5 @@ published: true
 擁有 LinkedIn 十萬追隨者但卻不擅面對人群的他，目前正與全球醫療體系共努力，運用新科技讓人民擁有更好的醫療。而他的業餘志業也是醫療，但對象社會的結構，他想先讓台灣未來能成為一個區塊鏈應用部落，路程中也就成立 ÐApp 101 讀書會。    
 對他而言，比特幣讓貨幣的去中心化，是一個有轉動世界的契機，配合現有網路優勢，再配合一個成熟的區塊鏈應用落地生態，可讓懂科技並且對社會有抱負的人，藉由創意及新科技來解決的社會結構問題，好讓弱勢族群於成長中有更多好的路可以選。
 
-### Cypherpunks 相關資訊：
-* Github：[https://cypherpunks-core.github.io/](https://cypherpunks-core.github.io/)
-* 論壇：[https://forum.cypherpunks.tech/](https://forum.cypherpunks.tech/)
-* 官網：[https://cypherpunks.tech/](https://cypherpunks.tech/)
-* Telegram：[https://t.me/CypherpunksTW](https://t.me/CypherpunksTW)
-* FB粉專：[https://fb.me/CypherpunksTW](https://fb.me/CypherpunksTW)
-* Youtuber頻道：[https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA](https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA)
-* PPT：[https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy](https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy)
+影片：
+ {% youtube "https://www.youtube.com/watch?v=wpYYd8xMFVg" %}

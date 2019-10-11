@@ -40,6 +40,9 @@ ps. 關於飲料的部分，大家自備環保杯喔
 * hydrogenesis@ bitcointalk;
 * 2011年開始接觸挖礦。
 
+影片：
+ {% youtube "https://www.youtube.com/watch?v=UhqOdAre5mo" %}
+
 這是「Cypherpunks Taiwan 密碼龐克」主題圍繞在 bitcoin是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由。
 
 
@@ -47,12 +50,3 @@ ps. 關於飲料的部分，大家自備環保杯喔
 * 創造一個 crypto 論壇
 * 學習crypto
 * 多元crypto議題分享會（一個月一次)
-
-### Cypherpunks 相關資訊：
-* Github：[https://cypherpunks-core.github.io/](https://cypherpunks-core.github.io/)
-* 論壇：[https://forum.cypherpunks.tech/](https://forum.cypherpunks.tech/)
-* 官網：[https://cypherpunks.tech/](https://cypherpunks.tech/)
-* Telegram：[https://t.me/CypherpunksTW](https://t.me/CypherpunksTW)
-* FB粉專：[https://fb.me/CypherpunksTW](https://fb.me/CypherpunksTW)
-* Youtuber頻道：[https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA](https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA)
-* PPT：[https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy](https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy)
