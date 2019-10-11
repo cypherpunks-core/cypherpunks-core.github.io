@@ -4,26 +4,22 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cypherpunks Taiwan（3）-AI on blockchain 核心價值 - Cypherpunks Taiwan</title>
+    <title>閃電網路資源 - Cypherpunks Taiwan</title>
     <link rel="stylesheet" href="/assets/css/app.css">
     <link rel="shortcut icon" type="image/png" href="/favicon.png" />
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Cypherpunks Taiwan（3）-AI on blockchain 核心價值 | Cypherpunks Taiwan</title>
+<title>閃電網路資源 | Cypherpunks Taiwan</title>
 <meta name="generator" content="Jekyll v3.8.6" />
-<meta property="og:title" content="Cypherpunks Taiwan（3）-AI on blockchain 核心價值" />
-<meta name="author" content="Cypherpunks Core" />
+<meta property="og:title" content="閃電網路資源" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="AI on blockchain 核心價值" />
-<meta property="og:description" content="AI on blockchain 核心價值" />
-<link rel="canonical" href="http://localhost:4000/meetup/2019/04/09/Cypherpunks-Taiwan-3-AI-on-blockchain-%E6%A0%B8%E5%BF%83%E5%83%B9%E5%80%BC/" />
-<meta property="og:url" content="http://localhost:4000/meetup/2019/04/09/Cypherpunks-Taiwan-3-AI-on-blockchain-%E6%A0%B8%E5%BF%83%E5%83%B9%E5%80%BC/" />
+<meta name="description" content="密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again." />
+<meta property="og:description" content="密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again." />
+<link rel="canonical" href="http://localhost:4000/resources-ln/" />
+<meta property="og:url" content="http://localhost:4000/resources-ln/" />
 <meta property="og:site_name" content="Cypherpunks Taiwan" />
-<meta property="og:image" content="http://localhost:4000/img/54.png" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-04-09T00:00:00+08:00" />
 <script type="application/ld+json">
-{"description":"AI on blockchain 核心價值","@type":"BlogPosting","headline":"Cypherpunks Taiwan（3）-AI on blockchain 核心價值","dateModified":"2019-04-09T00:00:00+08:00","datePublished":"2019-04-09T00:00:00+08:00","image":"http://localhost:4000/img/54.png","url":"http://localhost:4000/meetup/2019/04/09/Cypherpunks-Taiwan-3-AI-on-blockchain-%E6%A0%B8%E5%BF%83%E5%83%B9%E5%80%BC/","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/meetup/2019/04/09/Cypherpunks-Taiwan-3-AI-on-blockchain-%E6%A0%B8%E5%BF%83%E5%83%B9%E5%80%BC/"},"author":{"@type":"Person","name":"Cypherpunks Core"},"@context":"https://schema.org"}</script>
+{"description":"密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.","@type":"WebPage","headline":"閃電網路資源","url":"http://localhost:4000/resources-ln/","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131051587-3"></script>
 <script>
@@ -62,7 +58,7 @@
                             
                             <a href="/resources-ethereum/" class="navbar-item ">以太坊資源</a>
                             
-                            <a href="/resources-ln/" class="navbar-item ">閃電網路資源</a>
+                            <a href="/resources-ln/" class="navbar-item is-active">閃電網路資源</a>
                             
                         </div>
                     </div>
@@ -105,7 +101,7 @@
         <section class="hero  is-medium  is-bold is-primary"  style="background: url('/img/hero.png') no-repeat center center; background-size: cover;" >
     <div class="hero-body">
         <div class="container">
-            <p class="title is-2">Cypherpunks Taiwan（3）-AI on blockchain 核心價值</p>
+            <p class="title is-2">閃電網路資源</p>
             <p class="subtitle is-3"></p>
             
         </div>
@@ -122,73 +118,96 @@
                 <div class="column is-8">
                     
                     <div class="content">
+    <h3 id="實現--implementations">實現 | Implementations</h3>
 
-    <p>Published: Apr 9, 2019 by Cypherpunks Core</p>
+<p>閃電網路協議的實現</p>
 
-    <ul>
-  <li>時間：2019年4月9日（星期二） 晚上7:00到10:00</li>
-  <li>地點：People Squared 台北（中正區信義路二段253號）捷運東門站7號出https://goo.gl/maps/sfzdVEf6VTJ2</li>
-  <li>費用：100元現場收（場地費+飲料） <br />
-ps. 關於飲料的部分，大家自備環保杯喔
-團隊官網：https://www.cortexlabs.ai/</li>
+<ul>
+  <li><strong><a href="https://github.com/lightningnetwork/lnd">lightningnetwork/lnd</a> – Lightning Network Daemon（lnd） – 是Lightning Network節點的完整實現。(Golang)</strong></li>
+  <li><strong><a href="https://github.com/ElementsProject/lightning">ElementsProject/lightning</a> – c-lightning：C語言中符合規範的Lightning Network實現(C)</strong></li>
+  <li><strong><a href="https://github.com/ACINQ/eclair">ACINQ/eclair</a> – Lightning Network的Scala語言實現。它可以在有或沒有GUI的情況下運行，也可以使用JSON-RPC API。(Scala)</strong></li>
+  <li><a href="https://github.com/mit-dci/lit">mit-dci/lit</a> – Lightning Network節點軟件(Golang)</li>
+  <li><a href="https://github.com/lightningnetwork/lightning-onion">lightningnetwork/lightning-onion</a> – 該存儲庫包含Lightning Network的洋蔥路由協議的實現。(Golang)</li>
+  <li><a href="https://github.com/nayutaco/ptarmigan">nayutaco/ptarmigan</a> – 符合C ++ BOLT標準的Lightning網路實現[Incomplete]</li>
+  <li><a href="https://github.com/LightningPeach/lpd">LightningPeach/lpd</a> – 是Rust語言中Lightning Network節點的部分實現。</li>
 </ul>
 
-<p>第三次活動議程：</p>
+<h3 id="閃電網路-app">閃電網路 app</h3>
 
-<p>簡述密碼龐克社群現況</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>講題：AI on blockchain 核心價值&amp;鏈上AI的挑戰與發展</td>
-      <td>Cortex— What’s the catch？</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>講題摘要：
-智能合約是以太重要的技術之一，被視為區塊鏈的2.0版本。然而，目前智能合約的協議並非完美，侷限於有限的計算能力和尚有缺陷的制度。現在的智慧合約編成大多相當簡單，也不夠智慧來擔起它的稱號。Cortex團隊認為最優質的解決方案就是-在區塊鏈上啟用AI並將AI整合到智慧合約。</p>
-
-<p>人工智慧正在改變我們日常生活的方式，各行各業都在為人工智慧領域鋪路。區塊鏈技術發展除了本身需要更多群眾的共識之外，如果想邁向更普及、更多的應用場景也必須結合人工智慧，這就是為什麼智慧合約到目前為止還不是很成功的真正原因。作為第一個支援鏈上AI的底層區塊鏈，Cortex將如何實現AI智慧合約，並建立一個開源的開發者社群，在人工智慧和區塊鏈的開發基礎上，建立強大的開源平臺，以整個生態系統促進AI和區塊鏈技術的未來發展。</p>
-
-<p>講者名稱：Amy Chen、田甲  <br />
-講者簡介 ：  <br />
-(1) Cortex運營長－Amy Chen</p>
 <ul>
-  <li>Amy Chen畢業於哥倫比亞大學電機工程碩士學位</li>
-  <li>2012年創辦aSolar Inc太陽能項目開發公司，旨在提供太陽能可再生能源系統的全方位服務；</li>
-  <li>2017年於全球生態交通盛典上舉辦區塊鏈與低碳循環經濟未來展望論壇。</li>
-  <li>目前擔任Cortex Labs COO，致力於推廣人工智能的民主化進程，構建去中心化的人工智能自治系統。</li>
+  <li><a href="https://kintu.co/lightning-apps/">These are the Top 10 Lightning Apps out right now</a></li>
+  <li><a href="https://dev.lightning.community/lapps/">Lightning App Directory</a></li>
 </ul>
 
-<p>(2) Cortex的首席技術長－田甲</p>
+<h4 id="桌面界面--desktop-interfaces">桌面界面 | Desktop Interfaces</h4>
+
 <ul>
-  <li>Bitfinex的投資者；</li>
-  <li>Bitfund的有限合夥人;</li>
-  <li>Zhenfund的創業合伙人;</li>
-  <li>hydrogenesis@ bitcointalk;</li>
-  <li>2011年開始接觸挖礦。</li>
+  <li><strong><a href="https://github.com/lightninglabs/lightning-app">lightninglabs/lightning-app</a> – 跨平台Lightning桌面應用程序</strong></li>
+  <li><strong><a href="https://github.com/LN-Zap/zap-desktop">LN-Zap/zap-desktop</a> – Lightning Network桌面應用程序</strong></li>
+  <li><strong><a href="https://github.com/icota/presto">icota/presto</a> – 基於c-lightning的桌面錢包</strong></li>
+  <li><strong><a href="https://github.com/LightningPeach/lightning-peach-wallet">LightningPeach/lightning-peach-wallet</a> – Bitfury Lightning錢包</strong></li>
+  <li><strong><a href="https://github.com/shesek/spark-wallet">shesek/spark-wallet</a> – 用於c-lightning的最小GUI; 可用作網路，移動和桌面應用程序</strong></li>
+  <li><a href="https://github.com/alexbosworth/lnd-gui">alexbosworth/lnd-gui</a> – Lightning MacOS GUI錢包</li>
+  <li><a href="https://github.com/ACINQ/eclair">ACINQ/eclair</a> – Lightning的跨平台桌面GUI</li>
+  <li><a href="https://github.com/benharold/voltage">benharold/voltage</a> – 電壓是c-lightning的macOS GUI</li>
 </ul>
 
-<p>影片：</p>
+<h4 id="web界面--web-interfaces">Web界面 | Web Interfaces</h4>
 
-<p>https://www.youtube.com/watch?v=UhqOdAre5mo</p>
-
-<p>這是「Cypherpunks Taiwan 密碼龐克」主題圍繞在 bitcoin是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由。</p>
-
-<p>目標：</p>
 <ul>
-  <li>創造一個 crypto 論壇</li>
-  <li>學習crypto</li>
-  <li>多元crypto議題分享會（一個月一次)</li>
+  <li><a href="https://github.com/Lightning-Family/Discovery-Wallet">Lightning-Family/Discovery-Wallet</a> – 網路保管錢包; <a href="https://wallet.lightning.family/">現場演示</a></li>
+  <li><a href="https://github.com/marzig76/fulmo">marzig76/fulmo</a> – 簡約的c-lightning UI</li>
+  <li><a href="http://lightningjoule.com/">Joule</a> – 一個鍍鉻擴展程序，支持與閃電應用程序的付款和其他交互(類似於MetaMask)</li>
+  <li><a href="https://github.com/cdecker/kugelblitz">cdecker/kugelblitz</a> – 一個簡單的用戶界面，用於c-lightning守護進程閃電和bitcoind</li>
+  <li><a href="https://github.com/mably/lncli-web">mably/lncli-web</a> – 用NodeJS / Angular編寫的lnd守護進程的輕量級Web客戶端</li>
+  <li><a href="https://github.com/ShahanaFarooqui/RTL">ShahanaFarooqui/RTL</a> – 用NodeJS / Angular 7編寫的LND守護進程的Web客戶端</li>
+  <li><a href="https://bitlum.io/">bitlum.io</a>-Bitlum是一個Lightning Network主網絡錢包。快速，簡單，無需安裝節點。設置只需5分鐘訪問。</li>
+</ul>
+
+<h4 id="移動應用程序--mobile-applications">移動應用程序 | Mobile applications</h4>
+
+<ul>
+  <li><strong>Android</strong></li>
+  <li><a href="https://play.google.com/store/apps/details?id=fr.acinq.eclair.wallet.mainnet2">Eclair Mobile</a></li>
+  <li><a href="https://hoo.com/">Hoo Wallet</a>-適用於Android的移動閃電錢包。此錢包是非託管的，需要運行您自己的完整節點。</li>
+  <li><a href="https://github.com/ACINQ/eclair-mobile">Eclair</a>Eclair移動應用程序是一款非託管移動Lightning Network錢包，現在可以啟用閃電接收功能。以前只能發送資金。</li>
+  <li><strong>iOS</strong></li>
+  <li><a href="https://github.com/rawtxapp/rawtxapp">rawtxapp/rawtxapp</a> – 閃電網路錢包(Android，iOS); <a href="https://rawtx.com/">主頁</a></li>
+  <li><a href="https://github.com/biscottigelato/SwiftLightning">biscottigelato/SwiftLightning</a> – 在LND for iOS之上構建LN錢包</li>
+  <li><a href="https://play.google.com/store/apps/details?id=com.lightning.walletapp">比特幣閃電錢包</a> – 基於Eclair的基於Android的Lightning Network兼容錢包(<a href="https://cypherpunks.tech/resources/%e9%96%83%e9%9b%bb%e7%b6%b2%e8%b7%af-%e8%b3%87%e6%ba%90/https%EF%BC%9A//play.google.com/store/apps/details?id=com.lightning.wallet">testnet版本</a>)</li>
+</ul>
+
+<h4 id="遊戲">遊戲</h4>
+
+<ul>
+  <li><a href="https://bc.game/atm">BC.Game</a>-BC.Game是一個BlockChain遊戲平台，具有可靠的公平，快速支付，免費水龍頭和Lightning Network支持。一些可用的遊戲是Crash，Dice和Blackjack。</li>
+</ul>
+
+<h4 id="瀏覽器--explorers">瀏覽器 | Explorers</h4>
+
+<ul>
+  <li><strong>閃電網路節點瀏覽器</strong></li>
+  <li><a href="https://explore.casa/">Casa</a>-一個快速瀏覽器，允許您查詢節點和通道。節點詳細信息包括星圖和頻道列表。</li>
+  <li><a href="https://explorer.acinq.co/">acinq.co</a></li>
+  <li><a href="https://1ml.com/">1ML</a></li>
+  <li><a href="https://lightblock.me/">Lightblock</a></li>
+  <li><strong>閃電網路拓普</strong></li>
+  <li><a href="https://explorer.acinq.co/">Lightning network explorer</a> – 可視化閃電網路拓普</li>
+  <li><a href="https://gist.github.com/bretton/798ec38165ffabc719d91e0f4f67552d">chemicstry/recksplorer</a> – 網絡視圖​​往往是來自單個節點或少量節點選擇的網絡視圖。它們不是網絡的完整視圖。這是不可能實現的。即使組合了許多節點視圖，它仍然是不完整的。</li>
+  <li><a href="https://github.com/xsb/lngraph">xsb/lngraph</a> – lngraph將Lightning Network數據導入Neo4j，用於本地探索您的節點及其網絡視圖。這不是一個公共資源管理器。</li>
+  <li><a href="https://www.robtex.com/lightning/node/">Robtex比特幣Lightning Explorer</a> – 統計閃電節點數、殭屍節點數、活動節點數、活動節點數24h、活動節點數1w、活動節點數1m、總開放通道數、總封閉頻道、總頻道容量。</li>
+  <li><a href="https://bitcoinexchangerate.org/lightning">itcoinExchangeRate.org (Bitcoin 匯率)</a> – Lightning網路瀏覽器(testnet和mainnet)</li>
+</ul>
+
+<h2 id="特殊項目--special-item">特殊項目 | Special item</h2>
+
+<ul>
+  <li><a href="https://github.com/Stadicus/guides/blob/master/raspibolt/README.md">Stadicus/guides</a>-在Raspberry Pi 上搭建 Lightning Network</li>
+  <li><a href="https://github.com/rstmsn/lnd-for-wp">rstmsn/lnd-for-wp</a>-LND For WP是一個WordPress插件，允許您直接從WordPress管理面板管理和使用LND節點。它提供了一個功能齊全的錢包界面，使您可以輕鬆地在Lightning Network上發送和接收資金。</li>
+  <li><a href="https://www.opencart.com/index.php?route=marketplace/extension/info&amp;extension_id=36414">opencart 中支持 Lightning Network</a></li>
 </ul>
 
 </div>
-
-<div class="tags">
-    
-</div>
-
                 </div>
                 
                 <div class="column is-4-desktop is-12-tablet">

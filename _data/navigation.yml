@@ -1,21 +1,24 @@
-- name: Pages
+- name: '資源'
   link: /#
   dropdown:
-    - name: Page With Sidebar
-      link: /page-1/
-    - name: Page No Sidebar
-      link: /page-2/
-    - name: Page With Menubar
-      link: /page-3/
-    - name: Page With Tabs
-      link: /page-4/
-    - name: Page Without Footer
-      link: /page-5/
-    - name: Page Without Hero
-      link: /page-without-hero/
-    - name: Landing Page With Callouts
-      link: /landing/
-- name: Products
+    - name: 比特幣資源
+      link: /resources-bitcoin/
+    - name: 以太坊資源
+      link: /resources-ethereum/
+    - name: 閃電網路資源
+      link: /resources-ln/
+- name: '知識庫'
+  link: /#
+  dropdown:
+    - name: 比特幣知識庫
+      link: /knowledge-bitcoin/
+    - name: 以太坊知識庫
+      link: /knowledge-ethereum/
+    - name: 閃電網路知識庫
+      link: /knowledge-ln/
+- name: '書籍&論文'
   link: /products/
 - name: Blog
   link: /blog/
+- name: '關於'
+  link: /about/
