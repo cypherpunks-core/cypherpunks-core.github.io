@@ -14,6 +14,7 @@ features:
     - label: Available in multiple sizes
       icon: fa-fighter-jet
 rating: 5
+hero_image: /img/hero.png
 ---
 
 [ **電子書線上看** ](https://cypherpunks-core.github.io/bitcoinbook_2nd_zh/)、 [ **電子書下載** ](https://github.com/cypherpunks-core/bitcoinbook_2nd_zh/releases)、[ **本倉庫位置** ](https://github.com/cypherpunks-core/bitcoinbook_2nd_zh)

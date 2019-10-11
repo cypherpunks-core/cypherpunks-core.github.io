@@ -12,6 +12,7 @@ features:
     - label: 闡述人們該堅持的言論自由與應有人權
       icon: fa-fighter-jet
 rating: 3
+hero_image: /img/hero.png
 ---
 
 ## 什麼是密碼龐克？
