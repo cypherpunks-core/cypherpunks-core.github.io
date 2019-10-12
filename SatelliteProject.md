@@ -19,12 +19,12 @@ show_sidebar: true
 
 * 樹莓派3B+ 一顆
 * 150公分的小耳朵
-* 軟體定義的無線電接口(Software Defined Radio Interface): https://amzn.to/2g8Nu2O
+* 軟體定義的無線電接口(Software Defined Radio Interface): [link](https://amzn.to/2g8Nu2O)
 * 可收 C band 的 Linear Polarization (線性極化) PLL LNB
-* LNB 安裝支架: https://amzn.to/2xgotXU
-* LNB 電源: https://amzn.to/2KUGouq
-* 同軸電纜: https://amzn.to/2w7N4xQ
-* F連接器到SMA同軸適配器（F Connector to SMA Coax Adapter）: https://amzn.to/2gajpAh
+* LNB 安裝支架: [link](https://amzn.to/2xgotXU)
+* LNB 電源: [link](https://amzn.to/2KUGouq)
+* 同軸電纜: [link](https://amzn.to/2w7N4xQ)
+* F連接器到SMA同軸適配器（F Connector to SMA Coax Adapter）: [link](https://amzn.to/2gajpAh)
 
 ## 材料組裝
 
@@ -64,12 +64,12 @@ show_sidebar: true
 
 # 文章參考
 
-* <del>材料說明：https://github.com/Blockstream/satellite/wiki/Hardware-Requirements</del>
-* 衛星覆蓋：https://blockstream.com/satellite/#satellite_network-coverage
-* 衛星交易狀態：https://blockstream.com/satellite-queue/
-* API 文件說明：https://github.com/Blockstream/satellite/tree/master/api
+* <del>材料說明：[link](https://github.com/Blockstream/satellite/wiki/Hardware-Requirements)</del>
+* 衛星覆蓋：[link](https://blockstream.com/satellite/#satellite_network-coverage)
+* 衛星交易狀態：[link](https://blockstream.com/satellite-queue/)
+* API 文件說明：[link](https://github.com/Blockstream/satellite/tree/master/api)
 * Video-[使用SDR和GNU無線電降低區塊流量同步道衛星的成本](https://www.youtube.com/watch?v=o1N6zjOgmFA&t=158s)
-* 快速互聯網比特幣中繼引擎（FIBER）是一種協議：http://bitcoinfibre.org/
+* 快速互聯網比特幣中繼引擎（FIBER）是一種協議：[link](http://bitcoinfibre.org/)
 * 自製教學
   * 硬體需求：[Building Your Own Bitcoin Satellite Node: Part 1 — Hardware Assembly](https://github.com/cypherpunks-core/Satellite-project/blob/master/article/building-your-own-bitcoin-satellite-node-part1.md)
   * 軟體需求：[Building Your Own Bitcoin Satellite Node: Part 2 — Software Installation](https://github.com/cypherpunks-core/Satellite-project/blob/master/article/building-your-own-bitcoin-satellite-node-part2.md)
