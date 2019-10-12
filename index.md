@@ -5,6 +5,7 @@ layout: page
 # callouts: home_callouts
 hide_hero: true
 hero_image: /img/hero.png
+image: /img/hero.png
 show_sidebar: true
 ---
 歡迎來到密碼龐克網站！
@@ -58,3 +59,7 @@ Cryptography makes freedom and privacy great again.
 * 2019-04-19 發文互動賺比特幣，台灣論壇「密碼龐克」將透過閃電網路分發獎勵 [動區動趨 BlockTEMPO](https://www.blocktempo.com/cypherpunk-taiwan-lightning-tipping/)
 * 2019-03-03 台灣成立新社群平台「密碼龐克」— 從比特幣核心精神進行「在鏈上的交流」[動區動趨 BlockTEMPO](https://www.blocktempo.com/cypher-punk-taiwan-forum/)、[浮云网](http://fuyun.one/block-3063.html)
 *  2019-01-25 區塊鏈的再審視，回歸密碼龐克初衷 [動區動趨 BlockTEMPO](https://www.blocktempo.com/cypherpunk-blockchain-re-evaluation-2/)、[巴比特](https://www.8btc.com/article/356346)、[陀螺财经](https://www.tuoluocaijing.cn/article/detail-28371.html)、[區塊文摘](https://www.blocksummary.com/%E3%80%8C%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%86%8D%E5%AF%A9%E8%A6%96%EF%BC%8C%E5%9B%9E%E6%AD%B8%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%88%9D%E8%A1%B7%E3%80%8D-%E6%AF%94%E7%89%B9/)
+
+## 合作夥伴
+
+[<img width="300" src="/img/taipeihackerspace.png">](https://taipeihack.org/#)

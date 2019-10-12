@@ -1,6 +1,6 @@
 ---
-title: About Us
-subtitle: 
+title: 關於我們
+subtitle: About Us
 layout: page
 # callouts: home_callouts
 # hide_hero: true
@@ -56,48 +56,45 @@ Cypherpunks Taiwan is the only go-to source compiling all things related to the 
 <img width="200" src="/img/bill.jpg"/>
 
 **曾琮傑**
-
-https://www.facebook.com/tseng.jack.94
+[<img width="15" src="/img/icon-fb.png"/>](https://www.facebook.com/tseng.jack.94)   
 
 <img width="200" src="/img/tseng.jack.jpg"/>
 
 **BoYu Chen**
-
-https://www.facebook.com/bchen0224
+[<img width="15" src="/img/icon-fb.png"/>](https://www.facebook.com/bchen0224)    [<img width="15" src="/img/icon-github.png"/>](https://github.com/boyuchen0224)
 
 <img width="200" src="/img/bchen.jpg"/>
 
 **Jack 賴彥廷**
-
-https://www.facebook.com/jack.lai.332
-https://github.com/laijack512
+[<img width="15" src="/img/icon-fb.png"/>](https://www.facebook.com/jack.lai.332)    [<img width="15" src="/img/icon-github.png"/>](https://github.com/laijack512)
 
 <img width="200" src="/img/laijack.jpg"/>
 
 **Johnny 闕源均**
-
-https://www.facebook.com/profile.php?id=100002143060787
-
-專攻室內定位、資料蒐集、RF相關議題，個人興趣研究各類通訊領域相關技術以及硬體，於2018參予比特幣衛星計畫，提供相關通訊技術與知識。
+[<img width="15" src="/img/icon-fb.png"/>](https://www.facebook.com/profile.php?id=100002143060787)    [<img width="15" src="/img/icon-github.png"/>](https://github.com/aabb0404)
 
 <img width="200" src="/img/johnny.jpg"/>
 
-**林柏宇**
+專攻室內定位、資料蒐集、RF相關議題，個人興趣研究各類通訊領域相關技術以及硬體，於2018參予比特幣衛星計畫，提供相關通訊技術與知識。
 
-https://www.facebook.com/lin.b.yu.18
+**林柏宇**
+[<img width="15" src="/img/icon-fb.png"/>](https://www.facebook.com/lin.b.yu.18)    [<img width="15" src="/img/icon-github.png"/>](https://github.com/brianlin1017)
 
 <img width="200" src="/img/brian.jpg"/>
 
 **陳映辰**
-
-https://www.facebook.com/itsivan.tw
+[<img width="15" src="/img/icon-fb.png"/>](https://www.facebook.com/itsivan.tw)
+   [<img width="15" src="/img/icon-github.png"/>](https://github.com/Itsivantw)
 
 <img width="200" src="/img/itsivan.jpg"/>
 
 
 **陳奕丞**
-
-https://www.facebook.com/cic.ethan
+[<img width="15" src="/img/icon-fb.png"/>](https://www.facebook.com/cic.ethan) 
 
 <img width="200" src="/img/cic.ethan.jpg"/>
 
+**Jam Bo**
+[<img width="15" src="/img/icon-fb.png"/>](https://www.facebook.com/bo.jam.9)
+
+<img width="200" src="/img/jambo.jpg"/>
