@@ -13,7 +13,7 @@ hero_image: /img/hero.png
 
 作者：Kyle Torpey
 
-文章來源：https://www.longhash.com/news/altcoin-prices-have-never-been-more-closely-correlated-with-bitcoin
+文章來源：[link](https://www.longhash.com/news/altcoin-prices-have-never-been-more-closely-correlated-with-bitcoin)
 
 美籍比特幣專欄作家 Kyle Torpey 今年二月 6 日在 LongHash 網站上發表文章，以「Altcoin Prices Have Never Been More Closely Correlated with Bitcoin」（暫譯：比特幣與其他密碼貨幣關係從未如此密切）為標題，利用 Coin Metrics 製作的圖表，觀察比特幣價格與其他密碼貨幣（Altcoins）價格有極高的相關性，圖表分析顯示比特幣價格與其他密碼貨幣價格呈現正相關。
 

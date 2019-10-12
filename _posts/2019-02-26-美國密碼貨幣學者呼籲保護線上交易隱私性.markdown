@@ -12,7 +12,7 @@ hero_image: /img/hero.png
 
 作者：Jerry Brito
 
-文章來源：https://coincenter.org/entry/we-must-protect-our-ability-to-transact-privately-online
+文章來源：[link](https://coincenter.org/entry/we-must-protect-our-ability-to-transact-privately-online)
 
 美國非營利密碼貨幣和去中心化研究推廣機構 Coin Center 執行總監 Jerry Brito，今年二月6日在 [coincenter.org](http://coincenter.org/) 機構官方網站上發表文章，以「We must protect our ability to transact privately online」（暫譯： 必須保護我們的線上交易隱私性）為標題，針對 Coin Center 密碼貨幣研究機構今年二月最新發布的論文「The Case for Electronic Cash: Why Private Peer-to-Peer Payments are Essential to an Open Society（暫譯：電子現金案例：為什麼點對點支付的隱私保護對於開放社會未來發展至關重要）」，進一步說明並引介最新獨立發表的論文。點選此連結可查看 Coin Center 報告全文 PDF：https://coincenter.org/files/2019-02/the-case-for-electronic-cash-coin-center.pdf
 

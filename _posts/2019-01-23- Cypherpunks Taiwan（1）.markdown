@@ -11,7 +11,7 @@ hero_image: /img/hero.png
 
 注意：不要提早到，要到meetup網站報名，限20人
 
-[https://www.meetup.com/Taipei-Bitcoin-Meetup-Group/events/258294713/](https://www.meetup.com/Taipei-Bitcoin-Meetup-Group/events/258294713/)
+[meetup網站](https://www.meetup.com/Taipei-Bitcoin-Meetup-Group/events/258294713/)
 
 這是“Cypherpunks Taiwan 密碼龐克“第一次舉辦線下聚會，主題圍繞在 bitcoin 是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由。
 

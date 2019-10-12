@@ -11,7 +11,7 @@ hero_image: /img/hero.png
 
 - 時間：2019年7月5日（星期五）19:00-22:00
 - 地點：台北市中正區重慶南路一段105號2F (天瓏圖書2樓)
-- 報名連結：[https://lihi1.cc/BLOFd](https://l.facebook.com/l.php?u=https%3A%2F%2Flihi1.cc%2FBLOFd)
+- 報名連結：[link](https://l.facebook.com/l.php?u=https%3A%2F%2Flihi1.cc%2FBLOFd)
 - 當天請攜帶電腦，手把手帶你體驗 Maskbook！
 
 ![](/img/48.png)

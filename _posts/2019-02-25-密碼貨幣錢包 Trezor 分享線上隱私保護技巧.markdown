@@ -13,7 +13,7 @@ hero_image: /img/hero.png
 
 作者：SatoshiLabs
 
-文章來源：https://blog.trezor.io/trezor-data-privacy-series-10-tips-on-how-to-stay-safe-online-part-one-dbe9a94be36e
+文章來源：[link](https://blog.trezor.io/trezor-data-privacy-series-10-tips-on-how-to-stay-safe-online-part-one-dbe9a94be36e)
 
 知名密碼貨幣硬體錢包 Trezor 的製造商 [SatoshiLabs](https://blog.trezor.io/@satoshilabs) 今年二月4日在官方部落格網站上發表文章，以「 Trezor Data Privacy Series — 10 Tips on How to Stay Safe Online (Part One)」（暫譯： 密碼貨幣錢包 Trezor 資料隱私系列文章–– 線上隱私保護 10 招技巧 [上集]）為標題，推薦錢包使用者幾個保護自己資料隱私的技巧（本文分享了五個技巧），並以此文表示慶祝近期的國際資料隱私日(Data Privacy Day)。
 

@@ -10,10 +10,10 @@ hero_image: /img/hero.png
 ---
 
 * 時間：2019年4月9日（星期二） 晚上7:00到10:00
-* 地點：People Squared 台北（中正區信義路二段253號）捷運東門站7號出https://goo.gl/maps/sfzdVEf6VTJ2
+* 地點：People Squared 台北（中正區信義路二段253號）捷運東門站7號出[link](https://goo.gl/maps/sfzdVEf6VTJ2)
 * 費用：100元現場收（場地費+飲料）   
 ps. 關於飲料的部分，大家自備環保杯喔
-團隊官網：https://www.cortexlabs.ai/
+團隊官網：[link](https://www.cortexlabs.ai/)
 
 第三次活動議程：
 

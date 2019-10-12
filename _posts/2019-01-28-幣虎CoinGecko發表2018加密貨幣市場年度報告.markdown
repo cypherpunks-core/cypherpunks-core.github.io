@@ -9,7 +9,7 @@ published: true
 hero_image: /img/hero.png
 ---
 
-> 「CoinGecko Yearly Report for 2018」（幣虎2018加密貨幣市場年度報告），下載完整報告 PDF 檔案：https://assets.coingecko.com/reports/2018-Full-Year-Report/2018-CoinGecko-Report.pdf
+> 「CoinGecko Yearly Report for 2018」（幣虎2018加密貨幣市場年度報告），下載完整報告 PDF 檔案：[link](https://assets.coingecko.com/reports/2018-Full-Year-Report/2018-CoinGecko-Report.pdf)
 
 加密貨幣排名網站[幣虎 CoinGecko](https://www.coingecko.com/zh-tw) 今年 1 月中旬，在網路上發表了一份多達 83 頁的 2018 年加密貨幣市場回顧報告（CoinGecko Yearly Report for 2018），從市場動態、加密貨幣交易所到去年在加密貨幣圈內發生的重要事件等角度切入，集結了 TokenMarket、Dapp.com、Masternodes Online 及 Nonfungible.com 平台數據，回顧過去一年的市場和分析未來發展。
 

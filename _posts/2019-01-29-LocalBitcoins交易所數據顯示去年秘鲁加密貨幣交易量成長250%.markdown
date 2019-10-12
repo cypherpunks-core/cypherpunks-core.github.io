@@ -11,7 +11,7 @@ hero_image: /img/hero.png
 
 > 原文標題：Peru’s LocalBitcoins Transaction Volume Grew 250% in 2018
 > 作者：Cypto Panda
-> 文章來源：http://www.longhash.com/news/perus-localbitcoins-transaction-volume-grew-250-in-2018
+> 文章來源：[link](http://www.longhash.com/news/perus-localbitcoins-transaction-volume-grew-250-in-2018)
 
 Crypto Panda 今年 1 月 16 日在新加坡區塊鏈加速器 LongHash 網站平台上，發表了一篇標題為「Peru’s LocalBitcoins Transaction Volume Grew 250% in 2018」（暫譯：秘魯的 LocalBitcoins 交易量 2018 年成長 250%）的文章，指出拉丁美洲的加密貨幣市場去年表現亮眼，點對點加密貨幣交易量出現飛速成長。
 
