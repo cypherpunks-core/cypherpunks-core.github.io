@@ -4,7 +4,7 @@ subtitle: 精通以太坊
 product_code: E001
 layout: product
 image: /img/45.png
-price: free
+price: 繁中/Chinese
 features:
     - label: Great addition to any home
       icon: fa-location-arrow

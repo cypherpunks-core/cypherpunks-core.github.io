@@ -1,10 +1,10 @@
 ---
-title: 密碼龐克
-subtitle: Freedom and the Future
+title: Cypherpunks
+subtitle: 密碼龐克
 product_code: C001
 layout: product
 image: /img/46.png
-price: fee
+price: 繁中/Chinese
 features:
     - label: 適合想了解在國際上的新聞自由
     - label: 由全世界最有名的匿名爆料組織維基解密創辦人撰寫

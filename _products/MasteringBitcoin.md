@@ -5,7 +5,7 @@ description: 本書主要面向開發人員，前兩章對比特幣的介紹也�
 product_code: B001
 layout: product
 image: /img/44.png
-price: free
+price: 繁中/Chinese
 features:
     - label: Great addition to any home
       icon: fa-location-arrow
@@ -17,7 +17,7 @@ rating: 5
 hero_image: /img/hero.png
 ---
 
-[ **電子書線上看** ](https://cypherpunks-core.github.io/bitcoinbook_2nd_zh/)、 [ **電子書下載** ](https://github.com/cypherpunks-core/bitcoinbook_2nd_zh/releases)、[ **本倉庫位置** ](https://github.com/cypherpunks-core/bitcoinbook_2nd_zh)
+[ **電子書線上看** ](https://cypherpunks-core.github.io/bitcoinbook_2nd_zh/)、 [ **電子書下載** ](https://github.com/cypherpunks-core/bitcoinbook_2nd_zh/releases)、[ **倉庫位置** ](https://github.com/cypherpunks-core/bitcoinbook_2nd_zh)
 
 # Mastering Bitcoin 2nd Edition - 繁中
 
