@@ -29,4 +29,6 @@ hero_image: /img/hero.png
 
 影片：
 
-youtube "https://www.youtube.com/watch?v=Yois-l5x-sk&t=891s
+<div style="text-align:center">
+<iframe style="width:560px; height:315px;" src="https://www.youtube.com/embed/Yois-l5x-sk" styleframeborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>

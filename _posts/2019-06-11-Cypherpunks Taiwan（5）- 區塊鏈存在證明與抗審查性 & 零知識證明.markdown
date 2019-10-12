@@ -43,8 +43,9 @@ ps. 原價屋隔壁，藍色助聽器招牌，一樓樓梯口有 Mozilla 字樣�
 
 影片：
 
- https://www.youtube.com/watch?v=SU3D89FPv9o
-
+<div style="text-align:center">
+<iframe style="width:560px; height:315px;" src="https://www.youtube.com/embed/SU3D89FPv9o" styleframeborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 ### Cypherpunks 相關資訊：
 * Github：[https://cypherpunks-core.github.io/](https://cypherpunks-core.github.io/)

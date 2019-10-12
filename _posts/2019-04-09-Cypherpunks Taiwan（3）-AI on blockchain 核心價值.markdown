@@ -43,8 +43,9 @@ ps. 關於飲料的部分，大家自備環保杯喔
 
 影片：
 
- https://www.youtube.com/watch?v=UhqOdAre5mo
-
+<div style="text-align:center">
+<iframe style="width:560px; height:315px;" src="https://www.youtube.com/embed/UhqOdAre5mo" styleframeborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 這是「Cypherpunks Taiwan 密碼龐克」主題圍繞在 bitcoin是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由。
 
