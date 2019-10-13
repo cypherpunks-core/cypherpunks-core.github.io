@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-13T14:09:56+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">Cypherpunks Taiwan (8) -如何使用github &amp;amp; 衛星計畫進度</title><link href="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/" rel="alternate" type="text/html" title="Cypherpunks Taiwan (8) -如何使用github &amp; 衛星計畫進度" /><published>2019-10-04T00:00:00+08:00</published><updated>2019-10-04T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/10/04/Cypherpunks%20Taiwan%20(8)%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%20&amp;%20%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A</id><content type="html" xml:base="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&amp;-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/">&lt;p&gt;活動訊息：&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-13T14:38:00+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">Cypherpunks Taiwan (8) -如何使用github &amp;amp; 衛星計畫進度</title><link href="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/" rel="alternate" type="text/html" title="Cypherpunks Taiwan (8) -如何使用github &amp; 衛星計畫進度" /><published>2019-10-04T00:00:00+08:00</published><updated>2019-10-04T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/10/04/Cypherpunks%20Taiwan%20(8)%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%20&amp;%20%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A</id><content type="html" xml:base="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&amp;-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/">&lt;p&gt;活動訊息：&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;地點：Taipei Hackerspace&lt;/li&gt;
   &lt;li&gt;時間：19:00-22:00&lt;/li&gt;
@@ -154,7 +154,67 @@ Samson Mow 目前於 Blockstream 擔任策略長（CSO）。他是比特幣社�
 
 &lt;div style=&quot;text-align:center&quot;&gt;
 &lt;iframe style=&quot;width:560px; height:315px;&quot; src=&quot;https://www.youtube.com/embed/y2pKAX0qq0c&quot; styleframeborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;/div&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">比特幣基礎設施公司 Blockstream 首次登台，與 Cypherpunks Taiwan 聯手舉辦線下聚會！一個雇用了大量 Bitcoin Core 開發者的公司，究竟他們開發出的產品，能夠怎樣的影響比特幣及區塊鏈，甚至是整個世界呢？</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/49.png" /></entry><entry><title type="html">Cypherpunks Taiwan（5）- 區塊鏈存在證明與抗審查性 &amp;amp; 零知識證明</title><link href="http://localhost:4000/meetup/2019/06/11/Cypherpunks-Taiwan-5-%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7-&-%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E/" rel="alternate" type="text/html" title="Cypherpunks Taiwan（5）- 區塊鏈存在證明與抗審查性 &amp; 零知識證明" /><published>2019-06-11T00:00:00+08:00</published><updated>2019-06-11T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/06/11/Cypherpunks%20Taiwan(5)-%20%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7%20&amp;%20%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E</id><content type="html" xml:base="http://localhost:4000/meetup/2019/06/11/Cypherpunks-Taiwan-5-%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7-&amp;-%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E/">&lt;p&gt;時間：2019年6月11日（星期二） 晚上7:15到10:00
+&lt;/div&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">比特幣基礎設施公司 Blockstream 首次登台，與 Cypherpunks Taiwan 聯手舉辦線下聚會！一個雇用了大量 Bitcoin Core 開發者的公司，究竟他們開發出的產品，能夠怎樣的影響比特幣及區塊鏈，甚至是整個世界呢？</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/49.png" /></entry><entry><title type="html">Cypherpunks Taiwan Logo 的故事</title><link href="http://localhost:4000/news/2019/06/28/Cypherpunks-Taiwan-Logo-%E7%9A%84%E6%95%85%E4%BA%8B/" rel="alternate" type="text/html" title="Cypherpunks Taiwan Logo 的故事" /><published>2019-06-28T00:00:00+08:00</published><updated>2019-06-28T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/06/28/Cypherpunks%20Taiwan%20Logo%20%E7%9A%84%E6%95%85%E4%BA%8B</id><content type="html" xml:base="http://localhost:4000/news/2019/06/28/Cypherpunks-Taiwan-Logo-%E7%9A%84%E6%95%85%E4%BA%8B/">&lt;p&gt;感覺創立Cypherpunks Taiwan 也差不多半年的時間了，可是一直沒有設計出一個適合的Logo，因為本身不是設計出身，所以只能委託各個設計師大大。&lt;/p&gt;
+
+&lt;h3 id=&quot;手稿&quot;&gt;手稿&lt;/h3&gt;
+
+&lt;p&gt;於是 給了 &lt;a href=&quot;https://www.facebook.com/sora.be.9?eid=ARD0saVcwdu5U9ymgLiTcC7fLV6E2Ckr89Vexu736fS4tuw9uRYXgmvb7M8GVy9vf1NDTT3ls4V-tRhM&quot;&gt;Sora Chen&lt;/a&gt; 一些 議題（反監管、加密、隱私、比特幣、密碼龐克、匿名），於是在幾天的設計下，誕生了第一個手稿。&lt;/p&gt;
+
+&lt;p&gt;右眼代表著反監管，左眼代表著比特幣，一個象徵自由的貨幣。在最下方放上CYPHER的字樣。&lt;/p&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/60.jpg&quot; width=&quot;40%&quot; height=&quot;40%&quot; /&gt;
+&lt;/center&gt;
+
+&lt;h3 id=&quot;第一個-電繪版-原型&quot;&gt;第一個 電繪版 原型&lt;/h3&gt;
+
+&lt;p&gt;後來因為設計師大大有點過勞，於是Logo 的設計停下來了。&lt;/p&gt;
+
+&lt;p&gt;但是後來百忙中抽空的 小玉大大 幫我把這份手稿電子版，出來了第一個電繪版&lt;/p&gt;
+
+&lt;p&gt;比特幣的調色、角度都是參考bitcoin原始的色調跟角度。&lt;/p&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/61.jpg&quot; width=&quot;40%&quot; height=&quot;40%&quot; /&gt;
+&lt;/center&gt;
+
+&lt;h3 id=&quot;第二個-電繪版-加入台灣素材&quot;&gt;第二個 電繪版 （加入台灣素材）&lt;/h3&gt;
+
+&lt;p&gt;因為覺得希望增加更多的台灣色彩，於是加上了台灣島的圖像&lt;/p&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/62.jpg&quot; width=&quot;40%&quot; height=&quot;40%&quot; /&gt;
+&lt;/center&gt;
+
+&lt;h3 id=&quot;第三個-電繪版-加入太陽徽&quot;&gt;第三個 電繪版 (加入太陽徽)&lt;/h3&gt;
+
+&lt;p&gt;後來繼續看看台灣的題材，如台北以太坊，他們融入了台北兩個字，到LOGO當中。於是我就不斷的在看中華民國的國徽，娃，這看下來跟國民黨黨徽好像沒有什麼區別，但在一個F16戰鬥機上的圖騰讓我印象深刻。&lt;/p&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/63.jpg&quot; width=&quot;40%&quot; height=&quot;40%&quot; /&gt;
+&lt;/center&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;空軍F16戰鬥機機尾翼彩繪的太陽神「馬拉道」，是阿美族篤信的戰神與守護神。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/64.jpg&quot; width=&quot;40%&quot; height=&quot;40%&quot; /&gt;
+&lt;/center&gt;
+
+&lt;p&gt;太陽神&lt;/p&gt;
+
+&lt;p&gt;下一步就是變成他的右眼啦，看起來是挺美好的&lt;/p&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/65.jpg&quot; width=&quot;40%&quot; height=&quot;40%&quot; /&gt;
+&lt;/center&gt;
+
+&lt;p&gt;最後出了一個沒有字樣的版本&lt;/p&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/66.jpg&quot; width=&quot;40%&quot; height=&quot;40%&quot; /&gt;
+&lt;/center&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">感覺創立Cypherpunks Taiwan 也差不多半年的時間了，可是一直沒有設計出一個適合的Logo，因為本身不是設計出身，所以只能委託各個設計師大大。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://scontent.ftpe8-4.fna.fbcdn.net/v/t1.0-9/p720x720/65386720_2526920693993215_3118579142354796544_o.jpg" /></entry><entry><title type="html">Cypherpunks Taiwan（5）- 區塊鏈存在證明與抗審查性 &amp;amp; 零知識證明</title><link href="http://localhost:4000/meetup/2019/06/11/Cypherpunks-Taiwan-5-%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7-&-%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E/" rel="alternate" type="text/html" title="Cypherpunks Taiwan（5）- 區塊鏈存在證明與抗審查性 &amp; 零知識證明" /><published>2019-06-11T00:00:00+08:00</published><updated>2019-06-11T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/06/11/Cypherpunks%20Taiwan(5)-%20%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7%20&amp;%20%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E</id><content type="html" xml:base="http://localhost:4000/meetup/2019/06/11/Cypherpunks-Taiwan-5-%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7-&amp;-%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E/">&lt;p&gt;時間：2019年6月11日（星期二） 晚上7:15到10:00
 ps. 千萬不要提早到&lt;/p&gt;
 
 &lt;p&gt;地點：摩茲工寮（ 100 台北市中正區八德路一段 94 號 3F ）
@@ -358,20 +418,4 @@ Machine Learning Algorithm」的&lt;a href=&quot;https://docs.google.com/present
   &lt;li&gt;創造一個 crypto 論壇&lt;/li&gt;
   &lt;li&gt;學習crypto&lt;/li&gt;
   &lt;li&gt;多元crypto議題分享會（一個月一次)&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">Cypherpunks Taiwan 密碼龐克 - crypto文化的聚集地</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/55.png" /></entry><entry><title type="html">美國密碼貨幣學者呼籲保護線上交易隱私性</title><link href="http://localhost:4000/news/2019/02/26/%E7%BE%8E%E5%9C%8B%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E5%AD%B8%E8%80%85%E5%91%BC%E7%B1%B2%E4%BF%9D%E8%AD%B7%E7%B7%9A%E4%B8%8A%E4%BA%A4%E6%98%93%E9%9A%B1%E7%A7%81%E6%80%A7/" rel="alternate" type="text/html" title="美國密碼貨幣學者呼籲保護線上交易隱私性" /><published>2019-02-26T00:00:00+08:00</published><updated>2019-02-26T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/02/26/%E7%BE%8E%E5%9C%8B%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E5%AD%B8%E8%80%85%E5%91%BC%E7%B1%B2%E4%BF%9D%E8%AD%B7%E7%B7%9A%E4%B8%8A%E4%BA%A4%E6%98%93%E9%9A%B1%E7%A7%81%E6%80%A7</id><content type="html" xml:base="http://localhost:4000/news/2019/02/26/%E7%BE%8E%E5%9C%8B%E5%AF%86%E7%A2%BC%E8%B2%A8%E5%B9%A3%E5%AD%B8%E8%80%85%E5%91%BC%E7%B1%B2%E4%BF%9D%E8%AD%B7%E7%B7%9A%E4%B8%8A%E4%BA%A4%E6%98%93%E9%9A%B1%E7%A7%81%E6%80%A7/">&lt;p&gt;原文標題：We must protect our ability to transact privately online&lt;/p&gt;
-
-&lt;p&gt;作者：Jerry Brito&lt;/p&gt;
-
-&lt;p&gt;文章來源：&lt;a href=&quot;https://coincenter.org/entry/we-must-protect-our-ability-to-transact-privately-online&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;美國非營利密碼貨幣和去中心化研究推廣機構 Coin Center 執行總監 Jerry Brito，今年二月6日在 &lt;a href=&quot;http://coincenter.org/&quot;&gt;coincenter.org&lt;/a&gt; 機構官方網站上發表文章，以「We must protect our ability to transact privately online」（暫譯： 必須保護我們的線上交易隱私性）為標題，針對 Coin Center 密碼貨幣研究機構今年二月最新發布的論文「The Case for Electronic Cash: Why Private Peer-to-Peer Payments are Essential to an Open Society（暫譯：電子現金案例：為什麼點對點支付的隱私保護對於開放社會未來發展至關重要）」，進一步說明並引介最新獨立發表的論文。點選此連結可查看 Coin Center 報告全文 PDF：https://coincenter.org/files/2019-02/the-case-for-electronic-cash-coin-center.pdf&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;網站文章中提及，2月6日 Coin Center 發表了一篇 26 頁的論文報告，標題為「The Case for Electronic Cash: Why Private Peer-to-Peer Payments are Essential to an Open Society （暫譯：電子現金案例：為什麼點對點支付的隱私保護對於開放社會未來發展至關重要）」。&lt;/li&gt;
-  &lt;li&gt;隨著保護隱私的密碼貨幣如 Grin、Monero、Zcash 的出現，以及隱私保護技術（privacy-preserving）希冀強化比特幣前景的浮現，對我們來說，這個時候特別重要的是，向大眾說明為什麼電子現金是一種不僅應該被容忍，甚至應該加以培養和採用的工具。&lt;/li&gt;
-  &lt;li&gt;Coin Center Report 這份研究報告分有多個標題段落，包括：摘要、作者、關於 Coin Center、致謝、緒論、什麼是現金、無現金社會、中介社會（The Intermediated Society）、開放社會（The Open Society）、電子現金的道德案例（The Moral Case for Electronic Cash）、結論。&lt;/li&gt;
-  &lt;li&gt;以下內容節選自論文的第一章「緒論（Introduction）」：在沒有現金的世界（持有人和點對點形式的貨幣）中，所有交易必須由金融機構作為中介。中介交易在本質上受到監督和控制。如果第三方金融機構必須參與所有交易，那麼他們將了解每個人的財務生活私密細節。他們還可以禁止某些交易，甚至可能禁止某些人進行交易。&lt;/li&gt;
-  &lt;li&gt;中介（Intermediation）有很多好處，包括效率和便利性。從金融中介的特權地位收集來的資訊，民眾可以享受更好的信貸服務，能預防詐騙，並且能幫助當局打擊犯罪。但正如本文想闡述的，企業和政府亦有可能大肆濫用中介的特性。如果沒有辦法避免中介，那麼個人就無法保護自己的隱私或自主權。&lt;/li&gt;
-  &lt;li&gt;現金是一項古老的技術，它使我們能夠避免中介，從而保護個人自由和人類尊嚴所必需的價值。雖然現在我們距離無現金和完全中介的實現還有很長的路要走，至少在美國是如此。這篇論文也將表明，世界上其他地區已經有齊心努力消除現金的成功案例。&lt;/li&gt;
-  &lt;li&gt;在網路世界日益蓬勃發展的時代，現金紙幣對許多交易來說是不實際的，我們還必須開發如現金一樣可以保護隱私（privacy-preserving）及無需許可（permissionless）的電子現金。雖然這會帶來成本和收益，但我們認為解決成本問題的方法並不是禁止使用電子現金，而是將其使用方式進行規範，建立一個讓電子現金擁有與現金同等強而有力的制度。&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文標題：We must protect our ability to transact privately online</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/41.png" /></entry></feed>
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">Cypherpunks Taiwan 密碼龐克 - crypto文化的聚集地</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/55.png" /></entry></feed>
