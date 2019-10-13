@@ -8,8 +8,9 @@ hero_image: /img/hero.png
 image: /img/66.jpg
 show_sidebar: true
 ---
-
-[<img width="150" src="/img/66.jpg">](/news/2019/06/28/Cypherpunks-Taiwan-Logo-的故事/)
+[<center>
+<img src="/img/66.jpg" width="20%" height="20%" />
+</center>](/news/2019/06/28/Cypherpunks-Taiwan-Logo-的故事/)
 
 # Cypherpunks-core 
 密碼學使自由和隱私再次偉大。    
