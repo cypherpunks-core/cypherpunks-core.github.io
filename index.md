@@ -5,7 +5,7 @@ layout: page
 # callouts: home_callouts
 hide_hero: true
 hero_image: /img/hero.png
-image: /img/hero.png
+image: /img/66.jpg
 show_sidebar: true
 ---
 歡迎來到密碼龐克網站！
