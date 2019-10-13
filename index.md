@@ -58,5 +58,5 @@ Cryptography makes freedom and privacy great again.
 
 ## 合作夥伴
 
-[<img width="200" src="/img/logo-taipeihackerspace.jpg">](https://taipeihack.org/)[<img width="200" src="/img/logo-blocktempo.jpg">](https://www.blocktempo.com)[<img width="200" src="/img/logo-nayuta.jpg">](https://nayuta.co)[<img width="200" src="/img/logo-mozilla.png">](https://moztw.org/space/)[<img width="200" src="/img/logo-litecoin.jpg">](https://litecoin-foundation.org)[<img width="200" src="/img/logo-maskbook.png">](https://maskbook.com)
+[<img width="200" src="/img/logo-taipeihackerspace.jpg">](https://taipeihack.org/)[<img width="200" src="/img/logo-blocktempo.jpg">](https://www.blocktempo.com)[<img width="200" src="/img/logo-nayuta.jpg">](https://nayuta.co)[<img width="200" src="/img/logo-mozilla.png">](https://moztw.org/space/)[<img width="200" src="/img/logo-litecoin.jpg">](https://litecoin-foundation.org)[<img width="200" src="/img/logo-maskbook.png">](https://maskbook.com)[<img width="400" src="/img/logo-blockstream.png">](https://blockstream.com)
 
