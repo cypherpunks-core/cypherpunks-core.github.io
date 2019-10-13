@@ -8,9 +8,10 @@ hero_image: /img/hero.png
 image: /img/66.jpg
 show_sidebar: true
 ---
-歡迎來到密碼龐克網站！
 
-# Cypherpunks-core
+[<img width="150" src="/img/66.jpg">](/news/2019/06/28/Cypherpunks-Taiwan-Logo-的故事/)
+
+# Cypherpunks-core 
 密碼學使自由和隱私再次偉大。    
 Cryptography makes freedom and privacy great again.
 
