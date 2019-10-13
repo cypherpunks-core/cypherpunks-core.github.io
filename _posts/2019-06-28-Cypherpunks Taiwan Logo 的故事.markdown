@@ -4,7 +4,7 @@ title:  "Cypherpunks Taiwan Logo 的故事"
 date:   2019-06-28
 categories: news
 description: "Cypherpunks Taiwan Logo 的故事"
-image: 'https://scontent.ftpe8-4.fna.fbcdn.net/v/t1.0-9/p720x720/65386720_2526920693993215_3118579142354796544_o.jpg'
+image: '/img/67.png'
 published: true
 hero_image: /img/hero.png
 ---
