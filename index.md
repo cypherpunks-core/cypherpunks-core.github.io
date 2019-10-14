@@ -7,6 +7,7 @@ hide_hero: true
 hero_image: /img/hero.png
 image: /img/66.jpg
 show_sidebar: true
+description: 密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.
 ---
 
 [<center>
