@@ -1,29 +1,29 @@
 - name: '資源'
   link: /#
   dropdown:
-    - name: 比特幣資源
+    - name: 比特幣 | Bitcoin
       link: /resources-bitcoin/
-    - name: 閃電網路資源
+    - name: 閃電網路 | Lightning network
       link: /resources-ln/
-    - name: 區塊隱私資源
+    - name: 區塊隱私 | Blockchain privacy
       link: /resources-blockchain-privacy/
-    - name: 以太坊資源
+    - name: 以太坊 | Ethereum
       link: /resources-ethereum/
     
 - name: '知識庫'
   link: /#
   dropdown:
-    - name: 比特幣知識庫
+    - name: 比特幣 | Bitcoin
       link: /knowledge-bitcoin/
-    - name: 以太坊知識庫
+    - name: 以太坊 | Ethereum
       link: /knowledge-ethereum/
-    - name: 閃電網路知識庫
+    - name: 閃電網路 | Lightning network
       link: /knowledge-ln/
-- name: '書籍&論文'
+- name: '書籍 & 論文'
   link: /products/
-- name: Blog
-  link: /blog/
 - name: 衛星計畫
   link: /SatelliteProject/
+- name: Blog
+  link: /blog/
 - name: '關於'
   link: /about/
