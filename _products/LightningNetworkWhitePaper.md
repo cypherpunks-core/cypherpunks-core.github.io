@@ -12,7 +12,7 @@ features:
       icon: fa-grin-stars
     - label: Available in multiple sizes
       icon: fa-fighter-jet
-rating: 5
+rating: 4
 hero_image: /img/hero.png
 ---
 

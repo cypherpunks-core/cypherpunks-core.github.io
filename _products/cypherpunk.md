@@ -11,7 +11,7 @@ features:
       icon: fa-grin-stars
     - label: 闡述人們該堅持的言論自由與應有人權
       icon: fa-fighter-jet
-rating: 3
+rating: 2
 hero_image: /img/hero.png
 ---
 

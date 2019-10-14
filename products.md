@@ -5,7 +5,7 @@ layout: product-category
 show_sidebar: false
 # hide_hero: true
 hero_image: /img/hero.png
-sort: price
+sort: title
 ---
 
 以下是我們翻譯的相關書籍
