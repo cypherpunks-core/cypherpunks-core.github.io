@@ -3,10 +3,13 @@
   dropdown:
     - name: 比特幣資源
       link: /resources-bitcoin/
-    - name: 以太坊資源
-      link: /resources-ethereum/
     - name: 閃電網路資源
       link: /resources-ln/
+    - name: 區塊隱私資源
+      link: /resources-blockchain-privacy/
+    - name: 以太坊資源
+      link: /resources-ethereum/
+    
 - name: '知識庫'
   link: /#
   dropdown:
