@@ -1,6 +1,6 @@
 ---
 title: 比特幣資源 
-subtitle: 
+subtitle: Bitcoin resources
 layout: page
 # callouts: home_callouts
 # hide_hero: true

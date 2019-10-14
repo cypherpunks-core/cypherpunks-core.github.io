@@ -1,6 +1,6 @@
 ---
 title: 以太坊資源 
-subtitle: 
+subtitle: Ethereum resources
 layout: page
 # callouts: home_callouts
 # hide_hero: true

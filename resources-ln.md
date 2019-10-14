@@ -1,12 +1,14 @@
 ---
 title: 閃電網路資源 
-subtitle: 
+subtitle: Lightning network resources
 layout: page
 # callouts: home_callouts
 # hide_hero: true
 hero_image: /img/hero.png
 show_sidebar: true
 ---
+
+[**倉庫位置**](https://github.com/cypherpunks-core/Lightning_network_resources_zh)
 
 ### 實現 | Implementations
 

@@ -107,6 +107,9 @@
 <loc>http://localhost:4000/products/BlockchainGuide/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/products/EthereumWhitePaper/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/products/LightningNetworkWhitePaper/</loc>
 </url>
 <url>
@@ -162,6 +165,9 @@
 </url>
 <url>
 <loc>http://localhost:4000/resources-ln/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/resources-schnorr-signature/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/blog/page2/</loc>

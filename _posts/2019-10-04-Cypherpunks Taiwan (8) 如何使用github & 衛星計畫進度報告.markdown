@@ -11,8 +11,8 @@ hero_image: /img/hero.png
 
 活動影片：
 * Cypherpunks 介紹 ： [link](https://youtu.be/rG7X8pOZ_as?t=1)
-* 講題：如何使用github ： [link](https://youtu.be/rG7X8pOZ_as?t=1169)
-* 講題：比特幣衛星計畫運作與計畫進度 ： [link](https://youtu.be/rG7X8pOZ_as?t=3934)
+* 如何使用github ： [link](https://youtu.be/rG7X8pOZ_as?t=1169)
+* 比特幣衛星計畫運作與計畫進度 ： [link](https://youtu.be/rG7X8pOZ_as?t=3934)
 
 活動訊息：
 * 地點：Taipei Hackerspace

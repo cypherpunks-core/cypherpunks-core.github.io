@@ -7,6 +7,8 @@
       link: /resources-ln/
     - name: 區塊隱私 | Blockchain privacy
       link: /resources-blockchain-privacy/
+    - name: Schnorr 簽名 | Schnorr Signature
+      link: /resources-schnorr-signature/
     - name: 以太坊 | Ethereum
       link: /resources-ethereum/
     
