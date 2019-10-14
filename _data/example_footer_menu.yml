@@ -3,8 +3,8 @@
 - name: Blog
   link: /blog/
 - name: 書架
-  link: /products/
+  link: /markdown/products/
 - name: 關於我們
-  link: /about/
+  link: /markdown/about/
 - name: Github
   link: https://github.com/cypherpunks-core
