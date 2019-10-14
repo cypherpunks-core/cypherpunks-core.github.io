@@ -2,30 +2,28 @@
   link: /#
   dropdown:
     - name: 比特幣 | Bitcoin
-      link: /resources-bitcoin/
+      link: /markdown/resources/resources-bitcoin/
     - name: 閃電網路 | Lightning network
-      link: /resources-ln/
+      link: /markdown/resources/resources-ln/
     - name: 區塊隱私 | Blockchain privacy
-      link: /resources-blockchain-privacy/
+      link: /markdown/resources/resources-blockchain-privacy/
     - name: Schnorr 簽名 | Schnorr Signature
-      link: /resources-schnorr-signature/
+      link: /markdown/resources/resources-schnorr-signature/
     - name: 以太坊 | Ethereum
-      link: /resources-ethereum/
+      link: /markdown/resources/resources-ethereum/
     
 - name: '知識庫'
   link: /#
   dropdown:
     - name: 比特幣 | Bitcoin
-      link: /knowledge-bitcoin/
+      link: /markdown/knowledge/knowledge-bitcoin/
     - name: 以太坊 | Ethereum
-      link: /knowledge-ethereum/
-    - name: 閃電網路 | Lightning network
-      link: /knowledge-ln/
+      link: /markdown/knowledge/knowledge-ethereum/
 - name: '書籍 & 論文'
-  link: /products/
+  link: /markdown/products/
 - name: 衛星計畫
-  link: /SatelliteProject/
+  link: /markdown/SatelliteProject/
 - name: Blog
   link: /blog/
 - name: '關於'
-  link: /about/
+  link: /markdown/about/

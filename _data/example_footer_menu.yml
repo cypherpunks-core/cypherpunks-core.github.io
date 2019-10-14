@@ -2,7 +2,9 @@
   link: /
 - name: Blog
   link: /blog/
-- name: Products
+- name: 書架
   link: /products/
-- name: Privacy Policy
-  link: /privacy-policy/
+- name: 關於我們
+  link: /about/
+- name: Github
+  link: https://github.com/cypherpunks-core
