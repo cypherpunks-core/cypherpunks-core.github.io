@@ -4,7 +4,7 @@ title:  "一次搞懂「區塊鏈架構」"
 date:   2019-09-24
 categories: meetup
 description: "深入且完整地介紹區塊鏈技術架構，並且帶大家認識目前區塊鏈遇到的各種問題及許多專案在嘗試解決的部分！"
-image: '/img/50.png'
+image: '/img/73.png'
 published: true
 hero_image: /img/hero.png
 ---
