@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-14T14:30:32+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">Cypherpunks Taiwan (8) -如何使用github &amp;amp; 衛星計畫進度</title><link href="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/" rel="alternate" type="text/html" title="Cypherpunks Taiwan (8) -如何使用github &amp; 衛星計畫進度" /><published>2019-10-04T00:00:00+08:00</published><updated>2019-10-04T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/10/04/Cypherpunks%20Taiwan%20(8)%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%20&amp;%20%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A</id><content type="html" xml:base="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&amp;-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/">&lt;p&gt;活動影片：&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-14T15:00:29+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">Cypherpunks Taiwan (8) -如何使用github &amp;amp; 衛星計畫進度</title><link href="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/" rel="alternate" type="text/html" title="Cypherpunks Taiwan (8) -如何使用github &amp; 衛星計畫進度" /><published>2019-10-04T00:00:00+08:00</published><updated>2019-10-04T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/10/04/Cypherpunks%20Taiwan%20(8)%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%20&amp;%20%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A</id><content type="html" xml:base="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&amp;-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/">&lt;p&gt;活動影片：&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Cypherpunks 介紹 ： &lt;a href=&quot;https://youtu.be/rG7X8pOZ_as?t=1&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;講題：如何使用github ： &lt;a href=&quot;https://youtu.be/rG7X8pOZ_as?t=1169&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
@@ -35,7 +35,120 @@
 
 &lt;div style=&quot;text-align:center&quot;&gt;
 &lt;iframe style=&quot;width:560px; height:315px;&quot; src=&quot;https://www.youtube.com/embed/rG7X8pOZ_as&quot; styleframeborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;/div&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">活動影片： Cypherpunks 介紹 ： link 講題：如何使用github ： link 講題：比特幣衛星計畫運作與計畫進度 ： link</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/50.png" /></entry><entry><title type="html">Cypherpunks Taiwan (7) -微雷電網路 &amp;amp; 開發者眼中的區塊鏈應用</title><link href="http://localhost:4000/meetup/2019/08/15/Cypherpunks-Taiwan-7-%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF-&-%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8/" rel="alternate" type="text/html" title="Cypherpunks Taiwan (7) -微雷電網路 &amp; 開發者眼中的區塊鏈應用" /><published>2019-08-15T00:00:00+08:00</published><updated>2019-08-15T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/08/15/Cypherpunks%20Taiwan(7)-%20%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF%20&amp;%20%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8</id><content type="html" xml:base="http://localhost:4000/meetup/2019/08/15/Cypherpunks-Taiwan-7-%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF-&amp;-%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8/">&lt;p&gt;議程：&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">活動影片： Cypherpunks 介紹 ： link 講題：如何使用github ： link 講題：比特幣衛星計畫運作與計畫進度 ： link</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/50.png" /></entry><entry><title type="html">一次搞懂「區塊鏈架構」</title><link href="http://localhost:4000/meetup/2019/09/24/%E4%B8%80%E6%AC%A1%E6%90%9E%E6%87%82-%E5%8D%80%E5%A1%8A%E9%8F%88%E6%9E%B6%E6%A7%8B/" rel="alternate" type="text/html" title="一次搞懂「區塊鏈架構」" /><published>2019-09-24T00:00:00+08:00</published><updated>2019-09-24T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/09/24/%E4%B8%80%E6%AC%A1%E6%90%9E%E6%87%82%E3%80%8C%E5%8D%80%E5%A1%8A%E9%8F%88%E6%9E%B6%E6%A7%8B%E3%80%8D</id><content type="html" xml:base="http://localhost:4000/meetup/2019/09/24/%E4%B8%80%E6%AC%A1%E6%90%9E%E6%87%82-%E5%8D%80%E5%A1%8A%E9%8F%88%E6%9E%B6%E6%A7%8B/">&lt;p&gt;&lt;a href=&quot;https://medium.com/pelith/structure-of-blockchain-daf85e06027e&quot;&gt;&lt;strong&gt;轉自Pelith Medium&lt;/strong&gt;&lt;/a&gt;、作者&lt;a href=&quot;https://medium.com/@laijack?source=post_page-----daf85e06027e----------------------&quot;&gt;Lai Jack 賴彥廷&lt;/a&gt;  &lt;a href=&quot;https://medium.com/pelith/structure-of-blockchain-daf85e06027e?source=post_page-----daf85e06027e----------------------&quot;&gt;Sep 24&lt;/a&gt; · 8 min read&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;收看本系列文章的讀者，應該都對於區塊鏈的基本原理和架構有些概念，如果沒有，推薦您先去 Google 搜尋  &lt;strong&gt;區塊鏈、比特幣、以太坊&lt;/strong&gt; 這些關鍵字了解一下。我們將在這些基礎概念之上，來談區塊鏈的技術知識。本系列文章並不會談到太深的技術鑽研，而是希望以 &lt;strong&gt;深入淺出&lt;/strong&gt; 的方式讓每一個想要搞懂區塊鏈技術的人都能在讀完後說出： &lt;strong&gt;原來如此！&lt;/strong&gt;
+本系列文章由區塊鏈技術解決方案開發公司： &lt;strong&gt;Pelith&lt;/strong&gt;  編撰。內容皆經過諸位區塊鏈資深研究員及開發者 &lt;strong&gt;校對與驗證&lt;/strong&gt; ，盡可能確保 &lt;strong&gt;內容正確無誤&lt;/strong&gt; ，讓讀者能安心吸收 &lt;strong&gt;正確的區塊鏈技術知識&lt;/strong&gt; 。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://medium.com/pelith/behindtheethtransaction-534dc6ce123e&quot;&gt; &lt;strong&gt;上一節&lt;/strong&gt; &lt;/a&gt; 中，我們在介紹以太坊交易打包規則時帶大家大致了解區塊鏈運作的架構，不過有些技術細節我們沒有完整地交代清楚，本篇及未來數篇文我們將更深入且完整地介紹區塊鏈技術架構，並且帶大家認識目前區塊鏈遇到的各種問題及許多專案在嘗試解決的部分！&lt;/p&gt;
+
+&lt;p&gt;廢話不多說，我們先從中本聰設計的初代區塊鏈  &lt;strong&gt;比特幣 Bitcoin&lt;/strong&gt;  來談起：&lt;/p&gt;
+
+&lt;h1 id=&quot;how-bitcoin-blockchain-work&quot;&gt;How Bitcoin Blockchain Work&lt;/h1&gt;
+
+&lt;p&gt;如果&lt;a href=&quot;https://medium.com/pelith/tagged/course&quot;&gt;前面幾節&lt;/a&gt;大家有認真看的話，應該還記得比特幣是採用  &lt;strong&gt;UTXO 架構&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;p&gt;我們從比特幣一筆交易的一生帶大家來一探究竟區塊鏈是如何運作的：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;比特幣交易流程示意圖 :&lt;/strong&gt;
+&lt;img src=&quot;https://miro.medium.com/max/4608/1*VcLpDWRuh5LkZfE_g2ffgA.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;比特幣交易的一生&quot;&gt;比特幣交易的一生&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;一個使用者欲發起一筆交易。&lt;/li&gt;
+  &lt;li&gt;透過 &lt;strong&gt;錢包&lt;/strong&gt; （管理私鑰的工具）輸入交易資訊
+（To, Amount, 手續費, OP_Return …）。&lt;/li&gt;
+  &lt;li&gt;以 &lt;strong&gt;私鑰&lt;/strong&gt; 簽署交易。&lt;/li&gt;
+  &lt;li&gt;廣播 &lt;strong&gt;「加上簽名的交易封包」&lt;/strong&gt; 至鄰近的比特幣節點們。&lt;/li&gt;
+  &lt;li&gt;節點接收到新交易時，會先至 UTXO Pool  &lt;strong&gt;檢查交易發起地址是否能動用足額 UTXO&lt;/strong&gt; ，若無則該交易會即刻被丟棄。
+＊註：圖中以一個 Balance 值來做標註，但其實這個 Balance 可能是多個 UTXO 的集合，Steve 的 18 可能其實是 0.25+10.75+2+5 四個  &lt;strong&gt;錢堆&lt;/strong&gt; 。&lt;/li&gt;
+  &lt;li&gt;若檢查後確認有足額，則該交易會被放入到  &lt;strong&gt;Tx Pool&lt;/strong&gt;  中。
+（按造 &lt;strong&gt;手續費給的多寡&lt;/strong&gt; 由高至低排序）&lt;/li&gt;
+  &lt;li&gt;等待出塊的同時，各節點會
+&lt;strong&gt;A. 廣播接收到的交易&lt;/strong&gt;
+&lt;strong&gt;B. 接收未在 Tx Pool 內的交易&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;礦工節點們（有在用電腦算力找 nonce 值，拼出塊獎勵的節點）會
+&lt;strong&gt;撈取手續費較高的交易們來運算並打包成新區塊&lt;/strong&gt; ，
+用電腦算力計算 nonce 值。
+＊註：這邊的  &lt;strong&gt;nonce 值&lt;/strong&gt;  跟前面介紹過的  &lt;strong&gt;以太坊地址的 nonce 值&lt;/strong&gt;  不同（以太坊有兩個 nonce：一個是挖礦的；一個是地址的交易 &lt;strong&gt;序次&lt;/strong&gt; 。）&lt;/li&gt;
+  &lt;li&gt;成功找到找到 nonce 值，出塊的礦工會獲得 &lt;strong&gt;出塊獎勵&lt;/strong&gt; 及該區塊所有打包交易給的 &lt;strong&gt;手續費&lt;/strong&gt; 。&lt;/li&gt;
+  &lt;li&gt;該礦工節點將新的區塊廣播至全世界的其他節點們。&lt;/li&gt;
+  &lt;li&gt;其他節點 &lt;strong&gt;同步&lt;/strong&gt;  &amp;lt;595266 區塊高度（最新的區塊）&amp;gt;、&lt;UTXO Pool=&quot;&quot;&gt;、&lt;Tx Pool=&quot;&quot;&gt; 資料，繼續 **廣播與接收新交易** 。&lt;/Tx&gt;&lt;/UTXO&gt;&lt;/li&gt;
+  &lt;li&gt;礦工節點再從 Tx Pool 中撈取未出塊的交易們（生成 Merkle Root ）運算並打包成新的區塊。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;以上，便是區塊鏈運作的方式。&lt;/p&gt;
+
+&lt;p&gt;不過由於全世界可能每時每刻都有人在發起新的交易，所以以上這些過程都是 24/7/365.25 不斷在  &lt;strong&gt;動態運作中&lt;/strong&gt;  的。&lt;/p&gt;
+
+&lt;p&gt;光憑上述 12 點其實很難清楚交代許多的技術細節，所以我們將針對幾點再做更進一步的介紹：&lt;/p&gt;
+
+&lt;h1 id=&quot;3-私鑰簽署數位簽名-digital-signature&quot;&gt;(3) 私鑰簽署數位簽名 Digital Signature&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://miro.medium.com/max/1500/1*PQve_MqgyWFQVAMKngBmqA.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;數位簽名與驗證示意圖（https://zhaohuabing.com/2018/05/12/cryptocurrency_week1_digital_signature/）&lt;/p&gt;
+
+&lt;h2 id=&quot;為什麼發送交易需要使用私鑰進行簽名&quot;&gt;為什麼發送交易需要使用私鑰進行簽名？&lt;/h2&gt;
+
+&lt;p&gt;試想一下，若是沒有這樣的機制， &lt;strong&gt;就無法知道交易是不是由地址的主人發出的。&lt;/strong&gt; 因此當我發送交易時，必須有機制能證明這個交易是由我本人來發出。我們先來看一段《精通比特幣》的論述：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;《 精通比特幣（Mastering Bitcoin）第四章 》&lt;/strong&gt;
+私鑰可用於為交易生成指紋（數位簽名）。這個簽名只能由知道私鑰的人制作。但是， &lt;strong&gt;任何有權訪問公鑰和交易指紋的人都可以使用它們來驗證簽名確實是私鑰的擁有者生成的。&lt;/strong&gt; 非對稱加密的這一有用特性使任何人都可以驗證每筆交易的每個簽名，同時確保 &lt;strong&gt;只有私鑰所有者才能生成有效的簽名。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;因此，能唯一證明的機制便是：用我的私鑰生成一個 &lt;strong&gt;「數位簽名」&lt;/strong&gt; 後，連同交易內容一起送出。節點接收到這筆加上簽名的交易時，可以用 &lt;strong&gt;我的公鑰&lt;/strong&gt; 來驗證這個簽名是由 &lt;strong&gt;我的私鑰&lt;/strong&gt; 所簽署的。如此來證明這個交易是由我送出的。&lt;/p&gt;
+
+&lt;h1 id=&quot;5-utxo-pool&quot;&gt;(5) UTXO Pool&lt;/h1&gt;
+
+&lt;p&gt;接著，我們來介紹 UTXO Pool：所謂的區塊鏈其實就是自主網上線以來的所有歷史區塊，區塊內包含零至數筆的交易資料。而比特幣至 2019/9 為止的近 60 萬個區塊 資料大小約為 250 GB。&lt;/p&gt;
+
+&lt;p&gt;上方第 (5) 點，節點接收交易要檢查時，照理來說應該是要把近 60 萬個區塊資料都爬過一遍才能確認該地址可動用的餘額。然而，這麼做曠日費時，當區塊越來越多，且每一筆交易接收時都要整個掃描一遍時，會因掃描時間過長導致節點之間的同步出現問題。&lt;/p&gt;
+
+&lt;p&gt;因此，UTXO Pool 便出現了。作法是： &lt;strong&gt;用資料庫記錄一個掃描過後的最終狀態&lt;/strong&gt; ，並在這之上再依據後續區塊做更新變動。亦即 &lt;strong&gt;把已花費的 Output 紀錄都丟棄掉，只保留最後 Unspent 的 Tx Output。&lt;/strong&gt; 如此便不用每筆交易接收時都要掃描整條區塊鏈，只要掃描去蕪存菁的 UTXO Pool 就可以了。&lt;/p&gt;
+
+&lt;h1 id=&quot;10-節點-node&quot;&gt;(10) 節點 Node&lt;/h1&gt;
+
+&lt;p&gt;了解 UTXO Pool 後，接著來進一步介紹節點。節點是維持區塊鏈網路運作的根基，區塊鏈之所以能做到去中心化，便是因為在全世界有無數的節點在同步與備份所有的區塊資料（全交易歷史紀錄）。&lt;/p&gt;
+
+&lt;h2 id=&quot;11-節點同步不斷刷新推算&quot;&gt;(11) 節點同步（不斷刷新推算）&lt;/h2&gt;
+
+&lt;p&gt;當我接收到一筆新的交易並驗證後，放進我的 Tx Pool 中，我會同時把這筆交易廣播給鄰近的節點們。鄰近的節點們驗證、接收並同步後也會再廣播給他們鄰近的節點們，如此將資訊以網狀廣播出去，讓各個節點之間維持一個 &lt;strong&gt;「動態同步」&lt;/strong&gt; 的狀態。&lt;/p&gt;
+
+&lt;h2 id=&quot;12-節點不一定等於礦工&quot;&gt;&lt;strong&gt;(12) 節點不一定等於礦工&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;節點可以選擇 &lt;strong&gt;要不要進行挖礦&lt;/strong&gt; ，也就是說：我可以 &lt;strong&gt;單純的接收、同步與廣播&lt;/strong&gt; 「Block、UTXO Pool、Tx Pool」資料，只做帳本更新動作，當個稱職的傳聲筒為去中心化世界做貢獻，不花算力去打包交易、計算 nonce 拼出塊獎勵。&lt;/p&gt;
+
+&lt;p&gt;而這些 &lt;strong&gt;節點們&lt;/strong&gt; 便是所謂的  &lt;strong&gt;Peer to Peer（P2P）Network&lt;/strong&gt;   &lt;strong&gt;「點對點網路」&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;p&gt;以上便是核心版的區塊鏈架構，中間有許多的技術細節我們先不深入著墨。因為這是一個由淺入深的系列文，未來會逐一介紹到的！&lt;/p&gt;
+
+&lt;h1 id=&quot;blockchain-demo&quot;&gt;Blockchain Demo&lt;/h1&gt;
+
+&lt;p&gt;最後，如果想更了解區塊鏈如何運作的朋友，可以到下方這個網站去逛逛，實際體驗、操作看看區塊鏈是如何運作的！&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://anders.com/blockchain/?source=post_page-----daf85e06027e----------------------&quot;&gt;Blockchain Demo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;（&lt;/em&gt; &lt;a href=&quot;https://anders.com/blockchain/&quot;&gt; &lt;em&gt;https://anders.com/blockchain/&lt;/em&gt; &lt;/a&gt; &lt;em&gt;）&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;此外，也跟大家預告一下精彩可期的未來數篇文章：&lt;/p&gt;
+
+&lt;h2 id=&quot;7-以太坊區塊鏈架構-how-ethereum-blockchain-work&quot;&gt;&amp;lt;7&amp;gt; 以太坊區塊鏈架構 How Ethereum Blockchain Work&lt;/h2&gt;
+
+&lt;p&gt;我們將接續本篇文章，介紹  &lt;strong&gt;區塊鏈 2.0－&lt;/strong&gt;  Vitalik 如何在中本聰設計的比特幣架構上進行升級與改動，同時也將首度揭曉 &lt;strong&gt;「以太坊區塊鏈架構圖」&lt;/strong&gt; ！&lt;/p&gt;
+
+&lt;h2 id=&quot;8-區塊鏈技術地圖-blockchain-technical-roadmap&quot;&gt;&amp;lt;8&amp;gt; 區塊鏈技術地圖 Blockchain Technical Roadmap&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;比特幣資深研究員「陳伯韋」五年多來的研究結晶完全公開！&lt;/strong&gt;
+我們將依區塊鏈架構清楚剖析目前區塊鏈遇到的各項問題（ &lt;strong&gt;隱私問題、儲存問題、速度問題&lt;/strong&gt;  等），並 &lt;strong&gt;摘要介紹目前各個 項目／團隊 針對各項問題提出的解決方案&lt;/strong&gt; ！&lt;/p&gt;
+
+&lt;h2 id=&quot;9-去中心化金融技術解析-how-decentralized-finance-defi-work&quot;&gt;&amp;lt;9&amp;gt; 去中心化金融技術解析 How Decentralized Finance (DeFi) Work&lt;/h2&gt;
+
+&lt;p&gt;DeFi 正夯，到底在紅什麼呢？DeFi 如何解決傳統金融遇到的界線與問題呢？透過本篇文章將（盡可能）解答您心中的疑問！&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">轉自Pelith Medium、作者Lai Jack 賴彥廷 Sep 24 · 8 min read</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/50.png" /></entry><entry><title type="html">Cypherpunks Taiwan (7) -微雷電網路 &amp;amp; 開發者眼中的區塊鏈應用</title><link href="http://localhost:4000/meetup/2019/08/15/Cypherpunks-Taiwan-7-%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF-&-%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8/" rel="alternate" type="text/html" title="Cypherpunks Taiwan (7) -微雷電網路 &amp; 開發者眼中的區塊鏈應用" /><published>2019-08-15T00:00:00+08:00</published><updated>2019-08-15T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/08/15/Cypherpunks%20Taiwan(7)-%20%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF%20&amp;%20%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8</id><content type="html" xml:base="http://localhost:4000/meetup/2019/08/15/Cypherpunks-Taiwan-7-%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF-&amp;-%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8/">&lt;p&gt;議程：&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;18:30 - 19:00 開放入場&lt;/li&gt;
   &lt;li&gt;19:00 - 19:10 簡述密碼龐克社群現況 10min&lt;/li&gt;
@@ -402,31 +515,4 @@ Machine Learning Algorithm」的&lt;a href=&quot;https://docs.google.com/present
 
 &lt;p&gt;&lt;img src=&quot;/img/39.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/40.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">由「Cypherpunks Taiwan 密碼龐克」網站平台主辦、摩茲工寮 Mozilla Community Space Taipei 場地空間贊助的第二次密碼龐克台北實體技術交流聚會活動，於 3 月 5 日星期二晚上 19:00 – 21:30 舉行，現場吸引 30 多位朋友來到台北市八德路摩茲工寮的空間，聆聽資訊工程研究所碩二生 Brian 分享「比特幣交易手續費的預測」以及日本比特幣創業家東晃慈（Koji Higashi）談有關閃電網路（Lighting Network）和第二層技術的重要性。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/36.png" /></entry><entry><title type="html">Cypherpunks Taiwan（2）-比特幣交易手續費的預測 &amp;amp; 閃電網絡和第二層技術的重要性</title><link href="http://localhost:4000/meetup/2019/03/05/Cypherpunks-Taiwan-2-%E6%AF%94%E7%89%B9%E5%B9%A3%E4%BA%A4%E6%98%93%E6%89%8B%E7%BA%8C%E8%B2%BB%E7%9A%84%E9%A0%90%E6%B8%AC-&-%E9%96%83%E9%9B%BB%E7%B6%B2%E7%B5%A1%E5%92%8C%E7%AC%AC%E4%BA%8C%E5%B1%A4%E6%8A%80%E8%A1%93%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7/" rel="alternate" type="text/html" title="Cypherpunks Taiwan（2）-比特幣交易手續費的預測 &amp; 閃電網絡和第二層技術的重要性" /><published>2019-03-05T00:00:00+08:00</published><updated>2019-03-05T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/03/05/Cypherpunks%20Taiwan(2)-%E6%AF%94%E7%89%B9%E5%B9%A3%E4%BA%A4%E6%98%93%E6%89%8B%E7%BA%8C%E8%B2%BB%E7%9A%84%E9%A0%90%E6%B8%AC%20&amp;%20%E9%96%83%E9%9B%BB%E7%B6%B2%E7%B5%A1%E5%92%8C%E7%AC%AC%E4%BA%8C%E5%B1%A4%E6%8A%80%E8%A1%93%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7</id><content type="html" xml:base="http://localhost:4000/meetup/2019/03/05/Cypherpunks-Taiwan-2-%E6%AF%94%E7%89%B9%E5%B9%A3%E4%BA%A4%E6%98%93%E6%89%8B%E7%BA%8C%E8%B2%BB%E7%9A%84%E9%A0%90%E6%B8%AC-&amp;-%E9%96%83%E9%9B%BB%E7%B6%B2%E7%B5%A1%E5%92%8C%E7%AC%AC%E4%BA%8C%E5%B1%A4%E6%8A%80%E8%A1%93%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7/">&lt;p&gt;Cypherpunks Taiwan 密碼龐克 - crypto文化的聚集地&lt;/p&gt;
-
-&lt;p&gt;注意：七點開放入場，不要提早到&lt;/p&gt;
-
-&lt;p&gt;這是“Cypherpunks Taiwan 密碼龐克“，主題圍繞在 bitcoin是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由。&lt;/p&gt;
-
-&lt;p&gt;第二次活動議程:&lt;/p&gt;
-
-&lt;p&gt;講題：比特幣交易手續費的預測(30 分鐘)  &lt;br /&gt;
-講者：Brian 研究生&lt;/p&gt;
-
-&lt;p&gt;講題：閃電網絡和第二層技術的重要性”(30 分鐘) &lt;br /&gt;
-講者：Koji Higashi&lt;/p&gt;
-
-&lt;p&gt;活動最前面15分鐘做場地跟 Mozilla 簡介&lt;/p&gt;
-
-&lt;p&gt;影片：&lt;/p&gt;
-
-&lt;div style=&quot;text-align:center&quot;&gt;
-&lt;iframe style=&quot;width:560px; height:315px;&quot; src=&quot;https://www.youtube.com/embed/w00SteBL_5c&quot; styleframeborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-
-&lt;p&gt;目標：&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;創造一個 crypto 論壇&lt;/li&gt;
-  &lt;li&gt;學習crypto&lt;/li&gt;
-  &lt;li&gt;多元crypto議題分享會（一個月一次)&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">Cypherpunks Taiwan 密碼龐克 - crypto文化的聚集地</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/55.png" /></entry></feed>
+&lt;p&gt;&lt;img src=&quot;/img/40.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">由「Cypherpunks Taiwan 密碼龐克」網站平台主辦、摩茲工寮 Mozilla Community Space Taipei 場地空間贊助的第二次密碼龐克台北實體技術交流聚會活動，於 3 月 5 日星期二晚上 19:00 – 21:30 舉行，現場吸引 30 多位朋友來到台北市八德路摩茲工寮的空間，聆聽資訊工程研究所碩二生 Brian 分享「比特幣交易手續費的預測」以及日本比特幣創業家東晃慈（Koji Higashi）談有關閃電網路（Lighting Network）和第二層技術的重要性。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/36.png" /></entry></feed>
