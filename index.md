@@ -29,11 +29,11 @@ Cryptography makes freedom and privacy great again.
 
 ## 書籍 book
 * [**精通比特幣**第二版(Mastering Bitcoin 2nd Edition)](https://cypherpunks-core.github.io/bitcoinbook_2nd_zh/)
-    * repo：[https://github.com/cypherpunks-core/bitcoinbook_2nd_zh](https://github.com/cypherpunks-core/bitcoinbook_2nd_zh)
-    * 原文：[https://cypherpunks-core.github.io/bitcoinbook/](https://cypherpunks-core.github.io/bitcoinbook/)
+    * repo：[link](https://github.com/cypherpunks-core/bitcoinbook_2nd_zh)
+    * 原文：[link](https://cypherpunks-core.github.io/bitcoinbook/)
 * [**精通以太坊**(Mastering Ethereum)](https://cypherpunks-core.github.io/ethereumbook_zh/)
-    * repo：[https://github.com/cypherpunks-core/ethereumbook_zh](https://github.com/cypherpunks-core/ethereumbook_zh)
-    * 原文：[https://cypherpunks-core.github.io/ethereumbook](https://cypherpunks-core.github.io/ethereumbook)
+    * repo：[link](https://github.com/cypherpunks-core/ethereumbook_zh)
+    * 原文：[link](https://cypherpunks-core.github.io/ethereumbook)
 * [**密碼龐克**-自由與網際網路的未來(Cypherpunks: Freedom and the Future of the Internet)](https://github.com/cypherpunks-core/cyherpunksbook_zh)
 * [~~區塊鏈技術指南~~](https://github.com/cypherpunks-core/blockchain_guide_zh)
 
