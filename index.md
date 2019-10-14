@@ -8,6 +8,7 @@ hero_image: /img/hero.png
 image: /img/66.jpg
 show_sidebar: true
 ---
+
 [<center>
 <img src="/img/66.jpg" width="20%" height="20%" />
 </center>](/news/2019/06/28/Cypherpunks-Taiwan-Logo-的故事/)
