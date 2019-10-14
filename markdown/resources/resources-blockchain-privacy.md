@@ -11,7 +11,7 @@ hero_height: 0
 
 [**倉庫位置**](https://github.com/cypherpunks-core/blockchain_privacy_resources_zh)
 
-[![](https://github.com/cypherpunks-core/blockchain_privacy_resources_zh/raw/master/Blockchain-and-privacy.jpg)](https://github.com/cypherpunks-core/blockchain_privacy_resources_zh/blob/master/Blockchain-and-privacy.jpg)
+![](/img/83.jpg)
 
 主要參考：
 
