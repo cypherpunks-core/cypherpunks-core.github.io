@@ -13,7 +13,7 @@ image: /img/66.jpg
 
 Cypherpunks Taiwan is the only go-to source compiling all things related to the technology behind cryptocurrencies in the Chinese-speaking world. The site was established by three Taiwan-based crypto influencers: Koji Higashi, Po-Wei Chen in December 2018. The core members manage the website on a daily basis. The website exist to empower developers and businesses to do more with blockchain. It aims to provide best resources, materials, and information about Blockchain, Bitcoin, Ethereum, Smart Contracts, and second-layer solutions to a broader audience.
 
-# 團隊成員 Meet the Team
+# 團隊成員 | Meet the Team
 
 | Name............... | 個人簡介 | 
 | ------- | -------- | 

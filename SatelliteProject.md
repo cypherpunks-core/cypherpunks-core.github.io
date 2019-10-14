@@ -8,14 +8,12 @@ hero_image: /img/hero.png
 show_sidebar: true
 ---
 
-# Satellite Project 衛星計畫
-
 **目標：在台灣發射比特幣交易到TELSTAR 18V衛星**
 **Goal: Launch Bitcoin transactions in Taiwan to TELSTAR 18V satellite**
 
 ![](/img/57.png)
 
-## 材料搜集 & 購買
+## 材料收集 & 購買
 
 * 樹莓派3B+ 一顆
 * 150公分的小耳朵
