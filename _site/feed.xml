@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-14T23:50:40+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">Cypherpunks Taiwan (8) -如何使用github &amp;amp; 衛星計畫進度</title><link href="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/" rel="alternate" type="text/html" title="Cypherpunks Taiwan (8) -如何使用github &amp; 衛星計畫進度" /><published>2019-10-04T00:00:00+08:00</published><updated>2019-10-04T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/10/04/Cypherpunks%20Taiwan%20(8)%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%20&amp;%20%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A</id><content type="html" xml:base="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&amp;-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/">&lt;p&gt;活動影片：&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-15T00:31:12+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">Cypherpunks Taiwan (8) -如何使用github &amp;amp; 衛星計畫進度</title><link href="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/" rel="alternate" type="text/html" title="Cypherpunks Taiwan (8) -如何使用github &amp; 衛星計畫進度" /><published>2019-10-04T00:00:00+08:00</published><updated>2019-10-04T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/10/04/Cypherpunks%20Taiwan%20(8)%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%20&amp;%20%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A</id><content type="html" xml:base="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&amp;-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/">&lt;p&gt;活動影片：&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Cypherpunks 介紹 ： &lt;a href=&quot;https://youtu.be/rG7X8pOZ_as?t=1&quot;&gt;youtube&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;如何使用github ： &lt;a href=&quot;https://youtu.be/rG7X8pOZ_as?t=1169&quot;&gt;youtube&lt;/a&gt;, &lt;a href=&quot;/meetup/2019/10/04/Cypherpunks-GitHub-教學演講/&quot;&gt;文章&lt;/a&gt;&lt;/li&gt;
@@ -37,6 +37,40 @@
 &lt;iframe style=&quot;width:560px; height:315px;&quot; src=&quot;https://www.youtube.com/embed/rG7X8pOZ_as&quot; styleframeborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 &lt;/div&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">活動影片： Cypherpunks 介紹 ： youtube 如何使用github ： youtube, 文章 比特幣衛星計畫運作與計畫進度 ： youtube</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/50.png" /></entry><entry><title type="html">Cypherpunks GitHub 教學演講</title><link href="http://localhost:4000/meetup/2019/10/04/Cypherpunks-GitHub-%E6%95%99%E5%AD%B8%E6%BC%94%E8%AC%9B/" rel="alternate" type="text/html" title="Cypherpunks GitHub 教學演講" /><published>2019-10-04T00:00:00+08:00</published><updated>2019-10-04T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/10/04/Cypherpunks%20GitHub%20%E6%95%99%E5%AD%B8%E6%BC%94%E8%AC%9B</id><content type="html" xml:base="http://localhost:4000/meetup/2019/10/04/Cypherpunks-GitHub-%E6%95%99%E5%AD%B8%E6%BC%94%E8%AC%9B/">&lt;p&gt;GitHub 可以說是現今時代中工程師的一種社交網路, 當你發現原始作者有一些感興趣的專案時，你想為此專案作貢獻，加入原作者專案 Contributor 的行列時。就可以參考本文件一步一步操作。&lt;/p&gt;
 
+&lt;p&gt;&lt;strong&gt;目錄：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#%e7%ac%ac%e4%b8%80%e7%ab%a0%e6%a6%82%e5%bf%b5%e4%bb%8b%e7%b4%b9&quot;&gt;第一章、概念介紹&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#1-%e6%95%99%e5%ad%b8%e9%81%a9%e7%94%a8%e6%83%85%e5%a2%83&quot;&gt;1. 教學適用情境&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#2-%e4%b8%89%e5%80%8b%e8%a7%92%e8%89%b2%e4%bb%8b%e7%b4%b9&quot;&gt;2. 三個角色介紹&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#3-%e4%ba%86%e8%a7%a3%e8%a7%92%e8%89%b2%e9%81%8b%e4%bd%9c&quot;&gt;3. 了解角色運作&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#4-%e4%b8%83%e6%ad%a5%e6%88%90%e8%b2%a2%e7%8d%bb%e8%80%85&quot;&gt;4. 七步成貢獻者&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#%e7%ac%ac%e4%ba%8c%e7%ab%a0%e5%ae%8c%e6%95%b4%e6%93%8d%e4%bd%9c&quot;&gt;第二章、完整操作&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#1-%e8%ab%8b%e8%a8%bb%e5%86%8a-github&quot;&gt;(1) 請註冊 GitHub&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#2-%e5%9c%a8-github-%e4%b8%8a%e6%8a%8a%e5%88%a5%e4%ba%ba%e7%9a%84%e5%b0%88%e6%a1%88%e5%bc%84%e4%b8%80%e4%bb%bd%e5%88%b0%e8%87%aa%e5%b7%b1%e4%b8%8a%e9%9d%a2-by-fork&quot;&gt;(2) 在 GitHub 上把別人的專案弄一份到自己上面 by fork&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#3%e8%87%aa%e5%b7%b1%e5%be%9e%e8%87%aa%e5%b7%b1%e7%9a%84-repo-%e5%90%8c%e6%ad%a5%e4%b8%80%e4%bb%bd%e5%88%b0%e9%9b%bb%e8%85%a6--by-git-clone&quot;&gt;(3)自己從自己的 repo 同步一份到電腦  … by git clone&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#4-%e7%94%b1%e6%96%bc%e5%88%a5%e4%ba%ba%e7%9a%84%e5%b0%88%e6%a1%88%e6%9c%83%e6%8c%81%e7%ba%8c%e6%9b%b4%e6%96%b0%e6%89%80%e4%bb%a5%e6%88%91%e5%80%91%e8%ae%93%e8%87%aa%e5%b7%b1%e7%9a%84-repo-origin-%e8%88%87%e9%81%a0%e7%ab%af-upstream-%e4%bf%9d%e6%8c%81%e5%90%8c%e6%ad%a5&quot;&gt;(4)  由於別人的專案會持續更新，所以我們讓自己的 repo origin 與遠端 upstream 保持同步&lt;/a&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#41-%e5%be%9e-upstream-%e6%8b%89%e4%b8%8b%e4%be%86%e4%bd%bf%e9%9b%bb%e8%85%a6%e7%ab%af%e6%9c%89%e9%81%a0%e6%96%b9-upstream-%e7%9a%84-repo&quot;&gt;4.1 從 upstream 拉下來，使電腦端有遠方 upstream 的 repo&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#42-%e9%80%8f%e9%81%8e-push-%e7%9a%84%e6%96%b9%e5%bc%8f%e6%9b%b4%e6%96%b0%e8%87%b3-origin-%e8%87%aa%e5%b7%b1%e7%9a%84-repo--%e6%ad%a4%e6%99%82-upstream-%e4%be%bf%e8%88%87-origin-%e5%90%8c%e6%ad%a5&quot;&gt;4.2 透過 push 的方式更新至 origin (自己的 repo) … 此時 upstream 便與 origin 同步&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#5-%e9%96%8b%e5%a7%8b%e6%9b%b4%e6%96%b0%e4%b8%a6-push-%e8%87%b3%e8%87%aa%e5%b7%b1%e7%9a%84-origin-by-branch-%e6%96%b9%e5%bc%8f&quot;&gt;(5)　開始更新並 push 至自己的 origin  (by branch 方式)&lt;/a&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#51-%e8%ab%8b%e5%85%88%e7%a2%ba%e4%bf%9d%e8%87%aa%e5%b7%b1%e5%b7%b2%e7%b6%93%e5%ae%8c%e6%88%90%e4%b8%8a%e9%9d%a2%e5%90%8c%e6%ad%a5%e5%90%8c%e4%bd%9c&quot;&gt;5.1 請先確保自己已經完成上面同步同作&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#52-%e6%96%b0%e5%a2%9e%e4%b8%80%e5%80%8b-branch&quot;&gt;5.2 新增一個 branch&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#53-%e5%9c%a8%e6%ad%a4-branch-%e4%b8%8a%e9%9d%a2%e4%bd%9c%e6%96%b0%e5%a2%9e%e8%88%87%e4%bf%ae%e6%94%b9%e7%84%b6%e5%be%8c-git-add--git-commit-%e6%9c%80%e5%be%8c-push-%e8%87%b3%e8%87%aa%e5%b7%b1%e7%9a%84&quot;&gt;5.3 在此 branch 上面作新增與修改，然後 git add ,  git commit 最後 push 至自己的&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#6-%e5%88%b0github-%e4%b8%8a%e9%80%b2%e8%a1%8c-pull-request%e5%8e%9f%e4%bd%9c%e8%80%85%e5%90%8c%e6%84%8f%e5%be%8c%e4%be%bf%e6%9c%83-merge-%e9%80%b2%e4%be%86&quot;&gt;(6) 到GitHub 上進行 Pull Request。原作者同意後便會 merge 進來&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#7-%e5%8e%9f%e4%bd%9c%e8%80%85%e6%9c%83%e5%b0%87%e4%bd%a0%e6%8f%90%e7%9a%84%e8%ab%8b%e6%b1%82-merge-%e4%b9%8b%e5%be%8c%e8%a8%98%e5%be%97%e9%a0%86%e4%be%bf%e4%bd%9c%e4%b8%80%e6%95%b4%e5%80%8b%e5%90%8c%e6%ad%a5%e7%9a%84%e5%8b%95%e4%bd%9c&quot;&gt;(7) 原作者會將你提的請求　，merge 之後，記得順便作一整個同步的動作&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h1 id=&quot;第一章概念介紹&quot;&gt;第一章、概念介紹&lt;/h1&gt;
 
 &lt;h3 id=&quot;1-教學適用情境&quot;&gt;1. 教學適用情境&lt;/h3&gt;
@@ -50,8 +84,8 @@
 &lt;p&gt;注意有 Three role 三個角色&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;(1) Upstream master (原始作者之 project)
-(2) Origin master  (我 Fork 出來的 project )
+  &lt;p&gt;(1) Upstream master (原始作者之 project)  &lt;br /&gt;
+(2) Origin master  (我 Fork 出來的 project )  &lt;br /&gt;
 (3) And the master in my local computer (我 local 端從 自己 origin master fork 出來的 project)&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -68,12 +102,12 @@
 &lt;p&gt;至於如何實現上面概念，作法就只有 7  步, 你就有機會成為原作者專案中的 Contributor 了&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;(1)請註冊GitHub [ 沒有的人請註冊 ]
-(2) 用 fork 把原始作者 GitHub 上的 project 帶到自己的 GitHub 上
-(3) 從自己 fork 出來的 project  那邊， clone 到自己電腦上
-(4) 使 origin master 與 upstream master 同步
-(5) 在 local 電腦端建立branch 並且作更新，並將該branch更新至 origin master
-(6) 在origin 上以該 branch 作 Pull Request , 並等待原始作者接受更新至 upstream/master
+  &lt;p&gt;(1)請註冊GitHub [ 沒有的人請註冊 ]  &lt;br /&gt;
+(2) 用 fork 把原始作者 GitHub 上的 project 帶到自己的 GitHub 上  &lt;br /&gt;
+(3) 從自己 fork 出來的 project  那邊， clone 到自己電腦上  &lt;br /&gt;
+(4) 使 origin master 與 upstream master 同步  &lt;br /&gt;
+(5) 在 local 電腦端建立branch 並且作更新，並將該branch更新至 origin master  &lt;br /&gt;
+(6) 在origin 上以該 branch 作 Pull Request , 並等待原始作者接受更新至 upstream/master  &lt;br /&gt;
 (7) 原作者接受更新，將 upstrem/master 的資料與 local 電腦 master 及origin master 同步&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -91,7 +125,7 @@
 
 &lt;p&gt;http://github.com/milochen0418/milo-education-python&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://lh4.googleusercontent.com/tlsmNdBZFQJv-H16pffyJWe1YCUd3KFZsQ-seyQIvNFtbmLMjyoTmd3Jxs9UTuQMpb8hmEwda6uRZ1z7_zLS8-X-SuM80-Ce-MADnMmcvGnRxoMWx42d04ZU10Mmo4r_DyFbX_Xj&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/76.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;3自己從自己的-repo-同步一份到電腦--by-git-clone&quot;&gt;(3)自己從自己的 repo 同步一份到電腦  … by git clone &lt;/h3&gt;
 
@@ -148,7 +182,7 @@ $ git checkout pr-test-0001
 
 &lt;p&gt;修改一些東西後&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://lh5.googleusercontent.com/o502kiSf9lJfpx5zhjaXGdUC4_-CxD0qK9GvICjB-eOMEQ80jTwyaFSd2oUKaBe9S8yOb9jmFy7r8AL8gMe8x0UoH9R2F6DeL53ZuOUA45fHGoIMaLh6KVGn71_KOvDyDP54avuZ&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/77.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git add .
 $ git commit -m &quot;This is commit test&quot;
@@ -157,17 +191,13 @@ $ git push -u origin pr-test-0001
 
 &lt;p&gt;這時候你可以從自己的 GitHub 上面看到類似這訊息&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://lh5.googleusercontent.com/w9q7AxIBjPiKJTEqVHCIrjmaOzDaGUF-1ukYlIXolFi1-b7x1OxlnmlOzVKlZXw4rFu0kKjbf6xJ2PB84VWyB2e1w0ed86ARSEVoBu-ES4714ij_j0CSGf5eLCuar_sHWzYhIUpG&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3&gt;&lt;img src=&quot;https://lh3.googleusercontent.com/UuZ40zM6YIajJVGIsTSD2fYcnHBtkXxsIGJ4ilavFUlufOjxrjsH5Ixc2IU1_OhDh0cMX2mx1bU9KomOYCKgIAwDjuwGgZNEQvS6JumNaVzp4prEGLgbqMfPrMWoiwy8XkSO57ak&quot; alt=&quot;|438x337&quot; /&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/img/78.png&quot; alt=&quot;&quot; /&gt;&lt;img src=&quot;/img/79.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;6-到github-上進行-pull-request原作者同意後便會-merge-進來&quot;&gt;(6) 到GitHub 上進行 Pull Request。原作者同意後便會 merge 進來&lt;/h3&gt;
 
 &lt;p&gt;View of Owner can see Pull Request&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://lh4.googleusercontent.com/UXIajh56Ws01f6WkgUsKEf3FJyBuE4HHnHXAc9J9niDZ6IYFjyBuoQeV7u2hi6O3uQ6-EMC-6u15jzv_4yekmg5LOJVhixyZCAtslcaF8VEWB24_GMTFBLtKz9BZnfi1yY8S7VOp&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://lh3.googleusercontent.com/sWL0ZkRcpcgAUo8-RZLxa_VMHW6rPqmVqtIhqQYaNKqUMBAmoPLLKX3NmuG6MTLHrFLbUpVnn81Dmh4VhDpdM9fAPNyEguaaN53Oh2JzvshXHGCL_TPfpGTka7j58ZFmt5EYyXKw&quot; alt=&quot;&quot; /&gt;&lt;img src=&quot;https://lh4.googleusercontent.com/cVvpwYq4N5GgIYGAccSP2v3DYtnDRsdxcL0_kcxFgB5BJQKbuoClV5LSR94eFLBpQRsQl6ESai6iJm4oqVCJpjEmQCVRSke26im6N1N9Qx8WicEF0h7GztfHrVPq9kzjW-I_yB4r&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/80.png&quot; alt=&quot;&quot; /&gt;&lt;img src=&quot;/img/81.png&quot; alt=&quot;&quot; /&gt;&lt;img src=&quot;/img/82.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;7-原作者會將你提的請求merge-之後記得順便作一整個同步的動作&quot;&gt;(7) 原作者會將你提的請求　，merge 之後，記得順便作一整個同步的動作&lt;/h3&gt;
 
