@@ -17,7 +17,6 @@ plugins:
   - jekyll-seo-tag
   - kramdown
   - rouge
-  - jekyll-youtube
 
 exclude: 
   - Gemfile
