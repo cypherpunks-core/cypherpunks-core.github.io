@@ -1,21 +1,21 @@
-## 本地運行
-### 前置要求
+# 本地運行
+## 前置要求
 - [bundler](https://bundler.io/#getting-started)
 ```
     $ gem install bundler
 ```
 
-### 下載專案
+## 下載專案
 ```
     $ git clone https://github.com/cypherpunks-core/cypherpunks-core.github.io.git
 ```
 
-### 初始化
+## 初始化
 ```
     $ bundle install
 ```
 
-### 本地運行
+## 本地運行
 ```
     $ bundle exec jekyll server --future
 ```
