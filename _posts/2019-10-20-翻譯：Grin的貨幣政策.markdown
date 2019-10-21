@@ -3,7 +3,7 @@ layout: post
 title:  "Grin 的貨幣政策：比特幣的價值不在與2100萬的硬頂，而在於透明且去中心的發行政策！"
 date:   2019-10-21
 categories: meetup
-description: "說明Grin為什麼採取當前的發行政策，以前其背後對於比特幣等加密貨幣的思想，以及如何將自己的理解變為Grin中的發行政策。"
+description: "比特幣的價值不在與2100萬的硬頂，而在於透明且去中心的發行政策！"
 image: '/img/84.png'
 published: true
 hero_image: /img/hero.png
