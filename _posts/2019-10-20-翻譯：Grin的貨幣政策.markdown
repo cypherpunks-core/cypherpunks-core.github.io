@@ -2,7 +2,7 @@
 layout: post
 title:  "Grin 的貨幣政策"
 date:   2019-10-21
-categories: meetup
+categories: news
 description: "比特幣的價值不在與2100萬的硬頂，而在於透明且去中心的發行政策"
 image: '/img/84.png'
 published: true
