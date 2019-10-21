@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Schnorr簽名資源 - 密碼龐克 Cypherpunks Taiwan</title>
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Schnorr簽名資源 | 密碼龐克 Cypherpunks Taiwan</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Schnorr簽名資源" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again." />
+<meta property="og:description" content="密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again." />
+<link rel="canonical" href="http://localhost:4000/markdown/resources/resources-schnorr-signature/" />
+<meta property="og:url" content="http://localhost:4000/markdown/resources/resources-schnorr-signature/" />
+<meta property="og:site_name" content="密碼龐克 Cypherpunks Taiwan" />
+<script type="application/ld+json">
+{"description":"密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.","headline":"Schnorr簽名資源","@type":"WebPage","url":"http://localhost:4000/markdown/resources/resources-schnorr-signature/","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131051587-3"></script>
+<script>
+  window['ga-disable-UA-131051587-3'] = window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1";
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-131051587-3');
+</script><!-- head scripts --></head>
+
+  <body>
+    
+<nav class="navbar is-primary" >
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" class="navbar-item">
+                密碼龐克 Cypherpunks Taiwan
+            </a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="navMenu">
+            <div class="navbar-start">
+                <a href="/" class="navbar-item ">Home</a>
+                
+                
+                    
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a href="/#" class="navbar-link ">資源</a>
+                        <div class="navbar-dropdown">
+                            
+                            <a href="/markdown/resources/resources-bitcoin/" class="navbar-item ">比特幣 | Bitcoin</a>
+                            
+                            <a href="/markdown/resources/resources-ln/" class="navbar-item ">閃電網路 | Lightning network</a>
+                            
+                            <a href="/markdown/resources/resources-blockchain-privacy/" class="navbar-item ">區塊隱私 | Blockchain privacy</a>
+                            
+                            <a href="/markdown/resources/resources-schnorr-signature/" class="navbar-item is-active">Schnorr 簽名 | Schnorr Signature</a>
+                            
+                            <a href="/markdown/resources/resources-ethereum/" class="navbar-item ">以太坊 | Ethereum</a>
+                            
+                        </div>
+                    </div>
+                    
+                
+                    
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a href="/#" class="navbar-link ">知識庫</a>
+                        <div class="navbar-dropdown">
+                            
+                            <a href="/markdown/knowledge/knowledge-bitcoin/" class="navbar-item ">比特幣 | Bitcoin</a>
+                            
+                            <a href="/markdown/knowledge/knowledge-ethereum/" class="navbar-item ">以太坊 | Ethereum</a>
+                            
+                        </div>
+                    </div>
+                    
+                
+                    
+                    <a href="/markdown/products/" class="navbar-item ">書籍 & 論文</a>
+                    
+                
+                    
+                    <a href="/markdown/SatelliteProject/" class="navbar-item ">衛星計畫</a>
+                    
+                
+                    
+                    <a href="/blog/" class="navbar-item ">Blog</a>
+                    
+                
+                    
+                    <a href="/markdown/about/" class="navbar-item ">關於</a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+        <section class="hero  0  is-bold is-primary"  style="background: url('/img/hero.png') no-repeat center center; background-size: cover;" >
+    <div class="hero-body">
+        <div class="container">
+            <p class="title is-2">Schnorr簽名資源</p>
+            <p class="subtitle is-3">Schnorr Signature Resources</p>
+            
+        </div>
+    </div>
+</section>
+    
+    
+
+
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                
+                <div class="column is-8">
+                    
+                    <div class="content">
+    <p><a href="https://github.com/cypherpunks-core/blockchain_privacy_resources_zh"><strong>倉庫位置</strong></a></p>
+
+<p>Schnorr Signatures 是一個聚合多個簽名演算法，主要為了減少m-n多簽名的size，不管有多少個使用者，都可以用一個簽名來解決，從而減少區塊的大小。另外一方面這也縮短了簽名校驗的時間，因為多簽名情況下，只需要驗證一個簽名就可以。同時也可以一定程度解決匿名性，多簽名中隱藏了單個使用者的資訊。由於專利的問題，這個演算法並沒有標準實現（目前專利保護已經到期），有可能多語言之間互通還有些挑戰。Schnorr Signatures也是一種橢圓簽名演算法，不能解決量子計算攻擊。 https://bitcoincore.org/en/2017/03/23/schnorr-signature-aggregation/ by 三眼世界</p>
+
+<p>2008年專利過後的區塊鏈新專案不少使用Schnorr Signature簽名，例如monero, corda, hyperledger iroha, chain等。</p>
+
+<ul>
+  <li><a href="https://github.com/WebOfTrustInfo/rwot1-sf/blob/master/topics-and-advance-readings/Schnorr-Signatures--An-Overview.md?fbclid=IwAR204wd8i2rsX9QQnWyIl93_e8-UvyHBoeitsKPIEUkmvE1kGL4WgsGlCgw">Schnorr Signatures: An Overview</a></li>
+  <li><a href="https://www.youtube.com/watch?v=JeJzwZgxF50">Bitcoin Q&amp;A: Schnorr signatures and the privacy roadmap</a>-aantonop</li>
+  <li><a href="https://medium.com/digitalassetresearch/schnorr-signatures-the-inevitability-of-privacy-in-bitcoin-b2f45a1f7287">Schnorr Signatures &amp; The Inevitability of Privacy in Bitcoin</a></li>
+  <li><a href="https://cointelegraph.com/news/unpacking-schnorr-signatures-blockstreams-musig-to-improve-bitcoin-transactions">Unpacking Schnorr Signatures: Blockstream’s MuSig to Improve Bitcoin Transactions?</a></li>
+</ul>
+
+<h2 id="medium">Medium</h2>
+
+<ul>
+  <li><a href="https://github.com/cypherpunks-core/Schnorr_Signature_Resources_zh/blob/master/article/EthereumCasper-%E8%AA%8D%E8%AD%98BLSsignature.md">Ethereum Casper - 認識 BLS signature</a></li>
+</ul>
+
+<h2 id="ethfans">Ethfans</h2>
+
+<ul>
+  <li><a href="https://github.com/cypherpunks-core/Schnorr_Signature_Resources_zh/blob/master/article/%E6%AF%94%E7%89%B9%E5%B9%A3%E4%B8%8B%E4%B8%80%E6%AC%A1%E5%8D%87%E7%B4%9A%E8%A6%81%E5%8C%85%E5%90%AB%E7%9A%84Taproot%E7%A9%B6%E7%AB%9F%E6%98%AF%E4%BB%80%E9%BA%BC.md">比特幣下一次升級要包含的Taproot究竟是什麼</a></li>
+</ul>
+
+<h2 id="8btc">8btc</h2>
+
+<ul>
+  <li><a href="https://github.com/cypherpunks-core/Schnorr_Signature_Resources_zh/blob/master/article/Schnorr%E7%B0%BD%E5%90%8D%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F%EF%BC%9A%E7%82%BA%E4%BB%80%E9%BA%BC%E8%AA%AA%E6%AF%94%E7%89%B9%E5%B9%A3%E7%9A%84%E9%9A%B1%E7%A7%81%E6%80%A7%E6%98%AF%E4%B8%8D%E5%8F%AF%E9%81%BF%E5%85%8D%E7%9A%84%EF%BC%9F.md">Schnorr簽名的前世今生：為什麼說比特幣的隱私性是不可避免的？</a></li>
+  <li><a href="https://github.com/cypherpunks-core/Schnorr_Signature_Resources_zh/blob/master/article/MuSig:%E6%AF%94%E7%89%B9%E5%B9%A3%E5%8F%AF%E7%94%A8%E7%9A%84Schnorr%E7%B0%BD%E5%90%8D%E6%96%B9%E6%A1%88.md">MuSig : 比特幣可用的Schnorr簽名方案</a></li>
+  <li><a href="https://github.com/cypherpunks-core/Schnorr_Signature_Resources_zh/blob/master/article/%E6%AF%94%E7%89%B9%E5%B9%A3%E5%86%8D%E8%BF%8E%E9%87%8D%E5%A4%A7%E6%8A%80%E8%A1%93%E7%AA%81%E7%A0%B4%EF%BC%8CSchnorr%E7%B0%BD%E5%90%8D%E7%A8%8B%E5%BC%8F%E7%A2%BC%E6%AD%A3%E5%BC%8F%E9%96%8B%E6%94%BE%E6%B8%AC%E8%A9%A6.md">比特幣再迎重大技術突破，Schnorr簽名程式碼正式開放測試</a></li>
+  <li><a href="https://github.com/cypherpunks-core/Schnorr_Signature_Resources_zh/blob/master/article/%E5%AD%B8%E8%A1%93%E5%90%91%E4%B8%A8Schnorr%E7%B0%BD%E5%90%8D%E6%96%B9%E6%A1%88%E5%92%8CBLS%E7%B0%BD%E5%90%8D%E6%96%B9%E6%A1%88%E7%9A%84%E5%85%A8%E9%9D%A2%E5%B0%8D%E6%AF%94.md">學術向丨Schnorr簽名方案和BLS簽名方案的全面對比</a></li>
+  <li><a href="https://github.com/cypherpunks-core/Schnorr_Signature_Resources_zh/blob/master/article/%E5%8D%80%E5%A1%8A%E9%8F%88%E6%9B%BF%E4%BB%A3%E7%B0%BD%E5%90%8D%E6%96%B9%E6%A1%88%E5%84%AA%E5%8A%A3%E5%8B%A2%E5%B0%8D%E6%AF%94%EF%BC%8CSchnorr%E7%B0%BD%E5%90%8D%E6%9C%80%E9%81%A9%E5%90%88%E6%AF%94%E7%89%B9%E5%B9%A3.md">區塊鏈替代簽名方案優劣勢對比，Schnorr簽名最適合比特幣</a></li>
+  <li><a href="https://github.com/cypherpunks-core/Schnorr_Signature_Resources_zh/blob/master/article/%E9%9A%94%E9%9B%A2%E8%A6%8B%E8%AD%89%EF%BC%88SegWit%EF%BC%89%E4%B9%8B%E5%BE%8C%EF%BC%8C%E6%AF%94%E7%89%B9%E5%B9%A3%E6%9C%89%E6%9C%9B%E8%BF%8E%E4%BE%86%E6%9C%80%E9%87%8D%E7%A3%85%E5%8D%87%E7%B4%9A%E2%80%94%E2%80%94Schnorr.md">隔離見證（SegWit）之後，比特幣有望迎來最重磅升級——Schnorr</a></li>
+  <li><a href="https://github.com/cypherpunks-core/Schnorr_Signature_Resources_zh/blob/master/article/%E6%8F%90%E5%8D%87%E4%BA%A4%E6%98%93%E9%80%9F%E5%BA%A6%EF%BC%8C%E9%99%8D%E4%BD%8E%E6%89%8B%E7%BA%8C%E8%B2%BB%EF%BC%8CSchnorr%E7%B0%BD%E5%90%8D%E5%8D%B3%E5%B0%87%E6%88%90%E7%82%BA%E6%AF%94%E7%89%B9%E5%B9%A3%E7%9A%84%E9%87%8D%E8%A6%81%E6%8A%80%E8%A1%93.md">提升交易速度，降低手續費，Schnorr簽名即將成為比特幣的重要技術</a></li>
+  <li><a href="https://github.com/cypherpunks-core/Schnorr_Signature_Resources_zh/blob/master/article/%E5%A4%9A%E5%90%8D%E9%96%8B%E7%99%BC%E8%80%85%E8%81%AF%E5%90%88%E9%87%8B%E5%87%BASchnorr%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%96%B9%E6%A1%88%E6%96%B0%E8%AB%96%E6%96%87%EF%BC%8C%E6%93%B4%E5%AE%B9%E5%95%8F%E9%A1%8C%E9%83%BD%E4%B8%8D%E6%98%AF%E4%BA%8B%E5%85%92.md">多名開發者聯合釋出Schnorr多重簽名方案新論文，擴容問題都不是事兒</a></li>
+  <li><a href="https://github.com/cypherpunks-core/Schnorr_Signature_Resources_zh/blob/master/article/Schnorr%E7%B0%BD%E5%90%8D%E5%B0%87%E8%A7%A3%E6%B1%BA%E6%AF%94%E7%89%B9%E5%B9%A3%E7%9A%84%E5%85%A9%E5%80%8B%E6%9C%80%E5%A4%A7%E5%95%8F%E9%A1%8C%EF%BC%9A%E6%93%B4%E5%85%85%E5%A5%97%E4%BB%B6%E6%80%A7%E5%92%8C%E5%9E%83%E5%9C%BE%E4%BA%A4%E6%98%93%E6%94%BB%E6%93%8A.md">Schnorr簽名將解決比特幣的兩個最大問題：擴充套件性和垃圾交易攻擊</a></li>
+  <li><a href="https://github.com/cypherpunks-core/Schnorr_Signature_Resources_zh/blob/master/article/BitcoinCore%E6%AD%A3%E5%BC%8F%E5%85%AC%E4%BD%88Schnorr%E7%B0%BD%E5%90%8D%E5%AF%A6%E6%96%BD%E8%B7%AF%E7%B7%9A%E5%9C%96%EF%BC%8C%E4%BD%86%E4%BB%8D%E9%9C%80%E9%9A%94%E9%9B%A2%E8%A6%8B%E8%AD%89%E5%95%9F%E7%94%A8.md">Bitcoin Core正式公佈Schnorr簽名實施路線圖，但仍需隔離見證啟用</a></li>
+  <li><a href="https://github.com/cypherpunks-core/Schnorr_Signature_Resources_zh/blob/master/article/Schnorr%E7%B0%BD%E5%90%8D%E7%9A%84%E5%A8%81%E5%8A%9B%EF%BC%9A%E5%BC%B7%E5%8C%96%E6%AF%94%E7%89%B9%E5%B9%A3%E5%8F%AF%E6%93%B4%E5%85%85%E5%A5%97%E4%BB%B6%E6%80%A7%E5%92%8C%E9%9A%B1%E7%A7%81%E7%9A%84%E7%B0%BD%E5%90%8D%E6%BC%94%E7%AE%97%E6%B3%95.md">Schnorr簽名的威力：強化比特幣可擴充套件性和隱私的簽名演算法</a></li>
+</ul>
+
+<h2 id="論文">論文</h2>
+
+<ul>
+  <li><a href="https://hdl.handle.net/11296/kuku5v">可防止提權攻擊之階層式安全比特幣錢包機制</a> 隨著比特幣日益普及，人們傾向於使用比特幣錢包來管理用來支出或接受資金的金鑰。階層式確定性(HD)錢包不是隨機生成不便於存儲的金鑰對，而是從單一種子來派生所有金鑰，因此只要存儲該種子便足以恢復金鑰。HD錢包中允許使用者在不知道任何私鑰的情況下從父公鑰生成子公鑰，這個功能的一個合適情況是允許稽查人員導出所有公鑰以進行審計的案例。然而，這個優秀的特性卻使得HD錢包遭受到所謂的提權攻擊，意即任意一個子私鑰和主公鑰的洩漏就會導致整個錢包中的所有密鑰洩漏出去。為了應對這個嚴重的問題，我們提出了一種新的HD錢包機制，該機制使用陷門雜湊函數發出簽章，而不是直接提供給任何人私鑰以產生簽章，因此可以防止提權攻擊的發生。然而，我們所提出的方案提供了兩個公鑰之間的不可連結性，以實現用戶身分的匿名性和金鑰派生的高可擴展性。因此，我們的機制實現了匿名性、公鑰派生以及高可擴展性。</li>
+  <li><a href="https://github.com/cypherpunks-core/Schnorr_Signature_Resources_zh/blob/master/paper/Hash-Function-Requirements-for-Schnorr-Signatures.pdf">Hash function requirements for Schnorr signatures</a> We provide two necessary conditions on hash functions for the Schnorr signature scheme to be secure, assuming compact group representations such as those which occur in elliptic curve groups. We also show, via an argument in the generic group model, that these conditions are sufficient. Our hash function security requirements are variants of the standard notions of preimage and second preimage resistance. One of them is in fact equivalent to the Nostradamus attack by Kelsey and Kohno (Eurocrypt 2006), and, when considering keyed compression functions, both are closely related to the ePre and eSec notions by Rogaway and Shrimpton (FSE 2004). Our results have a number of interesting implications in practice. First, since security does not rely on the hash function being collision resistant, Schnorr signatures can still be securely instantiated with SHA-1/SHA-256, unlike DSA signatures. Second, we conjecture that our properties require O(2n) work to solve for a hash function with n-bit output, thereby allowing the use of shorter hashes and saving twenty-five percent in signature size. And third, our analysis does not reveal any significant difference in hardness between forging signatures and computing discrete logarithms, which plays down the importance of the loose reductions in existing random-oracle proofs, and seems to support the use of “normal-size” groups.</li>
+  <li><a href="http://sci-hub.tw/https://link.springer.com/chapter/10.1007%2F0-387-34805-0_22">Efficient Identification and Signatures for Smart Cards</a>We present an efficient interactive identification scheme and a related signature scheme that are based on discrete logarithms and which are particularly suited for smart cards. Previous cryptoschemes, based on the discrete logarithm, have been proposed by El Gamal (1985), Chaum, Evertse, Graaf (1988), Beth (1988) and Günter (1989). The new scheme comprises the following novel features.</li>
+  <li><a href="http://sci-hub.tw/https://link.springer.com/chapter/10.1007%2F3-540-47721-7_12">How To Prove Yourself: Practical Solutions to Identification and Signature Problems</a> In this paper we describe simple identification and signature schemes which enable any user to prove his identity and the authenticity of his messages to any other user without shared or public keys. The schemes are provably secure against any known or chosen message attack if factoring is difficult, and typical implementations require only 1% to 4% of the number of modular multiplications required by the RSA scheme. Due to their simplicity, security and speed, these schemes are ideally suited for microprocessor-based devices such as smart cards, personal computers, and remote control systems.</li>
+  <li><a href="https://ecc2017.cs.ru.nl/slides/ecc2017-tibouchi.pdf">Attacks on Schnorr signatures with biased nonces</a></li>
+  <li><a href="https://eprint.iacr.org/2012/029.pdf">On the Exact Security of Schnorr-Type Signatures in the Random Oracle Model</a> The Schnorr signature scheme has been known to be provably secure in the Random Oracle Model under the Discrete Logarithm (DL) assumption since the work of Pointcheval and Stern (EUROCRYPT ’96), at the price of a very loose reduction though: if there is a forger making at most   <em>q</em>    <em>h</em>   random oracle queries, and forging signatures with probability   <em>ε</em>     <em>F</em>   , then the Forking Lemma tells that one can compute discrete logarithms with constant probability by rewinding the forger (𝑞ℎ/𝜀𝐹)O(qh/εF) times. In other words, the security reduction loses a factor (𝑞ℎ)O(qh) in its time-to-success ratio. This is rather unsatisfactory since   <em>q</em>     <em>h</em>   may be quite large. Yet Paillier and Vergnaud (ASIACRYPT 2005) later showed that under the One More Discrete Logarithm (OMDL) assumption, any   <em>algebraic</em>   reduction must lose a factor at least 𝑞1/2ℎqh1/2 in its time-to-success ratio. This was later improved by Garg   <em>et al.</em>   (CRYPTO 2008) to a factor 𝑞2/3ℎqh2/3. Up to now, the gap between 𝑞2/3ℎqh2/3 and   <em>q</em>     <em>h</em>  remained open. In this paper, we show that the security proof using the Forking Lemma is essentially the best possible. Namely, under the OMDL assumption, any algebraic reduction must lose a factor   <em>f</em>  (  <em>ε</em>     <em>F</em>   )  <em>q</em>     <em>h</em>   in its time-to-success ratio, where   <em>f</em>   ≤ 1 is a function that remains close to 1 as long as   <em>ε</em>     <em>F</em>   is noticeably smaller than 1. Using a formulation in terms of expected-time and queries algorithms, we obtain an optimal loss factor Ω(  <em>q</em>     <em>h</em>   ), independently of   <em>ε</em>     <em>F</em>   . These results apply to other signature schemes based on one-way group homomorphisms, such as the Guillou-Quisquater signature scheme.</li>
+  <li><a href="https://www.rfc-editor.org/rfc/pdfrfc/rfc8235.txt.pdf">Schnorr Non-interactive Zero-Knowledge Proof</a> This document describes the Schnorr non-interactive zero-knowledge (NIZK) proof, a non-interactive variant of the three-pass Schnorr identification scheme. The Schnorr NIZK proof allows one to prove the knowledge of a discrete logarithm without leaking any information about its value. It can serve as a useful building block for many cryptographic protocols to ensure that participants follow the protocol specification honestly. This document specifies the Schnorr NIZK proof in both the finite field and the elliptic curve settings.</li>
+</ul>
+
+</div>
+                </div>
+                
+                <div class="column is-4-desktop is-12-tablet">
+                    <p class="title is-4">Latest Posts</p>
+
+<div class="columns is-multiline">
+    
+    <div class="column is-12">
+        <div class="card">
+    
+    <div class="card-image">
+        <img src="/img/84.png" alt="Grin 的貨幣政策：比特幣的價值不在與2100萬的硬頂，而在於透明且去中心的發行政策！">
+    </div>
+    
+    <div class="card-content">
+        <div class="content">
+            
+            <a class="title is-4" href="/meetup/2019/10/21/%E7%BF%BB%E8%AD%AF-Grin%E7%9A%84%E8%B2%A8%E5%B9%A3%E6%94%BF%E7%AD%96/">Grin 的貨幣政策：比特幣的價值不在與2100萬的硬頂，而在於透明且去中心的發行政策！</a>
+            
+            <p><blockquote>
+  <p>本篇文章是翻譯自Grin的<a href="https://github.com/mimblewimble/docs/wiki/Monetary-Policy">Gitgub</a>的內容，在說明Grin為什麼採取當前的發行政策，以前其背後對於比特幣等加密貨幣的思想，以及如何將自己的理解變為Grin中的發行政策。譯者認為加密貨幣的發行政策一直是大家鮮少注意到，卻極為重要的一塊，因此翻譯了這篇文章，簡單而言，<strong>Grin的核心貢獻者認為貨幣能有價值不在於有沒有硬頂，而是能不能有透明的發行政策</strong>。 by <a href="https://www.facebook.com/profile.php?id=100000175076210">Williams Lai</a></p>
+</blockquote>
+
+</p>
+        </div>
+        <div class="has-text-centered">
+            <a href="/meetup/2019/10/21/%E7%BF%BB%E8%AD%AF-Grin%E7%9A%84%E8%B2%A8%E5%B9%A3%E6%94%BF%E7%AD%96/" class="button is-primary">Read more</a>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <p class="card-footer-item">Published: Oct 21, 2019</p>
+    </footer>
+</div>
+    </div>
+    
+    <div class="column is-12">
+        <div class="card">
+    
+    <div class="card-image">
+        <img src="/img/50.png" alt="Cypherpunks Taiwan (8) -如何使用github & 衛星計畫進度">
+    </div>
+    
+    <div class="card-content">
+        <div class="content">
+            
+            <a class="title is-4" href="/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/">Cypherpunks Taiwan (8) -如何使用github & 衛星計畫進度</a>
+            
+            <p><p>活動影片：</p>
+<ul>
+  <li>Cypherpunks 介紹 ： <a href="https://youtu.be/rG7X8pOZ_as?t=1">youtube</a></li>
+  <li>如何使用github ： <a href="https://youtu.be/rG7X8pOZ_as?t=1169">youtube</a>, <a href="/meetup/2019/10/04/Cypherpunks-GitHub-教學演講/">文章</a></li>
+  <li>比特幣衛星計畫運作與計畫進度 ： <a href="https://youtu.be/rG7X8pOZ_as?t=3934">youtube</a></li>
+</ul>
+
+</p>
+        </div>
+        <div class="has-text-centered">
+            <a href="/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/" class="button is-primary">Read more</a>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <p class="card-footer-item">Published: Oct 4, 2019</p>
+    </footer>
+</div>
+    </div>
+    
+    <div class="column is-12">
+        <div class="card">
+    
+    <div class="card-image">
+        <img src="/img/75.png" alt="Cypherpunks GitHub 教學演講">
+    </div>
+    
+    <div class="card-content">
+        <div class="content">
+            
+            <a class="title is-4" href="/meetup/2019/10/04/Cypherpunks-GitHub-%E6%95%99%E5%AD%B8%E6%BC%94%E8%AC%9B/">Cypherpunks GitHub 教學演講</a>
+            
+            <p><p>GitHub 可以說是現今時代中工程師的一種社交網路, 當你發現原始作者有一些感興趣的專案時，你想為此專案作貢獻，加入原作者專案 Contributor 的行列時。就可以參考本文件一步一步操作。</p>
+
+</p>
+        </div>
+        <div class="has-text-centered">
+            <a href="/meetup/2019/10/04/Cypherpunks-GitHub-%E6%95%99%E5%AD%B8%E6%BC%94%E8%AC%9B/" class="button is-primary">Read more</a>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <p class="card-footer-item">Published: Oct 4, 2019</p>
+    </footer>
+</div>
+    </div>
+    
+</div>
+
+
+
+
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+        <footer class="footer">
+    <div class="container">
+        
+        
+        <div class="columns is-multiline">
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/" class="link">Home</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/blog/" class="link">Blog</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/markdown/products/" class="link">書架</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/markdown/about/" class="link">關於我們</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="https://github.com/cypherpunks-core" class="link">Github</a>
+                </div>
+            </div>
+            
+        </div>
+        
+
+        <div class="content is-small has-text-centered">
+            <p class=""> Powered by  <a href="https://cypherpunks-core.github.io"> Cypherpunks Core </a></p>
+        </div>
+    </div>
+</footer>
+
+    
+    <script src="/assets/js/app.js" type="text/javascript"></script><!-- footer scripts --></body>
+</html>
+

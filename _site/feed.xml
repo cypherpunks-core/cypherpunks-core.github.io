@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-21T11:49:18+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">密碼龐克 Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">Grin 的貨幣政策：比特幣的價值不在與2100萬的硬頂，而在於透明且去中心的發行政策！</title><link href="http://localhost:4000/meetup/2019/10/21/%E7%BF%BB%E8%AD%AF-Grin%E7%9A%84%E8%B2%A8%E5%B9%A3%E6%94%BF%E7%AD%96/" rel="alternate" type="text/html" title="Grin 的貨幣政策：比特幣的價值不在與2100萬的硬頂，而在於透明且去中心的發行政策！" /><published>2019-10-21T00:00:00+08:00</published><updated>2019-10-21T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/10/21/%E7%BF%BB%E8%AD%AF:Grin%E7%9A%84%E8%B2%A8%E5%B9%A3%E6%94%BF%E7%AD%96</id><content type="html" xml:base="http://localhost:4000/meetup/2019/10/21/%E7%BF%BB%E8%AD%AF-Grin%E7%9A%84%E8%B2%A8%E5%B9%A3%E6%94%BF%E7%AD%96/">&lt;blockquote&gt;
+  &lt;p&gt;本篇文章是翻譯自Grin的&lt;a href=&quot;https://github.com/mimblewimble/docs/wiki/Monetary-Policy&quot;&gt;Gitgub&lt;/a&gt;的內容，在說明Grin為什麼採取當前的發行政策，以前其背後對於比特幣等加密貨幣的思想，以及如何將自己的理解變為Grin中的發行政策。譯者認為加密貨幣的發行政策一直是大家鮮少注意到，卻極為重要的一塊，因此翻譯了這篇文章，簡單而言，&lt;strong&gt;Grin的核心貢獻者認為貨幣能有價值不在於有沒有硬頂，而是能不能有透明的發行政策&lt;/strong&gt;。 by &lt;a href=&quot;https://www.facebook.com/profile.php?id=100000175076210&quot;&gt;Williams Lai&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;貨幣政策&quot;&gt;貨幣政策&lt;/h1&gt;
+
+&lt;p&gt;近期，&lt;a href=&quot;https://docs.google.com/spreadsheets/d/1hGyC8tSivtZqjlu8aQgjG0pKfKc0L0RO0leMfjPADp0/edit#gid=0&quot;&gt;每秒都有新的Grin會被發行&lt;/a&gt;，很有可能這樣的方式會永遠一直持續下去，這代表通貨膨脹率會趨近於恆定。為什麼，考慮一下下面幾點吧&lt;/p&gt;
+
+&lt;h1 id=&quot;在前十年他會很接近比特幣&quot;&gt;&lt;strong&gt;在前十年他會很接近比特幣&lt;/strong&gt;&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://plot.ly/~Bobby_Digital/1/#/&quot;&gt;比特幣前四年的發行率與Grin前四年相同&lt;/a&gt;。比特幣在前四年有全額的獎勵，接下來的4年只有一半。所以相對於恆定的供給，八年後的代幣發行總量只減少了33%。
+&lt;em&gt;注：原文有一句「Compare that to daily price fluctuations.」很像是沒有說完的話。&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/84.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;               比特幣、Grin、和過去四十年黃金每年發行率
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;它更像是以太坊&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;以太坊的獎勵在2017年末以前是恆定的每個區塊5個Ether。隨後變為每個區塊三個，並打算在君士坦丁堡升級後變成每個區塊給2個ether的獎勵。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;它甚至更像黃金&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;黃金在歷史上已經有線性的發行，像是Grin一樣。看這張比較比特幣、Grin、黃金的發行量的&lt;a href=&quot;https://plot.ly/~Bobby_Digital/1/#/&quot;&gt;圖表&lt;/a&gt;吧&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;新的供給量在十年後少了10%&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;年復一年，總稀釋量會越來越小。在過了10年後，供給的通貨膨脹會小於10%。20年後會小於5%，25年後grin會只有4%的通貨膨脹，和從創始塊算起十年後（2018）的比特幣的通膨率是一樣的。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;很有可能每年至少有2%的硬幣會丟失&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;許多研究已經說明有相當數量的代幣，已經在流通的過程中，以無法恢復的方式丟失、燒毀或者逐漸消失。硬幣丟失率保守估計為2%，但可能略高。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;長期發行量可能需要趨於穩定&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;固定供應量的貨幣是非常試驗性的。礦工可能會需要在手續費之外，還有趨於穩定的收入來保證安全性。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;健全的貨幣與透明的發行更有關，而不是有上限的供給。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;以法定貨幣計價的貨幣通脹的一個陷阱是，政府可以隨心所欲地擴大貨幣供應。在歷史上這樣的濫用已經導致毀滅性的效果。一個無主權、開源、基於共識的貨幣，借由制定一個提前公佈的恆定發行政策，來解決這個問題，並且使其難以被改變。 &lt;strong&gt;&lt;em&gt;基於健全性的定義，Grin和比特幣一樣是健全的貨幣&lt;/em&gt;&lt;/strong&gt; 。讓比特幣變的重要的，是去除中央權威任意的控制，而非去除任意數量的供給上限。&lt;/p&gt;
+
+&lt;p&gt;Nick Szabo 是這樣評論比特幣的固定供給：&lt;a href=&quot;https://twitter.com/NickSzabo4/status/1077317105148547072&quot;&gt;許多的供給演算法可能都可以做到，只要他是可以預測的。安全和信任相對而言才是更有價值的。&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;還有許多加密貨幣和比特幣類似，且有更小的發行量，但又有幾個能讓你念出名字呢。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;通貨膨脹可能會導致價錢更穩定&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;作為一個實驗性質的假設，Grin的通貨膨脹率可能會在早期用來阻止囤積，並促進分配。通貨膨脹抑制了「巨鯨」 — 也就是那些對資產的價格有過多的控制的人的行為，應該採取行動來淡化投機泡沫和價格波動。 &lt;strong&gt;早期採用者和後期採用者可以得到一樣的grin&lt;/strong&gt; 。這個論點在《&lt;a href=&quot;https://www.lesswrong.com/posts/P9jggxRZTMJcjnaPw/bitcoins-are-not-digital-greenbacks&quot;&gt;比特幣不是數字美元&lt;/a&gt;》中有長足的討論，戴偉自己甚至認為「比特幣的貨幣政策是失敗的」。Grin的目標是在現在和將來為所有用戶提供盡可能平等的訪問和效用。&lt;/p&gt;
+
+&lt;p&gt;持續的發行可以為所有類型的用戶提供更強的供給確定性，並允許更透明、更自然的定價。注:比特幣作為一種交換方式與嚴格的價值儲存手段的廣泛使用，取決於「&lt;a href=&quot;https://jpkoning.blogspot.com/2018/10/bitcoin-and-bubble-theory-of-money.html&quot;&gt;凱恩斯式選美比賽&lt;/a&gt;」的概念。這樣的實驗還在持續中。
+&lt;em&gt;譯注：凱恩斯式選美亦即投資者會選擇他認為大家會選擇的產品作為投資標的&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;已經有更好的價值儲存方法或者很快讓人變富的代幣&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Grin關注在隱私、擴容與公平。如果團體或個人能夠快速致富，相比於其他人他們就更有力量能夠影響整個grin的經濟。Grin想做的並不是產生技術官僚，而是希望能夠盡可能的為很多人提供隱私的電子現金。囤幣是一個會產生巨大的中心化壓力的事，而grin的發行政策則是希望能夠盡可能的去減輕這個問題。這個想法就有點像讓你像是在用一台自行車一樣的在使用Grin，他可以帶你到處走一走，並且使你的生活更有效率，而不是將它存放在倉庫以期待他能夠升值。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Grin會被分叉成一個「讓人更快致富」的代幣&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;沒事，但快速致富的關鍵字是「快速」。相對而言，Grin每年供應的溫和變化相對較慢（能致富）。因為Grin並不是為了一夜暴富。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;機密資產允許並行的貨幣政策在隨後進行軟分叉&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;如果最近的貨幣政策會讓你無法繼續為Grin貢獻，那你應該繼續留下來。&lt;a href=&quot;https://lists.launchpad.net/mimblewimble/msg00103.html&quot;&gt;機密資產&lt;/a&gt;是一個由早期的MimbleWimble貢獻者Andrew Poelstra的發明，允許替代資產（有不同的演算法，發行政策，利率，以及更多包涵與其他資產或者區塊鏈掛鈎的代幣）可以被附加在Grin上，並且在隨後進行軟分叉。這些資產對鏈的容量只佔據了極少許，並使所有其他資產（例如原生的grin）變得更加有隱私性，並且可以根據個人的意願選擇要採用或者忽略，並且不影響鏈上的其他資產（grin或其他）。Grin是MimbleWimble一個最小的實現，但他會繼續成長和進化，記得MimbleWimble是敏捷的。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;我們正處於加密經濟的早期&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;關於透明、協作的貨幣政策是非常不成熟的。比特幣只有十歲而其實驗的成果是越來越豐碩的。對於抄襲實驗者而言時機仍尚未成熟，但卻是創新的好時機。&lt;/p&gt;
+
+&lt;p&gt;目前只有2800萬個比特幣錢包（許多還不是活躍使用，或者是某些單一用戶的次要錢包）。這代表只有少於0.5%的全球人口擁有自己的錢包。因為你在這裡，就代表你關心加密貨幣的整個前途，所以當事情如此新和不確定時，保持開放的心態是很重要的。&lt;/p&gt;
+
+&lt;p&gt;向前進吧！&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;在翻譯完這篇文章後，我也在想，有其他用途或者其他使用價值的token，相對於硬頂的發行，是不是發行總量趨於穩定的通縮模型，反而是比較好的發行方式，能讓貨幣繼續保持價值存儲，也能在初期避免囤幣而帶來的中心化現象？&lt;/p&gt;
+
+&lt;p&gt;另外，之所以能在每次的減半都造成預期的漲跌，是不是透明的發行政策所帶來的預期供需心理？&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">本篇文章是翻譯自Grin的Gitgub的內容，在說明Grin為什麼採取當前的發行政策，以前其背後對於比特幣等加密貨幣的思想，以及如何將自己的理解變為Grin中的發行政策。譯者認為加密貨幣的發行政策一直是大家鮮少注意到，卻極為重要的一塊，因此翻譯了這篇文章，簡單而言，Grin的核心貢獻者認為貨幣能有價值不在於有沒有硬頂，而是能不能有透明的發行政策。 by Williams Lai</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/84.png" /></entry><entry><title type="html">Cypherpunks GitHub 教學演講</title><link href="http://localhost:4000/meetup/2019/10/04/Cypherpunks-GitHub-%E6%95%99%E5%AD%B8%E6%BC%94%E8%AC%9B/" rel="alternate" type="text/html" title="Cypherpunks GitHub 教學演講" /><published>2019-10-04T00:00:00+08:00</published><updated>2019-10-04T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/10/04/Cypherpunks%20GitHub%20%E6%95%99%E5%AD%B8%E6%BC%94%E8%AC%9B</id><content type="html" xml:base="http://localhost:4000/meetup/2019/10/04/Cypherpunks-GitHub-%E6%95%99%E5%AD%B8%E6%BC%94%E8%AC%9B/">&lt;p&gt;GitHub 可以說是現今時代中工程師的一種社交網路, 當你發現原始作者有一些感興趣的專案時，你想為此專案作貢獻，加入原作者專案 Contributor 的行列時。就可以參考本文件一步一步操作。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;目錄：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#%e7%ac%ac%e4%b8%80%e7%ab%a0%e6%a6%82%e5%bf%b5%e4%bb%8b%e7%b4%b9&quot;&gt;第一章、概念介紹&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#1-%e6%95%99%e5%ad%b8%e9%81%a9%e7%94%a8%e6%83%85%e5%a2%83&quot;&gt;1. 教學適用情境&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#2-%e4%b8%89%e5%80%8b%e8%a7%92%e8%89%b2%e4%bb%8b%e7%b4%b9&quot;&gt;2. 三個角色介紹&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#3-%e4%ba%86%e8%a7%a3%e8%a7%92%e8%89%b2%e9%81%8b%e4%bd%9c&quot;&gt;3. 了解角色運作&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#4-%e4%b8%83%e6%ad%a5%e6%88%90%e8%b2%a2%e7%8d%bb%e8%80%85&quot;&gt;4. 七步成貢獻者&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#%e7%ac%ac%e4%ba%8c%e7%ab%a0%e5%ae%8c%e6%95%b4%e6%93%8d%e4%bd%9c&quot;&gt;第二章、完整操作&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#1-%e8%ab%8b%e8%a8%bb%e5%86%8a-github&quot;&gt;(1) 請註冊 GitHub&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#2-%e5%9c%a8-github-%e4%b8%8a%e6%8a%8a%e5%88%a5%e4%ba%ba%e7%9a%84%e5%b0%88%e6%a1%88%e5%bc%84%e4%b8%80%e4%bb%bd%e5%88%b0%e8%87%aa%e5%b7%b1%e4%b8%8a%e9%9d%a2-by-fork&quot;&gt;(2) 在 GitHub 上把別人的專案弄一份到自己上面 by fork&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#3%e8%87%aa%e5%b7%b1%e5%be%9e%e8%87%aa%e5%b7%b1%e7%9a%84-repo-%e5%90%8c%e6%ad%a5%e4%b8%80%e4%bb%bd%e5%88%b0%e9%9b%bb%e8%85%a6--by-git-clone&quot;&gt;(3)自己從自己的 repo 同步一份到電腦  … by git clone&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#4-%e7%94%b1%e6%96%bc%e5%88%a5%e4%ba%ba%e7%9a%84%e5%b0%88%e6%a1%88%e6%9c%83%e6%8c%81%e7%ba%8c%e6%9b%b4%e6%96%b0%e6%89%80%e4%bb%a5%e6%88%91%e5%80%91%e8%ae%93%e8%87%aa%e5%b7%b1%e7%9a%84-repo-origin-%e8%88%87%e9%81%a0%e7%ab%af-upstream-%e4%bf%9d%e6%8c%81%e5%90%8c%e6%ad%a5&quot;&gt;(4)  由於別人的專案會持續更新，所以我們讓自己的 repo origin 與遠端 upstream 保持同步&lt;/a&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#41-%e5%be%9e-upstream-%e6%8b%89%e4%b8%8b%e4%be%86%e4%bd%bf%e9%9b%bb%e8%85%a6%e7%ab%af%e6%9c%89%e9%81%a0%e6%96%b9-upstream-%e7%9a%84-repo&quot;&gt;4.1 從 upstream 拉下來，使電腦端有遠方 upstream 的 repo&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#42-%e9%80%8f%e9%81%8e-push-%e7%9a%84%e6%96%b9%e5%bc%8f%e6%9b%b4%e6%96%b0%e8%87%b3-origin-%e8%87%aa%e5%b7%b1%e7%9a%84-repo--%e6%ad%a4%e6%99%82-upstream-%e4%be%bf%e8%88%87-origin-%e5%90%8c%e6%ad%a5&quot;&gt;4.2 透過 push 的方式更新至 origin (自己的 repo) … 此時 upstream 便與 origin 同步&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#5-%e9%96%8b%e5%a7%8b%e6%9b%b4%e6%96%b0%e4%b8%a6-push-%e8%87%b3%e8%87%aa%e5%b7%b1%e7%9a%84-origin-by-branch-%e6%96%b9%e5%bc%8f&quot;&gt;(5)　開始更新並 push 至自己的 origin  (by branch 方式)&lt;/a&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#51-%e8%ab%8b%e5%85%88%e7%a2%ba%e4%bf%9d%e8%87%aa%e5%b7%b1%e5%b7%b2%e7%b6%93%e5%ae%8c%e6%88%90%e4%b8%8a%e9%9d%a2%e5%90%8c%e6%ad%a5%e5%90%8c%e4%bd%9c&quot;&gt;5.1 請先確保自己已經完成上面同步同作&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#52-%e6%96%b0%e5%a2%9e%e4%b8%80%e5%80%8b-branch&quot;&gt;5.2 新增一個 branch&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#53-%e5%9c%a8%e6%ad%a4-branch-%e4%b8%8a%e9%9d%a2%e4%bd%9c%e6%96%b0%e5%a2%9e%e8%88%87%e4%bf%ae%e6%94%b9%e7%84%b6%e5%be%8c-git-add--git-commit-%e6%9c%80%e5%be%8c-push-%e8%87%b3%e8%87%aa%e5%b7%b1%e7%9a%84&quot;&gt;5.3 在此 branch 上面作新增與修改，然後 git add ,  git commit 最後 push 至自己的&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#6-%e5%88%b0github-%e4%b8%8a%e9%80%b2%e8%a1%8c-pull-request%e5%8e%9f%e4%bd%9c%e8%80%85%e5%90%8c%e6%84%8f%e5%be%8c%e4%be%bf%e6%9c%83-merge-%e9%80%b2%e4%be%86&quot;&gt;(6) 到GitHub 上進行 Pull Request。原作者同意後便會 merge 進來&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#7-%e5%8e%9f%e4%bd%9c%e8%80%85%e6%9c%83%e5%b0%87%e4%bd%a0%e6%8f%90%e7%9a%84%e8%ab%8b%e6%b1%82-merge-%e4%b9%8b%e5%be%8c%e8%a8%98%e5%be%97%e9%a0%86%e4%be%bf%e4%bd%9c%e4%b8%80%e6%95%b4%e5%80%8b%e5%90%8c%e6%ad%a5%e7%9a%84%e5%8b%95%e4%bd%9c&quot;&gt;(7) 原作者會將你提的請求　，merge 之後，記得順便作一整個同步的動作&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;第一章概念介紹&quot;&gt;第一章、概念介紹&lt;/h1&gt;
+
+&lt;h3 id=&quot;1-教學適用情境&quot;&gt;1. 教學適用情境&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;但真實世界中，原作者不一定總接受提交，但可以多來 &lt;a href=&quot;https://github.com/cypherpunks-core&quot;&gt;Cypherpunks-core&lt;/a&gt; 的 GitHub 來, 我們比較開放讓大家一同來成為貢獻者。或是 &lt;a href=&quot;https://github.com/milochen0418/milo-education-python&quot;&gt;到我這&lt;/a&gt; 專案來，該專案裡面有個 GitHub 資料夾，在裡面你可以隨意更新，然後試著更新，然後對我發更新請求(Pull Request), 我可以幫你 merge，讓你成功使用本次的教學。若有操作上不懂之處，或是回家不懂，也可至 &lt;a href=&quot;https://www.facebook.com/events/523580818418580/&quot;&gt;Event Discussion&lt;/a&gt; 這邊留言討論。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;2-三個角色介紹&quot;&gt;2. 三個角色介紹&lt;/h3&gt;
+
+&lt;p&gt;注意有 Three role 三個角色&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;(1) Upstream master (原始作者之 project)  &lt;br /&gt;
+(2) Origin master  (我 Fork 出來的 project )  &lt;br /&gt;
+(3) And the master in my local computer (我 local 端從 自己 origin master fork 出來的 project)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;3-了解角色運作&quot;&gt;3. 了解角色運作&lt;/h3&gt;
+
+&lt;p&gt;知道這三者角色後，作法的概念，很簡單，如下&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;一開始先讓1,2,3 三者角色資料同步。在三方資料都同步的情況下，local computer 作一個branch , 並且在該 branch 上作commit. 接著把這個 branch push 到 Origin master 上，再由 Origin master 上會有 branch  出來，接著作 pull request. 原作者會將你提交的更新給 merge 進去。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;4-七步成貢獻者&quot;&gt;4. 七步成貢獻者&lt;/h3&gt;
+
+&lt;p&gt;至於如何實現上面概念，作法就只有 7  步, 你就有機會成為原作者專案中的 Contributor 了&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;(1)請註冊GitHub [ 沒有的人請註冊 ]  &lt;br /&gt;
+(2) 用 fork 把原始作者 GitHub 上的 project 帶到自己的 GitHub 上  &lt;br /&gt;
+(3) 從自己 fork 出來的 project  那邊， clone 到自己電腦上  &lt;br /&gt;
+(4) 使 origin master 與 upstream master 同步  &lt;br /&gt;
+(5) 在 local 電腦端建立branch 並且作更新，並將該branch更新至 origin master  &lt;br /&gt;
+(6) 在origin 上以該 branch 作 Pull Request , 並等待原始作者接受更新至 upstream/master  &lt;br /&gt;
+(7) 原作者接受更新，將 upstrem/master 的資料與 local 電腦 master 及origin master 同步&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;上面這 7 步的操作，其完整作法，請見下面完整操作的章節&lt;/p&gt;
+
+&lt;h1 id=&quot;第二章完整操作&quot;&gt;第二章、完整操作&lt;/h1&gt;
+
+&lt;h3 id=&quot;1-請註冊-github&quot;&gt;(1) 請註冊 GitHub &lt;/h3&gt;
+
+&lt;p&gt;如果有 GitHub 帳號的人就登入，沒有的話，請自行到 GitHub 註冊一個帳號&lt;/p&gt;
+
+&lt;h3 id=&quot;2-在-github-上把別人的專案弄一份到自己上面-by-fork&quot;&gt;(2) 在 GitHub 上把別人的專案弄一份到自己上面 by fork &lt;/h3&gt;
+
+&lt;p&gt;首次拉一個有趣的專案進來, 例如至&lt;/p&gt;
+
+&lt;p&gt;http://github.com/milochen0418/milo-education-python&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/76.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;3自己從自己的-repo-同步一份到電腦--by-git-clone&quot;&gt;(3)自己從自己的 repo 同步一份到電腦  … by git clone &lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git clone https://github.com/funprogrammer-byte/milo-education-python
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;4-由於別人的專案會持續更新所以我們讓自己的-repo-origin-與遠端-upstream-保持同步&quot;&gt;(4)  由於別人的專案會持續更新，所以我們讓自己的 repo origin 與遠端 upstream 保持同步&lt;/h3&gt;
+
+&lt;p&gt;« 讓原作者與自己 GitHub 同步,一起同步的手法 » &lt;/p&gt;
+
+&lt;h4 id=&quot;41-從-upstream-拉下來使電腦端有遠方-upstream-的-repo&quot;&gt;4.1 從 upstream 拉下來，使電腦端有遠方 upstream 的 repo &lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git remote add upstream https://github.com/milochen0418/milo-education-python
+$ git remote -v
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;就會看到 upstream 了&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git fetch upstream
+$ git checkout master
+$ git merge upstream/master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;42-透過-push-的方式更新至-origin-自己的-repo--此時-upstream-便與-origin-同步&quot;&gt;4.2 透過 push 的方式更新至 origin (自己的 repo) … 此時 upstream 便與 origin 同步&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git status
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;可以看到自己目前電腦端， 已經與my github account 上的 repo 有不同了&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git push -u origin master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;5開始更新並-push-至自己的-origin-by-branch-方式&quot;&gt;(5)　開始更新並 push 至自己的 origin  (by branch 方式)&lt;/h3&gt;
+
+&lt;p&gt;«開始作自己的更新 »&lt;/p&gt;
+
+&lt;h4 id=&quot;51-請先確保自己已經完成上面同步同作&quot;&gt;5.1 請先確保自己已經完成上面同步同作 &lt;/h4&gt;
+
+&lt;h4 id=&quot;52-新增一個-branch&quot;&gt;5.2 新增一個 branch &lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git branch -a ← 查詢 branch 狀況，包含 電腦外的 branch
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;接著就開始新建&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git branch pr-test-0001 
+$ git checkout pr-test-0001
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;改一些程式&lt;/p&gt;
+
+&lt;h4 id=&quot;53-在此-branch-上面作新增與修改然後-git-add--git-commit-最後-push-至自己的&quot;&gt;5.3 在此 branch 上面作新增與修改，然後 git add ,  git commit 最後 push 至自己的&lt;/h4&gt;
+
+&lt;p&gt;修改一些東西後&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/77.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git add .
+$ git commit -m &quot;This is commit test&quot;
+$ git push -u origin pr-test-0001
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;這時候你可以從自己的 GitHub 上面看到類似這訊息&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/78.png&quot; alt=&quot;&quot; /&gt;&lt;img src=&quot;/img/79.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;6-到github-上進行-pull-request原作者同意後便會-merge-進來&quot;&gt;(6) 到GitHub 上進行 Pull Request。原作者同意後便會 merge 進來&lt;/h3&gt;
+
+&lt;p&gt;View of Owner can see Pull Request&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/80.png&quot; alt=&quot;&quot; /&gt;&lt;img src=&quot;/img/81.png&quot; alt=&quot;&quot; /&gt;&lt;img src=&quot;/img/82.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;7-原作者會將你提的請求merge-之後記得順便作一整個同步的動作&quot;&gt;(7) 原作者會將你提的請求　，merge 之後，記得順便作一整個同步的動作&lt;/h3&gt;
+
+&lt;p&gt;Go to the section  → « 讓原作者與自己 GitHbu 同步,一起同步的手法 » &lt;/p&gt;
+
+&lt;p&gt;有時,你會忘了開branch，但 卻已經 push 到 origin master 的話，補救辦法如下 
+&lt;a href=&quot;https://stackoverflow.com/questions/17667023/git-how-to-reset-origin-master-to-a-commit&quot;&gt;link&lt;/a&gt;&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">GitHub 可以說是現今時代中工程師的一種社交網路, 當你發現原始作者有一些感興趣的專案時，你想為此專案作貢獻，加入原作者專案 Contributor 的行列時。就可以參考本文件一步一步操作。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/75.png" /></entry><entry><title type="html">Cypherpunks Taiwan (8) -如何使用github &amp;amp; 衛星計畫進度</title><link href="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/" rel="alternate" type="text/html" title="Cypherpunks Taiwan (8) -如何使用github &amp; 衛星計畫進度" /><published>2019-10-04T00:00:00+08:00</published><updated>2019-10-04T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/10/04/Cypherpunks%20Taiwan%20(8)%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%20&amp;%20%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A</id><content type="html" xml:base="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&amp;-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/">&lt;p&gt;活動影片：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Cypherpunks 介紹 ： &lt;a href=&quot;https://youtu.be/rG7X8pOZ_as?t=1&quot;&gt;youtube&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;如何使用github ： &lt;a href=&quot;https://youtu.be/rG7X8pOZ_as?t=1169&quot;&gt;youtube&lt;/a&gt;, &lt;a href=&quot;/meetup/2019/10/04/Cypherpunks-GitHub-教學演講/&quot;&gt;文章&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;比特幣衛星計畫運作與計畫進度 ： &lt;a href=&quot;https://youtu.be/rG7X8pOZ_as?t=3934&quot;&gt;youtube&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;活動訊息：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;地點：Taipei Hackerspace&lt;/li&gt;
+  &lt;li&gt;時間：19:00-22:00&lt;/li&gt;
+  &lt;li&gt;日期：10月4日&lt;/li&gt;
+  &lt;li&gt;性質：小聚，希望手把手讓大家一起玩起來，不排斥大家帶酒來&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;主題一：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;講者： &lt;a href=&quot;https://www.facebook.com/milochen0418&quot;&gt;Milo Chen&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;講題：如何使用github&lt;/li&gt;
+  &lt;li&gt;主旨：基礎說明如何使用git以及一些使用技巧，提高大家在github的貢獻量。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;主題二：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;講者： &lt;a href=&quot;https://www.facebook.com/pw.chen.bitcoiner&quot;&gt;陳伯韋 （Po Chen）&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;講題：比特幣衛星計畫運作與計畫進度&lt;/li&gt;
+  &lt;li&gt;主旨：因為太多人不是很明白比特幣衛星計畫在做些什麼東西，已經不知道該如何幫忙，所以會大致把roadmap 說完，以及如何參與說清楚&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;大家可以順便玩玩調酒機，了解一下 &lt;a href=&quot;https://www.facebook.com/groups/tpehack/&quot;&gt;台北創客空間 Taipei Hackerspace&lt;/a&gt; 的文化風氣，包括焊接、四軸飛行器…等的 創客文化&lt;/p&gt;
+
+&lt;p&gt;Facebook 活動連結：&lt;a href=&quot;https://www.facebook.com/events/523580818418580/&quot;&gt;https://www.facebook.com/events/523580818418580/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;影片：&lt;/p&gt;
+
+&lt;div style=&quot;text-align:center&quot;&gt;
+&lt;iframe style=&quot;width:560px; height:315px;&quot; src=&quot;https://www.youtube.com/embed/rG7X8pOZ_as&quot; styleframeborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">活動影片： Cypherpunks 介紹 ： youtube 如何使用github ： youtube, 文章 比特幣衛星計畫運作與計畫進度 ： youtube</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/50.png" /></entry><entry><title type="html">一次搞懂「區塊鏈架構」</title><link href="http://localhost:4000/meetup/2019/09/24/%E4%B8%80%E6%AC%A1%E6%90%9E%E6%87%82-%E5%8D%80%E5%A1%8A%E9%8F%88%E6%9E%B6%E6%A7%8B/" rel="alternate" type="text/html" title="一次搞懂「區塊鏈架構」" /><published>2019-09-24T00:00:00+08:00</published><updated>2019-09-24T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/09/24/%E4%B8%80%E6%AC%A1%E6%90%9E%E6%87%82%E3%80%8C%E5%8D%80%E5%A1%8A%E9%8F%88%E6%9E%B6%E6%A7%8B%E3%80%8D</id><content type="html" xml:base="http://localhost:4000/meetup/2019/09/24/%E4%B8%80%E6%AC%A1%E6%90%9E%E6%87%82-%E5%8D%80%E5%A1%8A%E9%8F%88%E6%9E%B6%E6%A7%8B/">&lt;p&gt;&lt;a href=&quot;https://medium.com/pelith/structure-of-blockchain-daf85e06027e&quot;&gt;&lt;strong&gt;轉自Pelith Medium&lt;/strong&gt;&lt;/a&gt;,
+作者&lt;a href=&quot;https://medium.com/@laijack?source=post_page-----daf85e06027e----------------------&quot;&gt;Lai Jack 賴彥廷&lt;/a&gt;  &lt;a href=&quot;https://medium.com/pelith/structure-of-blockchain-daf85e06027e?source=post_page-----daf85e06027e----------------------&quot;&gt;Sep 24&lt;/a&gt; · 8 min read&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;收看本系列文章的讀者，應該都對於區塊鏈的基本原理和架構有些概念，如果沒有，推薦您先去 Google 搜尋  &lt;strong&gt;區塊鏈、比特幣、以太坊&lt;/strong&gt; 這些關鍵字了解一下。我們將在這些基礎概念之上，來談區塊鏈的技術知識。本系列文章並不會談到太深的技術鑽研，而是希望以 &lt;strong&gt;深入淺出&lt;/strong&gt; 的方式讓每一個想要搞懂區塊鏈技術的人都能在讀完後說出： &lt;strong&gt;原來如此！&lt;/strong&gt;
+本系列文章由區塊鏈技術解決方案開發公司： &lt;strong&gt;Pelith&lt;/strong&gt;  編撰。內容皆經過諸位區塊鏈資深研究員及開發者 &lt;strong&gt;校對與驗證&lt;/strong&gt; ，盡可能確保 &lt;strong&gt;內容正確無誤&lt;/strong&gt; ，讓讀者能安心吸收 &lt;strong&gt;正確的區塊鏈技術知識&lt;/strong&gt; 。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://medium.com/pelith/behindtheethtransaction-534dc6ce123e&quot;&gt; &lt;strong&gt;上一節&lt;/strong&gt; &lt;/a&gt; 中，我們在介紹以太坊交易打包規則時帶大家大致了解區塊鏈運作的架構，不過有些技術細節我們沒有完整地交代清楚，本篇及未來數篇文我們將更深入且完整地介紹區塊鏈技術架構，並且帶大家認識目前區塊鏈遇到的各種問題及許多專案在嘗試解決的部分！&lt;/p&gt;
+
+&lt;p&gt;廢話不多說，我們先從中本聰設計的初代區塊鏈  &lt;strong&gt;比特幣 Bitcoin&lt;/strong&gt;  來談起：&lt;/p&gt;
+
+&lt;h1 id=&quot;how-bitcoin-blockchain-work&quot;&gt;How Bitcoin Blockchain Work&lt;/h1&gt;
+
+&lt;p&gt;如果&lt;a href=&quot;https://medium.com/pelith/tagged/course&quot;&gt;前面幾節&lt;/a&gt;大家有認真看的話，應該還記得比特幣是採用  &lt;strong&gt;UTXO 架構&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;p&gt;我們從比特幣一筆交易的一生帶大家來一探究竟區塊鏈是如何運作的：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;比特幣交易流程示意圖 :&lt;/strong&gt;
+&lt;img src=&quot;https://miro.medium.com/max/4608/1*VcLpDWRuh5LkZfE_g2ffgA.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;比特幣交易的一生&quot;&gt;比特幣交易的一生&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;一個使用者欲發起一筆交易。&lt;/li&gt;
+  &lt;li&gt;透過 &lt;strong&gt;錢包&lt;/strong&gt; （管理私鑰的工具）輸入交易資訊
+（To, Amount, 手續費, OP_Return …）。&lt;/li&gt;
+  &lt;li&gt;以 &lt;strong&gt;私鑰&lt;/strong&gt; 簽署交易。&lt;/li&gt;
+  &lt;li&gt;廣播 &lt;strong&gt;「加上簽名的交易封包」&lt;/strong&gt; 至鄰近的比特幣節點們。&lt;/li&gt;
+  &lt;li&gt;節點接收到新交易時，會先至 UTXO Pool  &lt;strong&gt;檢查交易發起地址是否能動用足額 UTXO&lt;/strong&gt; ，若無則該交易會即刻被丟棄。
+＊註：圖中以一個 Balance 值來做標註，但其實這個 Balance 可能是多個 UTXO 的集合，Steve 的 18 可能其實是 0.25+10.75+2+5 四個  &lt;strong&gt;錢堆&lt;/strong&gt; 。&lt;/li&gt;
+  &lt;li&gt;若檢查後確認有足額，則該交易會被放入到  &lt;strong&gt;Tx Pool&lt;/strong&gt;  中。
+（按造 &lt;strong&gt;手續費給的多寡&lt;/strong&gt; 由高至低排序）&lt;/li&gt;
+  &lt;li&gt;等待出塊的同時，各節點會
+&lt;strong&gt;A. 廣播接收到的交易&lt;/strong&gt;
+&lt;strong&gt;B. 接收未在 Tx Pool 內的交易&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;礦工節點們（有在用電腦算力找 nonce 值，拼出塊獎勵的節點）會
+&lt;strong&gt;撈取手續費較高的交易們來運算並打包成新區塊&lt;/strong&gt; ，
+用電腦算力計算 nonce 值。
+＊註：這邊的  &lt;strong&gt;nonce 值&lt;/strong&gt;  跟前面介紹過的  &lt;strong&gt;以太坊地址的 nonce 值&lt;/strong&gt;  不同（以太坊有兩個 nonce：一個是挖礦的；一個是地址的交易 &lt;strong&gt;序次&lt;/strong&gt; 。）&lt;/li&gt;
+  &lt;li&gt;成功找到找到 nonce 值，出塊的礦工會獲得 &lt;strong&gt;出塊獎勵&lt;/strong&gt; 及該區塊所有打包交易給的 &lt;strong&gt;手續費&lt;/strong&gt; 。&lt;/li&gt;
+  &lt;li&gt;該礦工節點將新的區塊廣播至全世界的其他節點們。&lt;/li&gt;
+  &lt;li&gt;其他節點 &lt;strong&gt;同步&lt;/strong&gt;  &amp;lt;595266 區塊高度（最新的區塊）&amp;gt;、&lt;UTXO Pool=&quot;&quot;&gt;、&lt;Tx Pool=&quot;&quot;&gt; 資料，繼續 **廣播與接收新交易** 。&lt;/Tx&gt;&lt;/UTXO&gt;&lt;/li&gt;
+  &lt;li&gt;礦工節點再從 Tx Pool 中撈取未出塊的交易們（生成 Merkle Root ）運算並打包成新的區塊。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;以上，便是區塊鏈運作的方式。&lt;/p&gt;
+
+&lt;p&gt;不過由於全世界可能每時每刻都有人在發起新的交易，所以以上這些過程都是 24/7/365.25 不斷在  &lt;strong&gt;動態運作中&lt;/strong&gt;  的。&lt;/p&gt;
+
+&lt;p&gt;光憑上述 12 點其實很難清楚交代許多的技術細節，所以我們將針對幾點再做更進一步的介紹：&lt;/p&gt;
+
+&lt;h1 id=&quot;3-私鑰簽署數位簽名-digital-signature&quot;&gt;(3) 私鑰簽署數位簽名 Digital Signature&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://miro.medium.com/max/1500/1*PQve_MqgyWFQVAMKngBmqA.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;數位簽名與驗證示意圖（https://zhaohuabing.com/2018/05/12/cryptocurrency_week1_digital_signature/）&lt;/p&gt;
+
+&lt;h2 id=&quot;為什麼發送交易需要使用私鑰進行簽名&quot;&gt;為什麼發送交易需要使用私鑰進行簽名？&lt;/h2&gt;
+
+&lt;p&gt;試想一下，若是沒有這樣的機制， &lt;strong&gt;就無法知道交易是不是由地址的主人發出的。&lt;/strong&gt; 因此當我發送交易時，必須有機制能證明這個交易是由我本人來發出。我們先來看一段《精通比特幣》的論述：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;《 精通比特幣（Mastering Bitcoin）第四章 》&lt;/strong&gt;
+私鑰可用於為交易生成指紋（數位簽名）。這個簽名只能由知道私鑰的人制作。但是， &lt;strong&gt;任何有權訪問公鑰和交易指紋的人都可以使用它們來驗證簽名確實是私鑰的擁有者生成的。&lt;/strong&gt; 非對稱加密的這一有用特性使任何人都可以驗證每筆交易的每個簽名，同時確保 &lt;strong&gt;只有私鑰所有者才能生成有效的簽名。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;因此，能唯一證明的機制便是：用我的私鑰生成一個 &lt;strong&gt;「數位簽名」&lt;/strong&gt; 後，連同交易內容一起送出。節點接收到這筆加上簽名的交易時，可以用 &lt;strong&gt;我的公鑰&lt;/strong&gt; 來驗證這個簽名是由 &lt;strong&gt;我的私鑰&lt;/strong&gt; 所簽署的。如此來證明這個交易是由我送出的。&lt;/p&gt;
+
+&lt;h1 id=&quot;5-utxo-pool&quot;&gt;(5) UTXO Pool&lt;/h1&gt;
+
+&lt;p&gt;接著，我們來介紹 UTXO Pool：所謂的區塊鏈其實就是自主網上線以來的所有歷史區塊，區塊內包含零至數筆的交易資料。而比特幣至 2019/9 為止的近 60 萬個區塊 資料大小約為 250 GB。&lt;/p&gt;
+
+&lt;p&gt;上方第 (5) 點，節點接收交易要檢查時，照理來說應該是要把近 60 萬個區塊資料都爬過一遍才能確認該地址可動用的餘額。然而，這麼做曠日費時，當區塊越來越多，且每一筆交易接收時都要整個掃描一遍時，會因掃描時間過長導致節點之間的同步出現問題。&lt;/p&gt;
+
+&lt;p&gt;因此，UTXO Pool 便出現了。作法是： &lt;strong&gt;用資料庫記錄一個掃描過後的最終狀態&lt;/strong&gt; ，並在這之上再依據後續區塊做更新變動。亦即 &lt;strong&gt;把已花費的 Output 紀錄都丟棄掉，只保留最後 Unspent 的 Tx Output。&lt;/strong&gt; 如此便不用每筆交易接收時都要掃描整條區塊鏈，只要掃描去蕪存菁的 UTXO Pool 就可以了。&lt;/p&gt;
+
+&lt;h1 id=&quot;10-節點-node&quot;&gt;(10) 節點 Node&lt;/h1&gt;
+
+&lt;p&gt;了解 UTXO Pool 後，接著來進一步介紹節點。節點是維持區塊鏈網路運作的根基，區塊鏈之所以能做到去中心化，便是因為在全世界有無數的節點在同步與備份所有的區塊資料（全交易歷史紀錄）。&lt;/p&gt;
+
+&lt;h2 id=&quot;11-節點同步不斷刷新推算&quot;&gt;(11) 節點同步（不斷刷新推算）&lt;/h2&gt;
+
+&lt;p&gt;當我接收到一筆新的交易並驗證後，放進我的 Tx Pool 中，我會同時把這筆交易廣播給鄰近的節點們。鄰近的節點們驗證、接收並同步後也會再廣播給他們鄰近的節點們，如此將資訊以網狀廣播出去，讓各個節點之間維持一個 &lt;strong&gt;「動態同步」&lt;/strong&gt; 的狀態。&lt;/p&gt;
+
+&lt;h2 id=&quot;12-節點不一定等於礦工&quot;&gt;&lt;strong&gt;(12) 節點不一定等於礦工&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;節點可以選擇 &lt;strong&gt;要不要進行挖礦&lt;/strong&gt; ，也就是說：我可以 &lt;strong&gt;單純的接收、同步與廣播&lt;/strong&gt; 「Block、UTXO Pool、Tx Pool」資料，只做帳本更新動作，當個稱職的傳聲筒為去中心化世界做貢獻，不花算力去打包交易、計算 nonce 拼出塊獎勵。&lt;/p&gt;
+
+&lt;p&gt;而這些 &lt;strong&gt;節點們&lt;/strong&gt; 便是所謂的  &lt;strong&gt;Peer to Peer（P2P）Network&lt;/strong&gt;   &lt;strong&gt;「點對點網路」&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;p&gt;以上便是核心版的區塊鏈架構，中間有許多的技術細節我們先不深入著墨。因為這是一個由淺入深的系列文，未來會逐一介紹到的！&lt;/p&gt;
+
+&lt;h1 id=&quot;blockchain-demo&quot;&gt;Blockchain Demo&lt;/h1&gt;
+
+&lt;p&gt;最後，如果想更了解區塊鏈如何運作的朋友，可以到下方這個網站去逛逛，實際體驗、操作看看區塊鏈是如何運作的！&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://anders.com/blockchain/?source=post_page-----daf85e06027e----------------------&quot;&gt;Blockchain Demo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;（&lt;/em&gt; &lt;a href=&quot;https://anders.com/blockchain/&quot;&gt; &lt;em&gt;https://anders.com/blockchain/&lt;/em&gt; &lt;/a&gt; &lt;em&gt;）&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;此外，也跟大家預告一下精彩可期的未來數篇文章：&lt;/p&gt;
+
+&lt;h2 id=&quot;7-以太坊區塊鏈架構-how-ethereum-blockchain-work&quot;&gt;&amp;lt;7&amp;gt; 以太坊區塊鏈架構 How Ethereum Blockchain Work&lt;/h2&gt;
+
+&lt;p&gt;我們將接續本篇文章，介紹  &lt;strong&gt;區塊鏈 2.0－&lt;/strong&gt;  Vitalik 如何在中本聰設計的比特幣架構上進行升級與改動，同時也將首度揭曉 &lt;strong&gt;「以太坊區塊鏈架構圖」&lt;/strong&gt; ！&lt;/p&gt;
+
+&lt;h2 id=&quot;8-區塊鏈技術地圖-blockchain-technical-roadmap&quot;&gt;&amp;lt;8&amp;gt; 區塊鏈技術地圖 Blockchain Technical Roadmap&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;比特幣資深研究員「陳伯韋」五年多來的研究結晶完全公開！&lt;/strong&gt;
+我們將依區塊鏈架構清楚剖析目前區塊鏈遇到的各項問題（ &lt;strong&gt;隱私問題、儲存問題、速度問題&lt;/strong&gt;  等），並 &lt;strong&gt;摘要介紹目前各個 項目／團隊 針對各項問題提出的解決方案&lt;/strong&gt; ！&lt;/p&gt;
+
+&lt;h2 id=&quot;9-去中心化金融技術解析-how-decentralized-finance-defi-work&quot;&gt;&amp;lt;9&amp;gt; 去中心化金融技術解析 How Decentralized Finance (DeFi) Work&lt;/h2&gt;
+
+&lt;p&gt;DeFi 正夯，到底在紅什麼呢？DeFi 如何解決傳統金融遇到的界線與問題呢？透過本篇文章將（盡可能）解答您心中的疑問！&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">轉自Pelith Medium, 作者Lai Jack 賴彥廷 Sep 24 · 8 min read</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/73.png" /></entry><entry><title type="html">Cypherpunks Taiwan (7) -微雷電網路 &amp;amp; 開發者眼中的區塊鏈應用</title><link href="http://localhost:4000/meetup/2019/08/15/Cypherpunks-Taiwan-7-%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF-&-%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8/" rel="alternate" type="text/html" title="Cypherpunks Taiwan (7) -微雷電網路 &amp; 開發者眼中的區塊鏈應用" /><published>2019-08-15T00:00:00+08:00</published><updated>2019-08-15T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/08/15/Cypherpunks%20Taiwan(7)-%20%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF%20&amp;%20%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8</id><content type="html" xml:base="http://localhost:4000/meetup/2019/08/15/Cypherpunks-Taiwan-7-%E5%BE%AE%E9%9B%B7%E9%9B%BB%E7%B6%B2%E8%B7%AF-&amp;-%E9%96%8B%E7%99%BC%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%8D%80%E5%A1%8A%E9%8F%88%E6%87%89%E7%94%A8/">&lt;p&gt;議程：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;18:30 - 19:00 開放入場&lt;/li&gt;
+  &lt;li&gt;19:00 - 19:10 簡述密碼龐克社群現況 10min&lt;/li&gt;
+  &lt;li&gt;19:10 - 19:50 Ethereum 微雷電網路 的美麗與哀愁 by 江柏憲 Jambo 40min&lt;/li&gt;
+  &lt;li&gt;19:50 - 20:05 中場休息&lt;/li&gt;
+  &lt;li&gt;20:05 - 20:45 讓區塊鏈有價值的應用落地 - 以一位創新應用開發者的視角 by Milo 40min&lt;/li&gt;
+  &lt;li&gt;20:45 - 21:30 交流時間&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/47.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;主題一-ethereum-微雷電網路-的美麗與哀愁&quot;&gt;主題一-Ethereum 微雷電網路 的美麗與哀愁&lt;/h3&gt;
+
+&lt;p&gt;講題摘要：
+「您好這杯飲料，我想用虛擬貨幣付款。」多麼希望未來像買飲料這類的的小額交易，也能夠拿虛擬貨幣來支付，想要安全的付款就得要等礦工驗證還要付高額的手續費；想要快速又便宜的消費就得要把錢放到別人口袋裡面。有沒有一種方式，可以讓我又快又便宜又安全的使用虛擬貨幣執行小額支付呢？那麼來看看mirco raiden怎麼運作的吧！&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;micro raiden 概念簡述&lt;/li&gt;
+  &lt;li&gt;micro raiden 運作原理&lt;/li&gt;
+  &lt;li&gt;micro raiden &amp;amp; raiden network的未來發展&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;講者：江柏憲 Jambo&lt;/li&gt;
+  &lt;li&gt;講者摘要：2016年因求學過程接觸到比特幣，對其無國界、無需中介與信任的交易形式感到讚嘆不已，因此畢業後一腳跨入了虛擬貨幣交易的產業中，期待某天能看到區塊鏈支付、交易都能夠頻繁的在世界上的每個小角落發生。我是Jambo，一個為了虛擬貨幣支付默默努力的菜鳥PM。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;主題二-讓區塊鏈有價值的應用落地---以一位創新應用開發者的視角&quot;&gt;主題二-讓區塊鏈有價值的應用落地 - 以一位創新應用開發者的視角&lt;/h3&gt;
+&lt;p&gt;講題摘要：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;創新研發者面臨的取捨 ? - 應用落地&lt;/li&gt;
+  &lt;li&gt;目前的學習歷程小分享 ? - 小小分享&lt;/li&gt;
+  &lt;li&gt;選哪個區塊鏈來作應用 ? - 研發觀點&lt;/li&gt;
+  &lt;li&gt;要如何避免見樹不見林 ? - 生態觀點&lt;/li&gt;
+  &lt;li&gt;讓台灣成為區塊鏈部落 ? - 創新部落&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;講者：Milo&lt;/li&gt;
+  &lt;li&gt;講者摘要：擁抱全人類的是 Milo 的信念。他自幼困苦，從技職練工程，再到台大學法律，是 Mensa 及 Cypherpunks Taiwan的一員，喜歡人之間的平權，所以他迷戀穿藍白拖走入東區、世界並擁抱國際。
+他是工程界的藝術家，他有強烈 IFSP 天生藝術家性格，有數學天份及藝術嗜好，他成功克服性格弱點成為強者工程師，擁有 AI 應用創新 Intel 獎, 好學新科技並喜愛交友，時常在各產業實現跨領域研發並應用落地。  &lt;br /&gt;
+擁有 LinkedIn 十萬追隨者但卻不擅面對人群的他，目前正與全球醫療體系共努力，運用新科技讓人民擁有更好的醫療。而他的業餘志業也是醫療，但對象社會的結構，他想先讓台灣未來能成為一個區塊鏈應用部落，路程中也就成立 ÐApp 101 讀書會。  &lt;br /&gt;
+對他而言，比特幣讓貨幣的去中心化，是一個有轉動世界的契機，配合現有網路優勢，再配合一個成熟的區塊鏈應用落地生態，可讓懂科技並且對社會有抱負的人，藉由創意及新科技來解決的社會結構問題，好讓弱勢族群於成長中有更多好的路可以選。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;影片：&lt;/p&gt;
+
+&lt;div style=&quot;text-align:center&quot;&gt;
+&lt;iframe style=&quot;width:560px; height:315px;&quot; src=&quot;https://www.youtube.com/embed/wpYYd8xMFVg&quot; styleframeborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">議程： 18:30 - 19:00 開放入場 19:00 - 19:10 簡述密碼龐克社群現況 10min 19:10 - 19:50 Ethereum 微雷電網路 的美麗與哀愁 by 江柏憲 Jambo 40min 19:50 - 20:05 中場休息 20:05 - 20:45 讓區塊鏈有價值的應用落地 - 以一位創新應用開發者的視角 by Milo 40min 20:45 - 21:30 交流時間</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/47.png" /></entry><entry><title type="html">活動-Make Privacy Protected Again | 找出你遺失很久的【隱私】</title><link href="http://localhost:4000/meetup/2019/07/05/Make-Privacy-Protected-Again-Maskbook-%E5%8F%B0%E5%8C%97%E9%A6%96%E6%AC%A1%E7%B7%9A%E4%B8%8B-Meetup/" rel="alternate" type="text/html" title="活動-Make Privacy Protected Again | 找出你遺失很久的【隱私】" /><published>2019-07-05T00:00:00+08:00</published><updated>2019-07-05T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/07/05/Make%20Privacy%20Protected%20Again%20%7C%20Maskbook%20%E5%8F%B0%E5%8C%97%E9%A6%96%E6%AC%A1%E7%B7%9A%E4%B8%8B%20Meetup</id><content type="html" xml:base="http://localhost:4000/meetup/2019/07/05/Make-Privacy-Protected-Again-Maskbook-%E5%8F%B0%E5%8C%97%E9%A6%96%E6%AC%A1%E7%B7%9A%E4%B8%8B-Meetup/">&lt;ul&gt;
+  &lt;li&gt;時間：2019年7月5日（星期五）19:00-22:00&lt;/li&gt;
+  &lt;li&gt;地點：台北市中正區重慶南路一段105號2F (天瓏圖書2樓)&lt;/li&gt;
+  &lt;li&gt;報名連結：&lt;a href=&quot;https://l.facebook.com/l.php?u=https%3A%2F%2Flihi1.cc%2FBLOFd&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;當天請攜帶電腦，手把手帶你體驗 Maskbook！&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/48.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;📌活動介紹
+隨著資訊科技的快速發展，在日漸開放、透明、方便的時代，我們將越來越多的資訊儲存到無法控制的網際網路上，但個資外洩、隱私事件的紛爭卻層出不窮。每次 Facebook 對隱私政策的調整都會引來社會各界對其背後意義的討論，而你對自己的隱私又了解多少呢？&lt;/p&gt;
+
+&lt;p&gt;團隊成員們將以過去的經驗，為台灣社區成員介紹 Maskbook 產品的起源及構想，同時帶來對於隱私、加密最前沿的發展方向以及實例分享，歡迎有興趣的朋友們到場交流討論！&lt;/p&gt;
+
+&lt;p&gt;📌活動議程：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;(1830 - 1900) 入場簽到&lt;/li&gt;
+  &lt;li&gt;(1900 - 1910) 開場+介紹來賓&lt;/li&gt;
+  &lt;li&gt;(1910 - 1950) 密碼隱私的重要以及應用場景&lt;/li&gt;
+  &lt;li&gt;(2000 - 2010) 休息&lt;/li&gt;
+  &lt;li&gt;(2010 - 2050) Maskbook 產品起源以及介紹&lt;/li&gt;
+  &lt;li&gt;(2050 - 2130) 手把手教你使用 Maskbook&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;📌講者資訊：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Suji Yan, Dimension CEO
+&lt;a href=&quot;https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.linkedin.com%2Fin%2Ftedkoyan%2F&quot;&gt;https://www.linkedin.com/in/tedkoyan/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Yisi Liu, Dimension CTO
+&lt;a href=&quot;https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fcachemiss%2F&quot;&gt;https://www.linkedin.com/in/cachemiss/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Neruthes, Dimension CPO, Manager-General of Maskbook
+&lt;a href=&quot;https://l.facebook.com/l.php?u=https%3A%2F%2Fneruthes.xyz%2F&quot;&gt;https://neruthes.xyz/&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;團隊成員皆在相關領域有非常優秀的發展表現，更獲邀 coscup 等其他大型活動擔任分享講者。（更多資訊請點擊購票連結查看）&lt;/p&gt;
+
+&lt;p&gt;📌關於主辦&amp;amp;協辦：  &lt;br /&gt;
+&lt;a href=&quot;https://www.facebook.com/realmaskbook/&quot;&gt;Maskbook&lt;/a&gt;
+Maskbook 是適用於 Chrome、Edge、Brave、Vivaldi 和所有基於 Chromium 瀏覽器的免費開源擴充插件，Maskbook 允許使用者在 Facebook 上發佈加密的貼文。只有使用者和使用者的朋友可以解密，簡單來說，只有你許可的使用者才可以查看你發布的內容，就連 Facebook 和 Maskbook 的開發者都無法查看。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.facebook.com/Grenadelab2019/&quot;&gt;Grenade Lab&lt;/a&gt;
+致力於推廣區塊鏈相關的整合公司，統籌區塊鏈相關之活動策劃、社區運營、教育推廣、行銷策劃等。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.facebook.com/CypherpunksTW/&quot;&gt;Cypherpunks Taiwan 密碼龐克&lt;/a&gt;
+致力建立最具影響力的區塊鏈、比特幣、以太坊技術中文交流平台，掌握技術開發最新資訊，成為開發者、研究員的最佳利器的社群。&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">時間：2019年7月5日（星期五）19:00-22:00 地點：台北市中正區重慶南路一段105號2F (天瓏圖書2樓) 報名連結：link 當天請攜帶電腦，手把手帶你體驗 Maskbook！</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/48.png" /></entry><entry><title type="html">Cypherpunks Taiwan （6）- Blockstream</title><link href="http://localhost:4000/meetup/2019/07/04/Cypherpunks-Taiwan-6-Blockstream/" rel="alternate" type="text/html" title="Cypherpunks Taiwan （6）- Blockstream" /><published>2019-07-04T00:00:00+08:00</published><updated>2019-07-04T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/07/04/Cypherpunks%20Taiwan(6)-%20Blockstream</id><content type="html" xml:base="http://localhost:4000/meetup/2019/07/04/Cypherpunks-Taiwan-6-Blockstream/">&lt;p&gt;比特幣基礎設施公司 Blockstream 首次登台，與 Cypherpunks Taiwan 聯手舉辦線下聚會！一個雇用了大量 Bitcoin Core 開發者的公司，究竟他們開發出的產品，能夠怎樣的影響比特幣及區塊鏈，甚至是整個世界呢？&lt;/p&gt;
+
+&lt;p&gt;Bitcoin Development company, Blockstream is here in Taipei to share their latest work on Bitcoin. Join us on July 4th to learn more about it!&lt;/p&gt;
+
+&lt;p&gt;活動簡介&lt;/p&gt;
+
+&lt;p&gt;【活動日期】：2019/07/04
+【活動時間】：19:00 - 22:00
+【活動地點】：台北市信義區基隆路一段178號4樓（AppWorks 4樓）
+【主辦單位】：Cypherpunks Taiwan &amp;amp; Blockstream
+【活動流程】：
+19:00 - 19:30 ：入場
+19:30 - 20:00 ：Cypherpunks Taiwan 社群介紹
+20:00 - 20:15 ：休息交流
+20:15 - 21:00 ：Blockstream 的使命 - 延伸比特幣（衛星計畫 &amp;amp; Liquid Network）by Samson Mow
+21:00 - 22:00 : 交流 散場&lt;/p&gt;
+
+&lt;p&gt;【活動介紹】：  &lt;br /&gt;
+Cypherpunks Taiwan 此次聚會邀請到了 Blockstream 策略長 Samson Mow 來當講者，他將透過這次機會向台灣社群介紹 Blockstream 所主導的兩項核心產品 - 「衛星計畫 Blockstream Satellite」以及「比特幣側鏈網路 Liquid Network」。&lt;/p&gt;
+
+&lt;p&gt;「衛星計畫 Blockstream Satellite」  &lt;br /&gt;
+由 Blockstream 公司在去年八月推出，旨在將比特幣區塊鏈透過「衛星訊號」廣播到全世界，降低了比特幣對網際網路（Internet）的依賴。只要在其衛星訊號覆蓋範圍內，都能自行架設接收器來接收並同步比特幣區塊鏈。&lt;/p&gt;
+
+&lt;p&gt;「比特幣側鏈網路 Liquid Network」 &lt;br /&gt;
+Liquid Network 由 Blockstream 所推出的側鏈網路，除了可以實現跨區塊鏈之間不同貨幣之間的交易，為眾多的幣種創造更多的流動性，也能在側鏈中發行代幣，在封閉體系中運行（若遭受攻擊也不影響主鏈）。測鏈透過「雙向錨定」的方式，讓更高頻率的交易留在主鏈之外處理，除了可以提供用戶所需的隱私性、高吞吐量，同時又能發揮主鏈的安全性優勢。&lt;/p&gt;
+
+&lt;p&gt;【講者介紹】：  &lt;br /&gt;
+Samson Mow 目前於 Blockstream 擔任策略長（CSO）。他是比特幣社區中知名的貢獻者，提倡去中心化的重要性，以及在協議開發時，將安全性擺在第一優先的必要。而 Blockstream 即是區塊鏈領域中具有領導地位的公司，以開發出下個世代的金融基礎設施為其產品願景。
+過去 Samson Mow 也曾擔任過 BTCC 的營運長（COO）- BTCC 是世界上最大的比特幣交易所及礦池之一。在 BTCC 任職期間，Samson Mow 負責公司整體每日的營運，並直接管理交易所及礦池的各項業務。&lt;/p&gt;
+
+&lt;p&gt;【主辦單位介紹】：  &lt;br /&gt;
+「Cypherpunks Taiwan 密碼龐克」沿用了「密碼龐克」一詞背後延伸的理念，期待可以建立一個針對區塊鏈、比特幣、以太坊技術學習資源網站，讓學習資源、最新訊息可以廣為流通與分享。&lt;/p&gt;
+
+&lt;p&gt;影片：&lt;/p&gt;
+
+&lt;div style=&quot;text-align:center&quot;&gt;
+&lt;iframe style=&quot;width:560px; height:315px;&quot; src=&quot;https://www.youtube.com/embed/y2pKAX0qq0c&quot; styleframeborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">比特幣基礎設施公司 Blockstream 首次登台，與 Cypherpunks Taiwan 聯手舉辦線下聚會！一個雇用了大量 Bitcoin Core 開發者的公司，究竟他們開發出的產品，能夠怎樣的影響比特幣及區塊鏈，甚至是整個世界呢？</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/49.png" /></entry><entry><title type="html">Cypherpunks Taiwan Logo 的故事</title><link href="http://localhost:4000/news/2019/06/28/Cypherpunks-Taiwan-Logo-%E7%9A%84%E6%95%85%E4%BA%8B/" rel="alternate" type="text/html" title="Cypherpunks Taiwan Logo 的故事" /><published>2019-06-28T00:00:00+08:00</published><updated>2019-06-28T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/06/28/Cypherpunks%20Taiwan%20Logo%20%E7%9A%84%E6%95%85%E4%BA%8B</id><content type="html" xml:base="http://localhost:4000/news/2019/06/28/Cypherpunks-Taiwan-Logo-%E7%9A%84%E6%95%85%E4%BA%8B/">&lt;p&gt;感覺創立Cypherpunks Taiwan 也差不多半年的時間了，可是一直沒有設計出一個適合的Logo，因為本身不是設計出身，所以只能委託各個設計師大大。&lt;/p&gt;
+
+&lt;h3 id=&quot;手稿&quot;&gt;手稿&lt;/h3&gt;
+
+&lt;p&gt;於是 給了 &lt;a href=&quot;https://www.facebook.com/sora.be.9?eid=ARD0saVcwdu5U9ymgLiTcC7fLV6E2Ckr89Vexu736fS4tuw9uRYXgmvb7M8GVy9vf1NDTT3ls4V-tRhM&quot;&gt;Sora Chen&lt;/a&gt; 一些 議題（反監管、加密、隱私、比特幣、密碼龐克、匿名），於是在幾天的設計下，誕生了第一個手稿。&lt;/p&gt;
+
+&lt;p&gt;右眼代表著反監管，左眼代表著比特幣，一個象徵自由的貨幣。在最下方放上CYPHER的字樣。&lt;/p&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/60.jpg&quot; width=&quot;40%&quot; height=&quot;40%&quot; /&gt;
+&lt;/center&gt;
+
+&lt;h3 id=&quot;第一個-電繪版-原型&quot;&gt;第一個 電繪版 原型&lt;/h3&gt;
+
+&lt;p&gt;後來因為設計師大大有點過勞，於是Logo 的設計停下來了。&lt;/p&gt;
+
+&lt;p&gt;但是後來百忙中抽空的 小玉大大 幫我把這份手稿電子版，出來了第一個電繪版&lt;/p&gt;
+
+&lt;p&gt;比特幣的調色、角度都是參考bitcoin原始的色調跟角度。&lt;/p&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/61.jpg&quot; width=&quot;40%&quot; height=&quot;40%&quot; /&gt;
+&lt;/center&gt;
+
+&lt;h3 id=&quot;第二個-電繪版-加入台灣素材&quot;&gt;第二個 電繪版 （加入台灣素材）&lt;/h3&gt;
+
+&lt;p&gt;因為覺得希望增加更多的台灣色彩，於是加上了台灣島的圖像&lt;/p&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/62.jpg&quot; width=&quot;40%&quot; height=&quot;40%&quot; /&gt;
+&lt;/center&gt;
+
+&lt;h3 id=&quot;第三個-電繪版-加入太陽徽&quot;&gt;第三個 電繪版 (加入太陽徽)&lt;/h3&gt;
+
+&lt;p&gt;後來繼續看看台灣的題材，如台北以太坊，他們融入了台北兩個字，到LOGO當中。於是我就不斷的在看中華民國的國徽，娃，這看下來跟國民黨黨徽好像沒有什麼區別，但在一個F16戰鬥機上的圖騰讓我印象深刻。&lt;/p&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/63.jpg&quot; width=&quot;40%&quot; height=&quot;40%&quot; /&gt;
+&lt;/center&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;空軍F16戰鬥機機尾翼彩繪的太陽神「馬拉道」，是阿美族篤信的戰神與守護神。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/64.jpg&quot; width=&quot;40%&quot; height=&quot;40%&quot; /&gt;
+&lt;/center&gt;
+
+&lt;p&gt;太陽神&lt;/p&gt;
+
+&lt;p&gt;下一步就是變成他的右眼啦，看起來是挺美好的&lt;/p&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/65.jpg&quot; width=&quot;40%&quot; height=&quot;40%&quot; /&gt;
+&lt;/center&gt;
+
+&lt;p&gt;最後出了一個沒有字樣的版本&lt;/p&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/66.jpg&quot; width=&quot;40%&quot; height=&quot;40%&quot; /&gt;
+&lt;/center&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">感覺創立Cypherpunks Taiwan 也差不多半年的時間了，可是一直沒有設計出一個適合的Logo，因為本身不是設計出身，所以只能委託各個設計師大大。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/67.png" /></entry><entry><title type="html">Cypherpunks Taiwan（5）- 區塊鏈存在證明與抗審查性 &amp;amp; 零知識證明</title><link href="http://localhost:4000/meetup/2019/06/11/Cypherpunks-Taiwan-5-%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7-&-%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E/" rel="alternate" type="text/html" title="Cypherpunks Taiwan（5）- 區塊鏈存在證明與抗審查性 &amp; 零知識證明" /><published>2019-06-11T00:00:00+08:00</published><updated>2019-06-11T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/06/11/Cypherpunks%20Taiwan(5)-%20%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7%20&amp;%20%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E</id><content type="html" xml:base="http://localhost:4000/meetup/2019/06/11/Cypherpunks-Taiwan-5-%E5%8D%80%E5%A1%8A%E9%8F%88%E5%AD%98%E5%9C%A8%E8%AD%89%E6%98%8E%E8%88%87%E6%8A%97%E5%AF%A9%E6%9F%A5%E6%80%A7-&amp;-%E9%9B%B6%E7%9F%A5%E8%AD%98%E8%AD%89%E6%98%8E/">&lt;p&gt;時間：2019年6月11日（星期二） 晚上7:15到10:00
+ps. 千萬不要提早到&lt;/p&gt;
+
+&lt;p&gt;地點：摩茲工寮（ 100 台北市中正區八德路一段 94 號 3F ）
+ps. 原價屋隔壁，藍色助聽器招牌，一樓樓梯口有 Mozilla 字樣標示&lt;/p&gt;
+
+&lt;p&gt;議程：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;(19:15~19:30) 開放入場&lt;/li&gt;
+  &lt;li&gt;(19:30~19:45) Mozilla及場地介紹 15min&lt;/li&gt;
+  &lt;li&gt;(19:45~19:55) 簡述密碼龐克社群現況 10min&lt;/li&gt;
+  &lt;li&gt;(20:00~20:30) 區塊鏈存在證明與抗審查性 by 陳品 30min&lt;/li&gt;
+  &lt;li&gt;(20:40~21:10) 零知識證明 by Kimi 30min&lt;/li&gt;
+  &lt;li&gt;(21:10~22:00) 交流時間&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;演講摘要：&lt;/p&gt;
+
+&lt;p&gt;&amp;lt; 區塊鏈存在證明與抗審查性 &amp;gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;為什麼區塊鏈可以作為存在證明？&lt;/li&gt;
+  &lt;li&gt;區塊鏈存在證明案例探討&lt;/li&gt;
+  &lt;li&gt;落實言論自由抗審查的平台&lt;/li&gt;
+  &lt;li&gt;利弊權衡探討&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;講者名稱：陳品 Ping Chen&lt;/p&gt;
+
+&lt;p&gt;講者簡介：區塊鏈企業級解決方案公司 Pelith 創辦人暨執行長；CryptoCow 技術共筆創辦人；Taipei Ethereum Meetup 早期參與者；三年以上 Ethereum DAPP 開發經驗&lt;/p&gt;
+
+&lt;p&gt;&amp;lt; 零知識證明 &amp;gt;&lt;/p&gt;
+
+&lt;p&gt;隱私是區塊鏈在應用上的一個大問題，而零知識證明(zero knowledge proof)可以解決隱私的問題，達到交易是保密的且交易同時能被驗證。
+本次演講會從最基本的何謂零知識證明，進而介紹零知識證明背後的基本數學原理，並且實際在區塊鏈上應用的例子。&lt;/p&gt;
+
+&lt;p&gt;講者名稱：Kimi Wu&lt;/p&gt;
+
+&lt;p&gt;講者簡介：擁有10年軟體開發經驗，2017年進入區塊鏈領域，主要都在Ethereum上做Dapp開發及區塊鏈上新技術的研究。Medium上Taipei Ethereum Meetup的寫手之一&lt;/p&gt;
+
+&lt;p&gt;影片：&lt;/p&gt;
+
+&lt;div style=&quot;text-align:center&quot;&gt;
+&lt;iframe style=&quot;width:560px; height:315px;&quot; src=&quot;https://www.youtube.com/embed/SU3D89FPv9o&quot; styleframeborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;cypherpunks-相關資訊&quot;&gt;Cypherpunks 相關資訊：&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Github：&lt;a href=&quot;https://cypherpunks-core.github.io/&quot;&gt;https://cypherpunks-core.github.io/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;論壇：&lt;a href=&quot;https://forum.cypherpunks.tech/&quot;&gt;https://forum.cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;官網：&lt;a href=&quot;https://cypherpunks.tech/&quot;&gt;https://cypherpunks.tech/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Telegram：&lt;a href=&quot;https://t.me/CypherpunksTW&quot;&gt;https://t.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;FB粉專：&lt;a href=&quot;https://fb.me/CypherpunksTW&quot;&gt;https://fb.me/CypherpunksTW&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Youtuber頻道：&lt;a href=&quot;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&quot;&gt;https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;PPT：&lt;a href=&quot;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&quot;&gt;https://drive.google.com/drive/u/0/folders/16db8-kiwBT-AC0hTYc9B3rOfhMwy10sy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">時間：2019年6月11日（星期二） 晚上7:15到10:00 ps. 千萬不要提早到</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/52.png" /></entry><entry><title type="html">Cypherpunks Taiwan（4）- 區塊鏈世界的隱私未來–Mimblewimble的隱私魔法</title><link href="http://localhost:4000/meetup/2019/05/05/Cypherpunks-Taiwan-4-%E5%8D%80%E5%A1%8A%E9%8F%88%E4%B8%96%E7%95%8C%E7%9A%84%E9%9A%B1%E7%A7%81%E6%9C%AA%E4%BE%86-Mimblewimble%E7%9A%84%E9%9A%B1%E7%A7%81%E9%AD%94%E6%B3%95/" rel="alternate" type="text/html" title="Cypherpunks Taiwan（4）- 區塊鏈世界的隱私未來–Mimblewimble的隱私魔法" /><published>2019-05-05T00:00:00+08:00</published><updated>2019-05-05T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/05/05/Cypherpunks%20Taiwan(4)-%20%E5%8D%80%E5%A1%8A%E9%8F%88%E4%B8%96%E7%95%8C%E7%9A%84%E9%9A%B1%E7%A7%81%E6%9C%AA%E4%BE%86%E2%80%93Mimblewimble%E7%9A%84%E9%9A%B1%E7%A7%81%E9%AD%94%E6%B3%95</id><content type="html" xml:base="http://localhost:4000/meetup/2019/05/05/Cypherpunks-Taiwan-4-%E5%8D%80%E5%A1%8A%E9%8F%88%E4%B8%96%E7%95%8C%E7%9A%84%E9%9A%B1%E7%A7%81%E6%9C%AA%E4%BE%86-Mimblewimble%E7%9A%84%E9%9A%B1%E7%A7%81%E9%AD%94%E6%B3%95/">&lt;ul&gt;
+  &lt;li&gt;時間：2019年5月5日（星期日） 晚上7:00到10:00&lt;/li&gt;
+  &lt;li&gt;地址：100 台北市中正區八德路一段 94 號 3F&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ps. 原價屋隔壁，藍色助聽器招牌，一樓樓梯口有 Mozilla 字樣標示&lt;/p&gt;
+
+&lt;p&gt;議程：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;(19:00~19:20) 開放入場&lt;/li&gt;
+  &lt;li&gt;(19:20~19:35) Mozilla及場地介紹 15min&lt;/li&gt;
+  &lt;li&gt;(19:35~20:00) 簡述密碼龐克社群現況 + 閃電網路錢包介紹 25min&lt;/li&gt;
+  &lt;li&gt;(20:00~20:30) MimbleWimble 介紹 30min&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;演講題目：區塊鏈世界的隱私未來–Mimblewimble的隱私魔法  &lt;br /&gt;
+演講摘要：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;MimbleWimble的來龍去脈&lt;/li&gt;
+  &lt;li&gt;MimbleWimble的機制運作&lt;/li&gt;
+  &lt;li&gt;MimbleWimble的發展限制與區塊鏈隱私的未來&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;如果有興趣的朋友可以先參閱我的Medium（https://pse.is/CypherpunksMeetup4）
+其他資料我會盡快補上&lt;/p&gt;
+
+&lt;p&gt;講者名稱：Williams Lai 賴佳祈  &lt;br /&gt;
+講者簡介：Cypherpunks core成員，最近有興趣的主題是Mimblewimble等隱私協議，以及基進市場(Radical Markets)這種更為公平的加密經濟學。曾經在社交Dapp公司擔任過一段時間的產品運營。&lt;/p&gt;
+
+&lt;p&gt;影片：&lt;/p&gt;
+
+&lt;div style=&quot;text-align:center&quot;&gt;
+&lt;iframe style=&quot;width:560px; height:315px;&quot; src=&quot;https://www.youtube.com/embed/mymtw4DUOsU&quot; styleframeborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p&gt;這是「Cypherpunks Taiwan 密碼龐克」主題圍繞在 bitcoin是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由。&lt;/p&gt;
+
+&lt;p&gt;目標：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;創造一個 crypto 論壇&lt;/li&gt;
+  &lt;li&gt;學習crypto&lt;/li&gt;
+  &lt;li&gt;多元crypto議題分享會（一個月一次)&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">時間：2019年5月5日（星期日） 晚上7:00到10:00 地址：100 台北市中正區八德路一段 94 號 3F</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/53.png" /></entry></feed>
