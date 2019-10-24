@@ -136,7 +136,7 @@ SF與市場價值的第一個散點圖顯示，最好使用對數值或軸作為
 
 # 結論
 
-比特幣是世界上第一個稀缺的數字物體，它很像銀和金，可以通過網際網路，無線電，衛星等傳送。
+比特幣是世界上第一個稀缺的數字物體，它很像銀和金，可以通過網際網路、無線電、衛星等傳送。
 
 當然，這種數字稀缺性具有價值。但是多少錢？在本文中，我使用庫存流量來量化稀缺性，並使用庫存流量來模擬比特幣的價值。
 
@@ -144,9 +144,9 @@ SF與市場價值的第一個散點圖顯示，最好使用對數值或軸作為
 
 增加對模型的信心：
 
-· 黃金和白銀是與比特幣完全不同的市場，但與SF的比特幣模型價值一致。
+* 黃金和白銀是與比特幣完全不同的市場，但與SF的比特幣模型價值一致。
 
-· 有冪律關係的跡象。
+* 有冪律關係的跡象。
 
 該模型預測，在2020年5月下一次減半之後，比特幣市場價值為1萬億美元，相當於55,000美元的比特幣單價。
 
@@ -154,19 +154,19 @@ SF與市場價值的第一個散點圖顯示，最好使用對數值或軸作為
 
 # References
 
-[1] https://bitcoin.org/bitcoin.pdf —Satoshi Nakamoto, 2008
+[1] [https://bitcoin.org/bitcoin.pdf](https://bitcoin.org/bitcoin.pdf) —Satoshi Nakamoto, 2008
 
-[2] https://bitcointalk.org/index.php?topic=583.msg11405#msg11405 —Satoshi Nakamoto, 2010
+[2] [https://bitcointalk.org/index.php?topic=583.msg11405#msg11405](https://bitcointalk.org/index.php?topic=583.msg11405#msg11405) —Satoshi Nakamoto, 2010
 
-[3] https://unenumerated.blogspot.com/2005/10/antiques-time-gold-and-bit-gold.html —Nick Szabo, 2008
+[3] [https://unenumerated.blogspot.com/2005/10/antiques-time-gold-and-bit-gold.html](https://unenumerated.blogspot.com/2005/10/antiques-time-gold-and-bit-gold.html) —Nick Szabo, 2008
 
-[4] https://unenumerated.blogspot.com/2005/12/bit-gold.html —Nick Szabo, 2008
+[4] [https://unenumerated.blogspot.com/2005/12/bit-gold.html](https://unenumerated.blogspot.com/2005/12/bit-gold.html) —Nick Szabo, 2008
 
 [5] The BitcoinStandard: The Decentralized Alternative to Central Banking — SaifedeanAmmous, 2018
 
-[6] https://necsi.edu/power-law
+[6] [https://necsi.edu/power-law](https://necsi.edu/power-law)
 
-[7] http://fractalfoundation.org/OFC/OFC-10-4.html
+[7] [http://fractalfoundation.org/OFC/OFC-10-4.html](http://fractalfoundation.org/OFC/OFC-10-4.html)
 
 # Appendix —Power Law Examples
 Kepler (planets)
