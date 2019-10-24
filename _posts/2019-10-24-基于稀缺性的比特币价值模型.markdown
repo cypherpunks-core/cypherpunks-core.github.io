@@ -4,10 +4,12 @@ title:  "基於稀缺性的比特幣價值模型"
 date:   2019-10-24
 categories: news
 description: "該模型預測，在2020年5月下一次減半之後，比特幣市場價值為1萬億美元，相當於55,000美元的比特幣單價"
-image: '/img/87.png'
+image: '/img/91.png'
 published: true
 hero_image: /img/hero.png
 ---
+
+該模型預測，在2020年5月下一次減半之後，比特幣市場價值為1萬億美元，相當於55,000美元的比特幣單價
 
 來源：[link](https://twitter.com/100trillionUSD)、原文連結：[link](https://medium.com/@100trillionUSD/modeling-bitcoins-value-with-scarcity-91fa0fc03e25)
 
