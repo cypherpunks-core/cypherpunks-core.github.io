@@ -1,0 +1,198 @@
+---
+layout: post
+title:  "基於稀缺性的比特幣價值模型"
+date:   2019-10-24
+categories: news
+description: "該模型預測，在2020年5月下一次減半之後，比特幣市場價值為1萬億美元，相當於55,000美元的比特幣單價"
+image: '/img/87.png'
+published: true
+hero_image: /img/hero.png
+---
+
+來源：[link](https://twitter.com/100trillionUSD)、原文連結：[link](https://medium.com/@100trillionUSD/modeling-bitcoins-value-with-scarcity-91fa0fc03e25)
+
+# 介紹
+
+Satoshi Nakamoto（中本聰）在2008年10月31日[1]發表了比特幣白皮書，於2009年1月3日建立了比特幣創世塊，並在2009年1月8日釋出了比特幣程式碼。從此開始一段旅程，創造如今市值700億美元的比特幣（BTC）市場。
+
+比特幣是世界上第一個稀缺的不可複製的數字物件。它像銀和金一樣稀缺，可以通過網際網路，無線電，衛星等傳送。
+
+> *“* *作為一個思想實驗，想象一下一種基礎金屬 **像金** 一樣 **稀缺** 但具有以下特性：暗淡無奇的灰色，不是良好的電導體，不是特別堅硬* *[...]* *，對任何實際或觀賞都沒有實用價值* *..* *和一個特殊的，神奇的財產： **可以通過通訊渠道運輸***  *“ - Nakamoto [2]*
+
+當然，這種數字稀缺性是具有價值的。但是值多少錢呢？在本文中，我使用庫存-流量來量化稀缺性，並使用庫存-流量來建立比特幣的價值模型。
+
+  
+
+# 稀缺和庫存-流動
+
+字典通常將稀缺性定義為“某種情況下不容易找到或得到的東西”，以及“缺乏的某種東西”。
+
+Nick Szabo對稀缺性有一個更有用的定義：“不可偽造的成本”。
+
+> *“* *古董、時間和黃金有什麼共同點呢？由於原始成本或歷史的不可能性，它們成本很高，而且很難偽造這種成本。* *[..]* *實施過程中存在一些問題計算機上難以 **偽造的成本** 。如果可以克服這些問題，我們就可以獲得一點點金錢。* *“ - Szabo [3]*
+
+> *“* *貴金屬和收藏品由於其創造成本太高而具有 **不可偽造的稀缺性** 。這曾經提供了金錢價值，這種價值在很大程度上獨立於任何可信賴的第三方。* *[..] [* *但* *]* *你不能用金屬線上支付。因此，如果有一個協議可以線上建立不可偽造的昂貴的位元，對可信第三方的依賴最小，然後以類似的最小信任安全地儲存，傳輸和分析，那將是非常好的。這就是位元金。* *“ - Szabo [4]*
+
+比特幣具有難以偽造的成本，因為生產新的比特幣需要消耗大量的電力。生產比特幣（挖礦）很難被偽造。請注意，這與法定貨幣以及沒有供應上限的山寨幣不同。那些（法幣或者山寨幣）沒有工作證明（PoW），具有低雜湊值，或者有一小群人或公司可以輕易影響供應等。
+
+Saifedean Ammous談到了庫存-流量（SF）比例的稀缺性。他解釋了為什麼黃金和比特幣與銅、鋅、鎳、黃銅等消費品不同，因為它們具有高SF（庫存-流量）。
+
+ 
+
+> *“* *對於任何消費品* *[......]* *，產量增加一倍會使任何現有庫存相形見絀，導致價格暴跌並損害持有者。對於黃金而言，導致年產量翻番的價格飆升將是微不足道的，庫存增加* *3* *％而不是* *1.5* *％。* *“*    
+> *“* *正是這種持續低的黃金供應率是其在整個人類歷史中保持貨幣角色的根本原因。* *”*    
+> *“*  *黃金的高 **庫存流量比** 使其成為供應價格彈性最低的商品。* *”*    
+> *“2017* *年現有的比特幣庫存比* *2017* *年生產的新硬幣大* *25* *倍左右。這仍然不到黃金比例的一半，但在* *2022* *年左右，比特幣的 **庫存流量比率** 將超過黃金* *“ - Aousous [5]*
+
+因此，SF可以量化稀缺性。
+
+**SF =** **庫存** **/** **流量**
+
+庫存是現有庫存或儲備的大小。流量是年產量。人們也使用供應增長率（流量/庫存）而不是SF。注意SF = 1 /供應增長率。
+
+我們來看看一些SF資料。
+
+![](/img/85.png)
+
+ 
+
+黃金擁有最高的SF62，需要62年的生產才能獲得當前的黃金庫存。白銀在SF 22中排名第二。這種高的SF使它們成為貨幣商品。
+
+鈀、鉑和所有其他商品的SF僅略高於1。現有庫存通常等於或低於年產量，這使得生產成為一個非常重要的因素。商品幾乎不可能獲得更高的SF，因為一旦有人囤積它們、價格上漲、產量上升、價格再次下跌。逃離這個陷阱非常困難。
+
+比特幣目前擁有1750萬硬幣的庫存和70萬每年的供應，其 SF為 25.這使比特幣成為貨幣類別，如白銀和黃金。比特幣目前的市場價值為700億美元。
+
+比特幣的供應是固定的。在每個新塊中會產生新的比特幣。當礦工發現滿足一個雜湊值可以滿足PoW對有效塊的要求時，每10分鐘（平均）會建立一個新塊。每個塊中的第一個交易，稱為coinbase，包含找到塊的礦工的獎勵。區塊獎勵包括人們為該區塊中的交易支付的費用以及新產生的比特幣（稱為補貼）。補貼從50比特幣開始，每210,000塊（約4年）減少一半。這就是為什麼“減半”對比特幣貨幣供應和SF非常重要。減半也導致供應增長率（在比特幣背景下通常稱為“貨幣通脹”）逐步而不平穩。
+
+ 
+
+![](/img/86.jpeg)
+
+https://plot.ly/~BashCo/5.embed
+
+ 
+
+# 庫存-流量和價值
+
+本研究中的假設是，SF所測量的稀缺性直接推動了價值。從上面的表格可以看出，當SF較高時，市場價值往往會更高。下一步是收集資料並製作統計模型。
+
+## 資料
+
+我從2009年12月到2019年2月計算了比特幣的每月SF和價值（總計111個數據點）。可以使用Python / RPC / bitcoind直接從比特幣區塊鏈中查詢每月的塊數。塊的實際數量與理論數量相差很大，因為塊不是每10分鐘生成一次（例如，在2009年的第一年，塊數明顯減少）。通過每月的塊數和已知的塊補貼，您可以計算流量和庫存。我通過任意忽略SF計算中的前一百萬個硬幣（7個月）來糾正丟失的硬幣。更準確地調整丟失的硬幣, 將成為未來研究的主題。
+
+比特幣價格資料可從不同來源獲得，但從2010年7月開始。我添加了第一個已知的比特幣價格（2009年10月1309 BTC 1美元，2010年3月比特幣市場首次報價0.003美元，2010年5月10,000比特幣2比薩價值41美元）和插值。資料考古學將成為未來研究的主題。
+
+我們已經獲得了黃金（SF 62，市值8.5萬億美元）和白銀（SF 22，市值3080億美元）的資料點，將其作為基準。
+
+## 模型
+
+SF與市場價值的第一個散點圖顯示，最好使用對數值或軸作為市場價值，因為它跨越8個數量級（從10,000美元到1000億美元）。使用SF的對數值或軸也可以顯示ln（SF）和ln（市場價值）之間的良好線性關係。請注意，我使用自然對數（ln with base e）而不是常用對數（log with base 10），這將產生類似的結果。
+
+  
+
+![](/img/87.png)
+
+使用gnuplot和gnumerics製作的圖表
+
+ 
+
+對資料進行線性迴歸確認了肉眼可以看到的結果：SF與市場價值之間存在統計學上顯著的關係（95％R2，F 2.3E-17的顯著性，斜率2.3E-17的p值）。SF和市場價值之間的關係由偶然性引起的可能性接近於零。當然，其他因素也會影響價格，監管，黑客和其他新聞，這就是為什麼R2不是100％（並非所有點都在直線黑線上）。然而，主導驅動因素似乎是稀缺/ SF。
+
+非常有趣的是，完全不同市場的黃金和白銀，也符合SF的比特幣模型價值。這為模型提供了額外的信心。請注意，在2017年12月牛市的高峰期，比特幣SF為22，比特幣市值為2300億美元，非常接近白銀。
+
+由於減半對SF有如此大的影響，因此我將下半個月作為圖表中的顏色疊加放置幾個月。深藍色是減半月，紅色剛剛減半。下一個減半是2020年5月。當前SF為25將翻倍至50，非常接近黃金（SF 62）。
+
+預計2020年5月之後比特幣的市場價值為1萬億美元，相當於55,000美元的比特幣價格。這非常壯觀。我想時間會告訴我們，我們可能知道在減半之後的一兩年，即2020年或2021年。這個假設和模型的樣本測試非常好。
+
+人們問我1萬億美元比特幣市場價值所需的資金來自哪裡？我的回答：白銀，黃金，負利率國家（歐洲，日本，美國），掠奪性政府國家（委內瑞拉，伊朗，土耳其等），億萬富翁和百萬富翁對衝量化寬鬆（QE），以及機構投資者發現過去10年中表現最佳的資產。
+
+我們還可以直接用SF模擬比特幣價格。當然公式有不同的參數，但結果是相同的，在2020年5月之後減半以後，95％R2且預計比特幣價格就在55,000美元（此時比特幣SF為 50）。
+
+我根據SF（黑色）和實際比特幣價格隨時間繪製比特幣模型價格，有些塊數的顏色會疊加。
+
+![](/img/88.png)
+
+使用gnuplot和gnumerics製作的圖表
+
+ 
+
+請注意挈合度，尤其是在2012年11月減半後幾乎立即進行價格調整。2016年6月減半之後的調整速度要慢得多，可能是因為以太坊競爭和DAO黑客攻擊。此外，您在2009年第一年以及2011年年中，2015年中期和2018年末的向下難度調整期間，可以看到每個月（藍色）的塊數減少。2010年至2011年GPU礦工和ASIC礦工的介紹導致每月更多的區塊（紅色）。
+
+# 冪律和分形
+
+同樣非常有趣的是，有冪律關係的跡象。
+
+線性迴歸函數：ln（市場價值）= 3.3 * ln（SF）+14.6
+
+..可以寫成冪律函數：市場價值= exp（14.6）* SF ^ 3.3
+
+冪定理很少，你經常找不到它們。95％R2超過8個數量級的冪律的可能性，增加了用SF正確捕獲比特幣值的主要驅動因素的可信度。
+
+冪律是一種關係，其中一個量的相對變化引起另一個量的比例相對變化，與這些量的初始大小無關。[6]。每增加一半，比特幣SF增加一倍，市場價值增加10倍，這是一個不變因素。
+
+冪定律很有意思，因為它們揭示了看似隨機複雜系統性質的潛在規律性。有關著名冪律的例子，請參閱附錄。複雜系統通常具有不同尺度的現象之間的變化與我們正在觀察的尺度無關的特性。這種自相似的屬性是權力法律關係的基礎。我們在比特幣中也看到了這一點：2011年，2014年和2018年的崩潰看起來非常相似（都有-80％的下降），但完全不同的規模（分別為10美元，1000美元，10,000美元）; 如果你不使用日誌刻度，你將看不到它。尺度方差和自相似性與分形有關。實際上，上面冪律函數中的參數3.3是“分形維數”。有關分形的更多資訊，請參閱著名的海岸線研究[7]。
+
+# 結論
+
+比特幣是世界上第一個稀缺的數字物體，它很像銀和金，可以通過網際網路，無線電，衛星等傳送。
+
+當然，這種數字稀缺性具有價值。但是多少錢？在本文中，我使用庫存流量來量化稀缺性，並使用庫存流量來模擬比特幣的價值。
+
+存在股票流量與市場價值之間存在統計上顯著的關係。股票流量與市場價值之間的關係由偶然性引起的可能性接近於零。
+
+增加對模型的信心：
+
+· 黃金和白銀是與比特幣完全不同的市場，但與SF的比特幣模型價值一致。
+
+· 有冪律關係的跡象。
+
+該模型預測，在2020年5月下一次減半之後，比特幣市場價值為1萬億美元，相當於55,000美元的比特幣單價。
+
+ 
+
+# References
+
+[1] https://bitcoin.org/bitcoin.pdf —Satoshi Nakamoto, 2008
+
+[2] https://bitcointalk.org/index.php?topic=583.msg11405#msg11405 —Satoshi Nakamoto, 2010
+
+[3] https://unenumerated.blogspot.com/2005/10/antiques-time-gold-and-bit-gold.html —Nick Szabo, 2008
+
+[4] https://unenumerated.blogspot.com/2005/12/bit-gold.html —Nick Szabo, 2008
+
+[5] The BitcoinStandard: The Decentralized Alternative to Central Banking — SaifedeanAmmous, 2018
+
+[6] https://necsi.edu/power-law
+
+[7] http://fractalfoundation.org/OFC/OFC-10-4.html
+
+# Appendix —Power Law Examples
+Kepler (planets)
+
+![](/img/89.png)
+
+![](/img/90.jpeg)
+
+# Translations
+
+* Chinese [link](https://mp.weixin.qq.com/s/Lj1313ND96unxcq98SNlMg)
+* Croatian [link](https://medium.com/@LuxBTC/modeliranje-vrijednosti-bitcoina-na-temelju-njegove-rijetkosti-6538e31080c3)
+* Czech [link](https://medium.com/@figyfaldaa/ur%C4%8Den%C3%AD-hodnoty-bitcoinu-na-z%C3%A1klad%C4%9B-jeho-vz%C3%A1cnosti-7c7a82a41f38)
+* Dutch [link](https://medium.com/@lekkercryptisch/modelleren-van-de-waarde-van-bitcoin-met-schaarste-e9a7418b5f3c)
+* French [link](https://medium.com/@PaulAdW/mod%C3%A9liser-la-valeur-de-bitcoin-gr%C3%A2ce-%C3%A0-la-raret%C3%A9-version-fran%C3%A7aise-dccfcb076839)
+* Frisian (Fryske) [link](https://medium.com/@MyLegacyKit/de-wearde-fan-bitcoin-modellen-mei-knapperheid-41cafea7b06e)
+* German [link](https://medium.com/@david.andlinger.privat/modellierung-von-bitcoins-wert-mit-stock-to-flow-fe706e7eeac9)
+* Greek [link](https://medium.com/@GeorgeTProfit/ypologizontas-tin-axia-tou-bitcoin-vasei-spaniotitas-528ef80d7bf)
+* Gujarati [link](https://medium.com/translation-of-modeling-bitcoins-value-with/%E0%AA%85%E0%AA%9B%E0%AA%A4-%E0%AA%B8%E0%AA%BE%E0%AA%A5%E0%AB%87-%E0%AA%AC%E0%AA%BF%E0%AA%9F%E0%AA%95%E0%AB%8B%E0%AA%87%E0%AA%A8%E0%AA%A8%E0%AB%81%E0%AA%82-%E0%AA%AE%E0%AB%82%E0%AA%B2%E0%AB%8D%E0%AA%AF-%E0%AA%AE%E0%AB%8B%E0%AA%A1%E0%AB%87%E0%AA%B2%E0%AA%BF%E0%AA%82%E0%AA%97-fce5cf53bebf)
+* Indonesian [link](https://medium.com/cryptowatchasia/menghitung-nilai-bitcoin-berdasarkan-sifat-kelangkaannya-cd00d8c6c59f)
+* Italian [link](https://medium.com/@carloclerici/il-concetto-di-scarsita-nella-determinazione-del-valore-di-bitcoin-c716c0ad3fff)
+* Japanese [link](https://medium.com/@leriansfield/%E5%B8%8C%E5%B0%91%E6%80%A7%E3%81%AB%E5%9F%BA%E3%81%A5%E3%81%84%E3%81%9F%E3%83%93%E3%83%83%E3%83%88%E3%82%B3%E3%82%A4%E3%83%B3%E4%BE%A1%E5%80%A4%E3%81%AE%E3%83%A2%E3%83%87%E3%83%AB%E5%8C%96-f060486f2508)
+* Korean [link](https://medium.com/@soulbitcoin1209/%ED%9D%AC%EC%86%8C%EC%84%B1%EC%9D%84-%ED%86%B5%ED%95%9C-%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8-%EB%AA%A8%EB%8D%B8%EB%A7%81-modeling-bitcoins-value-with-scarcity-942ceb287d5b)
+* Norwegian [link](https://kryptografen.no/2019/07/16/knapphet-bestemmer-verdien-pa-bitcoin/)
+* Polish [link](https://medium.com/@ztzawislak/modelowanie-warto%C5%9Bci-bitcoina-za-pomoc%C4%85-rzadko%C5%9Bci-739316b6e18a)
+* Portuguese [link](https://medium.com/@mmouta/modelo-matem%C3%A1tico-do-valor-da-bitcoin-com-base-na-escassez-4846c5d3f3f1)
+* Romanian [link](https://medium.com/@AndreiStroescu1/evalu%C3%A2nd-bitcoin-bazat-pe-raritatea-sa-2ff052d7c44a)
+* Russian [link](https://medium.com/@Tony_B/%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%86%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D0%B1%D0%B8%D1%82%D0%BA%D0%BE%D0%B8%D0%BD%D0%B0-%D1%81-%D1%83%D1%87%D0%B5%D1%82%D0%BE%D0%BC-%D0%B4%D0%B5%D1%84%D0%B8%D1%86%D0%B8%D1%82%D0%B0-3fcb10890999)
+* Slovenian [link](https://medium.com/@thepkbadger/modeliranje-vrednosti-bitcoina-na-osnovi-redkosti-7197ccdaf36c)
+* Spanish [link](https://medium.com/@jsanzsz/valorando-bitcoin-en-funci%C3%B3n-de-su-escasez-9828dd9c197)
+* Turkish [link](https://medium.com/@oguzhu12/bitcoin-de%C4%9Ferinin-nadirlik-ile-modellenmesi-965d07b0fcda)
