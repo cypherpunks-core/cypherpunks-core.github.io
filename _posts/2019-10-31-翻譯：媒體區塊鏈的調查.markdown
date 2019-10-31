@@ -1,0 +1,72 @@
+---
+layout: post
+title:  "媒體區塊鏈的調查"
+date:   2019-10-31
+categories: news
+description: "區塊鏈會被定義為媒體區塊鏈且分成兩類。一是內文的安全性，意指將用區塊鏈保障安全性。二則是內文的權利資訊，意指將用區塊鏈追蹤和管理權利上的資訊。我們將會介紹和分析這個媒體區塊鏈。"
+image: '/img/92.png'
+published: true
+hero_image: /img/hero.png
+---
+
+> 本篇文章翻譯自 [IEEE - A blockchain for media: Survey](https://ieeexplore.ieee.org/document/8706434) 的內容，時常我們都在想區塊鏈部署文字上的問題，但都沒有人去思考過「媒體」：圖像、影像...等的發展性，或許現今的區塊鏈並不適合存放大量的資料，但現今可以透過 IPFS .. 等工具幫助部署內容至區塊鏈上，已達到目的性。
+
+# 摘要
+
+隨著互聯網的發展，媒體傳播服務已經普及。然而，傳播系統有很多問題。區塊鏈科技可以解決這些問題。在本論文中，區塊鏈會被定義為媒體區塊鏈且分成兩類。一是內文的安全性，意指將用區塊鏈保障安全性。二則是內文的權利資訊，意指將用區塊鏈追蹤和管理權利上的資訊。我們將會介紹和分析這個媒體區塊鏈。
+
+# 第一章節 - 介紹
+
+隨著互聯網劇烈的發展，許多的傳播媒體服務已經提供。傳播媒體系統有著許多的問題。因為創建一個媒體的副本是簡單的，且此媒體可以被修改過，導致傳播盜竊或未經授權的媒體變得更容易。此外，版權的問題是十分嚴重的。因為這些問題，已經研究了多樣性方法，中心化管理系統無法解決這些問題。
+
+區塊鏈科技可以解決這些問題。此科技不需要中心化的伺服器和網路參與者的可靠性。一個稱作是區塊鏈的共享和分散式的資料庫儲存稱為數據的交易。區塊將鏈接到前一個區塊，每個區塊包含區塊鏈中一筆貨多筆的交易。要添加新的區塊，需要參與者之間達成共識。此結構含有許多的屬性：透明性、安全性（保障）、安全性、分散性等。具有這些特徵和特性的區塊鏈技術是保護媒體所必需的。
+
+論文中其餘的部分如下: 
+- 第二章節將介紹媒體的區塊鏈 
+- 第三章節將對第二章節中介紹的區塊鏈進行了分析
+- 第四章節將對媒體區塊鏈做個總結。
+
+# 第二章節 - 媒體區塊鏈
+
+在本文中，我們將數位內容、媒體和多媒體的區塊鏈定義為**媒體區塊鏈**。關於媒體區塊鏈有很多研究。這些研究可確保數位內容的完整性、可追溯性、驗證或控制，並分為兩類：一是內文的安全性意味著使用區塊鏈保護內容。二是內容權利資訊，這意指將使用區塊鏈追蹤和管理權利資訊。
+
+## A. 內文安全性
+
+D. Bhowmik and T. Feng [1] 提出了一個多媒體區塊鏈框架來針對圖像媒體的分散式多媒體之安全性和完整性。提出的框架包含基於壓縮感測（CS）[4]的自嵌入浮水印演算法[5]，區塊鏈分散式帳本和身份驗證。基於 CS 的自嵌入浮水印可以檢查媒體是否遭篡改。使用 CS 從原本的資料提取浮水印。CS 也可以用於恢復原始資料。在區塊鏈中，交易由包含交易 ID 的圖像/媒體的交易訊息和可以恢復原始資料的 CS 樣本訊息組成。認證過程如下。從想要驗證的圖像中提取浮水印。如上所述，內含浮水印的交易包含交易 ID 和 CS 樣本。區塊鏈可以透過交易 ID 查詢交易細節。並透過 CS 樣本恢復原始圖像。將檢索到的圖像與原始圖像進行比較，我們可以確定修改後的區域。
+
+在[2]中，Fotiou. N 和 Polyzos. G.C. 考慮如何在以訊息為中心的網路（ICN）中傳播內容[9]。該系統的模型由內容所有者和訂閱用戶所組成。
+作者使用基於區塊鏈的分層身份的加密（HIBE）[7]演算法。此演算法可確保內容完整性和內容之來源驗證。HIBE 是使用身份作為公鑰的方案而 PKG 有嚴重的金鑰託管問題。因此，使用區塊鏈來解決這個問題，可以透過 HIBE 的公鑰和私鑰安全地傳播內容。
+
+## B. 內文權利資訊
+
+在[3]中，作者提出了中國網路媒體行業的五個問題：抄襲、網路媒體質量低、利潤低、法規少和版權交易不受控制。為了解決這些問題，他們提出了一種基於區塊鏈的網路媒體版權管理方案。該方案具有生產管理，版權訊息管理，交易管理和用戶行為管理。在生產管理上，儲存數據並建立智能合約，在版權訊息管理上，版權會受到控制。此外，該方案表示提供方與平台方之間的關係以提高工作質量，交易已生成並在事務管理中簽名。透過允許客戶對問題進行投票及用戶活動管理接受公眾意見，這些管理將保護數字版權。
+
+J. Kishigami 提出了超級傳播[8]的問題，該問題應集中於中心。為了解決這個問題，作者提出了使用區塊鏈的內容傳播系統[4]，所提出的系統具有三個特徵。首先，內容擁有者可以輕鬆控制其內容。第二，區塊鏈是為此系統設計的。第三，目標是稱為 4K 或 8K 的超高分辨率視頻。他的系統由許可方，被許可方和礦工組成。許可方有權控制僅擁有的內容並上傳該內容。被許可方運行兩個應用程序。一個應用程序從區塊鏈獲得許可證後另一個應用程序播放視頻，挖礦服務器生成一個包含權利資訊的區塊，並通過共識演算法將該區塊添加到區塊鏈中，因此系統不需要一個中央伺服器。
+
+# 第三章節 - 分析
+
+在本章節中，我們分析第二章節中介紹的媒體區塊鏈，並通過 TABLE1 比較媒體區塊鏈。它顯示了交易中顯示的配置，使用的區塊鏈類型以及對媒體的保證。在內容安全方面，媒體區塊鏈具有不同的交易配置和對媒體的類似保證。另一方面，內容權利訊息中的媒體區塊鏈具有類似的交易配置和對媒體的不同保證。
+
+![](../img/92.png)
+
+# 第四章節 - 結論
+
+隨著互聯網的日益發展，媒體存在許多問題。區塊鏈解決了這些問題。我們將其定義為媒體區塊鏈，並在第二章節中介紹了有關媒體區塊鏈的四項研究。這些研究分為兩類：內容安全性和內容權利資訊。在第三章節中，我們對每個媒體鏈進行了比較，以顯示交易中配置，區塊鏈使用的類型以及對媒體的保證。我們通過此比較分析了每個區塊鏈。
+
+雖說媒體區塊鏈還不熟悉。但是，人們很感興趣，因為媒體區塊鏈可以解決現有媒體中竊盜、版權、未經授權的發行等問題。未來將有許多關於媒體區塊鏈的研究。
+
+# 譯者後記
+
+近期區塊鏈的應用上除了博弈（將規則公開透明吸引玩家和莊家進場遊玩。）、文字上鏈（確保不會被中心伺服器刪除。）、各式履歷（透過公開透明的規則，保障雙方權益。）..等，但媒體區塊鏈的概念尚未萌芽，有幾個痛點（以太坊區塊鏈為例）：1. 部署一張照片需要過多的成本（Gas Fees 太高）2. 上傳速度太慢、部署時間太久 ..等，以現有要解決這些問題仍必須透過 IPFS 來完成部署至區塊鏈上之動作，希望未來能夠將**擴容性**和 **TPS 提高**，使得應用區塊鏈項目更加方便。
+
+# Reference 
+
+1. D Bhowmik, T. Feng, "The multimedia blockchain: A distributed and tamper-proof media transaction framework", Digital Signal Processing (DSP) 2017 22nd International Conference on, 2017.
+2. N Fotiou, G.C. Polyzos, "Decentralized name-based security for content distribution using blockchains", Computer Communications Workshops (INFOCOM WKSHPS) 2016 IEEE Conference on, 2016.
+3. R Xu, L Zhang, H Zhao, Y. Peng, "Design of network media's digital rights management scheme based on blockchain technology", Autonomous Decentralized System (ISADS) 2017 IEEE 13th International Symposium on, 2017.
+4. J Kishigami, S Fujimura, H Watanabe, A Nakadaira, A Akutsu, "The blockchain-based digital content distribution system", Big Data and Cloud Computing (BDCloud) 2015 IEEE Fifth International Conference on, 2015.
+5. D.L. Donoho, "Compressed sensing", IEEE Transactions on information theory, vol. 52.4, pp. 1289-1306, 2006.
+6. D Singh, S.K. Singh, "Effective self-embedding watermarking scheme for image tampered detection and localization with recovery capability", Journal of Visual Communication and Image Representation, vol. 38, pp. 775-789, 2016.
+7. A Lewko, B Waters, "Unbounded HIBE and attribute-based encryption", Annual International Conference on the Theory and Applications of Cryptographic Techniques, 2011.
+8. R Mori, M Kawahara, "Superdistribution: the concept and the architecture", IEICE TRANSACTIONS (1976–1990), vol. 73.7, pp. 1133-1146, 1990.
+9. B Ahlgren, C Dannewitz, C Imbrenda, D Kutscher, B Ohlman, "A survey of information-centric networking", IEEE Communications Magazine, vol. 50.7, 2012.
