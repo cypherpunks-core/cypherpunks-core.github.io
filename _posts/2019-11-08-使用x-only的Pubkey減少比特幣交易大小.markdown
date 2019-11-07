@@ -16,10 +16,6 @@ hero_image: /img/hero.png
 
 ![](https://miro.medium.com/max/1920/1*qjjuaGbSSW8tu5TCQuPvOQ.png)
 
-目錄:
-> [TOC]
-
-
 # 介紹 | Introduction
 
 本文是關於最近在比特幣改進提案*BIP-schnorr*中引入所謂的x-only pubkeys。 BIP定義了針對比特幣的Schnorr簽名的介紹。
