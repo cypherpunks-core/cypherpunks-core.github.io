@@ -1,0 +1,54 @@
+---
+layout: post
+title:  "Neutrino：一種保護隱私的輕錢包協議"
+date:   2019-11-09
+categories: news
+description: "介紹Neutrino，這是一種新的協議，用於輕型client在保留隱私且不信任中央server的情況下獲取所需的數據。"
+image: '/img/123.png'
+published: true
+hero_image: /img/hero.png
+---
+
+如今， Lightning 風行一時，儘管這是一個令人興奮的發展，但用戶目前必須運行一個完整的節點才能進行交易。在本文中，將介紹Neutrino，這是一種新的協議，用於輕型client在保留隱私且不信任中央server的情況下獲取所需的數據。[原文](https://bitcoinmagazine.com/articles/neutrino-privacy-preserving-light-wallet-protocol)
+
+## 一點歷史
+中本聰（Satoshi Nakamoto）在2008年撰寫的原始白皮書中描述了一種稱為簡化付款驗證（SPV）的東西。SPV是輕型節點無需下載、驗證或儲存整個區塊鏈即可驗證付款的方式。這應該是輕錢包的基礎。不幸的是，原始的Bitcoin Core軟體未實現簡化付款驗證，因此，輕量級客戶無法訪問以隱私保護方式進行SPV所需的數據。
+
+在2013年，BIP0037被添加到Bitcoin Core以使SPV可行。BIP0037創建了網絡指令，使輕節點可以執行簡化的付款驗證。輕型節點現在可以要求證明特定交易發生在特定區塊中。這樣，輕型節點將不必信任server，但實際上可以驗證提供給它們的數據。
+
+為此，輕client向server提供了一個過濾器。然後，server對新區塊的所有交易運行篩選器，並將這些交易以及它們在該區塊中的證據報告給client。然後，客戶驗證證明並查看交易，以查看其中是否屬於錢包。
+
+不幸的是，BIP0037有一些缺點。除其他外，這被認為很難實施，大多數輕錢包選擇使用其他東西。例如，Electrum錢包使用其[自己的專有協議](http://docs.electrum.org/en/latest/protocol.html)，該協議不保護隱私。Mycelium錢包調用Mycelium公司運行的server。此外，還有一些拒絕服務媒介（通過運行大量過濾器）來利用響應BIP0037請求的server。
+
+此外，事實證明，BIP0037的隱私方面沒有想像的那麼強。事實證明，通過查找某些類型的模式，server可以對輕錢包有很多了解（例如它可能有什麼餘額，與誰進行交易，甚至可能是購買的東西）。
+
+因此，儘管自2013年以來已在Core軟體中使用BIP0037，但在很大程度上已經廢棄了。
+
+## 什麼是Neutrino？
+Neutrino是一種驗證付款的協議，除了這次，大部分工作是在client完成的。現在代替server過濾client的交易，而是將屬於一個區塊的所有交易（技術上對應於除OP_RETURN輸出之外的每個輸入和輸出的ScriptPubKey）壓縮並發送給client。現在，客戶的工作是弄清是否有任何交易是它進行的交易。如果任何交易與電子錢包有關，則客戶然後請求完整的區塊來驗證交易。
+
+事實證明，壓縮效果令人印象深刻。正常區塊約為1.4MB，但是通過對其進行壓縮（從技術上講，將每個ScriptPubKey hash 為64位），每個區塊會在每個區塊上產生約20KB的超壓縮數據。由於每個超級client的超級壓縮區塊都相同，因此可以消除server的拒絕服務漏洞。這也意味著server除了要查看的阻止內容外，沒有獲得有關輕client的特殊訊息，這意味著隱私洩漏少得多。
+
+## 權衡取捨
+當然，通過增加隱私權，我們確實需要權衡取捨。首先，有更多的數據來回發送。雖然1.4MB到20KB的帶寬減少了很多，但是BIP0037允許更大的減少，因為server只為錢包參與的交易發送大約3KB的數據區塊，而沒有這種交易的只有80 bytes 的數據區塊。假設每天大約有一筆交易，那麼BIP0037的每個區塊總計大約100 bytes ，這意味著從帶寬的角度來看Neutrino的價格更高。
+
+此外，由於client現在必須執行其他驗證以證明server發送的數據是真實的，因此在client需要進行更多的驗證。
+
+在尋找錢包參與的交易時會保留隱私。通常，這些交易是錢包正在收款的交易。然而，對於匯款來說，Neutrino並沒有真正幫助，仍然存在很多隱私問題（儘Tor和[Dandelion](https://github.com/bitcoin/bips/blob/master/bip-0156.mediawiki) 可以提供幫助）。
+
+最後，可能需要對每個區塊的coinbase交易作出新的承諾，以促進Neutrino的發展，這需要軟分叉。
+
+## 這對您意味著什麼
+事實證明Neutrino不僅對Bitcoin錢包有用，對 Lightning 也有用。當前很難設置一個Lightning節點，部分原因是您必須運行一個需要很長時間才能同步的完整節點。Neutrino在btcd中可用，但在Bitcoin Core中尚不可用，因此在Bitcoin Core中可用之前，輕型錢包將很難找到要從中獲取數據的節點。正是由於這個原因，Wasabi必須使用類似的[超壓縮區塊數據製作自己的server](https://medium.com/@nopara73/wasabi-privacy-focused-bitcoin-wallet-for-desktop-3962d567045a)。
+
+一旦Neutrino到達Bitcoin Core，Lightning Wallets將能夠更輕鬆地作為輕client運行。這意味著您的Bitcoin錢包將在保護隱私方面更加有效。這並不意味著您將具有完全的匿名性，尤其是從鏈分析的角度而言，但是您將能夠在不儲存、傳輸或驗證整個區塊鏈的情況下實現整個節點當前享有的大部分隱私。
+
+隱私洩漏最終是安全洩漏，因為有關您的訊息可能會被用來對您不利。
+
+與使用Neutrino協議的錢包進行交易意味著，無論是在鏈上還是在Lightning Network上，您的Bitcoin交易都不太容易受到訊息洩露的影響。
+
+## 更多訊息
+對於對此技術感興趣的開發人員，[BIP0157](https://github.com/bitcoin/bips/blob/master/bip-0157.mediawiki) and [BIP0158](https://github.com/bitcoin/bips/blob/master/bip-0158.mediawiki)詳細說明了該協議，並且可從[Lightning Labs](https://lightning.engineering/)的開發人員處獲得[test vectors](https://github.com/bitcoin/bips/blob/master/bip-0158/testnet-19.json)。對於消費者，請詢問您的錢包提供商是否計劃實施Neutrino。
+
+## 結論
+Neutrino是一項早就應該過期的技術。大多數使用輕型節點軟體的人都必須在某種程度上信任外部方，這不是密碼龐克的理想。通過使用Neutrino，錢包開發人員現在將能夠創建真正獨立的並且不需要信任server的錢包。
