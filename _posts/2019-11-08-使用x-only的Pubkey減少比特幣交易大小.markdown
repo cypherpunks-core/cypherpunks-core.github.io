@@ -4,17 +4,16 @@ title:  "使用x-only的Pubkey減少比特幣交易大小"
 date:   2019-11-07
 categories: news
 description: "如何使用BIP-schnorr安全地為每個output節省四個權重單位"
-image: 'https://miro.medium.com/max/1920/1*qjjuaGbSSW8tu5TCQuPvOQ.png'
-published: false
+image: '/img/110.png'
+published: true
 hero_image: /img/hero.png
 ---
 
-# **使用x-only的Pubkey減少比特幣交易大小**
-
-**如何使用BIP-schnorr安全地為每個output節省四個權重單位 [原文](https://medium.com/blockstream/reducing-bitcoin-transaction-sizes-with-x-only-pubkeys-f86476af05d7)**
+**如何使用BIP-schnorr安全地為每個output節省四個權重單位     
+[原文 : Reducing Bitcoin Transaction Sizes with x-only Pubkeys](https://medium.com/blockstream/reducing-bitcoin-transaction-sizes-with-x-only-pubkeys-f86476af05d7)**    
 8 min read   *By Jonas Nick*
 
-![](https://miro.medium.com/max/1920/1*qjjuaGbSSW8tu5TCQuPvOQ.png)
+![](/img/110.png)
 
 # 介紹 | Introduction
 
@@ -36,34 +35,34 @@ hero_image: /img/hero.png
 
 首先，讓我們看一下今天壓縮後的public key如何在比特幣中工作。
 
-![](https://miro.medium.com/max/2600/0*oo7B0AR93Rm6Mk2-.png)
+![](/img/111.png)
 <center><strong>壓縮public key</strong></center>
 
 比特幣中的壓縮public key是byte  `2`後跟一個32 byte矩陣，或者是byte  `3`後跟一個 32 byte矩陣。 第一個 byte 稱為*tie breaker(決勝局)*，第二個部分為橢圓曲線上基礎點的X坐標。
 
 ## Tie breaker的目的是什麼？
 
-![](https://miro.medium.com/max/2600/0*nYhf9zCL3CApy4RC.png)
+![](/img/112.png)
 <center><strong>tie breaker的目的</strong></center>
 
 public key在橢圓曲線上編碼一個點。 僅給出X坐標，曲線上就存在兩個點。 tie breaker的目的是確定兩個點中的哪一個被編碼為`P`  or  `-P`。
 
 最近，BIP-Schnorr從使用壓縮的public key更改為僅使用*x-only public keys*。 不同之處在於tie breake不再是public key的一部分。 而是隱式地假設tie breaker為`2`。 實際上，在BIP中使用了一個不同的tie breaker，但這對於本文而言並不重要。
 
-![](https://miro.medium.com/max/2600/0*lpi7SSkzEOGkBBSg.png)
+![](/img/113.png)
 <center><strong>BIP-schnorr中的x-only pubkeys</strong></center>
 
 那為什麼行得通呢？ 畢竟，`P`  and  `-P`仍然是不同的點。 由secret key `x`生成的public key點`P`是group`G`的生成者的`x`倍。 public key`-P`的secret key是`-x`。 答案是我們只需要在正確的時間否定public key和secret key即可。 特別是，簽名演算法會檢查您是否在簽名正確的public key，並在必要時取消secret key。
 
 請務必注意，錢包開發人員無需採取任何措施。 它應該由基礎crypto library處理。 BIP32分層確定性錢包生成也像以前一樣工作，只是您丟棄了第一個byte。
 
-![](https://miro.medium.com/max/2600/0*fl8GXsZUeyv1P7Do.png)
+![](/img/114.png)
 <center><strong>為什麼我們可以刪除tie breaker?</strong></center>
 
 
 # 為什麼引入 x-only pubkeys?
 
-![](https://miro.medium.com/max/2600/0*tpnUkLGAli2nrfJh.png)
+![](/img/115.png)
 <center><strong>為什麼 x-only?</strong></center>
 
 首先，在權重單位方面，scriptPubKey的bytes非常昂貴：x-only 可以在平均完整塊中節省約0.7％的權重單位。 其次，發件人創建scriptPubKey的成本與136個權重單位中的pay-to-witness-script-hash相同。 從理論上講，如果Taproot的價格比舊版隔離見證的價格高，則採用它的速度會更慢。
@@ -81,38 +80,38 @@ Pay-to-witness-pub-key-hash scriptPubKey的權重仍遠小於Taprootoutput，因
 我們知道的是，在隨機預言模型中，如果離散對數問題很困難，那麼Schnorr簽名是安全的。
 這意味著在不知道secret key的情況下無法偽造簽名。
 
-![](https://miro.medium.com/max/2600/0*uunBwnRXzjfk66I_.png)
+![](/img/116.png)
 
 現在我們要證明的是帶有壓縮public key的Schnorr簽名是否安全，那麼x-only的Schnorr簽名是安全的。 或等效地，如果x-only的Schnorr簽名不安全，則Schnorr簽名不安全。
 
-![](https://miro.medium.com/max/2600/0*oootB1OKOBEh-1gk.png)
+![](/img/117.png)
 
 因此，我們假設存在一種偽造Schnorr簽名的演算法，如下圖右圖所示。
 
 Schnorr 簽名是一個元組。 第一個元素是稱為的public nonce，它是通過將secret nonce與group generator相乘而生成的。
 第二個元素結合了secret nonce和secret key  `x`。 這裡唯一重要的部分是Schnorr簽名涉及一些hash計算。 我們現在假設的是，在某些時候，偽造者必須計算hash值-沒有其他方法可以產生偽造品。 為了在形式證明(formal proof)中正確定義此值，將hash函數替換為稱為*Random Oracle*的理想設備。 為了方便說明，我們將繼續稱他為hash function。
 
-![](https://miro.medium.com/max/2600/0*LaWrAgfaJsxm03Z4.png)
+![](/img/118.png)
 <center><strong>偽造者的Proof sketch模型</strong></center>
 
 現在，我們要做的是構建一種演算法，該演算法響應提供了壓縮public key的挑戰者，並期望獲得Schnorr簽名偽造作為回報。 我們將以某種方式利用x-only的Schnorr簽名偽造者。 這只是一種演算法，如果您願意，我們可以在虛擬機上運行它。 此外，我們可以修補計算hash函數的偽造者程式碼，以返回所需的任何內容。 替換的hash函數必須隨機尋找x-only的Schnorr簽名偽造者，因為否則它可以檢測到它在模擬中並且行為不同。
 
-![](https://miro.medium.com/max/2600/0*DrVOs_LkQS-BNNTo.png)
+![](/img/119.png)
 <center><strong>Proof sketch 概述</strong></center>
 
 現在，讓我們看一下第一種情況，即public key的第一個byte為`2`，，這與我們隱含地假定為x-only pubkeys相同。 在這種情況下，我們只需要刪除第一個byte，將其傳遞給偽造者，讓它做事情，然後將Schnorr簽名傳遞給挑戰者即可。
 
-![](https://miro.medium.com/max/2600/0*nzIkIvy_aBY5C8Sw.png)
+![](/img/120.png)
 <center><strong>Proof sketch case 1</strong></center>
 
 在另一種情況下，第一個byte為`3`。 同樣，我們將不帶第一個byte的pubkey傳遞給偽造者，但是現在x-only偽造者會將public key解碼為`-P`，因此將創建的簽名將用於錯誤的public key。 我們通過對hash函數進行編程來解決此問題，以返回挑戰者使用的hash函數output的負數。 然後，我們僅等待偽造者的答复並將其傳遞給挑戰者。
 
-![](https://miro.medium.com/max/2600/0*NlV2QHhY2w14C907.png)
+![](/img/121.png)
 <center><strong>Proof sketch case 2</strong></center>
 
 取反的hash值會為該取反的點生成Schnorr簽名，因此挑戰者將很樂意接受該簽名。
 
-![](https://miro.medium.com/max/2600/0*AIQNgJCSPff6xW2G.png)
+![](/img/122.png)
 <center><strong>Proof sketch resolution</strong></center>
 
 總而言之，我們顯示的是，如果存在x-only Schnorr簽名偽造者，則存在壓縮的pubkey Schnorr簽名偽造者，或者等效地，我們可以假設x-only Schnorr簽名偽造者是安全的。
