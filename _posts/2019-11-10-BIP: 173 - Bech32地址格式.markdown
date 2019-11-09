@@ -158,8 +158,6 @@ A segwit 地址[[6](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6e
 
 將地址轉換為scriptPubkey時，實現時應格外小心，其中witness version *n* 存儲為 *OP_n* 。 OP_0編碼為0x00，但OP_1至OP_16編碼為0x51至0x60（十進制為81至96）。如果將bech32地址轉換為不正確的scriptPubKey，則結果可能是不可花費的或不安全的。
 
-
-
 ### 兼容性 ｜ Compatibility
 
 只有新軟體才能使用這些地址，並且僅適用於具有啟用了segregated witness功能的新軟體的接收器。在所有其他情況下，可以使用P2SH或P2PKH地址。
@@ -173,7 +171,7 @@ A segwit 地址[[6](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6e
 5. **[+](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-5-0)**  **為什麼首先要處理人類可讀部分的higher bits？** 這導致實際Checksum的數據為[高] 0 [低] [數據]。這意味著在假設人類可讀部分的錯誤僅會更改低5 bit（例如將字母character更改為另一個character）的情況下，錯誤僅限於[low] [data]部分，該部分最多為89個character，並且因此，所有錯誤檢測屬性（請參閱附件）仍然適用。
 6. **[+](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-6-0)**  **為什麼不為所有scriptPubKeys創建通用的地址格式？** 這將導致現有scriptPubKey類型的地址混亂。此外，如果曾經引入沒有與scriptPubKeys一一對應的地址（例如基於ECDH的地址），則擁有完全通用的舊地址類型將允許使用舊地址格式重新解釋結果的scriptPubKeys，如果將比特幣發送給他們，則會導致資金損失。
 7. **[+](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-7-0)**  **為什麼使用" bc"作為人類可讀的部分而不使用" btc"？**" bc"較短。
-8. **[+](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-8-0)**  **為什麼將'tb'用作testnet的人類可讀部分？** **它被選擇為與mainnet對應的長度相同（以簡化實現對長度的假設），但在視覺上仍然截然不同。
+8. **[+](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-8-0)**  **為什麼將'tb'用作testnet的人類可讀部分？** 它被選擇為與mainnet對應的長度相同（以簡化實現對長度的假設），但在視覺上仍然截然不同。
 
 ## 參考實現 ｜ Reference implementations
 
