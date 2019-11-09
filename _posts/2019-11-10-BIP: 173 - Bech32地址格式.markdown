@@ -145,7 +145,7 @@ A segwit 地址[[6](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6e
 
 軟體解釋 segwit 地址:
 
-* *MUST驗證人類可讀的部分是"bc"為mainnet和"tb"的用於testnet。
+* MUST驗證人類可讀的部分是"bc"為mainnet和"tb"的用於testnet。
 * MUST驗證第一個解碼的數據值（witness version）在0到16之間（含0和16）。
 * 將其餘數據轉換為bytes：
     * 將值轉換為5bits，最高有效bit在前。
