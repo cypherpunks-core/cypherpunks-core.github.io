@@ -152,7 +152,7 @@ A segwit 地址[[6](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6e
     * 將這些bits重新排列為8bits的組。 最後任何不完整的組必須為4bits或更少，必須全為零，並被丟棄。
     * MUST在2到40個組之間，這被解釋為witness program的bytes。
 
-解碼器應該對witness program施加已知長度的限制。 例如，BIP141指定*如果version byte為0，但是witness  program既不是20bytes也不是32bytes，則script必須失效。
+解碼器應該對witness program施加已知長度的限制。 例如，BIP141指定如果version byte為0，但是witness  program既不是20bytes也不是32bytes，則script必須失效。
 
 根據先前的規則，地址的長度始終在14到74個characters之間，其modulo 8的長度不能為0、3或5。版本0的witness地址始終為42或62個characters，但是實現必須允許使用任何版本。
 
