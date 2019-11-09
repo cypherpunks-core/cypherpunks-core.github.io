@@ -1,0 +1,298 @@
+---
+layout: post
+title:  "BIP: 173 - Bech32地址格式"
+date:   2019-11-10
+categories: news
+description: "checksum和的base32格式“ Bech32”，以及使用該格式的native segregated witness output地址的標準"
+image: '/img/124.png'
+published: true
+hero_image: /img/hero.png
+---
+
+```
+BIP: 173 Layer: Applications 
+Title: Base32 address format for native v0-16 witness outputs 
+Author: Pieter Wuille <pieter.wuille@gmail.com> Greg Maxwell <greg@xiph.org> 
+Comments-Summary: No comments yet. 
+Comments-URI: https://github.com/bitcoin/bips/wiki/Comments:BIP-0173 
+Status: Final 
+Type: Informational 
+Created: 2017-03-20 
+License: BSD-2-Clause 
+Replaces: 142
+```
+
+## 介紹 ｜ Introduction
+
+### 摘要 ｜ Abstract
+
+本文件提出了checksum和的base32格式“ Bech32”，以及使用該格式的native segregated witness output地址的標準。
+
+### 版權 ｜ Copyright
+
+This BIP is licensed under the 2-clause BSD license.
+
+### 動機 ｜ Motivation
+
+在其歷史的大部分時間裡，比特幣都依賴於帶有切去頭部的double-SHA256 checksum和的base58地址。 它們是原始軟體的一部分，其範圍已在[BIP13](https://github.com/bitcoin/bips/blob/master/bip-0013.mediawiki)擴展為Pay-to-script-hash ([P2SH](https://github.com/bitcoin/bips/blob/master/bip-0016.mediawiki))。 但是，character set(character set)和checksum演算法都有局限性：
+
+* Base58在QR codes中需要大量空間，因為它不能使用字母數字模式。
+* base58中的混合大小寫不方便可靠地寫下，在手機鍵盤上輸入或電腦朗讀聲音。
+* double SHA256 checksum很慢，並且沒有錯誤檢測保證。
+* 關於錯誤檢測(error-detecting)程式碼的大多數研究僅適用於作為[prime power](https://en.wikipedia.org/wiki/Prime_power)的character set大小，不適用於58。
+* Base58解碼複雜且相對較慢。
+
+Segregated Witness proposal中包括一類新的輸出（見證程序，witness programs，請參見[BIP141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki))），以及兩個輸出實例（“ P2WPKH”和“ P2WSH”，請參見[BIP143](https://github.com/bitcoin/bips/blob/master/bip-0143.mediawiki)）。 通過嵌入P2SH輸出，它們的功能可以間接提供給較老的客戶端，但是為了獲得最佳的效率和安全性，最好直接使用它。 在本文件中，我們為native witness outputs （當前和將來的版本）提出了一種新的地址格式。
+
+它替代了[BIP142](https://github.com/bitcoin/bips/blob/master/bip-0142.mediawiki)，並在前面進行了討論（在[這裡](https://bitcoincore.org/en/meetings/2016/05/20/#error-correcting-codes-for-future-address-types)進行了概述）。
+
+
+### 例子 ｜ Examples
+
+所有的例子使用 public key `0279BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798`. P2WSH 的例子使用 key OP_CHECKSIG as script.
+
+* Mainnet P2WPKH: `bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4`
+* Testnet P2WPKH: `tb1qw508d6qejxtdg4y5r3zarvary0c5xw7kxpjzsx`
+* Mainnet P2WSH: `bc1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3qccfmv3`
+* Testnet P2WSH: `tb1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3q0sl5k7`
+
+## 格式 ｜ Specification
+
+我們首先描述的一般checksummed base32 [[1](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-1)]的格式稱為Bech32，然後用它定義 Segregated Witness 地址。
+
+### Bech32
+
+Bech32 [[2](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-2)]string的長度最多為90個characters，包括：
+
+* **人類可讀的部分(human-readable part, HRP)**，旨在傳達數據的類型或與讀者相關的任何其他內容。 此部分必須包含1到83個US-ASCII characters，每個character的值都在[33-126]範圍內。 HRP有效性可能會受到特定應用程序的進一步限制。
+* **分隔符(separator)**，始終為“ 1”。 如果在人類可讀部分內部允許“ 1”，則string中的最後一個是分隔符[[3](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-3)]。
+* **數據部分**至少長6個characters，並且僅由字母數字characters組成，但不包括“ 1”，“ b”，“ i”和“ o” [[4](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-4)]。
+
+
+|     | 0   | 1   | 2   | 3   | 4   | 5   | 6   | 7   |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| +0  | q   | p   | z   | r   | y   | 9   | x   | 8   |
+| +8  | g   | f   | 2   | t   | v   | d   | w   | 0   |
+| +16 | s   | 3   | j   | n   | 5   | 4   | k   | h   |
+| +24 | c   | e   | 6   | m   | u   | a   | 7   | l   |
+
+**Checksum**
+
+數據部分的最後六個characters構成一個Checksum，不包含任何訊息。 有效strings必須通過下面的Python3程式碼段指定的有效性標準。 當參數為以下參數時，bech32_verify_checksum函數必須返回true：
+
+
+* hrp: string形式的人類可讀部分
+* data: 數據部分為整數列表，代表使用上表進行轉換後的characters
+
+```
+def bech32_polymod(values):
+  GEN = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3]
+  chk = 1
+  for v in values:
+    b = (chk >> 25)
+    chk = (chk & 0x1ffffff) << 5 + v
+    for i in range(5):
+      chk += GEN[i] if ((b >> i) & 1) else 0
+  return chk
+
+def bech32_hrp_expand(s):
+  return [ord(x) >> 5 for x in s] + [0] + [ord(x) & 31 for x in s]
+
+def bech32_verify_checksum(hrp, data):
+  return bech32_polymod(bech32_hrp_expand(hrp) + data) == 1
+```
+
+這實現了一個[BCH code](https://en.wikipedia.org/wiki/BCH_code)，該程式碼可確保檢測到最多影響4個characters的任何錯誤，並且在109個失敗的機會中無法檢測到更多的錯誤。 有關屬性的更多詳細信息，請參見“Checksum設計”附件。 可讀部分的處理方法是，首先將每個character的US-ASCII值的higher bits輸入checksum，然後是零，然後是lower bits[[5](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-5)]。
+
+要根據給定的可讀部分和數據部分characters的（非checksum）值構造有效的checksum，可以使用以下程式碼：
+
+```
+def bech32_create_checksum(hrp, data):
+  values = bech32_hrp_expand(hrp) + data
+  polymod = bech32_polymod(values + [0,0,0,0,0,0]) + 1
+  return [(polymod >> 5 * (5 - i)) & 31 for i in range(6)]
+```
+
+**錯誤修正 ｜ Error correction**
+
+這些BCH程式碼的特性之一是它們可用於錯誤修正。 錯誤修正的一個不幸的副作用是它侵蝕了錯誤檢測：錯誤修正將無效輸入更改為有效輸入，但是如果進行了多個錯誤，則有效輸入可能不是正確輸入。 使用不正確但有效的輸入會導致資金無法挽回流失。 因此，實現方式不應該向用戶暗示在string中可能存在錯誤的位置，而不建議用戶進行更正，而不能進行更正。
+
+**大寫小寫 ｜ Uppercase/lowercase**
+
+在確定用於checksum目的的character值時，使用小寫形式。
+
+編碼器務必始終輸出全小寫的Bech32 string。 如果需要編碼結果的大寫版本（例如-為了表示目的或使用QR code），則可以在編碼過程外部執行大寫過程。
+
+解碼器絕不能接受某些characters為大寫而某些characters為小寫的strings（此類strings稱為大小寫混合的strings）。
+
+為了便於演示，通常最好使用小寫字母，但在QR code內部應使用大寫字母，因為那些允許使用字母數字模式([alphanumeric mode](http://www.thonky.com/qr-code-tutorial/alphanumeric-mode-encoding))，比普通[byte mode](http://www.thonky.com/qr-code-tutorial/byte-mode-encoding)簡洁45％。
+
+
+### Segwit address format(格式)
+
+A segwit 地址[[6](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-6)] 是以下內容的Bech32編碼：
+
+* 對於mainnet人類可讀部分“bc”[[7](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-7)]，以及用於testnet“tb”[[8](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-8)]。
+
+* 數據部分的值：
+  * 1 byte: witness 版本
+  * 將2-to-40-byte的witness program（由[BIP141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki)定義）轉換為base32：
+    * 從 witness program 的bit開始，首先是每個byte的最高有效位。
+    * 將這些位重新排列為5組，並在需要時在末尾加零。
+    * 使用上表將這些位轉換為characters。
+
+**解碼 ｜ Decoding**
+
+軟體解釋 segwit 地址:
+
+* *MUST驗證人類可讀的部分是“bc”為mainnet和“tb”的用於testnet。
+* MUST驗證第一個解碼的數據值（witness version）在0到16之間（含0和16）。
+* 將其餘數據轉換為bytes：
+    * 將值轉換為5bits，最高有效位在前。
+    * 將這些bits重新排列為8bits的組。 最後任何不完整的組必須為4bits或更少，必須全為零，並被丟棄。
+    * MUST在2到40個組之間，這被解釋為witness program的bytes。
+
+解碼器應該對witness program施加已知長度的限制。 例如，BIP141指定*如果version byte為0，但是witness  program既不是20bytes也不是32bytes，則script必須失效。
+
+根據先前的規則，地址的長度始終在14到74個characters之間，其modulo 8的長度不能為0、3或5。版本0的witness地址始終為42或62個characters，但是實現必須允許使用任何版本。
+
+將地址轉換為scriptPubkey時，實現時應格外小心，其中witness version *n* 存儲為 *OP_n* 。 OP_0編碼為0x00，但OP_1至OP_16編碼為0x51至0x60（十進制為81至96）。如果將bech32地址轉換為不正確的scriptPubKey，則結果可能是不可花費的或不安全的。
+
+
+
+### 兼容性 ｜ Compatibility
+
+只有新軟體才能使用這些地址，並且僅適用於具有啟用了segregated witness功能的新軟體的接收器。在所有其他情況下，可以使用P2SH或P2PKH地址。
+
+## 解釋 ｜ Rationale
+
+1. **[+](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-1-0)**  **為什麼要全部使用base32？** 缺少混合大小寫，使朗讀或放入QR code 更加有效。的確增加了15％的長度，但這與復制貼上地址無關緊要。
+2. **[+](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-2-0)**  **為什麼稱其為Bech32？**  “ Bech”包含characterBCH（使用的錯誤檢測演算法），聽起來有點像“ base”。
+3. **[+](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-3-0)**  **為什麼在地址中包含分隔符？** 這樣，人類可讀部分便與數據部分明確分離，避免了與其他共享前綴的人類可讀部分的潛在衝突。這也使我們避免了對人類可讀部分的character set限制。分隔符為1，因為使用非字母數字character會使地址的複制貼上變得複雜（在某些應用程序中沒有雙擊選擇）。因此，選擇了正常character set之外的字母數字character。
+4. **[+](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-4-0)**  **為什麼不使用[RFC3548](http://www.faqs.org/rfcs/rfc3548.html)或[z-base-32](https://philzimmermann.com/docs/human-oriented-base-32-encoding.txt)[this](https://hissa.nist.gov/~black/GTLD/)的現有character set？** 根據此視覺相似性數據選擇character set以最大程度地減少歧義，選擇順序以最小化相差超過1位的相似character對（根據同一數據）的數量。選擇Checksum以最大程度地減少少量誤碼的檢測能力，因此在某些錯誤模型下，此選擇可提高其性能。
+5. **[+](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-5-0)**  **為什麼首先要處理人類可讀部分的高位？** 這導致實際Checksum的數據為[高] 0 [低] [數據]。這意味著在假設人類可讀部分的錯誤僅會更改低5位（例如將字母character更改為另一個character）的情況下，錯誤僅限於[low] [data]部分，該部分最多為89個character，並且因此，所有錯誤檢測屬性（請參閱附件）仍然適用。
+6. **[+](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-6-0)**  **為什麼不為所有scriptPubKeys創建通用的地址格式？** 這將導致現有scriptPubKey類型的地址混亂。此外，如果曾經引入沒有與scriptPubKeys一一對應的地址（例如基於ECDH的地址），則擁有完全通用的舊地址類型將允許使用舊地址格式重新解釋結果的scriptPubKeys，如果將比特幣發送給他們，則會導致資金損失。
+7. **[+](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-7-0)**  **為什麼使用“ bc”作為人類可讀的部分而不使用“ btc”？**“ bc”較短。
+8. **[+](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-8-0)**  **為什麼將'tb'用作testnet的人類可讀部分？** **它被選擇為與mainnet對應的長度相同（以簡化實現對長度的假設），但在視覺上仍然截然不同。
+
+## 參考實現 ｜ Reference implementations
+
+* 參考編碼器和解碼器:
+  * [For C](https://github.com/sipa/bech32/tree/master/ref/c)
+  * [For C++](https://github.com/sipa/bech32/tree/master/ref/c++)
+  * [For JavaScript](https://github.com/sipa/bech32/tree/master/ref/javascript)
+  * [For Go](https://github.com/sipa/bech32/tree/master/ref/go)
+  * [For Python](https://github.com/sipa/bech32/tree/master/ref/python)
+  * [For Haskell](https://github.com/sipa/bech32/tree/master/ref/haskell)
+  * [For Ruby](https://github.com/sipa/bech32/tree/master/ref/ruby)
+  * [For Rust](https://github.com/sipa/bech32/tree/master/ref/rust)
+* Fancy decoder that localizes errors:
+  * [For JavaScript](https://github.com/sipa/bech32/tree/master/ecc/javascript) ([demo website](http://bitcoin.sipa.be/bech32/demo/demo.html))
+
+## 已註冊的人類可讀前綴 ｜ Registered Human-readable Prefixes
+
+ SatoshiLabs維護其他密碼貨幣的已註冊的人類可讀部件的完整列表：
+ 
+[SLIP-0173 : Registered human-readable parts for BIP-0173](https://github.com/satoshilabs/slips/blob/master/slip-0173.md)
+
+## 附件 ｜ Appendices
+
+### 測試向量 ｜ Test vectors
+
+以下strings是有效的 Bech32：
+
+* `A12UEL5L`
+* `a12uel5l`
+* `an83characterlonghumanreadablepartthatcontainsthenumber1andtheexcludedcharactersbio1tt5tgs`
+* `abcdef1qpzry9x8gf2tvdw0s3jn54khce6mua7lmqqqxw`
+* `11qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqc8247j`
+* `split1checkupstagehandshakeupstreamerranterredcaperred2y9e3w`
+* `?1ezyfcl` 警告：在轉換為US-ASCII期間，某些編碼器可能會將不可映射的character設置為有效的US-ASCIIcharacter，例如“？”。例如：
+
+```
+>>> bech32_encode('\x80'.encode('ascii', 'replace').decode('ascii'), [])
+'?1ezyfcl'
+```
+
+以下String不是有效的Bech32（具有無效原因）：
+
+* 0x20 + `1nwldj5`: HRP character out of range
+* 0x7F + `1axkwrx`: HRP character out of range
+* 0x80 + `1eym55h`: HRP character out of range
+* `an84characterslonghumanreadablepartthatcontainsthenumber1andtheexcludedcharactersbio1569pvx`: overall max length exceeded
+* `pzry9x0s0muk`: No separator character
+* `1pzry9x0s0muk`: Empty HRP
+* `x1b4n0q5v`: Invalid data character
+* `li1dgmt3`: Too short checksum
+* `de1lg7wt` + 0xFF: Invalid character in checksum
+* `A1G7SGD8`: checksum calculated with uppercase form of HRP
+* `10a06t8`: empty HRP
+* `1qzzfhee`: empty HRP
+
+The following list gives valid segwit addresses and the scriptPubKey that they translate to in hex.
+
+* `BC1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7KV8F3T4: 0014751e76e8199196d454941c45d1b3a323f1433bd6`
+* `tb1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3q0sl5k7`: `00201863143c14c5166804bd19203356da136c985678cd4d27a1b8c6329604903262`
+* `bc1pw508d6qejxtdg4y5r3zarvary0c5xw7kw508d6qejxtdg4y5r3zarvary0c5xw7k7grplx`: `5128751e76e8199196d454941c45d1b3a323f1433bd6751e76e8199196d454941c45d1b3a323f1433bd6`
+* `BC1SW50QA3JX3S`: `6002751e`
+* `bc1zw508d6qejxtdg4y5r3zarvaryvg6kdaj`: `5210751e76e8199196d454941c45d1b3a323`
+* `tb1qqqqqp399et2xygdj5xreqhjjvcmzhxw4aywxecjdzew6hylgvsesrxh6hy`: `0020000000c4a5cad46221b2a187905e5266362b99d5e91c6ce24d165dab93e86433`
+
+以下列表提供了無效的segwit地址及其無效的原因。
+
+* `tc1qw508d6qejxtdg4y5r3zarvary0c5xw7kg3g4ty`: Invalid human-readable part
+* `bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t5`: Invalid checksum
+* `BC13W508D6QEJXTDG4Y5R3ZARVARY0C5XW7KN40WF2`: Invalid witness version
+* `bc1rw5uspcuh`: Invalid program length
+* `bc10w508d6qejxtdg4y5r3zarvary0c5xw7kw508d6qejxtdg4y5r3zarvary0c5xw7kw5rljs90`: Invalid program length
+* `BC1QR508D6QEJXTDG4Y5R3ZARVARYV98GJ9P`: Invalid program length for witness version 0 (per BIP141)
+* `tb1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3q0sL5k7`: Mixed case
+* `bc1zw508d6qejxtdg4y5r3zarvaryvqyzf3du`: zero padding of more than 4 bits
+* `tb1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3pjxtptv`: Non-zero padding in 8-to-5 conversion
+* `bc1gmk9yu`: Empty data section
+
+### Checksum 設計
+
+**設計選擇**
+
+BCH程式碼可以構建在任何prime-power字母上，並且可以選擇在大小和錯誤檢測功能之間進行良好權衡。儘管大多數圍繞BCH程式碼的工作都使用二進製字母，但這不是必要的。這使它們比[CRC codes](https://en.wikipedia.org/wiki/Cyclic_redundancy_check)更適合我們的用例。與[Reed-Solomon codes](https://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction)不同，它們的長度不限於字母大小的一分之一。儘管它們還支持有效的錯誤糾正，但是僅錯誤檢測的實現非常簡單。
+
+我們選擇6個checksum characters作為地址長度和錯誤檢測功能之間的權衡，因為6個characters是足以保證隨機故障發生率低於十億分之一的最低數字。 對於我們希望保護的數據長度（對於將來可能的40bytes witness program而言，該字段的最大長度為71個bytes），可以構造BCH程式碼以確保檢測到最多4個錯誤。.
+
+**選定的屬性 ｜ Selected properties**
+
+這些程式碼中的許多程式碼在處理更多錯誤時的性能不佳，但並非全部。因此，我們考慮旨在僅檢測3個錯誤和4個錯誤的程式碼，並分析它們在實踐中的性能。
+
+此處選擇的特定程式碼是以下結果：
+
+* 從159605個BCH程式碼的詳盡列表開始，這些程式碼旨在檢測長度為93、151、165、341、1023和1057的3個或4個錯誤。
+* 從這些錯誤中，需要檢測到長度為71的4個錯誤，導致剩餘28825個程式碼。
+* 從這些程式碼中，選擇具有5個character錯誤的最壞情況窗口的程式碼，從而剩下310個程式碼。
+* 從這些程式碼中，選擇機會最少的程式碼來檢測少量的 *bit* 錯誤。
+
+由於naive的搜索需要超過6.5 * 1019的Checksum評估，因此使用了衝突搜索(collision-search)方法進行分析。可以在[here](https://github.com/sipa/ezbase32/)找到程式碼。
+
+**屬性 ｜ Properties**
+
+下表總結了檢測失敗的可能性（109 中的 1 倍）
+
+Window length Number of wrong characters
+
+| 長度 | 描述                          | ≤4  | 5     | 6     | 7     | 8     | ≥9    |
+| ------ | ------------------------------------ | --- | ----- | ----- | ----- | ----- | ----- |
+| 8      | Longest detecting 6 errors           | 0   |       |       | 1.127 | 0.909 | n/a   |
+| 18     | Longest detecting 5 errors           | 0   |       | 0.965 | 0.929 | 0.932 | 0.931 |
+| 19     | Worst case for 6 errors              | 0   | 0.093 | 0.972 | 0.928 | 0.931 |       |
+| 39     | Length for a P2WPKH address          | 0   | 0.756 | 0.935 | 0.932 | 0.931 |       |
+| 59     | Length for a P2WSH address           | 0   | 0.805 | 0.933 | 0.931 |       |       |
+| 71     | Length for a 40-byte program address | 0   | 0.830 | 0.934 | 0.931 |       |       |
+| 89     | Longest detecting 4 errors           | 0   | 0.867 | 0.933 | 0.931 |       |       |
+
+
+This means that when 5 changed characters occur randomly distributed in the 39 characters of a P2WPKH address, there is a chance of  *0.756 per billion*  that it will go undetected. When those 5 changes occur randomly within a 19-character window, that chance goes down to  *0.093 per billion* . As the number of errors goes up, the chance converges towards  *1 in 230*  =  *0.931 per billion* .
+
+即使選擇的程式碼可以很好地執行1023個character，但對於長度超過89個character（不包括分隔符）的其他設計，還是更可取的。
+
+## 致謝 ｜ Acknowledgements
+
+本文件的靈感來自Rusty Russell的[address proposal](https://rusty.ozlabs.org/?p=578)，Mark Friedenbach的[base32](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-February/004402.html)提案，並引用了Luke Dashjr，Johnson Lau，Eric Lombrozo，Peter Todd和其他各種審閱者的意見。
