@@ -1,3 +1,30 @@
+**路徑簡介：**
+    |_ `/_post`: blog 文章位置
+    |_ `/_site` : 編譯過的網站位置（ **不建議更動**
+    |_ `/_product` : 書架上的書 
+    |_ `/img`: blog 圖片位置
+    |_ `/markdown`__
+    |               |_ `knowledge` : 存放知識庫文章
+    |			    |_ `resource` : 存放資源文章
+    |			    |_ `about.md` : 關於我們的頁面
+    |			    |_ `product.md` : 書架頁面
+    |			    |_ `satellit.md` : 衛星計畫頁面			   
+    |_ `_data` __
+    |           |__ `navigation` : 定義 網站最上層的分頁 相依`/markdown`
+    |_ `_layouts` : 網頁框架定義（ **不建議更動**
+    |_ `readme.md` : 本文件位置
+    |_ `index.md` [cypherpunks-core.github.io](https://cypherpunks-core.github.io) 首頁內容
+
+**文章貢獻注意事項：**
+* 在`/_post`創建新的markdonwn文件，請依照發布 `年-月-日-標題.markdown`格式命名
+* `年-月-日-標題.markdown` 文件最上部的`YAML`請參考就有的文件模仿內容
+* 圖片，請放置在`/img`中，因用圖片請用`/img.png`格式（請勿用託管圖片，怕圖片失效
+
+> 圖片大小規範：
+> * blog 圖片 寬度 800 x 600
+> * 商品  圖片 寬度 640 x 480
+
+
 # 本地運行
 ## 前置要求
 - [bundler](https://bundler.io/#getting-started)
@@ -24,6 +51,4 @@
 
 ---
 
-圖片大小規範：
-* blog 圖片 寬度 800*600
-* 商品  圖片 寬度 640*480
+
