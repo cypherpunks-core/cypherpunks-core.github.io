@@ -189,7 +189,7 @@ A segwit 地址[[6](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6e
 
 ## 已註冊的人類可讀前綴 ｜ Registered Human-readable Prefixes
 
- SatoshiLabs維護其他密碼貨幣的已註冊的人類可讀部件的完整列表：
+SatoshiLabs維護其他密碼貨幣的已註冊的人類可讀部件的完整列表：
  
 [SLIP-0173 : Registered human-readable parts for BIP-0173](https://github.com/satoshilabs/slips/blob/master/slip-0173.md)
 
