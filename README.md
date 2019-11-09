@@ -1,19 +1,22 @@
 **路徑簡介：**
-    |_ `/_post`: blog 文章位置    
-    |_ `/_site` : 編譯過的網站位置（ **不建議更動**    
-    |_ `/_product` : 書架上的書     
-    |_ `/img`: blog 圖片位置    
-    |_ `/markdown`__
-    |               |_ `knowledge` : 存放知識庫文章    
-    |			    |_ `resource` : 存放資源文章    
-    |			    |_ `about.md` : 關於我們的頁面   
-    |			    |_ `product.md` : 書架頁面    
-    |			    |_ `satellit.md` : 衛星計畫頁面		   
-    |_ `_data` __    
-    |           |__ `navigation` : 定義 網站最上層的分頁 相依`/markdown`    
-    |_ `_layouts` : 網頁框架定義（ **不建議更動**    
-    |_ `readme.md` : 本文件位置    
-    |_ `index.md` [cypherpunks-core.github.io](https://cypherpunks-core.github.io) 首頁內容     
+
+```
+    |_ /_post: blog 文章位置
+    |_ /_site : 編譯過的網站位置（ **不建議更動**
+    |_ /_product : 書架上的書
+    |_ /img: blog 圖片位置
+    |_ /markdown_____
+    |               |_ knowledge : 存放知識庫文章
+    |			    |_ resource : 存放資源文章
+    |			    |_ about.md : 關於我們的頁面
+    |			    |_ product.md : 書架頁面
+    |			    |_ satellit.md : 衛星計畫頁面		   
+    |_ _data ____    
+    |           |__ navigation : 定義 網站最上層的分頁 相依/markdown    
+    |_ _layouts : 網頁框架定義（ **不建議更動**    
+    |_ readme.md : 本文件位置    
+    |_ index.md cypherpunks-core.github.io 首頁內容
+```
 
 **文章貢獻注意事項：**
 * 在`/_post`創建新的markdonwn文件，請依照發布 `年-月-日-標題.markdown`格式命名
