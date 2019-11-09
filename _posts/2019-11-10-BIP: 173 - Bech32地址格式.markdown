@@ -34,7 +34,7 @@ This BIP is licensed under the 2-clause BSD license.
 
 ### 動機 ｜ Motivation
 
-在其歷史的大部分時間裡，比特幣都依賴於帶有切去頭部的double-SHA256 checksum和的base58地址。 它們是原始軟體的一部分，其範圍已在[BIP13](https://github.com/bitcoin/bips/blob/master/bip-0013.mediawiki)擴展為Pay-to-script-hash ([P2SH](https://github.com/bitcoin/bips/blob/master/bip-0016.mediawiki))。 但是，character set(character set)和checksum演算法都有局限性：
+在其歷史的大部分時間裡，比特幣都依賴於帶有切去頭部的double-SHA256 checksum和的base58地址。 它們是原始軟體的一部分，其範圍已在[BIP13](https://github.com/bitcoin/bips/blob/master/bip-0013.mediawiki)擴展為Pay-to-script-hash ([P2SH](https://github.com/bitcoin/bips/blob/master/bip-0016.mediawiki))。 但是，字符集(character set)和checksum演算法都有局限性：
 
 * Base58在QR codes中需要大量空間，因為它不能使用字母數字模式。
 * base58中的混合大小寫不方便可靠地寫下，在手機鍵盤上輸入或電腦朗讀聲音。
