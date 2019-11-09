@@ -4,7 +4,7 @@ title:  "以區塊鏈為基礎的電子化註冊交付服務"
 date:   2019-11-09
 categories: news
 description: "歐洲法規規定了電子化支付（電子化識別和信任服務）而一個合格的電子註冊交付是信託服務之一並包含在法規中，它要求不可否認原產地及誠信的資料。"
-image: '/img/109.png'
+image: '/img/130.png'
 published: true
 hero_image: /img/hero.png
 ---
@@ -142,10 +142,11 @@ TTP 也有可能在技術層面遇到問題（例如：通信容易遇到瓶頸�
 - 圖1 描述了非機密協議的參與者之間的鏈間交互
 - 圖2 中描述了機密協議的離線交互。
 
-![](/img/93.png)
+<div align="center"><img width="500"  src="/img/93.png"/></div>
+
 <center><strong>圖1 非機密協議中的參與者之間的互動</strong></center>
 
-![](/img/94.png)
+<div align="center"><img width="500"  src="/img/94.png"/></div>
 <center><strong>圖2 機密協議中的參與者之間的互動</strong></center>
 
 # 第六章節 - 基於非機密區塊鏈的多方註冊電子交付系統
@@ -159,8 +160,7 @@ TTP 也有可能在技術層面遇到問題（例如：通信容易遇到瓶頸�
 
 此外，框內的紅色文本描述了必須由區塊鏈上部署的 eDelivery 執行的過程。
 
-
-![](/img/95.png)
+<div align="center"><img width="800"  src="/img/95.png"/></div>
 <center><strong>圖3 基於非機密區塊鏈的協議描述</strong></center>
 
 交付的發送方 A 和接收方集合 B 將遵循交換協議的步驟。
@@ -186,7 +186,7 @@ TTP 也有可能在技術層面遇到問題（例如：通信容易遇到瓶頸�
 - 最後執行完交換協議之後，所有接收方都可以讀取消息 M，因為它存在區塊鏈中，但只有 B’ 的成員可以證明他們已被通知且有證據。
 - 如果 term2 之後，發送方尚未發布消息，則每個接收方 Bi 可以取消 eDelivery 。
 
-![](/img/96.png)
+<div align="center"><img width="500"  src="/img/96.png"/></div>
 <center><strong>表1 非機密協議之要素</strong></center>
 
 
@@ -206,7 +206,7 @@ TTP 也有可能在技術層面遇到問題（例如：通信容易遇到瓶頸�
 
 `圖中的藍色箭頭表示對區塊鏈地址的簽名請求，而黑色箭頭表示離線通信消息。`
 
-![](/img/97.png)
+<div align="center"><img width="600"  src="/img/97.png"/></div>
 <center><strong>表2 機密多方協議之要素</strong></center>
 
 
@@ -216,7 +216,7 @@ TTP 也有可能在技術層面遇到問題（例如：通信容易遇到瓶頸�
 
 圖 4. 由機密 eDelivery 發送方和接收方交換的 3-Steps，已通過正向方法解決交換：該協議在某種意義上是正向的，即發送方 A 有可能在沒有 TTP 干預的情況下完成與接收方 B 的交換。
 
-![](/img/98.png)
+<div align="center"><img width="700"  src="/img/98.png"/></div>
 <center><strong>圖四 鏈下通信交換子協議</strong></center>
 
 
@@ -240,7 +240,7 @@ TTP 也有可能在技術層面遇到問題（例如：通信容易遇到瓶頸�
 
 Hash H（c）用作 eDelivery 的識別碼。當發送方執行智能合約的取消功能時，她必須指出所有未發送 hBi 的用戶的身份（由集合 B’’ 表示）。就智能合約而言，它將負責檢查集合 B’’ 中的任何用戶是否已通過 TTP 完成交換。在這種情況下，它會將相應的 NRR 證據（針對特定的 Bi）發送給發送方。否則，未完成的接收方將被包括在已取消的用戶組中（B’’ — 已取消）。因此，在此階段結束時，發送方 A 將與所有接收方完成公平交換，或者令人滿意，因為她已經收到了 hBi，或者因為取消了。
 
-![](/img/99.png)
+<div align="center"><img width="500"  src="/img/99.png"/></div>
 <center><strong>圖5 鏈上取消子協議</strong></center>
 
 ## C. 多方完成子協議
@@ -251,7 +251,7 @@ Hash H（c）用作 eDelivery 的識別碼。當發送方執行智能合約的�
 
 在圖6中，描述了收件方，TTP 和區塊鏈在異常情況下完成機密 eDelivery 所採取的操作。 TTP 基於區塊鏈中存儲的有關此 eDelivery 的信息。在此子協議中，智能合約檢查請求是否來自 TTP，然後驗證聲明的收件人是否已取消其郵件傳遞的用戶。在這種情況下，會發出適當的取消證據。否則，智能合約在區塊鏈中存儲收到的 hBi，並通過將 Bi 添加到 B’’ 來完成已完成此交換的用戶組 — 已完成。最後，TTP 將 kT 發送給 Bi，接收者能夠閱讀該消息並完成 NRO 證據。
 
-![](/img/100.png)
+<div align="center"><img width="800"  src="/img/100.png"/></div>
 <center><strong>圖6 鏈上完成子協議</strong></center>
 
 # 第八章節 - 智能合約
@@ -263,35 +263,39 @@ Hash H（c）用作 eDelivery 的識別碼。當發送方執行智能合約的�
 
 底下將會展示各種功能的智能合約撰寫範例
 
-![](/img/101.png)
+<div align="center"><img width="500"  src="/img/101.png"/></div>
 <center><strong>圖7 Variables 屬性定義</strong></center>
 
-![](/img/102.png)
+<div align="center"><img width="500"  src="/img/102.png"/></div>
 <center><strong>圖8 接受 function</strong></center>
 
-![](/img/103.png)
+<div align="center"><img width="500"  src="/img/103.png"/></div>
 <center><strong>圖9 完成 function</strong></center>
 
-![](/img/104.png)
+<div align="center"><img width="500"  src="/img/104.png"/></div>
 <center><strong>圖10 取消 function</strong></center>
 
 ## 機密多方註冊eDelivery協議的智能合約
 
 底下將會展示各種功能的智能合約撰寫範例
 
-![](/img/105.png)
+<div align="center"><img width="500"  src="/img/105.png"/></div>
+
 <center><strong>圖11 屬性以及建構子</strong></center>
 
-![](/img/106.png)
+<div align="center"><img width="500"  src="/img/106.png"/></div>
+
 <center><strong>圖12 取消 function</strong></center>
 
-![](/img/107.png)
+<div align="center"><img width="500"  src="/img/107.png"/></div>
+
 <center><strong>圖13 完成 function</strong></center>
 
-![](/img/108.png)
+<div align="center"><img width="500"  src="/img/108.png"/></div>
+
 <center><strong>圖14 新增接收方 function</strong></center>
 
-![](/img/109.png)
+<div align="center"><img width="500"  src="/img/109.png"/></div>
 <center><strong>圖15 非機密協議中的狀態生命週期</strong></center>
 
 # 結論
