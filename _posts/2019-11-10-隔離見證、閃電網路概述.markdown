@@ -64,7 +64,7 @@ hero_image: /img/hero.png
 
 Alice和Bob各自0.5BTC的餘額，此時Alice從Bob處購買了一件商品，價格為0.1BTC，那麼餘額應該變為Alice 0.4BTC，Bob 0.6BTC。於是建立新的Commitment Tx，對於Alice來說是C2a 和RD2a，對於Bob來說是C2b和RD2b，過程與上面類似。
 
-![](/img/127.jpg)
+![](/img/127.png)
 
 此時兩個狀態均是有效的，那麼最核心的問題來了，如何才能徹底廢棄掉C1a和C1b呢？
 RSMC採用了一個非常巧妙的方法，在C1a的第一個輸出中，採用了Alice2和Bob的多重簽名，Alice將Alice2的私鑰交給Bob，即表示Alice放棄C1a，承認C2a。
