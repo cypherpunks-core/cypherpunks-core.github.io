@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "BIP: 173 - Bech32地址格式"
+title:  "BIP 173 Bech32 address"
 date:   2019-11-10
 categories: news
-description: "checksum和的base32格式" Bech32"，以及使用該格式的native segregated witness output地址的標準"
+description: "本文件提出了checksum和的base32格式"
 image: '/img/124.png'
 published: true
 hero_image: /img/hero.png
