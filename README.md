@@ -64,4 +64,4 @@
 ```
     $ bundle exec jekyll server --future
 ```
-若執行成功，下方將顯示運行中的 _Server address_ ，預設為 _Server address_: `http://127.0.0.1:4000`。
+若執行成功，下方將顯示運行中的 _Server address_ ，預設為 _Server address_: [http://127.0.0.1:4000](http://127.0.0.1:4000)。
