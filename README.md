@@ -20,7 +20,20 @@
 
 **文章貢獻注意事項：**
 * 在`/_post`創建新的markdonwn文件，請依照發布 `年-月-日-標題.markdown`格式命名
-* `年-月-日-標題.markdown` 文件最上部的`YAML`請參考就有的文件模仿內容
+* `年-月-日-標題.markdown` 文件最上部的`YAML`請參考下方進行修改
+	> `image: '/img/125.png'` 圖片請放置在此處`/img/`，圖片命名格式`作者名-流水號.png`，圖片寬度為800
+```
+---
+layout: post
+title:  "文章標題"
+date:   2019-11-10
+categories: news
+description: "文章摘要"
+image: '/img/125.png'
+published: true
+hero_image: /img/hero.png
+---
+```
 * 圖片，請放置在`/img`中，因用圖片請用`/img.png`格式（請勿用託管圖片，怕圖片失效
 
 	> 圖片大小規範：
