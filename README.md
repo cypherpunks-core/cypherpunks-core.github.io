@@ -46,7 +46,7 @@
 
 ## 搭建測試環境
 
-**前置要求：**。  
+**前置要求：**  
 - [bundler](https://bundler.io/#getting-started)
 ```
     $ gem install bundler
