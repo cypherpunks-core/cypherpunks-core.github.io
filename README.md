@@ -2,7 +2,7 @@
 
 ```
     |_ /_post: blog 文章位置
-    |_ /_site : 編譯過的網站位置（ **不建議更動**
+    |_ /_site : 編譯過的網站位置  # 不建議更動
     |_ /_product : 書架上的書
     |_ /img: blog 圖片位置
     |_ /markdown__
@@ -13,7 +13,7 @@
     |            |_ satellit.md : 衛星計畫頁面		   
     |_ _data __    
     |         |__ navigation : 定義 網站最上層的分頁 相依/markdown    
-    |_ _layouts : 網頁框架定義（ **不建議更動**    
+    |_ _layouts : 網頁框架定義   # 不建議更動   
     |_ readme.md : 本文件位置    
     |_ index.md cypherpunks-core.github.io 首頁內容
 ```
