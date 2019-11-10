@@ -22,7 +22,7 @@
 * 在`/_post`創建新的markdonwn文件，請依照發布 `年-月-日-標題.markdown`格式命名
 * `年-月-日-標題.markdown` 文件最上部的`YAML`請參考下方進行修改
 	> * `image: '/img/125.png'` 圖片請放置在此處`/img/`，圖片命名格式`作者名-流水號.png`，圖片寬度為800
-	> * 如果還不想發布可以把`published: true`改為`false`
+	> * 如果還不想發布可以把`published: true`改為`false`。  
 	> **注意：**`layout: post`, `categories: news`, `hero_image: /img/hero.png`建議不要更動
 	```
 	---
