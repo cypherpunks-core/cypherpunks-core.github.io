@@ -1,4 +1,4 @@
-**路徑簡介：**
+## 路徑簡介：
 
 ```
     |_ /_post: blog 文章位置
@@ -18,12 +18,13 @@
     |_ index.md cypherpunks-core.github.io 首頁內容
 ```
 
-**文章貢獻注意事項：**
+## 文章貢獻注意事項：
 * 在`/_post`創建新的markdonwn文件，請依照發布 `年-月-日-標題.markdown`格式命名
 * `年-月-日-標題.markdown` 文件最上部的`YAML`請參考下方進行修改
 	> * `image: '/img/125.png'` 圖片請放置在此處`/img/`，圖片命名格式`作者名-流水號.png`，圖片寬度為800
 	> * 如果還不想發布可以把`published: true`改為`false`。  
 	> **注意：**`layout: post`, `categories: news`, `hero_image: /img/hero.png`建議不要更動
+
 	```
 	---
 	layout: post
@@ -36,37 +37,33 @@
 	hero_image: /img/hero.png
 	---
 	```
+
 * 圖片，請放置在`/img`中，因用圖片請用`/img.png`格式（請勿用託管圖片，怕圖片失效
 
 	> 圖片大小規範：
 	> * blog 圖片 寬度 800 x 600  # 寬度一定要800 高度隨意
 	> * 商品  圖片 寬度 640 x 480
 
+## 搭建測試環境
 
-# 本地運行
-## 前置要求
+**前置要求：**。  
 - [bundler](https://bundler.io/#getting-started)
 ```
     $ gem install bundler
 ```
 
-## 下載專案
+**下載專案：**    
 ```
     $ git clone https://github.com/cypherpunks-core/cypherpunks-core.github.io.git
 ```
 
-## 初始化
+**初始化：**    
 ```
     $ bundle install
 ```
 
-## 本地運行
+**本地運行：**    
 ```
     $ bundle exec jekyll server --future
 ```
 若執行成功，下方將顯示運行中的 _Server address_ ，預設為 _Server address_: `http://127.0.0.1:4000`。
-
-
----
-
-
