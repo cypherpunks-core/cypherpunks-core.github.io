@@ -15,7 +15,8 @@
     |         |__ navigation : 定義 網站最上層的分頁 相依/markdown    
     |_ _layouts : 網頁框架定義   # 不建議更動   
     |_ readme.md : 本文件位置    
-    |_ index.md cypherpunks-core.github.io 首頁內容
+    |_ index.md : cypherpunks-core.github.io 首頁內容
+    |_ classification.md : 文章分類分頁內容
 ```
 
 ## 文章貢獻注意事項：
