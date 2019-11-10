@@ -27,3 +27,5 @@
   link: /blog/
 - name: '關於'
   link: /markdown/about/
+- name: '分類'
+  link: /classification

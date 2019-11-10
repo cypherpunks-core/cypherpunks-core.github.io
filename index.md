@@ -9,7 +9,7 @@ image: /img/66.jpg
 show_sidebar: true
 description: 密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.
 hero_height: 0
-hero_link: https://github.com/cypherpunks-core
+hero_link: https://github.com/cypherpunks-core/cypherpunks-core.github.io
 hero_link_text: Github
 ---
 ## 相關訊息 | Related information
