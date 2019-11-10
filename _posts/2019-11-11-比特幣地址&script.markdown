@@ -27,8 +27,7 @@ hero_image: /img/hero.png
 其實地址的類型和交易的解鎖也是有很大的相關關係的。 **如果你創造了一種新的地址類型，並配置了相關的鎖定和解鎖 script ，那麼這個地址是可以工作的，只是沒有錢包支援，你需要提供能夠利用這種地址類型，傳送解鎖和鎖定 script 的客戶端，這樣你的地址就可以生效了，當然你也要相容其他類型，如果傳送的地址類型是其他的，那你的輸出 script 要按照對應地址類型的要求來才行** 。
 
 比特幣地址的生成規則如下：
-
-![](https://raw.githubusercontent.com/gavin-account/blog-pics/master/blockchain/%E4%BC%A0%E7%BB%9F%E6%AF%94%E7%89%B9%E5%B8%81%E5%9C%B0%E5%9D%80%E7%94%9F%E6%88%90%E7%AD%96%E7%95%A5.png)
+<div align="center"><img width="500"  src="/img/132.png"/></div>
 
 ## 傳統的比特幣地址 script P2PKH
 
@@ -43,7 +42,7 @@ hero_image: /img/hero.png
 <sig> <pubk>
 ```
 那麼整體的 script 是這樣的：
-![](https://github.com/gavin-account/blog-pics/blob/master/blockchain/p2pkh%E8%84%9A%E6%9C%AC%E5%9B%BE%E7%A4%BA.png?raw=true)
+![](/img/133.png)
 
 ## P2SH
 
