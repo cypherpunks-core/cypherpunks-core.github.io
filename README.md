@@ -45,9 +45,7 @@
 	> * 商品  圖片 寬度 640 x 480
 
 ## 搭建測試環境
-
-**前置要求：**  
-- [bundler](https://bundler.io/#getting-started)
+**前置要求 - [bundler](https://bundler.io/#getting-started)：**  
 ```
     $ gem install bundler
 ```
