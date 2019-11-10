@@ -7,10 +7,10 @@
     |_ /img: blog 圖片位置
     |_ /markdown_____
     |               |_ knowledge : 存放知識庫文章
-    |			    |_ resource : 存放資源文章
-    |			    |_ about.md : 關於我們的頁面
-    |			    |_ product.md : 書架頁面
-    |			    |_ satellit.md : 衛星計畫頁面		   
+    |               |_ resource : 存放資源文章
+    |               |_ about.md : 關於我們的頁面
+    |               |_ product.md : 書架頁面
+    |               |_ satellit.md : 衛星計畫頁面		   
     |_ _data ____    
     |           |__ navigation : 定義 網站最上層的分頁 相依/markdown    
     |_ _layouts : 網頁框架定義（ **不建議更動**    
