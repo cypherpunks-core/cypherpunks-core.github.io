@@ -222,21 +222,21 @@ Thanks goes to Gregory Maxwell for suggesting that the argument be compared agai
 
 PayPub
 
-* https://github.com/unsystem/paypub
+* [https://github.com/unsystem/paypub](https://github.com/unsystem/paypub)
 
 Jeremy Spilman支付通道
 
-* https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002433.html
+* [https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002433.html](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002433.html)
 
 ## 實現
 
 Python / python-bitcoinlib
 
-* https://github.com/petertodd/checklocktimeverify-demos
+* [https://github.com/petertodd/checklocktimeverify-demos](https://github.com/petertodd/checklocktimeverify-demos)
 
 JavaScript / Node.js / bitcore
 
-* https://github.com/mruddy/bip65-demos
+* [https://github.com/mruddy/bip65-demos](https://github.com/mruddy/bip65-demos)
 
 ## 版權 | Copyright
 
