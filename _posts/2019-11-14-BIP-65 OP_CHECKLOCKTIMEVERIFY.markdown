@@ -9,8 +9,7 @@ published: true
 hero_image: /img/hero.png
 ---
 
-## 摘要
-
+[原文](http://gavinzhang.work/blockchain/%E6%AF%94%E7%89%B9%E5%B8%81/BIP-65%20OP-CHECKLOCKTIMEVERIFY.html):BIP-65 OP_CHECKLOCKTIMEVERIFY      
 該BIP為比特幣腳本系統描述了一個新的操作碼（OP_CHECKLOCKTIMEVERIFY），該操作碼允許交易輸出在未來的某個點之前變得不可花費。
 
 ## 概要
