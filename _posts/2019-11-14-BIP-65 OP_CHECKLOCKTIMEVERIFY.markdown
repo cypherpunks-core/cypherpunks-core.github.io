@@ -3,40 +3,40 @@ layout: post
 title:  "BIP-65 OP_CHECKLOCKTIMEVERIFY"
 date:   2019-11-14
 categories: news
-description: "該操作碼允許交易輸出在未來的某個點之前變得不可花費。"
+description: "該 OPCode 允許交易輸出在未來的某個點之前變得不可花費。"
 image: '/img/X.jpg'
 published: true
 hero_image: /img/hero.png
 ---
 
 [原文](http://gavinzhang.work/blockchain/%E6%AF%94%E7%89%B9%E5%B8%81/BIP-65%20OP-CHECKLOCKTIMEVERIFY.html):BIP-65 OP_CHECKLOCKTIMEVERIFY      
-該BIP為比特幣腳本系統描述了一個新的操作碼（OP_CHECKLOCKTIMEVERIFY），該操作碼允許交易輸出在未來的某個點之前變得不可花費。
+該BIP為比特幣 script 系統描述了一個新的 OPCode （OP_CHECKLOCKTIMEVERIFY），該 OPCode 允許交易輸出在未來的某個點之前變得不可花費。
 
 ## 概要
 
-**CHECKLOCKTIMEVERIFY重新定義了現有的NOP2操作碼(其實就是OP_CHECKLOCKTIMEVERIFY命令替換了OP_NOP2命令)。執行時，如果以下任何一個條件成立，則指令碼直譯器將以錯誤終止：**
+**CHECKLOCKTIMEVERIFY重新定義了現有的`NOP2` OPCode (其實就是`OP_CHECKLOCKTIMEVERIFY`指令替換了`OP_NOP2`指令)。執行時，如果以下任何一個條件成立，則指令碼直譯器將以錯誤終止：**
 
 * 堆棧是空的;
 * 堆棧中的頂層項目小於0;
-* 頂層堆棧項的鎖定時間類型（高度vs.時間戳）與nLockTime欄位不同;
-* 頂部堆棧項大於事務的nLockTime欄位;
-* txin（交易輸入）的nSequence欄位是`0xffffffff`;
+* 頂層堆棧項的鎖定時間類型（高度vs.時間戳）與`nLockTime`欄位不同;
+* 頂部堆棧項大於交易的`nLockTime`欄位;
+* `txin`（交易輸入）的`nSequence`欄位是`0xffffffff`;
 
 否則，指令碼執行將繼續，如同NOP執行一樣。
 
-交易中的nLockTime欄位可防止事務被挖掘，直到達到某個塊高度或塊時間為止。通過將傳給CHECKLOCKTIMEVERIFY的參數與nLockTime欄位進行比較，我們間接驗證是否已達到所需的塊高度或塊時間; 直到該塊高度或塊時間已經達到，交易輸出仍然不可花費。
+交易中的`nLockTime`欄位可防止交易被挖出，直到達到某個區塊高度或區塊時間為止。通過將傳給`CHECKLOCKTIMEVERIFY`的參數與`nLockTime`欄位進行比較，我們間接驗證是否已達到所需的區塊高度或區塊時間; 直到該區塊高度或區塊時間已經達到，交易輸出仍然不可花費。
 
 ## 動機
 
-交易中的nLockTime欄位可用於證明 將來可以花費這筆交易輸出，方法是構造一個有效的交易開銷，並對nLockTime欄位進行設定。
+交易中的`nLockTime`欄位可用於證明 將來可以花費這筆交易輸出，方法是構造一個有效的交易開銷，並對`nLockTime`欄位進行設定。
 
 然而，nLockTime欄位不能證明在未來的某個時間內不可能花費交易輸出，因為無法知道是否建立了支出該輸出的其他交易的有效簽名。
 
 ## 第三方託管
 
-**如果Alice和Bob聯合經營一家企業，他們可能希望確保所有資金都儲存在需要雙方合作支出的二分之二的多重（多簽名的交易）交易輸出中。但是，他們認識到，在特殊情況下，例如任何一方受到“巴士撞擊”，他們都需要備份計劃來檢索資金。因此，他們任命他們的律師Lenny擔任第三方。**
+**如果Alice和Bob聯合經營一家企業，他們可能希望確保所有資金都儲存在需要雙方合作支出的2-of-2的多重（多簽名的交易）交易輸出中。但是，他們認識到，在特殊情況下，例如任何一方受到“巴士撞擊”，他們都需要備份計劃來檢索資金。因此，他們任命他們的律師Lenny擔任第三方。**
 
-在任何時候，Lenny都可以與Alice或Bob合謀竊取資金，這是一個標準的2分之3 多簽名。同樣，Lenny可能寧願不立即獲得資金，以阻止居心不良的人試圖暴力獲取他的金鑰。
+在任何時候，Lenny都可以與Alice或Bob合謀竊取資金，這是一個標準的2-of-3 多簽名。同樣，Lenny可能寧願不立即獲得資金，以阻止居心不良的人試圖暴力獲取他的金鑰。
 
 但是，使用CHECKLOCKTIMEVERIFY可以將資金儲存在以下格式的scriptPubKeys中：
 
@@ -61,13 +61,13 @@ Lenny經過3個月後，Alice或Bob中的一個可以用以下指令碼支付資
 ```
 ## 非互動式時間鎖定退款
 
-存在許多協議，其中建立交易輸出，這需要雙方的合作來花費輸出。為確保一方的失敗不會導致資金損失，退款交易使用nLockTime提前設定。這些退款交易需要互動式建立，此外，目前易受交易延展性影響。CHECKLOCKTIMEVERIFY可用於這些協議，用非互動式設定取代互動式設定，另外，使交易延展性不成問題。
+存在許多協議，其中建立交易輸出，這需要雙方的合作來花費輸出。為確保一方的失敗不會導致資金損失，退款交易使用`nLockTime`提前設定。這些退款交易需要互動式建立，此外，目前易受交易延展性影響。`CHECKLOCKTIMEVERIFY`可用於這些協議，用非互動式設定取代互動式設定，另外，使交易延展性不成問題。
 
 ### 雙因素錢包
 
-諸如GreenAddress之類的服務將比特幣儲存為2比2的多簽名指令碼ScriptPubKey，使得一個金鑰對由使用者控制，另一個金鑰對由服務控制。為了花費資金，使用者使用本地安裝的生成所需簽名之一的錢包軟體，然後使用第二因素身份驗證方法來授權該服務建立第二個SIGHASH_NONE簽名，該簽名在將來的某個時間被鎖定，並向用戶傳送該儲存簽名。如果使用者需要花費資金並且服務不可用，他們會等到nLockTime過期。
+諸如GreenAddress之類的服務將比特幣儲存為2-of-2的多簽名指令碼ScriptPubKey，使得一個金鑰對由使用者控制，另一個金鑰對由服務控制。為了花費資金，使用者使用本地安裝的生成所需簽名之一的錢包軟體，然後使用第二因素身份驗證方法來授權該服務建立第二個`SIGHASH_NONE`簽名，該簽名在將來的某個時間被鎖定，並向用戶傳送該儲存簽名。如果使用者需要花費資金並且服務不可用，他們會等到`nLockTime`過期。
 
-問題是，在許多情況下，使用者將不會擁有一些或全部交易輸出的有效簽名。使用CHECKLOCKTIMEVERIFY而不是按需建立退款簽名而是使用以下形式的scriptPubKeys：
+問題是，在許多情況下，使用者將不會擁有一些或全部交易輸出的有效簽名。使用`CHECKLOCKTIMEVERIFY`而不是按需建立退款簽名而是使用以下形式的scriptPubKeys：
 
 ```
 IF
@@ -114,7 +114,7 @@ ENDIF
 ```
 ## 完全替換nLockTime欄位
 
-另外，請注意如果SignatureHash()演算法可以選擇覆蓋指令碼的一部分，那麼簽名可能會要求指令碼Sig包含CHECKLOCKTIMEVERIFY操作碼，並且還需要執行它們。（CODESEPARATOR操作碼非常接近於在比特幣的v0.1中實現這一點）。這種每簽名功能可以完全取代每個交易的nLockTime欄位，因為有效簽名現在可以證明交易輸出可以花費。
+另外，請注意如果SignatureHash()演算法可以選擇覆蓋指令碼的一部分，那麼簽名可能會要求指令碼Sig包含CHECKLOCKTIMEVERIFY OPCode ，並且還需要執行它們。（CODESEPARATOR OPCode 非常接近於在比特幣的v0.1中實現這一點）。這種每簽名功能可以完全取代每個交易的nLockTime欄位，因為有效簽名現在可以證明交易輸出可以花費。
 
 ## 詳細規則
 
@@ -194,17 +194,17 @@ https://github.com/petertodd/bitcoin/commit/ab0f54f38e08ee1e50ff72f801680ee84d0f
 
 ## 部署
 
-我們重用BIP66中使用的雙閾值IsSuperMajority()切換機制，其閾值相同，但nVersion=4。新規則對於nVersion=4的每個塊（高度為H）有效，並且至少有750之前的塊（高度為H-1000..H-1）的nVersion>=4。此外，當塊之前的1000個塊中的950個具有nVersion>=4時，nVersion<4塊將變為無效，並且全部進一步的阻止執行新的規則。
+我們重用BIP66中使用的雙閾值IsSuperMajority()切換機制，其閾值相同，但nVersion=4。新規則對於nVersion=4的每個區塊（高度為H）有效，並且至少有750之前的區塊（高度為H-1000..H-1）的nVersion>=4。此外，當區塊之前的1000個區塊中的950個具有nVersion>=4時，nVersion<4區塊將變為無效，並且全部進一步的阻止執行新的規則。
 
 應該注意的是，BIP9涉及永久性地將高位設定為1，這導致nVersion>=所有先前的IsSuperMajority()軟分叉，因此nVersion中的位不會永久丟失。
 
 ## SPV客戶
 
-儘管SPV客戶端（目前）無法驗證塊，但相信礦工為他們進行驗證，但他們能夠驗證塊頭並因此可以驗證部署規則的子集。如果達到95％的閾值，如果1000個前面的塊中的950個 `nVersion>=4` ，則SPV客戶端應拒絕 `nVersion<4` 塊，以防止未升級的礦工剩餘的5％發生虛假確認。
+儘管SPV客戶端（目前）無法驗證區塊，但相信礦工為他們進行驗證，但他們能夠驗證區塊頭並因此可以驗證部署規則的子集。如果達到95％的閾值，如果1000個前面的區塊中的950個 `nVersion>=4` ，則SPV客戶端應拒絕 `nVersion<4` 區塊，以防止未升級的礦工剩餘的5％發生虛假確認。
 
 ## 積分
 
-感謝格雷戈裡麥克斯韋提出將參數與每個交易的nLockTime進行比較，而不是當前塊的高度和時間。
+感謝格雷戈裡麥克斯韋提出將參數與每個交易的nLockTime進行比較，而不是當前區塊的高度和時間。
 
 ## 參考
 
