@@ -4,7 +4,7 @@ title:  "BIP-65 OP_CHECKLOCKTIMEVERIFY"
 date:   2019-11-14
 categories: news
 description: "該 OPCode 允許交易輸出在未來的某個點之前變得不可花費。"
-image: '/img/X.jpg'
+image: '/img/135.jpg'
 published: true
 hero_image: /img/hero.png
 ---
@@ -65,7 +65,7 @@ Lenny經過3個月後，Alice或Bob中的一個可以用以下指令碼支付資
 
 ### 雙因素錢包
 
-諸如GreenAddress之類的服務將比特幣儲存為2-of-2的多簽名指令碼ScriptPubKey，使得一個金鑰對由使用者控制，另一個金鑰對由服務控制。為了花費資金，使用者使用本地安裝的生成所需簽名之一的錢包軟體，然後使用第二因素身份驗證方法來授權該服務建立第二個`SIGHASH_NONE`簽名，該簽名在將來的某個時間被鎖定，並向用戶傳送該儲存簽名。如果使用者需要花費資金並且服務不可用，他們會等到`nLockTime`過期。
+諸如GreenAddress之類的服務將比特幣儲存為2-of-2的多簽名指令碼ScriptPubKey，使得一個金鑰對由使用者控制，另一個金鑰對由服務控制。為了花費資金，使用者使用本地安裝的生成所需簽名之一的錢包軟體，然後使用雙因素身份驗證方法來授權該服務建立第二個`SIGHASH_NONE`簽名，該簽名在將來的某個時間被鎖定，並向用戶傳送該儲存簽名。如果使用者需要花費資金並且服務不可用，他們會等到`nLockTime`過期。
 
 問題是，在許多情況下，使用者將不會擁有一些或全部交易輸出的有效簽名。使用`CHECKLOCKTIMEVERIFY`而不是按需建立退款簽名而是使用以下形式的scriptPubKeys：
 
