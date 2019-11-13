@@ -59,11 +59,11 @@ Lenny經過3個月後，Alice或Bob中的一個可以用以下 OPCode 支付資�
 ```
 0 <Alice/Bob's signature> <Lenny's signature> 1
 ```
-## 非互動式時間鎖定退款
+## 非交互式定期退款 | Non-interactive time-locked refunds
 
 存在許多協議，其中建立交易輸出，這需要雙方的合作來花費輸出。為確保一方的失敗不會導致資金損失，退款交易使用`nLockTime`提前設定。這些退款交易需要互動式建立，此外，目前易受交易延展性影響。`CHECKLOCKTIMEVERIFY`可用於這些協議，用非互動式設定取代互動式設定，另外，使交易延展性不成問題。
 
-### 雙因素錢包
+### 雙因素錢包 | Two-factor wallets
 
 諸如GreenAddress之類的服務將比特幣儲存為2-of-2的多重簽名 OPCode ScriptPubKey，使得一個金鑰對由使用者控制，另一個金鑰對由服務控制。為了花費資金，使用者使用本地安裝的生成所需簽名之一的錢包軟體，然後使用雙因素身份驗證方法來授權該服務建立第二個`SIGHASH_NONE`簽名，該簽名在將來的某個時間被鎖定，並向用戶傳送該儲存簽名。如果使用者需要花費資金並且服務不可用，他們會等到`nLockTime`過期。
 
@@ -80,11 +80,17 @@ ENDIF
 
 現在，用戶總是可以通過等待到期時間來花費他們的資金而無需服務的合作。
 
-### 支付通道
+### 支付通道 | Payment Channels
 
 傑里米·斯皮爾曼（Jeremy Spilman）style 的支付通道首先設定一個存款，由2-of-2的多重簽名，tx1控制的存款，然後調整第二個交易tx2，將tx1的輸出用於支付者和收款者。在釋出tx1之前，建立一個退款交易tx3，確保收款人消失時付款人可以取回其押金。當前創建退款交易的過程容易受到交易延展性攻擊的影響，此外，還要求付款人儲存退款。使用與雙因素錢包示例中相同的scriptPubKey形式可以解決這兩個問題。
 
-## 發布數據的無信任付款
+## 發布數據的無信任付款 | Trustless Payments for Publishing Data
+
+The PayPub protocol makes it possible to pay for information in a trustless way by first proving that an encrypted file contains the desired data, and secondly crafting scriptPubKeys used for payment such that spending them reveals the encryption keys to the data. However the existing implementation has a significant flaw: the publisher can delay the release of the keys indefinitely.
+
+This problem can be solved interactively with the refund transaction technique; with CHECKLOCKTIMEVERIFY the problem can be non-interactively solved using scriptPubKeys of the following form:
+
+---
 
 通過首先證明加密文件包含所需的數據，然後製作用於支付的scriptPubKeys以便使它們花費來顯示數據的加密密鑰，PayPub協議可以以不信任的方式支付信息。但是，現有的實現存在一個重大缺陷：發布者可以無限期地延遲密鑰的發布。
 
@@ -104,21 +110,26 @@ ENDIF
 
 ## 證明犧牲礦工的手續費 | Proving sacrifice to miners' fees
 
+Proving the sacrifice of some limited resource is a common technique in a variety of cryptographic protocols. Proving sacrifices of coins to mining fees has been proposed as a universal public good to which the sacrifice could be directed, rather than simply destroying the coins. However doing so is non-trivial, and even the best existing technqiue - announce-commit sacrifices - could encourage mining centralization. CHECKLOCKTIMEVERIFY can be used to create outputs that are provably spendable by anyone (thus to mining fees assuming miners behave optimally and rationally) but only at a time sufficiently far into the future that large miners can't profitably sell the sacrifices at a discount.
+
+---
+
 證明犧牲一些有限的資源是各種密碼協議中的常用技術。已經提出了證明將硬幣犧牲為採礦費的做法，作為犧牲品可以針對的一種普遍的公共物品，而不是簡單地銷毀硬幣。但是，這樣做並非易事，即使是現有的最佳技術-宣布承諾犧牲-也會鼓勵採礦業的集中化。 CHECKLOCKTIMEVERIFY可用於創建任何人都可證明可使用的輸出（因此，假設礦工的行為合理且合理，則要收取採礦費），但前提是在足夠遠的將來，大型礦工無法以折扣價出售利潤。
 
 證明犧牲一些有限的資源是各種密碼協議中的常見技術。已經提出將幣的犧牲證明為挖礦手續費，作為犧牲可以指向的普遍公共物品，而不是簡單地摧毀幣。然而，這樣做並非微不足道，即使是最好的現有技術 - 宣佈 - 承諾 - 也會鼓勵礦業集中。`CHECKLOCKTIMEVERIFY`可用於建立任何人都可以花費的產出（因此，假設礦工的行為是理想的和理性的，那麼開採費），但只有在未來足夠遠的時間，大型礦工才能以折扣銷售犧牲品。
 
-## 凍結資金
+## 凍結資金 | Freezing Funds
 
 除了使用冷儲存，硬體錢包和P2SH multisig輸出來控制資金之外，現在資金可以直接在區塊鏈中凍結在UTXO中。使用下面的scriptPubKey，在提供的失效時間之前，沒有人能夠使用安全輸出。這種可靠地凍結資金的能力在需要減少脅迫或沒收風險的情況下可能會有用。
 ```
 <expiry time> CHECKLOCKTIMEVERIFY DROP DUP HASH160 <pubKeyHash> EQUALVERIFY CHECKSIG
 ```
-## 完全替換nLockTime欄位
+## 完全替換nLockTime欄位 | Replacing the nLockTime field entirely
 
 另外，請注意如果SignatureHash()演算法可以選擇覆蓋 OPCode 的一部分，那麼簽名可能會要求 OPCode Sig包含CHECKLOCKTIMEVERIFY OPCode ，並且還需要執行它們。（CODESEPARATOR OPCode 非常接近於在比特幣的v0.1中實現這一點）。這種每簽名功能可以完全取代每個交易的nLockTime欄位，因為有效簽名現在可以證明交易輸出可以花費。
 
-## 詳細規則
+## 詳細規格 | Detailed Specification
+
 
 參考下面轉載的參考實現，瞭解這些語義的精確語義和詳細基本原理。
 ```
@@ -227,11 +238,11 @@ JavaScript / Node.js / bitcore
 
 * https://github.com/mruddy/bip65-demos
 
-## 版權
+## 版權 | Copyright
 
-該檔案置於公共領域。
+This document is placed in the public domain.
 
 ## 引用和參考
 
-BIP65：檢查鎖定時間驗證
-bips/bip-0065.mediawiki
+* [BIP65：檢查鎖定時間驗證](http://www.chidaolian.com/article-680-4)
+* [bips/bip-0065.mediawiki](https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki)
