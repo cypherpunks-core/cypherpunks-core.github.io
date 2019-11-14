@@ -1,0 +1,241 @@
+---
+layout: post
+title:  "基於數位浮水印和區塊鏈的版權管理系統設計方案"
+date:   2019-11-13
+categories: news
+description: "過去，基於數位浮水印的數位版權保護系統主要在改進演算法效率上，而忽略浮水印訊息的生成和儲存空間。在本論文提出一個全新且基於數位浮水印和訊息的區塊鏈版權管理系統之設計機制，它結合數位浮水印、區塊鏈、感知雜湊、QR code 和星際檔案系統（IPFS）。"
+image: '/img/134.jpg'
+published: true
+hero_image: /img/hero.png
+---
+
+> 本篇文章翻譯自 [Design Scheme of Copyright Management System Based on Digital Watermarking and Blockchain](https://ieeexplore-ieee-org.autorpa.lib.nkust.edu.tw/document/8377886/references#references) 的內容，數位浮水印概念我們從圖像、影像..等，已經玩了許久當他結合區塊鏈又會產生什麼火花呢？
+
+# 摘要:
+
+過去，基於數位浮水印的數位版權保護系統主要在改進演算法效率上，而忽略浮水印訊息的生成和儲存空間。在本論文提出一個全新且基於數位浮水印和訊息的區塊鏈版權管理系統之設計機制，它結合數位浮水印、區塊鏈、感知雜湊、QR code 和星際檔案系統（IPFS）。其中，區塊鏈用於安全儲存浮水印訊息，並為多個浮水印（多個版權）提供時間戳認證，以確認創建順序。感知雜湊用於基於圖像的結構信息生成雜湊，無需原始圖像即可確認浮水印訊息。QR code 用於生成包含圖像之雜湊和版權訊息作為浮水印圖像的 QR Code，以提高數位浮水印的強韌性和容量；IPFS 在沒中心伺服器的情況下儲存和分散浮水印的圖像。該機制可以增強數位浮水印技術在版權保護領域的有效性。透過這種方式，可以使用 P2P 網路來集成並完成版權管理和版權作品的出版，而無需受信任的第三方。節點依靠密碼學來確認彼此的身份並確保訊息之安全性。它可以減少訊息洩露，數據破壞和造成過去的集中式系統崩潰等風險。這提高了訊息的安全性和透明度，並加快了受版權保護作品的出版，以促進網路中的流通。該方案還可以改善多個創作之版權保護。結合區塊鏈和多個數位浮水印，在創作過程中記錄每個版權所有者的版權訊息並充分證明，為了保護每個版權所有者的合法權益。
+
+# 第一章節 - 介紹
+
+隨著數位科技和互聯網之發展，以圖像、音頻、影像和其他數位格式的多媒體和數位作品已經在互聯網上發布，其版權保護和訊息完整性保證已逐漸成為迫切需要解決的問題。由於數位作品易於複製、處理、傳播和公開，因此竊盜者利用數位作品的這些特徵破壞版權擁有者的合法權利以獲得個人利益。
+
+數位浮水印技術可用於數位版權之保護 [1] [2] [3]。它可以將一些重要機密訊息（例如版權所有者的個人信息）添加到數位作品中，且不會被數位作品使用者察覺。此外，嵌入式數位浮水印可與數位作品的副本一起複製，在實際應用中更加方便有效。但是數位浮水印技術在訊息的儲存和認證、強韌性和儲存空間以及其他方面仍有改進的空間。
+
+除虛擬貨幣外，近年來，區塊鏈技術已開始在其他領域擴展，包括數位版權保護。[4] [5] [6]。為了保護傳統的版權，版權所有者需要向註冊機構提供數位作品和一些個人訊息作為版權訊息。中心化機構將手動檢查提交的訊息並將其存儲在中心化伺服器中。這不僅導致效率低下和成本增加，而且還存在訊息被篡改和洩漏的風險。同時，這也給版權驗證者進行數位取證帶來了很多麻煩，因為有必要證明該訊息確實是原始訊息且不得更改。對於此方案，將使用區塊鏈儲存版權信息，並將訊息寫入區塊鏈後，將很難更改它。這將極大化促進版權驗證者的數位取證。在實際應用中，區塊鏈還可以幫助確認多個浮水印（多個版權），因為每個區塊都包含不可更改的時間戳記。如果獲得了所有浮水印訊息，即可在區塊鏈中搜索相應的區塊並檢查時間戳記。可以知道多個浮水印的嵌入順序，換句話說，可以知道數位圖像的創建順序。
+
+將圖像直接存儲在區塊鏈中是不切實際的。一種更實用、更方便的方法是對圖像進行雜湊處理，在區塊鏈中記錄這些圖像的雜湊值，然後將圖像文件儲存在其他位置以供調用。然而，對於圖像、文件之類的多媒體文件，使用 MD5 和 SHA256 之類的傳統密碼雜湊演算法並不是很合適 [7]。
+
+因為除了篡改內容外，圖像還將經歷正常的操作，例如添加數位浮水印、過濾、旋轉、壓縮等。這些操作不會引起圖像內容的變化，因此不會引起人體感覺系統產生感覺差異，當然這些圖像仍然被人類視為同一圖像。
+
+但是，此圖像的數據結構已被電腦更改，因此傳統雜湊函數的計算結果將完全不同。顯然，這不是我們想要看到的結果，因此它需要一種對內容操作具有強韌性並且對內容篡改敏感的新雜湊算法。
+
+感知雜湊函數在計算雜湊值之前對圖像執行一系列處理，例如減小大小和簡化顏色，刪除圖像的細節以及保留這些圖像的結構信息[7]。
+
+只要某個圖像的結構沒有改變，雜湊就不會改變 [8] [9]。
+換句話說，在將數位浮水印添加到原始圖像後，結構信息將不會更改通過相同的感知雜湊函數計算浮水印圖像，並將計算出的雜湊值與提取的數位浮水印訊息進行比較。換句話說，在將數位浮水印添加到原始圖像後，通過相同的感知哈希函數計算水印圖像後，結構信息將不會更改。換句話說，在將數位浮水印添加到原始圖像，通過相同的感知雜湊函數計算浮水印圖像並將計算出的雜湊值與提取的數位浮水印信息進行比較之後，結構信息將不會改變。這樣，可以在沒有原始圖像的情況下對帶有浮水印的數位圖像進行自我認證[10] [11]。
+
+<div align="center"><img width="500" src="/img/panda-1.png"/></div>
+
+<center><strong>圖1 方案示意圖</strong></center>
+
+![](https://ieeexplore-ieee-org.autorpa.lib.nkust.edu.tw/mediastore_new/IEEE/content/media/8376143/8377808/8377886/8377886-fig-1-source-small.gif)
+
+
+就用於版權保護的數位浮水印技術而言，對其強韌性的要求實際上非常高 [1][2][3]。不僅要求在一系列操作或攻擊之後可以檢測並提取數位浮水印，而且還要求提取的數位浮水印應清晰可辨，以確認版權信息。另外，浮水印空間也是一個重要特徵，因為它必須具有足夠的版權信息才能發揮版權保護的作用。對於這兩點，QR Code 圖像可用作數位浮水印圖像[12][13][14][15]。
+
+首先，QR Code 具有一定的容錯能力。即使 QR Code 圖像上有污點，機器仍可以讀取。通常，QR Code 圖像的污損區域仍可以在 7％-30％ 的範圍內讀取[12] [13]。這可以有效地提高數位浮水印技術的強韌性。其次，QR Code 可儲存更多信息，這對於提高水印空間非常有幫助。最後，大多數電子設備，尤其是智能手機，都可以識別 QR Code 圖像，並且在實際應用中會很方便。
+
+與其他傳統網路平台一樣，它需要有一個儲存圖像的位置，供用戶瀏覽和下載。傳統的中心化儲存有很多缺點，例如，它需要大型伺服器儲存。這樣會增加營運成本，並且一旦伺服器斷電或物理損壞和其他嚴重問題，就會影響圖像用戶的使用並帶來很多不便。更嚴重的是，一旦伺服器受到駭客攻擊，它將洩漏或破壞大量重要訊息，從而導致嚴重且不可估量的損失。
+
+星際檔案系統是點對點分散式文件儲存系統，用於通信協議和內容傳遞之網路[16]。為了便於描述，後面將使用縮寫詞 IPFS 來表示該系統。與 HTTP 不同，IPFS 不再關心中央伺服器的位置，並且不考慮文件名和路徑。它僅注意文件中可能出現的內容。將任何文件放置在 IPFS 節點上之後，將根據該文件的內容計算加密雜湊。當要求 IPFS 提供文件之雜湊時，它使用分散式雜湊表來尋找此文件所在的節點，然後搜索此文件並進行驗證。因此，使用 IPFS 可以大大降低網路平台的運營成本，並提高圖像文件儲存的安全性。此外，IPFS 實現了 HTTP 閘道，圖像用戶可用通用瀏覽器瀏覽任何內容並下載它們。
+
+本文的其餘部分安排如下。第二章節介紹該方案基於數位浮水印的圖像版權保護系統的組成以及該方案的過程。第三章節介紹了該方案的仿真。最後，第四章節總結了論文。
+
+# 第二章節 - 基於數位浮水印技術之改進數位圖像版權保護系統
+
+圖1 為該方案的示意圖。 首先在 A 小節中詳細介紹該方案的具體組件。圖中標誌的序列號是該系統的實現順序，將會在 B 小節中描述該方案的過程。
+
+## A. 計畫的組成
+
+該方案的組成部分可以分為兩部分。數位浮水印系統的第一部分包括雜湊生成、區塊鏈儲存、數位浮水印之圖像生成和數位浮水印嵌入。第二部分是關於含有浮水印的圖像和版權訊息的儲存和傳播。首先介紹第一部分，如下：
+
+1. 感知雜湊函數將用於計算圖像的雜湊值作為圖像的 ID 號。其目的是在嵌入數位浮水印前和嵌入數位浮水印後，此圖像的雜湊值將不會更改。為了確保沒有原始圖像仍然可以驗證浮水印訊息。由於感知雜湊函數的這一特性，為了確保原始圖像和浮水印圖像不會混淆，還需要使用傳統的密碼雜湊函數。利用加密雜湊函數的特性，即在添加浮水印之前和之後對數據進行修改的敏感性，對兩個圖像進行加密雜湊計算，以證明它們之間的順序。
+
+2. 區塊鏈技術用於儲存有關圖像的訊息，如圖 1 所示，圖像的感知雜湊值，圖像所有者的訊息等。由於區塊鏈本質上是一個去中心化的數據庫，因此它可以通過**加密**來相互驗證彼此的身份並安全地儲存沒有受信任的第三方的數據。區塊鏈網路中的每個節點都可以備份完整的區塊鏈數據，並且節點之間不知道彼此的真實身份。這大大降低了節點之間發生**合夥篡改**數據的風險。在實際應用中，面對多個浮水印（多個版權）的問題，可以使用區塊鏈的時間戳記功能來解決。如前所述，關於區塊鏈的安全性，透過時間戳記數據也是不可更改的。獲取浮水印訊息後，可以根據該訊息獲取對應的區塊，以獲得對應的時間訊息，以證明多個浮水印之序列。
+
+3. 在所有必要訊息都記錄在區塊鏈上後，這是第一部分的最後階段，即數位浮水印的生成和嵌入。為了提高數位浮水印的強韌性和攜帶的信息量，使用 QR Code 生成浮水印圖像。此 QR code 圖像包含記錄在區塊鏈中的擁有者的數位簽章。 為了提高數位浮水印的強韌性，浮水印嵌入過程採用基於**頻率域**的數位浮水印嵌入方法。這裡使用的空頻域變換方法是離散餘弦變換（DCT）。具體方法將在第三章節中介紹。
+
+數位浮水印系統的工作已經結束，並將包含擁有者的數位簽章訊息的數位浮水印嵌入到原始圖像中。接下來是圖像用戶部分。該方案的第二部分如下：
+
+1. 為了解決集中式伺服器中可能出現的問題，IPFS 用於儲存和傳播帶浮水印的圖像。將一個文件夾上傳到 IPFS 網路，該文件夾包括一個帶浮水印的圖像，以及一個文本文件，其中包含有關其相應區塊的訊息，該文件包含該區塊的**索引**、該圖像的**標題**，擁有者的名稱和電子郵件地址等。可以通過常見的瀏覽器瀏覽圖像和相關訊息，然後下載它們。具體操作也將在第三節中演示。
+
+## B. 計畫流程
+
+如 圖1 中的（1）-（5）所示，該方案的具體過程如下：
+
+1. 上傳原始圖像，然後提交一些版權擁有者的訊息和其他中介資料，例如真實姓名、電子郵件地址、圖片標題。 然後使用感知雜湊函數計算該圖像的感知雜湊值。 並使用加密雜湊函數來計算此原始圖像的加密雜湊值作為數位簽章。
+2. 感知雜湊值，版權擁有者的訊息和其他中介資料作為版權擁有者的數位簽章。 結合加密雜湊值，它們被用作交易的附加訊息，以向區塊鏈網路發起交易請求，並將這些記錄在區塊鏈中。
+3. 生成包含版權擁有者的數位簽章的 QR Code 圖像。 即感知雜湊值，版權擁有者的訊息和其他中介資料。
+4. 將此 QR Code 圖像用作數位浮水印圖像，將其嵌入到原始圖像中，並生成已添加數位浮水印的圖像，並使用加密雜湊函數來計算該浮水印圖像的加密雜湊值，並將其記錄在區塊鏈中。
+6. 將此帶浮水印的圖像文件及其阻止訊息上傳到 IPFS 網路。通過 IPFS 網路瀏覽並下載帶浮水印的圖像及其版權信息。
+
+`已經引入了 圖1 所示的過程。用戶在獲取圖像後還需要驗證圖像，如下所示：`
+
+6. 使用相同的感知雜湊函數來計算此浮水印圖像，並提取浮水印。將計算出的雜湊值，數位浮水印中的雜湊值和區塊鏈中的雜湊值相互比較以確定版權。
+
+至此，完整的過程結束了。前面提到的多個浮水印問題，即每個圖像修改器都要經過步驟（1）-（5），最終形成一個包含多個數位浮水印的數位圖像。 然後，在步驟（6）中，提取所有數位浮水印，並基於浮水印訊息檢索相應的區塊以獲得時間戳記訊息。 最後，證明了數位浮水印的嵌入順序和數位圖像的創建順序。
+
+# 第三章節 - 計畫實驗
+
+> 仿真圖像為lena.jpg，如圖2所示。
+
+<div align="center"><img width="500" src="/img/panda-2.png"/></div>
+
+<center><strong>圖2 原始 lena.jpg</strong></center>
+
+## A. 計算圖像之雜湊值
+
+在感知雜湊函數中，基本上有四個類別，即平均雜湊（AHA），差異雜湊（DHA），感知哈希（PHA）和小波雜湊（WHA）[12]。 由於仿真中 DHA的結果最好且誤差最小，因此選擇 DHA 進行實驗。 如圖3所示，lena.jpg 的哈希值是 6e0egedaccc85a1c。為了證明嵌入數位浮水印後圖像的變化，請使用 MD5 計算 lena.jpg，如圖4所示。
+
+<div align="center"><img width="500" src="/img/panda-3.png"/></div>
+
+<center><strong>圖3 lena.jpg 之雜湊值</strong></center>
+
+<div align="center"><img width="500" src="/img/panda-4.png"/></div>
+
+<center><strong>圖4 使用 MD5 計算 lena.jpg</strong></center>
+
+## B. 區塊鏈的產生
+
+為了便於演示，透過 GitHub [17] [18] [19] [20] 上的區塊鏈程式，撰寫一個區塊鏈程式來模擬滿足此方案要求的區塊鏈功能。 然後使用網站 https://www.getpostman.com/ 提供的 Postman 進行接口請求測試並讀取區塊鏈中的數據。如 圖5 所示，啟動了區塊鏈網路中的一個節點。
+
+<div align="center"><img width="500" src="/img/panda-5.png"/></div>
+
+<center><strong>圖5 在區塊鏈網路中跑節點</strong></center>
+
+如圖6所示，lena.jpg 的雜湊值和版權擁有者訊息作為附加訊息添加到交易中，然後將交易之應用程序啟動到區塊鏈網路。
+
+<div align="center"><img width="500" src="/img/panda-6.png"/></div>
+
+<center><strong>圖6 增加交易資訊至區塊中</strong></center>
+
+區塊鏈網路中的節點將透過挖礦生成一個新區塊，如圖7所示。
+
+<div align="center"><img width="500" src="/img/panda-7.png"/></div>
+
+<center><strong>圖7 挖礦和生成區塊</strong></center>
+
+經過其他節點確認後，新生成的區塊將添加到合法的區塊鏈中，如圖8所示。
+
+<div align="center"><img width="500" src="/img/panda-8.png"/></div>
+
+<center><strong>圖8 合法的區塊鏈</strong></center>
+
+## C. 生成 QR Code 圖像
+
+由於仿真圖像的尺寸為512 * 512，因此必須在可以讀取 QR Code 訊息的前提下限制 QR Code 圖像的尺寸。 所有參數盡量選擇最小的一個。 如 圖9 所示，使用該圖像的雜湊值和版權擁有者的訊息生成一個64 * 64  QR Code 圖像。
+
+<div align="center"><img width="500" src="/img/panda-9.png"/></div>
+
+<center><strong>圖9 QR Code 圖像 mark.png</strong></center>
+
+## D. 嵌入和萃取數位浮水印
+
+使用 MATLAB 編寫基於離散餘弦變換（DCT）的頻率域數位浮水印算法進行仿真，並使用其逆變換（IDCT）提取浮水印[21] [22] [23]。這裡使用二維 DCT 和二維 IDCT。 F（μ，v）和 f（x，y）分別是 DCT 和IDCT 的**變換係數**。c（μ）和 c（v）是**相加係數**，其主要作用是使 DCT 和 IDCT 變換矩陣成為正交矩陣。如公式（1）、（2）和（3）所示。
+
+如圖10 和 11 所示，它們分別是浮水印圖像 lena_marked.jpg 和萃取的數位浮水印 markout.png。
+
+<div align="center"><img width="500" src="/img/panda-10.png"/></div>
+
+<center><strong>圖10 浮水印圖像 lena_marked.jpg</strong></center>
+
+<div align="center"><img width="500" src="/img/panda-11.png"/></div>
+
+<center><strong>圖11 萃取數位浮水印 markout.png</strong></center>
+
+和以前一樣，使用 MD5 計算帶浮水印的圖像 lena_marker.jpg。儘管兩個圖像看起來相同，但 MD5 值已更改，如圖12 所示。
+
+<div align="center"><img width="500" src="/img/panda-12.png"/></div>
+
+<center><strong>圖12 lena_marked.jpg 之 MD5 值</strong></center>
+
+## E. 上傳和儲存圖像檔案及版權資訊
+
+使用 IPFS 網站提供的 go-ipfs 軟件進行仿真。如圖13 所示，此電腦已作為 IPFS 網路中的節點成功啟動。圖3 顯示了該電腦在 IPFS 網路中的 ID 和本地 HTTP 地址
+
+<div align="center"><img width="500" src="/img/panda-13.png"/></div>
+
+<center><strong>圖13 啟動 go-ipfs</strong></center>
+
+創建一個名為 lena 的資料夾，其中包含兩個文件，這兩個文件是帶有浮水印的圖像 lena_marked.jpg 和包含版權訊息和相應區塊訊息的文本文件 copyright_information.txt。如圖14 所示，此文件夾已成功上傳到 IPFS，並且獲得了唯一證書-該文件夾的哈希值。此哈希值是IPFS 網路中此資料夾的名稱。
+
+<div align="center"><img width="500"  src="/img/panda-14.png"/></div>
+
+<center><strong>圖14 上傳資料夾 lena</strong></center>
+
+## F. 瀏覽和下載圖像和版權訊息
+
+與步驟E一樣，仍使用 go-ipfs 套件。成功上傳後，使用通用的 HTTP 瀏覽器瀏覽該文件夾。如圖15所示，在地址欄中輸入
+http://localhost:8080/ipfs/QmXik2CN6GsSvxudKxoXdXGLpuAaKiuzkrLDuAg2chc8T2
+
+它成功顯示了該資料夾的內容。單擊任何文件以瀏覽內容，如圖16和17所示。
+
+<div align="center"><img width="500"  src="/img/panda-15.png"/></div>
+
+<center><strong>圖15 顯示 lena 資料夾</strong></center>
+
+<div align="center"><img width="500"  src="/img/panda-16.png"/></div>
+
+<center><strong>圖16 顯示浮水印圖像 lena_marked.jpg</strong></center>
+
+<div align="center"><img width="500"  src="/img/panda-17.png"/></div>
+
+<center><strong>圖17 顯示浮水印內容 copyright_information.txt</strong></center>
+
+接下來是下載 lena 資料夾。如圖18所示，成功下載此資料夾。下載的資料夾包含兩個文件 lena_marked.jpg 和 copyright_information.txt。 如圖19所示。
+
+<div align="center"><img width="500" src="/img/panda-18.png"/></div>
+
+<center><strong>圖18 下載資料夾 lena</strong></center>
+
+<div align="center"><img width="500" src="/img/panda-19.png"/></div>
+
+<center><strong>圖19 下載資料夾 lena</strong></center>
+
+## G. 自我驗證
+
+DHA 仍用於計算原始圖像 lena.jpg 和帶水印的 lena_marked.jpg的雜湊值。最後，漢明碼距離用於比較這兩個雜湊值。如圖20所示，結果表明漢明碼距離為 0，因此這兩個圖像是同一圖像，並且兩個雜湊值均為6e0egedaccc85a1c。 該雜湊值與數位浮水印中的雜湊值和區塊鏈中的雜湊值一致，版權證明已完成。
+
+<div align="center"><img width="500" src="/img/panda-20.png"/></div>
+
+<center><strong>圖20 兩個雜湊值和漢明碼距離</strong></center>
+
+# 第四章節 - 結論
+
+面對日益嚴重的數位版權保護問題，用於版權保護的技術也應得到增強。 在此方案中，使用數位浮水印、區塊鏈、感知雜湊功能，QR Code 和 IPFS 為快速發展的網路時代及數位版權保護作業提供了全新的選擇。在文件類型方面，本文僅提及數位圖像的版權管理。將來，它可以擴展到音頻、視頻和其他多媒體文件類型，以形成多種類型的版權管理系統。而且，本文提到的這些技術仍處於快速發展時期。相信將來，理論方面將更加完善、算法將更加成熟，可以為數位版權保護作業提供更強大的支持。
+
+# Reference 
+
+1. Nicholas Paul Sheppard, Reihaneh Safavi-Naini, Philip Ogunbona, "Digital watermarks for copyright protection", Journal of Law and Information Science, vol. 12, no. 1, pp. 110-130, 2002.
+2. Deepa Merin Jose, R. Karuppathal, A. Vincent Antony Kumar, "Copyright Protection using Digital Watermarking", National Conference on Advances in Computer Science and Applications with International Journal of Computer Applications (NCACSA) International Journal of Computer Applications (IJCA), 2012.
+3. Chaw-Seng Woo, Digital Image Watermarking Methods for Copyright Protection and Authentication, March 2007.
+4. Alexander Savelyev, "COPYRIGHT IN THE BLOCKCHAIN ERA: PROMISES AND CHALLENGES" in Basic Research Program Working Paper, National Research University Higher School of Economics (HSE), 2017.
+5. Shigeru Fujimura, Hiroki Watanabe, Atsushi Nakadaira, Tomokazu Yamada, Akihito Akutsu, Jay-(Junichi) Kishigami, "BRIGHY: A Concept for a Decentralized Rights Management System Based on Blockchain", IEEE 5 th International Conference on Consumer Electronics Berlin (ICCE-Berlin) , 2015.
+6. Ruzhi Xu, Lu Zhang, Huawei Zhao, Yun Peng, "Design of Network Media's Digital Rights Management Scheme Based on Blockchain Technology", IEEE 13th International Symposium on Autonomous Decentralized Systems, 2017.
+7. Christoph Zauner, Implementation and Benchmarking of Perceptual Image Hash Functions, July 2010.
+8. Vladimir Viies, POSSIBLE APPLICATION OF PERCEPTUAL IMAGE HASHING, 2015.
+9. Ruchita Kesarkar, RW Deshpande, "A Survey on Perceptual image hash for authentication of content", International Research Journal of Engineering and Technology (IRJET), vol. 03, no. 01, January 2016.
+10. Hirotsugu Kinoshita, Masafumi Satoh, Terunobu Kobayashi, "A WATERMARK SYSTEM BASED ON THE STRUCTURED INFORMATION", European Association for Signal Processing 98, vol. 4, pp. 2273-2276, September 1998.
+11. Hirotsugu Kinoshita, "AN IMAGE DIGITAL SIGNATURE SYSTEM WITH ZKIP FOR THE GRAPH ISOMORPHISM", IEEE INTERNATIONAL CONFERENCE ON IMAGE PROCESSING ICIP96, vol. III, pp. 247-250, September 1996.
+12. Peter Kieseberg, Manuel Leithner, Martin Mulazzani, Lindsay Munroe, Schrittwieser Sebastian, Mayank Sinha, Edgar Weippl, "QR Code Security", the 8th International Conference on Advances in Mobile Computing and Multimedia, pp. 430-435, 8–10 November 2010.
+13. Kevin Peng, Harry Sanabria, Derek Wu, Charlotte Zhu, "Security Overview of QR Codes", Massachusetts Institute of Technology 6.857 Computer and Network Security, 2014.
+14. Sumedha Nishane, V.M. Umale, "Digital Image Watermarking based on DWT using QR Code", International Journal of Current Engineering and Technology, June 2015.
+15. Yang-Wai Chow, Willy Susilo, Joseph Tonien, Wei Zong, "A QR Code Watermarking Approach based on the DWT-DCT Technique", 22nd Australasian Conference on Information Security and Privacy, 2017.
+16. Juan Benet, IPFS - Content Addressed Versioned P2P File System (DRAFT 3) (online), 2014, [online] Available: https://ipfs.io/ipfs/QmR7GSQM93Cx5eAg6a6yRzNde1FQv7uL6X1o4k7zrJa3LX/ipfs.draft3.pdf.
+17. pysimplechain, [online] Available: https://github.com/EricAlcaide/pysimplechain.
+18. hands-on-learning, [online] Available: https://github.com/liuchengxu/hands-on-learning.
+19. blockchain, [online] Available: https://github.com/itauber/blockchain.
+20. blockchain, [online] Available: https://github.com/dvf/blockchain.
+21. Adrian G. Bors, Ioannis Pitas, "IMAGE WATERMARKING USING DCT DOMAIN CONSTRAINTS", Proceedings of 3rd IEEE International Conference on Image Processing, 19–19 September 1996.
+22.  Faisal Alurki, Russell Mersereau, "A ROBUST DIGITAL WATERMARK PROCEDURE FOR STILL IMAGES USING DCT PHASE MODULATION", 10th European Signal Processing Conference, 4–8 September 2000.
+23.  Chetna, "Digital Image Watermarking using DCT", A Monthly Journal of Computer Science and Information Technology, vol. 3, no. 9, pp. 586-591, September 2014.
