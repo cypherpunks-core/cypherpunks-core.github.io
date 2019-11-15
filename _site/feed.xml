@@ -1,139 +1,701 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-10T14:49:26+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">密碼龐克 Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">隔離見證、閃電網路概述</title><link href="http://localhost:4000/news/2019/11/10/%E9%9A%94%E9%9B%A2%E8%A6%8B%E8%AD%89-%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E6%A6%82%E8%BF%B0/" rel="alternate" type="text/html" title="隔離見證、閃電網路概述" /><published>2019-11-10T00:00:00+08:00</published><updated>2019-11-10T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/10/%E9%9A%94%E9%9B%A2%E8%A6%8B%E8%AD%89%E3%80%81%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E6%A6%82%E8%BF%B0</id><content type="html" xml:base="http://localhost:4000/news/2019/11/10/%E9%9A%94%E9%9B%A2%E8%A6%8B%E8%AD%89-%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E6%A6%82%E8%BF%B0/">&lt;p&gt;&lt;a href=&quot;http://gavinzhang.work/blockchain/比特币/隔离见证、闪电网络理解.html&quot;&gt;原文&lt;/a&gt;：隔离见证、闪电网络理解  &lt;br /&gt;
-隔離見證已經於2017年8月在比特幣上啟動了。最近比特幣正在朝著下一個擴容方案努力，閃電網路 Lightning Network。閃電網路的啟動必須基於更多的使用者使用隔離見證地址。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-15T21:32:58+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">密碼龐克 Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">BIP-65 OP_CHECKLOCKTIMEVERIFY</title><link href="http://localhost:4000/news/2019/11/14/BIP-65-OP_CHECKLOCKTIMEVERIFY/" rel="alternate" type="text/html" title="BIP-65 OP_CHECKLOCKTIMEVERIFY" /><published>2019-11-14T00:00:00+08:00</published><updated>2019-11-14T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/14/BIP-65%20OP_CHECKLOCKTIMEVERIFY</id><content type="html" xml:base="http://localhost:4000/news/2019/11/14/BIP-65-OP_CHECKLOCKTIMEVERIFY/">&lt;p&gt;&lt;a href=&quot;http://gavinzhang.work/blockchain/%E6%AF%94%E7%89%B9%E5%B8%81/BIP-65%20OP-CHECKLOCKTIMEVERIFY.html&quot;&gt;原文&lt;/a&gt;:BIP-65 OP_CHECKLOCKTIMEVERIFY    &lt;br /&gt;
+該BIP為比特幣 script 系統描述了一個新的 OPCode （&lt;code class=&quot;highlighter-rouge&quot;&gt;OP_CHECKLOCKTIMEVERIFY&lt;/code&gt;），該 OPCode 允許交易輸出在未來的某個點之前變得不可花費。&lt;/p&gt;
 
-&lt;h3 id=&quot;源起&quot;&gt;源起&lt;/h3&gt;
+&lt;h2 id=&quot;概要&quot;&gt;概要&lt;/h2&gt;
 
-&lt;p&gt;現在的比特幣網路交易量特別大，但是區塊10分鐘一個，一個區塊限制1M大小，這就造成了比特幣網路的擁堵。如果大家瞭解交易結構就一定知道加解密指令碼，這些指令碼都是放在區塊裡面的，於是大家就想如何能把指令碼從區塊中拿出來單獨儲存，這樣一個區塊不就可以容納更多的交易了嗎？於是下圖的結構就出現了：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CHECKLOCKTIMEVERIFY 重新定義了現有的 &lt;code class=&quot;highlighter-rouge&quot;&gt;NOP2&lt;/code&gt; OPCode (其實就是 &lt;code class=&quot;highlighter-rouge&quot;&gt;OP_CHECKLOCKTIMEVERIFY&lt;/code&gt; 指令替換了 &lt;code class=&quot;highlighter-rouge&quot;&gt;OP_NOP2&lt;/code&gt; 指令)。執行時，如果以下任何一個條件成立，則 OPCode 直譯器將以錯誤終止：&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/125.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;堆棧是空的;&lt;/li&gt;
+  &lt;li&gt;堆棧中的頂層項目小於0;&lt;/li&gt;
+  &lt;li&gt;頂層堆棧項的鎖定時間類型（高度vs.時間戳）與 &lt;code class=&quot;highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位不同;&lt;/li&gt;
+  &lt;li&gt;頂部堆棧項大於交易的 &lt;code class=&quot;highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;txin&lt;/code&gt;（交易輸入）的 &lt;code class=&quot;highlighter-rouge&quot;&gt;nSequence&lt;/code&gt; 欄位是 &lt;code class=&quot;highlighter-rouge&quot;&gt;0xffffffff&lt;/code&gt; ;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;隔離見證的其中一個好處是能緩解我們交易堵塞的問題。但是最重要的是為了閃電網路鋪路。一種建立在比特幣底層網路的智慧合約。&lt;/p&gt;
+&lt;p&gt;否則， OPCode 執行將繼續，如同NOP執行一樣。&lt;/p&gt;
 
-&lt;p&gt;隔離驗證確實不是很好的解決之道，因為指令碼還是需要儲存的，沒有指令碼的交易，那麼這個交易是不是可以隨便花費。另外對於錢包節點都是要去檢查指令碼的準確性，這個還是需要有指令碼資料的，所以這個也不是簡單的事情吧！&lt;/p&gt;
+&lt;p&gt;交易中的 &lt;code class=&quot;highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位可防止交易被挖出，直到達到某個區塊高度或區塊時間為止。通過將傳給 &lt;code class=&quot;highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; 的參數與 &lt;code class=&quot;highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位進行比較，我們間接驗證是否已達到所需的區塊高度或區塊時間; 直到該區塊高度或區塊時間已經達到，交易輸出仍然不可花費。&lt;/p&gt;
 
-&lt;h3 id=&quot;分叉&quot;&gt;分叉&lt;/h3&gt;
+&lt;h2 id=&quot;動機&quot;&gt;動機&lt;/h2&gt;
 
-&lt;p&gt;隔離見證可以應用軟分叉或者硬分叉，當然最終實施的是軟分叉。新的節點是可以相容後者的，但是舊節點是不是相容新版本的區塊這個是需要考慮的，如果不相容那麼就肯定出現軟分叉。但是官方的說明是舊版本的節點不用升級，這句話的話外之音就是舊節點也是支援新版的區塊（包含隔離見證）。看來這項技術很好。至於BCH應該是人為的硬分叉了。這部分知識可參考隔離見證比任何硬分叉都高階&lt;/p&gt;
+&lt;p&gt;交易中的 &lt;code class=&quot;highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位可用於證明 將來可以花費這筆交易輸出，方法是構造一個有效的交易開銷，並對&lt;code class=&quot;highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt;欄位進行設定。&lt;/p&gt;
 
-&lt;p&gt;上篇的文章中提到了Core團隊很多的問題，也許確實有問題，但是作為開發者，考慮前後版本相容也是應該的，畢竟誰都不想出問題。另外還有一點就是一旦一個項目上線，可做的可能真的就不多了，一是改動複雜，程式設計師不想動，二是工作量比較大！對於這場戰爭我還是當個第三者吧，看慣了公司風風雨雨，拿刀開乾的人還是很少的。一旦變革失敗也不會有人同情，core團隊可能有自己的考量。畢竟對於資本市場來說一切都是那麼的浮躁。&lt;/p&gt;
+&lt;p&gt;然而， &lt;code class=&quot;highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位不能證明在未來的某個時間內不可能花費交易輸出，因為無法知道是否建立了支出該輸出的其他交易的有效簽名。&lt;/p&gt;
 
-&lt;h2 id=&quot;閃電網路&quot;&gt;閃電網路&lt;/h2&gt;
+&lt;h2 id=&quot;第三方託管&quot;&gt;第三方託管&lt;/h2&gt;
 
-&lt;p&gt;閃電網路提供了一個可擴充套件的微支付通道網路。交易雙方若在區塊鏈上預先設有支付通道，就可以多次、高頻、雙向地通過軋差方式實現瞬間確認的微支付；雙方若無直接的點對點支付通道，只要網路中存在一條連通雙方的、由多個支付通道構成的支付路徑，閃電網路也可以利用這條支付路徑實現資金在雙方之間的可靠轉移。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;如果 Alice 和 Bob 聯合經營一家企業，他們可能希望確保所有資金都儲存在需要雙方同時批准的 2-of-2 的多重（多重簽名的交易）交易輸出中。但是，他們發現在特殊情況下，例如任何一個人受到“嚴重的車禍”，他們都需要備用的方法，繼續動用該筆資金。因此，他們任命他們的律師 Lenny 擔任第三方。&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;上面的這段話可能比較難於理解，總的來說就是通過多簽名實現多重交易的劃分，這裡需要了解比&lt;a href=&quot;http://gavinzhang.work/2018/03/16/blockchain/bitcoin%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E7%9A%84%E5%AE%9E%E7%8E%B0/&quot;&gt;特幣的智慧合約&lt;/a&gt;和&lt;a href=&quot;http://gavinzhang.work/2018/03/17/blockchain/bitcoin%E8%84%9A%E6%9C%AC%E8%A7%A3%E6%9E%90/&quot;&gt;P2SH指令碼&lt;/a&gt;的相關知識。&lt;/p&gt;
+&lt;p&gt;在任何時候，Lenny 隨時可以同 Alice 或 Bob 一起串謀非法竊取資金。同樣，Lenny 可能更願意不竊取資金，以阻止不良行為者企圖強行從他那裡獲取 secret keys 。&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;閃電網路並不試圖解決單次支付的銀貨對付問題，其假設是單次支付的金額足夠小，即使一方違約另一方的損失也非常小，風險可以承受。因此使用時必須注意“微支付”這個前提。多少資金算“微”，顯然應該根據業務而定。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;但是，使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; 可以將資金儲存在以下格式的 scriptPubKeys 中：&lt;/p&gt;
 
-&lt;h3 id=&quot;技術本質&quot;&gt;技術本質&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;IF
+    &amp;lt;now + 3 months&amp;gt; CHECKLOCKTIMEVERIFY DROP
+    &amp;lt;Lenny's pubkey&amp;gt; CHECKSIGVERIFY
+    1
+ELSE
+    2
+ENDIF
+&amp;lt;Alice's pubkey&amp;gt; &amp;lt;Bob's pubkey&amp;gt; 2 CHECKMULTISIG
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;閃電網路的關鍵技術有三，後後依賴於前前，依次是：RSMC，HTLC和閃電網路。技術實現雖然複雜，但本質卻很簡單。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在任何時候，資金都可以用下面的 OPCode 來支付：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0 &amp;lt;Alice's signature&amp;gt; &amp;lt;Bob's signature&amp;gt; 0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Lenny 經過 3 個月後，Alice 或 Bob 中的一個可以用以下 OPCode 支付資金：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0 &amp;lt;Alice/Bob's signature&amp;gt; &amp;lt;Lenny's signature&amp;gt; 1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;非交互式定期退款--non-interactive-time-locked-refunds&quot;&gt;非交互式定期退款 | Non-interactive time-locked refunds&lt;/h2&gt;
 
-&lt;p&gt;&lt;strong&gt;RSMC解決了通道中幣單向流動問題，HTLC解決了幣跨節點傳遞的問題。這兩個類型的交易組合構成了閃電網路。這裡面還會用到我們之前提到的&lt;a href=&quot;http://gavinzhang.work/2018/03/26/blockchain/BIP-65%20OP-CHECKLOCKTIMEVERIFY/&quot;&gt;BIP-65 OP_CHECKLOCKTIMEVERIFY&lt;/a&gt;和&lt;a href=&quot;http://gavinzhang.work/2018/03/26/blockchain/BIP-68%E4%BD%BF%E7%94%A8%E5%85%B1%E8%AF%86%E5%BA%8F%E5%88%97%E5%8F%B7%E8%AE%B0%E5%BD%95%E7%9B%B8%E5%AF%B9%E9%94%81%E5%AE%9A%E6%97%B6%E9%97%B4/&quot;&gt;BIP-68使用共識序列號記錄相對鎖定時間&lt;/a&gt;，這兩篇文件提到了交易鎖定的問題，也提到了分叉的問題。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;存在許多協議，其中建立交易輸出，這需要雙方的合作來花費輸出。為確保一方的失敗不會導致資金損失，退款交易使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 提前設定。這些退款交易需要互動式建立，此外，目前易受交易延展性影響。 ` CHECKLOCKTIMEVERIFY` 可用於這些協議，用非互動式設定取代互動式設定，另外，使交易延展性不成問題。&lt;/p&gt;
 
-&lt;h3 id=&quot;rsmc&quot;&gt;RSMC&lt;/h3&gt;
+&lt;h3 id=&quot;雙因素錢包--two-factor-wallets&quot;&gt;雙因素錢包 | Two-factor wallets&lt;/h3&gt;
 
-&lt;p&gt;我們先來建立一個序列到期可撤銷合約（RSMC），Alice和Bob是合作方，經常有比特幣往來，所以他們決定各拿出0.5BTC放入 &lt;strong&gt;通道&lt;/strong&gt; 中，便於業務往來。解釋一下下方RSMC交易的結構（圖X），左側為Alice的視角，右側為Bob的視角。中間Funding Tx為共同可見，C1a和RD1a為Alice持有，C1b和RD1b為Bob持有。交易圖中帶有尖括號的簽名表示待填入。&lt;/p&gt;
+&lt;p&gt;諸如 GreenAddress 之類的服務將比特幣儲存為 2-of-2 的多重簽名 OPCode ScriptPubKey，使得一個金鑰對由使用者控制，另一個金鑰對由服務控制。為了花費資金，使用者使用本地安裝的生成所需簽名之一的錢包軟體，然後使用雙因素身份驗證方法來授權該服務建立第二個 &lt;code class=&quot;highlighter-rouge&quot;&gt;SIGHASH_NONE&lt;/code&gt; 簽名，該簽名在將來的某個時間被鎖定，並向用戶傳送該儲存簽名。如果使用者需要花費資金並且服務不可用，他們會等到 &lt;code class=&quot;highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 過期。&lt;/p&gt;
 
-&lt;h4 id=&quot;建立交易&quot;&gt;建立交易&lt;/h4&gt;
+&lt;p&gt;問題是，在許多情況下，使用者將不會擁有一些或全部交易輸出的有效簽名。使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; 而不是按需建立退款簽名，而是使用以下形式的 scriptPubKeys ：&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/126.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;IF
+    &amp;lt;service pubkey&amp;gt; CHECKSIGVERIFY
+ELSE
+    &amp;lt;expiry time&amp;gt; CHECKLOCKTIMEVERIFY DROP
+ENDIF
+&amp;lt;user pubkey&amp;gt; CHECKSIG
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;來對上面的圖進行一番解釋：&lt;/p&gt;
+&lt;p&gt;現在，用戶總是可以通過等待到期時間來花費他們的資金而無需服務的合作。&lt;/p&gt;
+
+&lt;h3 id=&quot;支付通道--payment-channels&quot;&gt;支付通道 | Payment Channels&lt;/h3&gt;
+
+&lt;p&gt;傑里米·斯皮爾曼（ Jeremy Spilman ）style 的支付通道首先設定一個存款，由 2-of-2 的多重簽名， tx1 控制的存款，然後調整第二個交易 tx2 ，將 tx1 的輸出用於支付者和收款者。在釋出 tx1 之前，建立一個退款交易 tx3 ，確保收款人消失時付款人可以取回其押金。當前創建退款交易的過程容易受到交易延展性攻擊的影響，此外，還要求付款人儲存退款。使用與雙因素錢包示例中相同的 scriptPubKey 形式可以解決這兩個問題。&lt;/p&gt;
+
+&lt;h2 id=&quot;發布數據的無信任付款--trustless-payments-for-publishing-data&quot;&gt;發布數據的無信任付款 | Trustless Payments for Publishing Data&lt;/h2&gt;
+
+&lt;p&gt;The PayPub protocol makes it possible to pay for information in a trustless way by first proving that an encrypted file contains the desired data, and secondly crafting scriptPubKeys used for payment such that spending them reveals the encryption keys to the data. However the existing implementation has a significant flaw: the publisher can delay the release of the keys indefinitely.&lt;/p&gt;
+
+&lt;p&gt;This problem can be solved interactively with the refund transaction technique; with CHECKLOCKTIMEVERIFY the problem can be non-interactively solved using scriptPubKeys of the following form:&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;通過首先證明加密文件包含所需的數據，然後製作用於支付的 scriptPubKeys 以便使它們花費來顯示數據的加密密鑰，PayPub 協議可以以不信任的方式支付信息。但是，現有的實現存在一個重大缺陷：發布者可以無限期地延遲密鑰的發布。&lt;/p&gt;
+
+&lt;p&gt;這個問題可以用退款交易技術互動地解決; 使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; ，可以使用以下形式的scriptPubKeys以非互動方式解決問題：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;IF
+    HASH160 &amp;lt;Hash160(encryption key)&amp;gt; EQUALVERIFY
+    &amp;lt;publisher pubkey&amp;gt; CHECKSIG
+ELSE
+    &amp;lt;expiry time&amp;gt; CHECKLOCKTIMEVERIFY DROP
+    &amp;lt;buyer pubkey&amp;gt; CHECKSIG
+ENDIF
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;資料的買家現在正在提供一個有效期限的安全報價。如果發行商在到期時間到期之前未能接受報價，買家可以通過消費輸出來取消報價。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;證明犧牲礦工的手續費--proving-sacrifice-to-miners-fees&quot;&gt;證明犧牲礦工的手續費 | Proving sacrifice to miners’ fees&lt;/h2&gt;
+
+&lt;p&gt;Proving the sacrifice of some limited resource is a common technique in a variety of cryptographic protocols. Proving sacrifices of coins to mining fees has been proposed as a universal public good to which the sacrifice could be directed, rather than simply destroying the coins. However doing so is non-trivial, and even the best existing technqiue - announce-commit sacrifices - could encourage mining centralization. CHECKLOCKTIMEVERIFY can be used to create outputs that are provably spendable by anyone (thus to mining fees assuming miners behave optimally and rationally) but only at a time sufficiently far into the future that large miners can’t profitably sell the sacrifices at a discount.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;證明犧牲一些有限的資源是各種密碼協議中的常用技術。已經提出了證明將硬幣犧牲為採礦費的做法，作為犧牲品可以針對的一種普遍的公共物品，而不是簡單地銷毀硬幣。但是，這樣做並非易事，即使是現有的最佳技術-宣布承諾犧牲-也會鼓勵採礦業的集中化。  &lt;code class=&quot;highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; 可用於創建任何人都可證明可使用的輸出（因此，假設礦工的行為合理且合理，則要收取採礦費），但前提是在足夠遠的將來，大型礦工無法以折扣價出售利潤。&lt;/p&gt;
+
+&lt;p&gt;證明犧牲一些有限的資源是各種密碼協議中的常見技術。已經提出將幣的犧牲證明為挖礦手續費，作為犧牲可以指向的普遍公共物品，而不是簡單地摧毀幣。然而，這樣做並非微不足道，即使是最好的現有技術 - 宣佈 - 承諾 - 也會鼓勵礦業集中。 &lt;code class=&quot;highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; 可用於建立任何人都可以花費的產出（因此，假設礦工的行為是理想的和理性的，那麼開採費），但只有在未來足夠遠的時間，大型礦工才能以折扣銷售犧牲品。&lt;/p&gt;
+
+&lt;h2 id=&quot;凍結資金--freezing-funds&quot;&gt;凍結資金 | Freezing Funds&lt;/h2&gt;
+
+&lt;p&gt;除了使用冷儲存，硬體錢包和 P2SH multisig 輸出來控制資金之外，現在資金可以直接在區塊鏈中凍結在 UTXO 中。使用下面的 scriptPubKey ，在提供的失效時間之前，沒有人能夠使用安全輸出。這種可靠地凍結資金的能力在需要減少脅迫或沒收風險的情況下可能會有用。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;expiry time&amp;gt; CHECKLOCKTIMEVERIFY DROP DUP HASH160 &amp;lt;pubKeyHash&amp;gt; EQUALVERIFY CHECKSIG
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;完全替換nlocktime欄位--replacing-the-nlocktime-field-entirely&quot;&gt;完全替換nLockTime欄位 | Replacing the nLockTime field entirely&lt;/h2&gt;
+
+&lt;p&gt;另外，請注意如果 &lt;code class=&quot;highlighter-rouge&quot;&gt;SignatureHash()&lt;/code&gt; 演算法可以選擇覆蓋 OPCode 的一部分，那麼簽名可能會要求 OPCode Sig包含&lt;code class=&quot;highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; OPCode ，並且還需要執行它們。（ CODESEPARATOR OPCode 非常接近於在比特幣的 v0.1 中實現這一點）。這種每簽名功能可以完全取代每個交易的 &lt;code class=&quot;highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位，因為有效簽名現在可以證明交易輸出可以花費。&lt;/p&gt;
+
+&lt;h2 id=&quot;詳細規格--detailed-specification&quot;&gt;詳細規格 | Detailed Specification&lt;/h2&gt;
+
+&lt;p&gt;參考下面轉載的參考實現，瞭解這些語義的精確語義和詳細基本原理。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;case OP_NOP2:
+case OP_NOP2:
+{
+    // CHECKLOCKTIMEVERIFY
+    //
+    // (nLockTime -- nLockTime )
+
+    if (!(flags &amp;amp; SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY))
+        break; // not enabled; treat as a NOP
+
+    if (stack.size() &amp;lt; 1)
+        return false;
+
+    // Note that elsewhere numeric opcodes are limited to
+    // operands in the range -2**31+1 to 2**31-1, however it is
+    // legal for opcodes to produce results exceeding that
+    // range. This limitation is implemented by CScriptNum's
+    // default 4-byte limit.
+    //
+    // If we kept to that limit we'd have a year 2038 problem,
+    // even though the nLockTime field in transactions
+    // themselves is uint32 which only becomes meaningless
+    // after the year 2106.
+    //
+    // Thus as a special case we tell CScriptNum to accept up
+    // to 5-byte bignums, which are good until 2**32-1, the
+    // same limit as the nLockTime field itself.
+    const CScriptNum nLockTime(stacktop(-1), 5);
+
+    // In the rare event that the argument may be &amp;lt; 0 due to
+    // some arithmetic being done first, you can always use
+    // 0 MAX CHECKLOCKTIMEVERIFY.
+    if (nLockTime &amp;lt; 0)
+        return false;
+
+    // There are two types of nLockTime: lock-by-blockheight
+    // and lock-by-blocktime, distinguished by whether
+    // nLockTime &amp;lt; LOCKTIME_THRESHOLD.
+    //
+    // We want to compare apples to apples, so fail the script
+    // unless the type of nLockTime being tested is the same as
+    // the nLockTime in the transaction.
+    if (!(
+            (txTo.nLockTime &amp;lt;  LOCKTIME_THRESHOLD &amp;amp;&amp;amp; nLockTime &amp;lt;  LOCKTIME_THRESHOLD) ||
+            (txTo.nLockTime &amp;gt;= LOCKTIME_THRESHOLD &amp;amp;&amp;amp; nLockTime &amp;gt;= LOCKTIME_THRESHOLD)
+            ))
+        return false;
+
+    // Now that we know we're comparing apples-to-apples, the
+    // comparison is a simple numeric one.
+    if (nLockTime &amp;gt; (int64_t)txTo.nLockTime)
+        return false;
+
+    // Finally the nLockTime feature can be disabled and thus
+    // CHECKLOCKTIMEVERIFY bypassed if every txin has been
+    // finalized by setting nSequence to maxint. The
+    // transaction would be allowed into the blockchain, making
+    // the opcode ineffective.
+    //
+    // Testing if this vin is not final is sufficient to
+    // prevent this condition. Alternatively we could test all
+    // inputs, but testing just this input minimizes the data
+    // required to prove correct CHECKLOCKTIMEVERIFY execution.
+    if (txTo.vin[nIn].IsFinal())
+        return false;
+
+    break;
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;https://github.com/petertodd/bitcoin/commit/ab0f54f38e08ee1e50ff72f801680ee84d0f1bf4&lt;/p&gt;
+
+&lt;h2 id=&quot;部署--deployment&quot;&gt;部署 | Deployment&lt;/h2&gt;
+
+&lt;p&gt;我們重用BIP66中使用的雙閾值 &lt;code class=&quot;highlighter-rouge&quot;&gt;IsSuperMajority()&lt;/code&gt; 切換機制，其閾值相同，但 &lt;code class=&quot;highlighter-rouge&quot;&gt;nVersion = 4&lt;/code&gt; 。新規則對於 &lt;code class=&quot;highlighter-rouge&quot;&gt;nVersion = 4&lt;/code&gt; 的每個區塊（高度為H）有效，並且至少有750之前的區塊（高度為H-1000..H-1）的 &lt;code class=&quot;highlighter-rouge&quot;&gt;nVersion &amp;gt;= 4&lt;/code&gt; 。此外，當區塊之前的1000個區塊中的950個具有 &lt;code class=&quot;highlighter-rouge&quot;&gt;nVersion &amp;gt;= 4&lt;/code&gt; 時， &lt;code class=&quot;highlighter-rouge&quot;&gt;nVersion &amp;lt; 4&lt;/code&gt; 區塊將變為無效，並且全部進一步的阻止執行新的規則。&lt;/p&gt;
+
+&lt;p&gt;應該注意的是，BIP9涉及永久性地將高位設定為1，這導致 &lt;code class=&quot;highlighter-rouge&quot;&gt;nVersion&amp;gt;=&lt;/code&gt; 所有先前的 &lt;code class=&quot;highlighter-rouge&quot;&gt;IsSuperMajority()&lt;/code&gt; 軟分叉，因此 &lt;code class=&quot;highlighter-rouge&quot;&gt;nVersion&lt;/code&gt; 中的位不會永久丟失。&lt;/p&gt;
+
+&lt;h2 id=&quot;spv客戶--spv-clients&quot;&gt;SPV客戶 | SPV Clients&lt;/h2&gt;
+
+&lt;p&gt;儘管SPV客戶端（當前）通常無法驗證區塊，而是信任礦工對其進行驗證，但他們能夠驗證區塊頭，因此可以驗證部署規則的子集。如果達到95％閾值時，前1000個區塊中的950個中有950個具有 &lt;code class=&quot;highlighter-rouge&quot;&gt;nVersion &amp;gt;= 4&lt;/code&gt; ，則SPV客戶端應拒絕 &lt;code class=&quot;highlighter-rouge&quot;&gt;nVersion 4&lt;/code&gt; 區塊，以防止來自剩餘未升級礦工的5％的錯誤確認。&lt;/p&gt;
+
+&lt;h2 id=&quot;credits&quot;&gt;Credits&lt;/h2&gt;
+&lt;p&gt;Thanks goes to Gregory Maxwell for suggesting that the argument be compared against the per-transaction nLockTime, rather than the current block height and time.&lt;/p&gt;
+
+&lt;h2 id=&quot;參考&quot;&gt;參考&lt;/h2&gt;
+
+&lt;p&gt;PayPub&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/unsystem/paypub&quot;&gt;https://github.com/unsystem/paypub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Jeremy Spilman支付通道&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002433.html&quot;&gt;https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002433.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;實現&quot;&gt;實現&lt;/h2&gt;
+
+&lt;p&gt;Python / python-bitcoinlib&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/petertodd/checklocktimeverify-demos&quot;&gt;https://github.com/petertodd/checklocktimeverify-demos&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;JavaScript / Node.js / bitcore&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/mruddy/bip65-demos&quot;&gt;https://github.com/mruddy/bip65-demos&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;版權--copyright&quot;&gt;版權 | Copyright&lt;/h2&gt;
+
+&lt;p&gt;This document is placed in the public domain.&lt;/p&gt;
+
+&lt;h2 id=&quot;引用和參考&quot;&gt;引用和參考&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.chidaolian.com/article-680-4&quot;&gt;BIP65：檢查鎖定時間驗證&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki&quot;&gt;bips/bip-0065.mediawiki&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文:BIP-65 OP_CHECKLOCKTIMEVERIFY 該BIP為比特幣 script 系統描述了一個新的 OPCode （OP_CHECKLOCKTIMEVERIFY），該 OPCode 允許交易輸出在未來的某個點之前變得不可花費。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/135.jpg" /></entry><entry><title type="html">基於數位浮水印和區塊鏈的版權管理系統設計方案</title><link href="http://localhost:4000/news/2019/11/13/%E7%BF%BB%E8%AD%AF-%E5%9F%BA%E6%96%BC%E6%95%B8%E4%BD%8D%E6%B5%AE%E6%B0%B4%E5%8D%B0%E5%92%8C%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E7%89%88%E6%AC%8A%E7%AE%A1%E7%90%86%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E6%96%B9%E6%A1%88/" rel="alternate" type="text/html" title="基於數位浮水印和區塊鏈的版權管理系統設計方案" /><published>2019-11-13T00:00:00+08:00</published><updated>2019-11-13T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/13/%E7%BF%BB%E8%AD%AF:%E5%9F%BA%E6%96%BC%E6%95%B8%E4%BD%8D%E6%B5%AE%E6%B0%B4%E5%8D%B0%E5%92%8C%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E7%89%88%E6%AC%8A%E7%AE%A1%E7%90%86%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E6%96%B9%E6%A1%88</id><content type="html" xml:base="http://localhost:4000/news/2019/11/13/%E7%BF%BB%E8%AD%AF-%E5%9F%BA%E6%96%BC%E6%95%B8%E4%BD%8D%E6%B5%AE%E6%B0%B4%E5%8D%B0%E5%92%8C%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E7%89%88%E6%AC%8A%E7%AE%A1%E7%90%86%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E6%96%B9%E6%A1%88/">&lt;blockquote&gt;
+  &lt;p&gt;本篇文章翻譯自 &lt;a href=&quot;https://ieeexplore-ieee-org.autorpa.lib.nkust.edu.tw/document/8377886/references#references&quot;&gt;Design Scheme of Copyright Management System Based on Digital Watermarking and Blockchain&lt;/a&gt; 的內容，數位浮水印概念我們從圖像、影像..等，已經玩了許久當他結合區塊鏈又會產生什麼火花呢？&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;摘要&quot;&gt;摘要:&lt;/h1&gt;
+
+&lt;p&gt;過去，基於數位浮水印的數位版權保護系統主要在改進演算法效率上，而忽略浮水印訊息的生成和儲存空間。在本論文提出一個全新且基於數位浮水印和訊息的區塊鏈版權管理系統之設計機制，它結合數位浮水印、區塊鏈、感知雜湊、QR code 和星際檔案系統（IPFS）。其中，區塊鏈用於安全儲存浮水印訊息，並為多個浮水印（多個版權）提供時間戳認證，以確認創建順序。感知雜湊用於基於圖像的結構信息生成雜湊，無需原始圖像即可確認浮水印訊息。QR code 用於生成包含圖像之雜湊和版權訊息作為浮水印圖像的 QR Code，以提高數位浮水印的強韌性和容量；IPFS 在沒中心伺服器的情況下儲存和分散浮水印的圖像。該機制可以增強數位浮水印技術在版權保護領域的有效性。透過這種方式，可以使用 P2P 網路來集成並完成版權管理和版權作品的出版，而無需受信任的第三方。節點依靠密碼學來確認彼此的身份並確保訊息之安全性。它可以減少訊息洩露，數據破壞和造成過去的集中式系統崩潰等風險。這提高了訊息的安全性和透明度，並加快了受版權保護作品的出版，以促進網路中的流通。該方案還可以改善多個創作之版權保護。結合區塊鏈和多個數位浮水印，在創作過程中記錄每個版權所有者的版權訊息並充分證明，為了保護每個版權所有者的合法權益。&lt;/p&gt;
+
+&lt;h1 id=&quot;第一章節---介紹&quot;&gt;第一章節 - 介紹&lt;/h1&gt;
+
+&lt;p&gt;隨著數位科技和互聯網之發展，以圖像、音頻、影像和其他數位格式的多媒體和數位作品已經在互聯網上發布，其版權保護和訊息完整性保證已逐漸成為迫切需要解決的問題。由於數位作品易於複製、處理、傳播和公開，因此竊盜者利用數位作品的這些特徵破壞版權擁有者的合法權利以獲得個人利益。&lt;/p&gt;
+
+&lt;p&gt;數位浮水印技術可用於數位版權之保護 [1] [2] [3]。它可以將一些重要機密訊息（例如版權所有者的個人信息）添加到數位作品中，且不會被數位作品使用者察覺。此外，嵌入式數位浮水印可與數位作品的副本一起複製，在實際應用中更加方便有效。但是數位浮水印技術在訊息的儲存和認證、強韌性和儲存空間以及其他方面仍有改進的空間。&lt;/p&gt;
+
+&lt;p&gt;除虛擬貨幣外，近年來，區塊鏈技術已開始在其他領域擴展，包括數位版權保護。[4] [5] [6]。為了保護傳統的版權，版權所有者需要向註冊機構提供數位作品和一些個人訊息作為版權訊息。中心化機構將手動檢查提交的訊息並將其存儲在中心化伺服器中。這不僅導致效率低下和成本增加，而且還存在訊息被篡改和洩漏的風險。同時，這也給版權驗證者進行數位取證帶來了很多麻煩，因為有必要證明該訊息確實是原始訊息且不得更改。對於此方案，將使用區塊鏈儲存版權信息，並將訊息寫入區塊鏈後，將很難更改它。這將極大化促進版權驗證者的數位取證。在實際應用中，區塊鏈還可以幫助確認多個浮水印（多個版權），因為每個區塊都包含不可更改的時間戳記。如果獲得了所有浮水印訊息，即可在區塊鏈中搜索相應的區塊並檢查時間戳記。可以知道多個浮水印的嵌入順序，換句話說，可以知道數位圖像的創建順序。&lt;/p&gt;
+
+&lt;p&gt;將圖像直接存儲在區塊鏈中是不切實際的。一種更實用、更方便的方法是對圖像進行雜湊處理，在區塊鏈中記錄這些圖像的雜湊值，然後將圖像文件儲存在其他位置以供調用。然而，對於圖像、文件之類的多媒體文件，使用 MD5 和 SHA256 之類的傳統密碼雜湊演算法並不是很合適 [7]。&lt;/p&gt;
+
+&lt;p&gt;因為除了篡改內容外，圖像還將經歷正常的操作，例如添加數位浮水印、過濾、旋轉、壓縮等。這些操作不會引起圖像內容的變化，因此不會引起人體感覺系統產生感覺差異，當然這些圖像仍然被人類視為同一圖像。&lt;/p&gt;
+
+&lt;p&gt;但是，此圖像的數據結構已被電腦更改，因此傳統雜湊函數的計算結果將完全不同。顯然，這不是我們想要看到的結果，因此它需要一種對內容操作具有強韌性並且對內容篡改敏感的新雜湊算法。&lt;/p&gt;
+
+&lt;p&gt;感知雜湊函數在計算雜湊值之前對圖像執行一系列處理，例如減小大小和簡化顏色，刪除圖像的細節以及保留這些圖像的結構信息[7]。&lt;/p&gt;
+
+&lt;p&gt;只要某個圖像的結構沒有改變，雜湊就不會改變 [8] [9]。
+換句話說，在將數位浮水印添加到原始圖像後，結構信息將不會更改通過相同的感知雜湊函數計算浮水印圖像，並將計算出的雜湊值與提取的數位浮水印訊息進行比較。換句話說，在將數位浮水印添加到原始圖像後，通過相同的感知哈希函數計算水印圖像後，結構信息將不會更改。換句話說，在將數位浮水印添加到原始圖像，通過相同的感知雜湊函數計算浮水印圖像並將計算出的雜湊值與提取的數位浮水印信息進行比較之後，結構信息將不會改變。這樣，可以在沒有原始圖像的情況下對帶有浮水印的數位圖像進行自我認證[10] [11]。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-1.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖1 方案示意圖&lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ieeexplore-ieee-org.autorpa.lib.nkust.edu.tw/mediastore_new/IEEE/content/media/8376143/8377808/8377886/8377886-fig-1-source-small.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;就用於版權保護的數位浮水印技術而言，對其強韌性的要求實際上非常高 [1][2][3]。不僅要求在一系列操作或攻擊之後可以檢測並提取數位浮水印，而且還要求提取的數位浮水印應清晰可辨，以確認版權信息。另外，浮水印空間也是一個重要特徵，因為它必須具有足夠的版權信息才能發揮版權保護的作用。對於這兩點，QR Code 圖像可用作數位浮水印圖像[12][13][14][15]。&lt;/p&gt;
+
+&lt;p&gt;首先，QR Code 具有一定的容錯能力。即使 QR Code 圖像上有污點，機器仍可以讀取。通常，QR Code 圖像的污損區域仍可以在 7％-30％ 的範圍內讀取[12] [13]。這可以有效地提高數位浮水印技術的強韌性。其次，QR Code 可儲存更多信息，這對於提高水印空間非常有幫助。最後，大多數電子設備，尤其是智能手機，都可以識別 QR Code 圖像，並且在實際應用中會很方便。&lt;/p&gt;
+
+&lt;p&gt;與其他傳統網路平台一樣，它需要有一個儲存圖像的位置，供用戶瀏覽和下載。傳統的中心化儲存有很多缺點，例如，它需要大型伺服器儲存。這樣會增加營運成本，並且一旦伺服器斷電或物理損壞和其他嚴重問題，就會影響圖像用戶的使用並帶來很多不便。更嚴重的是，一旦伺服器受到駭客攻擊，它將洩漏或破壞大量重要訊息，從而導致嚴重且不可估量的損失。&lt;/p&gt;
+
+&lt;p&gt;星際檔案系統是點對點分散式文件儲存系統，用於通信協議和內容傳遞之網路[16]。為了便於描述，後面將使用縮寫詞 IPFS 來表示該系統。與 HTTP 不同，IPFS 不再關心中央伺服器的位置，並且不考慮文件名和路徑。它僅注意文件中可能出現的內容。將任何文件放置在 IPFS 節點上之後，將根據該文件的內容計算加密雜湊。當要求 IPFS 提供文件之雜湊時，它使用分散式雜湊表來尋找此文件所在的節點，然後搜索此文件並進行驗證。因此，使用 IPFS 可以大大降低網路平台的運營成本，並提高圖像文件儲存的安全性。此外，IPFS 實現了 HTTP 閘道，圖像用戶可用通用瀏覽器瀏覽任何內容並下載它們。&lt;/p&gt;
+
+&lt;p&gt;本文的其餘部分安排如下。第二章節介紹該方案基於數位浮水印的圖像版權保護系統的組成以及該方案的過程。第三章節介紹了該方案的仿真。最後，第四章節總結了論文。&lt;/p&gt;
+
+&lt;h1 id=&quot;第二章節---基於數位浮水印技術之改進數位圖像版權保護系統&quot;&gt;第二章節 - 基於數位浮水印技術之改進數位圖像版權保護系統&lt;/h1&gt;
+
+&lt;p&gt;圖1 為該方案的示意圖。 首先在 A 小節中詳細介紹該方案的具體組件。圖中標誌的序列號是該系統的實現順序，將會在 B 小節中描述該方案的過程。&lt;/p&gt;
+
+&lt;h2 id=&quot;a-計畫的組成&quot;&gt;A. 計畫的組成&lt;/h2&gt;
+
+&lt;p&gt;該方案的組成部分可以分為兩部分。數位浮水印系統的第一部分包括雜湊生成、區塊鏈儲存、數位浮水印之圖像生成和數位浮水印嵌入。第二部分是關於含有浮水印的圖像和版權訊息的儲存和傳播。首先介紹第一部分，如下：&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;雙方各拿出0.5BTC，構建Funding Tx，輸出為Alice和Bob的2/2多重簽名。此時，Funding Tx未簽名，更不廣播。&lt;/li&gt;
-  &lt;li&gt;Alice構造Commitment Tx：C1a和RD1a，並交給Bob簽名。C1a的第一個輸出為多重簽名地址，Alice的另一把私鑰Alice2和Bob的2/2多重簽名，第二個輸出為Bob 0.5BTC。&lt;/li&gt;
-  &lt;li&gt;RD1a為C1a第一個輸出的花費交易，輸出給Alice0.5BTC，但此類型交易帶有sequence，作用是阻止當前交易進塊，只有前向交易有sequence個確認時才能進塊。&lt;/li&gt;
-  &lt;li&gt;Bob構造Commitment Tx：C1b和RD1b，並交給Alice簽名。結構與C1a、RD1a是對稱關係。&lt;/li&gt;
-  &lt;li&gt;Bob對C1a和RD1a進行簽名，並將簽名給Alice；同理，Alice對C1b和RD1b簽名，完成後給Bob。此時，由於並未對Funding Tx進行簽名，任何一方均無法作惡，任何一方也不會有任何損失。&lt;/li&gt;
-  &lt;li&gt;雙方均完成對commitment Tx的簽名並交換後，各自再對Funding Tx進行簽名，並交換。此時，Funding Tx是完整的交易，廣播之。&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;感知雜湊函數將用於計算圖像的雜湊值作為圖像的 ID 號。其目的是在嵌入數位浮水印前和嵌入數位浮水印後，此圖像的雜湊值將不會更改。為了確保沒有原始圖像仍然可以驗證浮水印訊息。由於感知雜湊函數的這一特性，為了確保原始圖像和浮水印圖像不會混淆，還需要使用傳統的密碼雜湊函數。利用加密雜湊函數的特性，即在添加浮水印之前和之後對數據進行修改的敏感性，對兩個圖像進行加密雜湊計算，以證明它們之間的順序。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;區塊鏈技術用於儲存有關圖像的訊息，如圖 1 所示，圖像的感知雜湊值，圖像所有者的訊息等。由於區塊鏈本質上是一個去中心化的數據庫，因此它可以通過&lt;strong&gt;加密&lt;/strong&gt;來相互驗證彼此的身份並安全地儲存沒有受信任的第三方的數據。區塊鏈網路中的每個節點都可以備份完整的區塊鏈數據，並且節點之間不知道彼此的真實身份。這大大降低了節點之間發生&lt;strong&gt;合夥篡改&lt;/strong&gt;數據的風險。在實際應用中，面對多個浮水印（多個版權）的問題，可以使用區塊鏈的時間戳記功能來解決。如前所述，關於區塊鏈的安全性，透過時間戳記數據也是不可更改的。獲取浮水印訊息後，可以根據該訊息獲取對應的區塊，以獲得對應的時間訊息，以證明多個浮水印之序列。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在所有必要訊息都記錄在區塊鏈上後，這是第一部分的最後階段，即數位浮水印的生成和嵌入。為了提高數位浮水印的強韌性和攜帶的信息量，使用 QR Code 生成浮水印圖像。此 QR code 圖像包含記錄在區塊鏈中的擁有者的數位簽章。 為了提高數位浮水印的強韌性，浮水印嵌入過程採用基於&lt;strong&gt;頻率域&lt;/strong&gt;的數位浮水印嵌入方法。這裡使用的空頻域變換方法是離散餘弦變換（DCT）。具體方法將在第三章節中介紹。&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;上述過程以及結構圖的描述，就是建立RSMC的全部過程。C1a, C1b兩筆交易花費的是同一個輸出，故他們兩個交易只有一個能進塊。若Alice廣播C1a，則Bob立即拿到0.5BTC（C1a的第二個輸出），而Alice需要等C1a得到1000個確認，才能通過RD1a的輸出拿到0.5BTC。另一方，若Bob廣播C1b，則Alice立即拿到0.5BTC，Bob等待C1b得到1000個確認，才能通過RD1b拿到0.5BTC。也就是說，單方廣播交易終止合約的那一方會延遲拿到幣，而另一放則立即拿幣。&lt;/p&gt;
-
-&lt;h4 id=&quot;交易更新&quot;&gt;交易更新&lt;/h4&gt;
-
-&lt;p&gt;Alice和Bob各自0.5BTC的餘額，此時Alice從Bob處購買了一件商品，價格為0.1BTC，那麼餘額應該變為Alice 0.4BTC，Bob 0.6BTC。於是建立新的Commitment Tx，對於Alice來說是C2a 和RD2a，對於Bob來說是C2b和RD2b，過程與上面類似。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/127.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;此時兩個狀態均是有效的，那麼最核心的問題來了，如何才能徹底廢棄掉C1a和C1b呢？
-RSMC採用了一個非常巧妙的方法，在C1a的第一個輸出中，採用了Alice2和Bob的多重簽名，Alice將Alice2的私鑰交給Bob，即表示Alice放棄C1a，承認C2a。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/128.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Alice交出Alice2的私鑰給Bob，那麼Bob就可以修改RD1a的輸出給他自己，形成新的交易BR1a。若Alice破壞合約存在C2a的情況下依然廣播出C1a，那麼Alice的懲罰就是失去她全部的幣。Alice交出Alice2的私鑰，或者對交易BR1a進行簽名，兩者是等同的，都是對C1a的放棄。反之亦然，Bob交出Bob2的私鑰給Alice即意味放棄C1b，而僅能認可C2b。引入sequence的目的是，阻止後續交易進塊（RD1a），給出一個實施懲罰視窗期，當發現對方破壞合約時，可以有1000個塊確認的時間去實施懲罰交易，即廣播BR1a代替RD1a。若錯過1000個塊時間視窗，則無法再實施懲罰了（RD1a進塊了）。&lt;/p&gt;
-
-&lt;h4 id=&quot;交易關閉&quot;&gt;交易關閉&lt;/h4&gt;
-
-&lt;p&gt;關閉RSMC，直接按照最終的餘額構造出一個Commitment TX即可，例如輸出為Alice0.1BTC，Bob0.9BTC，無需再設定多重簽名，構造懲罰交易等。&lt;/p&gt;
-
-&lt;h4 id=&quot;中轉交易真實的閃電網路htlc&quot;&gt;中轉交易（真實的閃電網路，HTLC）&lt;/h4&gt;
-
-&lt;p&gt;我們來看一下基本的流程圖吧！
-&lt;img src=&quot;/img/129.png&quot; alt=&quot;&quot; /&gt;
-這裡面的R就是支付的口令，其實就是交易節點之間沒有直連的通道，需要其他人待轉，這些人會收手續費。這裡面需要解決幾個問題（我的思考）：&lt;/p&gt;
+&lt;p&gt;數位浮水印系統的工作已經結束，並將包含擁有者的數位簽章訊息的數位浮水印嵌入到原始圖像中。接下來是圖像用戶部分。該方案的第二部分如下：&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;如何建立初始的支付通道&lt;/li&gt;
-  &lt;li&gt;如果兩個節點間無直接支付通道，如何找到最佳的支付通道。&lt;/li&gt;
-  &lt;li&gt;如何保證第三方不作弊，防止現金丟失（前面的講的都是這個問題）&lt;/li&gt;
+  &lt;li&gt;為了解決集中式伺服器中可能出現的問題，IPFS 用於儲存和傳播帶浮水印的圖像。將一個文件夾上傳到 IPFS 網路，該文件夾包括一個帶浮水印的圖像，以及一個文本文件，其中包含有關其相應區塊的訊息，該文件包含該區塊的&lt;strong&gt;索引&lt;/strong&gt;、該圖像的&lt;strong&gt;標題&lt;/strong&gt;，擁有者的名稱和電子郵件地址等。可以通過常見的瀏覽器瀏覽圖像和相關訊息，然後下載它們。具體操作也將在第三節中演示。&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;總結&quot;&gt;總結&lt;/h3&gt;
+&lt;h2 id=&quot;b-計畫流程&quot;&gt;B. 計畫流程&lt;/h2&gt;
 
-&lt;h4 id=&quot;rsmc-1&quot;&gt;RSMC&lt;/h4&gt;
-
-&lt;p&gt;閃電網路的基礎是交易雙方之間的雙向微支付通道，RSMC（Recoverable Sequence Maturity Contract）定義了該雙向微支付通道的最基本工作方式。這是要求雙方都拿出資金放到合約上，然後輸出動態分配，最後確認輸出後上鏈，這樣的好處就是支付完全是在鏈下執行。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;為了鼓勵雙方儘可能久地利用通道進行交易，RSMC對主動終止通道方給予了一定的懲罰：主動提出方其資金到賬將比對方晚，因此誰發起誰吃虧。這個設計雖然增加了技術複雜度，但應該說是合理的。&lt;/strong&gt;  這樣許多交易就會在區塊鏈下面執行，不會產生交易（只產生預備交易），最後交易才會上鍊。還有就是交易的憑證怎麼保證？所以這個方式或許也有很多技術和現實的缺陷所在。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;通道餘額分配方案的本質是結算準備金。在此安排下，因為要完全控制資金交收風險，每筆交易都不能突破當前結算準備金所施限制。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;htlc&quot;&gt;HTLC&lt;/h4&gt;
-
-&lt;p&gt;RSMC只支援最簡單的無條件資金支付，HTLC（Hashed Timelock Contract）進一步實現了有條件的資金支付，通道餘額的分配方式也因此變得更為複雜。&lt;/p&gt;
-
-&lt;p&gt;通過HTLC，Alice和Bob可以達成這樣一個協議：協議將鎖定Alice的0.1 BTC，在時刻T到來之前（T以未來的某個區塊鏈高度表述），如果Bob能夠向Alice出示一個適當的R（稱為祕密），使得R的雜湊值等於事先約定的值H(R)，Bob就能獲得這0.1 BTC；如果直到時刻T過去Bob仍然未能提供一個正確的R，這0.1 BTC將自動解凍並歸還Alice。&lt;/p&gt;
-
-&lt;h2 id=&quot;雷電網路&quot;&gt;雷電網路&lt;/h2&gt;
-
-&lt;p&gt;基於閃電網路的思路，以太坊社群也提出了自己的鏈下微支付通道解決方案：雷電網路（Raiden Network）。
-延續了以太坊的風格，把本來較簡單的問題複雜智慧化。大致與閃電網路相同，但細節有些地方更復雜。例如：第一層面的那個舊版本作廢，其實只要加上時間戳看哪個時間新就可以了。但是其額外增加了一個單增的Sequence Number欄位來標明哪個有效。還有記錄分配餘額即可，但雷電網路記錄的是增減變動量。在第二個層面上，雷電網路引入了較HTLC更通用和複雜的“Smart Condition”。就是說HTLC中採用的成熟簡單地求HASH函數，在雷電網路中替代成了使用者可自己設定的任意函數，就是說向外擴充套件了，更加智慧，但同時面臨的風險可能就越大。&lt;/p&gt;
-
-&lt;h2 id=&quot;corda&quot;&gt;Corda&lt;/h2&gt;
-
-&lt;p&gt;相近技術的低層思想是相通的，受到閃電網路思想的啟發，知名的R3也宣佈釋出非區塊鏈的分散式賬本應用Corda，其本質思想應該是與閃電網路較相近似。
-關於Corda的資料較少，如整個R3較閉源封閉一樣，只是R3 CEV的首席技術官Richard Brown之前在部落格中披露些Corda的主要特點：&lt;/p&gt;
+&lt;p&gt;如 圖1 中的（1）-（5）所示，該方案的具體過程如下：&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;沒有多餘的全局資料共享：有合法需求的參與方才可按照協議獲取資料；&lt;/li&gt;
-  &lt;li&gt;Corda編寫和配置在企業間流轉，無中心控制者；&lt;/li&gt;
-  &lt;li&gt;Corda在企業間單個交易水平達成共識，而不是在系統水平上；&lt;/li&gt;
-  &lt;li&gt;系統設計直接支援監管觀察員節點；&lt;/li&gt;
-  &lt;li&gt;交易直接由交易雙方驗證，而不是由一大群不相干的驗證者進行；&lt;/li&gt;
-  &lt;li&gt;支援多種共識機制；&lt;/li&gt;
-  &lt;li&gt;記錄了智慧合約程式碼和人類語言法律檔案的清晰聯絡；&lt;/li&gt;
-  &lt;li&gt;用行業標準工具建立；&lt;/li&gt;
-  &lt;li&gt;沒有原始加密貨幣。&lt;/li&gt;
+  &lt;li&gt;上傳原始圖像，然後提交一些版權擁有者的訊息和其他中介資料，例如真實姓名、電子郵件地址、圖片標題。 然後使用感知雜湊函數計算該圖像的感知雜湊值。 並使用加密雜湊函數來計算此原始圖像的加密雜湊值作為數位簽章。&lt;/li&gt;
+  &lt;li&gt;感知雜湊值，版權擁有者的訊息和其他中介資料作為版權擁有者的數位簽章。 結合加密雜湊值，它們被用作交易的附加訊息，以向區塊鏈網路發起交易請求，並將這些記錄在區塊鏈中。&lt;/li&gt;
+  &lt;li&gt;生成包含版權擁有者的數位簽章的 QR Code 圖像。 即感知雜湊值，版權擁有者的訊息和其他中介資料。&lt;/li&gt;
+  &lt;li&gt;將此 QR Code 圖像用作數位浮水印圖像，將其嵌入到原始圖像中，並生成已添加數位浮水印的圖像，並使用加密雜湊函數來計算該浮水印圖像的加密雜湊值，並將其記錄在區塊鏈中。&lt;/li&gt;
+  &lt;li&gt;將此帶浮水印的圖像文件及其阻止訊息上傳到 IPFS 網路。通過 IPFS 網路瀏覽並下載帶浮水印的圖像及其版權信息。&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;總結-1&quot;&gt;總結&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;已經引入了 圖1 所示的過程。用戶在獲取圖像後還需要驗證圖像，如下所示：&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;將交易和智慧合約的執行放在鏈下快速地執行，僅在必要時才將其在鏈上公開結算執行，這就是閃電網路帶給我們的絕佳思路。同時可增加對閃電結鏈上算時的手續費，減輕鏈上壓力的同時有可能提升礦工收入，因理論上不可能所有交易都閃電。比特幣主鏈上交易有其它任何形式鏈下交易或側鏈交易所無法替代的優點。&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;使用相同的感知雜湊函數來計算此浮水印圖像，並提取浮水印。將計算出的雜湊值，數位浮水印中的雜湊值和區塊鏈中的雜湊值相互比較以確定版權。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;至此，完整的過程結束了。前面提到的多個浮水印問題，即每個圖像修改器都要經過步驟（1）-（5），最終形成一個包含多個數位浮水印的數位圖像。 然後，在步驟（6）中，提取所有數位浮水印，並基於浮水印訊息檢索相應的區塊以獲得時間戳記訊息。 最後，證明了數位浮水印的嵌入順序和數位圖像的創建順序。&lt;/p&gt;
+
+&lt;h1 id=&quot;第三章節---計畫實驗&quot;&gt;第三章節 - 計畫實驗&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;仿真圖像為lena.jpg，如圖2所示。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-2.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖2 原始 lena.jpg&lt;/strong&gt;&lt;/center&gt;
+
+&lt;h2 id=&quot;a-計算圖像之雜湊值&quot;&gt;A. 計算圖像之雜湊值&lt;/h2&gt;
+
+&lt;p&gt;在感知雜湊函數中，基本上有四個類別，即平均雜湊（AHA），差異雜湊（DHA），感知哈希（PHA）和小波雜湊（WHA）[12]。 由於仿真中 DHA的結果最好且誤差最小，因此選擇 DHA 進行實驗。 如圖3所示，lena.jpg 的哈希值是 6e0egedaccc85a1c。為了證明嵌入數位浮水印後圖像的變化，請使用 MD5 計算 lena.jpg，如圖4所示。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-3.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖3 lena.jpg 之雜湊值&lt;/strong&gt;&lt;/center&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-4.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖4 使用 MD5 計算 lena.jpg&lt;/strong&gt;&lt;/center&gt;
+
+&lt;h2 id=&quot;b-區塊鏈的產生&quot;&gt;B. 區塊鏈的產生&lt;/h2&gt;
+
+&lt;p&gt;為了便於演示，透過 GitHub [17] [18] [19] [20] 上的區塊鏈程式，撰寫一個區塊鏈程式來模擬滿足此方案要求的區塊鏈功能。 然後使用網站 https://www.getpostman.com/ 提供的 Postman 進行接口請求測試並讀取區塊鏈中的數據。如 圖5 所示，啟動了區塊鏈網路中的一個節點。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-5.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖5 在區塊鏈網路中跑節點&lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;如圖6所示，lena.jpg 的雜湊值和版權擁有者訊息作為附加訊息添加到交易中，然後將交易之應用程序啟動到區塊鏈網路。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-6.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖6 增加交易資訊至區塊中&lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;區塊鏈網路中的節點將透過挖礦生成一個新區塊，如圖7所示。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-7.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖7 挖礦和生成區塊&lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;經過其他節點確認後，新生成的區塊將添加到合法的區塊鏈中，如圖8所示。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-8.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖8 合法的區塊鏈&lt;/strong&gt;&lt;/center&gt;
+
+&lt;h2 id=&quot;c-生成-qr-code-圖像&quot;&gt;C. 生成 QR Code 圖像&lt;/h2&gt;
+
+&lt;p&gt;由於仿真圖像的尺寸為512 * 512，因此必須在可以讀取 QR Code 訊息的前提下限制 QR Code 圖像的尺寸。 所有參數盡量選擇最小的一個。 如 圖9 所示，使用該圖像的雜湊值和版權擁有者的訊息生成一個64 * 64  QR Code 圖像。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-9.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖9 QR Code 圖像 mark.png&lt;/strong&gt;&lt;/center&gt;
+
+&lt;h2 id=&quot;d-嵌入和萃取數位浮水印&quot;&gt;D. 嵌入和萃取數位浮水印&lt;/h2&gt;
+
+&lt;p&gt;使用 MATLAB 編寫基於離散餘弦變換（DCT）的頻率域數位浮水印算法進行仿真，並使用其逆變換（IDCT）提取浮水印[21] [22] [23]。這裡使用二維 DCT 和二維 IDCT。 F（μ，v）和 f（x，y）分別是 DCT 和IDCT 的&lt;strong&gt;變換係數&lt;/strong&gt;。c（μ）和 c（v）是&lt;strong&gt;相加係數&lt;/strong&gt;，其主要作用是使 DCT 和 IDCT 變換矩陣成為正交矩陣。如公式（1）、（2）和（3）所示。&lt;/p&gt;
+
+&lt;p&gt;如圖10 和 11 所示，它們分別是浮水印圖像 lena_marked.jpg 和萃取的數位浮水印 markout.png。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-10.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖10 浮水印圖像 lena_marked.jpg&lt;/strong&gt;&lt;/center&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-11.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖11 萃取數位浮水印 markout.png&lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;和以前一樣，使用 MD5 計算帶浮水印的圖像 lena_marker.jpg。儘管兩個圖像看起來相同，但 MD5 值已更改，如圖12 所示。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-12.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖12 lena_marked.jpg 之 MD5 值&lt;/strong&gt;&lt;/center&gt;
+
+&lt;h2 id=&quot;e-上傳和儲存圖像檔案及版權資訊&quot;&gt;E. 上傳和儲存圖像檔案及版權資訊&lt;/h2&gt;
+
+&lt;p&gt;使用 IPFS 網站提供的 go-ipfs 軟件進行仿真。如圖13 所示，此電腦已作為 IPFS 網路中的節點成功啟動。圖3 顯示了該電腦在 IPFS 網路中的 ID 和本地 HTTP 地址&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-13.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖13 啟動 go-ipfs&lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;創建一個名為 lena 的資料夾，其中包含兩個文件，這兩個文件是帶有浮水印的圖像 lena_marked.jpg 和包含版權訊息和相應區塊訊息的文本文件 copyright_information.txt。如圖14 所示，此文件夾已成功上傳到 IPFS，並且獲得了唯一證書-該文件夾的哈希值。此哈希值是IPFS 網路中此資料夾的名稱。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-14.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖14 上傳資料夾 lena&lt;/strong&gt;&lt;/center&gt;
+
+&lt;h2 id=&quot;f-瀏覽和下載圖像和版權訊息&quot;&gt;F. 瀏覽和下載圖像和版權訊息&lt;/h2&gt;
+
+&lt;p&gt;與步驟E一樣，仍使用 go-ipfs 套件。成功上傳後，使用通用的 HTTP 瀏覽器瀏覽該文件夾。如圖15所示，在地址欄中輸入
+http://localhost:8080/ipfs/QmXik2CN6GsSvxudKxoXdXGLpuAaKiuzkrLDuAg2chc8T2&lt;/p&gt;
+
+&lt;p&gt;它成功顯示了該資料夾的內容。單擊任何文件以瀏覽內容，如圖16和17所示。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-15.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖15 顯示 lena 資料夾&lt;/strong&gt;&lt;/center&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-16.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖16 顯示浮水印圖像 lena_marked.jpg&lt;/strong&gt;&lt;/center&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-17.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖17 顯示浮水印內容 copyright_information.txt&lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;接下來是下載 lena 資料夾。如圖18所示，成功下載此資料夾。下載的資料夾包含兩個文件 lena_marked.jpg 和 copyright_information.txt。 如圖19所示。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-18.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖18 下載資料夾 lena&lt;/strong&gt;&lt;/center&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-19.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖19 下載資料夾 lena&lt;/strong&gt;&lt;/center&gt;
+
+&lt;h2 id=&quot;g-自我驗證&quot;&gt;G. 自我驗證&lt;/h2&gt;
+
+&lt;p&gt;DHA 仍用於計算原始圖像 lena.jpg 和帶水印的 lena_marked.jpg的雜湊值。最後，漢明碼距離用於比較這兩個雜湊值。如圖20所示，結果表明漢明碼距離為 0，因此這兩個圖像是同一圖像，並且兩個雜湊值均為6e0egedaccc85a1c。 該雜湊值與數位浮水印中的雜湊值和區塊鏈中的雜湊值一致，版權證明已完成。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/panda-20.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖20 兩個雜湊值和漢明碼距離&lt;/strong&gt;&lt;/center&gt;
+
+&lt;h1 id=&quot;第四章節---結論&quot;&gt;第四章節 - 結論&lt;/h1&gt;
+
+&lt;p&gt;面對日益嚴重的數位版權保護問題，用於版權保護的技術也應得到增強。 在此方案中，使用數位浮水印、區塊鏈、感知雜湊功能，QR Code 和 IPFS 為快速發展的網路時代及數位版權保護作業提供了全新的選擇。在文件類型方面，本文僅提及數位圖像的版權管理。將來，它可以擴展到音頻、視頻和其他多媒體文件類型，以形成多種類型的版權管理系統。而且，本文提到的這些技術仍處於快速發展時期。相信將來，理論方面將更加完善、算法將更加成熟，可以為數位版權保護作業提供更強大的支持。&lt;/p&gt;
+
+&lt;h1 id=&quot;reference&quot;&gt;Reference&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Nicholas Paul Sheppard, Reihaneh Safavi-Naini, Philip Ogunbona, “Digital watermarks for copyright protection”, Journal of Law and Information Science, vol. 12, no. 1, pp. 110-130, 2002.&lt;/li&gt;
+  &lt;li&gt;Deepa Merin Jose, R. Karuppathal, A. Vincent Antony Kumar, “Copyright Protection using Digital Watermarking”, National Conference on Advances in Computer Science and Applications with International Journal of Computer Applications (NCACSA) International Journal of Computer Applications (IJCA), 2012.&lt;/li&gt;
+  &lt;li&gt;Chaw-Seng Woo, Digital Image Watermarking Methods for Copyright Protection and Authentication, March 2007.&lt;/li&gt;
+  &lt;li&gt;Alexander Savelyev, “COPYRIGHT IN THE BLOCKCHAIN ERA: PROMISES AND CHALLENGES” in Basic Research Program Working Paper, National Research University Higher School of Economics (HSE), 2017.&lt;/li&gt;
+  &lt;li&gt;Shigeru Fujimura, Hiroki Watanabe, Atsushi Nakadaira, Tomokazu Yamada, Akihito Akutsu, Jay-(Junichi) Kishigami, “BRIGHY: A Concept for a Decentralized Rights Management System Based on Blockchain”, IEEE 5 th International Conference on Consumer Electronics Berlin (ICCE-Berlin) , 2015.&lt;/li&gt;
+  &lt;li&gt;Ruzhi Xu, Lu Zhang, Huawei Zhao, Yun Peng, “Design of Network Media’s Digital Rights Management Scheme Based on Blockchain Technology”, IEEE 13th International Symposium on Autonomous Decentralized Systems, 2017.&lt;/li&gt;
+  &lt;li&gt;Christoph Zauner, Implementation and Benchmarking of Perceptual Image Hash Functions, July 2010.&lt;/li&gt;
+  &lt;li&gt;Vladimir Viies, POSSIBLE APPLICATION OF PERCEPTUAL IMAGE HASHING, 2015.&lt;/li&gt;
+  &lt;li&gt;Ruchita Kesarkar, RW Deshpande, “A Survey on Perceptual image hash for authentication of content”, International Research Journal of Engineering and Technology (IRJET), vol. 03, no. 01, January 2016.&lt;/li&gt;
+  &lt;li&gt;Hirotsugu Kinoshita, Masafumi Satoh, Terunobu Kobayashi, “A WATERMARK SYSTEM BASED ON THE STRUCTURED INFORMATION”, European Association for Signal Processing 98, vol. 4, pp. 2273-2276, September 1998.&lt;/li&gt;
+  &lt;li&gt;Hirotsugu Kinoshita, “AN IMAGE DIGITAL SIGNATURE SYSTEM WITH ZKIP FOR THE GRAPH ISOMORPHISM”, IEEE INTERNATIONAL CONFERENCE ON IMAGE PROCESSING ICIP96, vol. III, pp. 247-250, September 1996.&lt;/li&gt;
+  &lt;li&gt;Peter Kieseberg, Manuel Leithner, Martin Mulazzani, Lindsay Munroe, Schrittwieser Sebastian, Mayank Sinha, Edgar Weippl, “QR Code Security”, the 8th International Conference on Advances in Mobile Computing and Multimedia, pp. 430-435, 8–10 November 2010.&lt;/li&gt;
+  &lt;li&gt;Kevin Peng, Harry Sanabria, Derek Wu, Charlotte Zhu, “Security Overview of QR Codes”, Massachusetts Institute of Technology 6.857 Computer and Network Security, 2014.&lt;/li&gt;
+  &lt;li&gt;Sumedha Nishane, V.M. Umale, “Digital Image Watermarking based on DWT using QR Code”, International Journal of Current Engineering and Technology, June 2015.&lt;/li&gt;
+  &lt;li&gt;Yang-Wai Chow, Willy Susilo, Joseph Tonien, Wei Zong, “A QR Code Watermarking Approach based on the DWT-DCT Technique”, 22nd Australasian Conference on Information Security and Privacy, 2017.&lt;/li&gt;
+  &lt;li&gt;Juan Benet, IPFS - Content Addressed Versioned P2P File System (DRAFT 3) (online), 2014, [online] Available: https://ipfs.io/ipfs/QmR7GSQM93Cx5eAg6a6yRzNde1FQv7uL6X1o4k7zrJa3LX/ipfs.draft3.pdf.&lt;/li&gt;
+  &lt;li&gt;pysimplechain, [online] Available: https://github.com/EricAlcaide/pysimplechain.&lt;/li&gt;
+  &lt;li&gt;hands-on-learning, [online] Available: https://github.com/liuchengxu/hands-on-learning.&lt;/li&gt;
+  &lt;li&gt;blockchain, [online] Available: https://github.com/itauber/blockchain.&lt;/li&gt;
+  &lt;li&gt;blockchain, [online] Available: https://github.com/dvf/blockchain.&lt;/li&gt;
+  &lt;li&gt;Adrian G. Bors, Ioannis Pitas, “IMAGE WATERMARKING USING DCT DOMAIN CONSTRAINTS”, Proceedings of 3rd IEEE International Conference on Image Processing, 19–19 September 1996.&lt;/li&gt;
+  &lt;li&gt;Faisal Alurki, Russell Mersereau, “A ROBUST DIGITAL WATERMARK PROCEDURE FOR STILL IMAGES USING DCT PHASE MODULATION”, 10th European Signal Processing Conference, 4–8 September 2000.&lt;/li&gt;
+  &lt;li&gt;Chetna, “Digital Image Watermarking using DCT”, A Monthly Journal of Computer Science and Information Technology, vol. 3, no. 9, pp. 586-591, September 2014.&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">本篇文章翻譯自 Design Scheme of Copyright Management System Based on Digital Watermarking and Blockchain 的內容，數位浮水印概念我們從圖像、影像..等，已經玩了許久當他結合區塊鏈又會產生什麼火花呢？</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/panda-21.jpg" /></entry><entry><title type="html">比特幣粉塵和空塊</title><link href="http://localhost:4000/news/2019/11/11/%E6%AF%94%E7%89%B9%E5%B9%A3%E7%B2%89%E5%A1%B5%E5%92%8C%E7%A9%BA%E5%A1%8A/" rel="alternate" type="text/html" title="比特幣粉塵和空塊" /><published>2019-11-11T00:00:00+08:00</published><updated>2019-11-11T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/11/%E6%AF%94%E7%89%B9%E5%B9%A3%E7%B2%89%E5%A1%B5%E5%92%8C%E7%A9%BA%E5%A1%8A</id><content type="html" xml:base="http://localhost:4000/news/2019/11/11/%E6%AF%94%E7%89%B9%E5%B9%A3%E7%B2%89%E5%A1%B5%E5%92%8C%E7%A9%BA%E5%A1%8A/">&lt;p&gt;&lt;a href=&quot;http://gavinzhang.work/blockchain/比特币/比特币粉尘和空块.html&quot;&gt;原文&lt;/a&gt;：比特币粉尘和空块   &lt;br /&gt;
+最近看了bitcoinj的TransactionOutput類發現了裡面的關於粉塵的一些功能。網上搜索關於比特幣粉塵的知識，發現了空塊攻擊和粉塵攻擊的一些說明，但是隻是簡單地進行表述而已。也看到了礦工如何利用各種手段進行作弊，這個可能就是區塊鏈所不能監控的了。所以我覺得區塊鏈的問題還是很多的。&lt;/p&gt;
+
+&lt;h2 id=&quot;什麼是空塊攻擊&quot;&gt;什麼是空塊攻擊&lt;/h2&gt;
+
+&lt;p&gt;空塊的意思很明確，就是區塊中沒有交易，其實不管怎麼樣應該是有一筆交易的，就是挖礦獎勵的coinbase交易。但是呢塊被接收是經過大量的計算工作量的，所以這個看起來有點不太現實。從經濟的角度來說這是不太靠譜，但是這種攻擊最大的好處就是不用啟動算力攻擊。比如說你有全網1%的算力，那麼發起空包攻擊的概率也是很大的，但是就是這1%的算力也是不小的投入。算力攻擊其實就是能控制全網51%的算力，這個時候你可以隨意更改區塊的資訊。我在想以後會不會出現網路攻擊，癱瘓大部分網路，在一小片網路中佔據算力，從本質上說，區域網內的機器也可以進行挖礦，所以也比較困難。&lt;/p&gt;
+
+&lt;p&gt;另外個別情況下偶爾一次，也沒有問題，但短期內頻繁空塊就是攻擊了，其效果是使交易記憶體池變大，交易平均確認時間變長。其實已經有很多礦池消滅了空塊的，技術上沒有難度的。打包空塊並不會比打包滿塊有優勢。但是有ASICBoost專利就不同了，空塊有利於ASICBoost專利的實施。&lt;/p&gt;
+
+&lt;h2 id=&quot;粉塵攻擊&quot;&gt;粉塵攻擊&lt;/h2&gt;
+
+&lt;p&gt;如果要想理解粉塵攻擊就必須先理解什麼是粉塵。任何會消耗其費用三分之一以上的交易輸出都不是比特幣系統現在想要處理的東西，所以我們稱之為“粉塵輸出”，並且它們是非標準的。&lt;/p&gt;
+
+&lt;p&gt;一個典型的輸出是33位元組（pubkey hash +操作碼），需要輸入148位元組的消耗，所以我們將它們加在一起以找出用於傳輸這個數值的總資料量。請注意，這個公式對於任何不是付費地址輸出的東西都是錯誤的，不幸的是，我們必須遵循比特幣核心的錯誤以確保我們被認為是標準。一個更好的公式可以估計滿足所有不同指令碼類型所需的資料大小，或者只是使用硬編碼33。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// 這個是根據實時的資料進行的計算。
+public Coin getMinNonDustValue(Coin feePerKb) {
+    final long size = this.unsafeBitcoinSerialize().length + 148;
+    // 計算交易費
+    return feePerKb.multiply(size).divide(1000);
+}
+// 預設是費用的3倍
+public Coin getMinNonDustValue() {
+    return getMinNonDustValue(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.multiply(3));
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上面的這段程式碼就是用來計算最小的輸出，如果小於這個輸出值，我們就認為這個輸出是粉塵輸出。&lt;/p&gt;
+
+&lt;h2 id=&quot;關於小金額的問題&quot;&gt;關於小金額的問題&lt;/h2&gt;
+
+&lt;p&gt;如果地址上未花費輸出比較小，那麼很有可能就是使用的時候，這筆錢都不能支付交易費（這就是粉塵判斷所不能接受的），這樣會損失金額。也可以通過賬戶不停地將賬戶的錢轉移到大賬戶裡面去，看來不管是何種數字貨幣，都不能避免零頭損失的問題。我們做錢包的應用多少都存在這樣的問題。但是以太坊不是基於UTXO，而是基於賬戶多少能緩解不少的問題。&lt;/p&gt;
+
+&lt;h2 id=&quot;廣播攻擊&quot;&gt;廣播攻擊&lt;/h2&gt;
+
+&lt;p&gt;如果不停地向網路廣播大量的垃圾交易會阻塞網路，如果我們的節點能檢測出這個交易是非法的，並且停止廣播，那麼這個問題就不會很嚴重，但是如果修改了程式碼，不做這個的檢測就會出現大問題。比如說礦池大量傳送這樣的交易，這就會引起災難性的後果。&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文：比特币粉尘和空块 最近看了bitcoinj的TransactionOutput類發現了裡面的關於粉塵的一些功能。網上搜索關於比特幣粉塵的知識，發現了空塊攻擊和粉塵攻擊的一些說明，但是隻是簡單地進行表述而已。也看到了礦工如何利用各種手段進行作弊，這個可能就是區塊鏈所不能監控的了。所以我覺得區塊鏈的問題還是很多的。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/134.jpg" /></entry><entry><title type="html">比特幣地址和 script</title><link href="http://localhost:4000/news/2019/11/11/%E6%AF%94%E7%89%B9%E5%B9%A3%E5%9C%B0%E5%9D%80&script/" rel="alternate" type="text/html" title="比特幣地址和 script" /><published>2019-11-11T00:00:00+08:00</published><updated>2019-11-11T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/11/%E6%AF%94%E7%89%B9%E5%B9%A3%E5%9C%B0%E5%9D%80&amp;script</id><content type="html" xml:base="http://localhost:4000/news/2019/11/11/%E6%AF%94%E7%89%B9%E5%B9%A3%E5%9C%B0%E5%9D%80&amp;script/">&lt;p&gt;&lt;a href=&quot;http://gavinzhang.work/blockchain/比特币/比特币地址和脚本.html&quot;&gt;原文&lt;/a&gt;：比特币地址和脚本  &lt;br /&gt;
+這兩天由於要做多簽名的錢包的問題，所以一直在關注比特幣錢包的知識，當我看到bitcoinj裡面的知識時，發現了ScriptBuilder的類，也發現了bitcoinj文件中有提到怎麼使用多簽名的錢包，這裡就簡單帶過吧，今天的主題還是要說明錢包的地址和 script 的一些知識。&lt;/p&gt;
+
+&lt;h2 id=&quot;地址&quot;&gt;地址&lt;/h2&gt;
+
+&lt;p&gt;首先關於錢包地址大概有以下幾種：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;類型&lt;/th&gt;
+      &lt;th&gt;版本字首（hex）&lt;/th&gt;
+      &lt;th&gt;Base58結果的字首&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;傳統bitcoin地址&lt;/td&gt;
+      &lt;td&gt;0x00&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;P2SH&lt;/td&gt;
+      &lt;td&gt;0x05&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;比特幣測試網路地址&lt;/td&gt;
+      &lt;td&gt;0x6F&lt;/td&gt;
+      &lt;td&gt;m或者n&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;私鑰WIF&lt;/td&gt;
+      &lt;td&gt;0x80&lt;/td&gt;
+      &lt;td&gt;5、K、L&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;BIP-38編碼私鑰&lt;/td&gt;
+      &lt;td&gt;0x0142&lt;/td&gt;
+      &lt;td&gt;6P&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;BIP-32編碼私鑰&lt;/td&gt;
+      &lt;td&gt;0x0488B21E&lt;/td&gt;
+      &lt;td&gt;xpub&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;其實地址的類型和交易的解鎖也是有很大的相關關係的。 &lt;strong&gt;如果你創造了一種新的地址類型，並配置了相關的鎖定和解鎖 script ，那麼這個地址是可以工作的，只是沒有錢包支援，你需要提供能夠利用這種地址類型，傳送解鎖和鎖定 script 的客戶端，這樣你的地址就可以生效了，當然你也要相容其他類型，如果傳送的地址類型是其他的，那你的輸出 script 要按照對應地址類型的要求來才行&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;p&gt;比特幣地址的生成規則如下：&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/132.png&quot; /&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;傳統的比特幣地址-script-p2pkh&quot;&gt;傳統的比特幣地址 script P2PKH&lt;/h2&gt;
+
+&lt;p&gt;對於比特幣 script 的語言介紹這裡不提太多，比特幣 script 其實就是一種基於堆棧的 script 語言，堆棧是一個非常簡單的資料結構，可以被視為一疊卡片。棧允許兩個操作：push和pop（推送和彈出）。&lt;/p&gt;
+
+&lt;p&gt;對於解鎖 script 大概是這樣的：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1 OP_DUP OP_HASH160 &amp;lt;Cafe Public Key Hash&amp;gt; OP_EQUALVERIFY OP_CHECKSIG
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;前面輸出的鎖定 script 是這樣的：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;sig&amp;gt; &amp;lt;pubk&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;那麼整體的 script 是這樣的：
+&lt;img src=&quot;/img/133.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;p2sh&quot;&gt;P2SH&lt;/h2&gt;
+
+&lt;p&gt;Gavin Andresen在bip16提出一種P2SH(pay to Script Hash)方法，主要目的有兩個，一是容許傳送者構造豐富的交易類型，二是將位元組從A-&amp;gt;B的output轉移到B-&amp;gt;C的input(A-&amp;gt;B的output script中將是固定長度)。&lt;/p&gt;
+
+&lt;p&gt;對於解鎖的 script 是&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;OP_HASH256 6fe28c0ab6f1b372c1a6a246ae63f74f931e8365e15a089c68d6190000000000 OP_EQUAL
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;我們可以理解成解數學中的難題，hash(x) = 6fe28c0ab6f1b372c1a6 我們只是提供一個x滿足這個條件，就可以證明我可以花費這筆錢了。這裡 &lt;code class=&quot;highlighter-rouge&quot;&gt;6fe28c0ab6f1b372c1a6a246ae63f74f931e8365e15a089c68d6190000000000&lt;/code&gt; 不是簡單的一個數字的hash，而是一段script的hash(簡稱redeemScript),  &lt;strong&gt;我們可以理解成只要你提供了一段script，它的二進位制hash和目標匹配，那麼你就可以花費這筆錢了，注意這裡是前端 script 執行的輸出是x就行了。&lt;/strong&gt; .&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;請注意，雖然這樣的交易很有趣，但它們並不安全，因為它們不包含任何簽名，因此任何試圖花費它們的交易都可以用將資金髮送到其他地方，用不同的交易來替代&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;h3 id=&quot;p2sh地址生成&quot;&gt;P2SH地址生成&lt;/h3&gt;
+
+&lt;p&gt;可以使用 go-bitcoin-multisig 生成，Github地址：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;go-bitcoin-multisig keys --count 3 --concise
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;生成結果：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gd&quot;&gt;--------------
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;KEY #1
+Private key:
+5JruagvxNLXTnkksyLMfgFgf3CagJ3Ekxu5oGxpTm5mPfTAPez3
+Public key hex:
+04a882d414e478039cd5b52a92ffb13dd5e6bd4515497439dffd691a0f12af9575fa349b5694ed3155b136f09e63975a1700c9f4d4df849323dac06cf3bd6458cd
+Public Bitcoin address:
+1JzVFZSN1kxGLTHG41EVvY5gHxLAX7q1Rh
+&lt;/span&gt;&lt;span class=&quot;gd&quot;&gt;--------------
+--------------
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;KEY #2
+Private key:
+5JX3qAwDEEaapvLXRfbXRMSiyRgRSW9WjgxeyJQWwBugbudCwsk
+Public key hex:
+046ce31db9bdd543e72fe3039a1f1c047dab87037c36a669ff90e28da1848f640de68c2fe913d363a51154a0c62d7adea1b822d05035077418267b1a1379790187
+Public Bitcoin address:
+14JfSvgEq8A8S7qcvxeaSCxhn1u1L71vo4
+&lt;/span&gt;&lt;span class=&quot;gd&quot;&gt;--------------
+--------------
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;KEY #3
+Private key:
+5JjHVMwJdjPEPQhq34WMUhzLcEd4SD7HgZktEh8WHstWcCLRceV
+Public key hex:
+0411ffd36c70776538d079fbae117dc38effafb33304af83ce4894589747aee1ef992f63280567f52f5ba870678b4ab4ff6c8ea600bd217870a8b4f1f09f3a8e83
+Public Bitcoin address:
+1Kyy7pxzSKG75L9HhahRZgYoer9FePZL4R
+&lt;/span&gt;&lt;span class=&quot;gd&quot;&gt;--------------
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;接著我們取出裡面所有的Public key（hex格式）&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Key A:
+04a882d414e478039cd5b52a92ffb13dd5e6bd4515497439dffd691a0f12af9575fa349b5694ed3155b136f09e63975a1700c9f4d4df849323dac06cf3bd6458cd
+Key B:
+046ce31db9bdd543e72fe3039a1f1c047dab87037c36a669ff90e28da1848f640de68c2fe913d363a51154a0c62d7adea1b822d05035077418267b1a1379790187
+Key C:
+0411ffd36c70776538d079fbae117dc38effafb33304af83ce4894589747aee1ef992f63280567f52f5ba870678b4ab4ff6c8ea600bd217870a8b4f1f09f3a8e83
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;然後就可以使用這三組Public key組合起來（A,B,C）進行多重簽名：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;go-bitcoin-multisig address --m 2 --n 3 --public-keys 04a882d414e478039cd5b52a92ffb13dd5e6bd4515497439dffd691a0f12af9575fa349b5694ed3155b136f09e63975a1700c9f4d4df849323dac06cf3bd6458cd,046ce31db9bdd543e72fe3039a1f1c047dab87037c36a669ff90e28da1848f640de68c2fe913d363a51154a0c62d7adea1b822d05035077418267b1a1379790187,0411ffd36c70776538d079fbae117dc38effafb33304af83ce4894589747aee1ef992f63280567f52f5ba870678b4ab4ff6c8ea600bd217870a8b4f1f09f3a8e83
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;接著就生成了P2SH地址：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gd&quot;&gt;---------------------
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;Your *P2SH ADDRESS* is:
+347N1Thc213QqfYCz3PZkjoJpNv5b14kBd
+Give this to sender funding multisig address with Bitcoin.
+&lt;/span&gt;&lt;span class=&quot;gd&quot;&gt;---------------------
+---------------------
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;Your *REDEEM SCRIPT* is:
+524104a882d414e478039cd5b52a92ffb13dd5e6bd4515497439dffd691a0f12af9575fa349b5694ed3155b136f09e63975a1700c9f4d4df849323dac06cf3bd6458cd41046ce31db9bdd543e72fe3039a1f1c047dab87037c36a669ff90e28da1848f640de68c2fe913d363a51154a0c62d7adea1b822d05035077418267b1a1379790187410411ffd36c70776538d079fbae117dc38effafb33304af83ce4894589747aee1ef992f63280567f52f5ba870678b4ab4ff6c8ea600bd217870a8b4f1f09f3a8e8353ae
+Keep private and provide this to redeem multisig balance later.
+&lt;/span&gt;&lt;span class=&quot;gd&quot;&gt;---------------------
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;多重簽名地址&quot;&gt;多重簽名地址&lt;/h2&gt;
+
+&lt;p&gt;在bitcoin bips歷史上先有M-of-N Transaction(bip-11),然後才有Pay To Script Hash(bip-16)(簡稱P2SH). 按照這個順序，其實比特幣中實現多重簽名有兩種方法：&lt;/p&gt;
+
+&lt;h3 id=&quot;原始的方法bip-11&quot;&gt;原始的方法(bip-11)&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;scriptPubKey : m {pubkey}...{pubkey} n OP_CHECKMULTISIG
+scriptSig : OP_0 ...signatures...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;可以檢視一下例項：&lt;code class=&quot;highlighter-rouge&quot;&gt;09dd94f2c85262173da87a745a459007bb1eed6eeb6bfa238a0cd91a16cf7790&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;用p2sh來實現&quot;&gt;用P2SH來實現&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;scriptSig: [signature] {[pubkey] OP_CHECKSIG}
+scriptPubKey: OP_HASH160 [20-byte-hash of {[pubkey] OP_CHECKSIG} ] OP_EQUAL
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;這裡&lt;code class=&quot;highlighter-rouge&quot;&gt;{[pubkey] OP_CHECKSIG}&lt;/code&gt;就是我們提到&lt;code class=&quot;highlighter-rouge&quot;&gt;redeemScript&lt;/code&gt;程式碼. 例項：&lt;code class=&quot;highlighter-rouge&quot;&gt;3c9018e8d5615c306d72397f8f5eef44308c98fb576a88e030c25456b4f3a7ac&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;總結&quot;&gt;總結&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;首先P2SH和MultiSig是完全不同兩碼事，很多文章將P2SH表述成MultiSig，這是不恰當的。只不過現在可以用P2SH來實現MultiSig。&lt;/li&gt;
+  &lt;li&gt;比特幣的關鍵是認證，剛開始中本聰提供用私鑰認證，後來人發明了用hash(redeemScript)認證.&lt;/li&gt;
+  &lt;li&gt;P2SH豐富了交易類型，簡單易擴充套件&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;h2 id=&quot;參考和引用&quot;&gt;參考和引用&lt;/h2&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/32613487&quot;&gt;三分鐘讓你瞭解什麼是Segwit隔離見證&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.chainnode.com/post/45833&quot;&gt;隔離見證比任何硬分叉都高階&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.8btc.com/article/95385&quot;&gt;比特幣擴容為什麼選擇2MB？&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/46515457&quot;&gt;什麼是比特幣的閃電網路？&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/58567061&quot;&gt;什麼是隔離見證？&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.8btc.com/article/92887&quot;&gt;詳解最近大熱的閃電網路、雷電網路和CORDA&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s/lM0p3ikVBdw1zE50IWtMZA&quot;&gt;6.9Bite醬一閃電網路⚡大白話零門檻講解&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文：隔离见证、闪电网络理解 隔離見證已經於2017年8月在比特幣上啟動了。最近比特幣正在朝著下一個擴容方案努力，閃電網路 Lightning Network。閃電網路的啟動必須基於更多的使用者使用隔離見證地址。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/125.png" /></entry><entry><title type="html">BIP 173 Bech32 address</title><link href="http://localhost:4000/news/2019/11/10/BIP-173-Bech32%E5%9C%B0%E5%9D%80%E6%A0%BC%E5%BC%8F/" rel="alternate" type="text/html" title="BIP 173 Bech32 address" /><published>2019-11-10T00:00:00+08:00</published><updated>2019-11-10T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/10/BIP:%20173%20-%20Bech32%E5%9C%B0%E5%9D%80%E6%A0%BC%E5%BC%8F</id><content type="html" xml:base="http://localhost:4000/news/2019/11/10/BIP-173-Bech32%E5%9C%B0%E5%9D%80%E6%A0%BC%E5%BC%8F/">&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;BIP: 173 Layer: Applications 
+&lt;p&gt;&lt;a href=&quot;http://8btc.com/thread-23440-1-1.html&quot;&gt;http://8btc.com/thread-23440-1-1.html&lt;/a&gt;&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文：比特币地址和脚本 這兩天由於要做多簽名的錢包的問題，所以一直在關注比特幣錢包的知識，當我看到bitcoinj裡面的知識時，發現了ScriptBuilder的類，也發現了bitcoinj文件中有提到怎麼使用多簽名的錢包，這裡就簡單帶過吧，今天的主題還是要說明錢包的地址和 script 的一些知識。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/131.png" /></entry><entry><title type="html">BIP 173 Bech32 address</title><link href="http://localhost:4000/news/2019/11/10/BIP-173-Bech32%E5%9C%B0%E5%9D%80%E6%A0%BC%E5%BC%8F/" rel="alternate" type="text/html" title="BIP 173 Bech32 address" /><published>2019-11-10T00:00:00+08:00</published><updated>2019-11-10T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/10/BIP:%20173%20-%20Bech32%E5%9C%B0%E5%9D%80%E6%A0%BC%E5%BC%8F</id><content type="html" xml:base="http://localhost:4000/news/2019/11/10/BIP-173-Bech32%E5%9C%B0%E5%9D%80%E6%A0%BC%E5%BC%8F/">&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;BIP: 173 Layer: Applications 
 Title: Base32 address format for native v0-16 witness outputs 
 Author: Pieter Wuille &amp;lt;pieter.wuille@gmail.com&amp;gt; Greg Maxwell &amp;lt;greg@xiph.org&amp;gt; 
 Comments-Summary: No comments yet. 
@@ -583,7 +1145,142 @@ def bech32_verify_checksum(hrp, data):
 
 &lt;h2 id=&quot;致謝--acknowledgements&quot;&gt;致謝 ｜ Acknowledgements&lt;/h2&gt;
 
-&lt;p&gt;本文件的靈感來自Rusty Russell的&lt;a href=&quot;https://rusty.ozlabs.org/?p=578&quot;&gt;address proposal&lt;/a&gt;，Mark Friedenbach的&lt;a href=&quot;https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-February/004402.html&quot;&gt;base32&lt;/a&gt;提案，並引用了Luke Dashjr，Johnson Lau，Eric Lombrozo，Peter Todd和其他各種審閱者的意見。&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">BIP: 173 Layer: Applications Title: Base32 address format for native v0-16 witness outputs Author: Pieter Wuille &amp;lt;pieter.wuille@gmail.com&amp;gt; Greg Maxwell &amp;lt;greg@xiph.org&amp;gt; Comments-Summary: No comments yet. Comments-URI: https://github.com/bitcoin/bips/wiki/Comments:BIP-0173 Status: Final Type: Informational Created: 2017-03-20 License: BSD-2-Clause Replaces: 142</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/124.png" /></entry><entry><title type="html">以區塊鏈為基礎的電子化註冊交付服務</title><link href="http://localhost:4000/news/2019/11/09/%E7%BF%BB%E8%AD%AF-%E4%BB%A5%E5%8D%80%E5%A1%8A%E9%8F%88%E7%82%BA%E5%9F%BA%E7%A4%8E%E7%9A%84%E9%9B%BB%E5%AD%90%E5%8C%96%E8%A8%BB%E5%86%8A%E4%BA%A4%E4%BB%98%E6%9C%8D%E5%8B%99/" rel="alternate" type="text/html" title="以區塊鏈為基礎的電子化註冊交付服務" /><published>2019-11-09T00:00:00+08:00</published><updated>2019-11-09T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/09/%E7%BF%BB%E8%AD%AF:%E4%BB%A5%E5%8D%80%E5%A1%8A%E9%8F%88%E7%82%BA%E5%9F%BA%E7%A4%8E%E7%9A%84%E9%9B%BB%E5%AD%90%E5%8C%96%E8%A8%BB%E5%86%8A%E4%BA%A4%E4%BB%98%E6%9C%8D%E5%8B%99</id><content type="html" xml:base="http://localhost:4000/news/2019/11/09/%E7%BF%BB%E8%AD%AF-%E4%BB%A5%E5%8D%80%E5%A1%8A%E9%8F%88%E7%82%BA%E5%9F%BA%E7%A4%8E%E7%9A%84%E9%9B%BB%E5%AD%90%E5%8C%96%E8%A8%BB%E5%86%8A%E4%BA%A4%E4%BB%98%E6%9C%8D%E5%8B%99/">&lt;blockquote&gt;
+&lt;p&gt;本文件的靈感來自Rusty Russell的&lt;a href=&quot;https://rusty.ozlabs.org/?p=578&quot;&gt;address proposal&lt;/a&gt;，Mark Friedenbach的&lt;a href=&quot;https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-February/004402.html&quot;&gt;base32&lt;/a&gt;提案，並引用了Luke Dashjr，Johnson Lau，Eric Lombrozo，Peter Todd和其他各種審閱者的意見。&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">BIP: 173 Layer: Applications Title: Base32 address format for native v0-16 witness outputs Author: Pieter Wuille &amp;lt;pieter.wuille@gmail.com&amp;gt; Greg Maxwell &amp;lt;greg@xiph.org&amp;gt; Comments-Summary: No comments yet. Comments-URI: https://github.com/bitcoin/bips/wiki/Comments:BIP-0173 Status: Final Type: Informational Created: 2017-03-20 License: BSD-2-Clause Replaces: 142</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/124.png" /></entry><entry><title type="html">隔離見證、閃電網路概述</title><link href="http://localhost:4000/news/2019/11/10/%E9%9A%94%E9%9B%A2%E8%A6%8B%E8%AD%89-%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E6%A6%82%E8%BF%B0/" rel="alternate" type="text/html" title="隔離見證、閃電網路概述" /><published>2019-11-10T00:00:00+08:00</published><updated>2019-11-10T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/10/%E9%9A%94%E9%9B%A2%E8%A6%8B%E8%AD%89%E3%80%81%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E6%A6%82%E8%BF%B0</id><content type="html" xml:base="http://localhost:4000/news/2019/11/10/%E9%9A%94%E9%9B%A2%E8%A6%8B%E8%AD%89-%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E6%A6%82%E8%BF%B0/">&lt;p&gt;&lt;a href=&quot;http://gavinzhang.work/blockchain/比特币/隔离见证、闪电网络理解.html&quot;&gt;原文&lt;/a&gt;：隔离见证、闪电网络理解  &lt;br /&gt;
+隔離見證已經於2017年8月在比特幣上啟動了。最近比特幣正在朝著下一個擴容方案努力，閃電網路 Lightning Network。閃電網路的啟動必須基於更多的使用者使用隔離見證地址。&lt;/p&gt;
+
+&lt;h3 id=&quot;源起&quot;&gt;源起&lt;/h3&gt;
+
+&lt;p&gt;現在的比特幣網路交易量特別大，但是區塊10分鐘一個，一個區塊限制1M大小，這就造成了比特幣網路的擁堵。如果大家瞭解交易結構就一定知道加解密指令碼，這些指令碼都是放在區塊裡面的，於是大家就想如何能把指令碼從區塊中拿出來單獨儲存，這樣一個區塊不就可以容納更多的交易了嗎？於是下圖的結構就出現了：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/125.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;隔離見證的其中一個好處是能緩解我們交易堵塞的問題。但是最重要的是為了閃電網路鋪路。一種建立在比特幣底層網路的智慧合約。&lt;/p&gt;
+
+&lt;p&gt;隔離驗證確實不是很好的解決之道，因為指令碼還是需要儲存的，沒有指令碼的交易，那麼這個交易是不是可以隨便花費。另外對於錢包節點都是要去檢查指令碼的準確性，這個還是需要有指令碼資料的，所以這個也不是簡單的事情吧！&lt;/p&gt;
+
+&lt;h3 id=&quot;分叉&quot;&gt;分叉&lt;/h3&gt;
+
+&lt;p&gt;隔離見證可以應用軟分叉或者硬分叉，當然最終實施的是軟分叉。新的節點是可以相容後者的，但是舊節點是不是相容新版本的區塊這個是需要考慮的，如果不相容那麼就肯定出現軟分叉。但是官方的說明是舊版本的節點不用升級，這句話的話外之音就是舊節點也是支援新版的區塊（包含隔離見證）。看來這項技術很好。至於BCH應該是人為的硬分叉了。這部分知識可參考隔離見證比任何硬分叉都高階&lt;/p&gt;
+
+&lt;p&gt;上篇的文章中提到了Core團隊很多的問題，也許確實有問題，但是作為開發者，考慮前後版本相容也是應該的，畢竟誰都不想出問題。另外還有一點就是一旦一個項目上線，可做的可能真的就不多了，一是改動複雜，程式設計師不想動，二是工作量比較大！對於這場戰爭我還是當個第三者吧，看慣了公司風風雨雨，拿刀開乾的人還是很少的。一旦變革失敗也不會有人同情，core團隊可能有自己的考量。畢竟對於資本市場來說一切都是那麼的浮躁。&lt;/p&gt;
+
+&lt;h2 id=&quot;閃電網路&quot;&gt;閃電網路&lt;/h2&gt;
+
+&lt;p&gt;閃電網路提供了一個可擴充套件的微支付通道網路。交易雙方若在區塊鏈上預先設有支付通道，就可以多次、高頻、雙向地通過軋差方式實現瞬間確認的微支付；雙方若無直接的點對點支付通道，只要網路中存在一條連通雙方的、由多個支付通道構成的支付路徑，閃電網路也可以利用這條支付路徑實現資金在雙方之間的可靠轉移。&lt;/p&gt;
+
+&lt;p&gt;上面的這段話可能比較難於理解，總的來說就是通過多簽名實現多重交易的劃分，這裡需要了解比&lt;a href=&quot;http://gavinzhang.work/2018/03/16/blockchain/bitcoin%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E7%9A%84%E5%AE%9E%E7%8E%B0/&quot;&gt;特幣的智慧合約&lt;/a&gt;和&lt;a href=&quot;http://gavinzhang.work/2018/03/17/blockchain/bitcoin%E8%84%9A%E6%9C%AC%E8%A7%A3%E6%9E%90/&quot;&gt;P2SH指令碼&lt;/a&gt;的相關知識。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;閃電網路並不試圖解決單次支付的銀貨對付問題，其假設是單次支付的金額足夠小，即使一方違約另一方的損失也非常小，風險可以承受。因此使用時必須注意“微支付”這個前提。多少資金算“微”，顯然應該根據業務而定。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;技術本質&quot;&gt;技術本質&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;閃電網路的關鍵技術有三，後後依賴於前前，依次是：RSMC，HTLC和閃電網路。技術實現雖然複雜，但本質卻很簡單。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;RSMC解決了通道中幣單向流動問題，HTLC解決了幣跨節點傳遞的問題。這兩個類型的交易組合構成了閃電網路。這裡面還會用到我們之前提到的&lt;a href=&quot;http://gavinzhang.work/2018/03/26/blockchain/BIP-65%20OP-CHECKLOCKTIMEVERIFY/&quot;&gt;BIP-65 OP_CHECKLOCKTIMEVERIFY&lt;/a&gt;和&lt;a href=&quot;http://gavinzhang.work/2018/03/26/blockchain/BIP-68%E4%BD%BF%E7%94%A8%E5%85%B1%E8%AF%86%E5%BA%8F%E5%88%97%E5%8F%B7%E8%AE%B0%E5%BD%95%E7%9B%B8%E5%AF%B9%E9%94%81%E5%AE%9A%E6%97%B6%E9%97%B4/&quot;&gt;BIP-68使用共識序列號記錄相對鎖定時間&lt;/a&gt;，這兩篇文件提到了交易鎖定的問題，也提到了分叉的問題。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;rsmc&quot;&gt;RSMC&lt;/h3&gt;
+
+&lt;p&gt;我們先來建立一個序列到期可撤銷合約（RSMC），Alice和Bob是合作方，經常有比特幣往來，所以他們決定各拿出0.5BTC放入 &lt;strong&gt;通道&lt;/strong&gt; 中，便於業務往來。解釋一下下方RSMC交易的結構（圖X），左側為Alice的視角，右側為Bob的視角。中間Funding Tx為共同可見，C1a和RD1a為Alice持有，C1b和RD1b為Bob持有。交易圖中帶有尖括號的簽名表示待填入。&lt;/p&gt;
+
+&lt;h4 id=&quot;建立交易&quot;&gt;建立交易&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/126.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;來對上面的圖進行一番解釋：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;雙方各拿出0.5BTC，構建Funding Tx，輸出為Alice和Bob的2/2多重簽名。此時，Funding Tx未簽名，更不廣播。&lt;/li&gt;
+  &lt;li&gt;Alice構造Commitment Tx：C1a和RD1a，並交給Bob簽名。C1a的第一個輸出為多重簽名地址，Alice的另一把私鑰Alice2和Bob的2/2多重簽名，第二個輸出為Bob 0.5BTC。&lt;/li&gt;
+  &lt;li&gt;RD1a為C1a第一個輸出的花費交易，輸出給Alice0.5BTC，但此類型交易帶有sequence，作用是阻止當前交易進塊，只有前向交易有sequence個確認時才能進塊。&lt;/li&gt;
+  &lt;li&gt;Bob構造Commitment Tx：C1b和RD1b，並交給Alice簽名。結構與C1a、RD1a是對稱關係。&lt;/li&gt;
+  &lt;li&gt;Bob對C1a和RD1a進行簽名，並將簽名給Alice；同理，Alice對C1b和RD1b簽名，完成後給Bob。此時，由於並未對Funding Tx進行簽名，任何一方均無法作惡，任何一方也不會有任何損失。&lt;/li&gt;
+  &lt;li&gt;雙方均完成對commitment Tx的簽名並交換後，各自再對Funding Tx進行簽名，並交換。此時，Funding Tx是完整的交易，廣播之。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;上述過程以及結構圖的描述，就是建立RSMC的全部過程。C1a, C1b兩筆交易花費的是同一個輸出，故他們兩個交易只有一個能進塊。若Alice廣播C1a，則Bob立即拿到0.5BTC（C1a的第二個輸出），而Alice需要等C1a得到1000個確認，才能通過RD1a的輸出拿到0.5BTC。另一方，若Bob廣播C1b，則Alice立即拿到0.5BTC，Bob等待C1b得到1000個確認，才能通過RD1b拿到0.5BTC。也就是說，單方廣播交易終止合約的那一方會延遲拿到幣，而另一放則立即拿幣。&lt;/p&gt;
+
+&lt;h4 id=&quot;交易更新&quot;&gt;交易更新&lt;/h4&gt;
+
+&lt;p&gt;Alice和Bob各自0.5BTC的餘額，此時Alice從Bob處購買了一件商品，價格為0.1BTC，那麼餘額應該變為Alice 0.4BTC，Bob 0.6BTC。於是建立新的Commitment Tx，對於Alice來說是C2a 和RD2a，對於Bob來說是C2b和RD2b，過程與上面類似。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/127.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;此時兩個狀態均是有效的，那麼最核心的問題來了，如何才能徹底廢棄掉C1a和C1b呢？
+RSMC採用了一個非常巧妙的方法，在C1a的第一個輸出中，採用了Alice2和Bob的多重簽名，Alice將Alice2的私鑰交給Bob，即表示Alice放棄C1a，承認C2a。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/128.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Alice交出Alice2的私鑰給Bob，那麼Bob就可以修改RD1a的輸出給他自己，形成新的交易BR1a。若Alice破壞合約存在C2a的情況下依然廣播出C1a，那麼Alice的懲罰就是失去她全部的幣。Alice交出Alice2的私鑰，或者對交易BR1a進行簽名，兩者是等同的，都是對C1a的放棄。反之亦然，Bob交出Bob2的私鑰給Alice即意味放棄C1b，而僅能認可C2b。引入sequence的目的是，阻止後續交易進塊（RD1a），給出一個實施懲罰視窗期，當發現對方破壞合約時，可以有1000個塊確認的時間去實施懲罰交易，即廣播BR1a代替RD1a。若錯過1000個塊時間視窗，則無法再實施懲罰了（RD1a進塊了）。&lt;/p&gt;
+
+&lt;h4 id=&quot;交易關閉&quot;&gt;交易關閉&lt;/h4&gt;
+
+&lt;p&gt;關閉RSMC，直接按照最終的餘額構造出一個Commitment TX即可，例如輸出為Alice0.1BTC，Bob0.9BTC，無需再設定多重簽名，構造懲罰交易等。&lt;/p&gt;
+
+&lt;h4 id=&quot;中轉交易真實的閃電網路htlc&quot;&gt;中轉交易（真實的閃電網路，HTLC）&lt;/h4&gt;
+
+&lt;p&gt;我們來看一下基本的流程圖吧！
+&lt;img src=&quot;/img/129.png&quot; alt=&quot;&quot; /&gt;
+這裡面的R就是支付的口令，其實就是交易節點之間沒有直連的通道，需要其他人待轉，這些人會收手續費。這裡面需要解決幾個問題（我的思考）：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;如何建立初始的支付通道&lt;/li&gt;
+  &lt;li&gt;如果兩個節點間無直接支付通道，如何找到最佳的支付通道。&lt;/li&gt;
+  &lt;li&gt;如何保證第三方不作弊，防止現金丟失（前面的講的都是這個問題）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;總結&quot;&gt;總結&lt;/h3&gt;
+
+&lt;h4 id=&quot;rsmc-1&quot;&gt;RSMC&lt;/h4&gt;
+
+&lt;p&gt;閃電網路的基礎是交易雙方之間的雙向微支付通道，RSMC（Recoverable Sequence Maturity Contract）定義了該雙向微支付通道的最基本工作方式。這是要求雙方都拿出資金放到合約上，然後輸出動態分配，最後確認輸出後上鏈，這樣的好處就是支付完全是在鏈下執行。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;為了鼓勵雙方儘可能久地利用通道進行交易，RSMC對主動終止通道方給予了一定的懲罰：主動提出方其資金到賬將比對方晚，因此誰發起誰吃虧。這個設計雖然增加了技術複雜度，但應該說是合理的。&lt;/strong&gt;  這樣許多交易就會在區塊鏈下面執行，不會產生交易（只產生預備交易），最後交易才會上鍊。還有就是交易的憑證怎麼保證？所以這個方式或許也有很多技術和現實的缺陷所在。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;通道餘額分配方案的本質是結算準備金。在此安排下，因為要完全控制資金交收風險，每筆交易都不能突破當前結算準備金所施限制。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;htlc&quot;&gt;HTLC&lt;/h4&gt;
+
+&lt;p&gt;RSMC只支援最簡單的無條件資金支付，HTLC（Hashed Timelock Contract）進一步實現了有條件的資金支付，通道餘額的分配方式也因此變得更為複雜。&lt;/p&gt;
+
+&lt;p&gt;通過HTLC，Alice和Bob可以達成這樣一個協議：協議將鎖定Alice的0.1 BTC，在時刻T到來之前（T以未來的某個區塊鏈高度表述），如果Bob能夠向Alice出示一個適當的R（稱為祕密），使得R的雜湊值等於事先約定的值H(R)，Bob就能獲得這0.1 BTC；如果直到時刻T過去Bob仍然未能提供一個正確的R，這0.1 BTC將自動解凍並歸還Alice。&lt;/p&gt;
+
+&lt;h2 id=&quot;雷電網路&quot;&gt;雷電網路&lt;/h2&gt;
+
+&lt;p&gt;基於閃電網路的思路，以太坊社群也提出了自己的鏈下微支付通道解決方案：雷電網路（Raiden Network）。
+延續了以太坊的風格，把本來較簡單的問題複雜智慧化。大致與閃電網路相同，但細節有些地方更復雜。例如：第一層面的那個舊版本作廢，其實只要加上時間戳看哪個時間新就可以了。但是其額外增加了一個單增的Sequence Number欄位來標明哪個有效。還有記錄分配餘額即可，但雷電網路記錄的是增減變動量。在第二個層面上，雷電網路引入了較HTLC更通用和複雜的“Smart Condition”。就是說HTLC中採用的成熟簡單地求HASH函數，在雷電網路中替代成了使用者可自己設定的任意函數，就是說向外擴充套件了，更加智慧，但同時面臨的風險可能就越大。&lt;/p&gt;
+
+&lt;h2 id=&quot;corda&quot;&gt;Corda&lt;/h2&gt;
+
+&lt;p&gt;相近技術的低層思想是相通的，受到閃電網路思想的啟發，知名的R3也宣佈釋出非區塊鏈的分散式賬本應用Corda，其本質思想應該是與閃電網路較相近似。
+關於Corda的資料較少，如整個R3較閉源封閉一樣，只是R3 CEV的首席技術官Richard Brown之前在部落格中披露些Corda的主要特點：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;沒有多餘的全局資料共享：有合法需求的參與方才可按照協議獲取資料；&lt;/li&gt;
+  &lt;li&gt;Corda編寫和配置在企業間流轉，無中心控制者；&lt;/li&gt;
+  &lt;li&gt;Corda在企業間單個交易水平達成共識，而不是在系統水平上；&lt;/li&gt;
+  &lt;li&gt;系統設計直接支援監管觀察員節點；&lt;/li&gt;
+  &lt;li&gt;交易直接由交易雙方驗證，而不是由一大群不相干的驗證者進行；&lt;/li&gt;
+  &lt;li&gt;支援多種共識機制；&lt;/li&gt;
+  &lt;li&gt;記錄了智慧合約程式碼和人類語言法律檔案的清晰聯絡；&lt;/li&gt;
+  &lt;li&gt;用行業標準工具建立；&lt;/li&gt;
+  &lt;li&gt;沒有原始加密貨幣。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;總結-1&quot;&gt;總結&lt;/h2&gt;
+
+&lt;p&gt;將交易和智慧合約的執行放在鏈下快速地執行，僅在必要時才將其在鏈上公開結算執行，這就是閃電網路帶給我們的絕佳思路。同時可增加對閃電結鏈上算時的手續費，減輕鏈上壓力的同時有可能提升礦工收入，因理論上不可能所有交易都閃電。比特幣主鏈上交易有其它任何形式鏈下交易或側鏈交易所無法替代的優點。&lt;/p&gt;
+
+&lt;h2 id=&quot;參考和引用&quot;&gt;參考和引用&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/32613487&quot;&gt;三分鐘讓你瞭解什麼是Segwit隔離見證&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.chainnode.com/post/45833&quot;&gt;隔離見證比任何硬分叉都高階&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.8btc.com/article/95385&quot;&gt;比特幣擴容為什麼選擇2MB？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/46515457&quot;&gt;什麼是比特幣的閃電網路？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/58567061&quot;&gt;什麼是隔離見證？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.8btc.com/article/92887&quot;&gt;詳解最近大熱的閃電網路、雷電網路和CORDA&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s/lM0p3ikVBdw1zE50IWtMZA&quot;&gt;6.9Bite醬一閃電網路⚡大白話零門檻講解&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文：隔离见证、闪电网络理解 隔離見證已經於2017年8月在比特幣上啟動了。最近比特幣正在朝著下一個擴容方案努力，閃電網路 Lightning Network。閃電網路的啟動必須基於更多的使用者使用隔離見證地址。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/125.png" /></entry><entry><title type="html">以區塊鏈為基礎的電子化註冊交付服務</title><link href="http://localhost:4000/news/2019/11/09/%E7%BF%BB%E8%AD%AF-%E4%BB%A5%E5%8D%80%E5%A1%8A%E9%8F%88%E7%82%BA%E5%9F%BA%E7%A4%8E%E7%9A%84%E9%9B%BB%E5%AD%90%E5%8C%96%E8%A8%BB%E5%86%8A%E4%BA%A4%E4%BB%98%E6%9C%8D%E5%8B%99/" rel="alternate" type="text/html" title="以區塊鏈為基礎的電子化註冊交付服務" /><published>2019-11-09T00:00:00+08:00</published><updated>2019-11-09T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/09/%E7%BF%BB%E8%AD%AF:%E4%BB%A5%E5%8D%80%E5%A1%8A%E9%8F%88%E7%82%BA%E5%9F%BA%E7%A4%8E%E7%9A%84%E9%9B%BB%E5%AD%90%E5%8C%96%E8%A8%BB%E5%86%8A%E4%BA%A4%E4%BB%98%E6%9C%8D%E5%8B%99</id><content type="html" xml:base="http://localhost:4000/news/2019/11/09/%E7%BF%BB%E8%AD%AF-%E4%BB%A5%E5%8D%80%E5%A1%8A%E9%8F%88%E7%82%BA%E5%9F%BA%E7%A4%8E%E7%9A%84%E9%9B%BB%E5%AD%90%E5%8C%96%E8%A8%BB%E5%86%8A%E4%BA%A4%E4%BB%98%E6%9C%8D%E5%8B%99/">&lt;blockquote&gt;
   &lt;p&gt;本篇文章翻譯自 &lt;a href=&quot;https://ieeexplore.ieee.org/document/8764454?source=post_page-----f0472420a45b----------------------&quot;&gt;IEEE - Blockchain-Based System for Multiparty Electronic Registered Delivery Services&lt;/a&gt; 的內容，歐洲法規規定了電子化支付（電子化識別和信任服務）而一個合格的電子註冊交付是信託服務之一並包含在法規中，它要求不可否認原產地及誠信的資料。&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -1156,489 +1853,4 @@ def bech32_verify_checksum(hrp, data):
   &lt;li&gt;A Lewko, B Waters, “Unbounded HIBE and attribute-based encryption”, Annual International Conference on the Theory and Applications of Cryptographic Techniques, 2011.&lt;/li&gt;
   &lt;li&gt;R Mori, M Kawahara, “Superdistribution: the concept and the architecture”, IEICE TRANSACTIONS (1976–1990), vol. 73.7, pp. 1133-1146, 1990.&lt;/li&gt;
   &lt;li&gt;B Ahlgren, C Dannewitz, C Imbrenda, D Kutscher, B Ohlman, “A survey of information-centric networking”, IEEE Communications Magazine, vol. 50.7, 2012.&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">本篇文章翻譯自 IEEE - A blockchain for media: Survey 的內容，時常我們都在想區塊鏈部署文字上的問題，但都沒有人去思考過「媒體」：圖像、影像…等的發展性，或許現今的區塊鏈並不適合存放大量的資料，但現今可以透過 IPFS .. 等工具幫助部署內容至區塊鏈上，已達到目的性。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/92.png" /></entry><entry><title type="html">基於稀缺性的比特幣價值模型</title><link href="http://localhost:4000/news/2019/10/24/%E5%9F%BA%E6%96%BC%E7%A8%80%E7%BC%BA%E6%80%A7%E7%9A%84%E6%AF%94%E7%89%B9%E5%B9%A3%E5%83%B9%E5%80%BC%E6%A8%A1%E5%9E%8B/" rel="alternate" type="text/html" title="基於稀缺性的比特幣價值模型" /><published>2019-10-24T00:00:00+08:00</published><updated>2019-10-24T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/10/24/%E5%9F%BA%E6%96%BC%E7%A8%80%E7%BC%BA%E6%80%A7%E7%9A%84%E6%AF%94%E7%89%B9%E5%B9%A3%E5%83%B9%E5%80%BC%E6%A8%A1%E5%9E%8B</id><content type="html" xml:base="http://localhost:4000/news/2019/10/24/%E5%9F%BA%E6%96%BC%E7%A8%80%E7%BC%BA%E6%80%A7%E7%9A%84%E6%AF%94%E7%89%B9%E5%B9%A3%E5%83%B9%E5%80%BC%E6%A8%A1%E5%9E%8B/">&lt;p&gt;該模型預測，在2020年5月下一次減半之後，比特幣市場價值為1萬億美元，相當於55,000美元的比特幣單價&lt;/p&gt;
-
-&lt;p&gt;來源：&lt;a href=&quot;https://twitter.com/100trillionUSD&quot;&gt;link&lt;/a&gt;、原文連結：&lt;a href=&quot;https://medium.com/@100trillionUSD/modeling-bitcoins-value-with-scarcity-91fa0fc03e25&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;介紹&quot;&gt;介紹&lt;/h1&gt;
-
-&lt;p&gt;Satoshi Nakamoto（中本聰）在2008年10月31日[1]發表了比特幣白皮書，於2009年1月3日建立了比特幣創世塊，並在2009年1月8日釋出了比特幣程式碼。從此開始一段旅程，創造如今市值700億美元的比特幣（BTC）市場。&lt;/p&gt;
-
-&lt;p&gt;比特幣是世界上第一個稀缺的不可複製的數字物件。它像銀和金一樣稀缺，可以通過網際網路，無線電，衛星等傳送。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;em&gt;“&lt;/em&gt; &lt;em&gt;作為一個思想實驗，想象一下一種基礎金屬 &lt;strong&gt;像金&lt;/strong&gt; 一樣 &lt;strong&gt;稀缺&lt;/strong&gt; 但具有以下特性：暗淡無奇的灰色，不是良好的電導體，不是特別堅硬&lt;/em&gt; &lt;em&gt;[…]&lt;/em&gt; &lt;em&gt;，對任何實際或觀賞都沒有實用價值&lt;/em&gt; &lt;em&gt;..&lt;/em&gt; &lt;em&gt;和一個特殊的，神奇的財產： &lt;strong&gt;可以通過通訊渠道運輸&lt;/strong&gt;&lt;/em&gt;  &lt;em&gt;“ - Nakamoto [2]&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;當然，這種數字稀缺性是具有價值的。但是值多少錢呢？在本文中，我使用庫存-流量來量化稀缺性，並使用庫存-流量來建立比特幣的價值模型。&lt;/p&gt;
-
-&lt;p&gt;  &lt;/p&gt;
-
-&lt;h1 id=&quot;稀缺和庫存-流動&quot;&gt;稀缺和庫存-流動&lt;/h1&gt;
-
-&lt;p&gt;字典通常將稀缺性定義為“某種情況下不容易找到或得到的東西”，以及“缺乏的某種東西”。&lt;/p&gt;
-
-&lt;p&gt;Nick Szabo對稀缺性有一個更有用的定義：“不可偽造的成本”。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;em&gt;“&lt;/em&gt; &lt;em&gt;古董、時間和黃金有什麼共同點呢？由於原始成本或歷史的不可能性，它們成本很高，而且很難偽造這種成本。&lt;/em&gt; &lt;em&gt;[..]&lt;/em&gt; &lt;em&gt;實施過程中存在一些問題計算機上難以 &lt;strong&gt;偽造的成本&lt;/strong&gt; 。如果可以克服這些問題，我們就可以獲得一點點金錢。&lt;/em&gt; &lt;em&gt;“ - Szabo [3]&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;em&gt;“&lt;/em&gt; &lt;em&gt;貴金屬和收藏品由於其創造成本太高而具有 &lt;strong&gt;不可偽造的稀缺性&lt;/strong&gt; 。這曾經提供了金錢價值，這種價值在很大程度上獨立於任何可信賴的第三方。&lt;/em&gt; &lt;em&gt;[..] [&lt;/em&gt; &lt;em&gt;但&lt;/em&gt; &lt;em&gt;]&lt;/em&gt; &lt;em&gt;你不能用金屬線上支付。因此，如果有一個協議可以線上建立不可偽造的昂貴的位元，對可信第三方的依賴最小，然後以類似的最小信任安全地儲存，傳輸和分析，那將是非常好的。這就是位元金。&lt;/em&gt; &lt;em&gt;“ - Szabo [4]&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;比特幣具有難以偽造的成本，因為生產新的比特幣需要消耗大量的電力。生產比特幣（挖礦）很難被偽造。請注意，這與法定貨幣以及沒有供應上限的山寨幣不同。那些（法幣或者山寨幣）沒有工作證明（PoW），具有低雜湊值，或者有一小群人或公司可以輕易影響供應等。&lt;/p&gt;
-
-&lt;p&gt;Saifedean Ammous談到了庫存-流量（SF）比例的稀缺性。他解釋了為什麼黃金和比特幣與銅、鋅、鎳、黃銅等消費品不同，因為它們具有高SF（庫存-流量）。&lt;/p&gt;
-
-&lt;p&gt; &lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;em&gt;“&lt;/em&gt; &lt;em&gt;對於任何消費品&lt;/em&gt; &lt;em&gt;[……]&lt;/em&gt; &lt;em&gt;，產量增加一倍會使任何現有庫存相形見絀，導致價格暴跌並損害持有者。對於黃金而言，導致年產量翻番的價格飆升將是微不足道的，庫存增加&lt;/em&gt; &lt;em&gt;3&lt;/em&gt; &lt;em&gt;％而不是&lt;/em&gt; &lt;em&gt;1.5&lt;/em&gt; &lt;em&gt;％。&lt;/em&gt; &lt;em&gt;“&lt;/em&gt;  &lt;br /&gt;
-&lt;em&gt;“&lt;/em&gt; &lt;em&gt;正是這種持續低的黃金供應率是其在整個人類歷史中保持貨幣角色的根本原因。&lt;/em&gt; &lt;em&gt;”&lt;/em&gt;  &lt;br /&gt;
-&lt;em&gt;“&lt;/em&gt;  &lt;em&gt;黃金的高 &lt;strong&gt;庫存流量比&lt;/strong&gt; 使其成為供應價格彈性最低的商品。&lt;/em&gt; &lt;em&gt;”&lt;/em&gt;  &lt;br /&gt;
-&lt;em&gt;“2017&lt;/em&gt; &lt;em&gt;年現有的比特幣庫存比&lt;/em&gt; &lt;em&gt;2017&lt;/em&gt; &lt;em&gt;年生產的新硬幣大&lt;/em&gt; &lt;em&gt;25&lt;/em&gt; &lt;em&gt;倍左右。這仍然不到黃金比例的一半，但在&lt;/em&gt; &lt;em&gt;2022&lt;/em&gt; &lt;em&gt;年左右，比特幣的 &lt;strong&gt;庫存流量比率&lt;/strong&gt; 將超過黃金&lt;/em&gt; &lt;em&gt;“ - Aousous [5]&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;因此，SF可以量化稀缺性。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;SF =&lt;/strong&gt; &lt;strong&gt;庫存&lt;/strong&gt; &lt;strong&gt;/&lt;/strong&gt; &lt;strong&gt;流量&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;庫存是現有庫存或儲備的大小。流量是年產量。人們也使用供應增長率（流量/庫存）而不是SF。注意SF = 1 /供應增長率。&lt;/p&gt;
-
-&lt;p&gt;我們來看看一些SF資料。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/85.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt; &lt;/p&gt;
-
-&lt;p&gt;黃金擁有最高的SF62，需要62年的生產才能獲得當前的黃金庫存。白銀在SF 22中排名第二。這種高的SF使它們成為貨幣商品。&lt;/p&gt;
-
-&lt;p&gt;鈀、鉑和所有其他商品的SF僅略高於1。現有庫存通常等於或低於年產量，這使得生產成為一個非常重要的因素。商品幾乎不可能獲得更高的SF，因為一旦有人囤積它們、價格上漲、產量上升、價格再次下跌。逃離這個陷阱非常困難。&lt;/p&gt;
-
-&lt;p&gt;比特幣目前擁有1750萬硬幣的庫存和70萬每年的供應，其 SF為 25.這使比特幣成為貨幣類別，如白銀和黃金。比特幣目前的市場價值為700億美元。&lt;/p&gt;
-
-&lt;p&gt;比特幣的供應是固定的。在每個新塊中會產生新的比特幣。當礦工發現滿足一個雜湊值可以滿足PoW對有效塊的要求時，每10分鐘（平均）會建立一個新塊。每個塊中的第一個交易，稱為coinbase，包含找到塊的礦工的獎勵。區塊獎勵包括人們為該區塊中的交易支付的費用以及新產生的比特幣（稱為補貼）。補貼從50比特幣開始，每210,000塊（約4年）減少一半。這就是為什麼“減半”對比特幣貨幣供應和SF非常重要。減半也導致供應增長率（在比特幣背景下通常稱為“貨幣通脹”）逐步而不平穩。&lt;/p&gt;
-
-&lt;p&gt; &lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/86.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;https://plot.ly/~BashCo/5.embed&lt;/p&gt;
-
-&lt;p&gt; &lt;/p&gt;
-
-&lt;h1 id=&quot;庫存-流量和價值&quot;&gt;庫存-流量和價值&lt;/h1&gt;
-
-&lt;p&gt;本研究中的假設是，SF所測量的稀缺性直接推動了價值。從上面的表格可以看出，當SF較高時，市場價值往往會更高。下一步是收集資料並製作統計模型。&lt;/p&gt;
-
-&lt;h2 id=&quot;資料&quot;&gt;資料&lt;/h2&gt;
-
-&lt;p&gt;我從2009年12月到2019年2月計算了比特幣的每月SF和價值（總計111個數據點）。可以使用Python / RPC / bitcoind直接從比特幣區塊鏈中查詢每月的塊數。塊的實際數量與理論數量相差很大，因為塊不是每10分鐘生成一次（例如，在2009年的第一年，塊數明顯減少）。通過每月的塊數和已知的塊補貼，您可以計算流量和庫存。我通過任意忽略SF計算中的前一百萬個硬幣（7個月）來糾正丟失的硬幣。更準確地調整丟失的硬幣, 將成為未來研究的主題。&lt;/p&gt;
-
-&lt;p&gt;比特幣價格資料可從不同來源獲得，但從2010年7月開始。我添加了第一個已知的比特幣價格（2009年10月1309 BTC 1美元，2010年3月比特幣市場首次報價0.003美元，2010年5月10,000比特幣2比薩價值41美元）和插值。資料考古學將成為未來研究的主題。&lt;/p&gt;
-
-&lt;p&gt;我們已經獲得了黃金（SF 62，市值8.5萬億美元）和白銀（SF 22，市值3080億美元）的資料點，將其作為基準。&lt;/p&gt;
-
-&lt;h2 id=&quot;模型&quot;&gt;模型&lt;/h2&gt;
-
-&lt;p&gt;SF與市場價值的第一個散點圖顯示，最好使用對數值或軸作為市場價值，因為它跨越8個數量級（從10,000美元到1000億美元）。使用SF的對數值或軸也可以顯示ln（SF）和ln（市場價值）之間的良好線性關係。請注意，我使用自然對數（ln with base e）而不是常用對數（log with base 10），這將產生類似的結果。&lt;/p&gt;
-
-&lt;p&gt;  &lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/87.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;使用gnuplot和gnumerics製作的圖表&lt;/p&gt;
-
-&lt;p&gt; &lt;/p&gt;
-
-&lt;p&gt;對資料進行線性迴歸確認了肉眼可以看到的結果：SF與市場價值之間存在統計學上顯著的關係（95％R2，F 2.3E-17的顯著性，斜率2.3E-17的p值）。SF和市場價值之間的關係由偶然性引起的可能性接近於零。當然，其他因素也會影響價格，監管，黑客和其他新聞，這就是為什麼R2不是100％（並非所有點都在直線黑線上）。然而，主導驅動因素似乎是稀缺/ SF。&lt;/p&gt;
-
-&lt;p&gt;非常有趣的是，完全不同市場的黃金和白銀，也符合SF的比特幣模型價值。這為模型提供了額外的信心。請注意，在2017年12月牛市的高峰期，比特幣SF為22，比特幣市值為2300億美元，非常接近白銀。&lt;/p&gt;
-
-&lt;p&gt;由於減半對SF有如此大的影響，因此我將下半個月作為圖表中的顏色疊加放置幾個月。深藍色是減半月，紅色剛剛減半。下一個減半是2020年5月。當前SF為25將翻倍至50，非常接近黃金（SF 62）。&lt;/p&gt;
-
-&lt;p&gt;預計2020年5月之後比特幣的市場價值為1萬億美元，相當於55,000美元的比特幣價格。這非常壯觀。我想時間會告訴我們，我們可能知道在減半之後的一兩年，即2020年或2021年。這個假設和模型的樣本測試非常好。&lt;/p&gt;
-
-&lt;p&gt;人們問我1萬億美元比特幣市場價值所需的資金來自哪裡？我的回答：白銀，黃金，負利率國家（歐洲，日本，美國），掠奪性政府國家（委內瑞拉，伊朗，土耳其等），億萬富翁和百萬富翁對衝量化寬鬆（QE），以及機構投資者發現過去10年中表現最佳的資產。&lt;/p&gt;
-
-&lt;p&gt;我們還可以直接用SF模擬比特幣價格。當然公式有不同的參數，但結果是相同的，在2020年5月之後減半以後，95％R2且預計比特幣價格就在55,000美元（此時比特幣SF為 50）。&lt;/p&gt;
-
-&lt;p&gt;我根據SF（黑色）和實際比特幣價格隨時間繪製比特幣模型價格，有些塊數的顏色會疊加。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/88.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;使用gnuplot和gnumerics製作的圖表&lt;/p&gt;
-
-&lt;p&gt; &lt;/p&gt;
-
-&lt;p&gt;請注意挈合度，尤其是在2012年11月減半後幾乎立即進行價格調整。2016年6月減半之後的調整速度要慢得多，可能是因為以太坊競爭和DAO黑客攻擊。此外，您在2009年第一年以及2011年年中，2015年中期和2018年末的向下難度調整期間，可以看到每個月（藍色）的塊數減少。2010年至2011年GPU礦工和ASIC礦工的介紹導致每月更多的區塊（紅色）。&lt;/p&gt;
-
-&lt;h1 id=&quot;冪律和分形&quot;&gt;冪律和分形&lt;/h1&gt;
-
-&lt;p&gt;同樣非常有趣的是，有冪律關係的跡象。&lt;/p&gt;
-
-&lt;p&gt;線性迴歸函數：ln（市場價值）= 3.3 * ln（SF）+14.6&lt;/p&gt;
-
-&lt;p&gt;..可以寫成冪律函數：市場價值= exp（14.6）* SF ^ 3.3&lt;/p&gt;
-
-&lt;p&gt;冪定理很少，你經常找不到它們。95％R2超過8個數量級的冪律的可能性，增加了用SF正確捕獲比特幣值的主要驅動因素的可信度。&lt;/p&gt;
-
-&lt;p&gt;冪律是一種關係，其中一個量的相對變化引起另一個量的比例相對變化，與這些量的初始大小無關。[6]。每增加一半，比特幣SF增加一倍，市場價值增加10倍，這是一個不變因素。&lt;/p&gt;
-
-&lt;p&gt;冪定律很有意思，因為它們揭示了看似隨機複雜系統性質的潛在規律性。有關著名冪律的例子，請參閱附錄。複雜系統通常具有不同尺度的現象之間的變化與我們正在觀察的尺度無關的特性。這種自相似的屬性是權力法律關係的基礎。我們在比特幣中也看到了這一點：2011年，2014年和2018年的崩潰看起來非常相似（都有-80％的下降），但完全不同的規模（分別為10美元，1000美元，10,000美元）; 如果你不使用日誌刻度，你將看不到它。尺度方差和自相似性與分形有關。實際上，上面冪律函數中的參數3.3是“分形維數”。有關分形的更多資訊，請參閱著名的海岸線研究[7]。&lt;/p&gt;
-
-&lt;h1 id=&quot;結論&quot;&gt;結論&lt;/h1&gt;
-
-&lt;p&gt;比特幣是世界上第一個稀缺的數字物體，它很像銀和金，可以通過網際網路、無線電、衛星等傳送。&lt;/p&gt;
-
-&lt;p&gt;當然，這種數字稀缺性具有價值。但是多少錢？在本文中，我使用庫存流量來量化稀缺性，並使用庫存流量來模擬比特幣的價值。&lt;/p&gt;
-
-&lt;p&gt;存在股票流量與市場價值之間存在統計上顯著的關係。股票流量與市場價值之間的關係由偶然性引起的可能性接近於零。&lt;/p&gt;
-
-&lt;p&gt;增加對模型的信心：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;黃金和白銀是與比特幣完全不同的市場，但與SF的比特幣模型價值一致。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;有冪律關係的跡象。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;該模型預測，在2020年5月下一次減半之後，比特幣市場價值為1萬億美元，相當於55,000美元的比特幣單價。&lt;/p&gt;
-
-&lt;p&gt; &lt;/p&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-
-&lt;p&gt;[1] &lt;a href=&quot;https://bitcoin.org/bitcoin.pdf&quot;&gt;https://bitcoin.org/bitcoin.pdf&lt;/a&gt; —Satoshi Nakamoto, 2008&lt;/p&gt;
-
-&lt;p&gt;[2] &lt;a href=&quot;https://bitcointalk.org/index.php?topic=583.msg11405#msg11405&quot;&gt;https://bitcointalk.org/index.php?topic=583.msg11405#msg11405&lt;/a&gt; —Satoshi Nakamoto, 2010&lt;/p&gt;
-
-&lt;p&gt;[3] &lt;a href=&quot;https://unenumerated.blogspot.com/2005/10/antiques-time-gold-and-bit-gold.html&quot;&gt;https://unenumerated.blogspot.com/2005/10/antiques-time-gold-and-bit-gold.html&lt;/a&gt; —Nick Szabo, 2008&lt;/p&gt;
-
-&lt;p&gt;[4] &lt;a href=&quot;https://unenumerated.blogspot.com/2005/12/bit-gold.html&quot;&gt;https://unenumerated.blogspot.com/2005/12/bit-gold.html&lt;/a&gt; —Nick Szabo, 2008&lt;/p&gt;
-
-&lt;p&gt;[5] The BitcoinStandard: The Decentralized Alternative to Central Banking — SaifedeanAmmous, 2018&lt;/p&gt;
-
-&lt;p&gt;[6] &lt;a href=&quot;https://necsi.edu/power-law&quot;&gt;https://necsi.edu/power-law&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;[7] &lt;a href=&quot;http://fractalfoundation.org/OFC/OFC-10-4.html&quot;&gt;http://fractalfoundation.org/OFC/OFC-10-4.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;appendix-power-law-examples&quot;&gt;Appendix —Power Law Examples&lt;/h1&gt;
-&lt;p&gt;Kepler (planets)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/89.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/90.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;translations&quot;&gt;Translations&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Chinese &lt;a href=&quot;https://mp.weixin.qq.com/s/Lj1313ND96unxcq98SNlMg&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Croatian &lt;a href=&quot;https://medium.com/@LuxBTC/modeliranje-vrijednosti-bitcoina-na-temelju-njegove-rijetkosti-6538e31080c3&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Czech &lt;a href=&quot;https://medium.com/@figyfaldaa/ur%C4%8Den%C3%AD-hodnoty-bitcoinu-na-z%C3%A1klad%C4%9B-jeho-vz%C3%A1cnosti-7c7a82a41f38&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Dutch &lt;a href=&quot;https://medium.com/@lekkercryptisch/modelleren-van-de-waarde-van-bitcoin-met-schaarste-e9a7418b5f3c&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;French &lt;a href=&quot;https://medium.com/@PaulAdW/mod%C3%A9liser-la-valeur-de-bitcoin-gr%C3%A2ce-%C3%A0-la-raret%C3%A9-version-fran%C3%A7aise-dccfcb076839&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Frisian (Fryske) &lt;a href=&quot;https://medium.com/@MyLegacyKit/de-wearde-fan-bitcoin-modellen-mei-knapperheid-41cafea7b06e&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;German &lt;a href=&quot;https://medium.com/@david.andlinger.privat/modellierung-von-bitcoins-wert-mit-stock-to-flow-fe706e7eeac9&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Greek &lt;a href=&quot;https://medium.com/@GeorgeTProfit/ypologizontas-tin-axia-tou-bitcoin-vasei-spaniotitas-528ef80d7bf&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Gujarati &lt;a href=&quot;https://medium.com/translation-of-modeling-bitcoins-value-with/%E0%AA%85%E0%AA%9B%E0%AA%A4-%E0%AA%B8%E0%AA%BE%E0%AA%A5%E0%AB%87-%E0%AA%AC%E0%AA%BF%E0%AA%9F%E0%AA%95%E0%AB%8B%E0%AA%87%E0%AA%A8%E0%AA%A8%E0%AB%81%E0%AA%82-%E0%AA%AE%E0%AB%82%E0%AA%B2%E0%AB%8D%E0%AA%AF-%E0%AA%AE%E0%AB%8B%E0%AA%A1%E0%AB%87%E0%AA%B2%E0%AA%BF%E0%AA%82%E0%AA%97-fce5cf53bebf&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Indonesian &lt;a href=&quot;https://medium.com/cryptowatchasia/menghitung-nilai-bitcoin-berdasarkan-sifat-kelangkaannya-cd00d8c6c59f&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Italian &lt;a href=&quot;https://medium.com/@carloclerici/il-concetto-di-scarsita-nella-determinazione-del-valore-di-bitcoin-c716c0ad3fff&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Japanese &lt;a href=&quot;https://medium.com/@leriansfield/%E5%B8%8C%E5%B0%91%E6%80%A7%E3%81%AB%E5%9F%BA%E3%81%A5%E3%81%84%E3%81%9F%E3%83%93%E3%83%83%E3%83%88%E3%82%B3%E3%82%A4%E3%83%B3%E4%BE%A1%E5%80%A4%E3%81%AE%E3%83%A2%E3%83%87%E3%83%AB%E5%8C%96-f060486f2508&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Korean &lt;a href=&quot;https://medium.com/@soulbitcoin1209/%ED%9D%AC%EC%86%8C%EC%84%B1%EC%9D%84-%ED%86%B5%ED%95%9C-%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8-%EB%AA%A8%EB%8D%B8%EB%A7%81-modeling-bitcoins-value-with-scarcity-942ceb287d5b&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Norwegian &lt;a href=&quot;https://kryptografen.no/2019/07/16/knapphet-bestemmer-verdien-pa-bitcoin/&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Polish &lt;a href=&quot;https://medium.com/@ztzawislak/modelowanie-warto%C5%9Bci-bitcoina-za-pomoc%C4%85-rzadko%C5%9Bci-739316b6e18a&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Portuguese &lt;a href=&quot;https://medium.com/@mmouta/modelo-matem%C3%A1tico-do-valor-da-bitcoin-com-base-na-escassez-4846c5d3f3f1&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Romanian &lt;a href=&quot;https://medium.com/@AndreiStroescu1/evalu%C3%A2nd-bitcoin-bazat-pe-raritatea-sa-2ff052d7c44a&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Russian &lt;a href=&quot;https://medium.com/@Tony_B/%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%86%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D0%B1%D0%B8%D1%82%D0%BA%D0%BE%D0%B8%D0%BD%D0%B0-%D1%81-%D1%83%D1%87%D0%B5%D1%82%D0%BE%D0%BC-%D0%B4%D0%B5%D1%84%D0%B8%D1%86%D0%B8%D1%82%D0%B0-3fcb10890999&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Slovenian &lt;a href=&quot;https://medium.com/@thepkbadger/modeliranje-vrednosti-bitcoina-na-osnovi-redkosti-7197ccdaf36c&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spanish &lt;a href=&quot;https://medium.com/@jsanzsz/valorando-bitcoin-en-funci%C3%B3n-de-su-escasez-9828dd9c197&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Turkish &lt;a href=&quot;https://medium.com/@oguzhu12/bitcoin-de%C4%9Ferinin-nadirlik-ile-modellenmesi-965d07b0fcda&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">該模型預測，在2020年5月下一次減半之後，比特幣市場價值為1萬億美元，相當於55,000美元的比特幣單價</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/91.png" /></entry><entry><title type="html">Grin 的貨幣政策</title><link href="http://localhost:4000/news/2019/10/20/%E7%BF%BB%E8%AD%AF-Grin%E7%9A%84%E8%B2%A8%E5%B9%A3%E6%94%BF%E7%AD%96/" rel="alternate" type="text/html" title="Grin 的貨幣政策" /><published>2019-10-20T00:00:00+08:00</published><updated>2019-10-20T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/10/20/%E7%BF%BB%E8%AD%AF:Grin%E7%9A%84%E8%B2%A8%E5%B9%A3%E6%94%BF%E7%AD%96</id><content type="html" xml:base="http://localhost:4000/news/2019/10/20/%E7%BF%BB%E8%AD%AF-Grin%E7%9A%84%E8%B2%A8%E5%B9%A3%E6%94%BF%E7%AD%96/">&lt;blockquote&gt;
-  &lt;p&gt;本篇文章是翻譯自Grin的&lt;a href=&quot;https://github.com/mimblewimble/docs/wiki/Monetary-Policy&quot;&gt;Gitgub&lt;/a&gt;的內容，在說明Grin為什麼採取當前的發行政策，以前其背後對於比特幣等加密貨幣的思想，以及如何將自己的理解變為Grin中的發行政策。譯者認為加密貨幣的發行政策一直是大家鮮少注意到，卻極為重要的一塊，因此翻譯了這篇文章，簡單而言，&lt;strong&gt;Grin的核心貢獻者認為貨幣能有價值不在於有沒有硬頂，而是能不能有透明的發行政策&lt;/strong&gt;。 by &lt;a href=&quot;https://www.facebook.com/profile.php?id=100000175076210&quot;&gt;Williams Lai&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&quot;貨幣政策&quot;&gt;貨幣政策&lt;/h1&gt;
-
-&lt;p&gt;近期，&lt;a href=&quot;https://docs.google.com/spreadsheets/d/1hGyC8tSivtZqjlu8aQgjG0pKfKc0L0RO0leMfjPADp0/edit#gid=0&quot;&gt;每秒都有新的Grin會被發行&lt;/a&gt;，很有可能這樣的方式會永遠一直持續下去，這代表通貨膨脹率會趨近於恆定。為什麼，考慮一下下面幾點吧&lt;/p&gt;
-
-&lt;h1 id=&quot;在前十年他會很接近比特幣&quot;&gt;&lt;strong&gt;在前十年他會很接近比特幣&lt;/strong&gt;&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://plot.ly/~Bobby_Digital/1/#/&quot;&gt;比特幣前四年的發行率與Grin前四年相同&lt;/a&gt;。比特幣在前四年有全額的獎勵，接下來的4年只有一半。所以相對於恆定的供給，八年後的代幣發行總量只減少了33%。
-&lt;em&gt;注：原文有一句「Compare that to daily price fluctuations.」很像是沒有說完的話。&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/84.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;               比特幣、Grin、和過去四十年黃金每年發行率
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;它更像是以太坊&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;以太坊的獎勵在2017年末以前是恆定的每個區塊5個Ether。隨後變為每個區塊三個，並打算在君士坦丁堡升級後變成每個區塊給2個ether的獎勵。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;它甚至更像黃金&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;黃金在歷史上已經有線性的發行，像是Grin一樣。看這張比較比特幣、Grin、黃金的發行量的&lt;a href=&quot;https://plot.ly/~Bobby_Digital/1/#/&quot;&gt;圖表&lt;/a&gt;吧&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;新的供給量在十年後少了10%&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;年復一年，總稀釋量會越來越小。在過了10年後，供給的通貨膨脹會小於10%。20年後會小於5%，25年後grin會只有4%的通貨膨脹，和從創始塊算起十年後（2018）的比特幣的通膨率是一樣的。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;很有可能每年至少有2%的硬幣會丟失&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;許多研究已經說明有相當數量的代幣，已經在流通的過程中，以無法恢復的方式丟失、燒毀或者逐漸消失。硬幣丟失率保守估計為2%，但可能略高。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;長期發行量可能需要趨於穩定&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;固定供應量的貨幣是非常試驗性的。礦工可能會需要在手續費之外，還有趨於穩定的收入來保證安全性。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;健全的貨幣與透明的發行更有關，而不是有上限的供給。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;以法定貨幣計價的貨幣通脹的一個陷阱是，政府可以隨心所欲地擴大貨幣供應。在歷史上這樣的濫用已經導致毀滅性的效果。一個無主權、開源、基於共識的貨幣，借由制定一個提前公佈的恆定發行政策，來解決這個問題，並且使其難以被改變。 &lt;strong&gt;&lt;em&gt;基於健全性的定義，Grin和比特幣一樣是健全的貨幣&lt;/em&gt;&lt;/strong&gt; 。讓比特幣變的重要的，是去除中央權威任意的控制，而非去除任意數量的供給上限。&lt;/p&gt;
-
-&lt;p&gt;Nick Szabo 是這樣評論比特幣的固定供給：&lt;a href=&quot;https://twitter.com/NickSzabo4/status/1077317105148547072&quot;&gt;許多的供給演算法可能都可以做到，只要他是可以預測的。安全和信任相對而言才是更有價值的。&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;還有許多加密貨幣和比特幣類似，且有更小的發行量，但又有幾個能讓你念出名字呢。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;通貨膨脹可能會導致價錢更穩定&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;作為一個實驗性質的假設，Grin的通貨膨脹率可能會在早期用來阻止囤積，並促進分配。通貨膨脹抑制了「巨鯨」 — 也就是那些對資產的價格有過多的控制的人的行為，應該採取行動來淡化投機泡沫和價格波動。 &lt;strong&gt;早期採用者和後期採用者可以得到一樣的grin&lt;/strong&gt; 。這個論點在《&lt;a href=&quot;https://www.lesswrong.com/posts/P9jggxRZTMJcjnaPw/bitcoins-are-not-digital-greenbacks&quot;&gt;比特幣不是數字美元&lt;/a&gt;》中有長足的討論，戴偉自己甚至認為「比特幣的貨幣政策是失敗的」。Grin的目標是在現在和將來為所有用戶提供盡可能平等的訪問和效用。&lt;/p&gt;
-
-&lt;p&gt;持續的發行可以為所有類型的用戶提供更強的供給確定性，並允許更透明、更自然的定價。注:比特幣作為一種交換方式與嚴格的價值儲存手段的廣泛使用，取決於「&lt;a href=&quot;https://jpkoning.blogspot.com/2018/10/bitcoin-and-bubble-theory-of-money.html&quot;&gt;凱恩斯式選美比賽&lt;/a&gt;」的概念。這樣的實驗還在持續中。
-&lt;em&gt;譯注：凱恩斯式選美亦即投資者會選擇他認為大家會選擇的產品作為投資標的&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;已經有更好的價值儲存方法或者很快讓人變富的代幣&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Grin關注在隱私、擴容與公平。如果團體或個人能夠快速致富，相比於其他人他們就更有力量能夠影響整個grin的經濟。Grin想做的並不是產生技術官僚，而是希望能夠盡可能的為很多人提供隱私的電子現金。囤幣是一個會產生巨大的中心化壓力的事，而grin的發行政策則是希望能夠盡可能的去減輕這個問題。這個想法就有點像讓你像是在用一台自行車一樣的在使用Grin，他可以帶你到處走一走，並且使你的生活更有效率，而不是將它存放在倉庫以期待他能夠升值。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Grin會被分叉成一個「讓人更快致富」的代幣&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;沒事，但快速致富的關鍵字是「快速」。相對而言，Grin每年供應的溫和變化相對較慢（能致富）。因為Grin並不是為了一夜暴富。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;機密資產允許並行的貨幣政策在隨後進行軟分叉&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;如果最近的貨幣政策會讓你無法繼續為Grin貢獻，那你應該繼續留下來。&lt;a href=&quot;https://lists.launchpad.net/mimblewimble/msg00103.html&quot;&gt;機密資產&lt;/a&gt;是一個由早期的MimbleWimble貢獻者Andrew Poelstra的發明，允許替代資產（有不同的演算法，發行政策，利率，以及更多包涵與其他資產或者區塊鏈掛鈎的代幣）可以被附加在Grin上，並且在隨後進行軟分叉。這些資產對鏈的容量只佔據了極少許，並使所有其他資產（例如原生的grin）變得更加有隱私性，並且可以根據個人的意願選擇要採用或者忽略，並且不影響鏈上的其他資產（grin或其他）。Grin是MimbleWimble一個最小的實現，但他會繼續成長和進化，記得MimbleWimble是敏捷的。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;我們正處於加密經濟的早期&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;關於透明、協作的貨幣政策是非常不成熟的。比特幣只有十歲而其實驗的成果是越來越豐碩的。對於抄襲實驗者而言時機仍尚未成熟，但卻是創新的好時機。&lt;/p&gt;
-
-&lt;p&gt;目前只有2800萬個比特幣錢包（許多還不是活躍使用，或者是某些單一用戶的次要錢包）。這代表只有少於0.5%的全球人口擁有自己的錢包。因為你在這裡，就代表你關心加密貨幣的整個前途，所以當事情如此新和不確定時，保持開放的心態是很重要的。&lt;/p&gt;
-
-&lt;p&gt;向前進吧！&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;在翻譯完這篇文章後，我也在想，有其他用途或者其他使用價值的token，相對於硬頂的發行，是不是發行總量趨於穩定的通縮模型，反而是比較好的發行方式，能讓貨幣繼續保持價值存儲，也能在初期避免囤幣而帶來的中心化現象？&lt;/p&gt;
-
-&lt;p&gt;另外，之所以能在每次的減半都造成預期的漲跌，是不是透明的發行政策所帶來的預期供需心理？&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">本篇文章是翻譯自Grin的Gitgub的內容，在說明Grin為什麼採取當前的發行政策，以前其背後對於比特幣等加密貨幣的思想，以及如何將自己的理解變為Grin中的發行政策。譯者認為加密貨幣的發行政策一直是大家鮮少注意到，卻極為重要的一塊，因此翻譯了這篇文章，簡單而言，Grin的核心貢獻者認為貨幣能有價值不在於有沒有硬頂，而是能不能有透明的發行政策。 by Williams Lai</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/84.png" /></entry><entry><title type="html">Cypherpunks Taiwan (8) -如何使用github &amp;amp; 衛星計畫進度</title><link href="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/" rel="alternate" type="text/html" title="Cypherpunks Taiwan (8) -如何使用github &amp; 衛星計畫進度" /><published>2019-10-04T00:00:00+08:00</published><updated>2019-10-04T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/10/04/Cypherpunks%20Taiwan%20(8)%20%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%20&amp;%20%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A</id><content type="html" xml:base="http://localhost:4000/meetup/2019/10/04/Cypherpunks-Taiwan-(8)-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-&amp;-%E8%A1%9B%E6%98%9F%E8%A8%88%E7%95%AB%E9%80%B2%E5%BA%A6%E5%A0%B1%E5%91%8A/">&lt;p&gt;活動影片：&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Cypherpunks 介紹 ： &lt;a href=&quot;https://youtu.be/rG7X8pOZ_as?t=1&quot;&gt;youtube&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;如何使用github ： &lt;a href=&quot;https://youtu.be/rG7X8pOZ_as?t=1169&quot;&gt;youtube&lt;/a&gt;, &lt;a href=&quot;/meetup/2019/10/04/Cypherpunks-GitHub-教學演講/&quot;&gt;文章&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;比特幣衛星計畫運作與計畫進度 ： &lt;a href=&quot;https://youtu.be/rG7X8pOZ_as?t=3934&quot;&gt;youtube&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;活動訊息：&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;地點：Taipei Hackerspace&lt;/li&gt;
-  &lt;li&gt;時間：19:00-22:00&lt;/li&gt;
-  &lt;li&gt;日期：10月4日&lt;/li&gt;
-  &lt;li&gt;性質：小聚，希望手把手讓大家一起玩起來，不排斥大家帶酒來&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;主題一：&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;講者： &lt;a href=&quot;https://www.facebook.com/milochen0418&quot;&gt;Milo Chen&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;講題：如何使用github&lt;/li&gt;
-  &lt;li&gt;主旨：基礎說明如何使用git以及一些使用技巧，提高大家在github的貢獻量。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;主題二：&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;講者： &lt;a href=&quot;https://www.facebook.com/pw.chen.bitcoiner&quot;&gt;陳伯韋 （Po Chen）&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;講題：比特幣衛星計畫運作與計畫進度&lt;/li&gt;
-  &lt;li&gt;主旨：因為太多人不是很明白比特幣衛星計畫在做些什麼東西，已經不知道該如何幫忙，所以會大致把roadmap 說完，以及如何參與說清楚&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;大家可以順便玩玩調酒機，了解一下 &lt;a href=&quot;https://www.facebook.com/groups/tpehack/&quot;&gt;台北創客空間 Taipei Hackerspace&lt;/a&gt; 的文化風氣，包括焊接、四軸飛行器…等的 創客文化&lt;/p&gt;
-
-&lt;p&gt;Facebook 活動連結：&lt;a href=&quot;https://www.facebook.com/events/523580818418580/&quot;&gt;https://www.facebook.com/events/523580818418580/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;影片：&lt;/p&gt;
-
-&lt;div style=&quot;text-align:center&quot;&gt;
-&lt;iframe style=&quot;width:560px; height:315px;&quot; src=&quot;https://www.youtube.com/embed/rG7X8pOZ_as&quot; styleframeborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;/div&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">活動影片： Cypherpunks 介紹 ： youtube 如何使用github ： youtube, 文章 比特幣衛星計畫運作與計畫進度 ： youtube</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/50.png" /></entry><entry><title type="html">Cypherpunks GitHub 教學演講</title><link href="http://localhost:4000/meetup/2019/10/04/Cypherpunks-GitHub-%E6%95%99%E5%AD%B8%E6%BC%94%E8%AC%9B/" rel="alternate" type="text/html" title="Cypherpunks GitHub 教學演講" /><published>2019-10-04T00:00:00+08:00</published><updated>2019-10-04T00:00:00+08:00</updated><id>http://localhost:4000/meetup/2019/10/04/Cypherpunks%20GitHub%20%E6%95%99%E5%AD%B8%E6%BC%94%E8%AC%9B</id><content type="html" xml:base="http://localhost:4000/meetup/2019/10/04/Cypherpunks-GitHub-%E6%95%99%E5%AD%B8%E6%BC%94%E8%AC%9B/">&lt;p&gt;GitHub 可以說是現今時代中工程師的一種社交網路, 當你發現原始作者有一些感興趣的專案時，你想為此專案作貢獻，加入原作者專案 Contributor 的行列時。就可以參考本文件一步一步操作。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;目錄：&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;#%e7%ac%ac%e4%b8%80%e7%ab%a0%e6%a6%82%e5%bf%b5%e4%bb%8b%e7%b4%b9&quot;&gt;第一章、概念介紹&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#1-%e6%95%99%e5%ad%b8%e9%81%a9%e7%94%a8%e6%83%85%e5%a2%83&quot;&gt;1. 教學適用情境&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#2-%e4%b8%89%e5%80%8b%e8%a7%92%e8%89%b2%e4%bb%8b%e7%b4%b9&quot;&gt;2. 三個角色介紹&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#3-%e4%ba%86%e8%a7%a3%e8%a7%92%e8%89%b2%e9%81%8b%e4%bd%9c&quot;&gt;3. 了解角色運作&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#4-%e4%b8%83%e6%ad%a5%e6%88%90%e8%b2%a2%e7%8d%bb%e8%80%85&quot;&gt;4. 七步成貢獻者&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#%e7%ac%ac%e4%ba%8c%e7%ab%a0%e5%ae%8c%e6%95%b4%e6%93%8d%e4%bd%9c&quot;&gt;第二章、完整操作&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#1-%e8%ab%8b%e8%a8%bb%e5%86%8a-github&quot;&gt;(1) 請註冊 GitHub&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#2-%e5%9c%a8-github-%e4%b8%8a%e6%8a%8a%e5%88%a5%e4%ba%ba%e7%9a%84%e5%b0%88%e6%a1%88%e5%bc%84%e4%b8%80%e4%bb%bd%e5%88%b0%e8%87%aa%e5%b7%b1%e4%b8%8a%e9%9d%a2-by-fork&quot;&gt;(2) 在 GitHub 上把別人的專案弄一份到自己上面 by fork&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#3%e8%87%aa%e5%b7%b1%e5%be%9e%e8%87%aa%e5%b7%b1%e7%9a%84-repo-%e5%90%8c%e6%ad%a5%e4%b8%80%e4%bb%bd%e5%88%b0%e9%9b%bb%e8%85%a6--by-git-clone&quot;&gt;(3)自己從自己的 repo 同步一份到電腦  … by git clone&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#4-%e7%94%b1%e6%96%bc%e5%88%a5%e4%ba%ba%e7%9a%84%e5%b0%88%e6%a1%88%e6%9c%83%e6%8c%81%e7%ba%8c%e6%9b%b4%e6%96%b0%e6%89%80%e4%bb%a5%e6%88%91%e5%80%91%e8%ae%93%e8%87%aa%e5%b7%b1%e7%9a%84-repo-origin-%e8%88%87%e9%81%a0%e7%ab%af-upstream-%e4%bf%9d%e6%8c%81%e5%90%8c%e6%ad%a5&quot;&gt;(4)  由於別人的專案會持續更新，所以我們讓自己的 repo origin 與遠端 upstream 保持同步&lt;/a&gt;
-        &lt;ul&gt;
-          &lt;li&gt;&lt;a href=&quot;#41-%e5%be%9e-upstream-%e6%8b%89%e4%b8%8b%e4%be%86%e4%bd%bf%e9%9b%bb%e8%85%a6%e7%ab%af%e6%9c%89%e9%81%a0%e6%96%b9-upstream-%e7%9a%84-repo&quot;&gt;4.1 從 upstream 拉下來，使電腦端有遠方 upstream 的 repo&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href=&quot;#42-%e9%80%8f%e9%81%8e-push-%e7%9a%84%e6%96%b9%e5%bc%8f%e6%9b%b4%e6%96%b0%e8%87%b3-origin-%e8%87%aa%e5%b7%b1%e7%9a%84-repo--%e6%ad%a4%e6%99%82-upstream-%e4%be%bf%e8%88%87-origin-%e5%90%8c%e6%ad%a5&quot;&gt;4.2 透過 push 的方式更新至 origin (自己的 repo) … 此時 upstream 便與 origin 同步&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#5-%e9%96%8b%e5%a7%8b%e6%9b%b4%e6%96%b0%e4%b8%a6-push-%e8%87%b3%e8%87%aa%e5%b7%b1%e7%9a%84-origin-by-branch-%e6%96%b9%e5%bc%8f&quot;&gt;(5)　開始更新並 push 至自己的 origin  (by branch 方式)&lt;/a&gt;
-        &lt;ul&gt;
-          &lt;li&gt;&lt;a href=&quot;#51-%e8%ab%8b%e5%85%88%e7%a2%ba%e4%bf%9d%e8%87%aa%e5%b7%b1%e5%b7%b2%e7%b6%93%e5%ae%8c%e6%88%90%e4%b8%8a%e9%9d%a2%e5%90%8c%e6%ad%a5%e5%90%8c%e4%bd%9c&quot;&gt;5.1 請先確保自己已經完成上面同步同作&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href=&quot;#52-%e6%96%b0%e5%a2%9e%e4%b8%80%e5%80%8b-branch&quot;&gt;5.2 新增一個 branch&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href=&quot;#53-%e5%9c%a8%e6%ad%a4-branch-%e4%b8%8a%e9%9d%a2%e4%bd%9c%e6%96%b0%e5%a2%9e%e8%88%87%e4%bf%ae%e6%94%b9%e7%84%b6%e5%be%8c-git-add--git-commit-%e6%9c%80%e5%be%8c-push-%e8%87%b3%e8%87%aa%e5%b7%b1%e7%9a%84&quot;&gt;5.3 在此 branch 上面作新增與修改，然後 git add ,  git commit 最後 push 至自己的&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#6-%e5%88%b0github-%e4%b8%8a%e9%80%b2%e8%a1%8c-pull-request%e5%8e%9f%e4%bd%9c%e8%80%85%e5%90%8c%e6%84%8f%e5%be%8c%e4%be%bf%e6%9c%83-merge-%e9%80%b2%e4%be%86&quot;&gt;(6) 到GitHub 上進行 Pull Request。原作者同意後便會 merge 進來&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#7-%e5%8e%9f%e4%bd%9c%e8%80%85%e6%9c%83%e5%b0%87%e4%bd%a0%e6%8f%90%e7%9a%84%e8%ab%8b%e6%b1%82-merge-%e4%b9%8b%e5%be%8c%e8%a8%98%e5%be%97%e9%a0%86%e4%be%bf%e4%bd%9c%e4%b8%80%e6%95%b4%e5%80%8b%e5%90%8c%e6%ad%a5%e7%9a%84%e5%8b%95%e4%bd%9c&quot;&gt;(7) 原作者會將你提的請求　，merge 之後，記得順便作一整個同步的動作&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;第一章概念介紹&quot;&gt;第一章、概念介紹&lt;/h1&gt;
-
-&lt;h3 id=&quot;1-教學適用情境&quot;&gt;1. 教學適用情境&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;但真實世界中，原作者不一定總接受提交，但可以多來 &lt;a href=&quot;https://github.com/cypherpunks-core&quot;&gt;Cypherpunks-core&lt;/a&gt; 的 GitHub 來, 我們比較開放讓大家一同來成為貢獻者。或是 &lt;a href=&quot;https://github.com/milochen0418/milo-education-python&quot;&gt;到我這&lt;/a&gt; 專案來，該專案裡面有個 GitHub 資料夾，在裡面你可以隨意更新，然後試著更新，然後對我發更新請求(Pull Request), 我可以幫你 merge，讓你成功使用本次的教學。若有操作上不懂之處，或是回家不懂，也可至 &lt;a href=&quot;https://www.facebook.com/events/523580818418580/&quot;&gt;Event Discussion&lt;/a&gt; 這邊留言討論。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;2-三個角色介紹&quot;&gt;2. 三個角色介紹&lt;/h3&gt;
-
-&lt;p&gt;注意有 Three role 三個角色&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;(1) Upstream master (原始作者之 project)  &lt;br /&gt;
-(2) Origin master  (我 Fork 出來的 project )  &lt;br /&gt;
-(3) And the master in my local computer (我 local 端從 自己 origin master fork 出來的 project)&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;3-了解角色運作&quot;&gt;3. 了解角色運作&lt;/h3&gt;
-
-&lt;p&gt;知道這三者角色後，作法的概念，很簡單，如下&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;一開始先讓1,2,3 三者角色資料同步。在三方資料都同步的情況下，local computer 作一個branch , 並且在該 branch 上作commit. 接著把這個 branch push 到 Origin master 上，再由 Origin master 上會有 branch  出來，接著作 pull request. 原作者會將你提交的更新給 merge 進去。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;4-七步成貢獻者&quot;&gt;4. 七步成貢獻者&lt;/h3&gt;
-
-&lt;p&gt;至於如何實現上面概念，作法就只有 7  步, 你就有機會成為原作者專案中的 Contributor 了&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;(1)請註冊GitHub [ 沒有的人請註冊 ]  &lt;br /&gt;
-(2) 用 fork 把原始作者 GitHub 上的 project 帶到自己的 GitHub 上  &lt;br /&gt;
-(3) 從自己 fork 出來的 project  那邊， clone 到自己電腦上  &lt;br /&gt;
-(4) 使 origin master 與 upstream master 同步  &lt;br /&gt;
-(5) 在 local 電腦端建立branch 並且作更新，並將該branch更新至 origin master  &lt;br /&gt;
-(6) 在origin 上以該 branch 作 Pull Request , 並等待原始作者接受更新至 upstream/master  &lt;br /&gt;
-(7) 原作者接受更新，將 upstrem/master 的資料與 local 電腦 master 及origin master 同步&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;上面這 7 步的操作，其完整作法，請見下面完整操作的章節&lt;/p&gt;
-
-&lt;h1 id=&quot;第二章完整操作&quot;&gt;第二章、完整操作&lt;/h1&gt;
-
-&lt;h3 id=&quot;1-請註冊-github&quot;&gt;(1) 請註冊 GitHub &lt;/h3&gt;
-
-&lt;p&gt;如果有 GitHub 帳號的人就登入，沒有的話，請自行到 GitHub 註冊一個帳號&lt;/p&gt;
-
-&lt;h3 id=&quot;2-在-github-上把別人的專案弄一份到自己上面-by-fork&quot;&gt;(2) 在 GitHub 上把別人的專案弄一份到自己上面 by fork &lt;/h3&gt;
-
-&lt;p&gt;首次拉一個有趣的專案進來, 例如至&lt;/p&gt;
-
-&lt;p&gt;http://github.com/milochen0418/milo-education-python&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/76.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;3自己從自己的-repo-同步一份到電腦--by-git-clone&quot;&gt;(3)自己從自己的 repo 同步一份到電腦  … by git clone &lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git clone https://github.com/funprogrammer-byte/milo-education-python
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;4-由於別人的專案會持續更新所以我們讓自己的-repo-origin-與遠端-upstream-保持同步&quot;&gt;(4)  由於別人的專案會持續更新，所以我們讓自己的 repo origin 與遠端 upstream 保持同步&lt;/h3&gt;
-
-&lt;p&gt;« 讓原作者與自己 GitHub 同步,一起同步的手法 » &lt;/p&gt;
-
-&lt;h4 id=&quot;41-從-upstream-拉下來使電腦端有遠方-upstream-的-repo&quot;&gt;4.1 從 upstream 拉下來，使電腦端有遠方 upstream 的 repo &lt;/h4&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git remote add upstream https://github.com/milochen0418/milo-education-python
-$ git remote -v
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;就會看到 upstream 了&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git fetch upstream
-$ git checkout master
-$ git merge upstream/master
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;42-透過-push-的方式更新至-origin-自己的-repo--此時-upstream-便與-origin-同步&quot;&gt;4.2 透過 push 的方式更新至 origin (自己的 repo) … 此時 upstream 便與 origin 同步&lt;/h4&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git status
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;可以看到自己目前電腦端， 已經與my github account 上的 repo 有不同了&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git push -u origin master
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;5開始更新並-push-至自己的-origin-by-branch-方式&quot;&gt;(5)　開始更新並 push 至自己的 origin  (by branch 方式)&lt;/h3&gt;
-
-&lt;p&gt;«開始作自己的更新 »&lt;/p&gt;
-
-&lt;h4 id=&quot;51-請先確保自己已經完成上面同步同作&quot;&gt;5.1 請先確保自己已經完成上面同步同作 &lt;/h4&gt;
-
-&lt;h4 id=&quot;52-新增一個-branch&quot;&gt;5.2 新增一個 branch &lt;/h4&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git branch -a ← 查詢 branch 狀況，包含 電腦外的 branch
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;接著就開始新建&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git branch pr-test-0001 
-$ git checkout pr-test-0001
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;改一些程式&lt;/p&gt;
-
-&lt;h4 id=&quot;53-在此-branch-上面作新增與修改然後-git-add--git-commit-最後-push-至自己的&quot;&gt;5.3 在此 branch 上面作新增與修改，然後 git add ,  git commit 最後 push 至自己的&lt;/h4&gt;
-
-&lt;p&gt;修改一些東西後&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/77.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git add .
-$ git commit -m &quot;This is commit test&quot;
-$ git push -u origin pr-test-0001
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;這時候你可以從自己的 GitHub 上面看到類似這訊息&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/78.png&quot; alt=&quot;&quot; /&gt;&lt;img src=&quot;/img/79.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;6-到github-上進行-pull-request原作者同意後便會-merge-進來&quot;&gt;(6) 到GitHub 上進行 Pull Request。原作者同意後便會 merge 進來&lt;/h3&gt;
-
-&lt;p&gt;View of Owner can see Pull Request&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/80.png&quot; alt=&quot;&quot; /&gt;&lt;img src=&quot;/img/81.png&quot; alt=&quot;&quot; /&gt;&lt;img src=&quot;/img/82.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;7-原作者會將你提的請求merge-之後記得順便作一整個同步的動作&quot;&gt;(7) 原作者會將你提的請求　，merge 之後，記得順便作一整個同步的動作&lt;/h3&gt;
-
-&lt;p&gt;Go to the section  → « 讓原作者與自己 GitHbu 同步,一起同步的手法 » &lt;/p&gt;
-
-&lt;p&gt;有時,你會忘了開branch，但 卻已經 push 到 origin master 的話，補救辦法如下 
-&lt;a href=&quot;https://stackoverflow.com/questions/17667023/git-how-to-reset-origin-master-to-a-commit&quot;&gt;link&lt;/a&gt;&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">GitHub 可以說是現今時代中工程師的一種社交網路, 當你發現原始作者有一些感興趣的專案時，你想為此專案作貢獻，加入原作者專案 Contributor 的行列時。就可以參考本文件一步一步操作。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/75.png" /></entry></feed>
+&lt;/ol&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">本篇文章翻譯自 IEEE - A blockchain for media: Survey 的內容，時常我們都在想區塊鏈部署文字上的問題，但都沒有人去思考過「媒體」：圖像、影像…等的發展性，或許現今的區塊鏈並不適合存放大量的資料，但現今可以透過 IPFS .. 等工具幫助部署內容至區塊鏈上，已達到目的性。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/92.png" /></entry></feed>
