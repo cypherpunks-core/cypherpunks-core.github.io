@@ -46,23 +46,35 @@
 	> * 商品  圖片 寬度 640 x 480
 
 ## 搭建測試環境
-**前置要求 - [[bundler](https://bundler.io/#getting-started)]：**  
+
+**Mac OS X :**
 ```
-    $ gem install bundler
+# 在 terminal  輸入 安裝  xcode-select
+xcode-select --install
+
+# 安裝 homebrew
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# 安裝 ruby
+brew install ruby
+
+# 設定環境
+export PATH=/usr/local/opt/ruby/bin:$PATH
+
+# 安裝 jekyll bundler
+gem install jekyll bundler
+
+# 下載專案
+git clone https://github.com/cypherpunks-core/cypherpunks-core.github.io.git
+
+# 進入專案
+cd cypherpunks-core.github.io.git
+
+# 安裝 該專案所需套件
+bundle install
+
+# 在本地端起一個 server 
+bundle exec jekyll server --future
 ```
 
-**下載專案：**    
-```
-    $ git clone https://github.com/cypherpunks-core/cypherpunks-core.github.io.git
-```
-
-**初始化：**    
-```
-    $ bundle install
-```
-
-**本地運行：**    
-```
-    $ bundle exec jekyll server --future
-```
 若執行成功，下方將顯示運行中的 _Server address_ ，預設為 _Server address_: [http://127.0.0.1:4000](http://127.0.0.1:4000)。
