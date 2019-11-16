@@ -1,0 +1,102 @@
+---
+layout: post
+title:  "如何提出你的需求(PR)給密碼龐克台灣"
+date:   2019-11-17
+categories: news
+description: "密碼龐克歡迎各位對有興趣之主題提交自己的PR。"
+image: '/img/panda-22.png'
+published: true
+hero_image: /img/hero.png
+---
+
+> [密碼龐克台灣 Github](https://github.com/cypherpunks-core/cypherpunks-core.github.io)
+
+<div align="center"><img width="500" src="/img/panda-23.png"/></div>
+<center><strong>圖1</strong></center>
+
+## Step1 
+
+<div align="center"><img width="500" src="/img/panda-24.png"/></div>
+
+<center><strong>圖2 點擊畫面右上角之 Fork </strong></center>
+
+<div align="center"><img width="500" src="/img/panda-25.png"/></div>
+
+<center><strong>圖3 即可在自己的資源庫中看到 cypherpunks-core 的專案 </strong></center>
+
+以我為例 就會看到 panda850819 forked from cypherpunks-core ... 
+
+## Step2
+
+<div align="center"><img width="500" src="/img/panda-26.png"/></div>
+
+<center><strong>圖4 在自己的專案中按下 Clone 到自己的資料夾 </strong></center>
+
+1. 可以透過 Download ZIP 至你想要的位置解壓縮它 
+2. 可以透過終端機指令，請先開啟終端機並且輸入底下指令
+
+```
+$ cd desktop && mkdir cypherpunks-core
+
+// 先將位置移動至桌面並且創立 cypherpunks-core 資料夾
+
+$ git clone https://github.com/{你的github名稱}/cypherpunks-core.github.io.git
+
+// 將專案下載至 cypherpunks-core 資料夾
+```
+
+Step3 
+---
+
+> 同步遠端專案 
+
+```
+$ git remote -v
+
+// origin https://github.com/panda850819/cypherpunks-core.github.io.git (fetch)
+// origin https://github.com/panda850819/cypherpunks-core.github.io.git (push)
+
+$ git remote add upstream https://github.com/cypherpunks-core/cypherpunks-core.github.io.git
+
+$ git remote -v 
+
+// origin	https://github.com/panda850819/cypherpunks-core.github.io.git (fetch)
+// origin	https://github.com/panda850819/cypherpunks-core.github.io.git (push)
+// upstream	https://github.com/cypherpunks-core/cypherpunks-core.github.io.git (fetch)
+// upstream	https://github.com/cypherpunks-core/cypherpunks-core.github.io.git (push)
+
+```
+> 同步 fork 
+
+完成操作後，本地專案就會同步 Cypherpunk-core 專案中的變化!
+
+```
+$ git fetch upstream
+
+$ git checkout master 
+
+$ git merge upstream/master
+
+```
+
+Step4 
+---
+> 提交 PR
+
+### 再提交之前，什麼是 PR?
+
+
+PR 即為 Pull Request，在 Github 上必須先複製（Fork）一份原作的專案到你自己的 GitHub 帳號底下。
+
+那自己的 Fork 專案想怎麼玩就怎麼玩，之後你就可以推上自己的 Fork 文件上，發個通知給 Cypherpunks-core，讓團隊人員來審視這次的 PR 是否 ok，若是 ok 則會將您發起的 PR 合併進團隊文章裡。
+
+<div align="center"><img width="500" src="/img/panda-27.png"/></div>
+<center><strong>圖5</strong></center>
+
+然後可以在上面輸入摘要跟主題，接下來就等著團隊給予回覆囉！
+
+
+參考文獻
+---
+- [為你自己學Git](https://gitbook.tw/chapters/github/pull-request.html)
+- [git如何同步fork專案](https://www.itread01.com/content/1544771540.html?fbclid=IwAR2s4ATwibiiKRS3DYBnNsaNVuQeedOovTKZyGY9iaVqUukTDZppXzGu35w)
