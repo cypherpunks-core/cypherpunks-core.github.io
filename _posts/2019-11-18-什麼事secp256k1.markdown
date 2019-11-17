@@ -51,7 +51,7 @@ G = 02 79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798
 G = 04 79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798 483ADA77 26A3C465 5DA4FBFC 0E1108A8 FD17B448 A6855419 9C47D08F FB10D4B8
 ```
 
-最後，G的迴圈因子$$n$$(就是指$$nG=G$$)和輔因子$$h$$如下：
+最後，$$G$$的迴圈因子$$n$$(就是指$$nG=G$$)和輔因子$$h$$如下：
 
 ```
 n = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE BAAEDCE6 AF48A03B BFD25E8C D0364141
@@ -65,8 +65,8 @@ h = 01
 
 ## 也可以看看
 
-secp256k1是什麼（Pieter Wuille的比特幣堆棧交換答案）
+* [secp256k1是什麼](https://bitcoin.stackexchange.com/questions/21907/what-does-the-curve-used-in-bitcoin-secp256k1-look-like)（Pieter Wuille的比特幣堆棧交換答案）
 
 ## 原文
 
-Secp256k1
+* [Secp256k1](https://en.bitcoin.it/wiki/Secp256k1)
