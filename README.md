@@ -44,7 +44,7 @@
 	> 圖片大小規範：
 	> * blog 圖片 寬度 800 x 600  # 寬度一定要800 高度隨意
 	> * 商品  圖片 寬度 640 x 480
-* **數學公式：**可以markdown的文件當中添加以下程式碼：
+* **數學公式：**可以markdown的文件當中添加以下程式碼([參考](https://www.jianshu.com/p/054484d0892a)第四項)：
   ```
   <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
   ```
