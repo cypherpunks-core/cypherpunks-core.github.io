@@ -4,14 +4,14 @@ title:  "什麼是Secp256k1"
 date:   2019-11-18
 categories: news
 description: "secp256k1是指比特幣中使用的ECDSA曲線的參數"
-image: '/img/136.png'
+image: '/img/137.png'
 published: true
 hero_image: /img/hero.png
 ---
 
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
-
 **secp256k1是指比特幣中使用的ECDSA曲線的參數** ，並且在高效密碼學標準（SEC）（Certicom Research，[文件](http://www.secg.org/sec2-v2.pdf)）中進行了定義。
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
 在比特幣開始流行之前，secp256k1幾乎從未使用過，但由於其幾個不錯的屬性，它現在越來越受歡迎。大多數常用曲線具有隨機結構，但secp256k1是以特殊的非隨機方式構建的，可以實現特別高效的計算。 **因此，如果實施得到充分優化，它通常比其他曲線快30％以上** 。 **另外，與流行的NIST曲線不同，secp256k1的常量是以可預測的方式選擇的，這大大降低了曲線建立者在曲線中插入任何後門的可能性。**
 
