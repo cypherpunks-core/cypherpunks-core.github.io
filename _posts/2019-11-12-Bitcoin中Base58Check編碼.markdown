@@ -9,7 +9,7 @@ published: true
 hero_image: /img/hero.png
 ---
 
-Base58二進位制到文字編碼被稱為 Base58Check，用於編碼比特幣地址。
+[[原文]](http://gavinzhang.work/blockchain/比特币/Bitcoin中Base58Check.html)Base58二進位制到文字編碼被稱為 Base58Check，用於編碼比特幣地址。
 
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
