@@ -9,7 +9,7 @@ published: true
 hero_image: /img/hero.png
 ---
 
-[[原文](http://gavinzhang.work/blockchain/比特币/什么是Secp256k1)**secp256k1 是指比特幣中使用的 ECDSA 曲線的參數** ，並且在高效密碼學標準（SEC）（Certicom Research，[文件](http://www.secg.org/sec2-v2.pdf)）中進行了定義。
+[[原文]](http://gavinzhang.work/blockchain/比特币/什么是Secp256k1)**secp256k1 是指比特幣中使用的 ECDSA 曲線的參數** ，並且在高效密碼學標準（SEC）（Certicom Research，[文件](http://www.secg.org/sec2-v2.pdf)）中進行了定義。
 
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
