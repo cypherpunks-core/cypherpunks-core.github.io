@@ -9,10 +9,7 @@ published: true
 hero_image: /img/hero.png
 ---
 
-## 什麼是 PR 
-
-PR 即為 Pull Request，在 Github 上必須先複製（Fork）一份原作的專案到你自己的 GitHub 帳號底下。
-
+> PR 即為 Pull Request，在 Github 上必須先複製（Fork）一份原作的專案到你自己的 GitHub 帳號底下。
 那自己的 Fork 專案想怎麼玩就怎麼玩，之後你就可以推上自己的 Fork 文件上，發個通知給 Cypherpunks-core，讓團隊人員來審視這次的 PR 是否 ok，若是 ok 則會將您發起的 PR 合併進團隊文章裡，若不 ok 將會在底下描述為何沒通過的理由。
 
 > [密碼龐克台灣 Github](https://github.com/cypherpunks-core/cypherpunks-core.github.io)
