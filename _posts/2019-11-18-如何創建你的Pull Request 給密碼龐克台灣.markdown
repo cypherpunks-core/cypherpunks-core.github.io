@@ -14,16 +14,16 @@ hero_image: /img/hero.png
 
 > [密碼龐克台灣 Github](https://github.com/cypherpunks-core/cypherpunks-core.github.io)
 
-<div align="center"><img width="500" src="/img/panda-23.png"/></div>
+<div align="center"><img width="750" src="/img/panda-23.png"/></div>
 <center><strong>圖1 密碼龐克台灣官網</strong></center>
 
 ## Step1 - 點擊 Fork 將專案複製至自己的遠端儲存庫
 
-<div align="center"><img width="500" src="/img/panda-24.png"/></div>
+<div align="center"><img width="750" src="/img/panda-24.png"/></div>
 
 <center><strong>圖2 點擊畫面右上角之 Fork </strong></center>
 
-<div align="center"><img width="500" src="/img/panda-25.png"/></div>
+<div align="center"><img width="750" src="/img/panda-25.png"/></div>
 
 <center><strong>圖3 即可在自己的遠端資源庫中看到 cypherpunks-core 的專案 </strong></center>
 
@@ -31,7 +31,7 @@ hero_image: /img/hero.png
 
 ## Step2 - Clone 專案/下載專案
 
-<div align="center"><img width="500" src="/img/panda-26.png"/></div>
+<div align="center"><img width="750" src="/img/panda-26.png"/></div>
 
 <center><strong>圖4 在自己的專案中按下 Clone 到自己的資料夾 </strong></center>
 
@@ -89,7 +89,7 @@ $ git merge upstream/master
 
 > 提交 PR
 
-<div align="center"><img width="500" src="/img/panda-27.png"/></div>
+<div align="center"><img width="750" src="/img/panda-27.png"/></div>
 <center><strong>圖5 - 提交 PR 至 Cypherpunk-core</strong></center>
 
 然後可以在上面輸入摘要跟主題，接下來就等著團隊給予回覆囉！
