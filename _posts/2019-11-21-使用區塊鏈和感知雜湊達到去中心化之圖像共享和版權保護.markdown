@@ -1,15 +1,16 @@
 ---
 layout: post
 title:  "使用區塊鏈和感知雜湊達到去中心化之圖像共享和版權保護"
-date:   2019-11-21
+date:   2019-11-24
 categories: news
 description: "媒體區塊鏈的範疇越來越發人深省，究竟該如何透過去中心化的機制來達到版權保護呢？一起來閱讀本篇文章吧！"
-image: '/img/.png'
+image: '/img/panda-28.png'
 published: true
 hero_image: /img/hero.png
 ---
-
 > 本篇文章翻譯自 [Decentralised Image Sharing and Copyright Protection using Blockchain and Perceptual Hashes](https://ieeexplore.ieee.org/document/8711440)，媒體區塊鏈的範疇越來越發人深省，究竟該如何透過去中心化的機制來達到版權保護呢？一起來閱讀本篇文章吧！
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
 ## 摘要
 
@@ -34,3 +35,147 @@ hero_image: /img/hero.png
 > microstock : 在圖庫網上，有人有需求購買圖像/影片/音樂素材，自然就會有「供圖者 Contributor」。每個人都可以在這些圖庫網站上註冊申請成為供圖者。但因應每家的規則要求，在正式成為可上架素材產品賺取佣金的供圖者前，有的網站會有一些小考試（像是要先上傳幾張圖供站方審合是否符合他們的要求水準）。不過這個倒不用擔心，現在這些測試門檻都很低，基本上只要符合各類素材的一些格式設定大多會通過。
 
 > cryptographic hash : 可以將任意大小的數據（通常稱為「消息」）映射到固定大小的位字符串（「雜湊值」、「雜湊」或「消息摘要」），並且是單向的函數，即實際上不可行的函數。[1] 理想情況下，查找產生給定的消息的唯一方法是嘗試暴力搜尋，以查看它們是否產生匹配項，或使用匹配雜湊表的Rainbow 表。
+
+### A. 動機
+
+提出去中心化圖像共享市場的基本動機是糾正圖像來源並為原始圖像作者提供應有的信譽，這是在正版圖片網站上共享圖像的攝影師主要關注點。我們旨在建立強大且快速的版權侵犯檢測機制。當與基於區塊鏈的架構優勢結合時，可以將權力交還給圖像貢獻者。正版照片網站上的佣金率（可能高達 55％）也是攝影界普遍關注的問題。我們的目標是完全擺脫這些繁重的佣金，並創建一種架構，使用戶僅需支付與區塊鏈網路處理交易相關的交易費用。
+
+### B. 新穎性
+
+此專案新穎的貢獻包括使用可以編程的以太坊區塊鏈[1]，[4]創建一個去中心化的圖像共享應用，並以新穎的方式使用感知雜湊、以太坊上強大的智能合約[12]，[15]進行版權之侵犯檢測。網路上的照片通過 IPFS 以分散方式保存。我們最後也提供計算之結果，顯示我們方法的有效性和限制。
+
+## 第二章節 - 系統環境及建置
+
+我們使用以下工具和技術來建置我們的系統。關於它們的詳細信息可以在各自的網站和相應的 Github 中找到。
+
+- Metamask : Metamask 是用於瀏覽器的插件，可進行以太坊交易。它允許運行以太坊 Dapps（去中心化應用程序），而無需運行完整的以太坊節點，管理身份和簽署區塊鏈交易。
+- Ganache：Ganache 是一個以太坊區塊鏈模擬器。Ganache 是一個以太坊測試節點，可以在本地測試所有 Componet 組件。它還允許用戶部署合約，開發應用程序並運行測試。
+- Geth : Geth（以太坊）是一個終端機（Command Line）界面，可讓用戶運行和操作以太坊全節點。它在 Go（Golang）中實現，並允許挖掘區塊以生成以太幣、創建智能合約，發送交易以在以太坊地址之間轉移資金，檢查區塊歷史以及許多其他功能。
+- Turffle：Truffle 用於編譯，測試，構建智能合約，並提供開發框架以提高開發過程的速度。
+
+圖1中詳細顯示了系統架構。下面描述了該圖中顯示的各種模組：
+
+- 買方模組：它提供了搜索工具，可在分散式應用程序上顯示的所有圖像中找到購買者正在尋找的圖像類別。
+- 賣方模組：它提供了在區塊鏈上上傳圖像的簡單方法。賣方上傳圖像，以及圖像名稱和描述以幫助搜索過程。
+- 錢包模組：該客戶端加密模組允許創建新的以太坊地址或導入現有地址，請參閱錢包餘額和交易。用戶也可以使用 Metamask 來管理帳戶和錢包。
+
+從圖1可以看出，以太坊與 Web 客戶端連接並允許訪問以太坊系統。Web 客戶端包括買方，賣方和錢包模組。交易模組用於指定圖像售價，圖像上傳模組用於上傳新圖像。本地端資料庫儲存數據，並且在以太坊網路批准交易後，經過適當的加密後將數據和圖像將傳輸到 IPFS。我們使用公開金鑰加密技術進行加密。由於 IPFS 是內容可尋址的，因此此加密步驟對於訊息保護至關重要。以太坊由 Geth、奇偶校驗和 JSON-RPC（遠程過程調用）協議組成。以太坊提供對以太坊主網路的訪問，該網路由所有用戶節點、礦工、智能合約和交易區塊組成。所有模組之間的數據流如圖所示。下一部分將說明用於訊息儲存的 IPFS 和以太坊網路。
+<br>
+<div align="center">
+    <img src="/img/panda-29.png" style="width:100%">
+</div>
+<br>
+<center><strong>圖1 系統架構</strong> </center>
+
+## 第三章節 - 方法
+
+我們提出了兩種不同的體系結構，它們儲存數據的方式不同。
+
+1. 以太坊儲存：在這種架構中，圖像和雜湊值儲存在以太坊鏈本身上。圖像和感知雜湊被放置在區塊鏈交易中。這種方法的問題在於，隨著越來越多的圖像上傳，由於所有內容都儲存在測試鏈中，因此區塊鏈的儲存大小將迅速增加。每當新節點到達時，他們都必須下載包含所有圖像的整個鏈。該解決方案絕對不可擴展，特別是因為圖像大小可能會達到數兆字元。
+2. IPFS 儲存：在這種體系結構中，圖像和雜湊值儲存在 IPFS 中，這是一種分散的超媒體分佈協議。 IPFS [5]的內容是可透過地址搜尋的，並使用加密雜湊為文件內的區塊提供唯一的指紋，消除了網路上的冗餘，並將這些唯一的雜湊用於訊息檢索。通過使用 IPFS 協議儲存圖像和可感知的雜湊，我們在以太坊測試鏈的大小上節省了很多。可以使用任何標準加密方案對儲存在IPFS 上的數據進行加密並進行檢索。加密私鑰將僅通過智能合約與適當的買方共享。這種方法是可擴展的，是我們實施中使用的一種方法。
+
+### A. 侵犯版權和電腦視覺
+
+感知雜湊是多媒體指紋算法，它考慮了多媒體的各種功能。對於線上多媒體市場來說，**確保每個作品只能上傳一次非常重要**。通過將新的圖像雜湊值與區塊鏈上所有圖像的雜湊值進行比較並檢查，諸如 MD5 和 SHA 之類的密碼雜湊函數可以有效地完成此任務。但是我們走得更遠，還嘗試找出似乎是區塊鏈上已經存在的原始作品的修改作品，並且在感覺上與這些原始作品相似。例如，如果有人嘗試上傳稍微旋轉的圖片（例如逆時針說12°），則由於雪崩效應，諸如SHA之類的雜湊將具有完全不同的最終雜湊值。相反，如果我們使用感知雜湊，則最終雜湊中的某些位元或沒有位元更改。我們可以使用感知雜湊的此屬性來找到圖像之間的相似性。實現此目的的方式是通過計算原始圖像和測試圖像之間的差異。為了量化差異，找到兩個圖像的感知雜湊值並計算由此獲得的雜湊值之間的漢明距離。標準化 0 到 1 之間的漢明距離。這是原始圖像與測試圖像之間差異的量度，稱為 NHD。如果這種差異在某個閾值內，則測試圖像將被拒絕。但有時，兩個不同的原始圖像也可能具有近似相似的感知雜湊，從而導致較小的相異值。因此，此處的關鍵任務是找到閾值，以便我們可以盡可能正確地識別兩個不同的圖像和兩個感知相似的圖像。我們在結果部分描述獲取閾值的方法。
+
+感知雜湊算法很多，但是我們使用了四種最受歡迎的算法，分別是phash（DCT 雜湊），差分雜湊，平均雜湊和小波雜湊。這些算法包含在python 的 ImageHash 庫中，其中提供了有關這些算法的詳細文檔。因此，如果有人上傳了市場上存在的原始圖像的篡改版本，智能合約將計算其感知雜湊，計算此雜湊的漢明距離以及儲存在分散的 PERC HASH 資料庫中的雜湊，和閾值進行比較後將拒絕此類圖像。因此，不僅欺詐者無法上傳此類圖像，而且他們還將支付與在以太坊網路上處理該交易相關的交易費用，這可視為罰款。因此，這種經濟處罰將阻止欺詐行為。
+
+### B. 智能合約和訊息流
+
+訊息流如圖1所示的系統架構圖所示。智能合約是以太坊生態系統的核心。以太坊上的智能合約是區塊鏈中的一小段程式碼。智能合約的概念最早由 Szabo 提出[3]。它們用於管理用戶之間的協議。他們可以持有以太（ETH），將其提供給適當的實體，持有訊息並為其他智能合約提供效用。智能合約用於執行某些計算，儲存一些變量並交易數位商品，同時遵守合約中提到的某些特定條件。因此，人們可以在以太坊網路上以這些合約中指定的自定義條件（function）交易虛擬資產。由於這些特性，它們適用於包括圖像許可和版權保護邏輯[12]。我們使用 solidity [10]撰寫智能合約，這是迄今為止撰寫智能合約最流行的語言。我們遵循創建此類合約的最佳實踐[16]，並使用諸如小波雜湊（WHASH）之類的輕量級算法來提供版權保護，從而需要較少的手續費（Gas Fees）[13]。我們所有的交易都透過智能合約進行。我們使用智能合約來計算感知雜湊，將加密和解密金鑰分配給適當的實體，與 IPFS 連接，檢查是否侵犯版權及是否接受或拒絕圖像。透過計算標準化漢明距離（NHD）量化市場上存在的圖像與新上傳的圖像之間的圖像差異後，智能合約將拒絕 NHD 低於特定閾值的圖像，如表2和圖2所示。這裡 WHASH 能夠識別除 90° 旋轉版本外的經典 barbara 圖像的所有變換。為了確定圖像的接受或拒絕，將 WHASH 的閾值設為在結果部分中計算的 0.379。這表明了感知雜湊的有效性和可靠性水平。如果對圖片的修改不太極端，並且原始圖片與其被篡改版本之間仍具有良好的結構相似性，則感知雜湊能夠檢測到篡改。
+
+
+<div align="center">
+    <img src="/img/panda-30.png" style="width:100%">
+</div>
+
+<center><strong>圖2 從左到右的圖像：經典圖像barbara，barbara 旋轉 5 度，barbara 旋轉 25 度，barbara 旋轉 90 度，barbara 亮度 -50，barbara sat +50。</strong></center>
+
+<br>
+
+<div align="center">
+    <img src="/img/panda-31.png" style="width:100%">
+</div>
+<center><strong>表2 根據 Bsds-500 資料集計算的各種感知雜湊的有效性比較</strong></center>
+
+## 第四章節 - 結果
+
+我們在原始圖像和圖像的變換的資料集上測試模型，以評估感知雜湊在檢測版權侵權中的有效性。我們使用 Berkeley 分割資料集（BSDS）[7]，它是500 個原始圖像的資料集。現實生活中有效的雜湊算法將是一種可以區分兩個真實圖像和同一圖像轉換的算法。
+
+我們對 BSDS-500 資料集中的每個圖像執行以下轉換：
+- 旋轉(度數)：5 度 , 10 度 , 15 度 , 20 度, 25度（順時針） 
+- Gamma 校正：0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5
+- 胡椒和鹽的雜訊：0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00
+- 裁切（固定縱橫比模式）：5%, 10%, 15%, 20%, 25%
+- 調整大小（尺寸縮小 - 固定寬高比模式）：5％, 10％, 15％, 20％, 25％
+
+經過這些轉換，我們最終得到了 21500 張圖像（500 張原始圖像和每個原始圖像 42 張轉換）。為了評估雜湊算法的有效性，我們創建了兩種情況：
+
+正面（陽性）的情況：在這種情況下抓到的圖像是市場上原始圖像的操縱版本。我們期望雜湊算法能夠檢測到此類欺詐圖像，而智能合約應立即將其拒絕。
+
+負面（陰性）的情況：這種情況下的圖像是資料集中的兩個不同的原始圖像。網路應允許新上傳的獨特圖像添加到要出售的市場上。
+
+漢明碼距離是兩個雜湊間不同位元數量。因此，漢明碼距離帶有隱含的不相似感。我們計算新圖像與區塊鏈上傳的所有先前圖像之間的漢明碼距離，將距離值標準化並將其與閾值進行比較，以決定是否接受或拒絕新圖像。這樣，將對照市場上正在交易的所有圖像檢查新圖像。我們計算標準化漢明碼距離（NHD）如下：
+
+<div align="center">
+    <img src="/img/panda-32.png" style="width:100%">
+</div>
+
+<center><strong>圖3 特定知覺雜湊對正確分類正面和負面案例的有效性。X軸表示NHD，Y軸表示全部圖像的一部分。</strong></center>
+
+<br>
+
+> NHD 計算方式 
+
+$$ NHD = HammingDistance / HashBitsCount $$
+
+我們考慮的所有四種雜湊算法都返回 64 位元雜湊。 以下指標用於評估感知雜湊函數的質量：
+
+[Earth Mover's Distance（EMD)](https://www.twblogs.net/a/5b7d17972b71770a43ddde64)是對區域內兩個概率分佈之間的距離的度量。 EMD 基於將一種分配轉換為另一種分配所必須支付的最低成本[9]。需要更大的 EMD 值。
+
+Intersection-Over-Union：Intersection-Over-Union（IoU）是一種評估指標，用於測量特定數據集上對象檢測器的準確性。希望 IoU 值較小。
+
+閾值：閾值是規格值，如果未超過標準化漢明距離（NHD），則圖像將被拒絕。因此，如果 NHD 大於閾值，則相異性會超過所需值，並且圖像會在市場上被接受。要選擇最佳閾值，請專注於圖3。當負向案例數值首次與正向案例交叉時，將相應的縮放距離值將作為閾值。
+
+圖3分別顯示了 phash、dhash、平均雜湊和小波雜湊的圖形比較。在此，X 軸表示在 0 到 1 之間縮放的漢明碼距離，而 Y 軸表示圖像出現正向或負向情況的概率。我們希望使用感知雜湊算法，該算法在正向分佈和負向分佈之間提供最小的重疊。可以使用 IOU 度量標準來計算。我們更希望在正負向分佈之間具有最高 EMD 的算法。
+
+從表2中可以看出，所有四種雜湊算法在度量標準上都給出了可比較的值。平均雜湊和 Dhash 具有較高的 EMD 值，平均雜湊具有最小的 IoU 值。平均雜湊的閾值為0.304。這意味著，如果新圖像的平均雜湊值與市場上現有圖像的平均雜湊值相似的位元率超過 30.4％，則新圖像將被網路批准並添加到市場中。
+
+雜湊平均時間的比較如下：
+
+- PHASH: 33.97 ms
+- DHASH: 29.93 ms
+- 平均雜湊 AVG HASH: 29.81 ms
+- WHASH: 60.99 ms
+
+驗證新圖像所需的時間與在市場上傳的圖像數量成正比。換句話說，新圖像驗證的時間複雜度是呈線性的。
+
+## 第五章節 - 結論
+
+我們得出的結論是，針對線上正版圖片市場且基於區塊鏈的解決方案比傳統市場具有許多優勢，例如高安全性、永久性交易記錄、自定義許可證、圖像的自定義銷售價格，更高的貢獻者收入以及允許使用 IPFS 的幫助。由於缺乏中央權威，因此市場不受審查和干擾。經過全面評估，我們得出結論，感知雜湊是一種有效且高效的版權侵權檢測工具。區塊鏈交易僅包含用於檢索圖像的 IPFS 雜湊。通過預先選擇加密方案對智能合約中的內容進行加密，然後將數據傳輸到 IPFS，可以增強訊息安全性。智能合約僅將解密金鑰發布給適當的買方。此外，我們的實現是具擴展性。因此，本文舉例說明了一種經過驗證的技術的新穎用例，可幫助應對照片世界中根深蒂固的惡意行為。
+
+## 第六章節 - 限制和未來展望
+
+我們的系統可以在合理範圍內檢測到在外觀上與原始圖像相似的假圖像。儘管感知雜湊在檢測許多轉換中非常有效，但是在某些情況下，如表1中 90 度旋轉的 barbara 圖像所示，雜湊算法無法識別欺詐圖像，總結來說，感知雜湊在準確性和時間複雜度上提供一個很好的運作。
+
+我們打算將來進行以下任務：
+為了解決諸如圖2和表1所述的漏洞，我們需要研究和採用比感知雜湊（如果有）更健壯和高效的電腦視覺技術。 
+將此分散式應用程序（DApp）轉變為成熟的分佈式自治組織（DAO），該組織還可以提供索賠協助，對索賠進行分散式投票，獎勵管理以及針對侵犯版權的報酬。
+
+## 參考文獻
+1. G. Wood, "Ethereum: A secure decentralised generalised transaction ledger", Ethereum Project Yellow Paper, 2014.
+2. S. Nakamoto, Bitcoin: A peer-to-peer electronic cash system, White paper, 2008.
+3. Nick Szabo, The idea of smart contracts, 1997.
+4. V Buterin, A next-generation smart contract and decentralized application platform, White Paper, 2014.
+5. Juan Benet, IPFS -Content Addressed Versioned P2P File System (DRAFT 3), 2017, [online] Available: https://github.com/ipfs/papers.
+6. C. Zaunerm, Implementation and benchmarking of perceptual image hash functions, 2010.
+7. P. Arbelaez, M. Maire, C. Fowlkes, J. Malik, "Contour Detection and Hierarchical Image Segmentation", IEEE TPAMI, vol. 33, no. 5, pp. 898-916, May 2011.
+8. V. Monga, B. L. Evans, "Perceptual image hashing via feature points: performance evaluation and tradeoffs", Image Processing IEEE Transactions on, vol. 15, no. 11, pp. 34523465, 2006.
+9. Y. R Ubner, C. Tomasi, L. J. Andguibas, "The earth movers distance as a metric for image retrieval", Int. J. Comput. Vision 40 99121, 2000.
+10. Solidity, 2015.
+11. V. Buterin, On public and private blockchains, 2015, [online] Available: https://blog.ethereum.org/2015/08/07/on-public-and-privateblockchains.
+12. V. Morabito, "Smart contracts and licensing", Business Innovation Through Blockchain, pp. 101-124, 2017. 
+13. T. Chen, X. Li, X. Luo, X. Zhang, "Under-optimized smart contracts devour your money", 2017 IEEE 24th International Conference on Software Analysis Evolution and Reengineering (SANER), pp. 442-446, 2017.
+14. A. Bogner, M. Chanson, A. Meeuw, "A decentralised sharing app running a smart contract on the ethereum blockchain", Proceedings of the 6th International Conference on the Internet of Things, pp. 177-178, 2016.
+15. L. Luu, D.-H. Chu, H. Olickel, P. Saxena, A. Hobor, "Making smart contracts smarter", Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security CCS ’16, pp. 254-269, 2016.
+16. K. Delmolino, M. Arnett, A. Kosba, A. Miller, E. Shi, "Step by step towards creating a safe smart contract: Lessons and insights from a cryptocurrency lab", International Conference on Financial Cryptography and Data Security, pp. 79-94, 2016.
