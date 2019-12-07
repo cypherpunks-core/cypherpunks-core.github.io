@@ -1,0 +1,131 @@
+---
+layout: post
+title:  "過去到現在的Bitcoin性能測試"
+date:   2019-12-08
+categories: news
+description: "記錄了節點與網路同步所花費的時間，從而測試了Bitcoin Core的性能"
+image: '/img/143.png'
+published: true
+hero_image: /img/hero.png
+---
+
+**摘要：** 我們成功地進行了 35 次初始區塊下載(Initial Block Download, IBD)，並記錄了節點與網路同步所花費的時間，從而測試了 Bitcoin Core 的性能。我們使用了從 2012 年到 2019 年的軟體版本。結果表明，軟體性能得到了顯著而持續的改善，但差異也很大。即使使用最新的電腦硬體，舊版本的 Bitcoin 仍難以克服 2015 年至 2016 年期間的交易量提升。因此，我們得出結論，如果沒有軟體增強功能，今天的初始同步幾乎是不可能的。[2019年11月29日](https://blog.bitmex.com/bitcoins-initial-block-download/), [BITMEX Research](https://blog.bitmex.com/author/bitmex-research/)
+
+<div align="center"><img width="700" src="/img/140.png"/></div>
+
+<center><strong>圖1 – Bitcoin 初始區塊下載時間(天) – 3 次嘗試的平均值</strong></center>
+
+(來源：BitMEX Research)
+(注意：同步至區塊 602,707。更多詳細訊息，請參見下面的註釋)
+
+**總覽**
+
+為了在初始同步期間測試 Bitcoin Core 的性能，我們成功進行了 35 次初始區塊下載(IBD)，並記錄了每次嘗試花費的時間。結果 *如圖 1* 所示以上內容說明，由於從OpenSSL升級到用於簽名驗證的 `libsecp256k1` 的升級，Bitcoin Core 0.12.0 於 2016 年 2 月發佈時，速度有了顯著提高。`Libsecp256k1` 專為 Bitcoin 構建。從那時起，速度的改善要慢得多，並且由於 IBD 時間差異很大，因此只有經過多次嘗試才能清楚地看到這些改善。但是，即使在 2016 年 2 月發布了Bitcoin Core 0.12.0 之後，在從 Bitcoin Core 0.13.0 到Bitcoin Core 0.19.0.1 的每個軟體發行之後，性能仍然有逐漸改善的跡象。
+
+當然，IBD 時間只是一種衡量標準，還有許多其他角度和考慮因素可用於評估 Bitcoin Core 的性能和功能。儘管 IBD 時間可能不是衡量整體軟體性能的完美方法，但它佔用大量資源，因此可能是衡量基準的好方法。
+
+該報告來自之前的兩個實驗： 
+
+* 在 2018 年 11 月，詹姆森·洛普(Jameson Lopp)進行了類似的[exercise](https://blog.keys.casa/bitcoin-full-validation-sync-performance/)，但分析的重點是獨立的實現，而該分析的重點是較舊版本的 Bitcoin Core (或簡稱為"Bitcoin"，因為某些較舊的軟體早於名稱"Bitcoin Core" )。 
+* Sjors Provoost 還在 2017 年 7 月進行了此[實驗](https://medium.com/provoost-on-crypto/historical-bitcoin-core-client-performance-c5f16e1f8ccb)，儘管 Sjors 提供的資料用於減少同步嘗試。
+
+**完整結果和原始資料**
+
+
+<div align="center"><img width="700" src="/img/141.png"/></div>
+
+<center><strong>圖2 – Bitcoin 初始區塊下載時間(天)</strong></center>
+(來源：BitMEX Research)
+(注意：同步至區塊 602,707，更多詳細訊息在下面的註釋中)
+
+系統規格和其他說明
+
+|                  | **MacBook Pro(64位)** | **Linux VPS(64位)** |
+| ---------------- | --------------------- | ------------------- |
+| 作業系統         | macOS Mojave(10.14)   | Ubuntu 18.04.3      |
+| 處理器           | 6 核心 Intel i9 2.9GHz  | 8 核心 Intel Xeon     |
+| 記憶體           | 32 GB                  | 32GB                |
+| 儲存空間         | 1 TB SSD              | 640 GB SSD           |
+| 網路下載頻寬     | 62Mb / 秒              | 2,000Mb / 秒         |
+| 網路上傳頻寬     | 20Mb / 秒              | 400Mb / 秒           |
+| IBD在高度結束    | 602,707               | 602,707             |
+| Bitcoin.conf設定 |     |  <i>assumevalid = 0 <br> dbcache = 24000 <br> maxmempool = 500</i>  |
+
+完整結果表
+
+| **Client 端版本**       | **Client 端發布日期** | **同步時間(小時)** | **電腦**    |
+| --- | --- | --- | --- |
+|Bitcoin Core 0.19.0.1|24 / 11 / 2019|11.4|MacBook Pro|
+|Bitcoin Core 0.18.1|20 / 07 / 2019|10.4|MacBook Pro|
+|Bitcoin Core 0.17.0|03 / 10 / 2018|17.7|MacBook Pro|
+|Bitcoin Core 0.16.0|28 / 02 / 2018|18.5|MacBook Pro|
+|Bitcoin Core 0.15.0|14 / 07 / 2017|21.1|MacBook Pro|
+|Bitcoin Core 0.14.0|08 / 03 / 2017|16.4|MacBook Pro|
+|Bitcoin Core 0.13.0|17 / 08 / 2016|24.7|MacBook Pro|
+|Bitcoin Core 0.12.0|17 / 02 / 2016|15.8|MacBook Pro|
+|Bitcoin Core 0.11.2|10 / 11 / 2015|53.3|MacBook Pro|
+|Bitcoin Core 0.10.0|12 / 02 / 2015|81.2|MacBook Pro|
+|Bitcoin Core 0.9.0|18 / 03 / 2014|85.1|MacBook Pro|
+|Bitcoin Core 0.8.6|09 / 12 / 2013|Abandoned|MacBook Pro|
+|Bitcoin Core 0.19.0.1|24 / 11 / 2019|13.6|Linux|
+|Bitcoin Core 0.18.1|20 / 07 / 2019|15.9|Linux|
+|Bitcoin Core 0.17.0|03 / 10 / 2018|13.3|Linux|
+|Bitcoin Core 0.16.0|28 / 02 / 2018|18.8|Linux|
+|Bitcoin Core 0.15.0|14 / 07 / 2017|17.9|Linux|
+|Bitcoin Core 0.14.0|08 / 03 / 2017|25.1|Linux|
+|Bitcoin Core 0.13.0|17 / 08 / 2016|15.8|Linux|
+|Bitcoin Core 0.12.0|17 / 02 / 2016|14.8|Linux|
+|Bitcoin Core 0.11.2|10 / 11 / 2015|46.0|Linux|
+|Bitcoin Core 0.10.0|12 / 02 / 2015|77.2|Linux|
+|Bitcoin Core 0.9.0|18 / 03 / 2014|78.9|Linux|
+|Bitcoin Core 0.8.6|09 / 12 / 2013|98.5|Linux|
+|Bitcoin Core 0.19.0.1|24 / 11 / 2019|14.0|Linux|
+|Bitcoin Core 0.18.1|20 / 07 / 2019|13.7|Linux|
+|Bitcoin Core 0.17.0|03 / 10 / 2018|16.0|Linux|
+|Bitcoin Core 0.16.0|28 / 02 / 2018|18.2|Linux|
+|Bitcoin Core 0.15.0|14 / 07 / 2017|17.9|Linux|
+|Bitcoin Core 0.14.0|08 / 03 / 2017|17.0|Linux|
+|Bitcoin Core 0.13.0|17 / 08 / 2016|21.9|Linux|
+|Bitcoin Core 0.12.0|17 / 02 / 2016|17.1|Linux|
+|Bitcoin Core 0.11.2|10 / 11 / 2015|44.1|Linux|
+|Bitcoin Core 0.10.0|12 / 02 / 2015|82.2|Linux|
+|Bitcoin Core 0.9.0|18 / 03 / 2014|82.1|Linux|
+|Bitcoin Core 0.8.6|09 / 12 / 2013|72.6|Linux|
+
+(來源：BITMEX Research)
+
+**結果分析**
+
+如上面的 *圖2* 所示，即使使用相同的軟體和具有相同規格的機器來執行 IBD，報告的時間也存在相當大的差異。 
+
+<div align="center"><img width="700" src="/img/142.png"/></div>
+
+<center><strong>圖3 – IBD 時間與 Client 端發布日期(天)– 3 次嘗試的平均時間</strong></center>
+
+(來源：BitMEX Research)(注意：對於 Bitcoin 0.8.6 Client 端，以上結果平均只有兩次嘗試)
+
+上面的 *圖 3* 表明，除了 Bitcoin Core 0.12.0 的強大性能外，每個軟體版本的軟體性能都逐步提高。然而，儘管上圖中趨勢明顯，但每次嘗試的 IBD 時間和方差較大可能表明存在很大的不確定性。在從 2016 年以來就性能改進得出強有力的結論之前，可能需要更多的樣本資料。這種變化可能主要是由 Bitcoin P2P 網路或網路連接方面的問題引起的，因此，有待進一步研究的好領域可能是比較**掃描速度**，即已下載完成且完全驗證區塊鏈所花費的時間。
+
+在上述分析中，Bitcoin Core 0.12.0 的性能很好。這可能是因為 Bitcoin Core 0.12.0 已啟用 `libsecp256k`，但未驗證 Segregated Witness 的交易 input 的簽名([Segregated Witness](https://blog.bitmex.com/the-segwit-transaction-capacity-increase-part-1/?ref=tokendaily))。因此，Bitcoin Core 0.12.0 不會在 2017 年 8 月之後驗證區塊鏈中的所有簽名，從而給 Client 帶來一些"不公平的優勢"。儘管此節點似乎不是異常值，但此優勢也可能適用於 Bitcoin Core 0.13.0。~~當然，Bitcoin Core 0.12.0 之前的所有版本都具有相同的"不公平"優勢，但這與使用 OpenSSL 的缺點相形見。~~
+
+**同步Client 端直至其發布日期**
+
+下圖( *圖4* )說明了同步 Client 端所需的時間，直到軟體發布日的區塊高度為止。
+
+<div align="center"><img width="700" src="/img/143.png"/></div>
+
+<center><strong>圖 4 – IBD 到 Client 端發布日期的時間(天)</strong></center>
+
+(來源：BitMEX Research)(注意：僅在 Linux 上執行的節點的資料。Bitcoin Core 0.19.0.1僅同步到高度 602,707)
+
+該圖表顯示從 Bitcoin Core 0.8.6 到 Bitcoin Core 0.14.0 的趨勢基本持平，當時可擴展性的改進無法適應時間的推移和區塊鏈高度增加的影響，圖表顯示了上升趨勢。不幸的是，近年來，軟體改進的速度降低了，這也許是因為已經取得了令人~~垂涎~~的成果。較高的交易量也可能導致了這一情況。未來的可擴展性改進可能更具挑戰性，即使維持 400 萬個單位的區塊權重限制，IBD 時間也可能繼續增加，儘管軟體會進一步升級並且硬體性能會適度提高。
+
+**IBD嘗試失敗**
+
+我們確實成功編譯並執行了 0.8.6 之前的 Bitcoin 版本，但是，2015 年至 2016 年期間時，同步變得很慢。0.8.6 之前的節點(例如 0.7.0)在 2013 年通過[~~手動更改鎖定限製~~](https://bitcoin.org/en/alert/2013-03-15-upgrade-deadline#backports)成功克服了明顯的[硬分叉](https://blog.bitmex.com/bitcoins-consensus-forks/)，但是由於交易量增加，2015 年證明具有挑戰性，並且該節點停止了處理區塊。我們嘗試重新啟動該節點，這確實有助於將其向前推進，但隨後又再次卡住了。然後，我們甚至嘗試在具有 64 GB RAM 和 8 個 Intel i9 處理器的全新本地電腦上執行 Bitcoin Core 0.7.0，但是該節點仍無法通過 2016 年。~~由於涉及許多縮放參數，因此非線性，一個人不能簡單地在這個問題上投入更多的硬體。~~
+
+有時，當節點卡在一個區塊上並重新啟動時，在 4 次重新啟動嘗試後，我們放棄了同步。對於 MacBook Pro 上 的 Bitcoin Core 0.8.6，當領先者在 2016 年時，同步被放棄。儘管這有點令人失望，但其餘 35 個成功的同步不需要重啟。
+
+**結論**
+
+~~除了在與 MacBook Pro 一起發布 BitMEX Research 時~~，BitMEX IT 部門應更加謹慎外，該資料還說明了過去七年來已實現的顯著可擴展性增強。向 `libsecp256k` 的過渡是最重要的改進。IBD 時間的大幅減少以及舊節點無法完全同步，這表明，如果不進行這些~可伸縮性增強~，那麼即使用戶擁有最高規格的硬體，到現在 Bitcoin 也將基本消失。資料還表明，技術創新不太可能跟上不斷發展的區塊鏈的步伐，IBD 時間將增加。
