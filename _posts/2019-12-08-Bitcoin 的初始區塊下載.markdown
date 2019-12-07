@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Bitcoin 的初始區塊下載"
+title:  "過去到現在的Bitcoin性能比較"
 date:   2019-12-08
 categories: news
 description: "記錄了節點與網路同步所花費的時間，從而測試了Bitcoin Core的性能"
@@ -9,7 +9,7 @@ published: true
 hero_image: /img/hero.png
 ---
 
-**摘要：** 我們成功地進行了35次初始區塊下載(Initial Block, IBD)，並記錄了節點與網路同步所花費的時間，從而測試了Bitcoin Core的性能。我們使用了從2012年到2019年的軟體版本。結果表明，軟體性能得到了顯著而持續的改善，但差異也很大。即使使用最新的電腦硬體，舊版本的 Bitcoin 仍難以克服2015年至2016年期間的交易量提升。因此，我們得出結論，如果沒有軟體增強功能，今天的初始同步幾乎是不可能的。[2019年11月29日](https://blog.bitmex.com/bitcoins-initial-block-download/)[BITMEX research](https://blog.bitmex.com/author/bitmex-research/)
+**摘要：** 我們成功地進行了35次初始區塊下載(Initial Block, IBD)，並記錄了節點與網路同步所花費的時間，從而測試了Bitcoin Core的性能。我們使用了從2012年到2019年的軟體版本。結果表明，軟體性能得到了顯著而持續的改善，但差異也很大。即使使用最新的電腦硬體，舊版本的 Bitcoin 仍難以克服2015年至2016年期間的交易量提升。因此，我們得出結論，如果沒有軟體增強功能，今天的初始同步幾乎是不可能的。[2019年11月29日](https://blog.bitmex.com/bitcoins-initial-block-download/)[BITMEX Research](https://blog.bitmex.com/author/bitmex-research/)
 
 <div align="center"><img width="700" src="/img/140.png"/></div>
 
@@ -92,7 +92,7 @@ hero_image: /img/hero.png
 |Bitcoin Core 0.9.0|18/03/2014|82.1|Linux|
 |Bitcoin Core 0.8.6|09/12/2013|72.6|Linux|
 
-(來源：BitMEX研究)
+(來源：BITMEX Research)
 
 **結果分析**
 
