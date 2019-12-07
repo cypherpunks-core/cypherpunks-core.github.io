@@ -43,13 +43,13 @@ hero_image: /img/hero.png
 |                  | **MacBook Pro(64位)** | **Linux VPS(64位)** |
 | ---------------- | --------------------- | ------------------- |
 | 作業系統         | macOS Mojave(10.14)   | Ubuntu 18.04.3      |
-| 處理器           | 6核心Intel i9 2.9GHz  | 8核心Intel Xeon     |
-| 記憶體           | 32GB                  | 32GB                |
+| 處理器           | 6 核心 Intel i9 2.9GHz  | 8 核心 Intel Xeon     |
+| 記憶體           | 32 GB                  | 32GB                |
 | 儲存空間         | 1 TB SSD              | 640 GB SSD           |
-| 網路下載頻寬     | 62Mb /秒              | 2,000Mb /秒         |
-| 網路上傳頻寬     | 20Mb /秒              | 400Mb /秒           |
+| 網路下載頻寬     | 62Mb / 秒              | 2,000Mb / 秒         |
+| 網路上傳頻寬     | 20Mb / 秒              | 400Mb / 秒           |
 | IBD在高度結束    | 602,707               | 602,707             |
-| Bitcoin.conf設定 |     |  <i>假設有效= 0 <br> dbcache = 24000 <br> maxmempool = 500</i>  |
+| Bitcoin.conf設定 |     |  <i>assumevalid = 0 <br> dbcache = 24000 <br> maxmempool = 500</i>  |
 
 完整結果表
 
