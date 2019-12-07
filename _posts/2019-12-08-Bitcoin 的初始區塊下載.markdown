@@ -20,14 +20,14 @@ hero_image: /img/hero.png
 
 **總覽**
 
-為了在初始同步期間測試 Bitcoin Core的 性能，我們成功進行了35次初始區塊下載(IBD)，並記錄了每次嘗試花費的時間。結果 *如圖 1* 所示以上內容說明，由於從OpenSSL升級到用於簽名驗證的 `libsecp256k`1 的升級，Bitcoin Core 0.12.0 於 2016 年 2 月發佈時，速度有了顯著提高。`Libsecp256k`1專為 Bitcoin 構建。從那時起，速度的改善要慢得多，並且由於IBD時間差異很大，因此只有經過多次嘗試才能清楚地看到這些改善。但是，即使在2016年2月發布了Bitcoin Core 0.12.0 之後，在從 Bitcoin Core 0.13.0 到Bitcoin Core 0.19.0.1 的每個軟體發行之後，性能仍然有逐漸改善的跡象。
+為了在初始同步期間測試 Bitcoin Core 的性能，我們成功進行了 35 次初始區塊下載(IBD)，並記錄了每次嘗試花費的時間。結果 *如圖 1* 所示以上內容說明，由於從OpenSSL升級到用於簽名驗證的 `libsecp256k1` 的升級，Bitcoin Core 0.12.0 於 2016 年 2 月發佈時，速度有了顯著提高。`Libsecp256k1` 專為 Bitcoin 構建。從那時起，速度的改善要慢得多，並且由於 IBD 時間差異很大，因此只有經過多次嘗試才能清楚地看到這些改善。但是，即使在 2016 年 2 月發布了Bitcoin Core 0.12.0 之後，在從 Bitcoin Core 0.13.0 到Bitcoin Core 0.19.0.1 的每個軟體發行之後，性能仍然有逐漸改善的跡象。
 
-當然，IBD 時間只是一種衡量標準，還有許多其他角度和考慮因素可用於評估 Bitcoin Core 的性能和功能。儘管IBD時間可能不是衡量整體軟體性能的完美方法，但它佔用大量資源，因此可能是衡量基準的好方法。
+當然，IBD 時間只是一種衡量標準，還有許多其他角度和考慮因素可用於評估 Bitcoin Core 的性能和功能。儘管 IBD 時間可能不是衡量整體軟體性能的完美方法，但它佔用大量資源，因此可能是衡量基準的好方法。
 
 該報告來自之前的兩個實驗： 
 
-* 在 2018年11月，詹姆森·洛普(Jameson Lopp)進行了類似的[exercise](https://blog.keys.casa/bitcoin-full-validation-sync-performance/)，但分析的重點是獨立的實現，而該分析的重點是較舊版本的 Bitcoin Core (或簡稱為" Bitcoin "，因為某些較舊的軟體早於名稱" Bitcoin Core" )。 
-* Sjors Provoost 還在2017年7月進行了此[實驗](https://medium.com/provoost-on-crypto/historical-bitcoin-core-client-performance-c5f16e1f8ccb)，儘管 Sjors 提供的資料用於減少同步嘗試。
+* 在 2018 年 11 月，詹姆森·洛普(Jameson Lopp)進行了類似的[exercise](https://blog.keys.casa/bitcoin-full-validation-sync-performance/)，但分析的重點是獨立的實現，而該分析的重點是較舊版本的 Bitcoin Core (或簡稱為"Bitcoin"，因為某些較舊的軟體早於名稱"Bitcoin Core" )。 
+* Sjors Provoost 還在 2017 年 7 月進行了此[實驗](https://medium.com/provoost-on-crypto/historical-bitcoin-core-client-performance-c5f16e1f8ccb)，儘管 Sjors 提供的資料用於減少同步嘗試。
 
 **完整結果和原始資料**
 
@@ -96,7 +96,7 @@ hero_image: /img/hero.png
 
 **結果分析**
 
-如上面的 *圖2* 所示，即使使用相同的軟體和具有相同規格的機器來執行IBD，報告的時間也存在相當大的差異。 
+如上面的 *圖2* 所示，即使使用相同的軟體和具有相同規格的機器來執行 IBD，報告的時間也存在相當大的差異。 
 
 <div align="center"><img width="700" src="/img/142.png"/></div>
 
@@ -104,9 +104,9 @@ hero_image: /img/hero.png
 
 (來源：BitMEX Research)(注意：對於 Bitcoin 0.8.6 Client 端，以上結果平均只有兩次嘗試)
 
-上面的 *圖 3* 表明，除了 Bitcoin Core 0.12.0 的強大性能外，每個軟體版本的軟體性能都逐步提高。然而，儘管上圖中趨勢明顯，但每次嘗試的IBD時間和方差較大可能表明存在很大的不確定性。在從2016年以來就性能改進得出強有力的結論之前，可能需要更多的樣本資料。這種變化可能主要是由 Bitcoin P2P網路或網路連接方面的問題引起的，因此，有待進一步研究的一個好領域可能是比較掃描速度，即已下載完成完全驗證區塊鏈所花費的時間。
+上面的 *圖 3* 表明，除了 Bitcoin Core 0.12.0 的強大性能外，每個軟體版本的軟體性能都逐步提高。然而，儘管上圖中趨勢明顯，但每次嘗試的 IBD 時間和方差較大可能表明存在很大的不確定性。在從 2016 年以來就性能改進得出強有力的結論之前，可能需要更多的樣本資料。這種變化可能主要是由 Bitcoin P2P 網路或網路連接方面的問題引起的，因此，有待進一步研究的好領域可能是比較**掃描速度**，即已下載完成且完全驗證區塊鏈所花費的時間。
 
-在上述分析中，Bitcoin Core 0.12.0 的性能很好。這可能是因為 Bitcoin Core 0.12.0 已啟用 `libsecp256k`，但未驗證 Segregated Witness 的交易 input 的簽名([Segregated Witness](https://blog.bitmex.com/the-segwit-transaction-capacity-increase-part-1/?ref=tokendaily))。因此，Bitcoin Core 0.12.0 不會在2017年8月之後驗證區塊鏈中的所有簽名，從而給 Client 帶來一些"不公平的優勢"。但是，儘管此節點似乎不是異常值，但此優勢也可能適用於 Bitcoin Core 0.13.0。~~當然，Bitcoin Core 0.12.0 之前的所有版本都具有相同的"不公平"優勢，但這與使用 OpenSSL 的缺點相形見。~~
+在上述分析中，Bitcoin Core 0.12.0 的性能很好。這可能是因為 Bitcoin Core 0.12.0 已啟用 `libsecp256k`，但未驗證 Segregated Witness 的交易 input 的簽名([Segregated Witness](https://blog.bitmex.com/the-segwit-transaction-capacity-increase-part-1/?ref=tokendaily))。因此，Bitcoin Core 0.12.0 不會在 2017 年 8 月之後驗證區塊鏈中的所有簽名，從而給 Client 帶來一些"不公平的優勢"。儘管此節點似乎不是異常值，但此優勢也可能適用於 Bitcoin Core 0.13.0。~~當然，Bitcoin Core 0.12.0 之前的所有版本都具有相同的"不公平"優勢，但這與使用 OpenSSL 的缺點相形見。~~
 
 **同步Client 端直至其發布日期**
 
@@ -116,15 +116,15 @@ hero_image: /img/hero.png
 
 <center><strong>圖 4 – IBD 到 Client 端發布日期的時間(天)</strong></center>
 
-(來源：BitMEX Research)(注意：僅在 Linux 上執行的節點的資料。Bitcoin Core 0.19.0.1僅同步到高度602,707)
+(來源：BitMEX Research)(注意：僅在 Linux 上執行的節點的資料。Bitcoin Core 0.19.0.1僅同步到高度 602,707)
 
-該圖表顯示從 Bitcoin Core0.8.6 到 Bitcoin Core0.14.0 的趨勢基本持平，當時可擴展性的改進無法適應時間的推移和區塊鏈高度增加的影響，圖表顯示了上升趨勢。不幸的是，近年來，軟體改進的速度降低了，這也許是因為已經取得了令人~~垂涎~~的成果。較高的交易量也可能導致了這一情況。未來的可擴展性改進可能更具挑戰性，即使維持400萬個單位的區塊權重限制，IBD時間也可能繼續增加，儘管軟體會進一步升級並且硬體性能會適度提高。
+該圖表顯示從 Bitcoin Core 0.8.6 到 Bitcoin Core 0.14.0 的趨勢基本持平，當時可擴展性的改進無法適應時間的推移和區塊鏈高度增加的影響，圖表顯示了上升趨勢。不幸的是，近年來，軟體改進的速度降低了，這也許是因為已經取得了令人~~垂涎~~的成果。較高的交易量也可能導致了這一情況。未來的可擴展性改進可能更具挑戰性，即使維持 400 萬個單位的區塊權重限制，IBD 時間也可能繼續增加，儘管軟體會進一步升級並且硬體性能會適度提高。
 
 **IBD嘗試失敗**
 
-我們確實成功編譯並執行了 0.8.6 之前的 Bitcoin 版本，但是，當節點達到 2015 年至 2016 年期間時，同步變得很慢。0.8.6 之前的節點(例如 0.7.0)在 2013 年通過[~~手動更改鎖定限製~~](https://bitcoin.org/en/alert/2013-03-15-upgrade-deadline#backports)成功克服了明顯的[硬分叉](https://blog.bitmex.com/bitcoins-consensus-forks/)，但是由於交易量增加，2015 年證明具有挑戰性，並且該節點停止了處理區塊。我們嘗試重新啟動該節點，這確實有助於將其向前推進，但隨後又再次卡住了。然後，我們甚至嘗試在具有 64 GB RAM 和 8 個 Intel i9 處理器的全新本地電腦上執行 Bitcoin Core 0.7.0，但是該節點仍無法通過 2016 年。~~由於涉及許多縮放參數，因此非線性，一個人不能簡單地在這個問題上投入更多的硬體。~~
+我們確實成功編譯並執行了 0.8.6 之前的 Bitcoin 版本，但是，2015 年至 2016 年期間時，同步變得很慢。0.8.6 之前的節點(例如 0.7.0)在 2013 年通過[~~手動更改鎖定限製~~](https://bitcoin.org/en/alert/2013-03-15-upgrade-deadline#backports)成功克服了明顯的[硬分叉](https://blog.bitmex.com/bitcoins-consensus-forks/)，但是由於交易量增加，2015 年證明具有挑戰性，並且該節點停止了處理區塊。我們嘗試重新啟動該節點，這確實有助於將其向前推進，但隨後又再次卡住了。然後，我們甚至嘗試在具有 64 GB RAM 和 8 個 Intel i9 處理器的全新本地電腦上執行 Bitcoin Core 0.7.0，但是該節點仍無法通過 2016 年。~~由於涉及許多縮放參數，因此非線性，一個人不能簡單地在這個問題上投入更多的硬體。~~
 
-有時，當節點卡在一個區塊上並重新啟動時，在 4 次重新啟動嘗試後，我們放棄了同步。對於 MacBook Pro 上 的 Bitcoin Core 0.8.6，當領先者在 2016 年時，同步被放棄。儘管這有點令人失望，但其餘35個成功的同步不需要重啟。
+有時，當節點卡在一個區塊上並重新啟動時，在 4 次重新啟動嘗試後，我們放棄了同步。對於 MacBook Pro 上 的 Bitcoin Core 0.8.6，當領先者在 2016 年時，同步被放棄。儘管這有點令人失望，但其餘 35 個成功的同步不需要重啟。
 
 **結論**
 
