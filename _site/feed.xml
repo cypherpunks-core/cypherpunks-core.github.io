@@ -1,4 +1,882 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-15T21:32:58+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">密碼龐克 Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">BIP-65 OP_CHECKLOCKTIMEVERIFY</title><link href="http://localhost:4000/news/2019/11/14/BIP-65-OP_CHECKLOCKTIMEVERIFY/" rel="alternate" type="text/html" title="BIP-65 OP_CHECKLOCKTIMEVERIFY" /><published>2019-11-14T00:00:00+08:00</published><updated>2019-11-14T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/14/BIP-65%20OP_CHECKLOCKTIMEVERIFY</id><content type="html" xml:base="http://localhost:4000/news/2019/11/14/BIP-65-OP_CHECKLOCKTIMEVERIFY/">&lt;p&gt;&lt;a href=&quot;http://gavinzhang.work/blockchain/%E6%AF%94%E7%89%B9%E5%B8%81/BIP-65%20OP-CHECKLOCKTIMEVERIFY.html&quot;&gt;原文&lt;/a&gt;:BIP-65 OP_CHECKLOCKTIMEVERIFY    &lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-15T17:19:37+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">密碼龐克 Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">多媒體區塊鏈:分散式且防竄改之媒體交易框架</title><link href="http://localhost:4000/news/2020/01/15/%E5%A4%9A%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88/" rel="alternate" type="text/html" title="多媒體區塊鏈:分散式且防竄改之媒體交易框架" /><published>2020-01-15T00:00:00+08:00</published><updated>2020-01-15T00:00:00+08:00</updated><id>http://localhost:4000/news/2020/01/15/%E5%A4%9A%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88</id><content type="html" xml:base="http://localhost:4000/news/2020/01/15/%E5%A4%9A%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88/">&lt;blockquote&gt;
+  &lt;p&gt;當前多媒體發佈不會保留可自我檢索的訊息交易或內容修改之歷史記錄，經常對原始媒體進行編輯以獲取創意內容準備或篡改以進行錯誤宣傳通過社交媒體，然而現在沒有可信任之機制可以輕鬆檢視交易記錄或修改歷史。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;摘要&quot;&gt;摘要&lt;/h2&gt;
+
+&lt;p&gt;分散式且防篡改的媒體交易框架是基於區塊鏈模型提出的。當前多媒體發佈不會保留可自我檢索的訊息交易或內容修改之歷史記錄。&lt;/p&gt;
+
+&lt;p&gt;例如：珍貴藝術品的數位副本、創意媒體和娛樂內容被發佈於各種目的，包括展覽、畫廊收藏或媒體製作、工作流程。&lt;/p&gt;
+
+&lt;p&gt;經常對原始媒體進行編輯以獲取創意內容準備或篡改以進行錯誤宣傳通過社交媒體，然而現在沒有可信任之機制可以輕鬆檢視交易記錄或修改歷史。&lt;/p&gt;
+
+&lt;p&gt;作者團隊提出了一種新穎的浮水印基於多媒體的區塊鏈框架來解決問題。唯一浮水印訊息包含兩個訊息：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;a 包含交易歷史紀錄的加密雜湊&lt;/li&gt;
+  &lt;li&gt;b 保留可檢索的原始媒體內容。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;一旦浮水印提取後，浮水印的第一部分傳遞給分散式帳本以檢索歷史交易記錄和後者，部分用於識別已編輯/已篡改的區域。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;本論文概述了需求、挑戰並展示了這個概念的證明。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;介紹&quot;&gt;介紹&lt;/h2&gt;
+
+&lt;p&gt;媒體分發也稱為內容分發，是一種多媒體內容的數位分發形式，其中包括音訊、圖片和視訊。&lt;/p&gt;
+
+&lt;p&gt;從歷史上看，媒體發行依賴紙、光碟、DVD 或磁帶的物理交換。但是，在線交付媒體，例如基於 Internet 的雲服務或對等通信，已成為多媒體交付的事實上的標準，可確保高可用性，高性能和成本效益。內容分發網路（CDN）是專用服務器的分佈式網路，該服務器經過優化，可將豐富媒體無縫傳輸到與 Internet 連接的設備。與傳統的 CDN 相比，基於雲的 CDN 更好，因為它具有成本有效的託管服務，而無需擁有基礎架構。&lt;/p&gt;
+
+&lt;p&gt;對於有效的多媒體分發系統，在研究以及行業中都做出了巨大的努力。例如，MPEG 媒體傳輸標準是作為 MPEG 的一部分而開發的，用於通過 Internet 進行多媒體傳輸，其目標是以內容為中心的互聯網，以便通過網路更有效地分發內容。通過索引媒體文件中的多個視訊、音訊、字幕軌道和元數據，提出了一種生成、分發和使用多媒體文件的新方法。但這些解決方案都沒有關注傳送的內容的安全性和完整性，例如，可以很容易地從內容中刪除索引，從而失去了對相關訊息的追蹤。&lt;/p&gt;
+
+&lt;p&gt;周先生等人提出了一個聯合物理和應用層安全框架，該框架利用了物理層的安全能力和訊號處理技術。應用層的身份驗證和浮水印技術。&lt;/p&gt;
+
+&lt;p&gt;該方案旨在通過無線網路安全地傳送多媒體，並且在篡改的情況下不考慮媒體的任何完整性。使用基於安全浮水印以及聯合壓縮和加密的方法，提出了進一步的多媒體內容保護技術。但兩種算法都只關注內容保護，而沒有討論如何將這些技術集成到媒體分發框架中。&lt;/p&gt;
+
+&lt;p&gt;在沒有可以輕鬆搜尋交易或修改歷史記錄的信任機制下，我們提出了一種新穎的基於浮水印的多媒體區塊鏈框架，可以解決此類問題。唯一浮水印訊息包含兩則訊息：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;a 包含交易歷史紀錄的加密雜湊。&lt;/li&gt;
+  &lt;li&gt;b 保留可檢索的原始媒體內容。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;提取浮水印後，將前一段傳遞到可以搜尋歷史記錄的分散式帳本，而後一部分則用於定位和重建編輯/篡改的區域。通過使用感知壓縮算法(CS)找到最佳解決方案，可以實現原始內容的重建。本文概述了需求，挑戰並證明了這一概念。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-34.png&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;center&gt;圖1 區塊鏈工作原理概述&lt;/center&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+&lt;h3 id=&quot;a區塊鏈&quot;&gt;A.區塊鏈&lt;/h3&gt;
+
+&lt;p&gt;區塊鏈是一種新興技術，本質上是一個開放的分散式帳本（資料庫），記錄所有稱為區塊的交易細節。每個記錄或區塊都帶有時間戳記（TimeStamps），並鏈接到前一個區塊，並具有對數據修改的彈性，因此被認為是兩個實體之間以高效、可驗證和永久的方式進行交易的信任。近年來，許多打算採用該概念以提供安全且可公開驗證的交易機制的大型銀行、金融機構和其他公司注意到，對該技術的投資正在增加。例如，最新的虛擬貨幣 Bitcoin 使用區塊鏈作為其核心技術。&lt;/p&gt;
+
+&lt;p&gt;區塊鏈技術屬於分散式帳本技術的範疇，它允許交易以分散的方式運行，即允許在不使用中心化組織來處理交易的情況下驗證交易。取而代之的是，使用多個節點就交易是否有效達成共識。區塊鏈工作原理的一個示例如圖1所示，其中付款從 A 發送到 B，而其他節點驗證交易。如果交易失敗或無效，則不確認交易。最終，所有節點都將驗證交易並將其添加到其分散式帳本之副本中。從概念上講，它通過鏈接有關交易的訊息區塊並將它們按時間順序儲存在一起，因此稱為區塊鏈。&lt;/p&gt;
+
+&lt;p&gt;除虛擬貨幣外，這項技術還有很大的潛力在傳輸任何虛擬內容的用途。 目前其他潛在的應用場景包括硬體和軟體錢包，合規性和身份以及許多其他財務和交易管理應用程式，例如智能合約。 本質上，區塊鏈與任何事物都相關需要交易驗證或簽名、真實性和信任。 但是，沒有發現重大的努力在基於基本區塊鏈的多媒體應用中 Fujimura 等人介紹的數位版權管理概念等，在區塊鏈交易中添加了正確的訊息。相反，在這項工作中，我們提出了一個完整的框架，該框架保留了媒體交易的所有記錄（例如所有權，許可等），並提供了一種機制來防止媒體的篡改可驗證完整性，從而增強了利益相關者之間的信任。&lt;/p&gt;
+
+&lt;h3 id=&quot;b-多媒體保護&quot;&gt;B. 多媒體保護&lt;/h3&gt;
+&lt;p&gt;隨著數位技術在過去十年中顯示出快速增長，內容保護現在在內容管理系統中扮演著重要角色。 在當前系統中，數位浮水印技術提供了強大且可維護的解決方案以增強媒體安全性。 浮水印流行的證據在文獻中清晰可見，其中大多數論文都致力於保護媒體版權，並提出了浮水印算法，這些算法有些難以察覺、對各種有意和無意，例如壓縮的強韌性、過濾或幾何攻擊、脆弱或安全。 自嵌入浮水印方案本質上將主機圖片訊息作為浮水印嵌入圖片本身中。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;這樣的方案允許篡改檢測和原始圖片像的恢復。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Cox 等人列出了浮水印的各種應用，包括廣播監視、擁有者標籤、所有權證明、認證、交易浮水印、複製控制（Copy Control）和秘密通信。 提出了一種圖片質量評估方法，其中使用離散小波變換（DWT）嵌入浮水印，並使用提取的浮水印的降級來確定質量，而無需參考原始圖片。山田等人開發了一種用於影片播放服務的實時浮水印系統，其中當伺服器收到來自用戶的請求時，對該圖片進行浮水印，這對用戶是唯一的。該系統旨在阻止盜版。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Copy Control 是為了應對近年來日益嚴重的盜拷與檔案分享行為而制定的保護措施。上述盜版行為據稱已造成音樂產業的鉅額損失。實際上，由於 CD 規格在 1980 年代初被制定時尚未有此類問題，因此，與 DVD 相較，CD 標準先天缺乏提供保護或其它數位版權管理能力。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Copy Control 是一種試圖在 CD 標準上應用防拷保護的方法。然而，由於它只是基於這種缺乏限制的格式之微小改變，且必須要讓大部份的 CD 播放機能正常播放，其保護效力並不彰。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;出於提出分散式和防篡改媒體交易框架的動機，我們的方法結合了區塊鏈和自嵌入浮水印的概念。 雖然區塊鏈為分散式內容交易框架提供了一種受信任的機制，但基於頻率域小波的自嵌入浮水印算法通過檢測和恢復主機媒體上的任何篡改編輯嘗試來確保內容完整性。&lt;/p&gt;
+
+&lt;h2 id=&quot;提出框架&quot;&gt;提出框架&lt;/h2&gt;
+
+&lt;p&gt;所提出的基於區塊鏈模型的分散式防篡改媒體交易框架包括三個部分：
+a）基於感知壓縮（CS）的自嵌入水印
+b）區塊鏈分佈式分類帳
+c）身份驗證。&lt;/p&gt;
+
+&lt;p&gt;該框架在圖 2 中進行了描述，圖2顯示了內容預處理（用於自嵌入水印）和在區塊鏈中的註冊，圖3中描述了內容認證工作流程。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-35.png&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;center&gt;圖2 提議的多媒體區塊鏈框架概述：內容處理和交易。&lt;/center&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;1浮水印&quot;&gt;1）浮水印&lt;/h3&gt;
+
+&lt;p&gt;最近，頻率域浮水印技術，特別是基於小波的技術在平衡不可感知性和強韌性方面表現出更好的前景。在這項工作中，我們使用了基於小波的浮水印嵌入方案，其中低頻係數根據浮水印訊息進行了修改。&lt;/p&gt;
+
+&lt;p&gt;a）首先，使用降低採樣率後的原始圖片的基於 CS 的偽隨機投影構造浮水印（如圖2 所示）。然後將其與其他區塊鏈交易訊息結合以形成浮水印字串。字串的長度取決於圖片尺寸以及區塊鏈交易。在我們的實驗設置中，我們使用了 8220（8154 + 66）字長的浮水印字串，圖片大小為 3264×2448。&lt;/p&gt;
+
+&lt;p&gt;b）然後將基於 5/3 提升的一級小波變換應用於原始圖片，並使用低頻子帶（LL）係數嵌入浮水印。生成浮水印字節以形成單個二進製字串，並通過調整兩個相鄰係數來嵌入每個位元，即一個位元數應大於另一個係數以嵌入 1，反之則為 0。該字串在整個子帶中重複嵌入，以確保在篡改的情況下強大的浮水印提取。&lt;/p&gt;
+
+&lt;p&gt;c）最後，在身份驗證期間，將提取的浮水印傳遞到基於 CS 的稀疏重建（如下所述）以檢索原始圖片。接收到的圖片與檢索到的圖片之間的比較有助於識別篡改區域並恢復原始內容。下面給出了基於 CS 的重建的簡要說明。&lt;/p&gt;
+
+&lt;h3 id=&quot;2使用壓縮感應進行信號恢復&quot;&gt;2）使用壓縮感應進行信號恢復&lt;/h3&gt;
+
+&lt;p&gt;CS 理論證明，與 Shannon-Nyquist 定理的最小採樣率相比，可以從一組減少的線性測量結果中重建具有稀疏表示的信號。 稀疏域中給定信號 x∈ℝn 的標準 CS 模型可以描述為：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;y=Φx&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;其中 Φ 是 m×n m≪n＆y∈ℝm 的感知矩陣。稀疏訊號由少量非零係數組成。 因此，密集圖片 I 通常需要具有基本函數 spa 的稀疏變換，例如 DFT、DCT或 DWT，以實現信號的更緊湊的能量分佈。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;x=ΨI&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;訊號重建通常是非線性操作，以重建原始訊號的近似值。由於重建的優化約束是不同的，因此某些算法可以重建圖片域值，而不會使等式中的變換變稀疏。 （2）。 基於 CS 的圖片雜湊自嵌入浮水印生成如下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;將圖片 I 下採樣至較低的分辨率（N x M），以確保出現實際的 CS 問題。&lt;/li&gt;
+  &lt;li&gt;然後，通過 Φ 直接對下採樣圖片 Id 進行隨機採樣，或者通過 Φ 對 I d 的變異係數 X d 進行隨機採樣。&lt;/li&gt;
+  &lt;li&gt;將圖片域中的隨機採樣值 y 或頻率域中的變異係數儲存為圖片雜湊水印 w。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;從篡改圖片中提取的浮水印 w’ 可以看作是壓縮樣本 y’，以重建下採樣之原始圖片 I d。 然後，可以應用篡改檢測。所提出的方案對於各種 CS 方法是靈活的。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;特別是，測試了兩種恢復策略：&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;T 係數的 l1- 範數最小&lt;/li&gt;
+  &lt;li&gt;圖片最小化總變化範數&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;範數（英語：norm），是具有「長度」概念的函數。在線性代數、泛函分析及相關的數學領域，是一個函數，其為向量空間內的所有向量賦予非零的正長度或大小。另一方面，半範數（英語：seminorm）可以為非零的向量賦予零長度。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;b-多媒體區塊鏈&quot;&gt;B. 多媒體區塊鏈&lt;/h3&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-36.png&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;center&gt;圖3 內容認證和重建的功能流程圖&lt;/center&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;本文採用標準的區塊鏈基礎架構，並進行了修改以滿足多媒體區塊鏈的要求。如圖2 和圖3 所示，該框架包含兩個部分：
+1）內容預處理（用於自嵌入水印）和在區塊鏈中的註冊，以及
+2）內容認證。區塊鏈技術可實現去中心化的無信任數字交易。&lt;/p&gt;
+
+&lt;p&gt;交易獲得批准後，該區塊將在區塊鏈的分散式資料庫中進行更新，並由網路中的每個用戶進行記錄。交易可以嵌入智能合約和公眾訊息。該公眾訊息可用於記錄圖片/媒體的交易訊息，例如交易和修改歷史記錄、所有權、區塊鏈交易 ID 等以及可用於重建原始圖片/媒體的 CS 樣本訊息。在分發之前，此公眾訊息將嵌入圖片/媒體本身中。一旦交易被批准，圖片/媒體就準備好分發並儲存在鏈接的內容伺服器（圖2 中的媒體資料庫伺服器）中。資料庫伺服器中交易的圖片/媒體的相應區塊鏈訊息被更新。&lt;/p&gt;
+
+&lt;p&gt;通過提取查詢圖像/媒體的浮水印來實現進一步的分發或認證。查詢圖像/媒體的浮水印包含兩個部分：1. 區塊鏈交易 ID 和 2. 用於重建 CS 的原始圖片樣本。前一部分傳遞到可以檢索交易明細的分散式資料庫，後一部分分別用於重建原始圖片/媒體和定位被篡改的區域。區塊鏈交易 ID 用於檢索查詢圖片/媒體的歷史記錄，包括所有權訊息、發送者和接收者的地址、交易時間、交易的區塊鏈地址、價格等（例如：圖4）。&lt;/p&gt;
+
+&lt;p&gt;CS 樣本用於重建原始圖片的下採樣版本，以識別可能恢復原始圖片區域的任何篡改或編輯區域。如果區塊鏈驗證或篡改檢測身份驗證失敗，則查詢圖片/媒體不真實，並且不準備進行進一步的分發/交易。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-37.png&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;center&gt;圖4 使用以太坊獲得的特定 ID 的交易歷史記錄。&lt;/center&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-38.png&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;center&gt;圖5 圖片的資料庫。&lt;/center&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;結果&quot;&gt;結果&lt;/h2&gt;
+&lt;p&gt;對於作者的框架，作者使用了現有的區塊鏈基礎架構。區塊鏈網路建立在以太坊的測試網上。我們還使用了一個開源工具箱，用於基於感知壓縮的稀疏樣本生成和重構。 l1 - Magic 工具箱用於解決兩個優化問題，使用WAVELAB 包和 J. Romberg 的 Noiselet 生成小波（Wavelet）。&lt;/p&gt;
+
+&lt;p&gt;為了模擬內容認證中的篡改行為，由 Christlein 等人提供了一個標準資料集。在生成結果時，首先我們通過以太坊測試網和來自主機影像的稀疏隨機樣本生成了交易 ID。將這兩個連接起來以生成由一系列 8 位元組成的浮水印字串。一旦加浮水印，圖片就會被標準資料集可用的現有篡改模板進行保護。最後，我們從受保護之圖片中提取浮水印並重建原始圖片，以檢測編輯。一個成功測試的案例如圖6 所示，其中（a）是原始圖片，（b）是浮水印圖片，（c）是受保護版本，（d）是使用提取的浮水印的重建圖片，而（e）是檢測到的篡改區域。&lt;/p&gt;
+
+&lt;p&gt;提取的交易 ID 也被檢索到以太坊測試網上的相應交易中，以驗證所有權和交易歷史。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;關於 CS 感知壓縮和 l1 - Magic有興趣可以參照&lt;a href=&quot;https://medium.com/r/?url=https%3A%2F%2Fzhuanlan.zhihu.com%2Fp%2F27062896&quot;&gt;這篇&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-39.png&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;center&gt;圖6 各圖關係 （a）原始圖片（b）浮水印圖片（c）受保護版本（d）使用提取的浮水印的重建圖（e）是檢測到的篡改區域。&lt;/center&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;結論&quot;&gt;結論&lt;/h2&gt;
+&lt;p&gt;在本文中，作者提出了一種基於區塊鏈架構的新型分散式防篡改媒體交易框架。 擬議的多媒體區塊鏈框架建立在自嵌入浮水印演算法的基礎上，該算法使用感知壓縮來檢測任何篡改並檢索原始內容。我們已經成功證明了這一概念。&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">當前多媒體發佈不會保留可自我檢索的訊息交易或內容修改之歷史記錄，經常對原始媒體進行編輯以獲取創意內容準備或篡改以進行錯誤宣傳通過社交媒體，然而現在沒有可信任之機制可以輕鬆檢視交易記錄或修改歷史。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/panda-33.png" /></entry><entry><title type="html">使用區塊鏈和感知雜湊達到去中心化之圖像共享和版權保護</title><link href="http://localhost:4000/news/2019/11/24/%E4%BD%BF%E7%94%A8%E5%8D%80%E5%A1%8A%E9%8F%88%E5%92%8C%E6%84%9F%E7%9F%A5%E9%9B%9C%E6%B9%8A%E9%81%94%E5%88%B0%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B9%8B%E5%9C%96%E5%83%8F%E5%85%B1%E4%BA%AB%E5%92%8C%E7%89%88%E6%AC%8A%E4%BF%9D%E8%AD%B7-copy/" rel="alternate" type="text/html" title="使用區塊鏈和感知雜湊達到去中心化之圖像共享和版權保護" /><published>2019-11-24T00:00:00+08:00</published><updated>2019-11-24T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/24/%E4%BD%BF%E7%94%A8%E5%8D%80%E5%A1%8A%E9%8F%88%E5%92%8C%E6%84%9F%E7%9F%A5%E9%9B%9C%E6%B9%8A%E9%81%94%E5%88%B0%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B9%8B%E5%9C%96%E5%83%8F%E5%85%B1%E4%BA%AB%E5%92%8C%E7%89%88%E6%AC%8A%E4%BF%9D%E8%AD%B7%20copy</id><content type="html" xml:base="http://localhost:4000/news/2019/11/24/%E4%BD%BF%E7%94%A8%E5%8D%80%E5%A1%8A%E9%8F%88%E5%92%8C%E6%84%9F%E7%9F%A5%E9%9B%9C%E6%B9%8A%E9%81%94%E5%88%B0%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B9%8B%E5%9C%96%E5%83%8F%E5%85%B1%E4%BA%AB%E5%92%8C%E7%89%88%E6%AC%8A%E4%BF%9D%E8%AD%B7-copy/">&lt;blockquote&gt;
+  &lt;p&gt;本篇文章翻譯自 &lt;a href=&quot;https://ieeexplore.ieee.org/document/8711440&quot;&gt;Decentralised Image Sharing and Copyright Protection using Blockchain and Perceptual Hashes&lt;/a&gt;，媒體區塊鏈的範疇越來越發人深省，究竟該如何透過去中心化的機制來達到版權保護呢？一起來閱讀本篇文章吧！&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
+
+&lt;h2 id=&quot;摘要&quot;&gt;摘要&lt;/h2&gt;
+
+&lt;p&gt;在本文中，我們旨在解決照片上傳到正版圖片網站和圖像共享市場上之圖像來源問題，以確保原創攝影師的作品得到正確認可。&lt;/p&gt;
+
+&lt;p&gt;現在，每週在正版圖片網站上共享數百萬 &lt;strong&gt;Royalty Free&lt;/strong&gt; （RF,免權利金）之圖像。在這樣的網站上分享圖像的攝影師和圖形設計師之間存在著很大的不滿，因為這種行為存在廣泛的弊端，其他人試圖從原作者的作品中獲得榮譽並從中受益。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Royalty Free : 網站對使用者的一種圖片素材授權方式概稱，其意義指使用者一旦購買產品，可以無限次數地使用，每一次使用時，並不需另外就使用的媒體、數量、年限、地域等，付費取得授權。在著作權的相關法律中並無就此詞的規範，但在多媒體出版業界，尤其是數位影像業界中廣泛被使用。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;當除原作者外的其他人上傳與市場上已經共享的相同圖像，或使用圖像處理方法（例如旋轉、裁剪、灰階轉換等）然後上傳篡改圖像以避免版權侵犯檢測時，就會發生這種情況。為了解決這些問題，我們建議在以太坊測試鏈的基礎上建立一個去中心化的點對點照片共享市場，並展示它是如何公平，值得信賴和實用的。&lt;/p&gt;
+
+&lt;p&gt;我們的分散式應用程序利用以太坊的感知雜湊和強大的智能合約來自動檢測和拒絕在感知雜湊上與市場上已有的圖像或相似的篡改圖像。由於區塊鏈的固有特性，我們的市場沒有中央機構對其進行控制，沒有任何第三方干擾、沒有單點故障、零審查並保留了在線用戶隱私。&lt;/p&gt;
+
+&lt;p&gt;據我們所知，這是第一項提供實用解決方案的工作，可在分散的圖像共享平台上自動檢測和拒絕在感知上相似的圖像，從而保護正版圖像作者的版權。&lt;/p&gt;
+
+&lt;h2 id=&quot;第一章節---介紹&quot;&gt;第一章節 - 介紹&lt;/h2&gt;
+
+&lt;p&gt;在當前的互聯網時代，許多攝影師現在通常是透過正版照片公司通過線上出售圖像來賺取收入。這些網站上的免版稅和微圖庫之商業模式已導致攝影師之間的激烈競爭，每個人都在努力上傳更多圖像並獲得更多作品下載。&lt;/p&gt;
+
+&lt;p&gt;最近這種行為導致了廣泛的圖像來源欺詐，其中一些非作者違反了版權法並在心理和經濟上影響了合法圖像所有者，從而獲得了其他供圖者者圖像的信譽。他們通過從正版照片網站訪問原始作者的圖像並按原樣或在修改了正版照片網站上的某些圖像特徵後上傳由此獲得的圖像來實現此目的。儘管一些圖片網站確實通過使用密碼雜湊來檢查要上傳的新圖像是否已經存在於市場上，但它們無法識別原始圖像的可操縱版本。發生這種情況是因為密碼雜湊易於產生雪崩效應，這種現像是輸入值的微小變化導致輸出值的急劇變化。我們通過創建一個基於以太坊的圖像共享解決方案並選擇感知雜湊來解決這些問題[6]。感知雜湊避免雪崩效應，並且不易受到圖像感知變化的影響，例如旋轉，裁剪，調整大小，轉換為灰階、胡椒鹽攻擊，曝光或飽和度變化等。本文展示如何使用區塊鏈網路結合使用感知雜湊和適當的智能合約邏輯提供比當前系統更好的版權侵權檢測機制，以及區塊鏈的許多好處，例如永久性的交易記錄、透明度、信任、不變性、高可用性、信息安全和節省成本。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;microstock : 在圖庫網上，有人有需求購買圖像/影片/音樂素材，自然就會有「供圖者 Contributor」。每個人都可以在這些圖庫網站上註冊申請成為供圖者。但因應每家的規則要求，在正式成為可上架素材產品賺取佣金的供圖者前，有的網站會有一些小考試（像是要先上傳幾張圖供站方審合是否符合他們的要求水準）。不過這個倒不用擔心，現在這些測試門檻都很低，基本上只要符合各類素材的一些格式設定大多會通過。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;cryptographic hash : 可以將任意大小的數據（通常稱為「消息」）映射到固定大小的位字符串（「雜湊值」、「雜湊」或「消息摘要」），並且是單向的函數，即實際上不可行的函數。[1] 理想情況下，查找產生給定的消息的唯一方法是嘗試暴力搜尋，以查看它們是否產生匹配項，或使用匹配雜湊表的Rainbow 表。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;a-動機&quot;&gt;A. 動機&lt;/h3&gt;
+
+&lt;p&gt;提出去中心化圖像共享市場的基本動機是糾正圖像來源並為原始圖像作者提供應有的信譽，這是在正版圖片網站上共享圖像的攝影師主要關注點。我們旨在建立強大且快速的版權侵犯檢測機制。當與基於區塊鏈的架構優勢結合時，可以將權力交還給圖像貢獻者。正版照片網站上的佣金率（可能高達 55％）也是攝影界普遍關注的問題。我們的目標是完全擺脫這些繁重的佣金，並創建一種架構，使用戶僅需支付與區塊鏈網路處理交易相關的交易費用。&lt;/p&gt;
+
+&lt;h3 id=&quot;b-新穎性&quot;&gt;B. 新穎性&lt;/h3&gt;
+
+&lt;p&gt;此專案新穎的貢獻包括使用可以編程的以太坊區塊鏈[1]，[4]創建一個去中心化的圖像共享應用，並以新穎的方式使用感知雜湊、以太坊上強大的智能合約[12]，[15]進行版權之侵犯檢測。網路上的照片通過 IPFS 以分散方式保存。我們最後也提供計算之結果，顯示我們方法的有效性和限制。&lt;/p&gt;
+
+&lt;h2 id=&quot;第二章節---系統環境及建置&quot;&gt;第二章節 - 系統環境及建置&lt;/h2&gt;
+
+&lt;p&gt;我們使用以下工具和技術來建置我們的系統。關於它們的詳細信息可以在各自的網站和相應的 Github 中找到。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Metamask : Metamask 是用於瀏覽器的插件，可進行以太坊交易。它允許運行以太坊 Dapps（去中心化應用程序），而無需運行完整的以太坊節點，管理身份和簽署區塊鏈交易。&lt;/li&gt;
+  &lt;li&gt;Ganache：Ganache 是一個以太坊區塊鏈模擬器。Ganache 是一個以太坊測試節點，可以在本地測試所有 Componet 組件。它還允許用戶部署合約，開發應用程序並運行測試。&lt;/li&gt;
+  &lt;li&gt;Geth : Geth（以太坊）是一個終端機（Command Line）界面，可讓用戶運行和操作以太坊全節點。它在 Go（Golang）中實現，並允許挖掘區塊以生成以太幣、創建智能合約，發送交易以在以太坊地址之間轉移資金，檢查區塊歷史以及許多其他功能。&lt;/li&gt;
+  &lt;li&gt;Turffle：Truffle 用於編譯，測試，構建智能合約，並提供開發框架以提高開發過程的速度。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;圖1中詳細顯示了系統架構。下面描述了該圖中顯示的各種模組：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;買方模組：它提供了搜索工具，可在分散式應用程序上顯示的所有圖像中找到購買者正在尋找的圖像類別。&lt;/li&gt;
+  &lt;li&gt;賣方模組：它提供了在區塊鏈上上傳圖像的簡單方法。賣方上傳圖像，以及圖像名稱和描述以幫助搜索過程。&lt;/li&gt;
+  &lt;li&gt;錢包模組：該客戶端加密模組允許創建新的以太坊地址或導入現有地址，請參閱錢包餘額和交易。用戶也可以使用 Metamask 來管理帳戶和錢包。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;從圖1可以看出，以太坊與 Web 客戶端連接並允許訪問以太坊系統。Web 客戶端包括買方，賣方和錢包模組。交易模組用於指定圖像售價，圖像上傳模組用於上傳新圖像。本地端資料庫儲存數據，並且在以太坊網路批准交易後，經過適當的加密後將數據和圖像將傳輸到 IPFS。我們使用公開金鑰加密技術進行加密。由於 IPFS 是內容可尋址的，因此此加密步驟對於訊息保護至關重要。以太坊由 Geth、奇偶校驗和 JSON-RPC（遠程過程調用）協議組成。以太坊提供對以太坊主網路的訪問，該網路由所有用戶節點、礦工、智能合約和交易區塊組成。所有模組之間的數據流如圖所示。下一部分將說明用於訊息儲存的 IPFS 和以太坊網路。
+&lt;br /&gt;&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-29.png&quot; style=&quot;width:100%&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;center&gt;&lt;strong&gt;圖1 系統架構&lt;/strong&gt; &lt;/center&gt;
+
+&lt;h2 id=&quot;第三章節---方法&quot;&gt;第三章節 - 方法&lt;/h2&gt;
+
+&lt;p&gt;我們提出了兩種不同的體系結構，它們儲存數據的方式不同。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;以太坊儲存：在這種架構中，圖像和雜湊值儲存在以太坊鏈本身上。圖像和感知雜湊被放置在區塊鏈交易中。這種方法的問題在於，隨著越來越多的圖像上傳，由於所有內容都儲存在測試鏈中，因此區塊鏈的儲存大小將迅速增加。每當新節點到達時，他們都必須下載包含所有圖像的整個鏈。該解決方案絕對不可擴展，特別是因為圖像大小可能會達到數兆字元。&lt;/li&gt;
+  &lt;li&gt;IPFS 儲存：在這種體系結構中，圖像和雜湊值儲存在 IPFS 中，這是一種分散的超媒體分佈協議。 IPFS [5]的內容是可透過地址搜尋的，並使用加密雜湊為文件內的區塊提供唯一的指紋，消除了網路上的冗餘，並將這些唯一的雜湊用於訊息檢索。通過使用 IPFS 協議儲存圖像和可感知的雜湊，我們在以太坊測試鏈的大小上節省了很多。可以使用任何標準加密方案對儲存在IPFS 上的數據進行加密並進行檢索。加密私鑰將僅通過智能合約與適當的買方共享。這種方法是可擴展的，是我們實施中使用的一種方法。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;a-侵犯版權和電腦視覺&quot;&gt;A. 侵犯版權和電腦視覺&lt;/h3&gt;
+
+&lt;p&gt;感知雜湊是多媒體指紋算法，它考慮了多媒體的各種功能。對於線上多媒體市場來說，&lt;strong&gt;確保每個作品只能上傳一次非常重要&lt;/strong&gt;。通過將新的圖像雜湊值與區塊鏈上所有圖像的雜湊值進行比較並檢查，諸如 MD5 和 SHA 之類的密碼雜湊函數可以有效地完成此任務。但是我們走得更遠，還嘗試找出似乎是區塊鏈上已經存在的原始作品的修改作品，並且在感覺上與這些原始作品相似。例如，如果有人嘗試上傳稍微旋轉的圖片（例如逆時針說12°），則由於雪崩效應，諸如SHA之類的雜湊將具有完全不同的最終雜湊值。相反，如果我們使用感知雜湊，則最終雜湊中的某些位元或沒有位元更改。我們可以使用感知雜湊的此屬性來找到圖像之間的相似性。實現此目的的方式是通過計算原始圖像和測試圖像之間的差異。為了量化差異，找到兩個圖像的感知雜湊值並計算由此獲得的雜湊值之間的漢明距離。標準化 0 到 1 之間的漢明距離。這是原始圖像與測試圖像之間差異的量度，稱為 NHD。如果這種差異在某個閾值內，則測試圖像將被拒絕。但有時，兩個不同的原始圖像也可能具有近似相似的感知雜湊，從而導致較小的相異值。因此，此處的關鍵任務是找到閾值，以便我們可以盡可能正確地識別兩個不同的圖像和兩個感知相似的圖像。我們在結果部分描述獲取閾值的方法。&lt;/p&gt;
+
+&lt;p&gt;感知雜湊算法很多，但是我們使用了四種最受歡迎的算法，分別是phash（DCT 雜湊），差分雜湊，平均雜湊和小波雜湊。這些算法包含在python 的 ImageHash 庫中，其中提供了有關這些算法的詳細文檔。因此，如果有人上傳了市場上存在的原始圖像的篡改版本，智能合約將計算其感知雜湊，計算此雜湊的漢明距離以及儲存在分散的 PERC HASH 資料庫中的雜湊，和閾值進行比較後將拒絕此類圖像。因此，不僅欺詐者無法上傳此類圖像，而且他們還將支付與在以太坊網路上處理該交易相關的交易費用，這可視為罰款。因此，這種經濟處罰將阻止欺詐行為。&lt;/p&gt;
+
+&lt;h3 id=&quot;b-智能合約和訊息流&quot;&gt;B. 智能合約和訊息流&lt;/h3&gt;
+
+&lt;p&gt;訊息流如圖1所示的系統架構圖所示。智能合約是以太坊生態系統的核心。以太坊上的智能合約是區塊鏈中的一小段程式碼。智能合約的概念最早由 Szabo 提出[3]。它們用於管理用戶之間的協議。他們可以持有以太（ETH），將其提供給適當的實體，持有訊息並為其他智能合約提供效用。智能合約用於執行某些計算，儲存一些變量並交易數位商品，同時遵守合約中提到的某些特定條件。因此，人們可以在以太坊網路上以這些合約中指定的自定義條件（function）交易虛擬資產。由於這些特性，它們適用於包括圖像許可和版權保護邏輯[12]。我們使用 solidity [10]撰寫智能合約，這是迄今為止撰寫智能合約最流行的語言。我們遵循創建此類合約的最佳實踐[16]，並使用諸如小波雜湊（WHASH）之類的輕量級算法來提供版權保護，從而需要較少的手續費（Gas Fees）[13]。我們所有的交易都透過智能合約進行。我們使用智能合約來計算感知雜湊，將加密和解密金鑰分配給適當的實體，與 IPFS 連接，檢查是否侵犯版權及是否接受或拒絕圖像。透過計算標準化漢明距離（NHD）量化市場上存在的圖像與新上傳的圖像之間的圖像差異後，智能合約將拒絕 NHD 低於特定閾值的圖像，如表2和圖2所示。這裡 WHASH 能夠識別除 90° 旋轉版本外的經典 barbara 圖像的所有變換。為了確定圖像的接受或拒絕，將 WHASH 的閾值設為在結果部分中計算的 0.379。這表明了感知雜湊的有效性和可靠性水平。如果對圖片的修改不太極端，並且原始圖片與其被篡改版本之間仍具有良好的結構相似性，則感知雜湊能夠檢測到篡改。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-30.png&quot; style=&quot;width:100%&quot; /&gt;
+&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖2 從左到右的圖像：經典圖像barbara，barbara 旋轉 5 度，barbara 旋轉 25 度，barbara 旋轉 90 度，barbara 亮度 -50，barbara sat +50。&lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-31.png&quot; style=&quot;width:100%&quot; /&gt;
+&lt;/div&gt;
+&lt;center&gt;&lt;strong&gt;表2 根據 Bsds-500 資料集計算的各種感知雜湊的有效性比較&lt;/strong&gt;&lt;/center&gt;
+
+&lt;h2 id=&quot;第四章節---結果&quot;&gt;第四章節 - 結果&lt;/h2&gt;
+
+&lt;p&gt;我們在原始圖像和圖像的變換的資料集上測試模型，以評估感知雜湊在檢測版權侵權中的有效性。我們使用 Berkeley 分割資料集（BSDS）[7]，它是500 個原始圖像的資料集。現實生活中有效的雜湊算法將是一種可以區分兩個真實圖像和同一圖像轉換的算法。&lt;/p&gt;
+
+&lt;p&gt;我們對 BSDS-500 資料集中的每個圖像執行以下轉換：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;旋轉(度數)：5 度 , 10 度 , 15 度 , 20 度, 25度（順時針）&lt;/li&gt;
+  &lt;li&gt;Gamma 校正：0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5&lt;/li&gt;
+  &lt;li&gt;胡椒和鹽的雜訊：0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00&lt;/li&gt;
+  &lt;li&gt;裁切（固定縱橫比模式）：5%, 10%, 15%, 20%, 25%&lt;/li&gt;
+  &lt;li&gt;調整大小（尺寸縮小 - 固定寬高比模式）：5％, 10％, 15％, 20％, 25％&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;經過這些轉換，我們最終得到了 21500 張圖像（500 張原始圖像和每個原始圖像 42 張轉換）。為了評估雜湊算法的有效性，我們創建了兩種情況：&lt;/p&gt;
+
+&lt;p&gt;正面（陽性）的情況：在這種情況下抓到的圖像是市場上原始圖像的操縱版本。我們期望雜湊算法能夠檢測到此類欺詐圖像，而智能合約應立即將其拒絕。&lt;/p&gt;
+
+&lt;p&gt;負面（陰性）的情況：這種情況下的圖像是資料集中的兩個不同的原始圖像。網路應允許新上傳的獨特圖像添加到要出售的市場上。&lt;/p&gt;
+
+&lt;p&gt;漢明碼距離是兩個雜湊間不同位元數量。因此，漢明碼距離帶有隱含的不相似感。我們計算新圖像與區塊鏈上傳的所有先前圖像之間的漢明碼距離，將距離值標準化並將其與閾值進行比較，以決定是否接受或拒絕新圖像。這樣，將對照市場上正在交易的所有圖像檢查新圖像。我們計算標準化漢明碼距離（NHD）如下：&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-32.png&quot; style=&quot;width:100%&quot; /&gt;
+&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖3 特定知覺雜湊對正確分類正面和負面案例的有效性。X軸表示NHD，Y軸表示全部圖像的一部分。&lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;NHD 計算方式&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;NHD = HammingDistance / HashBitsCount&lt;/script&gt;
+
+&lt;p&gt;我們考慮的所有四種雜湊算法都返回 64 位元雜湊。 以下指標用於評估感知雜湊函數的質量：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.twblogs.net/a/5b7d17972b71770a43ddde64&quot;&gt;Earth Mover’s Distance（EMD)&lt;/a&gt;是對區域內兩個概率分佈之間的距離的度量。 EMD 基於將一種分配轉換為另一種分配所必須支付的最低成本[9]。需要更大的 EMD 值。&lt;/p&gt;
+
+&lt;p&gt;Intersection-Over-Union：Intersection-Over-Union（IoU）是一種評估指標，用於測量特定數據集上對象檢測器的準確性。希望 IoU 值較小。&lt;/p&gt;
+
+&lt;p&gt;閾值：閾值是規格值，如果未超過標準化漢明距離（NHD），則圖像將被拒絕。因此，如果 NHD 大於閾值，則相異性會超過所需值，並且圖像會在市場上被接受。要選擇最佳閾值，請專注於圖3。當負向案例數值首次與正向案例交叉時，將相應的縮放距離值將作為閾值。&lt;/p&gt;
+
+&lt;p&gt;圖3分別顯示了 phash、dhash、平均雜湊和小波雜湊的圖形比較。在此，X 軸表示在 0 到 1 之間縮放的漢明碼距離，而 Y 軸表示圖像出現正向或負向情況的概率。我們希望使用感知雜湊算法，該算法在正向分佈和負向分佈之間提供最小的重疊。可以使用 IOU 度量標準來計算。我們更希望在正負向分佈之間具有最高 EMD 的算法。&lt;/p&gt;
+
+&lt;p&gt;從表2中可以看出，所有四種雜湊算法在度量標準上都給出了可比較的值。平均雜湊和 Dhash 具有較高的 EMD 值，平均雜湊具有最小的 IoU 值。平均雜湊的閾值為0.304。這意味著，如果新圖像的平均雜湊值與市場上現有圖像的平均雜湊值相似的位元率超過 30.4％，則新圖像將被網路批准並添加到市場中。&lt;/p&gt;
+
+&lt;p&gt;雜湊平均時間的比較如下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;PHASH: 33.97 ms&lt;/li&gt;
+  &lt;li&gt;DHASH: 29.93 ms&lt;/li&gt;
+  &lt;li&gt;平均雜湊 AVG HASH: 29.81 ms&lt;/li&gt;
+  &lt;li&gt;WHASH: 60.99 ms&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;驗證新圖像所需的時間與在市場上傳的圖像數量成正比。換句話說，新圖像驗證的時間複雜度是呈線性的。&lt;/p&gt;
+
+&lt;h2 id=&quot;第五章節---結論&quot;&gt;第五章節 - 結論&lt;/h2&gt;
+
+&lt;p&gt;我們得出的結論是，針對線上正版圖片市場且基於區塊鏈的解決方案比傳統市場具有許多優勢，例如高安全性、永久性交易記錄、自定義許可證、圖像的自定義銷售價格，更高的貢獻者收入以及允許使用 IPFS 的幫助。由於缺乏中央權威，因此市場不受審查和干擾。經過全面評估，我們得出結論，感知雜湊是一種有效且高效的版權侵權檢測工具。區塊鏈交易僅包含用於檢索圖像的 IPFS 雜湊。通過預先選擇加密方案對智能合約中的內容進行加密，然後將數據傳輸到 IPFS，可以增強訊息安全性。智能合約僅將解密金鑰發布給適當的買方。此外，我們的實現是具擴展性。因此，本文舉例說明了一種經過驗證的技術的新穎用例，可幫助應對照片世界中根深蒂固的惡意行為。&lt;/p&gt;
+
+&lt;h2 id=&quot;第六章節---限制和未來展望&quot;&gt;第六章節 - 限制和未來展望&lt;/h2&gt;
+
+&lt;p&gt;我們的系統可以在合理範圍內檢測到在外觀上與原始圖像相似的假圖像。儘管感知雜湊在檢測許多轉換中非常有效，但是在某些情況下，如表1中 90 度旋轉的 barbara 圖像所示，雜湊算法無法識別欺詐圖像，總結來說，感知雜湊在準確性和時間複雜度上提供一個很好的運作。&lt;/p&gt;
+
+&lt;p&gt;我們打算將來進行以下任務：
+為了解決諸如圖2和表1所述的漏洞，我們需要研究和採用比感知雜湊（如果有）更健壯和高效的電腦視覺技術。 
+將此分散式應用程序（DApp）轉變為成熟的分佈式自治組織（DAO），該組織還可以提供索賠協助，對索賠進行分散式投票，獎勵管理以及針對侵犯版權的報酬。&lt;/p&gt;
+
+&lt;h2 id=&quot;參考文獻&quot;&gt;參考文獻&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;G. Wood, “Ethereum: A secure decentralised generalised transaction ledger”, Ethereum Project Yellow Paper, 2014.&lt;/li&gt;
+  &lt;li&gt;S. Nakamoto, Bitcoin: A peer-to-peer electronic cash system, White paper, 2008.&lt;/li&gt;
+  &lt;li&gt;Nick Szabo, The idea of smart contracts, 1997.&lt;/li&gt;
+  &lt;li&gt;V Buterin, A next-generation smart contract and decentralized application platform, White Paper, 2014.&lt;/li&gt;
+  &lt;li&gt;Juan Benet, IPFS -Content Addressed Versioned P2P File System (DRAFT 3), 2017, [online] Available: https://github.com/ipfs/papers.&lt;/li&gt;
+  &lt;li&gt;C. Zaunerm, Implementation and benchmarking of perceptual image hash functions, 2010.&lt;/li&gt;
+  &lt;li&gt;P. Arbelaez, M. Maire, C. Fowlkes, J. Malik, “Contour Detection and Hierarchical Image Segmentation”, IEEE TPAMI, vol. 33, no. 5, pp. 898-916, May 2011.&lt;/li&gt;
+  &lt;li&gt;V. Monga, B. L. Evans, “Perceptual image hashing via feature points: performance evaluation and tradeoffs”, Image Processing IEEE Transactions on, vol. 15, no. 11, pp. 34523465, 2006.&lt;/li&gt;
+  &lt;li&gt;Y. R Ubner, C. Tomasi, L. J. Andguibas, “The earth movers distance as a metric for image retrieval”, Int. J. Comput. Vision 40 99121, 2000.&lt;/li&gt;
+  &lt;li&gt;Solidity, 2015.&lt;/li&gt;
+  &lt;li&gt;V. Buterin, On public and private blockchains, 2015, [online] Available: https://blog.ethereum.org/2015/08/07/on-public-and-privateblockchains.&lt;/li&gt;
+  &lt;li&gt;V. Morabito, “Smart contracts and licensing”, Business Innovation Through Blockchain, pp. 101-124, 2017.&lt;/li&gt;
+  &lt;li&gt;T. Chen, X. Li, X. Luo, X. Zhang, “Under-optimized smart contracts devour your money”, 2017 IEEE 24th International Conference on Software Analysis Evolution and Reengineering (SANER), pp. 442-446, 2017.&lt;/li&gt;
+  &lt;li&gt;A. Bogner, M. Chanson, A. Meeuw, “A decentralised sharing app running a smart contract on the ethereum blockchain”, Proceedings of the 6th International Conference on the Internet of Things, pp. 177-178, 2016.&lt;/li&gt;
+  &lt;li&gt;L. Luu, D.-H. Chu, H. Olickel, P. Saxena, A. Hobor, “Making smart contracts smarter”, Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security CCS ’16, pp. 254-269, 2016.&lt;/li&gt;
+  &lt;li&gt;K. Delmolino, M. Arnett, A. Kosba, A. Miller, E. Shi, “Step by step towards creating a safe smart contract: Lessons and insights from a cryptocurrency lab”, International Conference on Financial Cryptography and Data Security, pp. 79-94, 2016.&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">本篇文章翻譯自 Decentralised Image Sharing and Copyright Protection using Blockchain and Perceptual Hashes，媒體區塊鏈的範疇越來越發人深省，究竟該如何透過去中心化的機制來達到版權保護呢？一起來閱讀本篇文章吧！</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/panda-28.png" /></entry><entry><title type="html">Bitcoin中Base58Check編碼</title><link href="http://localhost:4000/news/2019/11/19/Bitcoin%E4%B8%ADBase58Check%E7%B7%A8%E7%A2%BC/" rel="alternate" type="text/html" title="Bitcoin中Base58Check編碼" /><published>2019-11-19T00:00:00+08:00</published><updated>2019-11-19T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/19/Bitcoin%E4%B8%ADBase58Check%E7%B7%A8%E7%A2%BC</id><content type="html" xml:base="http://localhost:4000/news/2019/11/19/Bitcoin%E4%B8%ADBase58Check%E7%B7%A8%E7%A2%BC/">&lt;p&gt;&lt;a href=&quot;http://gavinzhang.work/blockchain/比特币/Bitcoin中Base58Check.html&quot;&gt;[原文]&lt;/a&gt;Base58二進位制到文字編碼被稱為 Base58Check，用於編碼比特幣地址。&lt;/p&gt;
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;更一般地說，Base58Check 編碼用於將比特幣中的位元組陣列編碼為人類可分類的字元串。&lt;/p&gt;
+
+&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;最初的比特幣客戶端原始碼解釋了 base58 編碼背後的原因：&lt;/p&gt;
+
+&lt;p&gt;base58.h：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// 為什麼 base-58 而不是標準的 base-64 編碼？
+// - 不希望 0OIl 字元在某些字型和字型中看起來相同
+//可以用來建立視覺上相同的賬號。
+// - 具有非字母數字字元的字元串並不像帳號那麼容易被接受。
+// - 如果沒有標點符號，電子郵件通常不會換行。
+// - 如果全部是字母數字，Doubleclicking 會將整個數字選為一個單詞。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;base58check的功能&quot;&gt;Base58Check的功能&lt;/h2&gt;
+
+&lt;p&gt;Base58Check 具有以下功能：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;一個任意大小的 payload（ &lt;strong&gt;這個 payload 其實就是公鑰的 HASH160 的雙次 hash 值&lt;/strong&gt; ）。&lt;/li&gt;
+  &lt;li&gt;由容易區分的大寫和小寫字母組成的一組 58 個字母數字符號（ &lt;code class=&quot;highlighter-rouge&quot;&gt;0OIl&lt;/code&gt; 不使用）( &lt;strong&gt;主要的原因還是因為可能會產生歧義&lt;/strong&gt; )&lt;/li&gt;
+  &lt;li&gt;一個位元組的 version/application 資訊。對於這個位元組比特幣地址使用 0x00（未來的可能使用 0x05 ）。&lt;/li&gt;
+  &lt;li&gt;四個位元組（32 位）基於 SHA256 的錯誤校驗碼。此校驗碼可用於自動檢測並可能更正印刷錯誤。&lt;/li&gt;
+  &lt;li&gt;保留資料中前導零的額外步驟。（這裡應該更深入地進行分析才是，但是現在真不太明白這裡面的意思。）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;建立一個-base58check-字元串&quot;&gt;建立一個 Base58Check 字元串&lt;/h2&gt;
+
+&lt;p&gt;Base58Check 字元串是從 version/application 位元組和 payload 建立的，如下所示。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;獲取 version 位元組和 payload 位元組，並將它們連線在一起（按位元組）。&lt;/li&gt;
+  &lt;li&gt;取 SHA256 的前四個位元組（ SHA256 （步驟 1 的結果））（ &lt;strong&gt;也應該是前面提到的那四個位元組的事情&lt;/strong&gt; ）&lt;/li&gt;
+  &lt;li&gt;將步驟 1 的結果和步驟 2 的結果連在一起（按位元組順序）。&lt;/li&gt;
+  &lt;li&gt;處理步驟3的結果 - 一系列位元組 -  &lt;strong&gt;作為單個大端序號&lt;/strong&gt; ，使用正常的數學步驟（ bignumber division ）和下面描述的 base-58 字母表轉換為 base-58 。結果應該被標準化為沒有任何前導的 base-58 零（字元 &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt; ）。( &lt;strong&gt;這裡注意前導 0 對應的 Base58Check 是1&lt;/strong&gt; )&lt;/li&gt;
+  &lt;li&gt;在 base58 中值為零的前導字元&lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;被保留用於表示整個前導零位元組，就像它處於前導位置時一樣，沒有值作為 base-58 符號。必要時可以有一個或多個前導 &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt; 來表示一個或多個前導零位元組。計算第3步結果的前導零位元組數（對於舊的比特幣地址，至少有一個用於版本/應用程式位元組;對於新地址，將永遠不會有）。每個前導零位元組在最終結果中應由其自己的字元 &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt; 表示。&lt;/li&gt;
+  &lt;li&gt;將步驟5中的1與步驟4 的結果連線起來。這是 Base58Check 的結果。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;在描述比特幣地址&lt;a href=&quot;https://en.bitcoin.it/wiki/Technical_background_of_version_1_Bitcoin_addresses#How_to_create_Bitcoin_Address&quot;&gt;技術背景&lt;/a&gt;的頁面上提供了一個更詳細的例子。&lt;/p&gt;
+
+&lt;h2 id=&quot;編碼比特幣地址&quot;&gt;編碼比特幣地址&lt;/h2&gt;
+
+&lt;p&gt;比特幣地址是使用以下任一項的雜湊的 Base58Check 編碼實現的：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Pay-to-script-hash（p2sh）：有效載荷是：其中 redeemScript 是錢包知道如何消費的指令碼; 版本（這些地址以數字&lt;code class=&quot;highlighter-rouge&quot;&gt;3&lt;/code&gt;開頭） RIPEMD160(SHA256(redeemScript))0x05&lt;/li&gt;
+  &lt;li&gt;支付到PUBKEY雜湊（ p2pkh ）：有效載荷是其中 ECDSA_publicKey 是錢包知道的私有金鑰的公共金鑰; 版本（這些地址以數字&lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;開頭）RIPEMD160(SHA256(ECDSA_publicKey))0x00&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在這兩種情況下得到的雜湊總是恰好為 20 個位元組。這些是大端（最重要的位元組在前）。（注意那些限制前導 0x00 位元組的數字編碼實現，或者預先增加額外的 0x00 位元組來表示符號 - 你的程式碼必須正確處理這些情況，否則你可能會生成可以傳送到但看不到的有效地址 -導致硬幣的永久損失。）&lt;/p&gt;
+
+&lt;h2 id=&quot;編碼一個私鑰&quot;&gt;編碼一個私鑰&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Base58Check 編碼也用於編碼錢包匯入格式中的&lt;a href=&quot;https://en.bitcoin.it/wiki/Private_key&quot;&gt;ECDSA 私鑰&lt;/a&gt;&lt;/strong&gt; 。除了 0x80 用於 version/application 位元組，並且有效載荷是 32 位元組而不是 20 （比特幣中的私鑰是單個 32 位元組無符號的大端整數）之外，它與比特幣地址完全相同。對於與未壓縮的公鑰相關的私鑰，這種編碼總是會產生一個以 &lt;code class=&quot;highlighter-rouge&quot;&gt;5&lt;/code&gt; 開頭的 51 個字元的字元串，或者更具體地說&lt;code class=&quot;highlighter-rouge&quot;&gt;5H&lt;/code&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;5J&lt;/code&gt;或&lt;code class=&quot;highlighter-rouge&quot;&gt;5K&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;base58-符號圖表&quot;&gt;Base58 符號圖表&lt;/h2&gt;
+
+&lt;p&gt;比特幣中使用的 Base58 符號圖特定於比特幣項目，並不打算與比特幣之外使用的任何其他 Base58 實現（排除的字元為：&lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;O&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;I&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;l&lt;/code&gt;）相同。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;值&lt;/th&gt;
+      &lt;th&gt;字元&lt;/th&gt;
+      &lt;th&gt;值&lt;/th&gt;
+      &lt;th&gt;字元&lt;/th&gt;
+      &lt;th&gt;值&lt;/th&gt;
+      &lt;th&gt;字元&lt;/th&gt;
+      &lt;th&gt;值&lt;/th&gt;
+      &lt;th&gt;字元&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;8&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;8&lt;/td&gt;
+      &lt;td&gt;9&lt;/td&gt;
+      &lt;td&gt;9&lt;/td&gt;
+      &lt;td&gt;A&lt;/td&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;B&lt;/td&gt;
+      &lt;td&gt;11&lt;/td&gt;
+      &lt;td&gt;C&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;12&lt;/td&gt;
+      &lt;td&gt;D&lt;/td&gt;
+      &lt;td&gt;13&lt;/td&gt;
+      &lt;td&gt;E&lt;/td&gt;
+      &lt;td&gt;14&lt;/td&gt;
+      &lt;td&gt;F&lt;/td&gt;
+      &lt;td&gt;15&lt;/td&gt;
+      &lt;td&gt;G&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;16&lt;/td&gt;
+      &lt;td&gt;H&lt;/td&gt;
+      &lt;td&gt;17&lt;/td&gt;
+      &lt;td&gt;J&lt;/td&gt;
+      &lt;td&gt;18&lt;/td&gt;
+      &lt;td&gt;K&lt;/td&gt;
+      &lt;td&gt;19&lt;/td&gt;
+      &lt;td&gt;L&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;20&lt;/td&gt;
+      &lt;td&gt;M&lt;/td&gt;
+      &lt;td&gt;21&lt;/td&gt;
+      &lt;td&gt;N&lt;/td&gt;
+      &lt;td&gt;22&lt;/td&gt;
+      &lt;td&gt;P&lt;/td&gt;
+      &lt;td&gt;23&lt;/td&gt;
+      &lt;td&gt;Q&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;24&lt;/td&gt;
+      &lt;td&gt;R&lt;/td&gt;
+      &lt;td&gt;25&lt;/td&gt;
+      &lt;td&gt;S&lt;/td&gt;
+      &lt;td&gt;26&lt;/td&gt;
+      &lt;td&gt;T&lt;/td&gt;
+      &lt;td&gt;27&lt;/td&gt;
+      &lt;td&gt;U&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;28&lt;/td&gt;
+      &lt;td&gt;V&lt;/td&gt;
+      &lt;td&gt;29&lt;/td&gt;
+      &lt;td&gt;W&lt;/td&gt;
+      &lt;td&gt;30&lt;/td&gt;
+      &lt;td&gt;X&lt;/td&gt;
+      &lt;td&gt;31&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;32&lt;/td&gt;
+      &lt;td&gt;Z&lt;/td&gt;
+      &lt;td&gt;33&lt;/td&gt;
+      &lt;td&gt;a&lt;/td&gt;
+      &lt;td&gt;34&lt;/td&gt;
+      &lt;td&gt;b&lt;/td&gt;
+      &lt;td&gt;35&lt;/td&gt;
+      &lt;td&gt;c&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;36&lt;/td&gt;
+      &lt;td&gt;d&lt;/td&gt;
+      &lt;td&gt;37&lt;/td&gt;
+      &lt;td&gt;e&lt;/td&gt;
+      &lt;td&gt;38&lt;/td&gt;
+      &lt;td&gt;f&lt;/td&gt;
+      &lt;td&gt;39&lt;/td&gt;
+      &lt;td&gt;g&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;40&lt;/td&gt;
+      &lt;td&gt;h&lt;/td&gt;
+      &lt;td&gt;41&lt;/td&gt;
+      &lt;td&gt;i&lt;/td&gt;
+      &lt;td&gt;42&lt;/td&gt;
+      &lt;td&gt;j&lt;/td&gt;
+      &lt;td&gt;43&lt;/td&gt;
+      &lt;td&gt;k&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;44&lt;/td&gt;
+      &lt;td&gt;m&lt;/td&gt;
+      &lt;td&gt;45&lt;/td&gt;
+      &lt;td&gt;n&lt;/td&gt;
+      &lt;td&gt;46&lt;/td&gt;
+      &lt;td&gt;o&lt;/td&gt;
+      &lt;td&gt;47&lt;/td&gt;
+      &lt;td&gt;p&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;48&lt;/td&gt;
+      &lt;td&gt;q&lt;/td&gt;
+      &lt;td&gt;49&lt;/td&gt;
+      &lt;td&gt;r&lt;/td&gt;
+      &lt;td&gt;50&lt;/td&gt;
+      &lt;td&gt;s&lt;/td&gt;
+      &lt;td&gt;51&lt;/td&gt;
+      &lt;td&gt;t&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;52&lt;/td&gt;
+      &lt;td&gt;u&lt;/td&gt;
+      &lt;td&gt;53&lt;/td&gt;
+      &lt;td&gt;v&lt;/td&gt;
+      &lt;td&gt;54&lt;/td&gt;
+      &lt;td&gt;w&lt;/td&gt;
+      &lt;td&gt;55&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;56&lt;/td&gt;
+      &lt;td&gt;y&lt;/td&gt;
+      &lt;td&gt;57&lt;/td&gt;
+      &lt;td&gt;z&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;編碼 address_byte_string 的演算法（由1-byte_version + hash_or_other_data + 4-byte_check_code組成）是&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;code_string = &quot;123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz&quot;
+x = convert_bytes_to_big_integer(hash_result)
+
+output_string = &quot;&quot;
+
+while(x &amp;gt; 0)
+{
+(x, remainder) = divide(x, 58)
+output_string.append(code_string[remainder])
+}
+
+repeat(number_of_leading_zero_bytes_in_hash)
+{
+output_string.append(code_string[0]);
+}
+
+output_string.reverse();
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;版本位元組&quot;&gt;版本位元組&lt;/h2&gt;
+
+&lt;p&gt;以下是一些常見的版本位元組：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;小數版本&lt;/th&gt;
+      &lt;th&gt;領導的象徵&lt;/th&gt;
+      &lt;th&gt;使用&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Bitcoin pubkey hash&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Bitcoin script hash&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;21&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;Bitcoin (compact) public key (proposed)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;52&lt;/td&gt;
+      &lt;td&gt;M or N&lt;/td&gt;
+      &lt;td&gt;Namecoin pubkey hash&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;128&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;Private key&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;111&lt;/td&gt;
+      &lt;td&gt;m or n&lt;/td&gt;
+      &lt;td&gt;Bitcoin testnet pubkey hash&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;196&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Bitcoin testnet script hash&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.bitcoin.it/wiki/List_of_address_prefixes&quot;&gt;地址字首列表&lt;/a&gt;是一個完整的列表。&lt;/p&gt;
+
+&lt;h2 id=&quot;也可以看看&quot;&gt;也可以看看&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://lenschulwitz.com/base58&quot;&gt;線上 Base58 解碼器，編碼器和驗證器&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;原始碼&quot;&gt;原始碼&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/bitcoin/bitcoin/blob/master/src/base58.cpp&quot;&gt;“Satoshi”C ++ codebase&lt;/a&gt;（解碼和編碼，不需要外部庫）&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/luke-jr/libbase58&quot;&gt;libbase58 C 程式碼&lt;/a&gt;（解碼和編碼，不需要外部庫）&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://lenschulwitz.com/b58/base58perl.txt&quot;&gt;Base58 在 Perl 中解碼，編碼和驗證&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;參考和引用&quot;&gt;參考和引用&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.bitcoin.it/wiki/Base58Check_encoding&quot;&gt;Base58Check encoding&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;總結&quot;&gt;總結&lt;/h2&gt;
+
+&lt;p&gt;關於比特幣地址知識，在精通比特幣中有詳細地介紹，這裡我們不做更多的介紹，這篇文章是我翻譯的結果。&lt;/p&gt;
+
+&lt;p&gt;在之前我們分析過橢圓曲線的知識，對於確定性錢包的知識我們也做了相關地介紹，還有就是分層確定性錢包的知識。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;另外 Base58Check 還有一個極大的好處就是可以校驗地址是不是正確的，因為 Base58 生成的時候是加入了校驗碼&lt;/strong&gt; 。我覺得比特幣團隊做的真的是很棒不是嗎？詳情可以參考：&lt;a href=&quot;http://8btc.com/thread-31201-1-1.html&quot;&gt;為什麼以太坊地址中沒有校驗值？&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;對於比特幣地址也要特別注意一下，地址類型也就是 version/appication 欄位其實是自己加入的，和 ecdsa 本身並沒有任何關係。校驗碼也是自己加上去的而已。我們可以看一下下面的圖片.&lt;/strong&gt;&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;600&quot; src=&quot;/img/139.png&quot; /&gt;&lt;/div&gt;
+
+&lt;p&gt;有一段時間我在分析 java 的 ECKey 的程式碼發現 java 底層的橢圓曲線演算法的實現，這裡我就不做更多的說明了。 &lt;strong&gt;關鍵是我們如何實現分層確定性錢包，這個很簡單也很複雜，其實就是找私鑰 &lt;script type=&quot;math/tex&quot;&gt;G&lt;/script&gt; ，至於這個 &lt;script type=&quot;math/tex&quot;&gt;G&lt;/script&gt; 怎麼找，我們可以檢視精通比特幣裡面的說明，這裡面只是提到了 HMAC-SHA512。看來這裡面隱藏了很多的細節因素，我們有時間需要研究一下，HMAC-SHA512 的知識了。&lt;/strong&gt;&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">[原文]Base58二進位制到文字編碼被稱為 Base58Check，用於編碼比特幣地址。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/138.png" /></entry><entry><title type="html">什麼是Secp256k1</title><link href="http://localhost:4000/news/2019/11/18/%E4%BB%80%E9%BA%BC%E6%98%AFsecp256k1/" rel="alternate" type="text/html" title="什麼是Secp256k1" /><published>2019-11-18T00:00:00+08:00</published><updated>2019-11-18T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/18/%E4%BB%80%E9%BA%BC%E6%98%AFsecp256k1</id><content type="html" xml:base="http://localhost:4000/news/2019/11/18/%E4%BB%80%E9%BA%BC%E6%98%AFsecp256k1/">&lt;p&gt;&lt;a href=&quot;http://gavinzhang.work/blockchain/比特币/什么是Secp256k1&quot;&gt;[原文]&lt;/a&gt;&lt;strong&gt;secp256k1 是指比特幣中使用的 ECDSA 曲線的參數&lt;/strong&gt; ，並且在高效密碼學標準（SEC）（Certicom Research，&lt;a href=&quot;http://www.secg.org/sec2-v2.pdf&quot;&gt;文件&lt;/a&gt;）中進行了定義。&lt;/p&gt;
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;在比特幣開始流行之前，secp256k1 幾乎從未使用過，但由於其幾個不錯的屬性，它現在越來越受歡迎。大多數常用曲線具有隨機結構，但 secp256k1 是以特殊的非隨機方式構建的，可以實現特別高效的計算。 &lt;strong&gt;因此，如果實施得到充分優化，它通常比其他曲線快 30％ 以上&lt;/strong&gt; 。 &lt;strong&gt;另外，與流行的NIST曲線不同，secp256k1 的常量是以可預測的方式選擇的，這大大降低了曲線建立者在曲線中插入任何後門的可能性。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;下面看一下這裡面的函數圖：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/136.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Secp256k1 是 secp256k1 橢圓曲線&lt;script type=&quot;math/tex&quot;&gt;y^2 = x^3 + 7&lt;/script&gt;在實數上的圖形。請注意，因為 secp256k1 實際上是在欄位&lt;script type=&quot;math/tex&quot;&gt;Zp&lt;/script&gt;上定義的，所以它的圖形實際上看起來像是隨機分散的點，而不是像圖中這樣是連續的點。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;技術細節&quot;&gt;技術細節&lt;/h2&gt;
+
+&lt;p&gt;從標準摘錄：&lt;/p&gt;
+
+&lt;p&gt;與 Koblitz 曲線 secp256k1 相關聯的&lt;script type=&quot;math/tex&quot;&gt;Fp&lt;/script&gt;上的橢圓曲線域參數由單元&lt;script type=&quot;math/tex&quot;&gt;T=（p，a，b，G，n，h）&lt;/script&gt;指定，其中有限域&lt;script type=&quot;math/tex&quot;&gt;Fp&lt;/script&gt;由下式定義：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;p = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE FFFFFC2F
+= 2256 - 232 - 29 - 28 - 27 - 26 - 24 - 1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;Fp&lt;/script&gt;上的曲線E：&lt;script type=&quot;math/tex&quot;&gt;y^2 = x^3 + ax + b&lt;/script&gt;由下式定義：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;a = 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+b = 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000007
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;壓縮形式的基點&lt;script type=&quot;math/tex&quot;&gt;G&lt;/script&gt;是：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;G = 02 79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;而在未壓縮的形式是：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;G = 04 79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798 483ADA77 26A3C465 5DA4FBFC 0E1108A8 FD17B448 A6855419 9C47D08F FB10D4B8
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;最後，&lt;script type=&quot;math/tex&quot;&gt;G&lt;/script&gt;的迴圈因子&lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;(就是指&lt;script type=&quot;math/tex&quot;&gt;nG=G&lt;/script&gt;)和輔因子&lt;script type=&quot;math/tex&quot;&gt;h&lt;/script&gt;如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;n = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE BAAEDCE6 AF48A03B BFD25E8C D0364141
+h = 01
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;屬性&quot;&gt;屬性&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;secp256k1 具有特徵&lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt;，它的素數域定義為 ℤp。常用的一些其他曲線具有特徵2，並且在二進位制伽羅瓦(Galois)域&lt;script type=&quot;math/tex&quot;&gt;GF(2n)&lt;/script&gt;上定義，但 secp256k1 不是其中之一。&lt;/li&gt;
+  &lt;li&gt;因為一個常數為零，曲線方程中 &lt;code class=&quot;highlighter-rouge&quot;&gt;ax&lt;/code&gt; 項始終為零，因此曲線方程變為&lt;script type=&quot;math/tex&quot;&gt;y^2 = x^3 + 7&lt;/script&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;也可以看看&quot;&gt;也可以看看&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bitcoin.stackexchange.com/questions/21907/what-does-the-curve-used-in-bitcoin-secp256k1-look-like&quot;&gt;secp256k1是什麼&lt;/a&gt;（ Pieter Wuille 的比特幣堆棧交換答案）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;原文&quot;&gt;原文&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.bitcoin.it/wiki/Secp256k1&quot;&gt;Secp256k1&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">[原文]secp256k1 是指比特幣中使用的 ECDSA 曲線的參數 ，並且在高效密碼學標準（SEC）（Certicom Research，文件）中進行了定義。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/137.png" /></entry><entry><title type="html">如何創建你的Pull Request(PR)給密碼龐克台灣</title><link href="http://localhost:4000/news/2019/11/18/%E5%A6%82%E4%BD%95%E5%89%B5%E5%BB%BA%E4%BD%A0%E7%9A%84Pull-Request-%E7%B5%A6%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E7%81%A3/" rel="alternate" type="text/html" title="如何創建你的Pull Request(PR)給密碼龐克台灣" /><published>2019-11-18T00:00:00+08:00</published><updated>2019-11-18T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/18/%E5%A6%82%E4%BD%95%E5%89%B5%E5%BB%BA%E4%BD%A0%E7%9A%84Pull%20Request%20%E7%B5%A6%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E7%81%A3</id><content type="html" xml:base="http://localhost:4000/news/2019/11/18/%E5%A6%82%E4%BD%95%E5%89%B5%E5%BB%BA%E4%BD%A0%E7%9A%84Pull-Request-%E7%B5%A6%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E7%81%A3/">&lt;blockquote&gt;
+  &lt;p&gt;PR 即為 Pull Request，在 Github 上必須先複製（Fork）一份原作的專案到你自己的 GitHub 帳號底下。
+那自己的 Fork 專案想怎麼玩就怎麼玩，之後你就可以推上自己的 Fork 文件上，發個通知給 Cypherpunks-core，讓團隊人員來審視這次的 PR 是否 ok，若是 ok 則會將您發起的 PR 合併進團隊文章裡，若不 ok 將會在底下描述為何沒通過的理由。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://github.com/cypherpunks-core/cypherpunks-core.github.io&quot;&gt;密碼龐克台灣 Github&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;750&quot; src=&quot;/img/panda-23.png&quot; /&gt;&lt;/div&gt;
+&lt;center&gt;&lt;strong&gt;圖1 密碼龐克台灣官網&lt;/strong&gt;&lt;/center&gt;
+
+&lt;h2 id=&quot;step1---點擊-fork-將專案複製至自己的遠端儲存庫&quot;&gt;Step1 - 點擊 Fork 將專案複製至自己的遠端儲存庫&lt;/h2&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;750&quot; src=&quot;/img/panda-24.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖2 點擊畫面右上角之 Fork &lt;/strong&gt;&lt;/center&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;750&quot; src=&quot;/img/panda-25.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖3 即可在自己的遠端資源庫中看到 cypherpunks-core 的專案 &lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;以我為例 就會看到 panda850819 forked from cypherpunks-core …&lt;/p&gt;
+
+&lt;h2 id=&quot;step2---clone-專案下載專案&quot;&gt;Step2 - Clone 專案/下載專案&lt;/h2&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;750&quot; src=&quot;/img/panda-26.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖4 在自己的專案中按下 Clone 到自己的資料夾 &lt;/strong&gt;&lt;/center&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;可以透過 Download ZIP 至你想要的位置解壓縮它&lt;/li&gt;
+  &lt;li&gt;可以透過終端機指令，請先開啟終端機並且輸入底下指令&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cd desktop &amp;amp;&amp;amp; mkdir cypherpunks-core &amp;amp;&amp;amp; cd cypherpunks-core
+
+// 先將位置移動至桌面並且創立 cypherpunks-core 資料夾
+
+$ git clone https://github.com/{你的github名稱}/cypherpunks-core.github.io.git
+
+// 將專案下載至 cypherpunks-core 資料夾
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;step3---同步-cypherpunks-core-專案&quot;&gt;Step3 - 同步 Cypherpunks-core 專案&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;同步遠端專案&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git remote -v
+
+// origin https://github.com/panda850819/cypherpunks-core.github.io.git (fetch)
+// origin https://github.com/panda850819/cypherpunks-core.github.io.git (push)
+
+$ git remote add upstream https://github.com/cypherpunks-core/cypherpunks-core.github.io.git
+
+$ git remote -v 
+
+// origin	https://github.com/panda850819/cypherpunks-core.github.io.git (fetch)
+// origin	https://github.com/panda850819/cypherpunks-core.github.io.git (push)
+// upstream	https://github.com/cypherpunks-core/cypherpunks-core.github.io.git (fetch)
+// upstream	https://github.com/cypherpunks-core/cypherpunks-core.github.io.git (push)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;同步 fork&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;完成操作後，本地專案就會同步 Cypherpunk-core 專案中的變化!&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git fetch upstream
+
+$ git checkout master 
+
+$ git merge upstream/master
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;step4---提交-pr-至-cypherpunks-core-team&quot;&gt;Step4 - 提交 PR 至 Cypherpunks-Core Team&lt;/h2&gt;
+
+&lt;p&gt;當我們完成修改之後，我們先將修改後的專案推（&lt;code class=&quot;highlighter-rouge&quot;&gt;push&lt;/code&gt;）到自己的專案中，接下來就是將修改的部分告知 Cypherpunks-Core Team，那就要來提交 PR 拉！&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;記得要先將自己 fork 的專案推上去，才能提交 PR 喔！&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;提交 PR&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;750&quot; src=&quot;/img/panda-27.png&quot; /&gt;&lt;/div&gt;
+&lt;center&gt;&lt;strong&gt;圖5 - 提交 PR 至 Cypherpunk-core&lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;然後可以在上面輸入摘要跟主題，接下來就等著團隊給予回覆囉！&lt;/p&gt;
+
+&lt;h2 id=&quot;小結&quot;&gt;小結&lt;/h2&gt;
+&lt;p&gt;透過幾個小小步驟，我們將了解如何 &lt;code class=&quot;highlighter-rouge&quot;&gt;Fork&lt;/code&gt; 專案以及 &lt;code class=&quot;highlighter-rouge&quot;&gt;Clone&lt;/code&gt; 專案，並且繳交自己的 &lt;code class=&quot;highlighter-rouge&quot;&gt;Pull Request&lt;/code&gt; 給 Cypherpunks-Core Team。&lt;/p&gt;
+
+&lt;p&gt;希望大家能一起為這個社群做貢獻，若有任何想要瞭解的也可以至&lt;a href=&quot;https://cypherpunks-core.github.io/&quot;&gt;官方網站&lt;/a&gt;、&lt;a href=&quot;https://www.facebook.com/CypherpunksTW/&quot;&gt;Facebook&lt;/a&gt;觀看我們的文章和我們一起討論，最後 Cypherpunks Taiwan 密碼龐克 為 crypto 文化的聚集地
+主題圍繞在 bitcoin 也是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由，若大家對我們有興趣也請不吝嗇的提交 PR 給我們!&lt;/p&gt;
+
+&lt;h2 id=&quot;參考文獻&quot;&gt;參考文獻&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gitbook.tw/chapters/github/pull-request.html&quot;&gt;為你自己學Git&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.itread01.com/content/1544771540.html?fbclid=IwAR2s4ATwibiiKRS3DYBnNsaNVuQeedOovTKZyGY9iaVqUukTDZppXzGu35w&quot;&gt;git如何同步fork專案&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">PR 即為 Pull Request，在 Github 上必須先複製（Fork）一份原作的專案到你自己的 GitHub 帳號底下。 那自己的 Fork 專案想怎麼玩就怎麼玩，之後你就可以推上自己的 Fork 文件上，發個通知給 Cypherpunks-core，讓團隊人員來審視這次的 PR 是否 ok，若是 ok 則會將您發起的 PR 合併進團隊文章裡，若不 ok 將會在底下描述為何沒通過的理由。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/panda-22.png" /></entry><entry><title type="html">BIP-65 OP_CHECKLOCKTIMEVERIFY</title><link href="http://localhost:4000/news/2019/11/14/BIP-65-OP_CHECKLOCKTIMEVERIFY/" rel="alternate" type="text/html" title="BIP-65 OP_CHECKLOCKTIMEVERIFY" /><published>2019-11-14T00:00:00+08:00</published><updated>2019-11-14T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/14/BIP-65%20OP_CHECKLOCKTIMEVERIFY</id><content type="html" xml:base="http://localhost:4000/news/2019/11/14/BIP-65-OP_CHECKLOCKTIMEVERIFY/">&lt;p&gt;&lt;a href=&quot;http://gavinzhang.work/blockchain/%E6%AF%94%E7%89%B9%E5%B8%81/BIP-65%20OP-CHECKLOCKTIMEVERIFY.html&quot;&gt;原文&lt;/a&gt;:BIP-65 OP_CHECKLOCKTIMEVERIFY    &lt;br /&gt;
 該BIP為比特幣 script 系統描述了一個新的 OPCode （&lt;code class=&quot;highlighter-rouge&quot;&gt;OP_CHECKLOCKTIMEVERIFY&lt;/code&gt;），該 OPCode 允許交易輸出在未來的某個點之前變得不可花費。&lt;/p&gt;
 
 &lt;h2 id=&quot;概要&quot;&gt;概要&lt;/h2&gt;
@@ -269,8 +1147,6 @@ case OP_NOP2:
 
 &lt;center&gt;&lt;strong&gt;圖1 方案示意圖&lt;/strong&gt;&lt;/center&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://ieeexplore-ieee-org.autorpa.lib.nkust.edu.tw/mediastore_new/IEEE/content/media/8376143/8377808/8377886/8377886-fig-1-source-small.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
 &lt;p&gt;就用於版權保護的數位浮水印技術而言，對其強韌性的要求實際上非常高 [1][2][3]。不僅要求在一系列操作或攻擊之後可以檢測並提取數位浮水印，而且還要求提取的數位浮水印應清晰可辨，以確認版權信息。另外，浮水印空間也是一個重要特徵，因為它必須具有足夠的版權信息才能發揮版權保護的作用。對於這兩點，QR Code 圖像可用作數位浮水印圖像[12][13][14][15]。&lt;/p&gt;
 
 &lt;p&gt;首先，QR Code 具有一定的容錯能力。即使 QR Code 圖像上有污點，機器仍可以讀取。通常，QR Code 圖像的污損區域仍可以在 7％-30％ 的範圍內讀取[12] [13]。這可以有效地提高數位浮水印技術的強韌性。其次，QR Code 可儲存更多信息，這對於提高水印空間非常有幫助。最後，大多數電子設備，尤其是智能手機，都可以識別 QR Code 圖像，並且在實際應用中會很方便。&lt;/p&gt;
@@ -484,7 +1360,7 @@ http://localhost:8080/ipfs/QmXik2CN6GsSvxudKxoXdXGLpuAaKiuzkrLDuAg2chc8T2&lt;/p&
   &lt;li&gt;Adrian G. Bors, Ioannis Pitas, “IMAGE WATERMARKING USING DCT DOMAIN CONSTRAINTS”, Proceedings of 3rd IEEE International Conference on Image Processing, 19–19 September 1996.&lt;/li&gt;
   &lt;li&gt;Faisal Alurki, Russell Mersereau, “A ROBUST DIGITAL WATERMARK PROCEDURE FOR STILL IMAGES USING DCT PHASE MODULATION”, 10th European Signal Processing Conference, 4–8 September 2000.&lt;/li&gt;
   &lt;li&gt;Chetna, “Digital Image Watermarking using DCT”, A Monthly Journal of Computer Science and Information Technology, vol. 3, no. 9, pp. 586-591, September 2014.&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">本篇文章翻譯自 Design Scheme of Copyright Management System Based on Digital Watermarking and Blockchain 的內容，數位浮水印概念我們從圖像、影像..等，已經玩了許久當他結合區塊鏈又會產生什麼火花呢？</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/panda-21.jpg" /></entry><entry><title type="html">比特幣粉塵和空塊</title><link href="http://localhost:4000/news/2019/11/11/%E6%AF%94%E7%89%B9%E5%B9%A3%E7%B2%89%E5%A1%B5%E5%92%8C%E7%A9%BA%E5%A1%8A/" rel="alternate" type="text/html" title="比特幣粉塵和空塊" /><published>2019-11-11T00:00:00+08:00</published><updated>2019-11-11T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/11/%E6%AF%94%E7%89%B9%E5%B9%A3%E7%B2%89%E5%A1%B5%E5%92%8C%E7%A9%BA%E5%A1%8A</id><content type="html" xml:base="http://localhost:4000/news/2019/11/11/%E6%AF%94%E7%89%B9%E5%B9%A3%E7%B2%89%E5%A1%B5%E5%92%8C%E7%A9%BA%E5%A1%8A/">&lt;p&gt;&lt;a href=&quot;http://gavinzhang.work/blockchain/比特币/比特币粉尘和空块.html&quot;&gt;原文&lt;/a&gt;：比特币粉尘和空块   &lt;br /&gt;
+&lt;/ol&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">本篇文章翻譯自 Design Scheme of Copyright Management System Based on Digital Watermarking and Blockchain 的內容，數位浮水印概念我們從圖像、影像..等，已經玩了許久當他結合區塊鏈又會產生什麼火花呢？</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/panda-21.png" /></entry><entry><title type="html">比特幣粉塵和空塊</title><link href="http://localhost:4000/news/2019/11/11/%E6%AF%94%E7%89%B9%E5%B9%A3%E7%B2%89%E5%A1%B5%E5%92%8C%E7%A9%BA%E5%A1%8A/" rel="alternate" type="text/html" title="比特幣粉塵和空塊" /><published>2019-11-11T00:00:00+08:00</published><updated>2019-11-11T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/11/%E6%AF%94%E7%89%B9%E5%B9%A3%E7%B2%89%E5%A1%B5%E5%92%8C%E7%A9%BA%E5%A1%8A</id><content type="html" xml:base="http://localhost:4000/news/2019/11/11/%E6%AF%94%E7%89%B9%E5%B9%A3%E7%B2%89%E5%A1%B5%E5%92%8C%E7%A9%BA%E5%A1%8A/">&lt;p&gt;&lt;a href=&quot;http://gavinzhang.work/blockchain/比特币/比特币粉尘和空块.html&quot;&gt;原文&lt;/a&gt;：比特币粉尘和空块   &lt;br /&gt;
 最近看了bitcoinj的TransactionOutput類發現了裡面的關於粉塵的一些功能。網上搜索關於比特幣粉塵的知識，發現了空塊攻擊和粉塵攻擊的一些說明，但是隻是簡單地進行表述而已。也看到了礦工如何利用各種手段進行作弊，這個可能就是區塊鏈所不能監控的了。所以我覺得區塊鏈的問題還是很多的。&lt;/p&gt;
 
 &lt;h2 id=&quot;什麼是空塊攻擊&quot;&gt;什麼是空塊攻擊&lt;/h2&gt;
@@ -695,457 +1571,7 @@ scriptPubKey: OP_HASH160 [20-byte-hash of {[pubkey] OP_CHECKSIG} ] OP_EQUAL
 
 &lt;h2 id=&quot;參考和引用&quot;&gt;參考和引用&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://8btc.com/thread-23440-1-1.html&quot;&gt;http://8btc.com/thread-23440-1-1.html&lt;/a&gt;&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文：比特币地址和脚本 這兩天由於要做多簽名的錢包的問題，所以一直在關注比特幣錢包的知識，當我看到bitcoinj裡面的知識時，發現了ScriptBuilder的類，也發現了bitcoinj文件中有提到怎麼使用多簽名的錢包，這裡就簡單帶過吧，今天的主題還是要說明錢包的地址和 script 的一些知識。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/131.png" /></entry><entry><title type="html">BIP 173 Bech32 address</title><link href="http://localhost:4000/news/2019/11/10/BIP-173-Bech32%E5%9C%B0%E5%9D%80%E6%A0%BC%E5%BC%8F/" rel="alternate" type="text/html" title="BIP 173 Bech32 address" /><published>2019-11-10T00:00:00+08:00</published><updated>2019-11-10T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/10/BIP:%20173%20-%20Bech32%E5%9C%B0%E5%9D%80%E6%A0%BC%E5%BC%8F</id><content type="html" xml:base="http://localhost:4000/news/2019/11/10/BIP-173-Bech32%E5%9C%B0%E5%9D%80%E6%A0%BC%E5%BC%8F/">&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;BIP: 173 Layer: Applications 
-Title: Base32 address format for native v0-16 witness outputs 
-Author: Pieter Wuille &amp;lt;pieter.wuille@gmail.com&amp;gt; Greg Maxwell &amp;lt;greg@xiph.org&amp;gt; 
-Comments-Summary: No comments yet. 
-Comments-URI: https://github.com/bitcoin/bips/wiki/Comments:BIP-0173 
-Status: Final 
-Type: Informational 
-Created: 2017-03-20 
-License: BSD-2-Clause 
-Replaces: 142
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;介紹--introduction&quot;&gt;介紹 ｜ Introduction&lt;/h2&gt;
-
-&lt;h3 id=&quot;摘要--abstract&quot;&gt;摘要 ｜ Abstract&lt;/h3&gt;
-
-&lt;p&gt;本文件提出了checksum和的base32格式” Bech32”，以及使用該格式的native segregated witness output地址的標準。&lt;/p&gt;
-
-&lt;h3 id=&quot;版權--copyright&quot;&gt;版權 ｜ Copyright&lt;/h3&gt;
-
-&lt;p&gt;This BIP is licensed under the 2-clause BSD license.&lt;/p&gt;
-
-&lt;h3 id=&quot;動機--motivation&quot;&gt;動機 ｜ Motivation&lt;/h3&gt;
-
-&lt;p&gt;在其歷史的大部分時間裡，比特幣都依賴於帶有切去頭部的double-SHA256 checksum和的base58地址。 它們是原始軟體的一部分，其範圍已在&lt;a href=&quot;https://github.com/bitcoin/bips/blob/master/bip-0013.mediawiki&quot;&gt;BIP13&lt;/a&gt;擴展為Pay-to-script-hash (&lt;a href=&quot;https://github.com/bitcoin/bips/blob/master/bip-0016.mediawiki&quot;&gt;P2SH&lt;/a&gt;)。 但是，字符集(character set)和checksum演算法都有局限性：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Base58在QR codes中需要大量空間，因為它不能使用字母數字模式。&lt;/li&gt;
-  &lt;li&gt;base58中的混合大小寫不方便可靠地寫下，在手機鍵盤上輸入或電腦朗讀聲音。&lt;/li&gt;
-  &lt;li&gt;double SHA256 checksum很慢，並且沒有錯誤檢測保證。&lt;/li&gt;
-  &lt;li&gt;關於錯誤檢測(error-detecting)程式碼的大多數研究僅適用於作為&lt;a href=&quot;https://en.wikipedia.org/wiki/Prime_power&quot;&gt;prime power&lt;/a&gt;的character set大小，不適用於58。&lt;/li&gt;
-  &lt;li&gt;Base58解碼複雜且相對較慢。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Segregated Witness proposal中包括一類新的輸出（見證程序，witness programs，請參見&lt;a href=&quot;https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki&quot;&gt;BIP141&lt;/a&gt;)），以及兩個輸出實例（” P2WPKH”和” P2WSH”，請參見&lt;a href=&quot;https://github.com/bitcoin/bips/blob/master/bip-0143.mediawiki&quot;&gt;BIP143&lt;/a&gt;）。 通過嵌入P2SH輸出，它們的功能可以間接提供給較老的客戶端，但是為了獲得最佳的效率和安全性，最好直接使用它。 在本文件中，我們為native witness outputs （當前和將來的版本）提出了一種新的地址格式。&lt;/p&gt;
-
-&lt;p&gt;它替代了&lt;a href=&quot;https://github.com/bitcoin/bips/blob/master/bip-0142.mediawiki&quot;&gt;BIP142&lt;/a&gt;，並在前面進行了討論（在&lt;a href=&quot;https://bitcoincore.org/en/meetings/2016/05/20/#error-correcting-codes-for-future-address-types&quot;&gt;這裡&lt;/a&gt;進行了概述）。&lt;/p&gt;
-
-&lt;h3 id=&quot;例子--examples&quot;&gt;例子 ｜ Examples&lt;/h3&gt;
-
-&lt;p&gt;所有的例子使用 public key &lt;code class=&quot;highlighter-rouge&quot;&gt;0279BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798&lt;/code&gt;. P2WSH 的例子使用 key OP_CHECKSIG as script.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Mainnet P2WPKH: &lt;code class=&quot;highlighter-rouge&quot;&gt;bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Testnet P2WPKH: &lt;code class=&quot;highlighter-rouge&quot;&gt;tb1qw508d6qejxtdg4y5r3zarvary0c5xw7kxpjzsx&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Mainnet P2WSH: &lt;code class=&quot;highlighter-rouge&quot;&gt;bc1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3qccfmv3&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Testnet P2WSH: &lt;code class=&quot;highlighter-rouge&quot;&gt;tb1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3q0sl5k7&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;格式--specification&quot;&gt;格式 ｜ Specification&lt;/h2&gt;
-
-&lt;p&gt;我們首先描述的一般checksummed base32 [&lt;a href=&quot;https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-1&quot;&gt;1&lt;/a&gt;]的格式稱為Bech32，然後用它定義 Segregated Witness 地址。&lt;/p&gt;
-
-&lt;h3 id=&quot;bech32&quot;&gt;Bech32&lt;/h3&gt;
-
-&lt;p&gt;Bech32 [&lt;a href=&quot;https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-2&quot;&gt;2&lt;/a&gt;]string的長度最多為90個characters，包括：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;人類可讀的部分(human-readable part, HRP)&lt;/strong&gt;，旨在傳達數據的類型或與讀者相關的任何其他內容。 此部分必須包含1到83個US-ASCII characters，每個character的值都在[33-126]範圍內。 HRP有效性可能會受到特定應用程序的進一步限制。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;分隔符(separator)&lt;/strong&gt;，始終為” 1”。 如果在人類可讀部分內部允許” 1”，則string中的最後一個是分隔符[&lt;a href=&quot;https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-3&quot;&gt;3&lt;/a&gt;]。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;數據部分&lt;/strong&gt;至少長6個characters，並且僅由字母數字characters組成，但不包括” 1”，” b”，” i”和” o” [&lt;a href=&quot;https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-4&quot;&gt;4&lt;/a&gt;]。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt; &lt;/th&gt;
-      &lt;th&gt;0&lt;/th&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;th&gt;4&lt;/th&gt;
-      &lt;th&gt;5&lt;/th&gt;
-      &lt;th&gt;6&lt;/th&gt;
-      &lt;th&gt;7&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;+0&lt;/td&gt;
-      &lt;td&gt;q&lt;/td&gt;
-      &lt;td&gt;p&lt;/td&gt;
-      &lt;td&gt;z&lt;/td&gt;
-      &lt;td&gt;r&lt;/td&gt;
-      &lt;td&gt;y&lt;/td&gt;
-      &lt;td&gt;9&lt;/td&gt;
-      &lt;td&gt;x&lt;/td&gt;
-      &lt;td&gt;8&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;+8&lt;/td&gt;
-      &lt;td&gt;g&lt;/td&gt;
-      &lt;td&gt;f&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;t&lt;/td&gt;
-      &lt;td&gt;v&lt;/td&gt;
-      &lt;td&gt;d&lt;/td&gt;
-      &lt;td&gt;w&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;+16&lt;/td&gt;
-      &lt;td&gt;s&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-      &lt;td&gt;j&lt;/td&gt;
-      &lt;td&gt;n&lt;/td&gt;
-      &lt;td&gt;5&lt;/td&gt;
-      &lt;td&gt;4&lt;/td&gt;
-      &lt;td&gt;k&lt;/td&gt;
-      &lt;td&gt;h&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;+24&lt;/td&gt;
-      &lt;td&gt;c&lt;/td&gt;
-      &lt;td&gt;e&lt;/td&gt;
-      &lt;td&gt;6&lt;/td&gt;
-      &lt;td&gt;m&lt;/td&gt;
-      &lt;td&gt;u&lt;/td&gt;
-      &lt;td&gt;a&lt;/td&gt;
-      &lt;td&gt;7&lt;/td&gt;
-      &lt;td&gt;l&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;strong&gt;Checksum&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;數據部分的最後六個characters構成一個Checksum，不包含任何訊息。 有效strings必須通過下面的Python3程式碼段指定的有效性標準。 當參數為以下參數時，bech32_verify_checksum函數必須返回true：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;hrp: string形式的人類可讀部分&lt;/li&gt;
-  &lt;li&gt;data: 數據部分為整數列表，代表使用上表進行轉換後的characters&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def bech32_polymod(values):
-  GEN = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3]
-  chk = 1
-  for v in values:
-    b = (chk &amp;gt;&amp;gt; 25)
-    chk = (chk &amp;amp; 0x1ffffff) &amp;lt;&amp;lt; 5 + v
-    for i in range(5):
-      chk += GEN[i] if ((b &amp;gt;&amp;gt; i) &amp;amp; 1) else 0
-  return chk
-
-def bech32_hrp_expand(s):
-  return [ord(x) &amp;gt;&amp;gt; 5 for x in s] + [0] + [ord(x) &amp;amp; 31 for x in s]
-
-def bech32_verify_checksum(hrp, data):
-  return bech32_polymod(bech32_hrp_expand(hrp) + data) == 1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;這實現了一個&lt;a href=&quot;https://en.wikipedia.org/wiki/BCH_code&quot;&gt;BCH code&lt;/a&gt;，該程式碼可確保檢測到最多影響4個characters的任何錯誤，並且在109個失敗的機會中無法檢測到更多的錯誤。 有關屬性的更多詳細信息，請參見”Checksum設計”附件。 可讀部分的處理方法是，首先將每個character的US-ASCII值的higher bits輸入checksum，然後是零，然後是lower bits[&lt;a href=&quot;https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-5&quot;&gt;5&lt;/a&gt;]。&lt;/p&gt;
-
-&lt;p&gt;要根據給定的可讀部分和數據部分characters的（非checksum）值構造有效的checksum，可以使用以下程式碼：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def bech32_create_checksum(hrp, data):
-  values = bech32_hrp_expand(hrp) + data
-  polymod = bech32_polymod(values + [0,0,0,0,0,0]) + 1
-  return [(polymod &amp;gt;&amp;gt; 5 * (5 - i)) &amp;amp; 31 for i in range(6)]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;錯誤修正 ｜ Error correction&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;這些BCH程式碼的特性之一是它們可用於錯誤修正。 錯誤修正的一個不幸的副作用是它侵蝕了錯誤檢測：錯誤修正將無效輸入更改為有效輸入，但是如果進行了多個錯誤，則有效輸入可能不是正確輸入。 使用不正確但有效的輸入會導致資金無法挽回流失。 因此，實現方式不應該向用戶暗示在string中可能存在錯誤的位置，而不建議用戶進行更正，而不能進行更正。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;大寫小寫 ｜ Uppercase/lowercase&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;在確定用於checksum目的的character值時，使用小寫形式。&lt;/p&gt;
-
-&lt;p&gt;編碼器務必始終輸出全小寫的Bech32 string。 如果需要編碼結果的大寫版本（例如-為了表示目的或使用QR code），則可以在編碼過程外部執行大寫過程。&lt;/p&gt;
-
-&lt;p&gt;解碼器絕不能接受某些characters為大寫而某些characters為小寫的strings（此類strings稱為大小寫混合的strings）。&lt;/p&gt;
-
-&lt;p&gt;為了便於演示，通常最好使用小寫字母，但在QR code內部應使用大寫字母，因為那些允許使用字母數字模式(&lt;a href=&quot;http://www.thonky.com/qr-code-tutorial/alphanumeric-mode-encoding&quot;&gt;alphanumeric mode&lt;/a&gt;)，比普通&lt;a href=&quot;http://www.thonky.com/qr-code-tutorial/byte-mode-encoding&quot;&gt;byte mode&lt;/a&gt;簡洁45％。&lt;/p&gt;
-
-&lt;h3 id=&quot;segwit-address-format格式&quot;&gt;Segwit address format(格式)&lt;/h3&gt;
-
-&lt;p&gt;A segwit 地址[&lt;a href=&quot;https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-6&quot;&gt;6&lt;/a&gt;] 是以下內容的Bech32編碼：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;對於mainnet人類可讀部分”bc”[&lt;a href=&quot;https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-7&quot;&gt;7&lt;/a&gt;]，以及用於testnet”tb”[&lt;a href=&quot;https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-8&quot;&gt;8&lt;/a&gt;]。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;數據部分的值：&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;1 byte: witness 版本&lt;/li&gt;
-      &lt;li&gt;將2-to-40-byte的witness program（由&lt;a href=&quot;https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki&quot;&gt;BIP141&lt;/a&gt;定義）轉換為base32：
-        &lt;ul&gt;
-          &lt;li&gt;從 witness program 的bit開始，首先是每個byte的最高有效bit。&lt;/li&gt;
-          &lt;li&gt;將這些bit重新排列為5組，並在需要時在末尾加零。&lt;/li&gt;
-          &lt;li&gt;使用上表將這些bit轉換為characters。&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;解碼 ｜ Decoding&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;軟體解釋 segwit 地址:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;MUST驗證人類可讀的部分是”bc”為mainnet和”tb”的用於testnet。&lt;/li&gt;
-  &lt;li&gt;MUST驗證第一個解碼的數據值（witness version）在0到16之間（含0和16）。&lt;/li&gt;
-  &lt;li&gt;將其餘數據轉換為bytes：
-    &lt;ul&gt;
-      &lt;li&gt;將值轉換為5bits，最高有效bit在前。&lt;/li&gt;
-      &lt;li&gt;將這些bits重新排列為8bits的組。 最後任何不完整的組必須為4bits或更少，必須全為零，並被丟棄。&lt;/li&gt;
-      &lt;li&gt;MUST在2到40個組之間，這被解釋為witness program的bytes。&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;解碼器應該對witness program施加已知長度的限制。 例如，BIP141指定如果version byte為0，但是witness  program既不是20bytes也不是32bytes，則script必須失效。&lt;/p&gt;
-
-&lt;p&gt;根據先前的規則，地址的長度始終在14到74個characters之間，其modulo 8的長度不能為0、3或5。版本0的witness地址始終為42或62個characters，但是實現必須允許使用任何版本。&lt;/p&gt;
-
-&lt;p&gt;將地址轉換為scriptPubkey時，實現時應格外小心，其中witness version &lt;em&gt;n&lt;/em&gt; 存儲為 &lt;em&gt;OP_n&lt;/em&gt; 。 OP_0編碼為0x00，但OP_1至OP_16編碼為0x51至0x60（十進制為81至96）。如果將bech32地址轉換為不正確的scriptPubKey，則結果可能是不可花費的或不安全的。&lt;/p&gt;
-
-&lt;h3 id=&quot;兼容性--compatibility&quot;&gt;兼容性 ｜ Compatibility&lt;/h3&gt;
-
-&lt;p&gt;只有新軟體才能使用這些地址，並且僅適用於具有啟用了segregated witness功能的新軟體的接收器。在所有其他情況下，可以使用P2SH或P2PKH地址。&lt;/p&gt;
-
-&lt;h2 id=&quot;解釋--rationale&quot;&gt;解釋 ｜ Rationale&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-1-0&quot;&gt;+&lt;/a&gt;&lt;/strong&gt;  &lt;strong&gt;為什麼要全部使用base32？&lt;/strong&gt; 缺少混合大小寫，使朗讀或放入QR code 更加有效。的確增加了15％的長度，但這與復制貼上地址無關緊要。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-2-0&quot;&gt;+&lt;/a&gt;&lt;/strong&gt;  &lt;strong&gt;為什麼稱其為Bech32？&lt;/strong&gt;  “ Bech”包含characterBCH（使用的錯誤檢測演算法），聽起來有點像” base”。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-3-0&quot;&gt;+&lt;/a&gt;&lt;/strong&gt;  &lt;strong&gt;為什麼在地址中包含分隔符？&lt;/strong&gt; 這樣，人類可讀部分便與數據部分明確分離，避免了與其他共享前綴的人類可讀部分的潛在衝突。這也使我們避免了對人類可讀部分的character set限制。分隔符為1，因為使用非字母數字character會使地址的複制貼上變得複雜（在某些應用程序中沒有雙擊選擇）。因此，選擇了正常character set之外的字母數字character。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-4-0&quot;&gt;+&lt;/a&gt;&lt;/strong&gt;  &lt;strong&gt;為什麼不使用&lt;a href=&quot;http://www.faqs.org/rfcs/rfc3548.html&quot;&gt;RFC3548&lt;/a&gt;或&lt;a href=&quot;https://philzimmermann.com/docs/human-oriented-base-32-encoding.txt&quot;&gt;z-base-32&lt;/a&gt;&lt;a href=&quot;https://hissa.nist.gov/~black/GTLD/&quot;&gt;this&lt;/a&gt;的現有character set？&lt;/strong&gt; 根據此視覺相似性數據選擇character set以最大程度地減少歧義，選擇順序以最小化相差超過1 bit的相似character對（根據同一數據）的數量。選擇Checksum以最大程度地減少少量誤碼的檢測能力，因此在某些錯誤模型下，此選擇可提高其性能。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-5-0&quot;&gt;+&lt;/a&gt;&lt;/strong&gt;  &lt;strong&gt;為什麼首先要處理人類可讀部分的higher bits？&lt;/strong&gt; 這導致實際Checksum的數據為[高] 0 [低] [數據]。這意味著在假設人類可讀部分的錯誤僅會更改低5 bit（例如將字母character更改為另一個character）的情況下，錯誤僅限於[low] [data]部分，該部分最多為89個character，並且因此，所有錯誤檢測屬性（請參閱附件）仍然適用。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-6-0&quot;&gt;+&lt;/a&gt;&lt;/strong&gt;  &lt;strong&gt;為什麼不為所有scriptPubKeys創建通用的地址格式？&lt;/strong&gt; 這將導致現有scriptPubKey類型的地址混亂。此外，如果曾經引入沒有與scriptPubKeys一一對應的地址（例如基於ECDH的地址），則擁有完全通用的舊地址類型將允許使用舊地址格式重新解釋結果的scriptPubKeys，如果將比特幣發送給他們，則會導致資金損失。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-7-0&quot;&gt;+&lt;/a&gt;&lt;/strong&gt;  &lt;strong&gt;為什麼使用” bc”作為人類可讀的部分而不使用” btc”？&lt;/strong&gt;” bc”較短。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_ref-8-0&quot;&gt;+&lt;/a&gt;&lt;/strong&gt;  &lt;strong&gt;為什麼將’tb’用作testnet的人類可讀部分？&lt;/strong&gt; 它被選擇為與mainnet對應的長度相同（以簡化實現對長度的假設），但在視覺上仍然截然不同。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;參考實現--reference-implementations&quot;&gt;參考實現 ｜ Reference implementations&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;參考編碼器和解碼器:
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;https://github.com/sipa/bech32/tree/master/ref/c&quot;&gt;For C&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://github.com/sipa/bech32/tree/master/ref/c++&quot;&gt;For C++&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://github.com/sipa/bech32/tree/master/ref/javascript&quot;&gt;For JavaScript&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://github.com/sipa/bech32/tree/master/ref/go&quot;&gt;For Go&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://github.com/sipa/bech32/tree/master/ref/python&quot;&gt;For Python&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://github.com/sipa/bech32/tree/master/ref/haskell&quot;&gt;For Haskell&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://github.com/sipa/bech32/tree/master/ref/ruby&quot;&gt;For Ruby&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://github.com/sipa/bech32/tree/master/ref/rust&quot;&gt;For Rust&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Fancy decoder that localizes errors:
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;https://github.com/sipa/bech32/tree/master/ecc/javascript&quot;&gt;For JavaScript&lt;/a&gt; (&lt;a href=&quot;http://bitcoin.sipa.be/bech32/demo/demo.html&quot;&gt;demo website&lt;/a&gt;)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;已註冊的人類可讀前綴--registered-human-readable-prefixes&quot;&gt;已註冊的人類可讀前綴 ｜ Registered Human-readable Prefixes&lt;/h2&gt;
-
-&lt;p&gt;SatoshiLabs維護其他密碼貨幣的已註冊的人類可讀部件的完整列表：&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/satoshilabs/slips/blob/master/slip-0173.md&quot;&gt;SLIP-0173 : Registered human-readable parts for BIP-0173&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;附件--appendices&quot;&gt;附件 ｜ Appendices&lt;/h2&gt;
-
-&lt;h3 id=&quot;測試向量--test-vectors&quot;&gt;測試向量 ｜ Test vectors&lt;/h3&gt;
-
-&lt;p&gt;以下strings是有效的 Bech32：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;A12UEL5L&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;a12uel5l&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;an83characterlonghumanreadablepartthatcontainsthenumber1andtheexcludedcharactersbio1tt5tgs&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;abcdef1qpzry9x8gf2tvdw0s3jn54khce6mua7lmqqqxw&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;11qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqc8247j&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;split1checkupstagehandshakeupstreamerranterredcaperred2y9e3w&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;?1ezyfcl&lt;/code&gt; 警告：在轉換為US-ASCII期間，某些編碼器可能會將不可映射的character設置為有效的US-ASCIIcharacter，例如”？”。例如：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; bech32_encode('\x80'.encode('ascii', 'replace').decode('ascii'), [])
-'?1ezyfcl'
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;以下String不是有效的Bech32（具有無效原因）：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;0x20 + &lt;code class=&quot;highlighter-rouge&quot;&gt;1nwldj5&lt;/code&gt;: HRP character out of range&lt;/li&gt;
-  &lt;li&gt;0x7F + &lt;code class=&quot;highlighter-rouge&quot;&gt;1axkwrx&lt;/code&gt;: HRP character out of range&lt;/li&gt;
-  &lt;li&gt;0x80 + &lt;code class=&quot;highlighter-rouge&quot;&gt;1eym55h&lt;/code&gt;: HRP character out of range&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;an84characterslonghumanreadablepartthatcontainsthenumber1andtheexcludedcharactersbio1569pvx&lt;/code&gt;: overall max length exceeded&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pzry9x0s0muk&lt;/code&gt;: No separator character&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;1pzry9x0s0muk&lt;/code&gt;: Empty HRP&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;x1b4n0q5v&lt;/code&gt;: Invalid data character&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;li1dgmt3&lt;/code&gt;: Too short checksum&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;de1lg7wt&lt;/code&gt; + 0xFF: Invalid character in checksum&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;A1G7SGD8&lt;/code&gt;: checksum calculated with uppercase form of HRP&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;10a06t8&lt;/code&gt;: empty HRP&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;1qzzfhee&lt;/code&gt;: empty HRP&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The following list gives valid segwit addresses and the scriptPubKey that they translate to in hex.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;BC1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7KV8F3T4: 0014751e76e8199196d454941c45d1b3a323f1433bd6&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tb1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3q0sl5k7&lt;/code&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;00201863143c14c5166804bd19203356da136c985678cd4d27a1b8c6329604903262&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bc1pw508d6qejxtdg4y5r3zarvary0c5xw7kw508d6qejxtdg4y5r3zarvary0c5xw7k7grplx&lt;/code&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;5128751e76e8199196d454941c45d1b3a323f1433bd6751e76e8199196d454941c45d1b3a323f1433bd6&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;BC1SW50QA3JX3S&lt;/code&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;6002751e&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bc1zw508d6qejxtdg4y5r3zarvaryvg6kdaj&lt;/code&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;5210751e76e8199196d454941c45d1b3a323&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tb1qqqqqp399et2xygdj5xreqhjjvcmzhxw4aywxecjdzew6hylgvsesrxh6hy&lt;/code&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;0020000000c4a5cad46221b2a187905e5266362b99d5e91c6ce24d165dab93e86433&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;以下列表提供了無效的segwit地址及其無效的原因。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tc1qw508d6qejxtdg4y5r3zarvary0c5xw7kg3g4ty&lt;/code&gt;: Invalid human-readable part&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t5&lt;/code&gt;: Invalid checksum&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;BC13W508D6QEJXTDG4Y5R3ZARVARY0C5XW7KN40WF2&lt;/code&gt;: Invalid witness version&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bc1rw5uspcuh&lt;/code&gt;: Invalid program length&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bc10w508d6qejxtdg4y5r3zarvary0c5xw7kw508d6qejxtdg4y5r3zarvary0c5xw7kw5rljs90&lt;/code&gt;: Invalid program length&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;BC1QR508D6QEJXTDG4Y5R3ZARVARYV98GJ9P&lt;/code&gt;: Invalid program length for witness version 0 (per BIP141)&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tb1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3q0sL5k7&lt;/code&gt;: Mixed case&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bc1zw508d6qejxtdg4y5r3zarvaryvqyzf3du&lt;/code&gt;: zero padding of more than 4 bits&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tb1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3pjxtptv&lt;/code&gt;: Non-zero padding in 8-to-5 conversion&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bc1gmk9yu&lt;/code&gt;: Empty data section&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;checksum-設計&quot;&gt;Checksum 設計&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;設計選擇&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;BCH程式碼可以構建在任何prime-power字母上，並且可以選擇在大小和錯誤檢測功能之間進行良好權衡。儘管大多數圍繞BCH程式碼的工作都使用二進製字母，但這不是必要的。這使它們比&lt;a href=&quot;https://en.wikipedia.org/wiki/Cyclic_redundancy_check&quot;&gt;CRC codes&lt;/a&gt;更適合我們的用例。與&lt;a href=&quot;https://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction&quot;&gt;Reed-Solomon codes&lt;/a&gt;不同，它們的長度不限於字母大小的一分之一。儘管它們還支持有效的錯誤糾正，但是僅錯誤檢測的實現非常簡單。&lt;/p&gt;
-
-&lt;p&gt;我們選擇6個checksum characters作為地址長度和錯誤檢測功能之間的權衡，因為6個characters是足以保證隨機故障發生率低於十億分之一的最低數字。 對於我們希望保護的數據長度（對於將來可能的40bytes witness program而言，該字段的最大長度為71個bytes），可以構造BCH程式碼以確保檢測到最多4個錯誤。.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;選定的屬性 ｜ Selected properties&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;這些程式碼中的許多程式碼在處理更多錯誤時的性能不佳，但並非全部。因此，我們考慮旨在僅檢測3個錯誤和4個錯誤的程式碼，並分析它們在實踐中的性能。&lt;/p&gt;
-
-&lt;p&gt;此處選擇的特定程式碼是以下結果：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;從159605個BCH程式碼的詳盡列表開始，這些程式碼旨在檢測長度為93、151、165、341、1023和1057的3個或4個錯誤。&lt;/li&gt;
-  &lt;li&gt;從這些錯誤中，需要檢測到長度為71的4個錯誤，導致剩餘28825個程式碼。&lt;/li&gt;
-  &lt;li&gt;從這些程式碼中，選擇具有5個character錯誤的最壞情況窗口的程式碼，從而剩下310個程式碼。&lt;/li&gt;
-  &lt;li&gt;從這些程式碼中，選擇機會最少的程式碼來檢測少量的 &lt;em&gt;bit&lt;/em&gt; 錯誤。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;由於naive的搜索需要超過6.5 * 1019的Checksum評估，因此使用了衝突搜索(collision-search)方法進行分析。可以在&lt;a href=&quot;https://github.com/sipa/ezbase32/&quot;&gt;here&lt;/a&gt;找到程式碼。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;屬性 ｜ Properties&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;下表總結了檢測失敗的可能性（109 中的 1 倍）&lt;/p&gt;
-
-&lt;p&gt;Window length Number of wrong characters&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;長度&lt;/th&gt;
-      &lt;th&gt;描述&lt;/th&gt;
-      &lt;th&gt;≤4&lt;/th&gt;
-      &lt;th&gt;5&lt;/th&gt;
-      &lt;th&gt;6&lt;/th&gt;
-      &lt;th&gt;7&lt;/th&gt;
-      &lt;th&gt;8&lt;/th&gt;
-      &lt;th&gt;≥9&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;8&lt;/td&gt;
-      &lt;td&gt;Longest detecting 6 errors&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt;1.127&lt;/td&gt;
-      &lt;td&gt;0.909&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;18&lt;/td&gt;
-      &lt;td&gt;Longest detecting 5 errors&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt;0.965&lt;/td&gt;
-      &lt;td&gt;0.929&lt;/td&gt;
-      &lt;td&gt;0.932&lt;/td&gt;
-      &lt;td&gt;0.931&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;19&lt;/td&gt;
-      &lt;td&gt;Worst case for 6 errors&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0.093&lt;/td&gt;
-      &lt;td&gt;0.972&lt;/td&gt;
-      &lt;td&gt;0.928&lt;/td&gt;
-      &lt;td&gt;0.931&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;39&lt;/td&gt;
-      &lt;td&gt;Length for a P2WPKH address&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0.756&lt;/td&gt;
-      &lt;td&gt;0.935&lt;/td&gt;
-      &lt;td&gt;0.932&lt;/td&gt;
-      &lt;td&gt;0.931&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;59&lt;/td&gt;
-      &lt;td&gt;Length for a P2WSH address&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0.805&lt;/td&gt;
-      &lt;td&gt;0.933&lt;/td&gt;
-      &lt;td&gt;0.931&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;71&lt;/td&gt;
-      &lt;td&gt;Length for a 40-byte program address&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0.830&lt;/td&gt;
-      &lt;td&gt;0.934&lt;/td&gt;
-      &lt;td&gt;0.931&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;89&lt;/td&gt;
-      &lt;td&gt;Longest detecting 4 errors&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0.867&lt;/td&gt;
-      &lt;td&gt;0.933&lt;/td&gt;
-      &lt;td&gt;0.931&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;This means that when 5 changed characters occur randomly distributed in the 39 characters of a P2WPKH address, there is a chance of  &lt;em&gt;0.756 per billion&lt;/em&gt;  that it will go undetected. When those 5 changes occur randomly within a 19-character window, that chance goes down to  &lt;em&gt;0.093 per billion&lt;/em&gt; . As the number of errors goes up, the chance converges towards  &lt;em&gt;1 in 230&lt;/em&gt;  =  &lt;em&gt;0.931 per billion&lt;/em&gt; .&lt;/p&gt;
-
-&lt;p&gt;即使選擇的程式碼可以很好地執行1023個character，但對於長度超過89個character（不包括分隔符）的其他設計，還是更可取的。&lt;/p&gt;
-
-&lt;h2 id=&quot;致謝--acknowledgements&quot;&gt;致謝 ｜ Acknowledgements&lt;/h2&gt;
-
-&lt;p&gt;本文件的靈感來自Rusty Russell的&lt;a href=&quot;https://rusty.ozlabs.org/?p=578&quot;&gt;address proposal&lt;/a&gt;，Mark Friedenbach的&lt;a href=&quot;https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2014-February/004402.html&quot;&gt;base32&lt;/a&gt;提案，並引用了Luke Dashjr，Johnson Lau，Eric Lombrozo，Peter Todd和其他各種審閱者的意見。&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">BIP: 173 Layer: Applications Title: Base32 address format for native v0-16 witness outputs Author: Pieter Wuille &amp;lt;pieter.wuille@gmail.com&amp;gt; Greg Maxwell &amp;lt;greg@xiph.org&amp;gt; Comments-Summary: No comments yet. Comments-URI: https://github.com/bitcoin/bips/wiki/Comments:BIP-0173 Status: Final Type: Informational Created: 2017-03-20 License: BSD-2-Clause Replaces: 142</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/124.png" /></entry><entry><title type="html">隔離見證、閃電網路概述</title><link href="http://localhost:4000/news/2019/11/10/%E9%9A%94%E9%9B%A2%E8%A6%8B%E8%AD%89-%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E6%A6%82%E8%BF%B0/" rel="alternate" type="text/html" title="隔離見證、閃電網路概述" /><published>2019-11-10T00:00:00+08:00</published><updated>2019-11-10T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/10/%E9%9A%94%E9%9B%A2%E8%A6%8B%E8%AD%89%E3%80%81%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E6%A6%82%E8%BF%B0</id><content type="html" xml:base="http://localhost:4000/news/2019/11/10/%E9%9A%94%E9%9B%A2%E8%A6%8B%E8%AD%89-%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E6%A6%82%E8%BF%B0/">&lt;p&gt;&lt;a href=&quot;http://gavinzhang.work/blockchain/比特币/隔离见证、闪电网络理解.html&quot;&gt;原文&lt;/a&gt;：隔离见证、闪电网络理解  &lt;br /&gt;
+&lt;p&gt;&lt;a href=&quot;http://8btc.com/thread-23440-1-1.html&quot;&gt;http://8btc.com/thread-23440-1-1.html&lt;/a&gt;&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文：比特币地址和脚本 這兩天由於要做多簽名的錢包的問題，所以一直在關注比特幣錢包的知識，當我看到bitcoinj裡面的知識時，發現了ScriptBuilder的類，也發現了bitcoinj文件中有提到怎麼使用多簽名的錢包，這裡就簡單帶過吧，今天的主題還是要說明錢包的地址和 script 的一些知識。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/131.png" /></entry><entry><title type="html">隔離見證、閃電網路概述</title><link href="http://localhost:4000/news/2019/11/10/%E9%9A%94%E9%9B%A2%E8%A6%8B%E8%AD%89-%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E6%A6%82%E8%BF%B0/" rel="alternate" type="text/html" title="隔離見證、閃電網路概述" /><published>2019-11-10T00:00:00+08:00</published><updated>2019-11-10T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/10/%E9%9A%94%E9%9B%A2%E8%A6%8B%E8%AD%89%E3%80%81%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E6%A6%82%E8%BF%B0</id><content type="html" xml:base="http://localhost:4000/news/2019/11/10/%E9%9A%94%E9%9B%A2%E8%A6%8B%E8%AD%89-%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E6%A6%82%E8%BF%B0/">&lt;p&gt;&lt;a href=&quot;http://gavinzhang.work/blockchain/比特币/隔离见证、闪电网络理解.html&quot;&gt;原文&lt;/a&gt;：隔离见证、闪电网络理解  &lt;br /&gt;
 隔離見證已經於2017年8月在比特幣上啟動了。最近比特幣正在朝著下一個擴容方案努力，閃電網路 Lightning Network。閃電網路的啟動必須基於更多的使用者使用隔離見證地址。&lt;/p&gt;
 
 &lt;h3 id=&quot;源起&quot;&gt;源起&lt;/h3&gt;
@@ -1280,577 +1706,4 @@ RSMC採用了一個非常巧妙的方法，在C1a的第一個輸出中，採用�
   &lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/58567061&quot;&gt;什麼是隔離見證？&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.8btc.com/article/92887&quot;&gt;詳解最近大熱的閃電網路、雷電網路和CORDA&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s/lM0p3ikVBdw1zE50IWtMZA&quot;&gt;6.9Bite醬一閃電網路⚡大白話零門檻講解&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文：隔离见证、闪电网络理解 隔離見證已經於2017年8月在比特幣上啟動了。最近比特幣正在朝著下一個擴容方案努力，閃電網路 Lightning Network。閃電網路的啟動必須基於更多的使用者使用隔離見證地址。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/125.png" /></entry><entry><title type="html">以區塊鏈為基礎的電子化註冊交付服務</title><link href="http://localhost:4000/news/2019/11/09/%E7%BF%BB%E8%AD%AF-%E4%BB%A5%E5%8D%80%E5%A1%8A%E9%8F%88%E7%82%BA%E5%9F%BA%E7%A4%8E%E7%9A%84%E9%9B%BB%E5%AD%90%E5%8C%96%E8%A8%BB%E5%86%8A%E4%BA%A4%E4%BB%98%E6%9C%8D%E5%8B%99/" rel="alternate" type="text/html" title="以區塊鏈為基礎的電子化註冊交付服務" /><published>2019-11-09T00:00:00+08:00</published><updated>2019-11-09T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/09/%E7%BF%BB%E8%AD%AF:%E4%BB%A5%E5%8D%80%E5%A1%8A%E9%8F%88%E7%82%BA%E5%9F%BA%E7%A4%8E%E7%9A%84%E9%9B%BB%E5%AD%90%E5%8C%96%E8%A8%BB%E5%86%8A%E4%BA%A4%E4%BB%98%E6%9C%8D%E5%8B%99</id><content type="html" xml:base="http://localhost:4000/news/2019/11/09/%E7%BF%BB%E8%AD%AF-%E4%BB%A5%E5%8D%80%E5%A1%8A%E9%8F%88%E7%82%BA%E5%9F%BA%E7%A4%8E%E7%9A%84%E9%9B%BB%E5%AD%90%E5%8C%96%E8%A8%BB%E5%86%8A%E4%BA%A4%E4%BB%98%E6%9C%8D%E5%8B%99/">&lt;blockquote&gt;
-  &lt;p&gt;本篇文章翻譯自 &lt;a href=&quot;https://ieeexplore.ieee.org/document/8764454?source=post_page-----f0472420a45b----------------------&quot;&gt;IEEE - Blockchain-Based System for Multiparty Electronic Registered Delivery Services&lt;/a&gt; 的內容，歐洲法規規定了電子化支付（電子化識別和信任服務）而一個合格的電子註冊交付是信託服務之一並包含在法規中，它要求不可否認原產地及誠信的資料。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&quot;摘要&quot;&gt;摘要&lt;/h1&gt;
-
-&lt;h2 id=&quot;故事介紹&quot;&gt;故事介紹&lt;/h2&gt;
-
-&lt;p&gt;歐洲法規規定了電子化支付（電子化識別和信任服務）而一個合格的電子註冊交付是信託服務之一並包含在法規中，它要求不可否認原產地及誠信的資料。這些服務基本上會依賴於信任的第三方，仍會有很大的溝通及使用障礙。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;科普小學堂 
-「若想要讀得更詳細，請參閱最底下資料來源」
-1. 交付：交付是動產、物權變動的公示方式。動產種類繁多，數量巨大，變動頻繁，不適宜採用登記方式。
-2. 信託：委託人將財產權移轉或為其他處分，使受託人依信託本旨，為受益人之利益或為特定之目的，管理或處分信託財產之關係。
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;edelivery&quot;&gt;eDelivery&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;在文章中，作者採用區塊鏈技術來解決問題（將 eDelivery 計劃減少受信任的第三方），並且滿足歐盟註冊 eDeliveries 的規範。&lt;/li&gt;
-  &lt;li&gt;由於機密性不被視為強制性財產，作者提出了兩個協議。
-    &lt;ul&gt;
-      &lt;li&gt;第一個：適合不太在乎消息或資料機密性，甚至是可以公開訪問的。&lt;/li&gt;
-      &lt;li&gt;第二個：允許除了接收方以外，隱藏他人的消息。&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&quot;第一章節---介紹&quot;&gt;第一章節 - 介紹&lt;/h1&gt;
-
-&lt;p&gt;區塊鏈提供了一個不可修改的資料註冊系統，可為傳統應用程式提供新的解決方案。
-&lt;em&gt;舉例：經過認證的電子郵件帳號，可以經過區塊鏈技術來證明他已發送信件或其他類型的服務。&lt;/em&gt;
-在之前，為了解決傳遞中之公平性問題，皆會透過 TTP（Trusted Third Party , 可信任之第三方）來解決。在典型的 eDelivery 案例中，要交換的是資料以及不可否認之來源證明。&lt;/p&gt;
-
-&lt;h2 id=&quot;a-合格的電子註冊遞送系統&quot;&gt;A. 合格的電子註冊遞送系統&lt;/h2&gt;
-
-&lt;p&gt;2016年7月，歐盟信息安全網的法規 910/2014（也稱為 eIDAS 法規）開始適用。該法規為內部市場的電子交易制定了電子識別和信託服務規則，涵蓋了所有28個成員國。&lt;/p&gt;
-
-&lt;p&gt;文件（Document）中定義了幾種信任服務：&lt;strong&gt;電子簽名（Electronic Signature）、密封（Seals）、時間戳記（TimeStamps）、已註冊的交付服務和用於網站驗證的證書&lt;/strong&gt;。該法規引入了合格信託服務和合格信託服務提供商的概念，其中包含確保信託服務高級別安全性的要求和義務。&lt;/p&gt;
-
-&lt;p&gt;合格的 eDelivery 服務必須根據指令提供：&lt;em&gt;資料/數據完整性、來源認證、交付時間的認證&lt;/em&gt;，而其中機密性不被視為核心功能但通常作為更完整的解決方案。&lt;/p&gt;
-
-&lt;p&gt;eDelivery 服務定義的資料 / 數據稱之為「Message（消息）」，且包含經過認證的通知和電子郵件。而電子郵件是一種可以使用的傳輸方式，但是 eDelivery 並不僅限於電子郵件。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;eDelivery 實例介紹&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;註冊過的電子郵件，能提供更多與處理電子郵件相關的證據&lt;/li&gt;
-  &lt;li&gt;訪問和交換敏感的資訊&lt;/li&gt;
-  &lt;li&gt;事件的電子化公證&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;b-交換協議中的安全性和可信任之第三方&quot;&gt;B. 交換協議中的安全性和可信任之第三方&lt;/h2&gt;
-
-&lt;p&gt;至今所提出的交換協議（例如電子郵件服務）的操作通常使用 TTP ，其負責解決由於交換或詐欺而引起的衝突。&lt;/p&gt;
-
-&lt;p&gt;當前的公平交換協議，包括 TTP 之干預以及很難為網路中用戶提供真正可靠的 TTP ，且具有明確的框架（例如，TTP 生成的電子文件必須被法院接受才能解決事件上的爭議）。&lt;/p&gt;
-
-&lt;p&gt;TTP 也有可能在技術層面遇到問題（例如：通信容易遇到瓶頸、協議缺乏效率），並且他們的可靠性也容易遇到挑戰，如果他們有任何漏洞，交換協議中的安全性即會被打破。&lt;/p&gt;
-
-&lt;h2 id=&quot;c-區塊鏈的解決方案&quot;&gt;C. 區塊鏈的解決方案&lt;/h2&gt;
-
-&lt;p&gt;隨著區塊鏈技術以及智能合約（Smart Contract）的出現，TTP 可以被這種新的技術所取代或補充，這為尋找解決方案提供了新的可能性。&lt;/p&gt;
-
-&lt;p&gt;智能合約能減少對 TTP 的需求，他是一種運行在區塊鏈上的程式，以預先訂立的規則來執行交易，這可以保障雙方之間的公平交換和相互信任，並且可防止互相欺騙且從而減少傳遞訊息中的延遲及服務佣金。&lt;/p&gt;
-
-&lt;p&gt;區塊鏈中的時間戳記（Timestamps）對於協議中的公平性是至關重要的！&lt;/p&gt;
-
-&lt;h1 id=&quot;第二章節---註冊-edelivery-之理想屬性&quot;&gt;第二章節 - 註冊 eDelivery 之理想屬性&lt;/h1&gt;
-
-&lt;p&gt;底下將會介紹關於 eDelivery 的主要功能列表&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;法律相關 Legal Features&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;交貨證明：發送方收到不可偽造的時間戳記，證明他已經傳遞訊息。&lt;/li&gt;
-  &lt;li&gt;接收證明：雙方皆收到不可偽造的時間戳記。&lt;/li&gt;
-  &lt;li&gt;誠信證明：雙方皆可以確保傳輸過程中沒有被竄改。&lt;/li&gt;
-  &lt;li&gt;安全性：防止丟失、被盜或未經授權之更改。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;安全相關 Security Features&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;發送人識別：消息接收方可以驗證發送方。&lt;/li&gt;
-  &lt;li&gt;安全的時間戳記：此時間戳記提供交付日期和時間準確性。&lt;/li&gt;
-  &lt;li&gt;保密：雙方皆可確定未經授權的人員無法訪問該訊息。&lt;/li&gt;
-  &lt;li&gt;資料完整性：確保傳輸資料的完整性，即消息之內容。&lt;/li&gt;
-  &lt;li&gt;控制路由錯誤：該控制有助於傳輸前檢查接受器之參數，並告知用戶傳輸前接收消息的能力。&lt;/li&gt;
-  &lt;li&gt;互操作性：服務向發送方指示預期接收方可以儲利的格式消息，並將消息轉換為另種格式。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;功能相關 Function Features&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;發送大文件：該服務必須允許傳輸大量消息和各種格式的消息。&lt;/li&gt;
-  &lt;li&gt;快速處理：必須是即時的。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;其他 Other Properties&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;降低風險：合格的電子註冊交付使得以下操作變得不可行（操縱數據、偽造發送和接收的時間戳記或未授權訪問）。&lt;/li&gt;
-  &lt;li&gt;降低成本：降低失敗或不確定性的成本。&lt;/li&gt;
-  &lt;li&gt;沒有傳輸延遲：傳輸必須幾乎是瞬間的。&lt;/li&gt;
-  &lt;li&gt;沒有雙重支付：避免發送額外的簽名版本。&lt;/li&gt;
-  &lt;li&gt;事故處理和責任：服務提供商仍要對客戶造成的損害承擔責任。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;考慮了上述功能，以便列出 eDelivery 系統的安全屬性。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;有效性：如果雙方行為正確，他們將收到預期的項目。&lt;/li&gt;
-  &lt;li&gt;公平性：完成協議運行後，每一方將會收到預期的項目，或者任一方皆沒收到任何一方的有效訊息。&lt;/li&gt;
-  &lt;li&gt;時效性：在協議運行期間，每一方皆可以單方面選擇終止協議而不會失去公平性。&lt;/li&gt;
-  &lt;li&gt;不可否認性：如果物品從 A 發送到 B ，則 A 不能拒絕該物品的來源，B 不能拒絕接收該物品。&lt;/li&gt;
-  &lt;li&gt;第三方可驗證性：如果第三方行為不好，導致一方喪失公平，受害者可以爭議中證明此事實。&lt;/li&gt;
-  &lt;li&gt;保密性：只有資料的發送及接收方才知道認證消息的內容。&lt;/li&gt;
-  &lt;li&gt;效率：有效的協議使用允許有效交換或最小成本的最少步驟數。&lt;/li&gt;
-  &lt;li&gt;證據可轉移性：系統生成的證據可以轉移到外部，以證明交換的結果。&lt;/li&gt;
-  &lt;li&gt;狀態存儲：如果不需要可以參與交換的 TTP 來維護狀態訊息。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;上述解釋了不可否認的階段：證據生成、證據轉移、證據驗證、證據存儲和解決爭議。&lt;/p&gt;
-
-&lt;h1 id=&quot;第三章節---註冊電子服務當前發展&quot;&gt;第三章節 - 註冊電子服務當前發展&lt;/h1&gt;
-
-&lt;p&gt;作者調查了公平交換問題，提出兩種使用智能合約進行公平交換的解決方案，該方案由區塊鏈功能支持並使用圖靈完備語言。&lt;/p&gt;
-
-&lt;p&gt;作者提出以區塊鏈技術和以太坊智能合約之不可否認協議，此用於解決 Token 和 數字資產間的交易，此協議要求相關各方存放抵押品，以激勵行為者的誠實行為。&lt;/p&gt;
-
-&lt;p&gt;作者也提出一個可重複使用的智能合約概念，它用於發送多個通知。&lt;/p&gt;
-
-&lt;h1 id=&quot;第四章節---貢獻&quot;&gt;第四章節 - 貢獻&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;（略）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;第五章節---系統總覽&quot;&gt;第五章節 - 系統總覽&lt;/h1&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;參與者&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;發送方&lt;/li&gt;
-  &lt;li&gt;接收方&lt;/li&gt;
-  &lt;li&gt;可信任的第三方&lt;/li&gt;
-  &lt;li&gt;智能合約&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;所有參與者皆擁有 address 並且能夠相互溝通以及和智能合約溝通。
-兩個提議的協議都遵循 3-Steps 交換。關於這個 3-Steps 協議的非機密和機密解決方案之間的主要區別在於，在機密解決方案中，各方可以直接交換消息（離線通信交換），而在非機密解決方案中，各方執行 3-Steps ，通過調用為此服務部署的智能合約的功能。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;圖1 描述了非機密協議的參與者之間的鏈間交互&lt;/li&gt;
-  &lt;li&gt;圖2 中描述了機密協議的離線交互。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/93.png&quot; /&gt;&lt;/div&gt;
-
-&lt;center&gt;&lt;strong&gt;圖1 非機密協議中的參與者之間的互動&lt;/strong&gt;&lt;/center&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/94.png&quot; /&gt;&lt;/div&gt;
-&lt;center&gt;&lt;strong&gt;圖2 機密協議中的參與者之間的互動&lt;/strong&gt;&lt;/center&gt;
-
-&lt;h1 id=&quot;第六章節---基於非機密區塊鏈的多方註冊電子交付系統&quot;&gt;第六章節 - 基於非機密區塊鏈的多方註冊電子交付系統&lt;/h1&gt;
-
-&lt;p&gt;此方法非常適合需要儲存交付數據的應用程序，這些應用程序必須註冊並可公開訪問。&lt;/p&gt;
-
-&lt;p&gt;非機密註冊 eDeliveries 的多方協議提供了一個發送方（A）和多個接收方（B = {B1，B2 …，Bn}）的公平交付解決方案。&lt;/p&gt;
-
-&lt;p&gt;圖3 是發送方和接收方在非機密 eDelivery 中為所提出的鏈上通信方案交換的消息序列圖。
-在圖3中，藍色箭頭表示上述步驟，並指定對區塊鏈地址的簽名請求。&lt;/p&gt;
-
-&lt;p&gt;此外，框內的紅色文本描述了必須由區塊鏈上部署的 eDelivery 執行的過程。&lt;/p&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;800&quot; src=&quot;/img/95.png&quot; /&gt;&lt;/div&gt;
-&lt;center&gt;&lt;strong&gt;圖3 基於非機密區塊鏈的協議描述&lt;/strong&gt;&lt;/center&gt;
-
-&lt;p&gt;交付的發送方 A 和接收方集合 B 將遵循交換協議的步驟。
-在以下對協議的完整描述中，協議的參與者發送的請求被指向區塊鏈上部署的 eDelivery 服務的地址。&lt;/p&gt;
-
-&lt;p&gt;交換協議的細節是（表1中的表示法）：
-發送方 A 發送新的 eDelivery 請求。&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;該請求包括發送方的 Address，要傳遞的消息的 Hash（c，該 Hash 也用作 eDelivery 的識別），- 接收方的地址以及句號 term1 和 term2。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;`&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;term1 為接收方在發送方完成交付前，能接受交付的有效期限。&lt;/li&gt;
-  &lt;li&gt;term2 為允許接收方取消，未完成交付的期限。
-`&lt;/li&gt;
-  &lt;li&gt;取消的功能是為了保證有效性和公平性。&lt;/li&gt;
-  &lt;li&gt;B 中的每個接收方 Bi 必須在 term1 期間單獨接受傳遞的接收，發布表達其意願的消息。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;簽署的交易將作為接收證明的不可否認性。&lt;/code&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如果接收方在 term1 期間不接受，則假定拒絕。&lt;/li&gt;
-  &lt;li&gt;在 term1 的截止日期之後，或者在所有接收方（B的成員）接受了接收之後，發送方A可以通過使用區塊鏈發布消息，完成與已接受的接收方B’（B’⊂B）的子集的傳遞。&lt;/li&gt;
-  &lt;li&gt;因此，部署在區塊鏈上的 eDelivery 服務會檢查消息的完整性，並為 B’ 中的接收方發布原始證據的不可否認性。完成後，發送方將收到押金退款。&lt;/li&gt;
-  &lt;li&gt;在這種情況下，我們在一般的 3-Steps 協議中添加了最後一步：在 term2 的截止日期之後， B’ 中的任何接收方都可以獲取消息，或者可以請求取消 eDelivery，以防消息未正確存入。&lt;/li&gt;
-  &lt;li&gt;最後執行完交換協議之後，所有接收方都可以讀取消息 M，因為它存在區塊鏈中，但只有 B’ 的成員可以證明他們已被通知且有證據。&lt;/li&gt;
-  &lt;li&gt;如果 term2 之後，發送方尚未發布消息，則每個接收方 Bi 可以取消 eDelivery 。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/96.png&quot; /&gt;&lt;/div&gt;
-&lt;center&gt;&lt;strong&gt;表1 非機密協議之要素&lt;/strong&gt;&lt;/center&gt;
-
-&lt;h1 id=&quot;第七章節---基於機密區塊鏈的註冊-edelivery-協議&quot;&gt;第七章節 - 基於機密區塊鏈的註冊 eDelivery 協議&lt;/h1&gt;
-
-&lt;p&gt;第二項提案的設計考慮到了需要保密的交付。&lt;/p&gt;
-
-&lt;p&gt;也就是說，區塊鏈必須有助於保持交換的公平性，但是消息不能存儲在公開訪問的區塊中。
-與非機密案例的主要區別在於，在機密案例中，協議允許進行離線交換，所以交換可以在沒有區塊鏈或 TTP 干預的情況下執行。&lt;/p&gt;
-
-&lt;p&gt;另一個重要特徵是該提案不需要截止日期，任何交換都可以隨時完成。無國籍 TTP 可用於解決雙方之間可能產生的爭議。我們描述了一種基於非區塊鏈的公平交換，我們將部分重用（即鏈下 3-Steps 交換），並在套用在本節中基於區塊鏈的新提案。&lt;/p&gt;
-
-&lt;p&gt;在新協議中，發送方 A 和收件方 B 直接交換消息和不可否認證據，使用圖4 中描述的 3-Steps 脫鏈通信。僅作為最後手段，以防他們無法獲得預期通過發送取消請求（圖5）或完成請求（圖6），可以調用來自另一方，智能合約或TTP的項目。&lt;/p&gt;
-
-&lt;p&gt;描述的協議相比，基於區塊鏈的解決方案中 TTP 的作用已大大降低。此外，發送方永遠不會聯繫 TTP。
-在這個新提案中，TTP 將僅採用已部署的智能合約來回應 B 的請求。TTP 完全是無狀態的，因此它從不存儲有關任何交換狀態的信息。&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;圖中的藍色箭頭表示對區塊鏈地址的簽名請求，而黑色箭頭表示離線通信消息。&lt;/code&gt;&lt;/p&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;600&quot; src=&quot;/img/97.png&quot; /&gt;&lt;/div&gt;
-&lt;center&gt;&lt;strong&gt;表2 機密多方協議之要素&lt;/strong&gt;&lt;/center&gt;
-
-&lt;h2 id=&quot;a-多重之正向交換子協議&quot;&gt;A. 多重之正向交換子協議&lt;/h2&gt;
-
-&lt;p&gt;該協議在某種意義上是正向的，發送方 A 有可能在沒有 TTP 干預的情況下完成接收方集合 B 的交換。&lt;/p&gt;
-
-&lt;p&gt;圖 4. 由機密 eDelivery 發送方和接收方交換的 3-Steps，已通過正向方法解決交換：該協議在某種意義上是正向的，即發送方 A 有可能在沒有 TTP 干預的情況下完成與接收方 B 的交換。&lt;/p&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;700&quot; src=&quot;/img/98.png&quot; /&gt;&lt;/div&gt;
-&lt;center&gt;&lt;strong&gt;圖四 鏈下通信交換子協議&lt;/strong&gt;&lt;/center&gt;
-
-&lt;p&gt;交換如下：發送方向接收方集合發送消息，包括加密消息，接收者的地址和原始證據的不可否認性的第一部分，kT、hA。&lt;/p&gt;
-
-&lt;p&gt;每個接收者決定他是否發送不可否認接收證明 hBi 的交換。
-接收方將接收打開消息的密鑰和原始證據的不可否認部分 kA。&lt;/p&gt;
-
-&lt;p&gt;如果已成功完成這些步驟的執行，則發送方將持有來自所有接收方的不可否認接收（NRR）證據，並且每個接收方將持有該消息和不可否認原產地（NRO）證據。&lt;/p&gt;
-
-&lt;p&gt;每個接收者都有密鑰，因此他可以解密消息，然後集合B的每個接收者獲得用於解密消息的密鑰 kA，以及相應的 NRO 證據（hA）。以相同的方式，消息的發送方將從每個接收者獲得 NRR 證據（hBi）。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;這樣，協議允許正向交換，也就是說，交換可以完全執行而無需 TTP和區塊鏈的干預。另一個重要特徵是該提案不需要截止日期，並且可以隨時完成，如果雙方之間發生爭議，可以執行以下子協議。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;b-多方之取消子協議&quot;&gt;B. 多方之取消子協議&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;取消子協議將由消息的發送方發起。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;如果沒從消息的所有接收方接收 hBi ，則發送方執行智能合約的相應功能。
-在圖 5 中，有一個圖形描述，表明發送方和區塊鏈為取消未完成的接收方取消機密 eDelivery 所採取的行動。&lt;/p&gt;
-
-&lt;p&gt;Hash H（c）用作 eDelivery 的識別碼。當發送方執行智能合約的取消功能時，她必須指出所有未發送 hBi 的用戶的身份（由集合 B’’ 表示）。就智能合約而言，它將負責檢查集合 B’’ 中的任何用戶是否已通過 TTP 完成交換。在這種情況下，它會將相應的 NRR 證據（針對特定的 Bi）發送給發送方。否則，未完成的接收方將被包括在已取消的用戶組中（B’’ — 已取消）。因此，在此階段結束時，發送方 A 將與所有接收方完成公平交換，或者令人滿意，因為她已經收到了 hBi，或者因為取消了。&lt;/p&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/99.png&quot; /&gt;&lt;/div&gt;
-&lt;center&gt;&lt;strong&gt;圖5 鏈上取消子協議&lt;/strong&gt;&lt;/center&gt;
-
-&lt;h2 id=&quot;c-多方完成子協議&quot;&gt;C. 多方完成子協議&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;將由任何接收方發起，在已發送相應的 hBi 但尚未接收到該元素以獲得密鑰 kA 的情況下。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;最終確定將由 TTP 根據從收件方 Bi 收到的請求進行。在檢查從 Bi 接收的所有不同參數的正確性之後，TTP 執行智能合約的完成功能（TTP 將 Bi 的 NRR 證據（hBi）提交給智能合約）。&lt;/p&gt;
-
-&lt;p&gt;在圖6中，描述了收件方，TTP 和區塊鏈在異常情況下完成機密 eDelivery 所採取的操作。 TTP 基於區塊鏈中存儲的有關此 eDelivery 的信息。在此子協議中，智能合約檢查請求是否來自 TTP，然後驗證聲明的收件人是否已取消其郵件傳遞的用戶。在這種情況下，會發出適當的取消證據。否則，智能合約在區塊鏈中存儲收到的 hBi，並通過將 Bi 添加到 B’’ 來完成已完成此交換的用戶組 — 已完成。最後，TTP 將 kT 發送給 Bi，接收者能夠閱讀該消息並完成 NRO 證據。&lt;/p&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;800&quot; src=&quot;/img/100.png&quot; /&gt;&lt;/div&gt;
-&lt;center&gt;&lt;strong&gt;圖6 鏈上完成子協議&lt;/strong&gt;&lt;/center&gt;
-
-&lt;h1 id=&quot;第八章節---智能合約&quot;&gt;第八章節 - 智能合約&lt;/h1&gt;
-
-&lt;p&gt;本文採用了以太坊區塊鏈，因為它提供了比比特幣區塊鏈更豐富的功能，因為他們在完全分布式系統中支持使用圖靈完備語言的智能合約。
-底下將以非機密 / 機密的協議來給大家展示一下相關的智能合約。&lt;/p&gt;
-
-&lt;h2 id=&quot;非機密多方註冊-edelivery-協議的智能合約&quot;&gt;非機密多方註冊 eDelivery 協議的智能合約&lt;/h2&gt;
-
-&lt;p&gt;底下將會展示各種功能的智能合約撰寫範例&lt;/p&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/101.png&quot; /&gt;&lt;/div&gt;
-&lt;center&gt;&lt;strong&gt;圖7 Variables 屬性定義&lt;/strong&gt;&lt;/center&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/102.png&quot; /&gt;&lt;/div&gt;
-&lt;center&gt;&lt;strong&gt;圖8 接受 function&lt;/strong&gt;&lt;/center&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/103.png&quot; /&gt;&lt;/div&gt;
-&lt;center&gt;&lt;strong&gt;圖9 完成 function&lt;/strong&gt;&lt;/center&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/104.png&quot; /&gt;&lt;/div&gt;
-&lt;center&gt;&lt;strong&gt;圖10 取消 function&lt;/strong&gt;&lt;/center&gt;
-
-&lt;h2 id=&quot;機密多方註冊edelivery協議的智能合約&quot;&gt;機密多方註冊eDelivery協議的智能合約&lt;/h2&gt;
-
-&lt;p&gt;底下將會展示各種功能的智能合約撰寫範例&lt;/p&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/105.png&quot; /&gt;&lt;/div&gt;
-
-&lt;center&gt;&lt;strong&gt;圖11 屬性以及建構子&lt;/strong&gt;&lt;/center&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/106.png&quot; /&gt;&lt;/div&gt;
-
-&lt;center&gt;&lt;strong&gt;圖12 取消 function&lt;/strong&gt;&lt;/center&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/107.png&quot; /&gt;&lt;/div&gt;
-
-&lt;center&gt;&lt;strong&gt;圖13 完成 function&lt;/strong&gt;&lt;/center&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/108.png&quot; /&gt;&lt;/div&gt;
-
-&lt;center&gt;&lt;strong&gt;圖14 新增接收方 function&lt;/strong&gt;&lt;/center&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;500&quot; src=&quot;/img/109.png&quot; /&gt;&lt;/div&gt;
-&lt;center&gt;&lt;strong&gt;圖15 非機密協議中的狀態生命週期&lt;/strong&gt;&lt;/center&gt;
-
-&lt;h1 id=&quot;結論&quot;&gt;結論&lt;/h1&gt;
-&lt;p&gt;歐法規定了電子交易的電子識別和信託服務規則。然後技術提案必須達到合格的法律要求。合格電子註冊交付的特徵是法規中包含的信託服務之一，與公平交換協議提供的特徵類似：不可否認來源和接收數據的完整性。因此，可以為註冊的 eDelivery 設計公平交換協議。然而，這種服務通常嚴重依賴於可信第三方的使用，並且成本高且效率低，並且必須驗證 TTP 的行為。&lt;/p&gt;
-
-&lt;p&gt;在本文也採用了區塊鏈技術結合智能合約來將 TTP 減少甚至取消，並且透過機密與非機密之不同需求選擇需要採用何種協議，使得人員能夠透過智能合約來減少複雜的手續和流程並且將 TTP 的干預降到最低，實現服務的理想屬性，我們也得知在協議設計中結合基於區塊鏈的技術可以影響 TTP 的作用。&lt;/p&gt;
-
-&lt;h1 id=&quot;資料來源&quot;&gt;資料來源&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://wiki.mbalib.com/zh-tw/%E4%BA%A4%E4%BB%98&quot;&gt;交付 — MBA智庫百科&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.trust.org.tw/tw/info/related-introduction/0&quot;&gt;信託是什麼？&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/eDelivery&quot;&gt;eDelivery&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://zh.wikipedia.org/zh-tw/%E4%BA%92%E6%93%8D%E4%BD%9C%E6%80%A7&quot;&gt;互操作性&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://zh.wikipedia.org/zh-tw/%E4%BA%92%E6%93%8D%E4%BD%9C%E6%80%A7&quot;&gt;作者團隊 Github&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://zh.wikipedia.org/zh-tw/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6&quot;&gt;智能合約&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">本篇文章翻譯自 IEEE - Blockchain-Based System for Multiparty Electronic Registered Delivery Services 的內容，歐洲法規規定了電子化支付（電子化識別和信任服務）而一個合格的電子註冊交付是信託服務之一並包含在法規中，它要求不可否認原產地及誠信的資料。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/130.png" /></entry><entry><title type="html">Neutrino：一種保護隱私的輕錢包協議</title><link href="http://localhost:4000/news/2019/11/09/Neutrino-%E4%B8%80%E7%A8%AE%E4%BF%9D%E8%AD%B7%E9%9A%B1%E7%A7%81%E7%9A%84%E8%BC%95%E9%8C%A2%E5%8C%85%E5%8D%94%E8%AD%B0/" rel="alternate" type="text/html" title="Neutrino：一種保護隱私的輕錢包協議" /><published>2019-11-09T00:00:00+08:00</published><updated>2019-11-09T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/09/Neutrino:%E4%B8%80%E7%A8%AE%E4%BF%9D%E8%AD%B7%E9%9A%B1%E7%A7%81%E7%9A%84%E8%BC%95%E9%8C%A2%E5%8C%85%E5%8D%94%E8%AD%B0</id><content type="html" xml:base="http://localhost:4000/news/2019/11/09/Neutrino-%E4%B8%80%E7%A8%AE%E4%BF%9D%E8%AD%B7%E9%9A%B1%E7%A7%81%E7%9A%84%E8%BC%95%E9%8C%A2%E5%8C%85%E5%8D%94%E8%AD%B0/">&lt;p&gt;如今， Lightning 風行一時，儘管這是一個令人興奮的發展，但用戶目前必須運行一個完整的節點才能進行交易。在本文中，將介紹Neutrino，這是一種新的協議，用於輕型client在保留隱私且不信任中央server的情況下獲取所需的數據。&lt;a href=&quot;https://bitcoinmagazine.com/articles/neutrino-privacy-preserving-light-wallet-protocol&quot;&gt;原文&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;一點歷史&quot;&gt;一點歷史&lt;/h2&gt;
-&lt;p&gt;中本聰（Satoshi Nakamoto）在2008年撰寫的原始白皮書中描述了一種稱為簡化付款驗證（SPV）的東西。SPV是輕型節點無需下載、驗證或儲存整個區塊鏈即可驗證付款的方式。這應該是輕錢包的基礎。不幸的是，原始的Bitcoin Core軟體未實現簡化付款驗證，因此，輕量級客戶無法訪問以隱私保護方式進行SPV所需的數據。&lt;/p&gt;
-
-&lt;p&gt;在2013年，BIP0037被添加到Bitcoin Core以使SPV可行。BIP0037創建了網絡指令，使輕節點可以執行簡化的付款驗證。輕型節點現在可以要求證明特定交易發生在特定區塊中。這樣，輕型節點將不必信任server，但實際上可以驗證提供給它們的數據。&lt;/p&gt;
-
-&lt;p&gt;為此，輕client向server提供了一個過濾器。然後，server對新區塊的所有交易運行篩選器，並將這些交易以及它們在該區塊中的證據報告給client。然後，客戶驗證證明並查看交易，以查看其中是否屬於錢包。&lt;/p&gt;
-
-&lt;p&gt;不幸的是，BIP0037有一些缺點。除其他外，這被認為很難實施，大多數輕錢包選擇使用其他東西。例如，Electrum錢包使用其&lt;a href=&quot;http://docs.electrum.org/en/latest/protocol.html&quot;&gt;自己的專有協議&lt;/a&gt;，該協議不保護隱私。Mycelium錢包調用Mycelium公司運行的server。此外，還有一些拒絕服務媒介（通過運行大量過濾器）來利用響應BIP0037請求的server。&lt;/p&gt;
-
-&lt;p&gt;此外，事實證明，BIP0037的隱私方面沒有想像的那麼強。事實證明，通過查找某些類型的模式，server可以對輕錢包有很多了解（例如它可能有什麼餘額，與誰進行交易，甚至可能是購買的東西）。&lt;/p&gt;
-
-&lt;p&gt;因此，儘管自2013年以來已在Core軟體中使用BIP0037，但在很大程度上已經廢棄了。&lt;/p&gt;
-
-&lt;h2 id=&quot;什麼是neutrino&quot;&gt;什麼是Neutrino？&lt;/h2&gt;
-&lt;p&gt;Neutrino是一種驗證付款的協議，除了這次，大部分工作是在client完成的。現在代替server過濾client的交易，而是將屬於一個區塊的所有交易（技術上對應於除OP_RETURN輸出之外的每個輸入和輸出的ScriptPubKey）壓縮並發送給client。現在，客戶的工作是弄清是否有任何交易是它進行的交易。如果任何交易與電子錢包有關，則客戶然後請求完整的區塊來驗證交易。&lt;/p&gt;
-
-&lt;p&gt;事實證明，壓縮效果令人印象深刻。正常區塊約為1.4MB，但是通過對其進行壓縮（從技術上講，將每個ScriptPubKey hash 為64位），每個區塊會在每個區塊上產生約20KB的超壓縮數據。由於每個超級client的超級壓縮區塊都相同，因此可以消除server的拒絕服務漏洞。這也意味著server除了要查看的阻止內容外，沒有獲得有關輕client的特殊訊息，這意味著隱私洩漏少得多。&lt;/p&gt;
-
-&lt;h2 id=&quot;權衡取捨&quot;&gt;權衡取捨&lt;/h2&gt;
-&lt;p&gt;當然，通過增加隱私權，我們確實需要權衡取捨。首先，有更多的數據來回發送。雖然1.4MB到20KB的帶寬減少了很多，但是BIP0037允許更大的減少，因為server只為錢包參與的交易發送大約3KB的數據區塊，而沒有這種交易的只有80 bytes 的數據區塊。假設每天大約有一筆交易，那麼BIP0037的每個區塊總計大約100 bytes ，這意味著從帶寬的角度來看Neutrino的價格更高。&lt;/p&gt;
-
-&lt;p&gt;此外，由於client現在必須執行其他驗證以證明server發送的數據是真實的，因此在client需要進行更多的驗證。&lt;/p&gt;
-
-&lt;p&gt;在尋找錢包參與的交易時會保留隱私。通常，這些交易是錢包正在收款的交易。然而，對於匯款來說，Neutrino並沒有真正幫助，仍然存在很多隱私問題（儘Tor和&lt;a href=&quot;https://github.com/bitcoin/bips/blob/master/bip-0156.mediawiki&quot;&gt;Dandelion&lt;/a&gt; 可以提供幫助）。&lt;/p&gt;
-
-&lt;p&gt;最後，可能需要對每個區塊的coinbase交易作出新的承諾，以促進Neutrino的發展，這需要軟分叉。&lt;/p&gt;
-
-&lt;h2 id=&quot;這對您意味著什麼&quot;&gt;這對您意味著什麼&lt;/h2&gt;
-&lt;p&gt;事實證明Neutrino不僅對Bitcoin錢包有用，對 Lightning 也有用。當前很難設置一個Lightning節點，部分原因是您必須運行一個需要很長時間才能同步的完整節點。Neutrino在btcd中可用，但在Bitcoin Core中尚不可用，因此在Bitcoin Core中可用之前，輕型錢包將很難找到要從中獲取數據的節點。正是由於這個原因，Wasabi必須使用類似的&lt;a href=&quot;https://medium.com/@nopara73/wasabi-privacy-focused-bitcoin-wallet-for-desktop-3962d567045a&quot;&gt;超壓縮區塊數據製作自己的server&lt;/a&gt;。&lt;/p&gt;
-
-&lt;p&gt;一旦Neutrino到達Bitcoin Core，Lightning Wallets將能夠更輕鬆地作為輕client運行。這意味著您的Bitcoin錢包將在保護隱私方面更加有效。這並不意味著您將具有完全的匿名性，尤其是從鏈分析的角度而言，但是您將能夠在不儲存、傳輸或驗證整個區塊鏈的情況下實現整個節點當前享有的大部分隱私。&lt;/p&gt;
-
-&lt;p&gt;隱私洩漏最終是安全洩漏，因為有關您的訊息可能會被用來對您不利。&lt;/p&gt;
-
-&lt;p&gt;與使用Neutrino協議的錢包進行交易意味著，無論是在鏈上還是在Lightning Network上，您的Bitcoin交易都不太容易受到訊息洩露的影響。&lt;/p&gt;
-
-&lt;h2 id=&quot;更多訊息&quot;&gt;更多訊息&lt;/h2&gt;
-&lt;p&gt;對於對此技術感興趣的開發人員，&lt;a href=&quot;https://github.com/bitcoin/bips/blob/master/bip-0157.mediawiki&quot;&gt;BIP0157&lt;/a&gt; and &lt;a href=&quot;https://github.com/bitcoin/bips/blob/master/bip-0158.mediawiki&quot;&gt;BIP0158&lt;/a&gt;詳細說明了該協議，並且可從&lt;a href=&quot;https://lightning.engineering/&quot;&gt;Lightning Labs&lt;/a&gt;的開發人員處獲得&lt;a href=&quot;https://github.com/bitcoin/bips/blob/master/bip-0158/testnet-19.json&quot;&gt;test vectors&lt;/a&gt;。對於消費者，請詢問您的錢包提供商是否計劃實施Neutrino。&lt;/p&gt;
-
-&lt;h2 id=&quot;結論&quot;&gt;結論&lt;/h2&gt;
-&lt;p&gt;Neutrino是一項早就應該過期的技術。大多數使用輕型節點軟體的人都必須在某種程度上信任外部方，這不是密碼龐克的理想。通過使用Neutrino，錢包開發人員現在將能夠創建真正獨立的並且不需要信任server的錢包。&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">如今， Lightning 風行一時，儘管這是一個令人興奮的發展，但用戶目前必須運行一個完整的節點才能進行交易。在本文中，將介紹Neutrino，這是一種新的協議，用於輕型client在保留隱私且不信任中央server的情況下獲取所需的數據。原文</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/123.png" /></entry><entry><title type="html">使用x-only的Pubkey減少比特幣交易大小</title><link href="http://localhost:4000/news/2019/11/07/%E4%BD%BF%E7%94%A8x-only%E7%9A%84Pubkey%E6%B8%9B%E5%B0%91%E6%AF%94%E7%89%B9%E5%B9%A3%E4%BA%A4%E6%98%93%E5%A4%A7%E5%B0%8F/" rel="alternate" type="text/html" title="使用x-only的Pubkey減少比特幣交易大小" /><published>2019-11-07T00:00:00+08:00</published><updated>2019-11-07T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/11/07/%E4%BD%BF%E7%94%A8x-only%E7%9A%84Pubkey%E6%B8%9B%E5%B0%91%E6%AF%94%E7%89%B9%E5%B9%A3%E4%BA%A4%E6%98%93%E5%A4%A7%E5%B0%8F</id><content type="html" xml:base="http://localhost:4000/news/2019/11/07/%E4%BD%BF%E7%94%A8x-only%E7%9A%84Pubkey%E6%B8%9B%E5%B0%91%E6%AF%94%E7%89%B9%E5%B9%A3%E4%BA%A4%E6%98%93%E5%A4%A7%E5%B0%8F/">&lt;p&gt;&lt;strong&gt;如何使用BIP-schnorr安全地為每個output節省四個權重單位   &lt;br /&gt;
-&lt;a href=&quot;https://medium.com/blockstream/reducing-bitcoin-transaction-sizes-with-x-only-pubkeys-f86476af05d7&quot;&gt;原文 : Reducing Bitcoin Transaction Sizes with x-only Pubkeys&lt;/a&gt;&lt;/strong&gt;  &lt;br /&gt;
-8 min read   &lt;em&gt;By Jonas Nick&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/110.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;介紹--introduction&quot;&gt;介紹 | Introduction&lt;/h1&gt;
-
-&lt;p&gt;本文是關於最近在比特幣改進提案&lt;em&gt;BIP-schnorr&lt;/em&gt;中引入所謂的x-only pubkeys。 BIP定義了針對比特幣的Schnorr簽名的介紹。&lt;/p&gt;
-
-&lt;p&gt;與現有的比特幣（ECDSA）簽名方案相比，Schnorr簽名具&lt;a href=&quot;https://hackernoon.com/a-brief-intro-to-bitcoin-schnorr-multi-signatures-b9ef052374c5&quot;&gt;有提供各種好處的潛力&lt;/a&gt;，特別是對於典型交易而言，交易大小（和&lt;a href=&quot;https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki&quot;&gt;&lt;em&gt;權重&lt;/em&gt;&lt;/a&gt;）更小。之所以能夠做到這一點，部分是因為Schnorr簽名支持更輕鬆地將多個簽名聚合到單個簽名中。&lt;/p&gt;
-
-&lt;p&gt;使用 x-only pubkeys，我們可以進一步優化，在不損失安全性的前提下，顯著降低了每個交易output的權重。&lt;/p&gt;
-
-&lt;h1 id=&quot;背景--background&quot;&gt;背景 | Background&lt;/h1&gt;
-
-&lt;p&gt;通過從比特幣當前使用的壓縮public key中刪除Y坐標 byte，public key最終以32-byte表示。 我們將研究它的工作原理，為什麼有用，並概述安全性證明(security proof)。&lt;/p&gt;
-
-&lt;p&gt;草繪安全證明(Sketching a security proof)是一種通常可用於比特幣和閃電協議研究的技術。 它將證明丟棄的 byte&lt;em&gt;不會&lt;/em&gt;削弱安全性，甚至不會降低”single bit”的安全性。&lt;/p&gt;
-
-&lt;p&gt;為了使這篇文章保持小巧美觀，我們在形式上將不做任何精確說明。 本文的主要目的是對BIP-schnorr的 x-only 部分提供基本了解。&lt;/p&gt;
-
-&lt;p&gt;本文假定已啟動&lt;a href=&quot;https://github.com/sipa/bips/blob/bip-schnorr/bip-taproot.mediawiki&quot;&gt;BIP-taproot&lt;/a&gt;軟分叉，它定義了SegWit 在 version 1 output花費的規則。 我們不在乎新的output花費的規則是什麼，除了，新規則之一是允許使用BIP-schnorr中定義的Schnorr簽名進行消費。 需要指出的是，BIP只是建議，因此不能保證BIP-taproot會以其當前形式或完全啟動。&lt;/p&gt;
-
-&lt;p&gt;首先，讓我們看一下今天壓縮後的public key如何在比特幣中工作。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/111.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-&lt;center&gt;&lt;strong&gt;壓縮public key&lt;/strong&gt;&lt;/center&gt;
-
-&lt;p&gt;比特幣中的壓縮public key是byte  &lt;code class=&quot;highlighter-rouge&quot;&gt;2&lt;/code&gt;後跟一個32 byte矩陣，或者是byte  &lt;code class=&quot;highlighter-rouge&quot;&gt;3&lt;/code&gt;後跟一個 32 byte矩陣。 第一個 byte 稱為&lt;em&gt;tie breaker(決勝局)&lt;/em&gt;，第二個部分為橢圓曲線上基礎點的X坐標。&lt;/p&gt;
-
-&lt;h2 id=&quot;tie-breaker的目的是什麼&quot;&gt;Tie breaker的目的是什麼？&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/112.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-&lt;center&gt;&lt;strong&gt;tie breaker的目的&lt;/strong&gt;&lt;/center&gt;
-
-&lt;p&gt;public key在橢圓曲線上編碼一個點。 僅給出X坐標，曲線上就存在兩個點。 tie breaker的目的是確定兩個點中的哪一個被編碼為&lt;code class=&quot;highlighter-rouge&quot;&gt;P&lt;/code&gt;  or  &lt;code class=&quot;highlighter-rouge&quot;&gt;-P&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;最近，BIP-Schnorr從使用壓縮的public key更改為僅使用&lt;em&gt;x-only public keys&lt;/em&gt;。 不同之處在於tie breake不再是public key的一部分。 而是隱式地假設tie breaker為&lt;code class=&quot;highlighter-rouge&quot;&gt;2&lt;/code&gt;。 實際上，在BIP中使用了一個不同的tie breaker，但這對於本文而言並不重要。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/113.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-&lt;center&gt;&lt;strong&gt;BIP-schnorr中的x-only pubkeys&lt;/strong&gt;&lt;/center&gt;
-
-&lt;p&gt;那為什麼行得通呢？ 畢竟，&lt;code class=&quot;highlighter-rouge&quot;&gt;P&lt;/code&gt;  and  &lt;code class=&quot;highlighter-rouge&quot;&gt;-P&lt;/code&gt;仍然是不同的點。 由secret key &lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt;生成的public key點&lt;code class=&quot;highlighter-rouge&quot;&gt;P&lt;/code&gt;是group&lt;code class=&quot;highlighter-rouge&quot;&gt;G&lt;/code&gt;的生成者的&lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt;倍。 public key&lt;code class=&quot;highlighter-rouge&quot;&gt;-P&lt;/code&gt;的secret key是&lt;code class=&quot;highlighter-rouge&quot;&gt;-x&lt;/code&gt;。 答案是我們只需要在正確的時間否定public key和secret key即可。 特別是，簽名演算法會檢查您是否在簽名正確的public key，並在必要時取消secret key。&lt;/p&gt;
-
-&lt;p&gt;請務必注意，錢包開發人員無需採取任何措施。 它應該由基礎crypto library處理。 BIP32分層確定性錢包生成也像以前一樣工作，只是您丟棄了第一個byte。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/114.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-&lt;center&gt;&lt;strong&gt;為什麼我們可以刪除tie breaker?&lt;/strong&gt;&lt;/center&gt;
-
-&lt;h1 id=&quot;為什麼引入-x-only-pubkeys&quot;&gt;為什麼引入 x-only pubkeys?&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/115.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-&lt;center&gt;&lt;strong&gt;為什麼 x-only?&lt;/strong&gt;&lt;/center&gt;
-
-&lt;p&gt;首先，在權重單位方面，scriptPubKey的bytes非常昂貴：x-only 可以在平均完整塊中節省約0.7％的權重單位。 其次，發件人創建scriptPubKey的成本與136個權重單位中的pay-to-witness-script-hash相同。 從理論上講，如果Taproot的價格比舊版隔離見證的價格高，則採用它的速度會更慢。&lt;/p&gt;
-
-&lt;p&gt;其次，發起人創建scriptPubKey的成本與pay-to-witness-script-hash”中的136權重單位相同。 從理論上講，如果Taproot的價格比舊的“隔離見證版本”貴，則採用它的速度會更慢。&lt;/p&gt;
-
-&lt;p&gt;Pay-to-witness-pub-key-hash scriptPubKey的權重仍遠小於Taprootoutput，因為它們僅包含20-byte hashed public key，但這對於Taproot來說是不安全的。&lt;/p&gt;
-
-&lt;p&gt;只是為了完整說明，如果我們考慮take the witness weight into account，Taproot和pay to witness pubkey hash非常相似。&lt;/p&gt;
-
-&lt;h1 id=&quot;proof-sketch&quot;&gt;Proof sketch&lt;/h1&gt;
-
-&lt;p&gt;現在讓我們看一下為什麼這是安全的。&lt;/p&gt;
-
-&lt;p&gt;我們知道的是，在隨機預言模型中，如果離散對數問題很困難，那麼Schnorr簽名是安全的。
-這意味著在不知道secret key的情況下無法偽造簽名。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/116.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;現在我們要證明的是帶有壓縮public key的Schnorr簽名是否安全，那麼x-only的Schnorr簽名是安全的。 或等效地，如果x-only的Schnorr簽名不安全，則Schnorr簽名不安全。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/117.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;因此，我們假設存在一種偽造Schnorr簽名的演算法，如下圖右圖所示。&lt;/p&gt;
-
-&lt;p&gt;Schnorr 簽名是一個元組。 第一個元素是稱為的public nonce，它是通過將secret nonce與group generator相乘而生成的。
-第二個元素結合了secret nonce和secret key  &lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt;。 這裡唯一重要的部分是Schnorr簽名涉及一些hash計算。 我們現在假設的是，在某些時候，偽造者必須計算hash值-沒有其他方法可以產生偽造品。 為了在形式證明(formal proof)中正確定義此值，將hash函數替換為稱為&lt;em&gt;Random Oracle&lt;/em&gt;的理想設備。 為了方便說明，我們將繼續稱他為hash function。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/118.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-&lt;center&gt;&lt;strong&gt;偽造者的Proof sketch模型&lt;/strong&gt;&lt;/center&gt;
-
-&lt;p&gt;現在，我們要做的是構建一種演算法，該演算法響應提供了壓縮public key的挑戰者，並期望獲得Schnorr簽名偽造作為回報。 我們將以某種方式利用x-only的Schnorr簽名偽造者。 這只是一種演算法，如果您願意，我們可以在虛擬機上運行它。 此外，我們可以修補計算hash函數的偽造者程式碼，以返回所需的任何內容。 替換的hash函數必須隨機尋找x-only的Schnorr簽名偽造者，因為否則它可以檢測到它在模擬中並且行為不同。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/119.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-&lt;center&gt;&lt;strong&gt;Proof sketch 概述&lt;/strong&gt;&lt;/center&gt;
-
-&lt;p&gt;現在，讓我們看一下第一種情況，即public key的第一個byte為&lt;code class=&quot;highlighter-rouge&quot;&gt;2&lt;/code&gt;，，這與我們隱含地假定為x-only pubkeys相同。 在這種情況下，我們只需要刪除第一個byte，將其傳遞給偽造者，讓它做事情，然後將Schnorr簽名傳遞給挑戰者即可。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/120.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-&lt;center&gt;&lt;strong&gt;Proof sketch case 1&lt;/strong&gt;&lt;/center&gt;
-
-&lt;p&gt;在另一種情況下，第一個byte為&lt;code class=&quot;highlighter-rouge&quot;&gt;3&lt;/code&gt;。 同樣，我們將不帶第一個byte的pubkey傳遞給偽造者，但是現在x-only偽造者會將public key解碼為&lt;code class=&quot;highlighter-rouge&quot;&gt;-P&lt;/code&gt;，因此將創建的簽名將用於錯誤的public key。 我們通過對hash函數進行編程來解決此問題，以返回挑戰者使用的hash函數output的負數。 然後，我們僅等待偽造者的答复並將其傳遞給挑戰者。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/121.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-&lt;center&gt;&lt;strong&gt;Proof sketch case 2&lt;/strong&gt;&lt;/center&gt;
-
-&lt;p&gt;取反的hash值會為該取反的點生成Schnorr簽名，因此挑戰者將很樂意接受該簽名。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/122.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-&lt;center&gt;&lt;strong&gt;Proof sketch resolution&lt;/strong&gt;&lt;/center&gt;
-
-&lt;p&gt;總而言之，我們顯示的是，如果存在x-only Schnorr簽名偽造者，則存在壓縮的pubkey Schnorr簽名偽造者，或者等效地，我們可以假設x-only Schnorr簽名偽造者是安全的。&lt;/p&gt;
-
-&lt;p&gt;我們還顯示了一些不直觀的事實，即破壞x-only的難度等於破壞壓縮的public key簽名方案。 簡而言之，tie breaker從來沒有在方案的安全性上添加任何內容。 攻擊者可以根據需要在應用x-only攻擊之前簡單地否定密鑰。 與分組操作（在這種情況下為點加法）相比，當確定攻擊的難度時，該操作通常被計數，否定操作是微不足道的。 在secp256k1的情況下，它只是對場序取模的整數（Y坐標）的取反，接近2²⁵⁶。 在任何現代處理器上，這幾乎不需要時間（在我的筆記本電腦上只需幾納秒），這意味著在硬度上的差異可以忽略不計。&lt;/p&gt;
-
-&lt;h1 id=&quot;結論--conclusion&quot;&gt;結論 | Conclusion&lt;/h1&gt;
-
-&lt;p&gt;總結，&lt;a href=&quot;https://github.com/bitcoin-core/secp256k1/pull/558&quot;&gt;BIP-schnorr&lt;/a&gt;和&lt;a href=&quot;https://github.com/sipa/bips/blob/bip-schnorr/bip-taproot.mediawiki&quot;&gt;BIP-taproot&lt;/a&gt;最近（2019年9月）進行了調整，以使用32 byte的x-only public keys。 如果在比特幣上採用Schnorr簽名，這將進一步優化已經很低的交易權重。&lt;/p&gt;
-
-&lt;p&gt;這種變化的程度相對較低，並且錢包開發人員不必對此太在意。 使用壓縮密鑰可以將x-only Schnorr signatures的安全性降低為Schnorr signatures。&lt;/p&gt;
-
-&lt;p&gt;BIP-schnorr和BIP-taproot從草稿狀態到提案狀態正在逐漸成熟。 我們正在尋找反饋，因此可以隨時閱讀，實施BIP或試用BIP-schnorr和BIP-taproot的實施。 Optech Taproot研討會和Taproot評論俱樂部提供的Jupyter筆記本是用於了解有關BIP的很好的資源。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;BIP-schnorr and BIP-taproot are slowly maturing from the draft status to the proposal status. We’re looking for feedback, so feel free to read the BIPs, implement them, or play with implementations of &lt;a href=&quot;https://github.com/bitcoin-core/secp256k1/pull/558&quot;&gt;BIP-schnorr&lt;/a&gt; and &lt;a href=&quot;https://github.com/sipa/bitcoin/commits/taproot&quot;&gt;BIP-taproot&lt;/a&gt;. Very good resources for learning more about the BIPs are &lt;a href=&quot;https://github.com/bitcoinops/taproot-workshop&quot;&gt;this Jupyter notebook&lt;/a&gt; from the Optech Taproot workshop and the &lt;a href=&quot;https://github.com/ajtowns/taproot-review&quot;&gt;Taproot Review Club.&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">如何使用BIP-schnorr安全地為每個output節省四個權重單位 原文 : Reducing Bitcoin Transaction Sizes with x-only Pubkeys 8 min read By Jonas Nick</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/110.png" /></entry><entry><title type="html">媒體區塊鏈的調查</title><link href="http://localhost:4000/news/2019/10/31/%E7%BF%BB%E8%AD%AF-%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E8%AA%BF%E6%9F%A5/" rel="alternate" type="text/html" title="媒體區塊鏈的調查" /><published>2019-10-31T00:00:00+08:00</published><updated>2019-10-31T00:00:00+08:00</updated><id>http://localhost:4000/news/2019/10/31/%E7%BF%BB%E8%AD%AF:%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E8%AA%BF%E6%9F%A5</id><content type="html" xml:base="http://localhost:4000/news/2019/10/31/%E7%BF%BB%E8%AD%AF-%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E8%AA%BF%E6%9F%A5/">&lt;blockquote&gt;
-  &lt;p&gt;本篇文章翻譯自 &lt;a href=&quot;https://ieeexplore.ieee.org/document/8706434&quot;&gt;IEEE - A blockchain for media: Survey&lt;/a&gt; 的內容，時常我們都在想區塊鏈部署文字上的問題，但都沒有人去思考過「媒體」：圖像、影像…等的發展性，或許現今的區塊鏈並不適合存放大量的資料，但現今可以透過 IPFS .. 等工具幫助部署內容至區塊鏈上，已達到目的性。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&quot;摘要&quot;&gt;摘要&lt;/h1&gt;
-
-&lt;p&gt;隨著互聯網的發展，媒體傳播服務已經普及。然而，傳播系統有很多問題。區塊鏈科技可以解決這些問題。在本論文中，區塊鏈會被定義為媒體區塊鏈且分成兩類。一是內文的安全性，意指將用區塊鏈保障安全性。二則是內文的權利資訊，意指將用區塊鏈追蹤和管理權利上的資訊。我們將會介紹和分析這個媒體區塊鏈。&lt;/p&gt;
-
-&lt;h1 id=&quot;第一章節---介紹&quot;&gt;第一章節 - 介紹&lt;/h1&gt;
-
-&lt;p&gt;隨著互聯網劇烈的發展，許多的傳播媒體服務已經提供。傳播媒體系統有著許多的問題。因為創建一個媒體的副本是簡單的，且此媒體可以被修改過，導致傳播盜竊或未經授權的媒體變得更容易。此外，版權的問題是十分嚴重的。因為這些問題，已經研究了多樣性方法，中心化管理系統無法解決這些問題。&lt;/p&gt;
-
-&lt;p&gt;區塊鏈科技可以解決這些問題。此科技不需要中心化的伺服器和網路參與者的可靠性。一個稱作是區塊鏈的共享和分散式的資料庫儲存稱為數據的交易。區塊將鏈接到前一個區塊，每個區塊包含區塊鏈中一筆貨多筆的交易。要添加新的區塊，需要參與者之間達成共識。此結構含有許多的屬性：透明性、安全性（保障）、安全性、分散性等。具有這些特徵和特性的區塊鏈技術是保護媒體所必需的。&lt;/p&gt;
-
-&lt;p&gt;論文中其餘的部分如下:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;第二章節將介紹媒體的區塊鏈&lt;/li&gt;
-  &lt;li&gt;第三章節將對第二章節中介紹的區塊鏈進行了分析&lt;/li&gt;
-  &lt;li&gt;第四章節將對媒體區塊鏈做個總結。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;第二章節---媒體區塊鏈&quot;&gt;第二章節 - 媒體區塊鏈&lt;/h1&gt;
-
-&lt;p&gt;在本文中，我們將數位內容、媒體和多媒體的區塊鏈定義為&lt;strong&gt;媒體區塊鏈&lt;/strong&gt;。關於媒體區塊鏈有很多研究。這些研究可確保數位內容的完整性、可追溯性、驗證或控制，並分為兩類：一是內文的安全性意味著使用區塊鏈保護內容。二是內容權利資訊，這意指將使用區塊鏈追蹤和管理權利資訊。&lt;/p&gt;
-
-&lt;h2 id=&quot;a-內文安全性&quot;&gt;A. 內文安全性&lt;/h2&gt;
-
-&lt;p&gt;D. Bhowmik and T. Feng [1] 提出了一個多媒體區塊鏈框架來針對圖像媒體的分散式多媒體之安全性和完整性。提出的框架包含基於壓縮感測（CS）[4]的自嵌入浮水印演算法[5]，區塊鏈分散式帳本和身份驗證。基於 CS 的自嵌入浮水印可以檢查媒體是否遭篡改。使用 CS 從原本的資料提取浮水印。CS 也可以用於恢復原始資料。在區塊鏈中，交易由包含交易 ID 的圖像/媒體的交易訊息和可以恢復原始資料的 CS 樣本訊息組成。認證過程如下。從想要驗證的圖像中提取浮水印。如上所述，內含浮水印的交易包含交易 ID 和 CS 樣本。區塊鏈可以透過交易 ID 查詢交易細節。並透過 CS 樣本恢復原始圖像。將檢索到的圖像與原始圖像進行比較，我們可以確定修改後的區域。&lt;/p&gt;
-
-&lt;p&gt;在[2]中，Fotiou. N 和 Polyzos. G.C. 考慮如何在以訊息為中心的網路（ICN）中傳播內容[9]。該系統的模型由內容所有者和訂閱用戶所組成。
-作者使用基於區塊鏈的分層身份的加密（HIBE）[7]演算法。此演算法可確保內容完整性和內容之來源驗證。HIBE 是使用身份作為公鑰的方案而 PKG 有嚴重的金鑰託管問題。因此，使用區塊鏈來解決這個問題，可以透過 HIBE 的公鑰和私鑰安全地傳播內容。&lt;/p&gt;
-
-&lt;h2 id=&quot;b-內文權利資訊&quot;&gt;B. 內文權利資訊&lt;/h2&gt;
-
-&lt;p&gt;在[3]中，作者提出了中國網路媒體行業的五個問題：抄襲、網路媒體質量低、利潤低、法規少和版權交易不受控制。為了解決這些問題，他們提出了一種基於區塊鏈的網路媒體版權管理方案。該方案具有生產管理，版權訊息管理，交易管理和用戶行為管理。在生產管理上，儲存數據並建立智能合約，在版權訊息管理上，版權會受到控制。此外，該方案表示提供方與平台方之間的關係以提高工作質量，交易已生成並在事務管理中簽名。透過允許客戶對問題進行投票及用戶活動管理接受公眾意見，這些管理將保護數字版權。&lt;/p&gt;
-
-&lt;p&gt;J. Kishigami 提出了超級傳播[8]的問題，該問題應集中於中心。為了解決這個問題，作者提出了使用區塊鏈的內容傳播系統[4]，所提出的系統具有三個特徵。首先，內容擁有者可以輕鬆控制其內容。第二，區塊鏈是為此系統設計的。第三，目標是稱為 4K 或 8K 的超高分辨率視頻。他的系統由許可方，被許可方和礦工組成。許可方有權控制僅擁有的內容並上傳該內容。被許可方運行兩個應用程序。一個應用程序從區塊鏈獲得許可證後另一個應用程序播放視頻，挖礦服務器生成一個包含權利資訊的區塊，並通過共識演算法將該區塊添加到區塊鏈中，因此系統不需要一個中央伺服器。&lt;/p&gt;
-
-&lt;h1 id=&quot;第三章節---分析&quot;&gt;第三章節 - 分析&lt;/h1&gt;
-
-&lt;p&gt;在本章節中，我們分析第二章節中介紹的媒體區塊鏈，並通過 TABLE1 比較媒體區塊鏈。它顯示了交易中顯示的配置，使用的區塊鏈類型以及對媒體的保證。在內容安全方面，媒體區塊鏈具有不同的交易配置和對媒體的類似保證。另一方面，內容權利訊息中的媒體區塊鏈具有類似的交易配置和對媒體的不同保證。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/92.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;第四章節---結論&quot;&gt;第四章節 - 結論&lt;/h1&gt;
-
-&lt;p&gt;隨著互聯網的日益發展，媒體存在許多問題。區塊鏈解決了這些問題。我們將其定義為媒體區塊鏈，並在第二章節中介紹了有關媒體區塊鏈的四項研究。這些研究分為兩類：內容安全性和內容權利資訊。在第三章節中，我們對每個媒體鏈進行了比較，以顯示交易中配置，區塊鏈使用的類型以及對媒體的保證。我們通過此比較分析了每個區塊鏈。&lt;/p&gt;
-
-&lt;p&gt;雖說媒體區塊鏈還不熟悉。但是，人們很感興趣，因為媒體區塊鏈可以解決現有媒體中竊盜、版權、未經授權的發行等問題。未來將有許多關於媒體區塊鏈的研究。&lt;/p&gt;
-
-&lt;h1 id=&quot;譯者後記&quot;&gt;譯者後記&lt;/h1&gt;
-
-&lt;p&gt;近期區塊鏈的應用上除了博弈（將規則公開透明吸引玩家和莊家進場遊玩。）、文字上鏈（確保不會被中心伺服器刪除。）、各式履歷（透過公開透明的規則，保障雙方權益。）..等，但媒體區塊鏈的概念尚未萌芽，有幾個痛點（以太坊區塊鏈為例）：1. 部署一張照片需要過多的成本（Gas Fees 太高）2. 上傳速度太慢、部署時間太久 ..等，以現有要解決這些問題仍必須透過 IPFS 來完成部署至區塊鏈上之動作，希望未來能夠將&lt;strong&gt;擴容性&lt;/strong&gt;和 &lt;strong&gt;TPS 提高&lt;/strong&gt;，使得應用區塊鏈項目更加方便。&lt;/p&gt;
-
-&lt;h1 id=&quot;reference&quot;&gt;Reference&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;D Bhowmik, T. Feng, “The multimedia blockchain: A distributed and tamper-proof media transaction framework”, Digital Signal Processing (DSP) 2017 22nd International Conference on, 2017.&lt;/li&gt;
-  &lt;li&gt;N Fotiou, G.C. Polyzos, “Decentralized name-based security for content distribution using blockchains”, Computer Communications Workshops (INFOCOM WKSHPS) 2016 IEEE Conference on, 2016.&lt;/li&gt;
-  &lt;li&gt;R Xu, L Zhang, H Zhao, Y. Peng, “Design of network media’s digital rights management scheme based on blockchain technology”, Autonomous Decentralized System (ISADS) 2017 IEEE 13th International Symposium on, 2017.&lt;/li&gt;
-  &lt;li&gt;J Kishigami, S Fujimura, H Watanabe, A Nakadaira, A Akutsu, “The blockchain-based digital content distribution system”, Big Data and Cloud Computing (BDCloud) 2015 IEEE Fifth International Conference on, 2015.&lt;/li&gt;
-  &lt;li&gt;D.L. Donoho, “Compressed sensing”, IEEE Transactions on information theory, vol. 52.4, pp. 1289-1306, 2006.&lt;/li&gt;
-  &lt;li&gt;D Singh, S.K. Singh, “Effective self-embedding watermarking scheme for image tampered detection and localization with recovery capability”, Journal of Visual Communication and Image Representation, vol. 38, pp. 775-789, 2016.&lt;/li&gt;
-  &lt;li&gt;A Lewko, B Waters, “Unbounded HIBE and attribute-based encryption”, Annual International Conference on the Theory and Applications of Cryptographic Techniques, 2011.&lt;/li&gt;
-  &lt;li&gt;R Mori, M Kawahara, “Superdistribution: the concept and the architecture”, IEICE TRANSACTIONS (1976–1990), vol. 73.7, pp. 1133-1146, 1990.&lt;/li&gt;
-  &lt;li&gt;B Ahlgren, C Dannewitz, C Imbrenda, D Kutscher, B Ohlman, “A survey of information-centric networking”, IEEE Communications Magazine, vol. 50.7, 2012.&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">本篇文章翻譯自 IEEE - A blockchain for media: Survey 的內容，時常我們都在想區塊鏈部署文字上的問題，但都沒有人去思考過「媒體」：圖像、影像…等的發展性，或許現今的區塊鏈並不適合存放大量的資料，但現今可以透過 IPFS .. 等工具幫助部署內容至區塊鏈上，已達到目的性。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/92.png" /></entry></feed>
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><summary type="html">原文：隔离见证、闪电网络理解 隔離見證已經於2017年8月在比特幣上啟動了。最近比特幣正在朝著下一個擴容方案努力，閃電網路 Lightning Network。閃電網路的啟動必須基於更多的使用者使用隔離見證地址。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/img/125.png" /></entry></feed>
