@@ -20,8 +20,8 @@
 ```
 
 ## 文章貢獻注意事項：
-* **文件命名：**在`/_post`創建新的markdonwn文件，請依照發布 `年-月-日-標題.markdown`格式命名
-* **YAML設定：**`年-月-日-標題.markdown` 文件最上部的`YAML`請參考下方進行修改
+* **文件命名：** 在`/_post`創建新的markdonwn文件，請依照發布 `年-月-日-標題.markdown`格式命名
+* **YAML設定：** `年-月-日-標題.markdown` 文件最上部的`YAML`請參考下方進行修改
 	> * `image: '/img/125.png'` 圖片請放置在此處`/img/`，圖片命名格式`作者名-流水號.png`，圖片寬度為800
 	> * 如果還不想發布可以把`published: true`改為`false`。  
 	> **注意：**`layout: post`, `categories: news`, `hero_image: /img/hero.png`建議不要更動
@@ -39,12 +39,12 @@
 	---
 	```
 
-* **圖片位置：**圖片，請放置在`/img`中，因用圖片請用`/img.png`格式（請勿用託管圖片，怕圖片失效
+* **圖片位置：** 圖片，請放置在`/img`中，因用圖片請用`/img.png`格式（請勿用託管圖片，怕圖片失效
 
 	> 圖片大小規範：
 	> * blog 圖片 寬度 800 x 600  # 寬度一定要800 高度隨意
 	> * 商品  圖片 寬度 640 x 480
-* **數學公式：**可以markdown的文件當中添加以下程式碼([參考](https://www.jianshu.com/p/054484d0892a)第四項)：
+* **數學公式：** 可以markdown的文件當中添加以下程式碼([參考](https://www.jianshu.com/p/054484d0892a)第四項)：
   ```
   <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
   ```
