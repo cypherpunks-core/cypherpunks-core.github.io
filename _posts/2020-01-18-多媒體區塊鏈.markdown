@@ -90,7 +90,7 @@ c）身份驗證
     <img src="/img/panda-35.png">
 </div>
 
-<strong><center>圖2 提議的多媒體區塊鏈框架概述：內容處理和交易。</center></strong>
+<strong><center>圖2 提議的多媒體區塊鏈框架概述：內容處理和交易</center></strong>
 
 ### 1）浮水印
 
@@ -149,13 +149,13 @@ CS 樣本用於重建原始圖片的下採樣版本，以識別可能恢復原�
     <img src="/img/panda-37.png">
 </div>
 
-<strong><center>圖4 使用以太坊獲得的特定 ID 的交易歷史記錄。</center></strong>
+<strong><center>圖4 使用以太坊獲得的特定 ID 的交易歷史記錄</center></strong>
 
 <div align="center">
     <img src="/img/panda-38.png">
 </div>
 
-<strong><center>圖5 圖片的資料庫。</center></strong>
+<strong><center>圖5 圖片的資料庫</center></strong>
 
 ## 結果
 對於作者的框架，作者使用了現有的區塊鏈基礎架構。區塊鏈網路建立在以太坊的測試網上。我們還使用了一個開源工具箱，用於基於感知壓縮的稀疏樣本生成和重構。 l1 - Magic 工具箱用於解決兩個優化問題，使用WAVELAB 包和 J. Romberg 的 Noiselet 生成小波（Wavelet）。
@@ -170,7 +170,7 @@ CS 樣本用於重建原始圖片的下採樣版本，以識別可能恢復原�
     <img src="/img/panda-39.png">
 </div>
 
-<strong><center>圖6 各圖關係 （a）原始圖片（b）浮水印圖片（c）受保護版本（d）使用提取的浮水印的重建圖（e）是檢測到的篡改區域。</center></strong>
+<strong><center>圖6 各圖關係 （a）原始圖片（b）浮水印圖片（c）受保護版本（d）使用提取的浮水印的重建圖（e）是檢測到的篡改區域</center></strong>
 
 ## 結論
 在本文中，作者提出了一種基於區塊鏈架構的新型分散式防篡改媒體交易框架。 擬議的多媒體區塊鏈框架建立在自嵌入浮水印演算法的基礎上，該演算法使用感知壓縮來檢測任何篡改並檢索原始內容。我們已經成功證明了這一概念。
