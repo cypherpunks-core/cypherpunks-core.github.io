@@ -10,23 +10,27 @@ hero_image: /img/hero.png
 ---
 
 > 編者注：本文對 Cosmos 網路中區塊鏈和比特幣、以太坊進行了鉅細靡遺的比較。作者先從區塊鏈系統的棧層出發，分析了比特幣、以太坊在不同棧層上的技術要點，最後迴歸到 Cosmos 網路中的區塊鏈，概念解釋尤為清晰，是不可多得的解釋文。
->
->
->
-> 鑑於文章實在太長，我們在文首附上了目錄。
 
-## **目錄**
+本文來自：[ethfans](https://ethfans.org/posts/how-does-cosmos-work-part1)   
+鑑於文章實在太長，我們在文首附上了目錄。
 
-* [Cosmos 是什麼？](https://ethfans.org/posts/how-does-cosmos-work-part1#Cosmos%20%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F)
-* [區塊鏈結構簡介](https://ethfans.org/posts/how-does-cosmos-work-part1#%E5%8C%BA%E5%9D%97%E9%93%BE%E7%BB%93%E6%9E%84%E7%AE%80%E4%BB%8B)
-  * [比特幣棧層結構](https://ethfans.org/posts/how-does-cosmos-work-part1#%E6%AF%94%E7%89%B9%E5%B8%81%E6%A0%88%E5%B1%82%E7%BB%93%E6%9E%84)
-  * [以太坊棧層結構](https://ethfans.org/posts/how-does-cosmos-work-part1#%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%A0%88%E5%B1%82%E7%BB%93%E6%9E%84)
-* [基於比特幣與以太坊構建應用程序](https://ethfans.org/posts/how-does-cosmos-work-part1#%E5%9F%BA%E4%BA%8E%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%8E%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%9E%84%E5%BB%BA%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F)
-* [Cosmos 區塊鏈結構](https://ethfans.org/posts/how-does-cosmos-work-part1#Cosmos%20%E5%8C%BA%E5%9D%97%E9%93%BE%E7%BB%93%E6%9E%84)
-  * [Cosmos 共識層](https://ethfans.org/posts/how-does-cosmos-work-part1#Cosmos%20%E5%85%B1%E8%AF%86%E5%B1%82)
-  * [Cosmos 網路層](https://ethfans.org/posts/how-does-cosmos-work-part1#Cosmos%20%E7%BD%91%E7%BB%9C%E5%B1%82)
-  * [Cosmos 應用層](https://ethfans.org/posts/how-does-cosmos-work-part1#Cosmos%20%E5%85%B1%E8%AF%86%E5%B1%82)
-* [結論](https://ethfans.org/posts/how-does-cosmos-work-part1#%E7%BB%93%E8%AE%BA)
+
+- [Cosmos 是什麼？](#cosmos-%e6%98%af%e4%bb%80%e9%ba%bc)
+  - [獨立平行區塊鏈的去中心化網路](#%e7%8d%a8%e7%ab%8b%e5%b9%b3%e8%a1%8c%e5%8d%80%e5%a1%8a%e9%8f%88%e7%9a%84%e5%8e%bb%e4%b8%ad%e5%bf%83%e5%8c%96%e7%b6%b2%e8%b7%af)
+  - [“每條區塊鏈都採用 BFT 共識算法”](#%e6%af%8f%e6%a2%9d%e5%8d%80%e5%a1%8a%e9%8f%88%e9%83%bd%e6%8e%a1%e7%94%a8-bft-%e5%85%b1%e8%ad%98%e7%ae%97%e6%b3%95)
+  - [“Tendermint 共識算法”](#tendermint-%e5%85%b1%e8%ad%98%e7%ae%97%e6%b3%95)
+- [區塊鏈結構簡介](#%e5%8d%80%e5%a1%8a%e9%8f%88%e7%b5%90%e6%a7%8b%e7%b0%a1%e4%bb%8b)
+  - [比特幣棧層結構](#%e6%af%94%e7%89%b9%e5%b9%a3%e6%a3%a7%e5%b1%a4%e7%b5%90%e6%a7%8b)
+  - [以太坊棧層結構](#%e4%bb%a5%e5%a4%aa%e5%9d%8a%e6%a3%a7%e5%b1%a4%e7%b5%90%e6%a7%8b)
+- [基於比特幣與以太坊構建應用程序](#%e5%9f%ba%e6%96%bc%e6%af%94%e7%89%b9%e5%b9%a3%e8%88%87%e4%bb%a5%e5%a4%aa%e5%9d%8a%e6%a7%8b%e5%bb%ba%e6%87%89%e7%94%a8%e7%a8%8b%e5%ba%8f)
+  - [比特幣侷限性的一個例子](#%e6%af%94%e7%89%b9%e5%b9%a3%e4%be%b7%e9%99%90%e6%80%a7%e7%9a%84%e4%b8%80%e5%80%8b%e4%be%8b%e5%ad%90)
+  - [以太坊侷限性的一個例子](#%e4%bb%a5%e5%a4%aa%e5%9d%8a%e4%be%b7%e9%99%90%e6%80%a7%e7%9a%84%e4%b8%80%e5%80%8b%e4%be%8b%e5%ad%90)
+- [Cosmos 區塊鏈結構](#cosmos-%e5%8d%80%e5%a1%8a%e9%8f%88%e7%b5%90%e6%a7%8b)
+  - [Cosmos 共識層](#cosmos-%e5%85%b1%e8%ad%98%e5%b1%a4)
+  - [Tendermint 共識是如何運作的？](#tendermint-%e5%85%b1%e8%ad%98%e6%98%af%e5%a6%82%e4%bd%95%e9%81%8b%e4%bd%9c%e7%9a%84)
+  - [Cosmos 網路層](#cosmos-%e7%b6%b2%e8%b7%af%e5%b1%a4)
+  - [Cosmos 應用層](#cosmos-%e6%87%89%e7%94%a8%e5%b1%a4)
+- [結論](#%e7%b5%90%e8%ab%96)
 
 ![1.jpg](https://upyun-assets.ethfans.org/uploads/photo/image/5ca7121ac7ae45a4a55cddeae218a5cb.jpg)
 
