@@ -3,7 +3,7 @@ layout: post
 title:  "Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊"
 date:   2020-02-13
 categories: news
-description: ""
+description: "本文對 Cosmos 網路中區塊鏈和比特幣、以太坊進行了鉅細靡遺的比較。作者先從區塊鏈系統的棧層出發，分析了比特幣、以太坊在不同棧層上的技術要點，最後迴歸到 Cosmos 網路中的區塊鏈，概念解釋尤為清晰，是不可多得的解釋文"
 image: 'https://upyun-assets.ethfans.org/uploads/photo/image/5ca7121ac7ae45a4a55cddeae218a5cb.jpg'
 published: true
 hero_image: /img/hero.png
