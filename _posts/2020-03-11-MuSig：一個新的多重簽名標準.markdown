@@ -6,6 +6,9 @@ tags: [Bitcoin, bitcoin, Scaling Bitcoin, Scripts, Network, MuSig]
 categories: [Bitcoin]
 image: /img/147.jpg
 description: "MuSig提供可證明的安全效能，甚至能夠抵禦多名惡意簽名者的勾結，並建立與普通的單一簽名者Schnorr簽名別無二致的簽名。"
+published: true
+hero_image: /img/hero.png
+categories: news
 ---
 
 2019年2月15日| Andrew Poelstra [轉載blockstream](https://blockstream.com/2019/02/18/en-musig-a-new-multisignature-standard/)
