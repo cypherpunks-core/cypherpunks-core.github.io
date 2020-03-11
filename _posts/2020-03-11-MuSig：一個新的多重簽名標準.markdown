@@ -2,8 +2,6 @@
 layout: post
 title: "MuSig：一個新的多重簽名標準"
 date: 2020-03-11
-tags: [Bitcoin, bitcoin, Scaling Bitcoin, Scripts, Network, MuSig]
-categories: [Bitcoin]
 image: /img/147.jpg
 description: "MuSig提供可證明的安全效能，甚至能夠抵禦多名惡意簽名者的勾結，並建立與普通的單一簽名者Schnorr簽名別無二致的簽名。"
 published: true

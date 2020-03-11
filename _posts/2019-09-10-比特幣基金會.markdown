@@ -3,8 +3,6 @@ layout: post
 categories: news
 title: "比特幣基金會"
 date: 2019-09-10
-tags: [Bitcoin, bitcoin, 比特幣基金會, bitcoin foundation]
-categories: [Bitcoin]
 image: /img/148.png
 description: "回顧了比特幣的歷史，著重介紹“比特幣基金會”——這一比特幣生態系統中最著名的組織之一。"
 published: true
