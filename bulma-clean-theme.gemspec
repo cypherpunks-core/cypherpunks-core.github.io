@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "jekyll-sitemap", "~> 1.2"
   spec.add_runtime_dependency "jekyll-paginate", "~> 1.1"
   spec.add_runtime_dependency "jekyll-seo-tag", "~> 2.5"
-  spec.add_runtime_dependency "kramdown", "~> 1.17"
+  spec.add_runtime_dependency "kramdown", ">= 1.17", "< 3.0"
   spec.add_runtime_dependency "rouge", "~> 3.3"
 
   spec.add_development_dependency "bundler", "~> 2.0"
