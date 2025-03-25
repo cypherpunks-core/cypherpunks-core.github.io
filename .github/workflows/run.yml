@@ -10,9 +10,16 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - name: Install kramdown-parser-gfm
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
+      - name: Install dependencies
         run: |
-          sudo gem install kramdown-parser-gfm
+          sudo gem install bundler:2.2.15
+          bundle install
+          bundle add kramdown-parser-gfm
       - uses: helaili/jekyll-action@2.0.1
         env:
           JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
