@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  github-pages:
+  build-and-deploy:
     runs-on: ubuntu-22.04
     permissions:
       contents: write
@@ -17,11 +17,6 @@ jobs:
         with:
           ruby-version: '3.0'
           bundler-cache: true
-      - name: Configure Git
-        run: |
-          git config --global --add safe.directory /github/workspace
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
       - name: Install dependencies
         run: |
           bundle config unset deployment
@@ -29,6 +24,10 @@ jobs:
           bundle install
           bundle add kramdown-parser-gfm
           bundle install
-      - uses: helaili/jekyll-action@2.0.1
-        env:
-          JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build site
+        run: bundle exec jekyll build
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
