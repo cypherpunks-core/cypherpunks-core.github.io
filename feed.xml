@@ -1,4 +1,75 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2025-03-25T14:23:41+00:00</updated><id>/feed.xml</id><title type="html">密碼龐克 Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">MuSig：一個新的多重簽名標準</title><link href="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/" rel="alternate" type="text/html" title="MuSig：一個新的多重簽名標準" /><published>2020-03-11T00:00:00+00:00</published><updated>2020-03-11T00:00:00+00:00</updated><id>/news/2020/03/11/MuSig:%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96</id><content type="html" xml:base="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/">&lt;table&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2025-03-25T14:32:27+00:00</updated><id>/feed.xml</id><title type="html">密碼龐克 Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">Cypherpunks Taiwan 重啟：我們為何再次聚集？</title><link href="/news/community/2025/03/24/Cypherpunks-Taiwan-%E9%87%8D%E5%95%9F-%E6%88%91%E5%80%91%E7%82%BA%E4%BD%95%E5%86%8D%E6%AC%A1%E8%81%9A%E9%9B%86/" rel="alternate" type="text/html" title="Cypherpunks Taiwan 重啟：我們為何再次聚集？" /><published>2025-03-24T00:00:00+00:00</published><updated>2025-03-24T00:00:00+00:00</updated><id>/news/community/2025/03/24/Cypherpunks%20Taiwan%20%E9%87%8D%E5%95%9F:%E6%88%91%E5%80%91%E7%82%BA%E4%BD%95%E5%86%8D%E6%AC%A1%E8%81%9A%E9%9B%86%3F</id><content type="html" xml:base="/news/community/2025/03/24/Cypherpunks-Taiwan-%E9%87%8D%E5%95%9F-%E6%88%91%E5%80%91%E7%82%BA%E4%BD%95%E5%86%8D%E6%AC%A1%E8%81%9A%E9%9B%86/">&lt;h2 id=&quot;cypherpunks-taiwan-重啟我們為何再次聚集&quot;&gt;&lt;strong&gt;Cypherpunks Taiwan 重啟：我們為何再次聚集？&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;從 2019 到現在，世界與網路都變了很多，但 &lt;strong&gt;我們對隱私的渴望沒有改變&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;在數位身份、鏈上足跡與 AI 大模型全面滲透的時代，&lt;strong&gt;Cypherpunks 的核心信念——Privacy is necessary for an open society in the electronic age.&lt;/strong&gt;，從未如此 relevant。&lt;/p&gt;
+
+&lt;p&gt;這些年來，我們見證了比特幣的主流化、Web3 的爆炸成長，也見證了過度中心化平台對個人自由與資訊掌控權的反撲。是時候重新聚集了。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;為什麼重啟-cypherpunks-taiwan&quot;&gt;&lt;strong&gt;為什麼重啟 Cypherpunks Taiwan？&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;Cypherpunks Taiwan 並不是為了「追逐熱點」，我們想建立的，是一個屬於台灣技術社群的節點——&lt;/p&gt;
+
+&lt;p&gt;一個可以討論密碼學、隱私工具、抗審查機制、去中心化協議的地方，一個能吸引真正關心自由與技術的你加入的社群。&lt;/p&gt;
+
+&lt;p&gt;這一次，我們的目標不只是討論技術，更希望拓展邊界、&lt;strong&gt;吸引對抗中心化壓力的潛在同盟者&lt;/strong&gt;，不論你是否來自區塊鏈產業，&lt;/p&gt;
+
+&lt;p&gt;只要你在思考如何用科技解決問題、保護自由，那你就是我們想認識的對象。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;我們想討論的是這些問題&quot;&gt;&lt;strong&gt;我們想討論的，是這些問題：&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在現代網路架構下，&lt;strong&gt;隱私還有多少選項？&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;去中心化的理想，&lt;strong&gt;如何與現實世界的運營模式協作？&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;面對鏈上永久紀錄與實名制風潮，&lt;strong&gt;我們還能怎麼設計新的技術解法？&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;「做自由的工具」與「成為主流產品」之間，有沒有第三條路？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;與我們一起分享這些問題的講者們&quot;&gt;&lt;strong&gt;與我們一起分享這些問題的講者們&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;🔹 &lt;strong&gt;Dr. Awesome Doge&lt;/strong&gt;｜Co-Founder @ TONX&lt;/p&gt;
+
+&lt;p&gt;TONX 共同創辦人，致力於推動 TON 生態系的發展，專注於區塊鏈技術的應用與創新。同時也是全球最大中文加密社群「比特幣中文社團」的共同創辦人，自 2014 年成立以來，已累積超過 16.9 萬成員，是華語圈最具影響力的加密社群之一。&lt;/p&gt;
+
+&lt;p&gt;🔹 &lt;strong&gt;Max Wu&lt;/strong&gt;｜Co-Founder @ HackMD&lt;/p&gt;
+
+&lt;p&gt;HackMD 共同創辦人暨 CEO，在網路產業與開源社群擁有豐富經驗。HackMD 是一個協作式 Markdown 編輯器，促進團隊與個人之間的知識共享，最近推出的文件夾功能更進一步提升了使用者體驗。&lt;/p&gt;
+
+&lt;p&gt;🔗 &lt;a href=&quot;https://hackmd.io/@MaxWu/HackMD-and-open-source&quot;&gt;延伸閱讀&lt;/a&gt;：https://hackmd.io/@MaxWu/HackMD-and-open-source&lt;/p&gt;
+
+&lt;p&gt;🔹 &lt;strong&gt;林旅強（Richard Lin）&lt;/strong&gt;｜Co-Founder @ 開源社&lt;/p&gt;
+
+&lt;p&gt;資深開源推動者，曾任 COSCUP 志工，並於中研院自由軟體鑄造場深耕多年。2014 年聯合創辦中國開源社，後任職華為近八年專注開源與開發者生態建設，現為 &lt;a href=&quot;http://01.AI&quot;&gt;01.AI&lt;/a&gt;（創辦人李開復）開源暨開發者關係負責人。&lt;/p&gt;
+
+&lt;p&gt;🔹 &lt;strong&gt;李佳憲（Neil Lee）&lt;/strong&gt;｜執行董事 @ EchoX&lt;/p&gt;
+
+&lt;p&gt;LeadBest Consulting Group 共同創辦人與前執行長，長期推動數位轉型、Web3 發展與開源創新。過去曾創辦時間軸科技、協助建立 friDay 購物等平台，並活躍於敏捷文化與去中心化應用的落地實踐。&lt;/p&gt;
+
+&lt;p&gt;🔗 延伸閱讀：https://www.facebook.com/chiahsienl&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;邀請你加入cypherpunks-小聚--make-privacy-great-again&quot;&gt;&lt;strong&gt;邀請你加入：#Cypherpunks 小聚 — Make Privacy Great Again&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;我們將在 Tempo House 辦一場開放的技術小聚，邀請過去在台灣推動開源、去中心化與隱私技術的講者現身分享，&lt;/p&gt;
+
+&lt;p&gt;也會安排足夠的交流時間，讓我們彼此認識、重新建立這個社群的連結。&lt;/p&gt;
+
+&lt;p&gt;📅 &lt;strong&gt;活動時間&lt;/strong&gt;：3 月 31 日（一）18:00 - 22:30&lt;/p&gt;
+
+&lt;p&gt;📍 &lt;strong&gt;活動地點&lt;/strong&gt;：Tempo House 二樓（台北市中山區建國北路二段 12 號）&lt;/p&gt;
+
+&lt;p&gt;🔗 &lt;strong&gt;報名連結&lt;/strong&gt;：https://www.meetup.com/taipei-bitcoin-meetup-group/events/306823746/&lt;/p&gt;
+
+&lt;p&gt;我們相信，&lt;strong&gt;Cypherpunks write code—but more重要的是，他們也聚在一起，互相認識，互相支持。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;這場重啟，會是我們的第一步。等你來。&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><category term="news" /><category term="community" /><category term="cypherpunks" /><category term="privacy" /><category term="decentralization" /><category term="technology" /><category term="community" /><summary type="html">Cypherpunks Taiwan 重啟：我們為何再次聚集？</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/img/150.jpg" /><media:content medium="image" url="/img/150.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">MuSig：一個新的多重簽名標準</title><link href="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/" rel="alternate" type="text/html" title="MuSig：一個新的多重簽名標準" /><published>2020-03-11T00:00:00+00:00</published><updated>2020-03-11T00:00:00+00:00</updated><id>/news/2020/03/11/MuSig:%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96</id><content type="html" xml:base="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/">&lt;table&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;td&gt;2019年2月15日&lt;/td&gt;
@@ -1844,244 +1915,4 @@ $ git merge upstream/master
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://gitbook.tw/chapters/github/pull-request.html&quot;&gt;為你自己學Git&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.itread01.com/content/1544771540.html?fbclid=IwAR2s4ATwibiiKRS3DYBnNsaNVuQeedOovTKZyGY9iaVqUukTDZppXzGu35w&quot;&gt;git如何同步fork專案&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><category term="news" /><summary type="html">PR 即為 Pull Request，在 Github 上必須先複製（Fork）一份原作的專案到你自己的 GitHub 帳號底下。 那自己的 Fork 專案想怎麼玩就怎麼玩，之後你就可以推上自己的 Fork 文件上，發個通知給 Cypherpunks-core，讓團隊人員來審視這次的 PR 是否 ok，若是 ok 則會將您發起的 PR 合併進團隊文章裡，若不 ok 將會在底下描述為何沒通過的理由。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/img/panda-22.png" /><media:content medium="image" url="/img/panda-22.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">BIP-65 OP_CHECKLOCKTIMEVERIFY</title><link href="/news/2019/11/14/BIP-65-OP_CHECKLOCKTIMEVERIFY/" rel="alternate" type="text/html" title="BIP-65 OP_CHECKLOCKTIMEVERIFY" /><published>2019-11-14T00:00:00+00:00</published><updated>2019-11-14T00:00:00+00:00</updated><id>/news/2019/11/14/BIP-65%20OP_CHECKLOCKTIMEVERIFY</id><content type="html" xml:base="/news/2019/11/14/BIP-65-OP_CHECKLOCKTIMEVERIFY/">&lt;p&gt;&lt;a href=&quot;http://gavinzhang.work/blockchain/%E6%AF%94%E7%89%B9%E5%B8%81/BIP-65%20OP-CHECKLOCKTIMEVERIFY.html&quot;&gt;原文&lt;/a&gt;:BIP-65 OP_CHECKLOCKTIMEVERIFY    &lt;br /&gt;
-該BIP為比特幣 script 系統描述了一個新的 OPCode （&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OP_CHECKLOCKTIMEVERIFY&lt;/code&gt;），該 OPCode 允許交易輸出在未來的某個點之前變得不可花費。&lt;/p&gt;
-
-&lt;h2 id=&quot;概要&quot;&gt;概要&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;CHECKLOCKTIMEVERIFY 重新定義了現有的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NOP2&lt;/code&gt; OPCode (其實就是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OP_CHECKLOCKTIMEVERIFY&lt;/code&gt; 指令替換了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OP_NOP2&lt;/code&gt; 指令)。執行時，如果以下任何一個條件成立，則 OPCode 直譯器將以錯誤終止：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;堆棧是空的;&lt;/li&gt;
-  &lt;li&gt;堆棧中的頂層項目小於0;&lt;/li&gt;
-  &lt;li&gt;頂層堆棧項的鎖定時間類型（高度vs.時間戳）與 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位不同;&lt;/li&gt;
-  &lt;li&gt;頂部堆棧項大於交易的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;txin&lt;/code&gt;（交易輸入）的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nSequence&lt;/code&gt; 欄位是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xffffffff&lt;/code&gt; ;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;否則， OPCode 執行將繼續，如同NOP執行一樣。&lt;/p&gt;
-
-&lt;p&gt;交易中的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位可防止交易被挖出，直到達到某個區塊高度或區塊時間為止。通過將傳給 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; 的參數與 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位進行比較，我們間接驗證是否已達到所需的區塊高度或區塊時間; 直到該區塊高度或區塊時間已經達到，交易輸出仍然不可花費。&lt;/p&gt;
-
-&lt;h2 id=&quot;動機&quot;&gt;動機&lt;/h2&gt;
-
-&lt;p&gt;交易中的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位可用於證明 將來可以花費這筆交易輸出，方法是構造一個有效的交易開銷，並對&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt;欄位進行設定。&lt;/p&gt;
-
-&lt;p&gt;然而， &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位不能證明在未來的某個時間內不可能花費交易輸出，因為無法知道是否建立了支出該輸出的其他交易的有效簽名。&lt;/p&gt;
-
-&lt;h2 id=&quot;第三方託管&quot;&gt;第三方託管&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;如果 Alice 和 Bob 聯合經營一家企業，他們可能希望確保所有資金都儲存在需要雙方同時批准的 2-of-2 的多重（多重簽名的交易）交易輸出中。但是，他們發現在特殊情況下，例如任何一個人受到“嚴重的車禍”，他們都需要備用的方法，繼續動用該筆資金。因此，他們任命他們的律師 Lenny 擔任第三方。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;在任何時候，Lenny 隨時可以同 Alice 或 Bob 一起串謀非法竊取資金。同樣，Lenny 可能更願意不竊取資金，以阻止不良行為者企圖強行從他那裡獲取 secret keys 。&lt;/p&gt;
-
-&lt;p&gt;但是，使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; 可以將資金儲存在以下格式的 scriptPubKeys 中：&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;IF
-    &amp;lt;now + 3 months&amp;gt; CHECKLOCKTIMEVERIFY DROP
-    &amp;lt;Lenny&apos;s pubkey&amp;gt; CHECKSIGVERIFY
-    1
-ELSE
-    2
-ENDIF
-&amp;lt;Alice&apos;s pubkey&amp;gt; &amp;lt;Bob&apos;s pubkey&amp;gt; 2 CHECKMULTISIG
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;在任何時候，資金都可以用下面的 OPCode 來支付：&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0 &amp;lt;Alice&apos;s signature&amp;gt; &amp;lt;Bob&apos;s signature&amp;gt; 0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Lenny 經過 3 個月後，Alice 或 Bob 中的一個可以用以下 OPCode 支付資金：&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0 &amp;lt;Alice/Bob&apos;s signature&amp;gt; &amp;lt;Lenny&apos;s signature&amp;gt; 1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;非交互式定期退款--non-interactive-time-locked-refunds&quot;&gt;非交互式定期退款 | Non-interactive time-locked refunds&lt;/h2&gt;
-
-&lt;p&gt;存在許多協議，其中建立交易輸出，這需要雙方的合作來花費輸出。為確保一方的失敗不會導致資金損失，退款交易使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 提前設定。這些退款交易需要互動式建立，此外，目前易受交易延展性影響。 ` CHECKLOCKTIMEVERIFY` 可用於這些協議，用非互動式設定取代互動式設定，另外，使交易延展性不成問題。&lt;/p&gt;
-
-&lt;h3 id=&quot;雙因素錢包--two-factor-wallets&quot;&gt;雙因素錢包 | Two-factor wallets&lt;/h3&gt;
-
-&lt;p&gt;諸如 GreenAddress 之類的服務將比特幣儲存為 2-of-2 的多重簽名 OPCode ScriptPubKey，使得一個金鑰對由使用者控制，另一個金鑰對由服務控制。為了花費資金，使用者使用本地安裝的生成所需簽名之一的錢包軟體，然後使用雙因素身份驗證方法來授權該服務建立第二個 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SIGHASH_NONE&lt;/code&gt; 簽名，該簽名在將來的某個時間被鎖定，並向用戶傳送該儲存簽名。如果使用者需要花費資金並且服務不可用，他們會等到 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 過期。&lt;/p&gt;
-
-&lt;p&gt;問題是，在許多情況下，使用者將不會擁有一些或全部交易輸出的有效簽名。使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; 而不是按需建立退款簽名，而是使用以下形式的 scriptPubKeys ：&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;IF
-    &amp;lt;service pubkey&amp;gt; CHECKSIGVERIFY
-ELSE
-    &amp;lt;expiry time&amp;gt; CHECKLOCKTIMEVERIFY DROP
-ENDIF
-&amp;lt;user pubkey&amp;gt; CHECKSIG
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;現在，用戶總是可以通過等待到期時間來花費他們的資金而無需服務的合作。&lt;/p&gt;
-
-&lt;h3 id=&quot;支付通道--payment-channels&quot;&gt;支付通道 | Payment Channels&lt;/h3&gt;
-
-&lt;p&gt;傑里米·斯皮爾曼（ Jeremy Spilman ）style 的支付通道首先設定一個存款，由 2-of-2 的多重簽名， tx1 控制的存款，然後調整第二個交易 tx2 ，將 tx1 的輸出用於支付者和收款者。在釋出 tx1 之前，建立一個退款交易 tx3 ，確保收款人消失時付款人可以取回其押金。當前創建退款交易的過程容易受到交易延展性攻擊的影響，此外，還要求付款人儲存退款。使用與雙因素錢包示例中相同的 scriptPubKey 形式可以解決這兩個問題。&lt;/p&gt;
-
-&lt;h2 id=&quot;發布數據的無信任付款--trustless-payments-for-publishing-data&quot;&gt;發布數據的無信任付款 | Trustless Payments for Publishing Data&lt;/h2&gt;
-
-&lt;p&gt;The PayPub protocol makes it possible to pay for information in a trustless way by first proving that an encrypted file contains the desired data, and secondly crafting scriptPubKeys used for payment such that spending them reveals the encryption keys to the data. However the existing implementation has a significant flaw: the publisher can delay the release of the keys indefinitely.&lt;/p&gt;
-
-&lt;p&gt;This problem can be solved interactively with the refund transaction technique; with CHECKLOCKTIMEVERIFY the problem can be non-interactively solved using scriptPubKeys of the following form:&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;通過首先證明加密文件包含所需的數據，然後製作用於支付的 scriptPubKeys 以便使它們花費來顯示數據的加密密鑰，PayPub 協議可以以不信任的方式支付信息。但是，現有的實現存在一個重大缺陷：發布者可以無限期地延遲密鑰的發布。&lt;/p&gt;
-
-&lt;p&gt;這個問題可以用退款交易技術互動地解決; 使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; ，可以使用以下形式的scriptPubKeys以非互動方式解決問題：&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;IF
-    HASH160 &amp;lt;Hash160(encryption key)&amp;gt; EQUALVERIFY
-    &amp;lt;publisher pubkey&amp;gt; CHECKSIG
-ELSE
-    &amp;lt;expiry time&amp;gt; CHECKLOCKTIMEVERIFY DROP
-    &amp;lt;buyer pubkey&amp;gt; CHECKSIG
-ENDIF
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;資料的買家現在正在提供一個有效期限的安全報價。如果發行商在到期時間到期之前未能接受報價，買家可以通過消費輸出來取消報價。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;證明犧牲礦工的手續費--proving-sacrifice-to-miners-fees&quot;&gt;證明犧牲礦工的手續費 | Proving sacrifice to miners’ fees&lt;/h2&gt;
-
-&lt;p&gt;Proving the sacrifice of some limited resource is a common technique in a variety of cryptographic protocols. Proving sacrifices of coins to mining fees has been proposed as a universal public good to which the sacrifice could be directed, rather than simply destroying the coins. However doing so is non-trivial, and even the best existing technqiue - announce-commit sacrifices - could encourage mining centralization. CHECKLOCKTIMEVERIFY can be used to create outputs that are provably spendable by anyone (thus to mining fees assuming miners behave optimally and rationally) but only at a time sufficiently far into the future that large miners can’t profitably sell the sacrifices at a discount.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;證明犧牲一些有限的資源是各種密碼協議中的常用技術。已經提出了證明將硬幣犧牲為採礦費的做法，作為犧牲品可以針對的一種普遍的公共物品，而不是簡單地銷毀硬幣。但是，這樣做並非易事，即使是現有的最佳技術-宣布承諾犧牲-也會鼓勵採礦業的集中化。  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; 可用於創建任何人都可證明可使用的輸出（因此，假設礦工的行為合理且合理，則要收取採礦費），但前提是在足夠遠的將來，大型礦工無法以折扣價出售利潤。&lt;/p&gt;
-
-&lt;p&gt;證明犧牲一些有限的資源是各種密碼協議中的常見技術。已經提出將幣的犧牲證明為挖礦手續費，作為犧牲可以指向的普遍公共物品，而不是簡單地摧毀幣。然而，這樣做並非微不足道，即使是最好的現有技術 - 宣佈 - 承諾 - 也會鼓勵礦業集中。 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; 可用於建立任何人都可以花費的產出（因此，假設礦工的行為是理想的和理性的，那麼開採費），但只有在未來足夠遠的時間，大型礦工才能以折扣銷售犧牲品。&lt;/p&gt;
-
-&lt;h2 id=&quot;凍結資金--freezing-funds&quot;&gt;凍結資金 | Freezing Funds&lt;/h2&gt;
-
-&lt;p&gt;除了使用冷儲存，硬體錢包和 P2SH multisig 輸出來控制資金之外，現在資金可以直接在區塊鏈中凍結在 UTXO 中。使用下面的 scriptPubKey ，在提供的失效時間之前，沒有人能夠使用安全輸出。這種可靠地凍結資金的能力在需要減少脅迫或沒收風險的情況下可能會有用。&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;expiry time&amp;gt; CHECKLOCKTIMEVERIFY DROP DUP HASH160 &amp;lt;pubKeyHash&amp;gt; EQUALVERIFY CHECKSIG
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;完全替換nlocktime欄位--replacing-the-nlocktime-field-entirely&quot;&gt;完全替換nLockTime欄位 | Replacing the nLockTime field entirely&lt;/h2&gt;
-
-&lt;p&gt;另外，請注意如果 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SignatureHash()&lt;/code&gt; 演算法可以選擇覆蓋 OPCode 的一部分，那麼簽名可能會要求 OPCode Sig包含&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; OPCode ，並且還需要執行它們。（ CODESEPARATOR OPCode 非常接近於在比特幣的 v0.1 中實現這一點）。這種每簽名功能可以完全取代每個交易的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位，因為有效簽名現在可以證明交易輸出可以花費。&lt;/p&gt;
-
-&lt;h2 id=&quot;詳細規格--detailed-specification&quot;&gt;詳細規格 | Detailed Specification&lt;/h2&gt;
-
-&lt;p&gt;參考下面轉載的參考實現，瞭解這些語義的精確語義和詳細基本原理。&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;case OP_NOP2:
-case OP_NOP2:
-{
-    // CHECKLOCKTIMEVERIFY
-    //
-    // (nLockTime -- nLockTime )
-
-    if (!(flags &amp;amp; SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY))
-        break; // not enabled; treat as a NOP
-
-    if (stack.size() &amp;lt; 1)
-        return false;
-
-    // Note that elsewhere numeric opcodes are limited to
-    // operands in the range -2**31+1 to 2**31-1, however it is
-    // legal for opcodes to produce results exceeding that
-    // range. This limitation is implemented by CScriptNum&apos;s
-    // default 4-byte limit.
-    //
-    // If we kept to that limit we&apos;d have a year 2038 problem,
-    // even though the nLockTime field in transactions
-    // themselves is uint32 which only becomes meaningless
-    // after the year 2106.
-    //
-    // Thus as a special case we tell CScriptNum to accept up
-    // to 5-byte bignums, which are good until 2**32-1, the
-    // same limit as the nLockTime field itself.
-    const CScriptNum nLockTime(stacktop(-1), 5);
-
-    // In the rare event that the argument may be &amp;lt; 0 due to
-    // some arithmetic being done first, you can always use
-    // 0 MAX CHECKLOCKTIMEVERIFY.
-    if (nLockTime &amp;lt; 0)
-        return false;
-
-    // There are two types of nLockTime: lock-by-blockheight
-    // and lock-by-blocktime, distinguished by whether
-    // nLockTime &amp;lt; LOCKTIME_THRESHOLD.
-    //
-    // We want to compare apples to apples, so fail the script
-    // unless the type of nLockTime being tested is the same as
-    // the nLockTime in the transaction.
-    if (!(
-            (txTo.nLockTime &amp;lt;  LOCKTIME_THRESHOLD &amp;amp;&amp;amp; nLockTime &amp;lt;  LOCKTIME_THRESHOLD) ||
-            (txTo.nLockTime &amp;gt;= LOCKTIME_THRESHOLD &amp;amp;&amp;amp; nLockTime &amp;gt;= LOCKTIME_THRESHOLD)
-            ))
-        return false;
-
-    // Now that we know we&apos;re comparing apples-to-apples, the
-    // comparison is a simple numeric one.
-    if (nLockTime &amp;gt; (int64_t)txTo.nLockTime)
-        return false;
-
-    // Finally the nLockTime feature can be disabled and thus
-    // CHECKLOCKTIMEVERIFY bypassed if every txin has been
-    // finalized by setting nSequence to maxint. The
-    // transaction would be allowed into the blockchain, making
-    // the opcode ineffective.
-    //
-    // Testing if this vin is not final is sufficient to
-    // prevent this condition. Alternatively we could test all
-    // inputs, but testing just this input minimizes the data
-    // required to prove correct CHECKLOCKTIMEVERIFY execution.
-    if (txTo.vin[nIn].IsFinal())
-        return false;
-
-    break;
-
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;https://github.com/petertodd/bitcoin/commit/ab0f54f38e08ee1e50ff72f801680ee84d0f1bf4&lt;/p&gt;
-
-&lt;h2 id=&quot;部署--deployment&quot;&gt;部署 | Deployment&lt;/h2&gt;
-
-&lt;p&gt;我們重用BIP66中使用的雙閾值 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IsSuperMajority()&lt;/code&gt; 切換機制，其閾值相同，但 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion = 4&lt;/code&gt; 。新規則對於 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion = 4&lt;/code&gt; 的每個區塊（高度為H）有效，並且至少有750之前的區塊（高度為H-1000..H-1）的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion &amp;gt;= 4&lt;/code&gt; 。此外，當區塊之前的1000個區塊中的950個具有 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion &amp;gt;= 4&lt;/code&gt; 時， &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion &amp;lt; 4&lt;/code&gt; 區塊將變為無效，並且全部進一步的阻止執行新的規則。&lt;/p&gt;
-
-&lt;p&gt;應該注意的是，BIP9涉及永久性地將高位設定為1，這導致 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion&amp;gt;=&lt;/code&gt; 所有先前的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IsSuperMajority()&lt;/code&gt; 軟分叉，因此 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion&lt;/code&gt; 中的位不會永久丟失。&lt;/p&gt;
-
-&lt;h2 id=&quot;spv客戶--spv-clients&quot;&gt;SPV客戶 | SPV Clients&lt;/h2&gt;
-
-&lt;p&gt;儘管SPV客戶端（當前）通常無法驗證區塊，而是信任礦工對其進行驗證，但他們能夠驗證區塊頭，因此可以驗證部署規則的子集。如果達到95％閾值時，前1000個區塊中的950個中有950個具有 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion &amp;gt;= 4&lt;/code&gt; ，則SPV客戶端應拒絕 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion 4&lt;/code&gt; 區塊，以防止來自剩餘未升級礦工的5％的錯誤確認。&lt;/p&gt;
-
-&lt;h2 id=&quot;credits&quot;&gt;Credits&lt;/h2&gt;
-&lt;p&gt;Thanks goes to Gregory Maxwell for suggesting that the argument be compared against the per-transaction nLockTime, rather than the current block height and time.&lt;/p&gt;
-
-&lt;h2 id=&quot;參考&quot;&gt;參考&lt;/h2&gt;
-
-&lt;p&gt;PayPub&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/unsystem/paypub&quot;&gt;https://github.com/unsystem/paypub&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Jeremy Spilman支付通道&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002433.html&quot;&gt;https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002433.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;實現&quot;&gt;實現&lt;/h2&gt;
-
-&lt;p&gt;Python / python-bitcoinlib&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/petertodd/checklocktimeverify-demos&quot;&gt;https://github.com/petertodd/checklocktimeverify-demos&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;JavaScript / Node.js / bitcore&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/mruddy/bip65-demos&quot;&gt;https://github.com/mruddy/bip65-demos&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;版權--copyright&quot;&gt;版權 | Copyright&lt;/h2&gt;
-
-&lt;p&gt;This document is placed in the public domain.&lt;/p&gt;
-
-&lt;h2 id=&quot;引用和參考&quot;&gt;引用和參考&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.chidaolian.com/article-680-4&quot;&gt;BIP65：檢查鎖定時間驗證&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki&quot;&gt;bips/bip-0065.mediawiki&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><category term="news" /><summary type="html">原文:BIP-65 OP_CHECKLOCKTIMEVERIFY 該BIP為比特幣 script 系統描述了一個新的 OPCode （OP_CHECKLOCKTIMEVERIFY），該 OPCode 允許交易輸出在未來的某個點之前變得不可花費。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/img/135.jpg" /><media:content medium="image" url="/img/135.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><category term="news" /><summary type="html">PR 即為 Pull Request，在 Github 上必須先複製（Fork）一份原作的專案到你自己的 GitHub 帳號底下。 那自己的 Fork 專案想怎麼玩就怎麼玩，之後你就可以推上自己的 Fork 文件上，發個通知給 Cypherpunks-core，讓團隊人員來審視這次的 PR 是否 ok，若是 ok 則會將您發起的 PR 合併進團隊文章裡，若不 ok 將會在底下描述為何沒通過的理由。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/img/panda-22.png" /><media:content medium="image" url="/img/panda-22.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
