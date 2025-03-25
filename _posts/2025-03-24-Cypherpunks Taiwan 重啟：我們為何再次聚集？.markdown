@@ -17,13 +17,7 @@ tags:
   - community
 ---
 
-## **Cypherpunks Taiwan 重啟：我們為何再次聚集？**
-
-從 2019 到現在，世界與網路都變了很多，但 **我們對隱私的渴望沒有改變**。
-
-在數位身份、鏈上足跡與 AI 大模型全面滲透的時代，**Cypherpunks 的核心信念——Privacy is necessary for an open society in the electronic age.**，從未如此 relevant。
-
-這些年來，我們見證了比特幣的主流化、Web3 的爆炸成長，也見證了過度中心化平台對個人自由與資訊掌控權的反撲。是時候重新聚集了。
+從 2019 到現在，世界與網路都變了很多，但 **我們對隱私的渴望沒有改變**。在數位身份、鏈上足跡與 AI 大模型全面滲透的時代，**Cypherpunks 的核心信念——Privacy is necessary for an open society in the electronic age.**，從未如此 relevant。這些年來，我們見證了比特幣的主流化、Web3 的爆炸成長，也見證了過度中心化平台對個人自由與資訊掌控權的反撲。是時候重新聚集了。
 
 ---
 
