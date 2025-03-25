@@ -1,12 +1,50 @@
 @charset "utf-8";
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
+// 基礎變量設置
 $family-sans-serif: 'Montserrat', sans-serif;
 $primary: #188eac !default;
+$secondary: #2c3e50;
+$accent: #e74c3c;
+$background: #f8f9fa;
+$text: #2c3e50;
 
+// 全局顏色設置
+$body-background-color: $background;
+$text-color: $text;
+$link-color: $primary;
+$link-hover-color: darken($primary, 10%);
+
+// 組件顏色設置
 $tabs-link-active-color: $primary;
 $tabs-link-active-border-bottom-color: $primary;
+$button-primary-background-color: $primary;
+$button-primary-hover-background-color: darken($primary, 10%);
 
+// 導入 Bulma
 @import "../node_modules/bulma/bulma.sass";
+
+// 自定義樣式
+.section {
+    padding: 3rem 1.5rem;
+}
+
+.title {
+    color: $secondary;
+    font-weight: 600;
+}
+
+.subtitle {
+    color: lighten($secondary, 20%);
+}
+
+// 響應式調整
+@media screen and (max-width: 768px) {
+    .section {
+        padding: 2rem 1rem;
+    }
+}
+
+// 導入其他樣式文件
 @import "layout";
-@import "syntax"
+@import "syntax";
