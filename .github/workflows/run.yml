@@ -29,4 +29,4 @@ jobs:
           git config --global --add safe.directory /github/workspace
       - uses: helaili/jekyll-action@2.0.1
         env:
-          JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
+          JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
