@@ -8,6 +8,8 @@ on:
 jobs:
   github-pages:
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - name: Set up Ruby
@@ -22,6 +24,9 @@ jobs:
           bundle install
           bundle add kramdown-parser-gfm
           bundle install
+      - name: Configure Git
+        run: |
+          git config --global --add safe.directory /github/workspace
       - uses: helaili/jekyll-action@2.0.1
         env:
           JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
