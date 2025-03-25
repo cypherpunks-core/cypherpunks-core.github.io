@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install kramdown-parser-gfm
         run: |
-          gem install kramdown-parser-gfm
+          sudo gem install kramdown-parser-gfm
       - uses: helaili/jekyll-action@2.0.1
         env:
           JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
