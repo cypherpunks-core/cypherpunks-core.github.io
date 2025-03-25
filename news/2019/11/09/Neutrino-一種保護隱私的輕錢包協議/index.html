@@ -1,0 +1,344 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Neutrino：一種保護隱私的輕錢包協議 - 密碼龐克 Cypherpunks Taiwan</title>
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Neutrino：一種保護隱私的輕錢包協議 | 密碼龐克 Cypherpunks Taiwan</title>
+<meta name="generator" content="Jekyll v3.9.1" />
+<meta property="og:title" content="Neutrino：一種保護隱私的輕錢包協議" />
+<meta name="author" content="Cypherpunks Core" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="介紹Neutrino，這是一種新的協議，用於輕型client在保留隱私且不信任中央server的情況下獲取所需的數據。" />
+<meta property="og:description" content="介紹Neutrino，這是一種新的協議，用於輕型client在保留隱私且不信任中央server的情況下獲取所需的數據。" />
+<meta property="og:site_name" content="密碼龐克 Cypherpunks Taiwan" />
+<meta property="og:image" content="/img/123.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-11-09T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/img/123.png" />
+<meta property="twitter:title" content="Neutrino：一種保護隱私的輕錢包協議" />
+<script type="application/ld+json">
+{"description":"介紹Neutrino，這是一種新的協議，用於輕型client在保留隱私且不信任中央server的情況下獲取所需的數據。","image":"/img/123.png","headline":"Neutrino：一種保護隱私的輕錢包協議","dateModified":"2019-11-09T00:00:00+00:00","datePublished":"2019-11-09T00:00:00+00:00","url":"/news/2019/11/09/Neutrino-%E4%B8%80%E7%A8%AE%E4%BF%9D%E8%AD%B7%E9%9A%B1%E7%A7%81%E7%9A%84%E8%BC%95%E9%8C%A2%E5%8C%85%E5%8D%94%E8%AD%B0/","mainEntityOfPage":{"@type":"WebPage","@id":"/news/2019/11/09/Neutrino-%E4%B8%80%E7%A8%AE%E4%BF%9D%E8%AD%B7%E9%9A%B1%E7%A7%81%E7%9A%84%E8%BC%95%E9%8C%A2%E5%8C%85%E5%8D%94%E8%AD%B0/"},"author":{"@type":"Person","name":"Cypherpunks Core"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131051587-3"></script>
+<script>
+  window['ga-disable-UA-131051587-3'] = window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1";
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-131051587-3');
+</script><!-- head scripts --></head>
+
+  <body>
+    
+<nav class="navbar is-primary" >
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" class="navbar-item">
+                密碼龐克 Cypherpunks Taiwan
+            </a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="navMenu">
+            <div class="navbar-start">
+                <a href="/" class="navbar-item ">Home</a>
+                
+                
+                    
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a href="/#" class="navbar-link ">資源</a>
+                        <div class="navbar-dropdown">
+                            
+                            <a href="/markdown/resources/resources-bitcoin/" class="navbar-item ">比特幣 | Bitcoin</a>
+                            
+                            <a href="/markdown/resources/resources-ln/" class="navbar-item ">閃電網路 | Lightning network</a>
+                            
+                            <a href="/markdown/resources/resources-blockchain-privacy/" class="navbar-item ">區塊隱私 | Blockchain privacy</a>
+                            
+                            <a href="/markdown/resources/resources-schnorr-signature/" class="navbar-item ">Schnorr 簽名 | Schnorr Signature</a>
+                            
+                            <a href="/markdown/resources/resources-ethereum/" class="navbar-item ">以太坊 | Ethereum</a>
+                            
+                        </div>
+                    </div>
+                    
+                
+                    
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a href="/#" class="navbar-link ">知識庫</a>
+                        <div class="navbar-dropdown">
+                            
+                            <a href="/markdown/knowledge/knowledge-bitcoin/" class="navbar-item ">比特幣 | Bitcoin</a>
+                            
+                            <a href="/markdown/knowledge/knowledge-ethereum/" class="navbar-item ">以太坊 | Ethereum</a>
+                            
+                        </div>
+                    </div>
+                    
+                
+                    
+                    <a href="/markdown/products/" class="navbar-item ">書籍 & 論文</a>
+                    
+                
+                    
+                    <a href="/markdown/SatelliteProject/" class="navbar-item ">衛星計畫</a>
+                    
+                
+                    
+                    <a href="/blog/" class="navbar-item ">Blog</a>
+                    
+                
+                    
+                    <a href="/markdown/about/" class="navbar-item ">關於</a>
+                    
+                
+                    
+                    <a href="/classification" class="navbar-item ">分類</a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+        <section class="hero  is-medium  is-bold is-primary"  style="background: url('/img/hero.png') no-repeat center center; background-size: cover;" >
+    <div class="hero-body">
+        <div class="container">
+            <p class="title is-2">Neutrino：一種保護隱私的輕錢包協議</p>
+            <p class="subtitle is-3"></p>
+            
+        </div>
+    </div>
+</section>
+    
+    
+
+
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                
+                <div class="column is-8">
+                    
+                    <div class="content">
+
+    <p>Published: Nov 9, 2019 by Cypherpunks Core</p>
+
+    <p>如今， Lightning 風行一時，儘管這是一個令人興奮的發展，但用戶目前必須運行一個完整的節點才能進行交易。在本文中，將介紹Neutrino，這是一種新的協議，用於輕型client在保留隱私且不信任中央server的情況下獲取所需的數據。<a href="https://bitcoinmagazine.com/articles/neutrino-privacy-preserving-light-wallet-protocol">原文</a></p>
+
+<h2 id="一點歷史">一點歷史</h2>
+<p>中本聰（Satoshi Nakamoto）在2008年撰寫的原始白皮書中描述了一種稱為簡化付款驗證（SPV）的東西。SPV是輕型節點無需下載、驗證或儲存整個區塊鏈即可驗證付款的方式。這應該是輕錢包的基礎。不幸的是，原始的Bitcoin Core軟體未實現簡化付款驗證，因此，輕量級客戶無法訪問以隱私保護方式進行SPV所需的數據。</p>
+
+<p>在2013年，BIP0037被添加到Bitcoin Core以使SPV可行。BIP0037創建了網絡指令，使輕節點可以執行簡化的付款驗證。輕型節點現在可以要求證明特定交易發生在特定區塊中。這樣，輕型節點將不必信任server，但實際上可以驗證提供給它們的數據。</p>
+
+<p>為此，輕client向server提供了一個過濾器。然後，server對新區塊的所有交易運行篩選器，並將這些交易以及它們在該區塊中的證據報告給client。然後，客戶驗證證明並查看交易，以查看其中是否屬於錢包。</p>
+
+<p>不幸的是，BIP0037有一些缺點。除其他外，這被認為很難實施，大多數輕錢包選擇使用其他東西。例如，Electrum錢包使用其<a href="http://docs.electrum.org/en/latest/protocol.html">自己的專有協議</a>，該協議不保護隱私。Mycelium錢包調用Mycelium公司運行的server。此外，還有一些拒絕服務媒介（通過運行大量過濾器）來利用響應BIP0037請求的server。</p>
+
+<p>此外，事實證明，BIP0037的隱私方面沒有想像的那麼強。事實證明，通過查找某些類型的模式，server可以對輕錢包有很多了解（例如它可能有什麼餘額，與誰進行交易，甚至可能是購買的東西）。</p>
+
+<p>因此，儘管自2013年以來已在Core軟體中使用BIP0037，但在很大程度上已經廢棄了。</p>
+
+<h2 id="什麼是neutrino">什麼是Neutrino？</h2>
+<p>Neutrino是一種驗證付款的協議，除了這次，大部分工作是在client完成的。現在代替server過濾client的交易，而是將屬於一個區塊的所有交易（技術上對應於除OP_RETURN輸出之外的每個輸入和輸出的ScriptPubKey）壓縮並發送給client。現在，客戶的工作是弄清是否有任何交易是它進行的交易。如果任何交易與電子錢包有關，則客戶然後請求完整的區塊來驗證交易。</p>
+
+<p>事實證明，壓縮效果令人印象深刻。正常區塊約為1.4MB，但是通過對其進行壓縮（從技術上講，將每個ScriptPubKey hash 為64位），每個區塊會在每個區塊上產生約20KB的超壓縮數據。由於每個超級client的超級壓縮區塊都相同，因此可以消除server的拒絕服務漏洞。這也意味著server除了要查看的阻止內容外，沒有獲得有關輕client的特殊訊息，這意味著隱私洩漏少得多。</p>
+
+<h2 id="權衡取捨">權衡取捨</h2>
+<p>當然，通過增加隱私權，我們確實需要權衡取捨。首先，有更多的數據來回發送。雖然1.4MB到20KB的帶寬減少了很多，但是BIP0037允許更大的減少，因為server只為錢包參與的交易發送大約3KB的數據區塊，而沒有這種交易的只有80 bytes 的數據區塊。假設每天大約有一筆交易，那麼BIP0037的每個區塊總計大約100 bytes ，這意味著從帶寬的角度來看Neutrino的價格更高。</p>
+
+<p>此外，由於client現在必須執行其他驗證以證明server發送的數據是真實的，因此在client需要進行更多的驗證。</p>
+
+<p>在尋找錢包參與的交易時會保留隱私。通常，這些交易是錢包正在收款的交易。然而，對於匯款來說，Neutrino並沒有真正幫助，仍然存在很多隱私問題（儘Tor和<a href="https://github.com/bitcoin/bips/blob/master/bip-0156.mediawiki">Dandelion</a> 可以提供幫助）。</p>
+
+<p>最後，可能需要對每個區塊的coinbase交易作出新的承諾，以促進Neutrino的發展，這需要軟分叉。</p>
+
+<h2 id="這對您意味著什麼">這對您意味著什麼</h2>
+<p>事實證明Neutrino不僅對Bitcoin錢包有用，對 Lightning 也有用。當前很難設置一個Lightning節點，部分原因是您必須運行一個需要很長時間才能同步的完整節點。Neutrino在btcd中可用，但在Bitcoin Core中尚不可用，因此在Bitcoin Core中可用之前，輕型錢包將很難找到要從中獲取數據的節點。正是由於這個原因，Wasabi必須使用類似的<a href="https://medium.com/@nopara73/wasabi-privacy-focused-bitcoin-wallet-for-desktop-3962d567045a">超壓縮區塊數據製作自己的server</a>。</p>
+
+<p>一旦Neutrino到達Bitcoin Core，Lightning Wallets將能夠更輕鬆地作為輕client運行。這意味著您的Bitcoin錢包將在保護隱私方面更加有效。這並不意味著您將具有完全的匿名性，尤其是從鏈分析的角度而言，但是您將能夠在不儲存、傳輸或驗證整個區塊鏈的情況下實現整個節點當前享有的大部分隱私。</p>
+
+<p>隱私洩漏最終是安全洩漏，因為有關您的訊息可能會被用來對您不利。</p>
+
+<p>與使用Neutrino協議的錢包進行交易意味著，無論是在鏈上還是在Lightning Network上，您的Bitcoin交易都不太容易受到訊息洩露的影響。</p>
+
+<h2 id="更多訊息">更多訊息</h2>
+<p>對於對此技術感興趣的開發人員，<a href="https://github.com/bitcoin/bips/blob/master/bip-0157.mediawiki">BIP0157</a> and <a href="https://github.com/bitcoin/bips/blob/master/bip-0158.mediawiki">BIP0158</a>詳細說明了該協議，並且可從<a href="https://lightning.engineering/">Lightning Labs</a>的開發人員處獲得<a href="https://github.com/bitcoin/bips/blob/master/bip-0158/testnet-19.json">test vectors</a>。對於消費者，請詢問您的錢包提供商是否計劃實施Neutrino。</p>
+
+<h2 id="結論">結論</h2>
+<p>Neutrino是一項早就應該過期的技術。大多數使用輕型節點軟體的人都必須在某種程度上信任外部方，這不是密碼龐克的理想。通過使用Neutrino，錢包開發人員現在將能夠創建真正獨立的並且不需要信任server的錢包。</p>
+
+</div>
+
+<div class="tags">
+    
+</div>
+
+                </div>
+                
+                <div class="column is-4-desktop is-12-tablet">
+                    <p class="title is-4">Latest Posts</p>
+
+<div class="columns is-multiline">
+    
+    <div class="column is-12">
+        <div class="card">
+    
+    <div class="card-image">
+        <img src="/img/147.jpg" alt="MuSig：一個新的多重簽名標準">
+    </div>
+    
+    <div class="card-content">
+        <div class="content">
+            
+            <a class="title is-4" href="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/">MuSig：一個新的多重簽名標準</a>
+            
+            <p><table>
+  <tbody>
+    <tr>
+      <td>2019年2月15日</td>
+      <td>Andrew Poelstra <a href="https://blockstream.com/2019/02/18/en-musig-a-new-multisignature-standard/">轉載blockstream</a></td>
+    </tr>
+  </tbody>
+</table>
+
+</p>
+        </div>
+        <div class="has-text-centered">
+            <a href="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/" class="button is-primary">Read more</a>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <p class="card-footer-item">Published: Mar 11, 2020</p>
+    </footer>
+</div>
+    </div>
+    
+    <div class="column is-12">
+        <div class="card">
+    
+    <div class="card-image">
+        <img src="https://upyun-assets.ethfans.org/uploads/photo/image/5ca7121ac7ae45a4a55cddeae218a5cb.jpg" alt="Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊">
+    </div>
+    
+    <div class="card-content">
+        <div class="content">
+            
+            <a class="title is-4" href="/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/">Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊</a>
+            
+            <p><blockquote>
+  <p>編者注：本文對 Cosmos 網路中區塊鏈和比特幣、以太坊進行了鉅細靡遺的比較。作者先從區塊鏈系統的棧層出發，分析了比特幣、以太坊在不同棧層上的技術要點，最後迴歸到 Cosmos 網路中的區塊鏈，概念解釋尤為清晰，是不可多得的解釋文。</p>
+</blockquote>
+
+</p>
+        </div>
+        <div class="has-text-centered">
+            <a href="/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/" class="button is-primary">Read more</a>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <p class="card-footer-item">Published: Feb 13, 2020</p>
+    </footer>
+</div>
+    </div>
+    
+    <div class="column is-12">
+        <div class="card">
+    
+    <div class="card-image">
+        <img src="/img/panda-33.png" alt="多媒體區塊鏈:分散式且防竄改之媒體交易框架">
+    </div>
+    
+    <div class="card-content">
+        <div class="content">
+            
+            <a class="title is-4" href="/news/2020/01/18/%E5%A4%9A%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88/">多媒體區塊鏈:分散式且防竄改之媒體交易框架</a>
+            
+            <p><blockquote>
+  <p>當前多媒體發佈不會保留可自我檢索的訊息交易或內容修改之歷史記錄，經常對原始媒體進行編輯以獲取創意內容準備或篡改通過社交媒體進行錯誤宣傳，然而現在沒有可信任之機制可以輕鬆檢視交易記錄或修改歷史。</p>
+</blockquote>
+
+</p>
+        </div>
+        <div class="has-text-centered">
+            <a href="/news/2020/01/18/%E5%A4%9A%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88/" class="button is-primary">Read more</a>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <p class="card-footer-item">Published: Jan 18, 2020</p>
+    </footer>
+</div>
+    </div>
+    
+</div>
+
+
+
+
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+        <footer class="footer">
+    <div class="container">
+        
+        
+        <div class="columns is-multiline">
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/" class="link">Home</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/blog/" class="link">Blog</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/markdown/products/" class="link">書架</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/markdown/about/" class="link">關於我們</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="https://github.com/cypherpunks-core" class="link">Github</a>
+                </div>
+            </div>
+            
+        </div>
+        
+
+        <div class="content is-small has-text-centered">
+            <p class=""> Powered by  <a href="https://cypherpunks-core.github.io"> Cypherpunks Core </a></p>
+        </div>
+    </div>
+</footer>
+
+    
+    <script src="/assets/js/app.js" type="text/javascript"></script><!-- footer scripts --></body>
+</html>
+

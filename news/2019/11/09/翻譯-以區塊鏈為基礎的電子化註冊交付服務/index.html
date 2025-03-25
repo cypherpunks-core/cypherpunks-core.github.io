@@ -1,0 +1,651 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>以區塊鏈為基礎的電子化註冊交付服務 - 密碼龐克 Cypherpunks Taiwan</title>
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>以區塊鏈為基礎的電子化註冊交付服務 | 密碼龐克 Cypherpunks Taiwan</title>
+<meta name="generator" content="Jekyll v3.9.1" />
+<meta property="og:title" content="以區塊鏈為基礎的電子化註冊交付服務" />
+<meta name="author" content="Cypherpunks Core" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="歐洲法規規定了電子化支付（電子化識別和信任服務）而一個合格的電子註冊交付是信託服務之一並包含在法規中，它要求不可否認原產地及誠信的資料。" />
+<meta property="og:description" content="歐洲法規規定了電子化支付（電子化識別和信任服務）而一個合格的電子註冊交付是信託服務之一並包含在法規中，它要求不可否認原產地及誠信的資料。" />
+<meta property="og:site_name" content="密碼龐克 Cypherpunks Taiwan" />
+<meta property="og:image" content="/img/130.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-11-09T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/img/130.png" />
+<meta property="twitter:title" content="以區塊鏈為基礎的電子化註冊交付服務" />
+<script type="application/ld+json">
+{"description":"歐洲法規規定了電子化支付（電子化識別和信任服務）而一個合格的電子註冊交付是信託服務之一並包含在法規中，它要求不可否認原產地及誠信的資料。","image":"/img/130.png","headline":"以區塊鏈為基礎的電子化註冊交付服務","dateModified":"2019-11-09T00:00:00+00:00","datePublished":"2019-11-09T00:00:00+00:00","url":"/news/2019/11/09/%E7%BF%BB%E8%AD%AF-%E4%BB%A5%E5%8D%80%E5%A1%8A%E9%8F%88%E7%82%BA%E5%9F%BA%E7%A4%8E%E7%9A%84%E9%9B%BB%E5%AD%90%E5%8C%96%E8%A8%BB%E5%86%8A%E4%BA%A4%E4%BB%98%E6%9C%8D%E5%8B%99/","mainEntityOfPage":{"@type":"WebPage","@id":"/news/2019/11/09/%E7%BF%BB%E8%AD%AF-%E4%BB%A5%E5%8D%80%E5%A1%8A%E9%8F%88%E7%82%BA%E5%9F%BA%E7%A4%8E%E7%9A%84%E9%9B%BB%E5%AD%90%E5%8C%96%E8%A8%BB%E5%86%8A%E4%BA%A4%E4%BB%98%E6%9C%8D%E5%8B%99/"},"author":{"@type":"Person","name":"Cypherpunks Core"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131051587-3"></script>
+<script>
+  window['ga-disable-UA-131051587-3'] = window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1";
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-131051587-3');
+</script><!-- head scripts --></head>
+
+  <body>
+    
+<nav class="navbar is-primary" >
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" class="navbar-item">
+                密碼龐克 Cypherpunks Taiwan
+            </a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="navMenu">
+            <div class="navbar-start">
+                <a href="/" class="navbar-item ">Home</a>
+                
+                
+                    
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a href="/#" class="navbar-link ">資源</a>
+                        <div class="navbar-dropdown">
+                            
+                            <a href="/markdown/resources/resources-bitcoin/" class="navbar-item ">比特幣 | Bitcoin</a>
+                            
+                            <a href="/markdown/resources/resources-ln/" class="navbar-item ">閃電網路 | Lightning network</a>
+                            
+                            <a href="/markdown/resources/resources-blockchain-privacy/" class="navbar-item ">區塊隱私 | Blockchain privacy</a>
+                            
+                            <a href="/markdown/resources/resources-schnorr-signature/" class="navbar-item ">Schnorr 簽名 | Schnorr Signature</a>
+                            
+                            <a href="/markdown/resources/resources-ethereum/" class="navbar-item ">以太坊 | Ethereum</a>
+                            
+                        </div>
+                    </div>
+                    
+                
+                    
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a href="/#" class="navbar-link ">知識庫</a>
+                        <div class="navbar-dropdown">
+                            
+                            <a href="/markdown/knowledge/knowledge-bitcoin/" class="navbar-item ">比特幣 | Bitcoin</a>
+                            
+                            <a href="/markdown/knowledge/knowledge-ethereum/" class="navbar-item ">以太坊 | Ethereum</a>
+                            
+                        </div>
+                    </div>
+                    
+                
+                    
+                    <a href="/markdown/products/" class="navbar-item ">書籍 & 論文</a>
+                    
+                
+                    
+                    <a href="/markdown/SatelliteProject/" class="navbar-item ">衛星計畫</a>
+                    
+                
+                    
+                    <a href="/blog/" class="navbar-item ">Blog</a>
+                    
+                
+                    
+                    <a href="/markdown/about/" class="navbar-item ">關於</a>
+                    
+                
+                    
+                    <a href="/classification" class="navbar-item ">分類</a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+        <section class="hero  is-medium  is-bold is-primary"  style="background: url('/img/hero.png') no-repeat center center; background-size: cover;" >
+    <div class="hero-body">
+        <div class="container">
+            <p class="title is-2">以區塊鏈為基礎的電子化註冊交付服務</p>
+            <p class="subtitle is-3"></p>
+            
+        </div>
+    </div>
+</section>
+    
+    
+
+
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                
+                <div class="column is-8">
+                    
+                    <div class="content">
+
+    <p>Published: Nov 9, 2019 by Cypherpunks Core</p>
+
+    <blockquote>
+  <p>本篇文章翻譯自 <a href="https://ieeexplore.ieee.org/document/8764454?source=post_page-----f0472420a45b----------------------">IEEE - Blockchain-Based System for Multiparty Electronic Registered Delivery Services</a> 的內容，歐洲法規規定了電子化支付（電子化識別和信任服務）而一個合格的電子註冊交付是信託服務之一並包含在法規中，它要求不可否認原產地及誠信的資料。</p>
+</blockquote>
+
+<h1 id="摘要">摘要</h1>
+
+<h2 id="故事介紹">故事介紹</h2>
+
+<p>歐洲法規規定了電子化支付（電子化識別和信任服務）而一個合格的電子註冊交付是信託服務之一並包含在法規中，它要求不可否認原產地及誠信的資料。這些服務基本上會依賴於信任的第三方，仍會有很大的溝通及使用障礙。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>科普小學堂 
+「若想要讀得更詳細，請參閱最底下資料來源」
+1. 交付：交付是動產、物權變動的公示方式。動產種類繁多，數量巨大，變動頻繁，不適宜採用登記方式。
+2. 信託：委託人將財產權移轉或為其他處分，使受託人依信託本旨，為受益人之利益或為特定之目的，管理或處分信託財產之關係。
+</code></pre></div></div>
+
+<h2 id="edelivery">eDelivery</h2>
+
+<ol>
+  <li>在文章中，作者採用區塊鏈技術來解決問題（將 eDelivery 計劃減少受信任的第三方），並且滿足歐盟註冊 eDeliveries 的規範。</li>
+  <li>由於機密性不被視為強制性財產，作者提出了兩個協議。
+    <ul>
+      <li>第一個：適合不太在乎消息或資料機密性，甚至是可以公開訪問的。</li>
+      <li>第二個：允許除了接收方以外，隱藏他人的消息。</li>
+    </ul>
+  </li>
+</ol>
+
+<h1 id="第一章節---介紹">第一章節 - 介紹</h1>
+
+<p>區塊鏈提供了一個不可修改的資料註冊系統，可為傳統應用程式提供新的解決方案。
+<em>舉例：經過認證的電子郵件帳號，可以經過區塊鏈技術來證明他已發送信件或其他類型的服務。</em>
+在之前，為了解決傳遞中之公平性問題，皆會透過 TTP（Trusted Third Party , 可信任之第三方）來解決。在典型的 eDelivery 案例中，要交換的是資料以及不可否認之來源證明。</p>
+
+<h2 id="a-合格的電子註冊遞送系統">A. 合格的電子註冊遞送系統</h2>
+
+<p>2016年7月，歐盟信息安全網的法規 910/2014（也稱為 eIDAS 法規）開始適用。該法規為內部市場的電子交易制定了電子識別和信託服務規則，涵蓋了所有28個成員國。</p>
+
+<p>文件（Document）中定義了幾種信任服務：<strong>電子簽名（Electronic Signature）、密封（Seals）、時間戳記（TimeStamps）、已註冊的交付服務和用於網站驗證的證書</strong>。該法規引入了合格信託服務和合格信託服務提供商的概念，其中包含確保信託服務高級別安全性的要求和義務。</p>
+
+<p>合格的 eDelivery 服務必須根據指令提供：<em>資料/數據完整性、來源認證、交付時間的認證</em>，而其中機密性不被視為核心功能但通常作為更完整的解決方案。</p>
+
+<p>eDelivery 服務定義的資料 / 數據稱之為「Message（消息）」，且包含經過認證的通知和電子郵件。而電子郵件是一種可以使用的傳輸方式，但是 eDelivery 並不僅限於電子郵件。</p>
+
+<blockquote>
+  <p>eDelivery 實例介紹</p>
+</blockquote>
+
+<ul>
+  <li>註冊過的電子郵件，能提供更多與處理電子郵件相關的證據</li>
+  <li>訪問和交換敏感的資訊</li>
+  <li>事件的電子化公證</li>
+</ul>
+
+<h2 id="b-交換協議中的安全性和可信任之第三方">B. 交換協議中的安全性和可信任之第三方</h2>
+
+<p>至今所提出的交換協議（例如電子郵件服務）的操作通常使用 TTP ，其負責解決由於交換或詐欺而引起的衝突。</p>
+
+<p>當前的公平交換協議，包括 TTP 之干預以及很難為網路中用戶提供真正可靠的 TTP ，且具有明確的框架（例如，TTP 生成的電子文件必須被法院接受才能解決事件上的爭議）。</p>
+
+<p>TTP 也有可能在技術層面遇到問題（例如：通信容易遇到瓶頸、協議缺乏效率），並且他們的可靠性也容易遇到挑戰，如果他們有任何漏洞，交換協議中的安全性即會被打破。</p>
+
+<h2 id="c-區塊鏈的解決方案">C. 區塊鏈的解決方案</h2>
+
+<p>隨著區塊鏈技術以及智能合約（Smart Contract）的出現，TTP 可以被這種新的技術所取代或補充，這為尋找解決方案提供了新的可能性。</p>
+
+<p>智能合約能減少對 TTP 的需求，他是一種運行在區塊鏈上的程式，以預先訂立的規則來執行交易，這可以保障雙方之間的公平交換和相互信任，並且可防止互相欺騙且從而減少傳遞訊息中的延遲及服務佣金。</p>
+
+<p>區塊鏈中的時間戳記（Timestamps）對於協議中的公平性是至關重要的！</p>
+
+<h1 id="第二章節---註冊-edelivery-之理想屬性">第二章節 - 註冊 eDelivery 之理想屬性</h1>
+
+<p>底下將會介紹關於 eDelivery 的主要功能列表</p>
+
+<blockquote>
+  <p>法律相關 Legal Features</p>
+</blockquote>
+
+<ul>
+  <li>交貨證明：發送方收到不可偽造的時間戳記，證明他已經傳遞訊息。</li>
+  <li>接收證明：雙方皆收到不可偽造的時間戳記。</li>
+  <li>誠信證明：雙方皆可以確保傳輸過程中沒有被竄改。</li>
+  <li>安全性：防止丟失、被盜或未經授權之更改。</li>
+</ul>
+
+<blockquote>
+  <p>安全相關 Security Features</p>
+</blockquote>
+
+<ul>
+  <li>發送人識別：消息接收方可以驗證發送方。</li>
+  <li>安全的時間戳記：此時間戳記提供交付日期和時間準確性。</li>
+  <li>保密：雙方皆可確定未經授權的人員無法訪問該訊息。</li>
+  <li>資料完整性：確保傳輸資料的完整性，即消息之內容。</li>
+  <li>控制路由錯誤：該控制有助於傳輸前檢查接受器之參數，並告知用戶傳輸前接收消息的能力。</li>
+  <li>互操作性：服務向發送方指示預期接收方可以儲利的格式消息，並將消息轉換為另種格式。</li>
+</ul>
+
+<blockquote>
+  <p>功能相關 Function Features</p>
+</blockquote>
+
+<ul>
+  <li>發送大文件：該服務必須允許傳輸大量消息和各種格式的消息。</li>
+  <li>快速處理：必須是即時的。</li>
+</ul>
+
+<blockquote>
+  <p>其他 Other Properties</p>
+</blockquote>
+
+<ul>
+  <li>降低風險：合格的電子註冊交付使得以下操作變得不可行（操縱數據、偽造發送和接收的時間戳記或未授權訪問）。</li>
+  <li>降低成本：降低失敗或不確定性的成本。</li>
+  <li>沒有傳輸延遲：傳輸必須幾乎是瞬間的。</li>
+  <li>沒有雙重支付：避免發送額外的簽名版本。</li>
+  <li>事故處理和責任：服務提供商仍要對客戶造成的損害承擔責任。</li>
+</ul>
+
+<blockquote>
+  <p>考慮了上述功能，以便列出 eDelivery 系統的安全屬性。</p>
+</blockquote>
+
+<ul>
+  <li>有效性：如果雙方行為正確，他們將收到預期的項目。</li>
+  <li>公平性：完成協議運行後，每一方將會收到預期的項目，或者任一方皆沒收到任何一方的有效訊息。</li>
+  <li>時效性：在協議運行期間，每一方皆可以單方面選擇終止協議而不會失去公平性。</li>
+  <li>不可否認性：如果物品從 A 發送到 B ，則 A 不能拒絕該物品的來源，B 不能拒絕接收該物品。</li>
+  <li>第三方可驗證性：如果第三方行為不好，導致一方喪失公平，受害者可以爭議中證明此事實。</li>
+  <li>保密性：只有資料的發送及接收方才知道認證消息的內容。</li>
+  <li>效率：有效的協議使用允許有效交換或最小成本的最少步驟數。</li>
+  <li>證據可轉移性：系統生成的證據可以轉移到外部，以證明交換的結果。</li>
+  <li>狀態存儲：如果不需要可以參與交換的 TTP 來維護狀態訊息。</li>
+</ul>
+
+<p>上述解釋了不可否認的階段：證據生成、證據轉移、證據驗證、證據存儲和解決爭議。</p>
+
+<h1 id="第三章節---註冊電子服務當前發展">第三章節 - 註冊電子服務當前發展</h1>
+
+<p>作者調查了公平交換問題，提出兩種使用智能合約進行公平交換的解決方案，該方案由區塊鏈功能支持並使用圖靈完備語言。</p>
+
+<p>作者提出以區塊鏈技術和以太坊智能合約之不可否認協議，此用於解決 Token 和 數字資產間的交易，此協議要求相關各方存放抵押品，以激勵行為者的誠實行為。</p>
+
+<p>作者也提出一個可重複使用的智能合約概念，它用於發送多個通知。</p>
+
+<h1 id="第四章節---貢獻">第四章節 - 貢獻</h1>
+<ul>
+  <li>（略）</li>
+</ul>
+
+<h1 id="第五章節---系統總覽">第五章節 - 系統總覽</h1>
+
+<blockquote>
+  <p>參與者</p>
+</blockquote>
+
+<ul>
+  <li>發送方</li>
+  <li>接收方</li>
+  <li>可信任的第三方</li>
+  <li>智能合約</li>
+</ul>
+
+<p>所有參與者皆擁有 address 並且能夠相互溝通以及和智能合約溝通。
+兩個提議的協議都遵循 3-Steps 交換。關於這個 3-Steps 協議的非機密和機密解決方案之間的主要區別在於，在機密解決方案中，各方可以直接交換消息（離線通信交換），而在非機密解決方案中，各方執行 3-Steps ，通過調用為此服務部署的智能合約的功能。</p>
+
+<ul>
+  <li>圖1 描述了非機密協議的參與者之間的鏈間交互</li>
+  <li>圖2 中描述了機密協議的離線交互。</li>
+</ul>
+
+<div align="center"><img width="500" src="/img/93.png" /></div>
+
+<center><strong>圖1 非機密協議中的參與者之間的互動</strong></center>
+
+<div align="center"><img width="500" src="/img/94.png" /></div>
+<center><strong>圖2 機密協議中的參與者之間的互動</strong></center>
+
+<h1 id="第六章節---基於非機密區塊鏈的多方註冊電子交付系統">第六章節 - 基於非機密區塊鏈的多方註冊電子交付系統</h1>
+
+<p>此方法非常適合需要儲存交付數據的應用程序，這些應用程序必須註冊並可公開訪問。</p>
+
+<p>非機密註冊 eDeliveries 的多方協議提供了一個發送方（A）和多個接收方（B = {B1，B2 …，Bn}）的公平交付解決方案。</p>
+
+<p>圖3 是發送方和接收方在非機密 eDelivery 中為所提出的鏈上通信方案交換的消息序列圖。
+在圖3中，藍色箭頭表示上述步驟，並指定對區塊鏈地址的簽名請求。</p>
+
+<p>此外，框內的紅色文本描述了必須由區塊鏈上部署的 eDelivery 執行的過程。</p>
+
+<div align="center"><img width="800" src="/img/95.png" /></div>
+<center><strong>圖3 基於非機密區塊鏈的協議描述</strong></center>
+
+<p>交付的發送方 A 和接收方集合 B 將遵循交換協議的步驟。
+在以下對協議的完整描述中，協議的參與者發送的請求被指向區塊鏈上部署的 eDelivery 服務的地址。</p>
+
+<p>交換協議的細節是（表1中的表示法）：
+發送方 A 發送新的 eDelivery 請求。</p>
+<ul>
+  <li>該請求包括發送方的 Address，要傳遞的消息的 Hash（c，該 Hash 也用作 eDelivery 的識別），- 接收方的地址以及句號 term1 和 term2。</li>
+</ul>
+
+<p>`</p>
+<ul>
+  <li>term1 為接收方在發送方完成交付前，能接受交付的有效期限。</li>
+  <li>term2 為允許接收方取消，未完成交付的期限。
+`</li>
+  <li>取消的功能是為了保證有效性和公平性。</li>
+  <li>B 中的每個接收方 Bi 必須在 term1 期間單獨接受傳遞的接收，發布表達其意願的消息。</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">簽署的交易將作為接收證明的不可否認性。</code></p>
+
+<ul>
+  <li>如果接收方在 term1 期間不接受，則假定拒絕。</li>
+  <li>在 term1 的截止日期之後，或者在所有接收方（B的成員）接受了接收之後，發送方A可以通過使用區塊鏈發布消息，完成與已接受的接收方B’（B’⊂B）的子集的傳遞。</li>
+  <li>因此，部署在區塊鏈上的 eDelivery 服務會檢查消息的完整性，並為 B’ 中的接收方發布原始證據的不可否認性。完成後，發送方將收到押金退款。</li>
+  <li>在這種情況下，我們在一般的 3-Steps 協議中添加了最後一步：在 term2 的截止日期之後， B’ 中的任何接收方都可以獲取消息，或者可以請求取消 eDelivery，以防消息未正確存入。</li>
+  <li>最後執行完交換協議之後，所有接收方都可以讀取消息 M，因為它存在區塊鏈中，但只有 B’ 的成員可以證明他們已被通知且有證據。</li>
+  <li>如果 term2 之後，發送方尚未發布消息，則每個接收方 Bi 可以取消 eDelivery 。</li>
+</ul>
+
+<div align="center"><img width="500" src="/img/96.png" /></div>
+<center><strong>表1 非機密協議之要素</strong></center>
+
+<h1 id="第七章節---基於機密區塊鏈的註冊-edelivery-協議">第七章節 - 基於機密區塊鏈的註冊 eDelivery 協議</h1>
+
+<p>第二項提案的設計考慮到了需要保密的交付。</p>
+
+<p>也就是說，區塊鏈必須有助於保持交換的公平性，但是消息不能存儲在公開訪問的區塊中。
+與非機密案例的主要區別在於，在機密案例中，協議允許進行離線交換，所以交換可以在沒有區塊鏈或 TTP 干預的情況下執行。</p>
+
+<p>另一個重要特徵是該提案不需要截止日期，任何交換都可以隨時完成。無國籍 TTP 可用於解決雙方之間可能產生的爭議。我們描述了一種基於非區塊鏈的公平交換，我們將部分重用（即鏈下 3-Steps 交換），並在套用在本節中基於區塊鏈的新提案。</p>
+
+<p>在新協議中，發送方 A 和收件方 B 直接交換消息和不可否認證據，使用圖4 中描述的 3-Steps 脫鏈通信。僅作為最後手段，以防他們無法獲得預期通過發送取消請求（圖5）或完成請求（圖6），可以調用來自另一方，智能合約或TTP的項目。</p>
+
+<p>描述的協議相比，基於區塊鏈的解決方案中 TTP 的作用已大大降低。此外，發送方永遠不會聯繫 TTP。
+在這個新提案中，TTP 將僅採用已部署的智能合約來回應 B 的請求。TTP 完全是無狀態的，因此它從不存儲有關任何交換狀態的信息。</p>
+
+<p><code class="language-plaintext highlighter-rouge">圖中的藍色箭頭表示對區塊鏈地址的簽名請求，而黑色箭頭表示離線通信消息。</code></p>
+
+<div align="center"><img width="600" src="/img/97.png" /></div>
+<center><strong>表2 機密多方協議之要素</strong></center>
+
+<h2 id="a-多重之正向交換子協議">A. 多重之正向交換子協議</h2>
+
+<p>該協議在某種意義上是正向的，發送方 A 有可能在沒有 TTP 干預的情況下完成接收方集合 B 的交換。</p>
+
+<p>圖 4. 由機密 eDelivery 發送方和接收方交換的 3-Steps，已通過正向方法解決交換：該協議在某種意義上是正向的，即發送方 A 有可能在沒有 TTP 干預的情況下完成與接收方 B 的交換。</p>
+
+<div align="center"><img width="700" src="/img/98.png" /></div>
+<center><strong>圖四 鏈下通信交換子協議</strong></center>
+
+<p>交換如下：發送方向接收方集合發送消息，包括加密消息，接收者的地址和原始證據的不可否認性的第一部分，kT、hA。</p>
+
+<p>每個接收者決定他是否發送不可否認接收證明 hBi 的交換。
+接收方將接收打開消息的密鑰和原始證據的不可否認部分 kA。</p>
+
+<p>如果已成功完成這些步驟的執行，則發送方將持有來自所有接收方的不可否認接收（NRR）證據，並且每個接收方將持有該消息和不可否認原產地（NRO）證據。</p>
+
+<p>每個接收者都有密鑰，因此他可以解密消息，然後集合B的每個接收者獲得用於解密消息的密鑰 kA，以及相應的 NRO 證據（hA）。以相同的方式，消息的發送方將從每個接收者獲得 NRR 證據（hBi）。</p>
+
+<blockquote>
+  <p>這樣，協議允許正向交換，也就是說，交換可以完全執行而無需 TTP和區塊鏈的干預。另一個重要特徵是該提案不需要截止日期，並且可以隨時完成，如果雙方之間發生爭議，可以執行以下子協議。</p>
+</blockquote>
+
+<h2 id="b-多方之取消子協議">B. 多方之取消子協議</h2>
+
+<blockquote>
+  <p>取消子協議將由消息的發送方發起。</p>
+</blockquote>
+
+<p>如果沒從消息的所有接收方接收 hBi ，則發送方執行智能合約的相應功能。
+在圖 5 中，有一個圖形描述，表明發送方和區塊鏈為取消未完成的接收方取消機密 eDelivery 所採取的行動。</p>
+
+<p>Hash H（c）用作 eDelivery 的識別碼。當發送方執行智能合約的取消功能時，她必須指出所有未發送 hBi 的用戶的身份（由集合 B’’ 表示）。就智能合約而言，它將負責檢查集合 B’’ 中的任何用戶是否已通過 TTP 完成交換。在這種情況下，它會將相應的 NRR 證據（針對特定的 Bi）發送給發送方。否則，未完成的接收方將被包括在已取消的用戶組中（B’’ — 已取消）。因此，在此階段結束時，發送方 A 將與所有接收方完成公平交換，或者令人滿意，因為她已經收到了 hBi，或者因為取消了。</p>
+
+<div align="center"><img width="500" src="/img/99.png" /></div>
+<center><strong>圖5 鏈上取消子協議</strong></center>
+
+<h2 id="c-多方完成子協議">C. 多方完成子協議</h2>
+
+<blockquote>
+  <p>將由任何接收方發起，在已發送相應的 hBi 但尚未接收到該元素以獲得密鑰 kA 的情況下。</p>
+</blockquote>
+
+<p>最終確定將由 TTP 根據從收件方 Bi 收到的請求進行。在檢查從 Bi 接收的所有不同參數的正確性之後，TTP 執行智能合約的完成功能（TTP 將 Bi 的 NRR 證據（hBi）提交給智能合約）。</p>
+
+<p>在圖6中，描述了收件方，TTP 和區塊鏈在異常情況下完成機密 eDelivery 所採取的操作。 TTP 基於區塊鏈中存儲的有關此 eDelivery 的信息。在此子協議中，智能合約檢查請求是否來自 TTP，然後驗證聲明的收件人是否已取消其郵件傳遞的用戶。在這種情況下，會發出適當的取消證據。否則，智能合約在區塊鏈中存儲收到的 hBi，並通過將 Bi 添加到 B’’ 來完成已完成此交換的用戶組 — 已完成。最後，TTP 將 kT 發送給 Bi，接收者能夠閱讀該消息並完成 NRO 證據。</p>
+
+<div align="center"><img width="800" src="/img/100.png" /></div>
+<center><strong>圖6 鏈上完成子協議</strong></center>
+
+<h1 id="第八章節---智能合約">第八章節 - 智能合約</h1>
+
+<p>本文採用了以太坊區塊鏈，因為它提供了比比特幣區塊鏈更豐富的功能，因為他們在完全分布式系統中支持使用圖靈完備語言的智能合約。
+底下將以非機密 / 機密的協議來給大家展示一下相關的智能合約。</p>
+
+<h2 id="非機密多方註冊-edelivery-協議的智能合約">非機密多方註冊 eDelivery 協議的智能合約</h2>
+
+<p>底下將會展示各種功能的智能合約撰寫範例</p>
+
+<div align="center"><img width="500" src="/img/101.png" /></div>
+<center><strong>圖7 Variables 屬性定義</strong></center>
+
+<div align="center"><img width="500" src="/img/102.png" /></div>
+<center><strong>圖8 接受 function</strong></center>
+
+<div align="center"><img width="500" src="/img/103.png" /></div>
+<center><strong>圖9 完成 function</strong></center>
+
+<div align="center"><img width="500" src="/img/104.png" /></div>
+<center><strong>圖10 取消 function</strong></center>
+
+<h2 id="機密多方註冊edelivery協議的智能合約">機密多方註冊eDelivery協議的智能合約</h2>
+
+<p>底下將會展示各種功能的智能合約撰寫範例</p>
+
+<div align="center"><img width="500" src="/img/105.png" /></div>
+
+<center><strong>圖11 屬性以及建構子</strong></center>
+
+<div align="center"><img width="500" src="/img/106.png" /></div>
+
+<center><strong>圖12 取消 function</strong></center>
+
+<div align="center"><img width="500" src="/img/107.png" /></div>
+
+<center><strong>圖13 完成 function</strong></center>
+
+<div align="center"><img width="500" src="/img/108.png" /></div>
+
+<center><strong>圖14 新增接收方 function</strong></center>
+
+<div align="center"><img width="500" src="/img/109.png" /></div>
+<center><strong>圖15 非機密協議中的狀態生命週期</strong></center>
+
+<h1 id="結論">結論</h1>
+<p>歐法規定了電子交易的電子識別和信託服務規則。然後技術提案必須達到合格的法律要求。合格電子註冊交付的特徵是法規中包含的信託服務之一，與公平交換協議提供的特徵類似：不可否認來源和接收數據的完整性。因此，可以為註冊的 eDelivery 設計公平交換協議。然而，這種服務通常嚴重依賴於可信第三方的使用，並且成本高且效率低，並且必須驗證 TTP 的行為。</p>
+
+<p>在本文也採用了區塊鏈技術結合智能合約來將 TTP 減少甚至取消，並且透過機密與非機密之不同需求選擇需要採用何種協議，使得人員能夠透過智能合約來減少複雜的手續和流程並且將 TTP 的干預降到最低，實現服務的理想屬性，我們也得知在協議設計中結合基於區塊鏈的技術可以影響 TTP 的作用。</p>
+
+<h1 id="資料來源">資料來源</h1>
+<ul>
+  <li><a href="https://wiki.mbalib.com/zh-tw/%E4%BA%A4%E4%BB%98">交付 — MBA智庫百科</a></li>
+  <li><a href="http://www.trust.org.tw/tw/info/related-introduction/0">信託是什麼？</a></li>
+  <li><a href="https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/eDelivery">eDelivery</a></li>
+  <li><a href="https://zh.wikipedia.org/zh-tw/%E4%BA%92%E6%93%8D%E4%BD%9C%E6%80%A7">互操作性</a></li>
+  <li><a href="https://zh.wikipedia.org/zh-tw/%E4%BA%92%E6%93%8D%E4%BD%9C%E6%80%A7">作者團隊 Github</a></li>
+  <li><a href="https://zh.wikipedia.org/zh-tw/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6">智能合約</a></li>
+</ul>
+
+</div>
+
+<div class="tags">
+    
+</div>
+
+                </div>
+                
+                <div class="column is-4-desktop is-12-tablet">
+                    <p class="title is-4">Latest Posts</p>
+
+<div class="columns is-multiline">
+    
+    <div class="column is-12">
+        <div class="card">
+    
+    <div class="card-image">
+        <img src="/img/147.jpg" alt="MuSig：一個新的多重簽名標準">
+    </div>
+    
+    <div class="card-content">
+        <div class="content">
+            
+            <a class="title is-4" href="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/">MuSig：一個新的多重簽名標準</a>
+            
+            <p><table>
+  <tbody>
+    <tr>
+      <td>2019年2月15日</td>
+      <td>Andrew Poelstra <a href="https://blockstream.com/2019/02/18/en-musig-a-new-multisignature-standard/">轉載blockstream</a></td>
+    </tr>
+  </tbody>
+</table>
+
+</p>
+        </div>
+        <div class="has-text-centered">
+            <a href="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/" class="button is-primary">Read more</a>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <p class="card-footer-item">Published: Mar 11, 2020</p>
+    </footer>
+</div>
+    </div>
+    
+    <div class="column is-12">
+        <div class="card">
+    
+    <div class="card-image">
+        <img src="https://upyun-assets.ethfans.org/uploads/photo/image/5ca7121ac7ae45a4a55cddeae218a5cb.jpg" alt="Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊">
+    </div>
+    
+    <div class="card-content">
+        <div class="content">
+            
+            <a class="title is-4" href="/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/">Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊</a>
+            
+            <p><blockquote>
+  <p>編者注：本文對 Cosmos 網路中區塊鏈和比特幣、以太坊進行了鉅細靡遺的比較。作者先從區塊鏈系統的棧層出發，分析了比特幣、以太坊在不同棧層上的技術要點，最後迴歸到 Cosmos 網路中的區塊鏈，概念解釋尤為清晰，是不可多得的解釋文。</p>
+</blockquote>
+
+</p>
+        </div>
+        <div class="has-text-centered">
+            <a href="/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/" class="button is-primary">Read more</a>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <p class="card-footer-item">Published: Feb 13, 2020</p>
+    </footer>
+</div>
+    </div>
+    
+    <div class="column is-12">
+        <div class="card">
+    
+    <div class="card-image">
+        <img src="/img/panda-33.png" alt="多媒體區塊鏈:分散式且防竄改之媒體交易框架">
+    </div>
+    
+    <div class="card-content">
+        <div class="content">
+            
+            <a class="title is-4" href="/news/2020/01/18/%E5%A4%9A%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88/">多媒體區塊鏈:分散式且防竄改之媒體交易框架</a>
+            
+            <p><blockquote>
+  <p>當前多媒體發佈不會保留可自我檢索的訊息交易或內容修改之歷史記錄，經常對原始媒體進行編輯以獲取創意內容準備或篡改通過社交媒體進行錯誤宣傳，然而現在沒有可信任之機制可以輕鬆檢視交易記錄或修改歷史。</p>
+</blockquote>
+
+</p>
+        </div>
+        <div class="has-text-centered">
+            <a href="/news/2020/01/18/%E5%A4%9A%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88/" class="button is-primary">Read more</a>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <p class="card-footer-item">Published: Jan 18, 2020</p>
+    </footer>
+</div>
+    </div>
+    
+</div>
+
+
+
+
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+        <footer class="footer">
+    <div class="container">
+        
+        
+        <div class="columns is-multiline">
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/" class="link">Home</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/blog/" class="link">Blog</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/markdown/products/" class="link">書架</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/markdown/about/" class="link">關於我們</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="https://github.com/cypherpunks-core" class="link">Github</a>
+                </div>
+            </div>
+            
+        </div>
+        
+
+        <div class="content is-small has-text-centered">
+            <p class=""> Powered by  <a href="https://cypherpunks-core.github.io"> Cypherpunks Core </a></p>
+        </div>
+    </div>
+</footer>
+
+    
+    <script src="/assets/js/app.js" type="text/javascript"></script><!-- footer scripts --></body>
+</html>
+

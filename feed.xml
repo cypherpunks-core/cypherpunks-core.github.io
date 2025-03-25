@@ -1,0 +1,2087 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2025-03-25T14:12:27+00:00</updated><id>/feed.xml</id><title type="html">密碼龐克 Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">MuSig：一個新的多重簽名標準</title><link href="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/" rel="alternate" type="text/html" title="MuSig：一個新的多重簽名標準" /><published>2020-03-11T00:00:00+00:00</published><updated>2020-03-11T00:00:00+00:00</updated><id>/news/2020/03/11/MuSig:%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96</id><content type="html" xml:base="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/">&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2019年2月15日&lt;/td&gt;
+      &lt;td&gt;Andrew Poelstra &lt;a href=&quot;https://blockstream.com/2019/02/18/en-musig-a-new-multisignature-standard/&quot;&gt;轉載blockstream&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/147.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;比特幣及&lt;a href=&quot;https://blockstream.com/liquid/&quot;&gt;Blockstream的Liquid&lt;/a&gt;等相關區塊鏈使用&lt;a href=&quot;https://en.bitcoin.it/wiki/Elliptic_Curve_Digital_Signature_Algorithm&quot;&gt;ECDSA簽名演算法&lt;/a&gt;來驗證儲存在系統裡的幣的所有權歸屬。業界於2008年決定使用這個演算法是&lt;a href=&quot;https://bitcoin.stackexchange.com/questions/73049/why-was-ecdsa-chosen-over-schnorr-signatures-in-the-inital-design&quot;&gt;基於當時廣泛使用且未申請專利的&lt;/a&gt;數位簽名系統。但ECDSA存在一些嚴重的技術侷限，尤其是&lt;a href=&quot;https://en.bitcoin.it/wiki/Multisignature&quot;&gt;多重簽名&lt;/a&gt;和&lt;a href=&quot;https://bitcoinmagazine.com/articles/threshold-signatures-new-standard-wallet-security-1425937098/&quot;&gt;閾值簽名&lt;/a&gt;這兩種需要多個獨立方而非單一方的簽名非常難以通過ECDSA來實現。ECDSA簽名擁有十分複雜的代數結構，導致他們非常不靈活、難以操作，迫使比特幣開發者不得不用&lt;a href=&quot;https://en.bitcoin.it/wiki/Script&quot;&gt;比特幣指令碼&lt;/a&gt;來開發&lt;a href=&quot;https://en.bitcoin.it/wiki/Atomic_swap&quot;&gt;跨鏈原子交換&lt;/a&gt;或&lt;a href=&quot;https://en.bitcoin.it/wiki/Lightning_Network&quot;&gt;閃電網路&lt;/a&gt;這類應用，如果使用更加現代的簽名方案的話，可以讓這些應用更加小巧且隱私性更好。&lt;/p&gt;
+
+&lt;p&gt;自2008年以來，數位簽名技術已有了很大的發展，但新出的簽名方案卻忽略了實踐中亟需的幾個重要功能。尤其是方案設計者經常假設簽名者能夠控制金鑰何時以及如何生成、總是能夠獲得一致、可靠、安全的隨機性，以及擁有安全穩定的記憶體。實際上，比特幣使用者並不總是能夠直接接觸到自己的金鑰，對於精確的金鑰生成機制幾乎沒有控制權，對其他使用者如何使用他們產生的地址則完全沒有控制權。為了解決這些問題，我們開始設計一個全新的簽名方案，並通過務實的工程方法來確保它保持穩健不易破壞。&lt;/p&gt;
+
+&lt;h2 id=&quot;簡介&quot;&gt;簡介&lt;/h2&gt;
+
+&lt;p&gt;去年前半年，Blockstream密碼學家Pieter Wuille和我以及Yannick Seurin、Gregory Maxwell發表了一個&lt;a href=&quot;https://eprint.iacr.org/2018/068&quot;&gt;全新的多重簽名方案，叫做MuSig&lt;/a&gt;。這個多重簽名方案提供可證明的安全效能，甚至能夠抵禦多名惡意簽名者的勾結，並建立與普通的單一簽名者Schnorr簽名別無二致的簽名。&lt;/p&gt;
+
+&lt;p&gt;從那以後，我們就一直致力於將MuSig從一篇學術論文變成可用的程式碼，這周&lt;a href=&quot;https://github.com/ElementsProject/secp256k1-zkp/pull/35&quot;&gt;我們將這段程式碼併入了&lt;/a&gt;secp256k1-zkp，這是&lt;a href=&quot;https://www.github.com/bitcoin-core/secp256k1&quot;&gt;secp256k1&lt;/a&gt;的一個分叉，secp256k1是Bitcoin Core使用的一個高保證的加密庫，我們將之擴充套件來為Elements和Liquid提供保密交易功能。&lt;/p&gt;
+
+&lt;p&gt;目前比特幣社群還在&lt;a href=&quot;https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki&quot;&gt;探索Schnorr簽名在比特幣中的應用&lt;/a&gt;，我們希望我們的程式碼最終能夠進入被Bitcoin Core 及許多其他項目使用的上游庫secp256k1。&lt;/p&gt;
+
+&lt;p&gt;我們的程式碼生成的簽名與&lt;a href=&quot;https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki&quot;&gt;BIP-schnorr&lt;/a&gt;相相容，也可以生成介面卡簽名（adaptor signatures），從而使得&lt;a href=&quot;https://bitcoinmagazine.com/articles/scriptless-scripts-how-bitcoin-can-support-smart-contracts-without-smart-contracts/&quot;&gt;閃電網路在無指令碼指令碼中成為可能&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;為什麼使用musig&quot;&gt;為什麼使用MuSig？&lt;/h2&gt;
+
+&lt;p&gt;正如&lt;a href=&quot;https://blockstream.com/2018/01/23/musig-key-aggregation-schnorr-signatures/&quot;&gt;我們去年討論過的&lt;/a&gt;，密碼學研究中已有許多多重簽名方案，那麼為什麼我們要開發自己的簽名方案？因為我們有兩個現有方案無法解決的功能需求：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;簡短的、體積固定的簽名，不管簽名者集如何，在驗證者看來都是一樣的。&lt;/strong&gt; 在區塊鏈系統中，驗證效率是最重要的因素，除非在安全上確實需要，否則就不必要向驗證者提供簽名者組成細節了。此外還有一個好處是MuSig簽名還能夠改進隱私效能，因為它能隱藏具體的簽名者政策。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;在簡單公鑰模型中的可證明的安全性。&lt;/strong&gt; 這就意味著簽名者可以使用普通的金鑰配對來參加多重簽名，而不需要提供任何關於這些金鑰生產及控制的具體方式的資訊。在一些比特幣情境中，個人簽名者的金鑰管理政策互不相同且有限制，這時候就很難獲得關於金鑰生成的資訊。此外，對於金鑰生成細節的依賴可能與&lt;a href=&quot;https://bitcoinmagazine.com/articles/taproot-coming-what-it-and-how-it-will-benefit-bitcoin/&quot;&gt;Taproot&lt;/a&gt;不相容，這是一個預想的比特幣擴充套件，使得公開簽名金鑰可以擁有額外的隱形語義。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;此外在推出MuSig之後，我們發現許多已經發布的簽名方案，包括一個未公佈的MuSig版本&lt;a href=&quot;https://mobile.twitter.com/gregoryneven/status/1082337250304638976&quot;&gt;都是不安全的&lt;/a&gt;！我們會在以後的文章中展開講這一點，但目前我們已經開發出了一個適用於比特幣和Liquid的多重簽名方案。&lt;/p&gt;
+
+&lt;h2 id=&quot;常見誤區與安全api開發&quot;&gt;常見誤區與安全API開發&lt;/h2&gt;
+
+&lt;p&gt;和其他多重簽名協議的學術解釋一樣，MuSig假設參與者在整個簽名過程中都有持續的、易於升級的記憶體，並且攻擊者無法將之“重置”為之前的狀態。同時也假設簽名者能夠獲得隨機性資源。不幸的是，真實的世界並沒有這麼簡單，為了將數學理論應用到現實世界，我們花了很長時間開發一個API，能夠在各種各樣的情景下使用，同時又不會因為未聲明的假設而導致金鑰材料丟失。&lt;/p&gt;
+
+&lt;p&gt;就和Schnorr簽名或ECDSA一樣，MuSig簽名也使用必須隨機均勻生成的“隨機數（nonce）”。稍微有一點偏差都&lt;a href=&quot;https://eprint.iacr.org/2019/023.pdf&quot;&gt;可能導致金鑰丟失、財產被盜&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;我們主要的設計目標是建立一個安全的防止誤用的API，即使在受限制的環境中也不會鼓勵脆弱的使用方式。&lt;/p&gt;
+
+&lt;h2 id=&quot;均勻隨機性&quot;&gt;均勻隨機性&lt;/h2&gt;
+
+&lt;p&gt;使用單獨的簽名時，要獲得均勻的隨機數的標準做法是：把一些祕密資料以及需要簽名的訊息放到一個密碼學雜湊函數裡，就能得到均勻的隨機數，這些隨機數對於每個要簽名的訊息都是獨立的。&lt;/p&gt;
+
+&lt;p&gt;但如果使用的是多重簽名，這個簡單穩健的方法反而會帶來風險。惡意簽名者可能會在同一條訊息中請求兩個多重簽名，在第二次迭代時調整自己對簽名的貢獻，即所謂的平行攻擊。如果第一個簽名者通過在訊息旁邊雜湊一個祕密資料來選擇他的隨機數，他將在兩個非常不同的簽名中使用相同的隨機數，&lt;a href=&quot;https://www.schneier.com/blog/archives/2011/01/sony_ps3_securi.html&quot;&gt;PS3受到黑客攻擊&lt;/a&gt;也是因為同樣的原因。和只有單一簽名者的情況不同，對於平行攻擊並沒有簡單的解決方案，因為每個簽名者在瞭解所要生成簽名的所有細節之前，就必須選擇隨機數。&lt;/p&gt;
+
+&lt;p&gt;在雜湊流行起來之前，這個問題的一個傳統解決方案是使用硬體隨機數生成器。不過這些硬體十分昂貴，容易受到環境或其他外部影響，並且最重要的是，沒有辦法驗證他們是否正確操作。&lt;/p&gt;
+
+&lt;p&gt;後面一個關於驗證的問題有一些較有創意的解決方案，我們會在今後的文章中談到。目前我們選擇的解決方案是要求API使用者為每一次簽名會話提供一個獨特的”會話ID”。隨機數的生成需要對簽名者的祕密資料、簽名者集、需要簽名的訊息以及這個獨特的ID進行雜湊。擁有隨機數生成器的使用者可以使用它來生成這個會話ID，擁有一致記憶體的使用者可以直接使用一個計數器。&lt;/p&gt;
+
+&lt;p&gt;如果能夠無需要求隨機數或一致記憶體則比較理想，我們認為如果我們繼續進行研究，終將能夠開發出一個真正穩健的解決方案。&lt;/p&gt;
+
+&lt;h2 id=&quot;重放攻擊&quot;&gt;重放攻擊&lt;/h2&gt;
+
+&lt;p&gt;即使擁有可靠的隨機源，如果可以在簽名過程中重放一個簽名協議，仍然可以從多重簽名的參與者中提取金鑰。這種攻擊被稱為“重放攻擊”，可以攻擊在可重新啟動的虛擬機器內執行的簽名者，也可以攻擊支援間斷簽名及從可序列化狀態恢復的虛擬機器。即使沒有活躍的攻擊者也可能意外地出現這種情況，例如通過執行從同一狀態克隆的兩個虛擬機器，或者通過在已經不同步的分散式資料庫上執行程式碼。&lt;/p&gt;
+
+&lt;p&gt;具體來說，如果簽名者對多重簽名做出貢獻，並且在選擇隨機數之後簽名過程重新啟動，則可以修改其他簽名者對簽名的貢獻，以進行和上文提到的基本相同的攻擊。&lt;/p&gt;
+
+&lt;p&gt;這些類型的攻擊根本不適用於單一簽名，因為單一簽名是一步生成的，沒有可重新啟動的中間狀態。這些額外的問題是多輪加密協議所獨有的。&lt;/p&gt;
+
+&lt;p&gt;如果沒有新的方案的話，我們根本無法保護使用虛擬機器簽名的使用者，不過我們正在積極進行相關研究。我們認為使用虛擬機器是一種不太安全的方式，因為如果攻擊者能夠重置虛擬機器的話，那攻擊者也很有可能能夠從中提取機密資料。&lt;/p&gt;
+
+&lt;p&gt;一些使用者會將停滯狀態系列化且從這裡重新開始，為了保護這些使用者，我們的API就不支援簽名會話的序列化。&lt;/p&gt;
+
+&lt;p&gt;在實際操作中，這意味著使用我們的程式碼的使用者，如果想要支援可以安全度過電源重啟或中斷干擾的簽名會話——這對於硬體錢包來說是很合理的目標——就必須要保證安全一致的記憶體、如果這類錢包想要同時支援多個簽名會話，那麼每個平行的會話都需要額外的一致記憶體。&lt;/p&gt;
+
+&lt;p&gt;我們認為可以通過我們正在研究的這個方案來解決這個侷限。&lt;/p&gt;
+
+&lt;h2 id=&quot;結論&quot;&gt;結論&lt;/h2&gt;
+
+&lt;p&gt;從上文中我們得到的結論是，多方協議比單方協議帶來了更多新的問題。在數學複雜性方面，MuSig比&lt;a href=&quot;https://crypto.stanford.edu/bulletproofs/&quot;&gt;Bulletproofs&lt;/a&gt;之類的解決方案要簡單得多。但在安裝複雜性方面，MuSig付出了更多努力，並且需要在抗脆弱性和API靈活性之間做更多權衡取捨。&lt;/p&gt;
+
+&lt;p&gt;本文只討論了多重簽名，多重簽名是指n個簽名者一起合作生成一個單一簽名。在未來的文章中我們將會討論閾值簽名，即在n足夠大的情況下，n個簽名者的任何子集都能生成簽名，而不需要整個群組的貢獻。&lt;/p&gt;
+
+&lt;p&gt;在未來的文章中我們還會討論一些安全生成隨機數並讓隨機數更易於驗證的技術。尤其是通過一個被稱為&lt;a href=&quot;https://www.wpsoftware.net/andrew/secrets/slides.pdf&quot;&gt;sign-to-contract&lt;/a&gt;的技術，主計算機可以消除來自不可靠的硬體錢包的隨機數生成器的任何偏差。&lt;/p&gt;
+
+&lt;p&gt;讓我們來進一步解釋關於消除隨機性和一致記憶體的研究，我們可以通過&lt;a href=&quot;https://en.wikipedia.org/wiki/Zero-knowledge_proof&quot;&gt;零知識證明&lt;/a&gt;來消除隨機數偏差或重放攻擊，不再要求一致記憶體，並且將MuSig協議從三輪減少到兩輪。我們對這個反感的可行性非常激動，並期待能夠繼續跟大家分享我們的進展。&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><category term="news" /><summary type="html">2019年2月15日 Andrew Poelstra 轉載blockstream</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/img/147.jpg" /><media:content medium="image" url="/img/147.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊</title><link href="/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/" rel="alternate" type="text/html" title="Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊" /><published>2020-02-13T00:00:00+00:00</published><updated>2020-02-13T00:00:00+00:00</updated><id>/news/2020/02/13/Cosmos%20%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86,Part-1:%E6%AF%94%E8%BC%83Cosmos%20%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3%E3%80%81%E4%BB%A5%E5%A4%AA%E5%9D%8A</id><content type="html" xml:base="/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/">&lt;blockquote&gt;
+  &lt;p&gt;編者注：本文對 Cosmos 網路中區塊鏈和比特幣、以太坊進行了鉅細靡遺的比較。作者先從區塊鏈系統的棧層出發，分析了比特幣、以太坊在不同棧層上的技術要點，最後迴歸到 Cosmos 網路中的區塊鏈，概念解釋尤為清晰，是不可多得的解釋文。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;本文來自：&lt;a href=&quot;https://ethfans.org/posts/how-does-cosmos-work-part1&quot;&gt;ethfans&lt;/a&gt; &lt;br /&gt;
+鑑於文章實在太長，我們在文首附上了目錄。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#cosmos-%e6%98%af%e4%bb%80%e9%ba%bc&quot;&gt;Cosmos 是什麼？&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#%e7%8d%a8%e7%ab%8b%e5%b9%b3%e8%a1%8c%e5%8d%80%e5%a1%8a%e9%8f%88%e7%9a%84%e5%8e%bb%e4%b8%ad%e5%bf%83%e5%8c%96%e7%b6%b2%e8%b7%af&quot;&gt;獨立平行區塊鏈的去中心化網路&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#%e6%af%8f%e6%a2%9d%e5%8d%80%e5%a1%8a%e9%8f%88%e9%83%bd%e6%8e%a1%e7%94%a8-bft-%e5%85%b1%e8%ad%98%e7%ae%97%e6%b3%95&quot;&gt;“每條區塊鏈都採用 BFT 共識算法”&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#tendermint-%e5%85%b1%e8%ad%98%e7%ae%97%e6%b3%95&quot;&gt;“Tendermint 共識算法”&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#%e5%8d%80%e5%a1%8a%e9%8f%88%e7%b5%90%e6%a7%8b%e7%b0%a1%e4%bb%8b&quot;&gt;區塊鏈結構簡介&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#%e6%af%94%e7%89%b9%e5%b9%a3%e6%a3%a7%e5%b1%a4%e7%b5%90%e6%a7%8b&quot;&gt;比特幣棧層結構&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#%e4%bb%a5%e5%a4%aa%e5%9d%8a%e6%a3%a7%e5%b1%a4%e7%b5%90%e6%a7%8b&quot;&gt;以太坊棧層結構&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#%e5%9f%ba%e6%96%bc%e6%af%94%e7%89%b9%e5%b9%a3%e8%88%87%e4%bb%a5%e5%a4%aa%e5%9d%8a%e6%a7%8b%e5%bb%ba%e6%87%89%e7%94%a8%e7%a8%8b%e5%bc%8f&quot;&gt;基於比特幣與以太坊構建應用程式&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#%e6%af%94%e7%89%b9%e5%b9%a3%e4%be%b7%e9%99%90%e6%80%a7%e7%9a%84%e4%b8%80%e5%80%8b%e4%be%8b%e5%ad%90&quot;&gt;比特幣侷限性的一個例子&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#%e4%bb%a5%e5%a4%aa%e5%9d%8a%e4%be%b7%e9%99%90%e6%80%a7%e7%9a%84%e4%b8%80%e5%80%8b%e4%be%8b%e5%ad%90&quot;&gt;以太坊侷限性的一個例子&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#cosmos-%e5%8d%80%e5%a1%8a%e9%8f%88%e7%b5%90%e6%a7%8b&quot;&gt;Cosmos 區塊鏈結構&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#cosmos-%e5%85%b1%e8%ad%98%e5%b1%a4&quot;&gt;Cosmos 共識層&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#tendermint-%e5%85%b1%e8%ad%98%e6%98%af%e5%a6%82%e4%bd%95%e9%81%8b%e4%bd%9c%e7%9a%84&quot;&gt;Tendermint 共識是如何運作的？&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#cosmos-%e7%b6%b2%e8%b7%af%e5%b1%a4&quot;&gt;Cosmos 網路層&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#cosmos-%e6%87%89%e7%94%a8%e5%b1%a4&quot;&gt;Cosmos 應用層&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#%e7%b5%90%e8%ab%96&quot;&gt;結論&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/5ca7121ac7ae45a4a55cddeae218a5cb.jpg&quot; alt=&quot;1.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;密碼學貨幣產業從未停下腳步。&lt;/p&gt;
+
+&lt;p&gt;一切都始於2010年比特幣的問世。比特幣剛問世時，所有人都認為它是數字貨幣的聖盃。曾經被認為不可能的事情現在變成了現實：第一個點對點（peer-to-peer，P2P）支付網路出現了。&lt;/p&gt;
+
+&lt;p&gt;即便在今天，對事物的信任仍然是最難以琢磨並且最珍貴的資產。比特幣通過創建第一個“免信任型”系統，繞過了這一問題。但這僅僅是一個開始。&lt;/p&gt;
+
+&lt;p&gt;從那之後，比特幣就成為了催生更廣泛密碼學創新的催化劑，這些創新也導致了一系列新型去中心化系統與金融基礎設施的出現：以太坊（Ethereum）、閃電網路（Lighting Network）、EOS、Tezos、Maker…… 這個名單還在不斷延長。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;但是有一個項目與眾不同：Cosmos&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;p&gt;在區塊鏈領域，&lt;a href=&quot;https://cosmos.network/&quot;&gt;Cosmos&lt;/a&gt; 是一個“新生兒”。雖然它的理念已經出現有一段時間了，但其開發團隊一直在背後慢慢地開發以確保 Cosmos 設計及實現的正確性。這也使得 Cosmos 最近才公開推出。&lt;/p&gt;
+
+&lt;p&gt;因此，有很多人看過 Cosmos 項目之後卻不理解它也就不足為奇了。簡單瀏覽 Cosmos 相關資料並不會讓他們能夠直觀地瞭解 Cosmos，反而會讓他們有更多疑問：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;什麼是 Cosmos？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cosmos 的工作原理是什麼？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;與比特幣、以太坊相比 Cosmos 有什麼不同？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cosmos 的特點是什麼？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;我已經知道 Cosmos 團隊快兩年了。老實說，當我第一次聽說他們在做什麼的時候，我和其他人一樣對它的概念一無所知。&lt;/p&gt;
+
+&lt;p&gt;但當我更深入地瞭解 Cosmos 之後，我開始非常欣賞它。我這麼說不僅是為了引人注目，是真正地發自內心。&lt;/p&gt;
+
+&lt;p&gt;我對 Cosmos 非常著迷，所以我們決定將 TruStory 應用構建為一個 Cosmos 區塊鏈應用。 &lt;em&gt;（插播：我將在之後的文章中更詳細地闡述我們為什麼會做出這個決定）&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;儘管如此，關於 Cosmos 仍然有很多困惑。所以我決定專門為此寫一篇文章。我想讓讀者對 Cosmos 是什麼以及它在區塊鏈世界中的定位有一個更深層次的理解。&lt;/p&gt;
+
+&lt;p&gt;你準備好開始了麼？理清思緒，帶上你的思考帽，繫好安全帶。我們要開車啦！&lt;/p&gt;
+
+&lt;h2 id=&quot;cosmos-是什麼&quot;&gt;Cosmos 是什麼？&lt;/h2&gt;
+
+&lt;p&gt;Cosmos 是這樣定義自己的：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;“一個由多條獨立平行區塊鏈組成的去中心化網路，每條平行區塊鏈均採用 BFT 共識算法（例如：Tendermint 共識）。”&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;哇，好拗口啊！讓我們把這個定義拆分成幾個容易理解的部分。&lt;/p&gt;
+
+&lt;h3 id=&quot;獨立平行區塊鏈的去中心化網路&quot;&gt;獨立平行區塊鏈的去中心化網路&lt;/h3&gt;
+
+&lt;p&gt;我在這裡假設讀者已經對區塊鏈非常瞭解了！不過，我還是快速回顧一下：&lt;/p&gt;
+
+&lt;p&gt;簡單來說，區塊鏈是一個分佈在許多計算機上的數據庫，每臺計算機上的數據庫都保持相同的狀態。換句話說，每臺計算機上的數據庫所包含的數據都完全相同。這些計算機共同組成了所謂的“區塊鏈網路”。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/2e3b581e3cd74baeb1bb1bc26e31db14.png&quot; alt=&quot;2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;比特幣和以太坊都是區塊鏈，而 Cosmos 是由許多這樣並行運行的區塊鏈組成的區塊鏈網路。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/c1bd73967e4c4a77a034c9498ebc90c6.png&quot; alt=&quot;3.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如果你不能完全理解剛才說的，那麼在進一步瞭解 Cosmos 工作原理之前，你最好再多讀一些關於&lt;a href=&quot;https://hackernoon.com/wtf-is-the-blockchain-1da89ba19348&quot;&gt;區塊鏈的基礎知識&lt;/a&gt;。（編者注：中譯本見文末超鏈接《區塊鏈是什麼鬼》）&lt;/p&gt;
+
+&lt;h3 id=&quot;每條區塊鏈都採用-bft-共識算法&quot;&gt;“每條區塊鏈都採用 BFT 共識算法”&lt;/h3&gt;
+
+&lt;p&gt;BFT 是 “Byzantine Fault-Tolerant（拜占庭容錯）”的縮寫。一條拜占庭容錯的區塊鏈能夠在網路中部分節點宕機 以及/或者 作惡（即所謂“拜占庭式節點”）的情況下，保證網路依舊具備“安全性”與“活性”等性質。安全性與活性能夠確保區塊鏈網路中每個節點維護相同的狀態。&lt;/p&gt;
+
+&lt;p&gt;插播：如果你想要更深入地瞭解什麼是安全性（Safety）與活性（Liveness），請閱讀我的這篇有關&lt;a href=&quot;https://www.preethikasireddy.com/posts/lets-take-a-crack-at-understanding-distributed-consensus/&quot;&gt;分佈式共識的文章&lt;/a&gt;。（編者注：中譯本見文末超鏈接《分佈式共識的工作原理，Part-2》）&lt;/p&gt;
+
+&lt;p&gt;因此，一種 “BFT 共識算法” 乃是定義了計算機間通信與協調、使得區塊鏈具有拜占庭容錯能力的算法。Cosmos 網路中的所有區塊鏈都採用某種 BFT 共識算法。&lt;/p&gt;
+
+&lt;p&gt;比特幣和以太坊的共識算法不是典型的 BFT 算法。所以它們不符合 Cosmos 網路中區塊鏈的定義。（值得注意的是，雖然它們不是拜占庭容錯的，但仍然可以讓比特幣和以太坊等區塊鏈加入 Cosmos 網路，僅僅需要一些額外的步驟。如果你覺得費解，不用擔心——我們將稍後對此進行更深入的研究。）&lt;/p&gt;
+
+&lt;p&gt;插播：如果你還是不清楚什麼是 BFT，我在&lt;a href=&quot;https://www.preethikasireddy.com/posts/lets-take-a-crack-at-understanding-distributed-consensus/&quot;&gt;這篇文章&lt;/a&gt;中寫得蠻清楚了。（編者注：中譯本見文末超鏈接《分佈式共識的工作原理，Part-3》）&lt;/p&gt;
+
+&lt;h3 id=&quot;tendermint-共識算法&quot;&gt;“Tendermint 共識算法”&lt;/h3&gt;
+
+&lt;p&gt;Tendermint 是由 Cosmos 開發者提出並構建的一種 BFT 共識算法。Cosmos 網路中的區塊鏈可以使用 Tendermint 共識或任何其他 BFT 共識算法。稍後我們將在本文了解更多關於 Tendermint 的內容。&lt;/p&gt;
+
+&lt;p&gt;簡單來說，Cosmos 網路是一個由多條並行運行的獨立拜占庭容錯區塊鏈組成的生態系統。這些區塊鏈是  &lt;em&gt;獨立運行的&lt;/em&gt; ，並且能夠與其他區塊鏈進行  &lt;em&gt;互操作&lt;/em&gt; 。&lt;/p&gt;
+
+&lt;p&gt;現在你可能會想， &lt;em&gt;“為什麼區塊鏈之間要進行互操作呢？”&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;好問題！我們很快就會講到。但首先我們要回顧一下區塊鏈的結構。&lt;/p&gt;
+
+&lt;h2 id=&quot;區塊鏈結構簡介&quot;&gt;區塊鏈結構簡介&lt;/h2&gt;
+
+&lt;p&gt;在深入研究 Cosmos 生態系統中區塊鏈是如何工作和互操作的之前，讓我們先回顧一下區塊鏈結構的基礎知識。&lt;/p&gt;
+
+&lt;p&gt;正如我們前面所討論的，區塊鏈是一個多機複製數據庫，並且在每臺計算機上維護相同的數據。這種類型的分佈式系統也被稱為“複製狀態機”。&lt;/p&gt;
+
+&lt;p&gt;複製狀態機是一種多機複製的確定性狀態機，但因為網路中每臺計算機都維護著相同的狀態，因此在功能上看起來就像一臺單機。&lt;/p&gt;
+
+&lt;p&gt;聽起來很熟悉，對吧？回顧上文區塊鏈的定義，這裡的定義僅僅是將“數據庫”替換為“狀態機”、“數據”替換為“狀態”，相信你能明白我的意思。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/8621dc23daed4911b746a343c7a7ac50.png&quot; alt=&quot;4.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;“確定性”&lt;/strong&gt;  可以簡單地理解為，給定一個確定的輸入，狀態機將始終產生相同的輸出。在區塊鏈系統中，“確定性”意味著如果你從一個給定狀態開始執行相同的交易序列，你總是會得到相同的最終狀態。&lt;/p&gt;
+
+&lt;p&gt;複製狀態機從某個狀態啟動。每筆有效交易都將導致系統狀態轉變到下一個狀態（這與數據庫中條目更新相同：如果你更新某個條目，數據庫將遷移到包含該更新後數據條目的新狀態）。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/aa88e909d5f34339af4aabc42e5a751f.png&quot; alt=&quot;5.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;複製狀態機在概念上有三個棧層：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1）應用層&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;應用層負責定義狀態變遷，並在交易發生後更新狀態機狀態。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2）網路層&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;網路層負責將在某一個狀態機上執行的交易傳播到網路中其他所有狀態機上。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3）共識層&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;共識層由算法組成，負責確保在交易執行後每一臺狀態機都存儲相同的狀態（即，某一狀態機無法偽造不存在的交易）。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3a）抗女巫攻擊層&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;試圖在去中心化公網運行的複製狀態機還需要第四層（“抗女巫攻擊層”），確保任何一臺狀態機都不能破壞網路。如果沒有這一層，狀態機可以通過創建許多假身份來篡改狀態，從而獲得與其投入不成比例的影響或收益（即，發起&lt;a href=&quot;https://en.wikipedia.org/wiki/Sybil_attack&quot;&gt;女巫攻擊&lt;/a&gt;）。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/9b3e9316caae4284885bdf4029c027cb.png&quot; alt=&quot;6.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;總之，應用層負責定義狀態與管理狀態遷移。網路與共識層負責保持每臺機器上狀態一致（即，確保網路中每個數據庫數據一致）。抗女巫攻擊層（顯然）負責避免女巫攻擊。&lt;/p&gt;
+
+&lt;p&gt;現在，讓我們看看在比特幣區塊鏈和以太坊區塊鏈中是如何定義與實現這些棧層的。&lt;/p&gt;
+
+&lt;h3 id=&quot;比特幣棧層結構&quot;&gt;比特幣棧層結構&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;1）應用層&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;比特幣的主要應用是 P2P 交易。比特幣使用 &lt;a href=&quot;https://en.bitcoin.it/wiki/Script&quot;&gt;Script&lt;/a&gt;（一種堆棧式非圖靈完備的語言）來定義與執行交易。當發送方通過交易發送比特幣時，發送方將使用腳本來編碼指定誰才能掌控這筆資金。Script 包含一組操作碼或者說命令，發送方可以使用這些操作碼來指定要花費一筆比特幣所需滿足的條件。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2）網路層&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;當發送方向接收方發送比特幣時，該轉賬交易必須被廣播到網路中，才能使礦工將其打包進區塊中。比特幣使用一種“Gossip 協議”來確保每個節點都會將其接收的所有新區塊或交易發送至鄰居節點（peer）。Gossip 協議是確保消息在全部節點間傳播的 P2P 協議。比特幣網路中所有節點都會將其新接收的有效交易立即發送給其鄰居節點，從而使得待打包交易能夠在幾秒鐘內通過點對點網路傳播到大多數節點。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3）共識層&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在交易被轉播到網路中後，還需要將其添加到區塊鏈中才能完成轉賬（即讓網路中的計算機都來執行這個交易）。驗證交易並將其打包到區塊中的過程稱為“中本聰共識（Nakamoto Consensus）”。中本聰共識的運行原理可以在其他論壇或文章找到。如果你想深入瞭解，&lt;a href=&quot;https://blockonomi.com/nakamoto-consensus/&quot;&gt;這篇文章&lt;/a&gt;是一個很好的入門文章。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3a）抗女巫攻擊層&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;中本聰共識依賴於“工作量證明（Proof-of-Work）”來防止女巫攻擊。基本上，產生一個新區塊所需的算力使得比特幣共識協議自身能夠抵抗女巫攻擊。由於礦工需要大量的算力來產生下一個區塊，使得他們無法在不增加大量算力（與資金）投入的情況下“偽造”多個身份。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/f37cf734318646859dc80dde991db92d.png&quot; alt=&quot;7.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;以太坊棧層結構&quot;&gt;以太坊棧層結構&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;1）應用層&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;與比特幣不同，以太坊的設計初衷是構建一個能夠運行去中心化應用的平臺。以太坊包含一種高級語言（即，Solidity），使得開發者能夠通過編寫智能合約定義去中心化應用的具體功能。EVM（以太坊虛擬機，Ethereum Virtual Machine）是以太坊應用層的核心。EVM 使用 EVM 編譯器將智能合約程式碼編譯成字節碼，用戶可以通過交易的形式，將該字節碼上傳到區塊鏈之後，EVM 就可以執行這些字節碼，從而改變去中心化應用的狀態（即，更新以太坊節點存儲的該智能合約相關狀態）。由於以太坊網路中所有節點均運行 EVM，這也保證所有節點的狀態一致。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2）網路層&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;與比特幣相似，以太坊也使用 Gossip 協議，使得節點能夠與其鄰居節點通信。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3）共識層&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;為了達成共識，以太坊使用了與中本聰共識相似的“&lt;a href=&quot;https://en.wikipedia.org/wiki/Ethash&quot;&gt;Ethash&lt;/a&gt;”，但 Ethash 與中本聰共識有一些關鍵區別。如果你需要了解以太坊共識算法的工作原理，請閱讀&lt;a href=&quot;https://www.preethikasireddy.com/posts/how-does-ethereum-work-anyway/&quot;&gt;我之前的一篇文章&lt;/a&gt;。（編者注：中譯本見文末超鏈接《以太坊的工作原理》)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3a）抗女巫攻擊層&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;與比特幣一樣，Ethash 依賴於工作量證明（目前為止，譯者注：未來以太坊 2.0 將切換到 PoS 共識機制）來抵禦女巫攻擊。&lt;/p&gt;
+
+&lt;h2 id=&quot;基於比特幣與以太坊構建應用程式&quot;&gt;基於比特幣與以太坊構建應用程式&lt;/h2&gt;
+
+&lt;p&gt;我希望以上內容讓你對區塊鏈結構有了一定了解。當我們討論 “比特幣” 或 “以太坊”時，這些名字指的是相關的所有棧層。因為比特幣和以太坊是由這些棧層組成的整體。&lt;/p&gt;
+
+&lt;p&gt;你無法將以太坊智能合約與其底層 Ethhash 共識層分開，也因此單獨討論這兩個主題都沒有意義。比特幣也是如此，不使用中本聰共識與工作量證明你就無法進行比特幣交易。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;另一方面，Cosmos 採用了一種稍微不同的模式：它將應用層與共識層和網路層分開。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;因為 Cosmos 的目標是建立一個區塊鏈網路，所以這樣設計是有意義的。在這個區塊鏈網路中，每條區塊鏈是獨立的，並且有它自己的需要和要求（即，它自己的應用）。在這種情況下，想要提出一種一刀切的、適合所有區塊鏈的應用層，是行不通的。讓我們用幾個例子來研究一下原因。&lt;/p&gt;
+
+&lt;h3 id=&quot;比特幣侷限性的一個例子&quot;&gt;比特幣侷限性的一個例子&lt;/h3&gt;
+
+&lt;p&gt;假設我們準備構建一個貨幣應用程式。在這種情況下，像 Bitcoin Scrypt 這種簡單的基於堆棧的腳本語言是最佳選擇。比特幣腳本語言不僅可以很好地實現從一個地址到另一個地址的價值轉移，並且非常簡單、不是圖靈完備的。&lt;/p&gt;
+
+&lt;p&gt;因此，它不太容易受到各種類型安全漏洞的影響，而這些安全漏洞可能會嚴重影響圖靈完備的編程語言。這正是我們在處理貨幣與價值存儲時想要的。但是這種簡單也有其侷限性。&lt;/p&gt;
+
+&lt;p&gt;使用 Scrypt 做任何更復雜的事情（例如：去中心化預測市場）都非常困難。比特幣腳本語言不僅受其可執行程式碼複雜性限制，對於開發者來說也十分不友好。更糟糕的是，比特幣區塊鏈交易的處理速度很慢（大約每秒 7 筆交易）。 &lt;strong&gt;因此，直接在比特幣區塊鏈上構建需要高交易吞吐量的應用是不現實的。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;以太坊侷限性的一個例子&quot;&gt;以太坊侷限性的一個例子&lt;/h3&gt;
+
+&lt;p&gt;與比特幣相反，以太坊的 EVM 與智能合約語言（Solidity）是為了支持更靈活的應用程式而設計的。Solidity 是一種圖靈完備的編程語言，因此理論上它可以執行任意算法複雜度的程式碼。&lt;/p&gt;
+
+&lt;p&gt;在實際應用中，由於 Solidity 易出錯並易受到安全攻擊，所以使用 Solidity 開發任意複雜度的程序是相當困難的。這種特性與處理價值轉移的應用程式背道而馳，在後者這個場景種，安全性是最重要的。&lt;/p&gt;
+
+&lt;p&gt;此外，智能合約也非常難以升級，從而使得迭代開發非常困難。合約一旦部署上鏈，你所能做的就只有祈禱它能夠平穩運行！與比特幣一樣，以太坊交易處理速率也非常低（大約每秒能夠處理 15 筆交易），因此在以太坊區塊鏈上構建需要高交易吞吐量的應用也是不現實的。&lt;/p&gt;
+
+&lt;p&gt;Cosmos 的提出就是為了滿足這種實際業務需要，儘管它為此做了一些較大的犧牲。接下來我們將深入研究具體的細節。但在那之前，我們還必須理解 Cosmos 中區塊鏈的三個棧層是什麼樣的。&lt;/p&gt;
+
+&lt;h2 id=&quot;cosmos-區塊鏈結構&quot;&gt;Cosmos 區塊鏈結構&lt;/h2&gt;
+
+&lt;p&gt;首先，我們將從共識層開始瞭解 Cosmos，以便更好地理解在 Cosmos 上開發應用城市與使用比特幣或以太坊有何不同。&lt;/p&gt;
+
+&lt;h3 id=&quot;cosmos-共識層&quot;&gt;Cosmos 共識層&lt;/h3&gt;
+
+&lt;p&gt;Cosmos 網路中區塊鏈使用 Tendermint 共識算法。Tendermint 是一個 2014 年誕生的開源項目， &lt;em&gt;“旨在解決比特幣工作量證明（Proof-of-Work, PoW）共識算法的速度、可擴展性與環境問題”&lt;/em&gt; 。&lt;/p&gt;
+
+&lt;p&gt;Tendermint 共識算法是一個  &lt;em&gt;“&lt;/em&gt; &lt;em&gt;無視應用層（application-agnostic）&lt;/em&gt; &lt;em&gt;的共識引擎”&lt;/em&gt; 。從本質上講，這意味著任何區塊鏈都可以使用 Tendermint 共識算法，它是拜占庭容錯的，並且使用 PoS 算法來抵禦女巫攻擊。&lt;/p&gt;
+
+&lt;p&gt;又是 &lt;em&gt;一大堆術語&lt;/em&gt; ！我們好好說道說道。&lt;/p&gt;
+
+&lt;h3 id=&quot;tendermint-共識是如何運作的&quot;&gt;Tendermint 共識是如何運作的？&lt;/h3&gt;
+
+&lt;p&gt;回顧一下，共識算法的存在是為了保證交易執行後，狀態機中保存的狀態一致；而 Tendermint 共識算法定義了一種“能讓所有節點對下個區塊達成共識”的規則。&lt;/p&gt;
+
+&lt;p&gt;讓我們看看相關因素及規則是如何運作的吧！&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;驗證者&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;負責達成狀態一致的節點稱為“驗證者”。任何願意協助整個網路達成共識的參與節點都能成為驗證者；作為回報，驗證者會獲得交易手續費和區塊獎勵。Tendermint 整合這些驗證者的投票結果，確定下一個區塊的正確狀態。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;通過質押對抗女巫攻擊&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;每個驗證者的票都有自己的投票權重，投票權重通常是在創世塊產生時確定，或是在開始運行後根據應用層開發者所設計的某些邏輯來決定。一般來說，由驗證者鎖在系統中的代幣量（作為質押品）決定投票權重的大小，這種質押物也被稱為“保證金”。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Consensus&lt;/strong&gt;   &lt;strong&gt;共識&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;按照規則，驗證者要按輪次（round）對每一個區塊達成共識。每一輪都包含三個基本步驟： &lt;strong&gt;提議階段&lt;/strong&gt; （Propose）、 &lt;strong&gt;預投票階段&lt;/strong&gt; （Prevote）、 &lt;strong&gt;預提交階段&lt;/strong&gt; （Precommit），以及兩個後續步驟： &lt;strong&gt;提交階段&lt;/strong&gt; （Commit）、 &lt;strong&gt;新高度階段&lt;/strong&gt; （NewHeight）。從抽象角度來看，驗證者按照以下協議規則共同決定下一高度要使用什麼區塊：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;首先是 &lt;strong&gt;提議&lt;/strong&gt; 階段，由指定的驗證者提出一個區塊——每一輪中的提議者都是從有序的列表中按照投票權重的比例，確定性地選擇出來的。&lt;/li&gt;
+  &lt;li&gt;接著進入 &lt;strong&gt;預投票&lt;/strong&gt; 階段——每一位驗證者廣播他們各自的預投票。&lt;/li&gt;
+  &lt;li&gt;當該輪次中某一區塊收到超過 2/3 的預投票，我們就稱其為 “ &lt;strong&gt;polka&lt;/strong&gt; ”。一旦出現 “ &lt;strong&gt;polka&lt;/strong&gt; ”，就進入下一個階段。&lt;/li&gt;
+  &lt;li&gt;進入 &lt;strong&gt;預提交&lt;/strong&gt; 階段，由每一個驗證者廣播他們的預提交的投票。
+    &lt;ul&gt;
+      &lt;li&gt;如果某一特定區塊收到超過 2/3 的預投票，就進入 &lt;strong&gt;提交&lt;/strong&gt; 階段，這個階段會將區塊加入區塊鏈，並 &lt;strong&gt;增加區塊高度&lt;/strong&gt; 。每當有新的區塊加入區塊鏈，所在區塊鏈的區塊高度就 +1。&lt;/li&gt;
+      &lt;li&gt;如果失敗，則要麼返回預投票階段，要麼回到預提交階段。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;要注意的是，在任何高度上，都有可能需要一輪以上的投票才能提交一個區塊。因為可能出現以下情況：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;被指定的“提議者”在應該提出區塊時掉線&lt;/li&gt;
+  &lt;li&gt;提議者所提出的區塊違反一些預先定義的規則&lt;/li&gt;
+  &lt;li&gt;Tendermint 依靠超時機制確保區塊鏈出塊不會遇到延宕。如果在超時前，提議區塊沒有收到超過 2/3 的預投票，則由新的提議者再次進行提出區塊流程。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;協議細節詳見&lt;a href=&quot;https://github.com/tendermint/tendermint/wiki/Byzantine-Consensus-Algorithm&quot;&gt;此處&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/ce64233727e040cb9849dc10df850583.png&quot; alt=&quot;8.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;總的來說，Tendermint 選擇了與比特幣的中本聰共識、以太坊 Ethash 不同的路線， 讓我們做一些重點對比：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;確定性與機率性&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;與中本聰共識和 Ethash 這類機率性共識不同， Tendermint 是確定共識——這意味著 Tendermint 每個區塊都是最終確定的，而不像比特幣的區塊只是處於“很可能”被確定的狀態。&lt;/p&gt;
+
+&lt;p&gt;我們回顧一下中本聰共識，區塊總是處於“未確定”狀態——只有確定某個區塊在“&lt;a href=&quot;https://blockonomi.com/nakamoto-consensus/&quot;&gt;最長鏈&lt;/a&gt;”上，才能有把握認為該塊 &lt;strong&gt;正在&lt;/strong&gt; 被最終確定，這也是為什麼比特幣交易需要等“&lt;a href=&quot;https://en.bitcoin.it/wiki/Confirmation&quot;&gt;6 個區塊確認&lt;/a&gt;”。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/a19427f81a1746169c446a700f5a58a0.png&quot; alt=&quot;9.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;而在 Tendermint 中，驗證者成功投票及提交後，區塊就立即被確認了。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/405798e0a07a49f9835ffd57975e6132.png&quot; alt=&quot;10.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;固定驗證者 vs. 可變驗證者&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;中本聰共識及 Ethash 允許礦工隨時選擇加入或退出，並不需要其他礦工提前知曉。相反地，Tendermint 共識要求維護一個事先知曉且固定的驗證者集合，驗證者身份是靠他們的公鑰來辨認的。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;領導 vs. 無領導&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;中本聰共識及 Ethash 沒有指定領導者來提議下一個區塊（i.e. 任何礦工都有可能挖到下一個區塊）。另一方面，Tendermint 選擇領導者，或稱為提議者，負責提出下一個區塊。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;明確的 vs. 模糊的超時機制&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;中本聰共識和 Ethash 沒有使用超時機制來確保礦工一定能出塊，而 Tendermint 有明確的超時機制保證區塊鏈的出塊過程不會遭遇延宕。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;100 個驗證者 vs. 1000 個驗證者&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Tendermint 遵循傳統的一致性共識算法，每個驗證者之間都要進行通信。考慮到通信開銷，Tendermint 無法像比特幣或以太坊那樣可以無限增加驗證者。Tendermint 共識安排了 100 個驗證者。&lt;/p&gt;
+
+&lt;p&gt;因此 Tendermint 的缺點之一就是，它要求事先知曉所有驗證者，而且不允許驗證者隨時加入或退出；這與比特幣或以太坊不同。&lt;/p&gt;
+
+&lt;p&gt;除此之外，Tendermint 還要求整個系統維持統一時鐘；雖然在實踐中 Tendermint 已經證明通過整合每個節點的時間戳就能維護統一時鐘，但大家都知道同步時間是個非常複雜的理論問題。&lt;/p&gt;
+
+&lt;p&gt;Tendermint 的驗證者少於比特幣，而且要求事先知道驗證者集合，因此可能會有人提出 Tendermint 共識協議“不夠去中心化”的質疑。&lt;/p&gt;
+
+&lt;p&gt;但是，去中心化是見仁見智的。Okay，先不抖機靈，我想說的是去中心化是為了達到某種目標的手段，而不是目標本身；我不喜歡在瞭解去中心化的目標前就妄下評論。&lt;/p&gt;
+
+&lt;p&gt;我認為在許多案例（甚至是大部分情況）下，只要破壞系統的代價夠大，並且有針對攻擊者的防禦及懲罰機制，則 Tendermint 要求固定且事先知曉驗證者集合的保守方法是可行的。&lt;/p&gt;
+
+&lt;p&gt;如果我們回顧預測市場的例子，我會說去中心化預測市場應用，根本不需要像健全貨幣或是價值存儲應用一樣具備這麼高級別的去中心化程度，有 10 、20 或 100 個驗證者足矣。&lt;/p&gt;
+
+&lt;p&gt;以 &lt;a href=&quot;https://www.trustory.io/&quot;&gt;TruStory &lt;/a&gt;為例，我們使用 Cosmos SDK 構建後端應用邏輯，將應用的狀態和邏輯存在區塊鏈上，而前端某種程度上是私有的——Cosmos SDK 允許我們建立用來賞善罰惡的激勵系統、透明化展示數據層、允許用戶分享網路的所有權及治理權，還可以共同決議未來的交易、踢出惡意使用者，並按照個人喜好針對用戶層或基礎層設計網路。對於開發者來說，他們也能基於後端區塊鏈邏輯構建自己的開發工具及服務。因此有 10 個或 100 個執行並驗證交易的驗證者，就能夠保障使用者和開發者對於透明性、所有權、責任歸屬的需求。&lt;/p&gt;
+
+&lt;p&gt;如果你能明白 Tendermint 以“選擇固定且事先知曉的驗證者集合”作為犧牲，所帶來的利益，你會對這些原本不可能實現的神奇特性充滿讚歎：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;安全性及活躍度&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Tendermint 的協議保證安全性及活躍度。假設超過 2/3 的驗證者投票權重沒有掌握在拜占庭驗證者手中（也就超過 2/3 驗證者是遵守協議的），換句話說少於 1/3的投票是惡意的 ，則協議就能保證網路的安全性及活躍度（i.e. 驗證者永遠不會在相同的塊高度提出衝突區塊，區塊鏈永遠會正常出塊）。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;高性能&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Tendermint 共識的出塊時間可以低至 1 秒，達到每秒處理數千筆交易的速度，讓 Tendermint 更適合需要頻繁交易的應用。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;即時確認&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在區塊鏈世界中，最終確定性（Finality）意味著一旦區塊被提交上鏈，我們就能確定直至該區塊之前的整個區塊鏈的狀態。&lt;/p&gt;
+
+&lt;p&gt;如我們前面提到的，中本聰共識有其機率性，所以沒有辦法保證最終確定性。你只能基於大多數礦工可能還在該分叉中挖礦的機率，保證你的交易所在的分叉鏈是共識鏈。&lt;/p&gt;
+
+&lt;p&gt;但是，Tendermint 要求驗證者對每個區塊進行投票及最終確認。所以我們可以說，在少於 1/3 惡意驗證者的情況下，交易能夠被“即時確認”——當區塊被創建出來，使用者就知道他們的交易已經被確認了。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;責任制&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Tendermint 使用 PoS 作為抗女巫攻擊機制——要求驗證者質押代幣（i.e. 他們的“保證金”），以確保節點不會通過創建多個虛假賬戶來欺騙系統。&lt;/p&gt;
+
+&lt;p&gt;PoS 比 PoW（PoW 的證明來自礦工解出下個區塊哈希所耗費的算力）更節能，但是它固有的“&lt;a href=&quot;https://discourse.trustory.io/t/best-trustories-of-the-week-6/455/2?u=preethi&quot;&gt;無利害關係&lt;/a&gt;”缺陷導致驗證者能輕易作弊。&lt;/p&gt;
+
+&lt;p&gt;Tendermint 通過罰沒保證金來處罰違反協議規則（e.g. 替衝突區塊投票，及廣播未驗明的投票）的驗證者，避免發生無利害關係問題。說得更具體點，協議存在“鎖定規則”，規範了每個驗證者在投票給特定區塊時能做的行為。舉例來說，一旦驗證者預提交投票後，它就被“鎖定”在該區塊；只有在下一輪中要讓一個不同的區塊成為 polka 時，該驗證者才能解鎖並預提交另一個區塊。如果違反鎖定規則，驗證者會被罰沒保證金。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;更簡單的輕客戶端&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;輕客戶端比全節點“更輕巧”，因為它們不存儲區塊鏈的所有狀態，只存儲區塊頭。除非是負責驗證和出塊的挖礦節點，或驗證者節點，不然大部分節點其實不需要存儲區塊鏈全狀態。&lt;/p&gt;
+
+&lt;p&gt;輕客戶端下載從創世區塊開始到當前區塊的區塊頭，而不去下載和存儲整條鏈。相比於全節點，輕客戶端只需要存儲少量數據，因為區塊頭就足以驗證某些特定交易的有效性。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/e124f8005aca4f43b4357b2dfac4eda6.png&quot; alt=&quot;11.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;最酷的事情在於，基於 Tendermint 的區塊鏈的輕客戶端甚至無需同步所有區塊頭，只要週期性的下載區塊頭就行。&lt;/p&gt;
+
+&lt;p&gt;就像我們前面討論的，Tendermint 與比特幣、以太坊不同，其所有區塊都要經過投票及最終確認；因為每個區塊都經過最終確認，所以輕客戶端只要注意驗證者集合的變化——只要知道最新的驗證者集合，輕客戶端就能下載最新的區塊頭，並驗證這些區塊都有大於 2/3 的驗證者投票。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/94fa42b4e6f945afb4021084b881f167.png&quot; alt=&quot;12.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;cosmos-網路層&quot;&gt;Cosmos 網路層&lt;/h3&gt;
+
+&lt;p&gt;如我們上面所說的，Tendermint 的共識依靠驗證者在每一輪進行投票來完成。因此，節點間必須能溝通及傳遞訊息，確保網路中所有參與者都能看到相同數據。&lt;/p&gt;
+
+&lt;p&gt;與比特幣和以太坊一樣，Tendermint 使用 gossip 協議快速傳播最新的區塊鏈狀態。&lt;/p&gt;
+
+&lt;p&gt;網路中的節點不一定要成為驗證者才能在網路共識過程中發揮作用。舉例來說，節點可以是輕節點或是全節點，而不是驗證者；這類節點也被稱為 “非驗證者節點”。&lt;/p&gt;
+
+&lt;p&gt;驗證者及非驗證者節點都要肩負傳遞數據的責任（例如提案數據、區塊數據和投票數據），以確保所有節點都能收到系統正在產生的信息和交易。&lt;/p&gt;
+
+&lt;h3 id=&quot;cosmos-應用層&quot;&gt;Cosmos 應用層&lt;/h3&gt;
+
+&lt;p&gt;目前，我們已經瞭解 Tendermint 網路層及共識層的核心組成部分；網路層負責網路中所有計算機之間交易的傳遞，Tendermint 共識算法確保狀態機的一致性（即所有節點中的區塊鏈都是一致的）。&lt;/p&gt;
+
+&lt;p&gt;但我們傳遞和驗證的到底是什麼交易？這裡就引出了應用層。&lt;/p&gt;
+
+&lt;p&gt;Cosmos 應用層負責：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;定義和提交需要被記錄進區塊鏈的交易&lt;/li&gt;
+  &lt;li&gt;在交易通過共識層提交後，持續更新區塊鏈狀態&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/aa7e6cb46c64477daa2e79f8382d3bce.png&quot; alt=&quot;13.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;使用 Cosmos SDK 構建應用程式&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/cosmos/cosmos-sdk&quot;&gt;Cosmos SDK &lt;/a&gt;提供一套構建應用層的框架，就像是區塊鏈界的 Ruby-on-Rails （Ruby-on-Rails 是一種讓開發者輕鬆通過默認設置構建網頁端應用的框架），Cosmos SDK 也為開發者提供了一種基於 Tendermint 內核構建安全的區塊鏈應用的框架。&lt;/p&gt;
+
+&lt;p&gt;要記住，區塊鏈就是一個在所有節點將狀態做相同備份的狀態機，而 Cosmos SDK 讓你可以構建能在多個節點間進行復制的實際狀態機。SDK 讓你自定義應用的狀態、交易類型，及狀態-轉變函數所需的功能和工具。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/3973fe68376b41edbe07b51fa7ce4f1b.png&quot; alt=&quot;14.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cosmos 應用如何運行（抽象視角)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Cosmos SDK 提供一種“multistore”機制來定義及維護應用層狀態機的狀態。Multistore 將應用層的狀態劃分到不同組件，通過各自的“模塊”進行管理。&lt;/p&gt;
+
+&lt;p&gt;Cosmos SDK 的強大之處就是它獨特的模塊化設計，每個模塊定義及維護一個狀態子集，這些狀態子集構成完整的區塊鏈。舉例來說：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;銀行模塊&lt;/strong&gt; ：允許你在應用中持有代幣，及進行代幣轉賬&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;權限模塊&lt;/strong&gt; ：允許你創建及管理賬戶和簽名&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;質押與罰沒模塊&lt;/strong&gt; ：允許你通過編碼構建 PoS 共識機制&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;每個模塊都是個小狀態機，可以相互聚合生成總體狀態機&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/b809a510fa1c4d78b0d8d6b3419cf5a5.png&quot; alt=&quot;15.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;應用開發者按照每個模塊和修改狀態的慣用邏輯來定義子集，除了 Cosmos SDK 提供的模塊，開發者還能調用第三方模塊。&lt;/p&gt;
+
+&lt;p&gt;這種用於構建區塊鏈應用的插件模塊非常強大，因為它賦予開發者使用 SDK 或外部模塊的靈活性。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;應用層如何與共識層交互？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;發生在應用層的交易通過&lt;a href=&quot;https://github.com/tendermint/tendermint/tree/master/abci&quot;&gt;區塊鏈應用交互&lt;/a&gt;&lt;a href=&quot;https://github.com/tendermint/tendermint/tree/master/abci&quot;&gt;界面&lt;/a&gt;（ABCI, Application Blockchain Interface）與 Tendermint 共識及網路層通信。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/f12e6715643e40ce9e9cbbd119029491.png&quot; alt=&quot;16.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ABCI 是 Socket 通信協議，連接 Tendermint 核心（共識 + 網路）與應用。它可以兼容任何編程語言，也就是說使用 Cosmos SDK 構建的區塊鏈應用理論上能以任何語言編寫，而不僅僅是 Tendermint 底層共識和網路層所用的編程語言。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/802bbdb7bcbd4098b8e52412d2aec042.png&quot; alt=&quot;17.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;注意：當前版本的 Cosmos 主要支持 Golang，後續會加入更多語言。&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;總而言之，Cosmos SDK 允許開發者基於 Tendermint 內核構建去中心化應用，這個應用理論上能用任何語言開發，並通過 ABCI 連接 Tendermint 共識引擎。&lt;/p&gt;
+
+&lt;p&gt;將應用層（Cosnos SDK、ABCI）與網路層、共識層（Tendermint 內核）剝離，能讓開發者在開發各種類型應用的時候有更大的靈活性，再加上 Cosmos SDK 允許這些應用以任何語言開發（e.g. Golang），讓區塊鏈 App 開發過程更像平常的應用開發的樣子。&lt;/p&gt;
+
+&lt;p&gt;這與在以太坊上開發應用形成鮮明對比，因為後者要求開發者學習新語言 Solidity ，還要克服 Solidity 的諸多限制和&lt;a href=&quot;https://hackernoon.com/solidity-pitfalls-and-how-to-avoid-them-24ba87735c7a&quot;&gt;缺陷&lt;/a&gt;，而且 Golang 比 Solidity 具備更多的開發工具，開發體驗好上 10 倍。&lt;/p&gt;
+
+&lt;p&gt;除此之外，全部的以太坊 App 都基於單一網路進行操作，這麼做的優勢是這些 App 能夠共享以太坊的標準，以及相應而生的&lt;a href=&quot;https://www.preethikasireddy.com/posts/the-synergies-gained-from-building-on-ethereums-decentralized-app-ecosystem/&quot;&gt;規模效應&lt;/a&gt;；缺點是所有這些 App 都共享以太坊共識層，會受到新加入的應用體量大小的影響。 此外， &lt;strong&gt;整個網路必須作為一個巨大的單元來管理，會被治理理念和意識形態分歧所束縛，使得擴展難以進行&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;p&gt;Cosmos 區塊鏈應用不會受到這些限制， &lt;strong&gt;每個應用都有獨立的網路、自己的共識層及治理層&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;p&gt;開發者有很大的自主性來決定它們的共識層權限，還能選擇基於代幣質押數量推舉公開的驗證者集合，或是通過預授權設置私密驗證者集合。這種自由選擇驗證者集合的規則，意味著區塊鏈對於自己的鏈有更大的自主性。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;當然，這樣的好處伴隨某些犧牲：Cosmos 網路中的每個區塊鏈應用都必須導入自己的驗證者、社群，及經濟體系；無法像以太坊一般，直接蹭用所有驗證者、強大的社群，及已有的經濟體系&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upyun-assets.ethfans.org/uploads/photo/image/69cf0583a75c44a9bc5576bb983fbe82.png&quot; alt=&quot;18.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;結論&quot;&gt;結論&lt;/h2&gt;
+
+&lt;p&gt;在這第一篇文章裡，我們對比了 Cosmos 網路中的區塊鏈架構與比特幣、以太坊的不同。這種架構賦予區塊鏈應用對於自己的鏈更大的自主性。&lt;/p&gt;
+
+&lt;p&gt;在&lt;a href=&quot;https://www.preethikasireddy.com/posts/how-does-cosmos-work-part2&quot;&gt;第二部分&lt;/a&gt;，我們要深入討論 Cosmos 中相互獨立的區塊鏈如何進行交互；更重要的是回答 &lt;em&gt;“為什麼區塊鏈需要互相進行交互&lt;/em&gt; ”。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://ethfans.org/posts/how-does-cosmos-work-part2&quot;&gt;Cosmos 區塊鏈的工作原理，Part-2：如何跨鏈，為何要跨鏈&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;原文鏈接:&lt;/strong&gt;  https://www.preethikasireddy.com/posts/how-does-cosmos-work-part1
+&lt;strong&gt;作者:&lt;/strong&gt;  Preethi Kasireddy
+&lt;strong&gt;翻譯&amp;amp;校對:&lt;/strong&gt;  stormpang, IAN LIU &amp;amp; 阿劍&lt;/p&gt;
+
+&lt;p&gt;本文由作者授權 EthFans 翻譯及再出版。&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><category term="news" /><summary type="html">編者注：本文對 Cosmos 網路中區塊鏈和比特幣、以太坊進行了鉅細靡遺的比較。作者先從區塊鏈系統的棧層出發，分析了比特幣、以太坊在不同棧層上的技術要點，最後迴歸到 Cosmos 網路中的區塊鏈，概念解釋尤為清晰，是不可多得的解釋文。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://upyun-assets.ethfans.org/uploads/photo/image/5ca7121ac7ae45a4a55cddeae218a5cb.jpg" /><media:content medium="image" url="https://upyun-assets.ethfans.org/uploads/photo/image/5ca7121ac7ae45a4a55cddeae218a5cb.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">多媒體區塊鏈:分散式且防竄改之媒體交易框架</title><link href="/news/2020/01/18/%E5%A4%9A%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88/" rel="alternate" type="text/html" title="多媒體區塊鏈:分散式且防竄改之媒體交易框架" /><published>2020-01-18T00:00:00+00:00</published><updated>2020-01-18T00:00:00+00:00</updated><id>/news/2020/01/18/%E5%A4%9A%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88</id><content type="html" xml:base="/news/2020/01/18/%E5%A4%9A%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88/">&lt;blockquote&gt;
+  &lt;p&gt;當前多媒體發佈不會保留可自我檢索的訊息交易或內容修改之歷史記錄，經常對原始媒體進行編輯以獲取創意內容準備或篡改通過社交媒體進行錯誤宣傳，然而現在沒有可信任之機制可以輕鬆檢視交易記錄或修改歷史。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
+
+&lt;h2 id=&quot;摘要&quot;&gt;摘要&lt;/h2&gt;
+
+&lt;p&gt;分散式且防篡改的媒體交易框架是基於區塊鏈模型提出的。當前多媒體發佈不會保留可自我檢索的訊息交易或內容修改之歷史記錄。&lt;/p&gt;
+
+&lt;p&gt;例如：珍貴藝術品的數位副本、創意媒體和娛樂內容被發佈於各種目的，包括展覽、畫廊收藏或媒體製作、工作流程。&lt;/p&gt;
+
+&lt;p&gt;經常對原始媒體進行編輯以獲取創意內容準備或篡改以進行錯誤宣傳通過社交媒體，然而現在沒有可信任之機制可以輕鬆檢視交易記錄或修改歷史。&lt;/p&gt;
+
+&lt;p&gt;作者團隊提出了一種新穎的浮水印基於多媒體的區塊鏈框架來解決問題。唯一浮水印訊息包含兩個訊息：&lt;/p&gt;
+
+&lt;p&gt;a. 包含交易歷史紀錄的加密雜湊
+b.  保留可檢索的原始媒體內容&lt;/p&gt;
+
+&lt;p&gt;一旦浮水印提取後，浮水印的第一部分傳遞給分散式帳本以檢索歷史交易記錄和後者，部分用於識別已編輯/已篡改的區域。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;本論文概述了需求、挑戰並展示了這個概念的證明。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;介紹&quot;&gt;介紹&lt;/h2&gt;
+
+&lt;p&gt;媒體分發也稱為內容分發，是一種多媒體內容的數位分發形式，其中包括音訊、圖片和視訊。&lt;/p&gt;
+
+&lt;p&gt;從歷史上看，媒體發行依賴紙、光碟、DVD 或磁帶的物理交換。但是，在線交付媒體，例如基於 Internet 的雲服務或對等通信，已成為多媒體交付的事實上的標準，可確保高可用性，高性能和成本效益。內容分發網路（CDN）是專用伺服器的分佈式網路，該伺服器經過優化，可將豐富媒體無縫傳輸到與 Internet 連接的設備。與傳統的 CDN 相比，基於雲的 CDN 更好，因為它具有成本有效的託管服務，而無需擁有基礎架構。&lt;/p&gt;
+
+&lt;p&gt;對於有效的多媒體分發系統，在研究以及行業中都做出了巨大的努力。例如，MPEG 媒體傳輸標準是作為 MPEG 的一部分而開發的，用於通過 Internet 進行多媒體傳輸，其目標是以內容為中心的互聯網，以便通過網路更有效地分發內容。通過索引媒體文件中的多個視訊、音訊、字幕軌道和元數據，提出了一種生成、分發和使用多媒體文件的新方法。但這些解決方案都沒有關注傳送的內容的安全性和完整性，例如，可以很容易地從內容中刪除索引，從而失去了對相關訊息的追蹤。&lt;/p&gt;
+
+&lt;p&gt;周先生等人提出了一個聯合物理和應用層安全框架，該框架利用了物理層的安全能力和訊號處理技術。應用層的身份驗證和浮水印技術。&lt;/p&gt;
+
+&lt;p&gt;該方案旨在通過無線網路安全地傳送多媒體，並且在篡改的情況下不考慮媒體的任何完整性。使用基於安全浮水印以及聯合壓縮和加密的方法，提出了進一步的多媒體內容保護技術。但兩種演算法都只關注內容保護，而沒有討論如何將這些技術集成到媒體分發框架中。&lt;/p&gt;
+
+&lt;p&gt;在沒有可以輕鬆搜尋交易或修改歷史記錄的信任機制下，我們提出了一種新穎的基於浮水印的多媒體區塊鏈框架，可以解決此類問題。唯一浮水印訊息包含兩則訊息：&lt;/p&gt;
+
+&lt;p&gt;a. 包含交易歷史紀錄的加密雜湊
+b. 保留可檢索的原始媒體內容&lt;/p&gt;
+
+&lt;p&gt;提取浮水印後，將前一段傳遞到可以搜尋歷史記錄的分散式帳本，而後一部分則用於定位和重建編輯/篡改的區域。通過使用感知壓縮演算法(CS)找到最佳解決方案，可以實現原始內容的重建。本文概述了需求，挑戰並證明了這一概念。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-34.png&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;center&gt;圖1 區塊鏈工作原理概述&lt;/center&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+&lt;h3 id=&quot;a區塊鏈&quot;&gt;A.區塊鏈&lt;/h3&gt;
+
+&lt;p&gt;區塊鏈是一種新興技術，本質上是一個開放的分散式帳本（資料庫），記錄所有稱為區塊的交易細節。每個記錄或區塊都帶有時間戳記（TimeStamps），並鏈接到前一個區塊，並具有對數據修改的彈性，因此被認為是兩個實體之間以高效、可驗證和永久的方式進行交易的信任。近年來，許多打算採用該概念以提供安全且可公開驗證的交易機制的大型銀行、金融機構和其他公司注意到，對該技術的投資正在增加。例如，最新的虛擬貨幣 Bitcoin 使用區塊鏈作為其核心技術。&lt;/p&gt;
+
+&lt;p&gt;區塊鏈技術屬於分散式帳本技術的範疇，它允許交易以分散的方式運行，即允許在不使用中心化組織來處理交易的情況下驗證交易。取而代之的是，使用多個節點就交易是否有效達成共識。區塊鏈工作原理的一個示例如圖1所示，其中付款從 A 發送到 B，而其他節點驗證交易。如果交易失敗或無效，則不確認交易。最終，所有節點都將驗證交易並將其添加到其分散式帳本之副本中。從概念上講，它通過鏈接有關交易的訊息區塊並將它們按時間順序儲存在一起，因此稱為區塊鏈。&lt;/p&gt;
+
+&lt;p&gt;除虛擬貨幣外，這項技術還有很大的潛力在傳輸任何虛擬內容的用途。 目前其他潛在的應用場景包括硬體和軟體錢包，合規性和身份以及許多其他財務和交易管理應用程式，例如智能合約。 本質上，區塊鏈與任何事物都相關需要交易驗證或簽名、真實性和信任。 但是，沒有發現重大的努力在基於基本區塊鏈的多媒體應用中 Fujimura 等人介紹的數位版權管理概念等，在區塊鏈交易中添加了正確的訊息。相反，在這項工作中，我們提出了一個完整的框架，該框架保留了媒體交易的所有記錄（例如所有權、許可等），並提供了一種機制來防止媒體的篡改可驗證完整性，從而增強了利益相關者之間的信任。&lt;/p&gt;
+
+&lt;h3 id=&quot;b-多媒體保護&quot;&gt;B. 多媒體保護&lt;/h3&gt;
+&lt;p&gt;隨著數位技術在過去十年中顯示出快速增長，內容保護現在在內容管理系統中扮演著重要角色。 在當前系統中，數位浮水印技術提供了強大且可維護的解決方案以增強媒體安全性。 浮水印流行的證據在文獻中清晰可見，其中大多數論文都致力於保護媒體版權，並提出了浮水印演算法，這些演算法有些難以察覺、對各種有意和無意，例如壓縮的強韌性、過濾或幾何攻擊、脆弱或安全。 自嵌入浮水印方案本質上將主機圖片訊息作為浮水印嵌入圖片本身中。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;這樣的方案允許篡改檢測和原始圖片像的恢復。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Cox 等人列出了浮水印的各種應用，包括廣播監視、擁有者標籤、所有權證明、認證、交易浮水印、複製控制（Copy Control）和秘密通信。 提出了一種圖片質量評估方法，其中使用離散小波變換（DWT）嵌入浮水印，並使用提取的浮水印的降級來確定質量，而無需參考原始圖片。山田等人開發了一種用於影片播放服務的實時浮水印系統，其中當伺服器收到來自用戶的請求時，對該圖片進行浮水印，這對用戶是唯一的。該系統旨在阻止盜版。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Copy Control 是為了應對近年來日益嚴重的盜拷與檔案分享行為而制定的保護措施。上述盜版行為據稱已造成音樂產業的鉅額損失。實際上，由於 CD 規格在 1980 年代初被制定時尚未有此類問題，因此，與 DVD 相較，CD 標準先天缺乏提供保護或其它數位版權管理能力。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Copy Control 是一種試圖在 CD 標準上應用防拷保護的方法。然而，由於它只是基於這種缺乏限制的格式之微小改變，且必須要讓大部份的 CD 播放機能正常播放，其保護效力並不彰。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;出於提出分散式和防篡改媒體交易框架的動機，我們的方法結合了區塊鏈和自嵌入浮水印的概念。 雖然區塊鏈為分散式內容交易框架提供了一種受信任的機制，但基於頻率域小波的自嵌入浮水印演算法通過檢測和恢復主機媒體上的任何篡改編輯嘗試來確保內容完整性。&lt;/p&gt;
+
+&lt;h2 id=&quot;提出框架&quot;&gt;提出框架&lt;/h2&gt;
+
+&lt;p&gt;所提出的基於區塊鏈模型的分散式防篡改媒體交易框架包括三個部分：
+a）基於感知壓縮（CS）的自嵌入水印
+b）區塊鏈分佈式分類帳
+c）身份驗證&lt;/p&gt;
+
+&lt;p&gt;該框架在圖 2 中進行了描述，圖2顯示了內容預處理（用於自嵌入水印）和在區塊鏈中的註冊，圖3中描述了內容認證工作流程。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-35.png&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;center&gt;圖2 提議的多媒體區塊鏈框架概述：內容處理和交易&lt;/center&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;1浮水印&quot;&gt;1）浮水印&lt;/h3&gt;
+
+&lt;p&gt;最近，頻率域浮水印技術，特別是基於小波的技術在平衡不可感知性和強韌性方面表現出更好的前景。在這項工作中，我們使用了基於小波的浮水印嵌入方案，其中低頻係數根據浮水印訊息進行了修改。&lt;/p&gt;
+
+&lt;p&gt;a）首先，使用降低採樣率後的原始圖片的基於 CS 的偽隨機投影構造浮水印（如圖2 所示）。然後將其與其他區塊鏈交易訊息結合以形成浮水印字串。字串的長度取決於圖片尺寸以及區塊鏈交易。在我們的實驗設置中，我們使用了 8220（8154 + 66）字長的浮水印字串，圖片大小為 3264×2448。&lt;/p&gt;
+
+&lt;p&gt;b）然後將基於 5/3 提升的一級小波變換應用於原始圖片，並使用低頻子帶（LL）係數嵌入浮水印。生成浮水印字節以形成單個二進製字串，並通過調整兩個相鄰係數來嵌入每個位元，即一個位元數應大於另一個係數以嵌入 1，反之則為 0。該字串在整個子帶中重複嵌入，以確保在篡改的情況下強大的浮水印提取。&lt;/p&gt;
+
+&lt;p&gt;c）最後，在身份驗證期間，將提取的浮水印傳遞到基於 CS 的稀疏重建（如下所述）以檢索原始圖片。接收到的圖片與檢索到的圖片之間的比較有助於識別篡改區域並恢復原始內容。下面給出了基於 CS 的重建的簡要說明。&lt;/p&gt;
+
+&lt;h3 id=&quot;2使用壓縮感應進行信號恢復&quot;&gt;2）使用壓縮感應進行信號恢復&lt;/h3&gt;
+
+&lt;p&gt;CS 理論證明，與 Shannon-Nyquist 定理的最小採樣率相比，可以從一組減少的線性測量結果中重建具有稀疏表示的信號。 稀疏域中給定信號\(x∈ℝn\)的標準 CS 模型可以描述為：&lt;/p&gt;
+
+\[y=Φx\]
+
+&lt;p&gt;其中 \(Φ\) 是 \(m×n m≪n＆y∈ℝm\) 的感知矩陣。稀疏訊號由少量非零係數組成。 因此，密集圖片 I 通常需要具有基本函數 $spa$ 的稀疏變換，例如 DFT、DCT或 DWT，以實現信號的更緊湊的能量分佈。&lt;/p&gt;
+
+\[x=ΨI\]
+
+&lt;p&gt;訊號重建通常是非線性操作，以重建原始訊號的近似值。由於重建的優化約束是不同的，因此某些演演算法可以重建圖片域值，而不會使等式中的變換變稀疏。 （2）。 基於 CS 的圖片雜湊自嵌入浮水印生成如下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;將圖片 I 下採樣至較低的分辨率（N x M），以確保出現實際的 CS 問題。&lt;/li&gt;
+  &lt;li&gt;然後，通過 \(Φ\) 直接對下採樣圖片 Id 進行隨機採樣，或者通過 \(Φ\) 對 $I d$ 的變異係數 \(X d\) 進行隨機採樣。&lt;/li&gt;
+  &lt;li&gt;將圖片域中的隨機採樣值 \(y\) 或頻率域中的變異係數儲存為圖片雜湊水印 \(w\)。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;從篡改圖片中提取的浮水印 \(w&apos;\) 可以看作是壓縮樣本 \(y&apos;\)，以重建下採樣之原始圖片 I d。 然後，可以應用篡改檢測。所提出的方案對於各種 CS 方法是靈活的。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;特別是，測試了兩種恢復策略：&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;\(T\) 係數的 \(l1\)- 範數最小&lt;/li&gt;
+  &lt;li&gt;圖片最小化總變化範數&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;範數（英語：norm），是具有「長度」概念的函數。在線性代數、泛函分析及相關的數學領域，是一個函數，其為向量空間內的所有向量賦予非零的正長度或大小。另一方面，半範數（英語：seminorm）可以為非零的向量賦予零長度。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;b-多媒體區塊鏈&quot;&gt;B. 多媒體區塊鏈&lt;/h3&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-36.png&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;center&gt;圖3 內容認證和重建的功能流程圖&lt;/center&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;本文採用標準的區塊鏈基礎架構，並進行了修改以滿足多媒體區塊鏈的要求。如圖2 和圖3 所示，該框架包含兩個部分：
+1）內容預處理（用於自嵌入水印）和在區塊鏈中的註冊，以及
+2）內容認證。區塊鏈技術可實現去中心化的無信任數字交易。&lt;/p&gt;
+
+&lt;p&gt;交易獲得批准後，該區塊將在區塊鏈的分散式資料庫中進行更新，並由網路中的每個用戶進行記錄。交易可以嵌入智能合約和公眾訊息。該公眾訊息可用於記錄圖片/媒體的交易訊息，例如交易和修改歷史記錄、所有權、區塊鏈交易 ID 等以及可用於重建原始圖片/媒體的 CS 樣本訊息。在分發之前，此公眾訊息將嵌入圖片/媒體本身中。一旦交易被批准，圖片/媒體就準備好分發並儲存在鏈接的內容伺服器（圖2 中的媒體資料庫伺服器）中。資料庫伺服器中交易的圖片/媒體的相應區塊鏈訊息被更新。&lt;/p&gt;
+
+&lt;p&gt;通過提取查詢圖像/媒體的浮水印來實現進一步的分發或認證。查詢圖像/媒體的浮水印包含兩個部分：1. 區塊鏈交易 ID 和 2. 用於重建 CS 的原始圖片樣本。前一部分傳遞到可以檢索交易明細的分散式資料庫，後一部分分別用於重建原始圖片/媒體和定位被篡改的區域。區塊鏈交易 ID 用於檢索查詢圖片/媒體的歷史記錄，包括所有權訊息、發送者和接收者的地址、交易時間、交易的區塊鏈地址、價格等（例如：圖4）。&lt;/p&gt;
+
+&lt;p&gt;CS 樣本用於重建原始圖片的下採樣版本，以識別可能恢復原始圖片區域的任何篡改或編輯區域。如果區塊鏈驗證或篡改檢測身份驗證失敗，則查詢圖片/媒體不真實，並且不準備進行進一步的分發/交易。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-37.png&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;center&gt;圖4 使用以太坊獲得的特定 ID 的交易歷史記錄&lt;/center&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-38.png&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;center&gt;圖5 圖片的資料庫&lt;/center&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;結果&quot;&gt;結果&lt;/h2&gt;
+&lt;p&gt;對於作者的框架，作者使用了現有的區塊鏈基礎架構。區塊鏈網路建立在以太坊的測試網上。我們還使用了一個開源工具箱，用於基於感知壓縮的稀疏樣本生成和重構。 l1 - Magic 工具箱用於解決兩個優化問題，使用WAVELAB 包和 J. Romberg 的 Noiselet 生成小波（Wavelet）。&lt;/p&gt;
+
+&lt;p&gt;為了模擬內容認證中的篡改行為，由 Christlein 等人提供了一個標準資料集。在生成結果時，首先我們通過以太坊測試網和來自主機影像的稀疏隨機樣本生成了交易 ID。將這兩個連接起來以生成由一系列 8 位元組成的浮水印字串。一旦加浮水印，圖片就會被標準資料集可用的現有篡改模板進行保護。最後，我們從受保護之圖片中提取浮水印並重建原始圖片，以檢測編輯。一個成功測試的案例如圖6 所示，其中（a）是原始圖片，（b）是浮水印圖片，（c）是受保護版本，（d）是使用提取的浮水印的重建圖片，而（e）是檢測到的篡改區域。&lt;/p&gt;
+
+&lt;p&gt;提取的交易 ID 也被檢索到以太坊測試網上的相應交易中，以驗證所有權和交易歷史。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;關於 CS 感知壓縮和 l1 - Magic有興趣可以參照&lt;a href=&quot;https://medium.com/r/?url=https%3A%2F%2Fzhuanlan.zhihu.com%2Fp%2F27062896&quot;&gt;這篇&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-39.png&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;center&gt;圖6 各圖關係 （a）原始圖片（b）浮水印圖片（c）受保護版本（d）使用提取的浮水印的重建圖（e）是檢測到的篡改區域&lt;/center&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;結論&quot;&gt;結論&lt;/h2&gt;
+&lt;p&gt;在本文中，作者提出了一種基於區塊鏈架構的新型分散式防篡改媒體交易框架。 擬議的多媒體區塊鏈框架建立在自嵌入浮水印演算法的基礎上，該演算法使用感知壓縮來檢測任何篡改並檢索原始內容。我們已經成功證明了這一概念。&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><category term="news" /><summary type="html">當前多媒體發佈不會保留可自我檢索的訊息交易或內容修改之歷史記錄，經常對原始媒體進行編輯以獲取創意內容準備或篡改通過社交媒體進行錯誤宣傳，然而現在沒有可信任之機制可以輕鬆檢視交易記錄或修改歷史。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/img/panda-33.png" /><media:content medium="image" url="/img/panda-33.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">過去到現在的Bitcoin性能測試</title><link href="/news/2019/12/08/Bitcoin-%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8D%80%E5%A1%8A%E4%B8%8B%E8%BC%89/" rel="alternate" type="text/html" title="過去到現在的Bitcoin性能測試" /><published>2019-12-08T00:00:00+00:00</published><updated>2019-12-08T00:00:00+00:00</updated><id>/news/2019/12/08/Bitcoin%20%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8D%80%E5%A1%8A%E4%B8%8B%E8%BC%89</id><content type="html" xml:base="/news/2019/12/08/Bitcoin-%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8D%80%E5%A1%8A%E4%B8%8B%E8%BC%89/">&lt;p&gt;&lt;strong&gt;摘要：&lt;/strong&gt; 我們成功地進行了 35 次初始區塊下載(Initial Block Download, IBD)，並記錄了節點與網路同步所花費的時間，從而測試了 Bitcoin Core 的性能。我們使用了從 2012 年到 2019 年的軟體版本。結果表明，軟體性能得到了顯著而持續的改善，但差異也很大。即使使用最新的電腦硬體，舊版本的 Bitcoin 仍難以克服 2015 年至 2016 年期間的交易量提升。因此，我們得出結論，如果沒有軟體增強功能，今天的初始同步幾乎是不可能的。&lt;a href=&quot;https://blog.bitmex.com/bitcoins-initial-block-download/&quot;&gt;2019年11月29日&lt;/a&gt;, &lt;a href=&quot;https://blog.bitmex.com/author/bitmex-research/&quot;&gt;BITMEX Research&lt;/a&gt;&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;700&quot; src=&quot;/img/140.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖1 – Bitcoin 初始區塊下載時間(天) – 3 次嘗試的平均值&lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;(來源：BitMEX Research)
+(注意：同步至區塊 602,707。更多詳細訊息，請參見下面的註釋)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;總覽&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;為了在初始同步期間測試 Bitcoin Core 的性能，我們成功進行了 35 次初始區塊下載(IBD)，並記錄了每次嘗試花費的時間。結果 &lt;em&gt;如圖 1&lt;/em&gt; 所示以上內容說明，由於從OpenSSL升級到用於簽名驗證的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;libsecp256k1&lt;/code&gt; 的升級，Bitcoin Core 0.12.0 於 2016 年 2 月發佈時，速度有了顯著提高。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Libsecp256k1&lt;/code&gt; 專為 Bitcoin 構建。從那時起，速度的改善要慢得多，並且由於 IBD 時間差異很大，因此只有經過多次嘗試才能清楚地看到這些改善。但是，即使在 2016 年 2 月發布了Bitcoin Core 0.12.0 之後，在從 Bitcoin Core 0.13.0 到Bitcoin Core 0.19.0.1 的每個軟體發行之後，性能仍然有逐漸改善的跡象。&lt;/p&gt;
+
+&lt;p&gt;當然，IBD 時間只是一種衡量標準，還有許多其他角度和考慮因素可用於評估 Bitcoin Core 的性能和功能。儘管 IBD 時間可能不是衡量整體軟體性能的完美方法，但它佔用大量資源，因此可能是衡量基準的好方法。&lt;/p&gt;
+
+&lt;p&gt;該報告來自之前的兩個實驗： &lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在 2018 年 11 月，詹姆森·洛普(Jameson Lopp)進行了類似的&lt;a href=&quot;https://blog.keys.casa/bitcoin-full-validation-sync-performance/&quot;&gt;exercise&lt;/a&gt;，但分析的重點是獨立的實現，而該分析的重點是較舊版本的 Bitcoin Core (或簡稱為”Bitcoin”，因為某些較舊的軟體早於名稱”Bitcoin Core” )。 &lt;/li&gt;
+  &lt;li&gt;Sjors Provoost 還在 2017 年 7 月進行了此&lt;a href=&quot;https://medium.com/provoost-on-crypto/historical-bitcoin-core-client-performance-c5f16e1f8ccb&quot;&gt;實驗&lt;/a&gt;，儘管 Sjors 提供的資料用於減少同步嘗試。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;完整結果和原始資料&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;700&quot; src=&quot;/img/141.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖2 – Bitcoin 初始區塊下載時間(天)&lt;/strong&gt;&lt;/center&gt;
+&lt;p&gt;(來源：BitMEX Research)
+(注意：同步至區塊 602,707，更多詳細訊息在下面的註釋中)&lt;/p&gt;
+
+&lt;p&gt;系統規格和其他說明&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;MacBook Pro(64位)&lt;/strong&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;Linux VPS(64位)&lt;/strong&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;作業系統&lt;/td&gt;
+      &lt;td&gt;macOS Mojave(10.14)&lt;/td&gt;
+      &lt;td&gt;Ubuntu 18.04.3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;處理器&lt;/td&gt;
+      &lt;td&gt;6 核心 Intel i9 2.9GHz&lt;/td&gt;
+      &lt;td&gt;8 核心 Intel Xeon&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;記憶體&lt;/td&gt;
+      &lt;td&gt;32 GB&lt;/td&gt;
+      &lt;td&gt;32GB&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;儲存空間&lt;/td&gt;
+      &lt;td&gt;1 TB SSD&lt;/td&gt;
+      &lt;td&gt;640 GB SSD&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;網路下載頻寬&lt;/td&gt;
+      &lt;td&gt;62Mb / 秒&lt;/td&gt;
+      &lt;td&gt;2,000Mb / 秒&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;網路上傳頻寬&lt;/td&gt;
+      &lt;td&gt;20Mb / 秒&lt;/td&gt;
+      &lt;td&gt;400Mb / 秒&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;IBD在高度結束&lt;/td&gt;
+      &lt;td&gt;602,707&lt;/td&gt;
+      &lt;td&gt;602,707&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin.conf設定&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;i&gt;assumevalid = 0 &lt;br /&gt; dbcache = 24000 &lt;br /&gt; maxmempool = 500&lt;/i&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;完整結果表&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;strong&gt;Client 端版本&lt;/strong&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;Client 端發布日期&lt;/strong&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;同步時間(小時)&lt;/strong&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;電腦&lt;/strong&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.19.0.1&lt;/td&gt;
+      &lt;td&gt;24 / 11 / 2019&lt;/td&gt;
+      &lt;td&gt;11.4&lt;/td&gt;
+      &lt;td&gt;MacBook Pro&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.18.1&lt;/td&gt;
+      &lt;td&gt;20 / 07 / 2019&lt;/td&gt;
+      &lt;td&gt;10.4&lt;/td&gt;
+      &lt;td&gt;MacBook Pro&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.17.0&lt;/td&gt;
+      &lt;td&gt;03 / 10 / 2018&lt;/td&gt;
+      &lt;td&gt;17.7&lt;/td&gt;
+      &lt;td&gt;MacBook Pro&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.16.0&lt;/td&gt;
+      &lt;td&gt;28 / 02 / 2018&lt;/td&gt;
+      &lt;td&gt;18.5&lt;/td&gt;
+      &lt;td&gt;MacBook Pro&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.15.0&lt;/td&gt;
+      &lt;td&gt;14 / 07 / 2017&lt;/td&gt;
+      &lt;td&gt;21.1&lt;/td&gt;
+      &lt;td&gt;MacBook Pro&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.14.0&lt;/td&gt;
+      &lt;td&gt;08 / 03 / 2017&lt;/td&gt;
+      &lt;td&gt;16.4&lt;/td&gt;
+      &lt;td&gt;MacBook Pro&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.13.0&lt;/td&gt;
+      &lt;td&gt;17 / 08 / 2016&lt;/td&gt;
+      &lt;td&gt;24.7&lt;/td&gt;
+      &lt;td&gt;MacBook Pro&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.12.0&lt;/td&gt;
+      &lt;td&gt;17 / 02 / 2016&lt;/td&gt;
+      &lt;td&gt;15.8&lt;/td&gt;
+      &lt;td&gt;MacBook Pro&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.11.2&lt;/td&gt;
+      &lt;td&gt;10 / 11 / 2015&lt;/td&gt;
+      &lt;td&gt;53.3&lt;/td&gt;
+      &lt;td&gt;MacBook Pro&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.10.0&lt;/td&gt;
+      &lt;td&gt;12 / 02 / 2015&lt;/td&gt;
+      &lt;td&gt;81.2&lt;/td&gt;
+      &lt;td&gt;MacBook Pro&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.9.0&lt;/td&gt;
+      &lt;td&gt;18 / 03 / 2014&lt;/td&gt;
+      &lt;td&gt;85.1&lt;/td&gt;
+      &lt;td&gt;MacBook Pro&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.8.6&lt;/td&gt;
+      &lt;td&gt;09 / 12 / 2013&lt;/td&gt;
+      &lt;td&gt;Abandoned&lt;/td&gt;
+      &lt;td&gt;MacBook Pro&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.19.0.1&lt;/td&gt;
+      &lt;td&gt;24 / 11 / 2019&lt;/td&gt;
+      &lt;td&gt;13.6&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.18.1&lt;/td&gt;
+      &lt;td&gt;20 / 07 / 2019&lt;/td&gt;
+      &lt;td&gt;15.9&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.17.0&lt;/td&gt;
+      &lt;td&gt;03 / 10 / 2018&lt;/td&gt;
+      &lt;td&gt;13.3&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.16.0&lt;/td&gt;
+      &lt;td&gt;28 / 02 / 2018&lt;/td&gt;
+      &lt;td&gt;18.8&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.15.0&lt;/td&gt;
+      &lt;td&gt;14 / 07 / 2017&lt;/td&gt;
+      &lt;td&gt;17.9&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.14.0&lt;/td&gt;
+      &lt;td&gt;08 / 03 / 2017&lt;/td&gt;
+      &lt;td&gt;25.1&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.13.0&lt;/td&gt;
+      &lt;td&gt;17 / 08 / 2016&lt;/td&gt;
+      &lt;td&gt;15.8&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.12.0&lt;/td&gt;
+      &lt;td&gt;17 / 02 / 2016&lt;/td&gt;
+      &lt;td&gt;14.8&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.11.2&lt;/td&gt;
+      &lt;td&gt;10 / 11 / 2015&lt;/td&gt;
+      &lt;td&gt;46.0&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.10.0&lt;/td&gt;
+      &lt;td&gt;12 / 02 / 2015&lt;/td&gt;
+      &lt;td&gt;77.2&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.9.0&lt;/td&gt;
+      &lt;td&gt;18 / 03 / 2014&lt;/td&gt;
+      &lt;td&gt;78.9&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.8.6&lt;/td&gt;
+      &lt;td&gt;09 / 12 / 2013&lt;/td&gt;
+      &lt;td&gt;98.5&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.19.0.1&lt;/td&gt;
+      &lt;td&gt;24 / 11 / 2019&lt;/td&gt;
+      &lt;td&gt;14.0&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.18.1&lt;/td&gt;
+      &lt;td&gt;20 / 07 / 2019&lt;/td&gt;
+      &lt;td&gt;13.7&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.17.0&lt;/td&gt;
+      &lt;td&gt;03 / 10 / 2018&lt;/td&gt;
+      &lt;td&gt;16.0&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.16.0&lt;/td&gt;
+      &lt;td&gt;28 / 02 / 2018&lt;/td&gt;
+      &lt;td&gt;18.2&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.15.0&lt;/td&gt;
+      &lt;td&gt;14 / 07 / 2017&lt;/td&gt;
+      &lt;td&gt;17.9&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.14.0&lt;/td&gt;
+      &lt;td&gt;08 / 03 / 2017&lt;/td&gt;
+      &lt;td&gt;17.0&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.13.0&lt;/td&gt;
+      &lt;td&gt;17 / 08 / 2016&lt;/td&gt;
+      &lt;td&gt;21.9&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.12.0&lt;/td&gt;
+      &lt;td&gt;17 / 02 / 2016&lt;/td&gt;
+      &lt;td&gt;17.1&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.11.2&lt;/td&gt;
+      &lt;td&gt;10 / 11 / 2015&lt;/td&gt;
+      &lt;td&gt;44.1&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.10.0&lt;/td&gt;
+      &lt;td&gt;12 / 02 / 2015&lt;/td&gt;
+      &lt;td&gt;82.2&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.9.0&lt;/td&gt;
+      &lt;td&gt;18 / 03 / 2014&lt;/td&gt;
+      &lt;td&gt;82.1&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bitcoin Core 0.8.6&lt;/td&gt;
+      &lt;td&gt;09 / 12 / 2013&lt;/td&gt;
+      &lt;td&gt;72.6&lt;/td&gt;
+      &lt;td&gt;Linux&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;(來源：BITMEX Research)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;結果分析&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;如上面的 &lt;em&gt;圖2&lt;/em&gt; 所示，即使使用相同的軟體和具有相同規格的機器來執行 IBD，報告的時間也存在相當大的差異。 &lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;700&quot; src=&quot;/img/142.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖3 – IBD 時間與 Client 端發布日期(天)– 3 次嘗試的平均時間&lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;(來源：BitMEX Research)(注意：對於 Bitcoin 0.8.6 Client 端，以上結果平均只有兩次嘗試)&lt;/p&gt;
+
+&lt;p&gt;上面的 &lt;em&gt;圖 3&lt;/em&gt; 表明，除了 Bitcoin Core 0.12.0 的強大性能外，每個軟體版本的軟體性能都逐步提高。然而，儘管上圖中趨勢明顯，但每次嘗試的 IBD 時間和方差較大可能表明存在很大的不確定性。在從 2016 年以來就性能改進得出強有力的結論之前，可能需要更多的樣本資料。這種變化可能主要是由 Bitcoin P2P 網路或網路連接方面的問題引起的，因此，有待進一步研究的好領域可能是比較&lt;strong&gt;掃描速度&lt;/strong&gt;，即已下載完成且完全驗證區塊鏈所花費的時間。&lt;/p&gt;
+
+&lt;p&gt;在上述分析中，Bitcoin Core 0.12.0 的性能很好。這可能是因為 Bitcoin Core 0.12.0 已啟用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;libsecp256k&lt;/code&gt;，但未驗證 Segregated Witness 的交易 input 的簽名(&lt;a href=&quot;https://blog.bitmex.com/the-segwit-transaction-capacity-increase-part-1/?ref=tokendaily&quot;&gt;Segregated Witness&lt;/a&gt;)。因此，Bitcoin Core 0.12.0 不會在 2017 年 8 月之後驗證區塊鏈中的所有簽名，從而給 Client 帶來一些”不公平的優勢”。儘管此節點似乎不是異常值，但此優勢也可能適用於 Bitcoin Core 0.13.0。&lt;del&gt;當然，Bitcoin Core 0.12.0 之前的所有版本都具有相同的”不公平”優勢，但這與使用 OpenSSL 的缺點相形見。&lt;/del&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;同步Client 端直至其發布日期&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;下圖( &lt;em&gt;圖4&lt;/em&gt; )說明了同步 Client 端所需的時間，直到軟體發布日的區塊高度為止。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;700&quot; src=&quot;/img/143.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖 4 – IBD 到 Client 端發布日期的時間(天)&lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;(來源：BitMEX Research)(注意：僅在 Linux 上執行的節點的資料。Bitcoin Core 0.19.0.1僅同步到高度 602,707)&lt;/p&gt;
+
+&lt;p&gt;該圖表顯示從 Bitcoin Core 0.8.6 到 Bitcoin Core 0.14.0 的趨勢基本持平，當時可擴展性的改進無法適應時間的推移和區塊鏈高度增加的影響，圖表顯示了上升趨勢。不幸的是，近年來，軟體改進的速度降低了，這也許是因為已經取得了令人&lt;del&gt;垂涎&lt;/del&gt;的成果。較高的交易量也可能導致了這一情況。未來的可擴展性改進可能更具挑戰性，即使維持 400 萬個單位的區塊權重限制，IBD 時間也可能繼續增加，儘管軟體會進一步升級並且硬體性能會適度提高。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;IBD嘗試失敗&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;我們確實成功編譯並執行了 0.8.6 之前的 Bitcoin 版本，但是，2015 年至 2016 年期間時，同步變得很慢。0.8.6 之前的節點(例如 0.7.0)在 2013 年通過&lt;a href=&quot;https://bitcoin.org/en/alert/2013-03-15-upgrade-deadline#backports&quot;&gt;&lt;del&gt;手動更改鎖定限製&lt;/del&gt;&lt;/a&gt;成功克服了明顯的&lt;a href=&quot;https://blog.bitmex.com/bitcoins-consensus-forks/&quot;&gt;硬分叉&lt;/a&gt;，但是由於交易量增加，2015 年證明具有挑戰性，並且該節點停止了處理區塊。我們嘗試重新啟動該節點，這確實有助於將其向前推進，但隨後又再次卡住了。然後，我們甚至嘗試在具有 64 GB RAM 和 8 個 Intel i9 處理器的全新本地電腦上執行 Bitcoin Core 0.7.0，但是該節點仍無法通過 2016 年。&lt;del&gt;由於涉及許多縮放參數，因此非線性，一個人不能簡單地在這個問題上投入更多的硬體。&lt;/del&gt;&lt;/p&gt;
+
+&lt;p&gt;有時，當節點卡在一個區塊上並重新啟動時，在 4 次重新啟動嘗試後，我們放棄了同步。對於 MacBook Pro 上 的 Bitcoin Core 0.8.6，當領先者在 2016 年時，同步被放棄。儘管這有點令人失望，但其餘 35 個成功的同步不需要重啟。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;結論&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;del&gt;除了在與 MacBook Pro 一起發布 BitMEX Research 時&lt;/del&gt;，BitMEX IT 部門應更加謹慎外，該資料還說明了過去七年來已實現的顯著可擴展性增強。向 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;libsecp256k&lt;/code&gt; 的過渡是最重要的改進。IBD 時間的大幅減少以及舊節點無法完全同步，這表明，如果不進行這些~可伸縮性增強~，那麼即使用戶擁有最高規格的硬體，到現在 Bitcoin 也將基本消失。資料還表明，技術創新不太可能跟上不斷發展的區塊鏈的步伐，IBD 時間將增加。&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><category term="news" /><summary type="html">摘要： 我們成功地進行了 35 次初始區塊下載(Initial Block Download, IBD)，並記錄了節點與網路同步所花費的時間，從而測試了 Bitcoin Core 的性能。我們使用了從 2012 年到 2019 年的軟體版本。結果表明，軟體性能得到了顯著而持續的改善，但差異也很大。即使使用最新的電腦硬體，舊版本的 Bitcoin 仍難以克服 2015 年至 2016 年期間的交易量提升。因此，我們得出結論，如果沒有軟體增強功能，今天的初始同步幾乎是不可能的。2019年11月29日, BITMEX Research</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/img/143.png" /><media:content medium="image" url="/img/143.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">比特幣的區塊時間戳保護規則</title><link href="/news/2019/12/08/%E6%AF%94%E7%89%B9%E5%B9%A3%E7%9A%84%E5%8D%80%E5%A1%8A%E6%99%82%E9%96%93%E6%88%B3%E4%BF%9D%E8%AD%B7%E8%A6%8F%E5%89%87/" rel="alternate" type="text/html" title="比特幣的區塊時間戳保護規則" /><published>2019-12-08T00:00:00+00:00</published><updated>2019-12-08T00:00:00+00:00</updated><id>/news/2019/12/08/%E6%AF%94%E7%89%B9%E5%B9%A3%E7%9A%84%E5%8D%80%E5%A1%8A%E6%99%82%E9%96%93%E6%88%B3%E4%BF%9D%E8%AD%B7%E8%A6%8F%E5%89%87</id><content type="html" xml:base="/news/2019/12/08/%E6%AF%94%E7%89%B9%E5%B9%A3%E7%9A%84%E5%8D%80%E5%A1%8A%E6%99%82%E9%96%93%E6%88%B3%E4%BF%9D%E8%AD%B7%E8%A6%8F%E5%89%87/">&lt;p&gt;&lt;strong&gt;摘要：&lt;/strong&gt; 我們檢查了比特幣鮮為人知的兩個規則，這些規則用於防止不法礦工操縱區塊時間戳以獲得不公平的高額挖礦報酬。我們討論了為什麼可能選擇類似2小時MAX_FUTURE_BLOCK_TIME值之類的常數，以及該值會對比特幣現金有何特定的影響。我們得出的結論是，考慮到實施規則時缺乏功能網路，比特幣的時間保護規則似乎相當有效，令人讚嘆。&lt;a href=&quot;https://blog.bitmex.com/zh_cn-bitcoins-block-timestamp-protection-rules/&quot;&gt;6 NOVEMBER 2019&lt;/a&gt;, &lt;a href=&quot;https://blog.bitmex.com/author/bitmex-research/&quot;&gt;BITMEX RESEARCH&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;比特幣的時間問題&quot;&gt;比特幣的時間問題&lt;/h3&gt;
+
+&lt;p&gt;人們可能認為時間對於比特幣網路並不是一項重要的考慮因素，因為每個區塊都引用前一個區塊的 hash 值，所以這些區塊已經有先後順序。比特幣區塊還包含交易（輸入、輸出和值）、推導區塊頭的默克爾樹（Merkle Tree）和區塊 hash 值本身，用於證明工作量。從表面上看，這對於交易和一致性系統也許已經足夠。但是，存在&lt;a href=&quot;https://blog.bitmex.com/mining-incentives-part-1-the-difficulty-adjustment-and-mining-profits/&quot;&gt;調整難度&lt;/a&gt;的問題如果太多的礦工加入網路，區塊時間可能變得太快，又或者如果太多的礦工離開，區塊時間可能變得太慢，使得網路不可靠。為了解決這個問題，每兩星期調整一次採礦難度，以實現區塊之間十分鐘的目標時間。遺憾的是，為了對兩星期的時間進行計算，需要將時間概念引入區塊鏈並成為一致性系統的一部分。因此區塊必須含有時間戳，人們可以將比特幣看作世界上第一個分佈式電子時鐘。&lt;/p&gt;
+
+&lt;h3 id=&quot;區塊時間戳安全規則&quot;&gt;區塊時間戳安全規則&lt;/h3&gt;
+
+&lt;p&gt;在比特幣區塊產生時，實質上涉及兩個時間：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;區塊頭中的時間，是由礦工放置的&lt;/li&gt;
+  &lt;li&gt;區塊產生的實際時間。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;當然，這兩個時間應當幾乎相同。畢竟，礦工們肯定有合理準確的時鐘，他們為什麼會在時間上撒謊呢？&lt;/p&gt;
+
+&lt;p&gt;礦工的確存在在時間上撒謊的誘因。比如，不法礦工可能會添加一個將來的時間戳。舉例，如果生產一個區塊要10 分鐘，礦工可以通過向將來添加5 分鐘的時間戳來聲稱花了15 分鐘。如果這種增加5 分鐘的做法在整個兩星期的難度調整週期都持續，平均區塊時間會看起來像是15 分鐘，而實際上比這要短。那麼下一個週期的難度可能會向下調整，由於區塊時間加快，增加採礦收入。當然，這種方法的問題在於，比特幣時鐘的移動繼續與真實時間越來越遠。&lt;/p&gt;
+
+&lt;p&gt;為了解決或減輕上述問題，比特幣有兩個機制防止礦工篡改時間戳。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;過去時間中值（MPT）規則&lt;/strong&gt; －時間戳必須比過去11個區塊的中值更靠前。11個區塊的中值意味著可以對6個區塊進行重組並且時間仍不會向後移動，有人可能認為這與Meni Rosenfeld的&lt;a href=&quot;https://bitcoil.co.il/Doublespend.pdf&quot;&gt;2012年報告&lt;/a&gt;中提供的例子是一致的，即對於擁有10％網路算力的攻擊者，必須進行六次確認才能將攻擊的成功概率降低到0.1％以下。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;未來區塊時間規則根據&lt;/strong&gt; － MAX_FUTURE_BLOCK_TIME常量，相比來自同等節點的中值時間，時間戳不能出現在&lt;a href=&quot;https://github.com/bitcoin/bitcoin/blob/4daadce36cfe9baa63c4d7d70de027add03a00df/src/chain.h#L22&quot;&gt;未來2小時&lt;/a&gt;以上。節點提供的時間與當地系統時鐘之間的最大允許差是90分鐘（又一個安全保障措施）。需要注意的是，不同於上面的MPT規則，這不是一個完全達成共識的規則。具有在未來太遠時間點的時間戳的區塊是無效的，但隨著時間向前移動它們可能變得有效。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;規則一確保區塊鏈在時間方面繼續向前移動，而規則二確保區塊鏈不會向前移動太遠。這些時間保護規則並不完美，例如，礦工仍可以在兩星期時間內通過生成未來的時間戳，從而將時間戳向前移動，但這種操作的影響有限。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;300&quot; src=&quot;/img/144.png&quot; /&gt;&lt;/div&gt;
+
+&lt;p&gt;如上文的比率所示 ，由於兩個小時只是兩星期中很小的一部分，此操作對網路可靠性和挖礦盈利能力的影響可能有限。這相當於在難度調整後的兩星期內，將區塊之間的時間從10 分鐘減少至9 分54 秒。而且，它只是一次性變動，因為一旦發生了兩小時的時間移動之後，除非先向後移動，否則無法再次發生前移。與此同時，礦工在向前移動兩個小時之前，可能會考慮安全邊際，以減少區塊被網路拒絕的風險。&lt;/p&gt;
+
+&lt;p&gt;據我們判斷，這些規則在防止礦工以惡意方式篡改比特幣時間戳方面，已經證明具有合理的有效性。&lt;/p&gt;
+
+&lt;h3 id=&quot;比特幣現金的理論區塊時間問題&quot;&gt;比特幣現金的理論區塊時間問題&lt;/h3&gt;
+
+&lt;p&gt;如我們最先在&lt;a href=&quot;https://blog.bitmex.com/bitcoin-cash-potential-price-implications-of-investment-flow-data-2/&quot;&gt;2017年9月&lt;/a&gt;所提及，比特幣現金是2017年8月從比特幣分叉出來的一種替代貨幣，它的主要目的是提高區塊大小限制。當時比特幣現金開發者的擔憂之一，就是很多礦工不會開採比特幣現金，因此區塊之間的時間差可能太大。因此實施了所謂的“緊急難度調整”（EDA），以減輕這種擔憂。我們在此不會進行詳細討論，但足以說明此機制非常複雜並且證明存在根本的瑕疵。這種算法意味著，如果在特定時期內沒有找到特定數量的區塊，難度將會降低。此政策尤其激進，因為它意味著區塊之間的時間差越長，難度向下調整的幅度就越大。礦工可以故意留下大的時間差操縱網路，導致難度大幅變動，隨後出現以非常高頻率生成區塊的低難度期。然後網路變得不可靠。&lt;/p&gt;
+
+&lt;p&gt;由於這種瑕疵，生成的比特幣現金區塊超過預期，並且礦工在此期間的收入增加。比特幣現金建立了基於比特幣的大約5,000 條區塊引線，一條引線至今依然存在。幾個月後，在2017 年11 月，最終進行了修復。EDA 被移除並且被一個新的難度調整系統（更簡單的24 小時滾動系統）取代。但是，這仍然與比特幣的兩星期窗口系統不同。比特幣現金的系統更加動態並且調整速度更快。雖然這意味著比特幣現金可能在短期擁有更波動的難度，但此貨幣對變化的調整速度更快，而比特幣中的時間差糾正可能需要花費更長時間。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;strong&gt;幣種&lt;/strong&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;計算期&lt;/strong&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;難度調整&lt;/strong&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;說明&lt;/strong&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;比特幣&lt;/td&gt;
+      &lt;td&gt;2 星期&lt;/td&gt;
+      &lt;td&gt;每2 星期&lt;/td&gt;
+      &lt;td&gt;遭遇區塊時間差的可能性更低時間差需要更長時間解決&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;比特幣現金&lt;/td&gt;
+      &lt;td&gt;1 天&lt;/td&gt;
+      &lt;td&gt;每個區塊&lt;/td&gt;
+      &lt;td&gt;遭遇區塊時間差的可能性更高時間差的解決速度更快&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;(來源: BitMEX Research)&lt;/p&gt;
+
+&lt;p&gt;在比特幣現金的新難度調整算法中很多人可能忽略了一件事情，就是它與兩小時時間保護規則的相互關係。據我們所知，比特幣現金&lt;a href=&quot;https://github.com/Bitcoin-ABC/bitcoin-abc/blob/master/src/chain.h&quot;&gt;保留&lt;/a&gt;了2小時常數。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;300&quot; src=&quot;/img/145.png&quot; /&gt;&lt;/div&gt;
+
+&lt;p&gt;兩小時時間現在是計算期的8.3% 。這相當於將區塊之間的時間從10 分鐘減少至9 分10 秒。這確實似乎具有潛在的重要意義，並且如果加以利用，可能導致礦工盈利能力的變化。因此比特幣現金在礦工篡改時間戳方面可能具有一定脆弱性，或者至少比比特幣更加脆弱。另一方面，雖然比特幣現金面對礦工時間戳篡改攻擊時比比特幣更加脆弱，但對問題的解決速度更快。&lt;/p&gt;
+
+&lt;h3 id=&quot;結論&quot;&gt;結論&lt;/h3&gt;
+
+&lt;p&gt;比特幣現金的時間保護規則的明顯脆弱性，可能未被利用，顯示出比特幣的時間保護規則的思考是如此完善。據我們所知，這些時間保護規則自2009 年比特幣推出時就已經存在。在設計系統時，中本聰必須至少在三個深度層面進行創新：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;工作系統的驗證→ 難度調整系統→ 完善的時間保護規則&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;雖然這在今天我們看來可能不是特別精巧，但我們對這些系統已經有了10 年經驗。我們認為，中本聰在沒有任何此類網路之前對此進行了全面思考，是非常了不起的。&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><category term="news" /><summary type="html">摘要： 我們檢查了比特幣鮮為人知的兩個規則，這些規則用於防止不法礦工操縱區塊時間戳以獲得不公平的高額挖礦報酬。我們討論了為什麼可能選擇類似2小時MAX_FUTURE_BLOCK_TIME值之類的常數，以及該值會對比特幣現金有何特定的影響。我們得出的結論是，考慮到實施規則時缺乏功能網路，比特幣的時間保護規則似乎相當有效，令人讚嘆。6 NOVEMBER 2019, BITMEX RESEARCH</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/img/146.png" /><media:content medium="image" url="/img/146.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">使用區塊鏈和感知雜湊達到去中心化之圖像共享和版權保護</title><link href="/news/2019/11/24/%E4%BD%BF%E7%94%A8%E5%8D%80%E5%A1%8A%E9%8F%88%E5%92%8C%E6%84%9F%E7%9F%A5%E9%9B%9C%E6%B9%8A%E9%81%94%E5%88%B0%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B9%8B%E5%9C%96%E5%83%8F%E5%85%B1%E4%BA%AB%E5%92%8C%E7%89%88%E6%AC%8A%E4%BF%9D%E8%AD%B7/" rel="alternate" type="text/html" title="使用區塊鏈和感知雜湊達到去中心化之圖像共享和版權保護" /><published>2019-11-24T00:00:00+00:00</published><updated>2019-11-24T00:00:00+00:00</updated><id>/news/2019/11/24/%E4%BD%BF%E7%94%A8%E5%8D%80%E5%A1%8A%E9%8F%88%E5%92%8C%E6%84%9F%E7%9F%A5%E9%9B%9C%E6%B9%8A%E9%81%94%E5%88%B0%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B9%8B%E5%9C%96%E5%83%8F%E5%85%B1%E4%BA%AB%E5%92%8C%E7%89%88%E6%AC%8A%E4%BF%9D%E8%AD%B7</id><content type="html" xml:base="/news/2019/11/24/%E4%BD%BF%E7%94%A8%E5%8D%80%E5%A1%8A%E9%8F%88%E5%92%8C%E6%84%9F%E7%9F%A5%E9%9B%9C%E6%B9%8A%E9%81%94%E5%88%B0%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B9%8B%E5%9C%96%E5%83%8F%E5%85%B1%E4%BA%AB%E5%92%8C%E7%89%88%E6%AC%8A%E4%BF%9D%E8%AD%B7/">&lt;blockquote&gt;
+  &lt;p&gt;本篇文章翻譯自 &lt;a href=&quot;https://ieeexplore.ieee.org/document/8711440&quot;&gt;Decentralised Image Sharing and Copyright Protection using Blockchain and Perceptual Hashes&lt;/a&gt;，媒體區塊鏈的範疇越來越發人深省，究竟該如何透過去中心化的機制來達到版權保護呢？一起來閱讀本篇文章吧！&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
+
+&lt;h2 id=&quot;摘要&quot;&gt;摘要&lt;/h2&gt;
+
+&lt;p&gt;在本文中，我們旨在解決照片上傳到正版圖片網站和圖像共享市場上之圖像來源問題，以確保原創攝影師的作品得到正確認可。&lt;/p&gt;
+
+&lt;p&gt;現在，每週在正版圖片網站上共享數百萬 &lt;strong&gt;Royalty Free&lt;/strong&gt; （RF,免權利金）之圖像。在這樣的網站上分享圖像的攝影師和圖形設計師之間存在著很大的不滿，因為這種行為存在廣泛的弊端，其他人試圖從原作者的作品中獲得榮譽並從中受益。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Royalty Free : 網站對使用者的一種圖片素材授權方式概稱，其意義指使用者一旦購買產品，可以無限次數地使用，每一次使用時，並不需另外就使用的媒體、數量、年限、地域等，付費取得授權。在著作權的相關法律中並無就此詞的規範，但在多媒體出版業界，尤其是數位影像業界中廣泛被使用。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;當除原作者外的其他人上傳與市場上已經共享的相同圖像，或使用圖像處理方法（例如旋轉、裁剪、灰階轉換等）然後上傳篡改圖像以避免版權侵犯檢測時，就會發生這種情況。為了解決這些問題，我們建議在以太坊測試鏈的基礎上建立一個去中心化的點對點照片共享市場，並展示它是如何公平，值得信賴和實用的。&lt;/p&gt;
+
+&lt;p&gt;我們的分散式應用程序利用以太坊的感知雜湊和強大的智能合約來自動檢測和拒絕在感知雜湊上與市場上已有的圖像或相似的篡改圖像。由於區塊鏈的固有特性，我們的市場沒有中央機構對其進行控制，沒有任何第三方干擾、沒有單點故障、零審查並保留了在線用戶隱私。&lt;/p&gt;
+
+&lt;p&gt;據我們所知，這是第一項提供實用解決方案的工作，可在分散的圖像共享平台上自動檢測和拒絕在感知上相似的圖像，從而保護正版圖像作者的版權。&lt;/p&gt;
+
+&lt;h2 id=&quot;第一章節---介紹&quot;&gt;第一章節 - 介紹&lt;/h2&gt;
+
+&lt;p&gt;在當前的互聯網時代，許多攝影師現在通常是透過正版照片公司通過線上出售圖像來賺取收入。這些網站上的免版稅和微圖庫之商業模式已導致攝影師之間的激烈競爭，每個人都在努力上傳更多圖像並獲得更多作品下載。&lt;/p&gt;
+
+&lt;p&gt;最近這種行為導致了廣泛的圖像來源欺詐，其中一些非作者違反了版權法並在心理和經濟上影響了合法圖像所有者，從而獲得了其他供圖者者圖像的信譽。他們通過從正版照片網站訪問原始作者的圖像並按原樣或在修改了正版照片網站上的某些圖像特徵後上傳由此獲得的圖像來實現此目的。儘管一些圖片網站確實通過使用密碼雜湊來檢查要上傳的新圖像是否已經存在於市場上，但它們無法識別原始圖像的可操縱版本。發生這種情況是因為密碼雜湊易於產生雪崩效應，這種現像是輸入值的微小變化導致輸出值的急劇變化。我們通過創建一個基於以太坊的圖像共享解決方案並選擇感知雜湊來解決這些問題[6]。感知雜湊避免雪崩效應，並且不易受到圖像感知變化的影響，例如旋轉，裁剪，調整大小，轉換為灰階、胡椒鹽攻擊，曝光或飽和度變化等。本文展示如何使用區塊鏈網路結合使用感知雜湊和適當的智能合約邏輯提供比當前系統更好的版權侵權檢測機制，以及區塊鏈的許多好處，例如永久性的交易記錄、透明度、信任、不變性、高可用性、信息安全和節省成本。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;microstock : 在圖庫網上，有人有需求購買圖像/影片/音樂素材，自然就會有「供圖者 Contributor」。每個人都可以在這些圖庫網站上註冊申請成為供圖者。但因應每家的規則要求，在正式成為可上架素材產品賺取佣金的供圖者前，有的網站會有一些小考試（像是要先上傳幾張圖供站方審合是否符合他們的要求水準）。不過這個倒不用擔心，現在這些測試門檻都很低，基本上只要符合各類素材的一些格式設定大多會通過。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;cryptographic hash : 可以將任意大小的數據（通常稱為「消息」）映射到固定大小的位字符串（「雜湊值」、「雜湊」或「消息摘要」），並且是單向的函數，即實際上不可行的函數。[1] 理想情況下，查找產生給定的消息的唯一方法是嘗試暴力搜尋，以查看它們是否產生匹配項，或使用匹配雜湊表的Rainbow 表。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;a-動機&quot;&gt;A. 動機&lt;/h3&gt;
+
+&lt;p&gt;提出去中心化圖像共享市場的基本動機是糾正圖像來源並為原始圖像作者提供應有的信譽，這是在正版圖片網站上共享圖像的攝影師主要關注點。我們旨在建立強大且快速的版權侵犯檢測機制。當與基於區塊鏈的架構優勢結合時，可以將權力交還給圖像貢獻者。正版照片網站上的佣金率（可能高達 55％）也是攝影界普遍關注的問題。我們的目標是完全擺脫這些繁重的佣金，並創建一種架構，使用戶僅需支付與區塊鏈網路處理交易相關的交易費用。&lt;/p&gt;
+
+&lt;h3 id=&quot;b-新穎性&quot;&gt;B. 新穎性&lt;/h3&gt;
+
+&lt;p&gt;此專案新穎的貢獻包括使用可以編程的以太坊區塊鏈[1]，[4]創建一個去中心化的圖像共享應用，並以新穎的方式使用感知雜湊、以太坊上強大的智能合約[12]，[15]進行版權之侵犯檢測。網路上的照片通過 IPFS 以分散方式保存。我們最後也提供計算之結果，顯示我們方法的有效性和限制。&lt;/p&gt;
+
+&lt;h2 id=&quot;第二章節---系統環境及建置&quot;&gt;第二章節 - 系統環境及建置&lt;/h2&gt;
+
+&lt;p&gt;我們使用以下工具和技術來建置我們的系統。關於它們的詳細信息可以在各自的網站和相應的 Github 中找到。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Metamask : Metamask 是用於瀏覽器的插件，可進行以太坊交易。它允許運行以太坊 Dapps（去中心化應用程序），而無需運行完整的以太坊節點，管理身份和簽署區塊鏈交易。&lt;/li&gt;
+  &lt;li&gt;Ganache：Ganache 是一個以太坊區塊鏈模擬器。Ganache 是一個以太坊測試節點，可以在本地測試所有 Componet 組件。它還允許用戶部署合約，開發應用程序並運行測試。&lt;/li&gt;
+  &lt;li&gt;Geth : Geth（以太坊）是一個終端機（Command Line）界面，可讓用戶運行和操作以太坊全節點。它在 Go（Golang）中實現，並允許挖掘區塊以生成以太幣、創建智能合約，發送交易以在以太坊地址之間轉移資金，檢查區塊歷史以及許多其他功能。&lt;/li&gt;
+  &lt;li&gt;Turffle：Truffle 用於編譯，測試，構建智能合約，並提供開發框架以提高開發過程的速度。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;圖1中詳細顯示了系統架構。下面描述了該圖中顯示的各種模組：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;買方模組：它提供了搜索工具，可在分散式應用程序上顯示的所有圖像中找到購買者正在尋找的圖像類別。&lt;/li&gt;
+  &lt;li&gt;賣方模組：它提供了在區塊鏈上上傳圖像的簡單方法。賣方上傳圖像，以及圖像名稱和描述以幫助搜索過程。&lt;/li&gt;
+  &lt;li&gt;錢包模組：該客戶端加密模組允許創建新的以太坊地址或導入現有地址，請參閱錢包餘額和交易。用戶也可以使用 Metamask 來管理帳戶和錢包。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;從圖1可以看出，以太坊與 Web 客戶端連接並允許訪問以太坊系統。Web 客戶端包括買方，賣方和錢包模組。交易模組用於指定圖像售價，圖像上傳模組用於上傳新圖像。本地端資料庫儲存數據，並且在以太坊網路批准交易後，經過適當的加密後將數據和圖像將傳輸到 IPFS。我們使用公開金鑰加密技術進行加密。由於 IPFS 是內容可尋址的，因此此加密步驟對於訊息保護至關重要。以太坊由 Geth、奇偶校驗和 JSON-RPC（遠程過程調用）協議組成。以太坊提供對以太坊主網路的訪問，該網路由所有用戶節點、礦工、智能合約和交易區塊組成。所有模組之間的數據流如圖所示。下一部分將說明用於訊息儲存的 IPFS 和以太坊網路。
+&lt;br /&gt;&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-29.png&quot; style=&quot;width:100%&quot; /&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;center&gt;&lt;strong&gt;圖1 系統架構&lt;/strong&gt; &lt;/center&gt;
+
+&lt;h2 id=&quot;第三章節---方法&quot;&gt;第三章節 - 方法&lt;/h2&gt;
+
+&lt;p&gt;我們提出了兩種不同的體系結構，它們儲存數據的方式不同。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;以太坊儲存：在這種架構中，圖像和雜湊值儲存在以太坊鏈本身上。圖像和感知雜湊被放置在區塊鏈交易中。這種方法的問題在於，隨著越來越多的圖像上傳，由於所有內容都儲存在測試鏈中，因此區塊鏈的儲存大小將迅速增加。每當新節點到達時，他們都必須下載包含所有圖像的整個鏈。該解決方案絕對不可擴展，特別是因為圖像大小可能會達到數兆字元。&lt;/li&gt;
+  &lt;li&gt;IPFS 儲存：在這種體系結構中，圖像和雜湊值儲存在 IPFS 中，這是一種分散的超媒體分佈協議。 IPFS [5]的內容是可透過地址搜尋的，並使用加密雜湊為文件內的區塊提供唯一的指紋，消除了網路上的冗餘，並將這些唯一的雜湊用於訊息檢索。通過使用 IPFS 協議儲存圖像和可感知的雜湊，我們在以太坊測試鏈的大小上節省了很多。可以使用任何標準加密方案對儲存在IPFS 上的數據進行加密並進行檢索。加密私鑰將僅通過智能合約與適當的買方共享。這種方法是可擴展的，是我們實施中使用的一種方法。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;a-侵犯版權和電腦視覺&quot;&gt;A. 侵犯版權和電腦視覺&lt;/h3&gt;
+
+&lt;p&gt;感知雜湊是多媒體指紋算法，它考慮了多媒體的各種功能。對於線上多媒體市場來說，&lt;strong&gt;確保每個作品只能上傳一次非常重要&lt;/strong&gt;。通過將新的圖像雜湊值與區塊鏈上所有圖像的雜湊值進行比較並檢查，諸如 MD5 和 SHA 之類的密碼雜湊函數可以有效地完成此任務。但是我們走得更遠，還嘗試找出似乎是區塊鏈上已經存在的原始作品的修改作品，並且在感覺上與這些原始作品相似。例如，如果有人嘗試上傳稍微旋轉的圖片（例如逆時針說12°），則由於雪崩效應，諸如SHA之類的雜湊將具有完全不同的最終雜湊值。相反，如果我們使用感知雜湊，則最終雜湊中的某些位元或沒有位元更改。我們可以使用感知雜湊的此屬性來找到圖像之間的相似性。實現此目的的方式是通過計算原始圖像和測試圖像之間的差異。為了量化差異，找到兩個圖像的感知雜湊值並計算由此獲得的雜湊值之間的漢明距離。標準化 0 到 1 之間的漢明距離。這是原始圖像與測試圖像之間差異的量度，稱為 NHD。如果這種差異在某個閾值內，則測試圖像將被拒絕。但有時，兩個不同的原始圖像也可能具有近似相似的感知雜湊，從而導致較小的相異值。因此，此處的關鍵任務是找到閾值，以便我們可以盡可能正確地識別兩個不同的圖像和兩個感知相似的圖像。我們在結果部分描述獲取閾值的方法。&lt;/p&gt;
+
+&lt;p&gt;感知雜湊算法很多，但是我們使用了四種最受歡迎的算法，分別是phash（DCT 雜湊），差分雜湊，平均雜湊和小波雜湊。這些算法包含在python 的 ImageHash 庫中，其中提供了有關這些算法的詳細文檔。因此，如果有人上傳了市場上存在的原始圖像的篡改版本，智能合約將計算其感知雜湊，計算此雜湊的漢明距離以及儲存在分散的 PERC HASH 資料庫中的雜湊，和閾值進行比較後將拒絕此類圖像。因此，不僅欺詐者無法上傳此類圖像，而且他們還將支付與在以太坊網路上處理該交易相關的交易費用，這可視為罰款。因此，這種經濟處罰將阻止欺詐行為。&lt;/p&gt;
+
+&lt;h3 id=&quot;b-智能合約和訊息流&quot;&gt;B. 智能合約和訊息流&lt;/h3&gt;
+
+&lt;p&gt;訊息流如圖1所示的系統架構圖所示。智能合約是以太坊生態系統的核心。以太坊上的智能合約是區塊鏈中的一小段程式碼。智能合約的概念最早由 Szabo 提出[3]。它們用於管理用戶之間的協議。他們可以持有以太（ETH），將其提供給適當的實體，持有訊息並為其他智能合約提供效用。智能合約用於執行某些計算，儲存一些變量並交易數位商品，同時遵守合約中提到的某些特定條件。因此，人們可以在以太坊網路上以這些合約中指定的自定義條件（function）交易虛擬資產。由於這些特性，它們適用於包括圖像許可和版權保護邏輯[12]。我們使用 solidity [10]撰寫智能合約，這是迄今為止撰寫智能合約最流行的語言。我們遵循創建此類合約的最佳實踐[16]，並使用諸如小波雜湊（WHASH）之類的輕量級算法來提供版權保護，從而需要較少的手續費（Gas Fees）[13]。我們所有的交易都透過智能合約進行。我們使用智能合約來計算感知雜湊，將加密和解密金鑰分配給適當的實體，與 IPFS 連接，檢查是否侵犯版權及是否接受或拒絕圖像。透過計算標準化漢明距離（NHD）量化市場上存在的圖像與新上傳的圖像之間的圖像差異後，智能合約將拒絕 NHD 低於特定閾值的圖像，如表2和圖2所示。這裡 WHASH 能夠識別除 90° 旋轉版本外的經典 barbara 圖像的所有變換。為了確定圖像的接受或拒絕，將 WHASH 的閾值設為在結果部分中計算的 0.379。這表明了感知雜湊的有效性和可靠性水平。如果對圖片的修改不太極端，並且原始圖片與其被篡改版本之間仍具有良好的結構相似性，則感知雜湊能夠檢測到篡改。&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-30.png&quot; style=&quot;width:100%&quot; /&gt;
+&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖2 從左到右的圖像：經典圖像barbara，barbara 旋轉 5 度，barbara 旋轉 25 度，barbara 旋轉 90 度，barbara 亮度 -50，barbara sat +50。&lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-31.png&quot; style=&quot;width:100%&quot; /&gt;
+&lt;/div&gt;
+&lt;center&gt;&lt;strong&gt;表2 根據 Bsds-500 資料集計算的各種感知雜湊的有效性比較&lt;/strong&gt;&lt;/center&gt;
+
+&lt;h2 id=&quot;第四章節---結果&quot;&gt;第四章節 - 結果&lt;/h2&gt;
+
+&lt;p&gt;我們在原始圖像和圖像的變換的資料集上測試模型，以評估感知雜湊在檢測版權侵權中的有效性。我們使用 Berkeley 分割資料集（BSDS）[7]，它是500 個原始圖像的資料集。現實生活中有效的雜湊算法將是一種可以區分兩個真實圖像和同一圖像轉換的算法。&lt;/p&gt;
+
+&lt;p&gt;我們對 BSDS-500 資料集中的每個圖像執行以下轉換：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;旋轉(度數)：5 度 , 10 度 , 15 度 , 20 度, 25度（順時針）&lt;/li&gt;
+  &lt;li&gt;Gamma 校正：0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5&lt;/li&gt;
+  &lt;li&gt;胡椒和鹽的雜訊：0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00&lt;/li&gt;
+  &lt;li&gt;裁切（固定縱橫比模式）：5%, 10%, 15%, 20%, 25%&lt;/li&gt;
+  &lt;li&gt;調整大小（尺寸縮小 - 固定寬高比模式）：5％, 10％, 15％, 20％, 25％&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;經過這些轉換，我們最終得到了 21500 張圖像（500 張原始圖像和每個原始圖像 42 張轉換）。為了評估雜湊算法的有效性，我們創建了兩種情況：&lt;/p&gt;
+
+&lt;p&gt;正面（陽性）的情況：在這種情況下抓到的圖像是市場上原始圖像的操縱版本。我們期望雜湊算法能夠檢測到此類欺詐圖像，而智能合約應立即將其拒絕。&lt;/p&gt;
+
+&lt;p&gt;負面（陰性）的情況：這種情況下的圖像是資料集中的兩個不同的原始圖像。網路應允許新上傳的獨特圖像添加到要出售的市場上。&lt;/p&gt;
+
+&lt;p&gt;漢明碼距離是兩個雜湊間不同位元數量。因此，漢明碼距離帶有隱含的不相似感。我們計算新圖像與區塊鏈上傳的所有先前圖像之間的漢明碼距離，將距離值標準化並將其與閾值進行比較，以決定是否接受或拒絕新圖像。這樣，將對照市場上正在交易的所有圖像檢查新圖像。我們計算標準化漢明碼距離（NHD）如下：&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/img/panda-32.png&quot; style=&quot;width:100%&quot; /&gt;
+&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖3 特定知覺雜湊對正確分類正面和負面案例的有效性。X軸表示NHD，Y軸表示全部圖像的一部分。&lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;NHD 計算方式&lt;/p&gt;
+&lt;/blockquote&gt;
+
+\[NHD = HammingDistance / HashBitsCount\]
+
+&lt;p&gt;我們考慮的所有四種雜湊算法都返回 64 位元雜湊。 以下指標用於評估感知雜湊函數的質量：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.twblogs.net/a/5b7d17972b71770a43ddde64&quot;&gt;Earth Mover’s Distance（EMD)&lt;/a&gt;是對區域內兩個概率分佈之間的距離的度量。 EMD 基於將一種分配轉換為另一種分配所必須支付的最低成本[9]。需要更大的 EMD 值。&lt;/p&gt;
+
+&lt;p&gt;Intersection-Over-Union：Intersection-Over-Union（IoU）是一種評估指標，用於測量特定數據集上對象檢測器的準確性。希望 IoU 值較小。&lt;/p&gt;
+
+&lt;p&gt;閾值：閾值是規格值，如果未超過標準化漢明距離（NHD），則圖像將被拒絕。因此，如果 NHD 大於閾值，則相異性會超過所需值，並且圖像會在市場上被接受。要選擇最佳閾值，請專注於圖3。當負向案例數值首次與正向案例交叉時，將相應的縮放距離值將作為閾值。&lt;/p&gt;
+
+&lt;p&gt;圖3分別顯示了 phash、dhash、平均雜湊和小波雜湊的圖形比較。在此，X 軸表示在 0 到 1 之間縮放的漢明碼距離，而 Y 軸表示圖像出現正向或負向情況的概率。我們希望使用感知雜湊算法，該算法在正向分佈和負向分佈之間提供最小的重疊。可以使用 IOU 度量標準來計算。我們更希望在正負向分佈之間具有最高 EMD 的算法。&lt;/p&gt;
+
+&lt;p&gt;從表2中可以看出，所有四種雜湊算法在度量標準上都給出了可比較的值。平均雜湊和 Dhash 具有較高的 EMD 值，平均雜湊具有最小的 IoU 值。平均雜湊的閾值為0.304。這意味著，如果新圖像的平均雜湊值與市場上現有圖像的平均雜湊值相似的位元率超過 30.4％，則新圖像將被網路批准並添加到市場中。&lt;/p&gt;
+
+&lt;p&gt;雜湊平均時間的比較如下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;PHASH: 33.97 ms&lt;/li&gt;
+  &lt;li&gt;DHASH: 29.93 ms&lt;/li&gt;
+  &lt;li&gt;平均雜湊 AVG HASH: 29.81 ms&lt;/li&gt;
+  &lt;li&gt;WHASH: 60.99 ms&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;驗證新圖像所需的時間與在市場上傳的圖像數量成正比。換句話說，新圖像驗證的時間複雜度是呈線性的。&lt;/p&gt;
+
+&lt;h2 id=&quot;第五章節---結論&quot;&gt;第五章節 - 結論&lt;/h2&gt;
+
+&lt;p&gt;我們得出的結論是，針對線上正版圖片市場且基於區塊鏈的解決方案比傳統市場具有許多優勢，例如高安全性、永久性交易記錄、自定義許可證、圖像的自定義銷售價格，更高的貢獻者收入以及允許使用 IPFS 的幫助。由於缺乏中央權威，因此市場不受審查和干擾。經過全面評估，我們得出結論，感知雜湊是一種有效且高效的版權侵權檢測工具。區塊鏈交易僅包含用於檢索圖像的 IPFS 雜湊。通過預先選擇加密方案對智能合約中的內容進行加密，然後將數據傳輸到 IPFS，可以增強訊息安全性。智能合約僅將解密金鑰發布給適當的買方。此外，我們的實現是具擴展性。因此，本文舉例說明了一種經過驗證的技術的新穎用例，可幫助應對照片世界中根深蒂固的惡意行為。&lt;/p&gt;
+
+&lt;h2 id=&quot;第六章節---限制和未來展望&quot;&gt;第六章節 - 限制和未來展望&lt;/h2&gt;
+
+&lt;p&gt;我們的系統可以在合理範圍內檢測到在外觀上與原始圖像相似的假圖像。儘管感知雜湊在檢測許多轉換中非常有效，但是在某些情況下，如表1中 90 度旋轉的 barbara 圖像所示，雜湊算法無法識別欺詐圖像，總結來說，感知雜湊在準確性和時間複雜度上提供一個很好的運作。&lt;/p&gt;
+
+&lt;p&gt;我們打算將來進行以下任務：
+為了解決諸如圖2和表1所述的漏洞，我們需要研究和採用比感知雜湊（如果有）更健壯和高效的電腦視覺技術。 
+將此分散式應用程序（DApp）轉變為成熟的分佈式自治組織（DAO），該組織還可以提供索賠協助，對索賠進行分散式投票，獎勵管理以及針對侵犯版權的報酬。&lt;/p&gt;
+
+&lt;h2 id=&quot;參考文獻&quot;&gt;參考文獻&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;G. Wood, “Ethereum: A secure decentralised generalised transaction ledger”, Ethereum Project Yellow Paper, 2014.&lt;/li&gt;
+  &lt;li&gt;S. Nakamoto, Bitcoin: A peer-to-peer electronic cash system, White paper, 2008.&lt;/li&gt;
+  &lt;li&gt;Nick Szabo, The idea of smart contracts, 1997.&lt;/li&gt;
+  &lt;li&gt;V Buterin, A next-generation smart contract and decentralized application platform, White Paper, 2014.&lt;/li&gt;
+  &lt;li&gt;Juan Benet, IPFS -Content Addressed Versioned P2P File System (DRAFT 3), 2017, [online] Available: https://github.com/ipfs/papers.&lt;/li&gt;
+  &lt;li&gt;C. Zaunerm, Implementation and benchmarking of perceptual image hash functions, 2010.&lt;/li&gt;
+  &lt;li&gt;P. Arbelaez, M. Maire, C. Fowlkes, J. Malik, “Contour Detection and Hierarchical Image Segmentation”, IEEE TPAMI, vol. 33, no. 5, pp. 898-916, May 2011.&lt;/li&gt;
+  &lt;li&gt;V. Monga, B. L. Evans, “Perceptual image hashing via feature points: performance evaluation and tradeoffs”, Image Processing IEEE Transactions on, vol. 15, no. 11, pp. 34523465, 2006.&lt;/li&gt;
+  &lt;li&gt;Y. R Ubner, C. Tomasi, L. J. Andguibas, “The earth movers distance as a metric for image retrieval”, Int. J. Comput. Vision 40 99121, 2000.&lt;/li&gt;
+  &lt;li&gt;Solidity, 2015.&lt;/li&gt;
+  &lt;li&gt;V. Buterin, On public and private blockchains, 2015, [online] Available: https://blog.ethereum.org/2015/08/07/on-public-and-privateblockchains.&lt;/li&gt;
+  &lt;li&gt;V. Morabito, “Smart contracts and licensing”, Business Innovation Through Blockchain, pp. 101-124, 2017.&lt;/li&gt;
+  &lt;li&gt;T. Chen, X. Li, X. Luo, X. Zhang, “Under-optimized smart contracts devour your money”, 2017 IEEE 24th International Conference on Software Analysis Evolution and Reengineering (SANER), pp. 442-446, 2017.&lt;/li&gt;
+  &lt;li&gt;A. Bogner, M. Chanson, A. Meeuw, “A decentralised sharing app running a smart contract on the ethereum blockchain”, Proceedings of the 6th International Conference on the Internet of Things, pp. 177-178, 2016.&lt;/li&gt;
+  &lt;li&gt;L. Luu, D.-H. Chu, H. Olickel, P. Saxena, A. Hobor, “Making smart contracts smarter”, Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security CCS ’16, pp. 254-269, 2016.&lt;/li&gt;
+  &lt;li&gt;K. Delmolino, M. Arnett, A. Kosba, A. Miller, E. Shi, “Step by step towards creating a safe smart contract: Lessons and insights from a cryptocurrency lab”, International Conference on Financial Cryptography and Data Security, pp. 79-94, 2016.&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Cypherpunks Core</name></author><category term="news" /><summary type="html">本篇文章翻譯自 Decentralised Image Sharing and Copyright Protection using Blockchain and Perceptual Hashes，媒體區塊鏈的範疇越來越發人深省，究竟該如何透過去中心化的機制來達到版權保護呢？一起來閱讀本篇文章吧！</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/img/panda-28.png" /><media:content medium="image" url="/img/panda-28.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Bitcoin中Base58Check編碼</title><link href="/news/2019/11/19/Bitcoin%E4%B8%ADBase58Check%E7%B7%A8%E7%A2%BC/" rel="alternate" type="text/html" title="Bitcoin中Base58Check編碼" /><published>2019-11-19T00:00:00+00:00</published><updated>2019-11-19T00:00:00+00:00</updated><id>/news/2019/11/19/Bitcoin%E4%B8%ADBase58Check%E7%B7%A8%E7%A2%BC</id><content type="html" xml:base="/news/2019/11/19/Bitcoin%E4%B8%ADBase58Check%E7%B7%A8%E7%A2%BC/">&lt;p&gt;&lt;a href=&quot;http://gavinzhang.work/blockchain/比特币/Bitcoin中Base58Check.html&quot;&gt;[原文]&lt;/a&gt;Base58二進位制到文字編碼被稱為 Base58Check，用於編碼比特幣地址。&lt;/p&gt;
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;更一般地說，Base58Check 編碼用於將比特幣中的位元組陣列編碼為人類可分類的字元串。&lt;/p&gt;
+
+&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;最初的比特幣客戶端原始碼解釋了 base58 編碼背後的原因：&lt;/p&gt;
+
+&lt;p&gt;base58.h：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// 為什麼 base-58 而不是標準的 base-64 編碼？
+// - 不希望 0OIl 字元在某些字型和字型中看起來相同
+//可以用來建立視覺上相同的賬號。
+// - 具有非字母數字字元的字元串並不像帳號那麼容易被接受。
+// - 如果沒有標點符號，電子郵件通常不會換行。
+// - 如果全部是字母數字，Doubleclicking 會將整個數字選為一個單詞。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;base58check的功能&quot;&gt;Base58Check的功能&lt;/h2&gt;
+
+&lt;p&gt;Base58Check 具有以下功能：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;一個任意大小的 payload（ &lt;strong&gt;這個 payload 其實就是公鑰的 HASH160 的雙次 hash 值&lt;/strong&gt; ）。&lt;/li&gt;
+  &lt;li&gt;由容易區分的大寫和小寫字母組成的一組 58 個字母數字符號（ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0OIl&lt;/code&gt; 不使用）( &lt;strong&gt;主要的原因還是因為可能會產生歧義&lt;/strong&gt; )&lt;/li&gt;
+  &lt;li&gt;一個位元組的 version/application 資訊。對於這個位元組比特幣地址使用 0x00（未來的可能使用 0x05 ）。&lt;/li&gt;
+  &lt;li&gt;四個位元組（32 位）基於 SHA256 的錯誤校驗碼。此校驗碼可用於自動檢測並可能更正印刷錯誤。&lt;/li&gt;
+  &lt;li&gt;保留資料中前導零的額外步驟。（這裡應該更深入地進行分析才是，但是現在真不太明白這裡面的意思。）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;建立一個-base58check-字元串&quot;&gt;建立一個 Base58Check 字元串&lt;/h2&gt;
+
+&lt;p&gt;Base58Check 字元串是從 version/application 位元組和 payload 建立的，如下所示。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;獲取 version 位元組和 payload 位元組，並將它們連線在一起（按位元組）。&lt;/li&gt;
+  &lt;li&gt;取 SHA256 的前四個位元組（ SHA256 （步驟 1 的結果））（ &lt;strong&gt;也應該是前面提到的那四個位元組的事情&lt;/strong&gt; ）&lt;/li&gt;
+  &lt;li&gt;將步驟 1 的結果和步驟 2 的結果連在一起（按位元組順序）。&lt;/li&gt;
+  &lt;li&gt;處理步驟3的結果 - 一系列位元組 -  &lt;strong&gt;作為單個大端序號&lt;/strong&gt; ，使用正常的數學步驟（ bignumber division ）和下面描述的 base-58 字母表轉換為 base-58 。結果應該被標準化為沒有任何前導的 base-58 零（字元 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1&lt;/code&gt; ）。( &lt;strong&gt;這裡注意前導 0 對應的 Base58Check 是1&lt;/strong&gt; )&lt;/li&gt;
+  &lt;li&gt;在 base58 中值為零的前導字元&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1&lt;/code&gt;被保留用於表示整個前導零位元組，就像它處於前導位置時一樣，沒有值作為 base-58 符號。必要時可以有一個或多個前導 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1&lt;/code&gt; 來表示一個或多個前導零位元組。計算第3步結果的前導零位元組數（對於舊的比特幣地址，至少有一個用於版本/應用程式位元組;對於新地址，將永遠不會有）。每個前導零位元組在最終結果中應由其自己的字元 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1&lt;/code&gt; 表示。&lt;/li&gt;
+  &lt;li&gt;將步驟5中的1與步驟4 的結果連線起來。這是 Base58Check 的結果。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;在描述比特幣地址&lt;a href=&quot;https://en.bitcoin.it/wiki/Technical_background_of_version_1_Bitcoin_addresses#How_to_create_Bitcoin_Address&quot;&gt;技術背景&lt;/a&gt;的頁面上提供了一個更詳細的例子。&lt;/p&gt;
+
+&lt;h2 id=&quot;編碼比特幣地址&quot;&gt;編碼比特幣地址&lt;/h2&gt;
+
+&lt;p&gt;比特幣地址是使用以下任一項的雜湊的 Base58Check 編碼實現的：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Pay-to-script-hash（p2sh）：有效載荷是：其中 redeemScript 是錢包知道如何消費的指令碼; 版本（這些地址以數字&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;3&lt;/code&gt;開頭） RIPEMD160(SHA256(redeemScript))0x05&lt;/li&gt;
+  &lt;li&gt;支付到PUBKEY雜湊（ p2pkh ）：有效載荷是其中 ECDSA_publicKey 是錢包知道的私有金鑰的公共金鑰; 版本（這些地址以數字&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1&lt;/code&gt;開頭）RIPEMD160(SHA256(ECDSA_publicKey))0x00&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在這兩種情況下得到的雜湊總是恰好為 20 個位元組。這些是大端（最重要的位元組在前）。（注意那些限制前導 0x00 位元組的數字編碼實現，或者預先增加額外的 0x00 位元組來表示符號 - 你的程式碼必須正確處理這些情況，否則你可能會生成可以傳送到但看不到的有效地址 -導致硬幣的永久損失。）&lt;/p&gt;
+
+&lt;h2 id=&quot;編碼一個私鑰&quot;&gt;編碼一個私鑰&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Base58Check 編碼也用於編碼錢包匯入格式中的&lt;a href=&quot;https://en.bitcoin.it/wiki/Private_key&quot;&gt;ECDSA 私鑰&lt;/a&gt;&lt;/strong&gt; 。除了 0x80 用於 version/application 位元組，並且有效載荷是 32 位元組而不是 20 （比特幣中的私鑰是單個 32 位元組無符號的大端整數）之外，它與比特幣地址完全相同。對於與未壓縮的公鑰相關的私鑰，這種編碼總是會產生一個以 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;5&lt;/code&gt; 開頭的 51 個字元的字元串，或者更具體地說&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;5H&lt;/code&gt;，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;5J&lt;/code&gt;或&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;5K&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;base58-符號圖表&quot;&gt;Base58 符號圖表&lt;/h2&gt;
+
+&lt;p&gt;比特幣中使用的 Base58 符號圖特定於比特幣項目，並不打算與比特幣之外使用的任何其他 Base58 實現（排除的字元為：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;O&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;I&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;l&lt;/code&gt;）相同。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;值&lt;/th&gt;
+      &lt;th&gt;字元&lt;/th&gt;
+      &lt;th&gt;值&lt;/th&gt;
+      &lt;th&gt;字元&lt;/th&gt;
+      &lt;th&gt;值&lt;/th&gt;
+      &lt;th&gt;字元&lt;/th&gt;
+      &lt;th&gt;值&lt;/th&gt;
+      &lt;th&gt;字元&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;8&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;8&lt;/td&gt;
+      &lt;td&gt;9&lt;/td&gt;
+      &lt;td&gt;9&lt;/td&gt;
+      &lt;td&gt;A&lt;/td&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;B&lt;/td&gt;
+      &lt;td&gt;11&lt;/td&gt;
+      &lt;td&gt;C&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;12&lt;/td&gt;
+      &lt;td&gt;D&lt;/td&gt;
+      &lt;td&gt;13&lt;/td&gt;
+      &lt;td&gt;E&lt;/td&gt;
+      &lt;td&gt;14&lt;/td&gt;
+      &lt;td&gt;F&lt;/td&gt;
+      &lt;td&gt;15&lt;/td&gt;
+      &lt;td&gt;G&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;16&lt;/td&gt;
+      &lt;td&gt;H&lt;/td&gt;
+      &lt;td&gt;17&lt;/td&gt;
+      &lt;td&gt;J&lt;/td&gt;
+      &lt;td&gt;18&lt;/td&gt;
+      &lt;td&gt;K&lt;/td&gt;
+      &lt;td&gt;19&lt;/td&gt;
+      &lt;td&gt;L&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;20&lt;/td&gt;
+      &lt;td&gt;M&lt;/td&gt;
+      &lt;td&gt;21&lt;/td&gt;
+      &lt;td&gt;N&lt;/td&gt;
+      &lt;td&gt;22&lt;/td&gt;
+      &lt;td&gt;P&lt;/td&gt;
+      &lt;td&gt;23&lt;/td&gt;
+      &lt;td&gt;Q&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;24&lt;/td&gt;
+      &lt;td&gt;R&lt;/td&gt;
+      &lt;td&gt;25&lt;/td&gt;
+      &lt;td&gt;S&lt;/td&gt;
+      &lt;td&gt;26&lt;/td&gt;
+      &lt;td&gt;T&lt;/td&gt;
+      &lt;td&gt;27&lt;/td&gt;
+      &lt;td&gt;U&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;28&lt;/td&gt;
+      &lt;td&gt;V&lt;/td&gt;
+      &lt;td&gt;29&lt;/td&gt;
+      &lt;td&gt;W&lt;/td&gt;
+      &lt;td&gt;30&lt;/td&gt;
+      &lt;td&gt;X&lt;/td&gt;
+      &lt;td&gt;31&lt;/td&gt;
+      &lt;td&gt;Y&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;32&lt;/td&gt;
+      &lt;td&gt;Z&lt;/td&gt;
+      &lt;td&gt;33&lt;/td&gt;
+      &lt;td&gt;a&lt;/td&gt;
+      &lt;td&gt;34&lt;/td&gt;
+      &lt;td&gt;b&lt;/td&gt;
+      &lt;td&gt;35&lt;/td&gt;
+      &lt;td&gt;c&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;36&lt;/td&gt;
+      &lt;td&gt;d&lt;/td&gt;
+      &lt;td&gt;37&lt;/td&gt;
+      &lt;td&gt;e&lt;/td&gt;
+      &lt;td&gt;38&lt;/td&gt;
+      &lt;td&gt;f&lt;/td&gt;
+      &lt;td&gt;39&lt;/td&gt;
+      &lt;td&gt;g&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;40&lt;/td&gt;
+      &lt;td&gt;h&lt;/td&gt;
+      &lt;td&gt;41&lt;/td&gt;
+      &lt;td&gt;i&lt;/td&gt;
+      &lt;td&gt;42&lt;/td&gt;
+      &lt;td&gt;j&lt;/td&gt;
+      &lt;td&gt;43&lt;/td&gt;
+      &lt;td&gt;k&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;44&lt;/td&gt;
+      &lt;td&gt;m&lt;/td&gt;
+      &lt;td&gt;45&lt;/td&gt;
+      &lt;td&gt;n&lt;/td&gt;
+      &lt;td&gt;46&lt;/td&gt;
+      &lt;td&gt;o&lt;/td&gt;
+      &lt;td&gt;47&lt;/td&gt;
+      &lt;td&gt;p&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;48&lt;/td&gt;
+      &lt;td&gt;q&lt;/td&gt;
+      &lt;td&gt;49&lt;/td&gt;
+      &lt;td&gt;r&lt;/td&gt;
+      &lt;td&gt;50&lt;/td&gt;
+      &lt;td&gt;s&lt;/td&gt;
+      &lt;td&gt;51&lt;/td&gt;
+      &lt;td&gt;t&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;52&lt;/td&gt;
+      &lt;td&gt;u&lt;/td&gt;
+      &lt;td&gt;53&lt;/td&gt;
+      &lt;td&gt;v&lt;/td&gt;
+      &lt;td&gt;54&lt;/td&gt;
+      &lt;td&gt;w&lt;/td&gt;
+      &lt;td&gt;55&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;56&lt;/td&gt;
+      &lt;td&gt;y&lt;/td&gt;
+      &lt;td&gt;57&lt;/td&gt;
+      &lt;td&gt;z&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;編碼 address_byte_string 的演算法（由1-byte_version + hash_or_other_data + 4-byte_check_code組成）是&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;code_string = &quot;123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz&quot;
+x = convert_bytes_to_big_integer(hash_result)
+
+output_string = &quot;&quot;
+
+while(x &amp;gt; 0)
+{
+(x, remainder) = divide(x, 58)
+output_string.append(code_string[remainder])
+}
+
+repeat(number_of_leading_zero_bytes_in_hash)
+{
+output_string.append(code_string[0]);
+}
+
+output_string.reverse();
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;版本位元組&quot;&gt;版本位元組&lt;/h2&gt;
+
+&lt;p&gt;以下是一些常見的版本位元組：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;小數版本&lt;/th&gt;
+      &lt;th&gt;領導的象徵&lt;/th&gt;
+      &lt;th&gt;使用&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Bitcoin pubkey hash&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Bitcoin script hash&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;21&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;Bitcoin (compact) public key (proposed)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;52&lt;/td&gt;
+      &lt;td&gt;M or N&lt;/td&gt;
+      &lt;td&gt;Namecoin pubkey hash&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;128&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;Private key&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;111&lt;/td&gt;
+      &lt;td&gt;m or n&lt;/td&gt;
+      &lt;td&gt;Bitcoin testnet pubkey hash&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;196&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Bitcoin testnet script hash&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.bitcoin.it/wiki/List_of_address_prefixes&quot;&gt;地址字首列表&lt;/a&gt;是一個完整的列表。&lt;/p&gt;
+
+&lt;h2 id=&quot;也可以看看&quot;&gt;也可以看看&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://lenschulwitz.com/base58&quot;&gt;線上 Base58 解碼器，編碼器和驗證器&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;原始碼&quot;&gt;原始碼&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/bitcoin/bitcoin/blob/master/src/base58.cpp&quot;&gt;“Satoshi”C ++ codebase&lt;/a&gt;（解碼和編碼，不需要外部庫）&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/luke-jr/libbase58&quot;&gt;libbase58 C 程式碼&lt;/a&gt;（解碼和編碼，不需要外部庫）&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://lenschulwitz.com/b58/base58perl.txt&quot;&gt;Base58 在 Perl 中解碼，編碼和驗證&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;參考和引用&quot;&gt;參考和引用&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.bitcoin.it/wiki/Base58Check_encoding&quot;&gt;Base58Check encoding&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;總結&quot;&gt;總結&lt;/h2&gt;
+
+&lt;p&gt;關於比特幣地址知識，在精通比特幣中有詳細地介紹，這裡我們不做更多的介紹，這篇文章是我翻譯的結果。&lt;/p&gt;
+
+&lt;p&gt;在之前我們分析過橢圓曲線的知識，對於確定性錢包的知識我們也做了相關地介紹，還有就是分層確定性錢包的知識。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;另外 Base58Check 還有一個極大的好處就是可以校驗地址是不是正確的，因為 Base58 生成的時候是加入了校驗碼&lt;/strong&gt; 。我覺得比特幣團隊做的真的是很棒不是嗎？詳情可以參考：&lt;a href=&quot;http://8btc.com/thread-31201-1-1.html&quot;&gt;為什麼以太坊地址中沒有校驗值？&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;對於比特幣地址也要特別注意一下，地址類型也就是 version/appication 欄位其實是自己加入的，和 ecdsa 本身並沒有任何關係。校驗碼也是自己加上去的而已。我們可以看一下下面的圖片.&lt;/strong&gt;&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;600&quot; src=&quot;/img/139.png&quot; /&gt;&lt;/div&gt;
+
+&lt;p&gt;有一段時間我在分析 java 的 ECKey 的程式碼發現 java 底層的橢圓曲線演算法的實現，這裡我就不做更多的說明了。 &lt;strong&gt;關鍵是我們如何實現分層確定性錢包，這個很簡單也很複雜，其實就是找私鑰 \(G\) ，至於這個 \(G\) 怎麼找，我們可以檢視精通比特幣裡面的說明，這裡面只是提到了 HMAC-SHA512。看來這裡面隱藏了很多的細節因素，我們有時間需要研究一下，HMAC-SHA512 的知識了。&lt;/strong&gt;&lt;/p&gt;</content><author><name>Cypherpunks Core</name></author><category term="news" /><summary type="html">[原文]Base58二進位制到文字編碼被稱為 Base58Check，用於編碼比特幣地址。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/img/138.png" /><media:content medium="image" url="/img/138.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">什麼是Secp256k1</title><link href="/news/2019/11/18/%E4%BB%80%E9%BA%BC%E6%98%AFsecp256k1/" rel="alternate" type="text/html" title="什麼是Secp256k1" /><published>2019-11-18T00:00:00+00:00</published><updated>2019-11-18T00:00:00+00:00</updated><id>/news/2019/11/18/%E4%BB%80%E9%BA%BC%E6%98%AFsecp256k1</id><content type="html" xml:base="/news/2019/11/18/%E4%BB%80%E9%BA%BC%E6%98%AFsecp256k1/">&lt;p&gt;&lt;a href=&quot;http://gavinzhang.work/blockchain/比特币/什么是Secp256k1&quot;&gt;[原文]&lt;/a&gt;&lt;strong&gt;secp256k1 是指比特幣中使用的 ECDSA 曲線的參數&lt;/strong&gt; ，並且在高效密碼學標準（SEC）（Certicom Research，&lt;a href=&quot;http://www.secg.org/sec2-v2.pdf&quot;&gt;文件&lt;/a&gt;）中進行了定義。&lt;/p&gt;
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;在比特幣開始流行之前，secp256k1 幾乎從未使用過，但由於其幾個不錯的屬性，它現在越來越受歡迎。大多數常用曲線具有隨機結構，但 secp256k1 是以特殊的非隨機方式構建的，可以實現特別高效的計算。 &lt;strong&gt;因此，如果實施得到充分優化，它通常比其他曲線快 30％ 以上&lt;/strong&gt; 。 &lt;strong&gt;另外，與流行的NIST曲線不同，secp256k1 的常量是以可預測的方式選擇的，這大大降低了曲線建立者在曲線中插入任何後門的可能性。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;下面看一下這裡面的函數圖：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/136.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Secp256k1 是 secp256k1 橢圓曲線\(y^2 = x^3 + 7\)在實數上的圖形。請注意，因為 secp256k1 實際上是在欄位\(Zp\)上定義的，所以它的圖形實際上看起來像是隨機分散的點，而不是像圖中這樣是連續的點。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;技術細節&quot;&gt;技術細節&lt;/h2&gt;
+
+&lt;p&gt;從標準摘錄：&lt;/p&gt;
+
+&lt;p&gt;與 Koblitz 曲線 secp256k1 相關聯的\(Fp\)上的橢圓曲線域參數由單元\(T=（p，a，b，G，n，h）\)指定，其中有限域\(Fp\)由下式定義：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;p = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE FFFFFC2F
+= 2256 - 232 - 29 - 28 - 27 - 26 - 24 - 1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;\(Fp\)上的曲線E：\(y^2 = x^3 + ax + b\)由下式定義：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;a = 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+b = 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000007
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;壓縮形式的基點\(G\)是：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;G = 02 79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;而在未壓縮的形式是：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;G = 04 79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798 483ADA77 26A3C465 5DA4FBFC 0E1108A8 FD17B448 A6855419 9C47D08F FB10D4B8
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;最後，\(G\)的迴圈因子\(n\)(就是指\(nG=G\))和輔因子\(h\)如下：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;n = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE BAAEDCE6 AF48A03B BFD25E8C D0364141
+h = 01
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;屬性&quot;&gt;屬性&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;secp256k1 具有特徵\(p\)，它的素數域定義為 ℤp。常用的一些其他曲線具有特徵2，並且在二進位制伽羅瓦(Galois)域\(GF(2n)\)上定義，但 secp256k1 不是其中之一。&lt;/li&gt;
+  &lt;li&gt;因為一個常數為零，曲線方程中 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ax&lt;/code&gt; 項始終為零，因此曲線方程變為\(y^2 = x^3 + 7\)。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;也可以看看&quot;&gt;也可以看看&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bitcoin.stackexchange.com/questions/21907/what-does-the-curve-used-in-bitcoin-secp256k1-look-like&quot;&gt;secp256k1是什麼&lt;/a&gt;（ Pieter Wuille 的比特幣堆棧交換答案）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;原文&quot;&gt;原文&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.bitcoin.it/wiki/Secp256k1&quot;&gt;Secp256k1&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><category term="news" /><summary type="html">[原文]secp256k1 是指比特幣中使用的 ECDSA 曲線的參數 ，並且在高效密碼學標準（SEC）（Certicom Research，文件）中進行了定義。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/img/137.png" /><media:content medium="image" url="/img/137.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">如何創建你的Pull Request(PR)給密碼龐克台灣</title><link href="/news/2019/11/18/%E5%A6%82%E4%BD%95%E5%89%B5%E5%BB%BA%E4%BD%A0%E7%9A%84Pull-Request-%E7%B5%A6%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E7%81%A3/" rel="alternate" type="text/html" title="如何創建你的Pull Request(PR)給密碼龐克台灣" /><published>2019-11-18T00:00:00+00:00</published><updated>2019-11-18T00:00:00+00:00</updated><id>/news/2019/11/18/%E5%A6%82%E4%BD%95%E5%89%B5%E5%BB%BA%E4%BD%A0%E7%9A%84Pull%20Request%20%E7%B5%A6%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E7%81%A3</id><content type="html" xml:base="/news/2019/11/18/%E5%A6%82%E4%BD%95%E5%89%B5%E5%BB%BA%E4%BD%A0%E7%9A%84Pull-Request-%E7%B5%A6%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E7%81%A3/">&lt;blockquote&gt;
+  &lt;p&gt;PR 即為 Pull Request，在 Github 上必須先複製（Fork）一份原作的專案到你自己的 GitHub 帳號底下。
+那自己的 Fork 專案想怎麼玩就怎麼玩，之後你就可以推上自己的 Fork 文件上，發個通知給 Cypherpunks-core，讓團隊人員來審視這次的 PR 是否 ok，若是 ok 則會將您發起的 PR 合併進團隊文章裡，若不 ok 將會在底下描述為何沒通過的理由。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://github.com/cypherpunks-core/cypherpunks-core.github.io&quot;&gt;密碼龐克台灣 Github&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;750&quot; src=&quot;/img/panda-23.png&quot; /&gt;&lt;/div&gt;
+&lt;center&gt;&lt;strong&gt;圖1 密碼龐克台灣官網&lt;/strong&gt;&lt;/center&gt;
+
+&lt;h2 id=&quot;step1---點擊-fork-將專案複製至自己的遠端儲存庫&quot;&gt;Step1 - 點擊 Fork 將專案複製至自己的遠端儲存庫&lt;/h2&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;750&quot; src=&quot;/img/panda-24.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖2 點擊畫面右上角之 Fork &lt;/strong&gt;&lt;/center&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;750&quot; src=&quot;/img/panda-25.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖3 即可在自己的遠端資源庫中看到 cypherpunks-core 的專案 &lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;以我為例 就會看到 panda850819 forked from cypherpunks-core …&lt;/p&gt;
+
+&lt;h2 id=&quot;step2---clone-專案下載專案&quot;&gt;Step2 - Clone 專案/下載專案&lt;/h2&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;750&quot; src=&quot;/img/panda-26.png&quot; /&gt;&lt;/div&gt;
+
+&lt;center&gt;&lt;strong&gt;圖4 在自己的專案中按下 Clone 到自己的資料夾 &lt;/strong&gt;&lt;/center&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;可以透過 Download ZIP 至你想要的位置解壓縮它&lt;/li&gt;
+  &lt;li&gt;可以透過終端機指令，請先開啟終端機並且輸入底下指令&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cd desktop &amp;amp;&amp;amp; mkdir cypherpunks-core &amp;amp;&amp;amp; cd cypherpunks-core
+
+// 先將位置移動至桌面並且創立 cypherpunks-core 資料夾
+
+$ git clone https://github.com/{你的github名稱}/cypherpunks-core.github.io.git
+
+// 將專案下載至 cypherpunks-core 資料夾
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;step3---同步-cypherpunks-core-專案&quot;&gt;Step3 - 同步 Cypherpunks-core 專案&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;同步遠端專案&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git remote -v
+
+// origin https://github.com/panda850819/cypherpunks-core.github.io.git (fetch)
+// origin https://github.com/panda850819/cypherpunks-core.github.io.git (push)
+
+$ git remote add upstream https://github.com/cypherpunks-core/cypherpunks-core.github.io.git
+
+$ git remote -v 
+
+// origin	https://github.com/panda850819/cypherpunks-core.github.io.git (fetch)
+// origin	https://github.com/panda850819/cypherpunks-core.github.io.git (push)
+// upstream	https://github.com/cypherpunks-core/cypherpunks-core.github.io.git (fetch)
+// upstream	https://github.com/cypherpunks-core/cypherpunks-core.github.io.git (push)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;同步 fork&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;完成操作後，本地專案就會同步 Cypherpunk-core 專案中的變化!&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git fetch upstream
+
+$ git checkout master 
+
+$ git merge upstream/master
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;step4---提交-pr-至-cypherpunks-core-team&quot;&gt;Step4 - 提交 PR 至 Cypherpunks-Core Team&lt;/h2&gt;
+
+&lt;p&gt;當我們完成修改之後，我們先將修改後的專案推（&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;push&lt;/code&gt;）到自己的專案中，接下來就是將修改的部分告知 Cypherpunks-Core Team，那就要來提交 PR 拉！&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;記得要先將自己 fork 的專案推上去，才能提交 PR 喔！&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;提交 PR&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;750&quot; src=&quot;/img/panda-27.png&quot; /&gt;&lt;/div&gt;
+&lt;center&gt;&lt;strong&gt;圖5 - 提交 PR 至 Cypherpunk-core&lt;/strong&gt;&lt;/center&gt;
+
+&lt;p&gt;然後可以在上面輸入摘要跟主題，接下來就等著團隊給予回覆囉！&lt;/p&gt;
+
+&lt;h2 id=&quot;小結&quot;&gt;小結&lt;/h2&gt;
+&lt;p&gt;透過幾個小小步驟，我們將了解如何 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Fork&lt;/code&gt; 專案以及 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Clone&lt;/code&gt; 專案，並且繳交自己的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Pull Request&lt;/code&gt; 給 Cypherpunks-Core Team。&lt;/p&gt;
+
+&lt;p&gt;希望大家能一起為這個社群做貢獻，若有任何想要瞭解的也可以至&lt;a href=&quot;https://cypherpunks-core.github.io/&quot;&gt;官方網站&lt;/a&gt;、&lt;a href=&quot;https://www.facebook.com/CypherpunksTW/&quot;&gt;Facebook&lt;/a&gt;觀看我們的文章和我們一起討論，最後 Cypherpunks Taiwan 密碼龐克 為 crypto 文化的聚集地
+主題圍繞在 bitcoin 也是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由，若大家對我們有興趣也請不吝嗇的提交 PR 給我們!&lt;/p&gt;
+
+&lt;h2 id=&quot;參考文獻&quot;&gt;參考文獻&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gitbook.tw/chapters/github/pull-request.html&quot;&gt;為你自己學Git&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.itread01.com/content/1544771540.html?fbclid=IwAR2s4ATwibiiKRS3DYBnNsaNVuQeedOovTKZyGY9iaVqUukTDZppXzGu35w&quot;&gt;git如何同步fork專案&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><category term="news" /><summary type="html">PR 即為 Pull Request，在 Github 上必須先複製（Fork）一份原作的專案到你自己的 GitHub 帳號底下。 那自己的 Fork 專案想怎麼玩就怎麼玩，之後你就可以推上自己的 Fork 文件上，發個通知給 Cypherpunks-core，讓團隊人員來審視這次的 PR 是否 ok，若是 ok 則會將您發起的 PR 合併進團隊文章裡，若不 ok 將會在底下描述為何沒通過的理由。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/img/panda-22.png" /><media:content medium="image" url="/img/panda-22.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">BIP-65 OP_CHECKLOCKTIMEVERIFY</title><link href="/news/2019/11/14/BIP-65-OP_CHECKLOCKTIMEVERIFY/" rel="alternate" type="text/html" title="BIP-65 OP_CHECKLOCKTIMEVERIFY" /><published>2019-11-14T00:00:00+00:00</published><updated>2019-11-14T00:00:00+00:00</updated><id>/news/2019/11/14/BIP-65%20OP_CHECKLOCKTIMEVERIFY</id><content type="html" xml:base="/news/2019/11/14/BIP-65-OP_CHECKLOCKTIMEVERIFY/">&lt;p&gt;&lt;a href=&quot;http://gavinzhang.work/blockchain/%E6%AF%94%E7%89%B9%E5%B8%81/BIP-65%20OP-CHECKLOCKTIMEVERIFY.html&quot;&gt;原文&lt;/a&gt;:BIP-65 OP_CHECKLOCKTIMEVERIFY    &lt;br /&gt;
+該BIP為比特幣 script 系統描述了一個新的 OPCode （&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OP_CHECKLOCKTIMEVERIFY&lt;/code&gt;），該 OPCode 允許交易輸出在未來的某個點之前變得不可花費。&lt;/p&gt;
+
+&lt;h2 id=&quot;概要&quot;&gt;概要&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;CHECKLOCKTIMEVERIFY 重新定義了現有的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NOP2&lt;/code&gt; OPCode (其實就是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OP_CHECKLOCKTIMEVERIFY&lt;/code&gt; 指令替換了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OP_NOP2&lt;/code&gt; 指令)。執行時，如果以下任何一個條件成立，則 OPCode 直譯器將以錯誤終止：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;堆棧是空的;&lt;/li&gt;
+  &lt;li&gt;堆棧中的頂層項目小於0;&lt;/li&gt;
+  &lt;li&gt;頂層堆棧項的鎖定時間類型（高度vs.時間戳）與 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位不同;&lt;/li&gt;
+  &lt;li&gt;頂部堆棧項大於交易的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;txin&lt;/code&gt;（交易輸入）的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nSequence&lt;/code&gt; 欄位是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xffffffff&lt;/code&gt; ;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;否則， OPCode 執行將繼續，如同NOP執行一樣。&lt;/p&gt;
+
+&lt;p&gt;交易中的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位可防止交易被挖出，直到達到某個區塊高度或區塊時間為止。通過將傳給 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; 的參數與 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位進行比較，我們間接驗證是否已達到所需的區塊高度或區塊時間; 直到該區塊高度或區塊時間已經達到，交易輸出仍然不可花費。&lt;/p&gt;
+
+&lt;h2 id=&quot;動機&quot;&gt;動機&lt;/h2&gt;
+
+&lt;p&gt;交易中的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位可用於證明 將來可以花費這筆交易輸出，方法是構造一個有效的交易開銷，並對&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt;欄位進行設定。&lt;/p&gt;
+
+&lt;p&gt;然而， &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位不能證明在未來的某個時間內不可能花費交易輸出，因為無法知道是否建立了支出該輸出的其他交易的有效簽名。&lt;/p&gt;
+
+&lt;h2 id=&quot;第三方託管&quot;&gt;第三方託管&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;如果 Alice 和 Bob 聯合經營一家企業，他們可能希望確保所有資金都儲存在需要雙方同時批准的 2-of-2 的多重（多重簽名的交易）交易輸出中。但是，他們發現在特殊情況下，例如任何一個人受到“嚴重的車禍”，他們都需要備用的方法，繼續動用該筆資金。因此，他們任命他們的律師 Lenny 擔任第三方。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在任何時候，Lenny 隨時可以同 Alice 或 Bob 一起串謀非法竊取資金。同樣，Lenny 可能更願意不竊取資金，以阻止不良行為者企圖強行從他那裡獲取 secret keys 。&lt;/p&gt;
+
+&lt;p&gt;但是，使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; 可以將資金儲存在以下格式的 scriptPubKeys 中：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;IF
+    &amp;lt;now + 3 months&amp;gt; CHECKLOCKTIMEVERIFY DROP
+    &amp;lt;Lenny&apos;s pubkey&amp;gt; CHECKSIGVERIFY
+    1
+ELSE
+    2
+ENDIF
+&amp;lt;Alice&apos;s pubkey&amp;gt; &amp;lt;Bob&apos;s pubkey&amp;gt; 2 CHECKMULTISIG
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在任何時候，資金都可以用下面的 OPCode 來支付：&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0 &amp;lt;Alice&apos;s signature&amp;gt; &amp;lt;Bob&apos;s signature&amp;gt; 0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Lenny 經過 3 個月後，Alice 或 Bob 中的一個可以用以下 OPCode 支付資金：&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0 &amp;lt;Alice/Bob&apos;s signature&amp;gt; &amp;lt;Lenny&apos;s signature&amp;gt; 1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;非交互式定期退款--non-interactive-time-locked-refunds&quot;&gt;非交互式定期退款 | Non-interactive time-locked refunds&lt;/h2&gt;
+
+&lt;p&gt;存在許多協議，其中建立交易輸出，這需要雙方的合作來花費輸出。為確保一方的失敗不會導致資金損失，退款交易使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 提前設定。這些退款交易需要互動式建立，此外，目前易受交易延展性影響。 ` CHECKLOCKTIMEVERIFY` 可用於這些協議，用非互動式設定取代互動式設定，另外，使交易延展性不成問題。&lt;/p&gt;
+
+&lt;h3 id=&quot;雙因素錢包--two-factor-wallets&quot;&gt;雙因素錢包 | Two-factor wallets&lt;/h3&gt;
+
+&lt;p&gt;諸如 GreenAddress 之類的服務將比特幣儲存為 2-of-2 的多重簽名 OPCode ScriptPubKey，使得一個金鑰對由使用者控制，另一個金鑰對由服務控制。為了花費資金，使用者使用本地安裝的生成所需簽名之一的錢包軟體，然後使用雙因素身份驗證方法來授權該服務建立第二個 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SIGHASH_NONE&lt;/code&gt; 簽名，該簽名在將來的某個時間被鎖定，並向用戶傳送該儲存簽名。如果使用者需要花費資金並且服務不可用，他們會等到 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 過期。&lt;/p&gt;
+
+&lt;p&gt;問題是，在許多情況下，使用者將不會擁有一些或全部交易輸出的有效簽名。使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; 而不是按需建立退款簽名，而是使用以下形式的 scriptPubKeys ：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;IF
+    &amp;lt;service pubkey&amp;gt; CHECKSIGVERIFY
+ELSE
+    &amp;lt;expiry time&amp;gt; CHECKLOCKTIMEVERIFY DROP
+ENDIF
+&amp;lt;user pubkey&amp;gt; CHECKSIG
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;現在，用戶總是可以通過等待到期時間來花費他們的資金而無需服務的合作。&lt;/p&gt;
+
+&lt;h3 id=&quot;支付通道--payment-channels&quot;&gt;支付通道 | Payment Channels&lt;/h3&gt;
+
+&lt;p&gt;傑里米·斯皮爾曼（ Jeremy Spilman ）style 的支付通道首先設定一個存款，由 2-of-2 的多重簽名， tx1 控制的存款，然後調整第二個交易 tx2 ，將 tx1 的輸出用於支付者和收款者。在釋出 tx1 之前，建立一個退款交易 tx3 ，確保收款人消失時付款人可以取回其押金。當前創建退款交易的過程容易受到交易延展性攻擊的影響，此外，還要求付款人儲存退款。使用與雙因素錢包示例中相同的 scriptPubKey 形式可以解決這兩個問題。&lt;/p&gt;
+
+&lt;h2 id=&quot;發布數據的無信任付款--trustless-payments-for-publishing-data&quot;&gt;發布數據的無信任付款 | Trustless Payments for Publishing Data&lt;/h2&gt;
+
+&lt;p&gt;The PayPub protocol makes it possible to pay for information in a trustless way by first proving that an encrypted file contains the desired data, and secondly crafting scriptPubKeys used for payment such that spending them reveals the encryption keys to the data. However the existing implementation has a significant flaw: the publisher can delay the release of the keys indefinitely.&lt;/p&gt;
+
+&lt;p&gt;This problem can be solved interactively with the refund transaction technique; with CHECKLOCKTIMEVERIFY the problem can be non-interactively solved using scriptPubKeys of the following form:&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;通過首先證明加密文件包含所需的數據，然後製作用於支付的 scriptPubKeys 以便使它們花費來顯示數據的加密密鑰，PayPub 協議可以以不信任的方式支付信息。但是，現有的實現存在一個重大缺陷：發布者可以無限期地延遲密鑰的發布。&lt;/p&gt;
+
+&lt;p&gt;這個問題可以用退款交易技術互動地解決; 使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; ，可以使用以下形式的scriptPubKeys以非互動方式解決問題：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;IF
+    HASH160 &amp;lt;Hash160(encryption key)&amp;gt; EQUALVERIFY
+    &amp;lt;publisher pubkey&amp;gt; CHECKSIG
+ELSE
+    &amp;lt;expiry time&amp;gt; CHECKLOCKTIMEVERIFY DROP
+    &amp;lt;buyer pubkey&amp;gt; CHECKSIG
+ENDIF
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;資料的買家現在正在提供一個有效期限的安全報價。如果發行商在到期時間到期之前未能接受報價，買家可以通過消費輸出來取消報價。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;證明犧牲礦工的手續費--proving-sacrifice-to-miners-fees&quot;&gt;證明犧牲礦工的手續費 | Proving sacrifice to miners’ fees&lt;/h2&gt;
+
+&lt;p&gt;Proving the sacrifice of some limited resource is a common technique in a variety of cryptographic protocols. Proving sacrifices of coins to mining fees has been proposed as a universal public good to which the sacrifice could be directed, rather than simply destroying the coins. However doing so is non-trivial, and even the best existing technqiue - announce-commit sacrifices - could encourage mining centralization. CHECKLOCKTIMEVERIFY can be used to create outputs that are provably spendable by anyone (thus to mining fees assuming miners behave optimally and rationally) but only at a time sufficiently far into the future that large miners can’t profitably sell the sacrifices at a discount.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;證明犧牲一些有限的資源是各種密碼協議中的常用技術。已經提出了證明將硬幣犧牲為採礦費的做法，作為犧牲品可以針對的一種普遍的公共物品，而不是簡單地銷毀硬幣。但是，這樣做並非易事，即使是現有的最佳技術-宣布承諾犧牲-也會鼓勵採礦業的集中化。  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; 可用於創建任何人都可證明可使用的輸出（因此，假設礦工的行為合理且合理，則要收取採礦費），但前提是在足夠遠的將來，大型礦工無法以折扣價出售利潤。&lt;/p&gt;
+
+&lt;p&gt;證明犧牲一些有限的資源是各種密碼協議中的常見技術。已經提出將幣的犧牲證明為挖礦手續費，作為犧牲可以指向的普遍公共物品，而不是簡單地摧毀幣。然而，這樣做並非微不足道，即使是最好的現有技術 - 宣佈 - 承諾 - 也會鼓勵礦業集中。 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; 可用於建立任何人都可以花費的產出（因此，假設礦工的行為是理想的和理性的，那麼開採費），但只有在未來足夠遠的時間，大型礦工才能以折扣銷售犧牲品。&lt;/p&gt;
+
+&lt;h2 id=&quot;凍結資金--freezing-funds&quot;&gt;凍結資金 | Freezing Funds&lt;/h2&gt;
+
+&lt;p&gt;除了使用冷儲存，硬體錢包和 P2SH multisig 輸出來控制資金之外，現在資金可以直接在區塊鏈中凍結在 UTXO 中。使用下面的 scriptPubKey ，在提供的失效時間之前，沒有人能夠使用安全輸出。這種可靠地凍結資金的能力在需要減少脅迫或沒收風險的情況下可能會有用。&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;expiry time&amp;gt; CHECKLOCKTIMEVERIFY DROP DUP HASH160 &amp;lt;pubKeyHash&amp;gt; EQUALVERIFY CHECKSIG
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;完全替換nlocktime欄位--replacing-the-nlocktime-field-entirely&quot;&gt;完全替換nLockTime欄位 | Replacing the nLockTime field entirely&lt;/h2&gt;
+
+&lt;p&gt;另外，請注意如果 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SignatureHash()&lt;/code&gt; 演算法可以選擇覆蓋 OPCode 的一部分，那麼簽名可能會要求 OPCode Sig包含&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CHECKLOCKTIMEVERIFY&lt;/code&gt; OPCode ，並且還需要執行它們。（ CODESEPARATOR OPCode 非常接近於在比特幣的 v0.1 中實現這一點）。這種每簽名功能可以完全取代每個交易的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nLockTime&lt;/code&gt; 欄位，因為有效簽名現在可以證明交易輸出可以花費。&lt;/p&gt;
+
+&lt;h2 id=&quot;詳細規格--detailed-specification&quot;&gt;詳細規格 | Detailed Specification&lt;/h2&gt;
+
+&lt;p&gt;參考下面轉載的參考實現，瞭解這些語義的精確語義和詳細基本原理。&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;case OP_NOP2:
+case OP_NOP2:
+{
+    // CHECKLOCKTIMEVERIFY
+    //
+    // (nLockTime -- nLockTime )
+
+    if (!(flags &amp;amp; SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY))
+        break; // not enabled; treat as a NOP
+
+    if (stack.size() &amp;lt; 1)
+        return false;
+
+    // Note that elsewhere numeric opcodes are limited to
+    // operands in the range -2**31+1 to 2**31-1, however it is
+    // legal for opcodes to produce results exceeding that
+    // range. This limitation is implemented by CScriptNum&apos;s
+    // default 4-byte limit.
+    //
+    // If we kept to that limit we&apos;d have a year 2038 problem,
+    // even though the nLockTime field in transactions
+    // themselves is uint32 which only becomes meaningless
+    // after the year 2106.
+    //
+    // Thus as a special case we tell CScriptNum to accept up
+    // to 5-byte bignums, which are good until 2**32-1, the
+    // same limit as the nLockTime field itself.
+    const CScriptNum nLockTime(stacktop(-1), 5);
+
+    // In the rare event that the argument may be &amp;lt; 0 due to
+    // some arithmetic being done first, you can always use
+    // 0 MAX CHECKLOCKTIMEVERIFY.
+    if (nLockTime &amp;lt; 0)
+        return false;
+
+    // There are two types of nLockTime: lock-by-blockheight
+    // and lock-by-blocktime, distinguished by whether
+    // nLockTime &amp;lt; LOCKTIME_THRESHOLD.
+    //
+    // We want to compare apples to apples, so fail the script
+    // unless the type of nLockTime being tested is the same as
+    // the nLockTime in the transaction.
+    if (!(
+            (txTo.nLockTime &amp;lt;  LOCKTIME_THRESHOLD &amp;amp;&amp;amp; nLockTime &amp;lt;  LOCKTIME_THRESHOLD) ||
+            (txTo.nLockTime &amp;gt;= LOCKTIME_THRESHOLD &amp;amp;&amp;amp; nLockTime &amp;gt;= LOCKTIME_THRESHOLD)
+            ))
+        return false;
+
+    // Now that we know we&apos;re comparing apples-to-apples, the
+    // comparison is a simple numeric one.
+    if (nLockTime &amp;gt; (int64_t)txTo.nLockTime)
+        return false;
+
+    // Finally the nLockTime feature can be disabled and thus
+    // CHECKLOCKTIMEVERIFY bypassed if every txin has been
+    // finalized by setting nSequence to maxint. The
+    // transaction would be allowed into the blockchain, making
+    // the opcode ineffective.
+    //
+    // Testing if this vin is not final is sufficient to
+    // prevent this condition. Alternatively we could test all
+    // inputs, but testing just this input minimizes the data
+    // required to prove correct CHECKLOCKTIMEVERIFY execution.
+    if (txTo.vin[nIn].IsFinal())
+        return false;
+
+    break;
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;https://github.com/petertodd/bitcoin/commit/ab0f54f38e08ee1e50ff72f801680ee84d0f1bf4&lt;/p&gt;
+
+&lt;h2 id=&quot;部署--deployment&quot;&gt;部署 | Deployment&lt;/h2&gt;
+
+&lt;p&gt;我們重用BIP66中使用的雙閾值 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IsSuperMajority()&lt;/code&gt; 切換機制，其閾值相同，但 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion = 4&lt;/code&gt; 。新規則對於 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion = 4&lt;/code&gt; 的每個區塊（高度為H）有效，並且至少有750之前的區塊（高度為H-1000..H-1）的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion &amp;gt;= 4&lt;/code&gt; 。此外，當區塊之前的1000個區塊中的950個具有 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion &amp;gt;= 4&lt;/code&gt; 時， &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion &amp;lt; 4&lt;/code&gt; 區塊將變為無效，並且全部進一步的阻止執行新的規則。&lt;/p&gt;
+
+&lt;p&gt;應該注意的是，BIP9涉及永久性地將高位設定為1，這導致 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion&amp;gt;=&lt;/code&gt; 所有先前的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IsSuperMajority()&lt;/code&gt; 軟分叉，因此 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion&lt;/code&gt; 中的位不會永久丟失。&lt;/p&gt;
+
+&lt;h2 id=&quot;spv客戶--spv-clients&quot;&gt;SPV客戶 | SPV Clients&lt;/h2&gt;
+
+&lt;p&gt;儘管SPV客戶端（當前）通常無法驗證區塊，而是信任礦工對其進行驗證，但他們能夠驗證區塊頭，因此可以驗證部署規則的子集。如果達到95％閾值時，前1000個區塊中的950個中有950個具有 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion &amp;gt;= 4&lt;/code&gt; ，則SPV客戶端應拒絕 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nVersion 4&lt;/code&gt; 區塊，以防止來自剩餘未升級礦工的5％的錯誤確認。&lt;/p&gt;
+
+&lt;h2 id=&quot;credits&quot;&gt;Credits&lt;/h2&gt;
+&lt;p&gt;Thanks goes to Gregory Maxwell for suggesting that the argument be compared against the per-transaction nLockTime, rather than the current block height and time.&lt;/p&gt;
+
+&lt;h2 id=&quot;參考&quot;&gt;參考&lt;/h2&gt;
+
+&lt;p&gt;PayPub&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/unsystem/paypub&quot;&gt;https://github.com/unsystem/paypub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Jeremy Spilman支付通道&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002433.html&quot;&gt;https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002433.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;實現&quot;&gt;實現&lt;/h2&gt;
+
+&lt;p&gt;Python / python-bitcoinlib&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/petertodd/checklocktimeverify-demos&quot;&gt;https://github.com/petertodd/checklocktimeverify-demos&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;JavaScript / Node.js / bitcore&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/mruddy/bip65-demos&quot;&gt;https://github.com/mruddy/bip65-demos&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;版權--copyright&quot;&gt;版權 | Copyright&lt;/h2&gt;
+
+&lt;p&gt;This document is placed in the public domain.&lt;/p&gt;
+
+&lt;h2 id=&quot;引用和參考&quot;&gt;引用和參考&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.chidaolian.com/article-680-4&quot;&gt;BIP65：檢查鎖定時間驗證&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki&quot;&gt;bips/bip-0065.mediawiki&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><category term="news" /><summary type="html">原文:BIP-65 OP_CHECKLOCKTIMEVERIFY 該BIP為比特幣 script 系統描述了一個新的 OPCode （OP_CHECKLOCKTIMEVERIFY），該 OPCode 允許交易輸出在未來的某個點之前變得不可花費。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/img/135.jpg" /><media:content medium="image" url="/img/135.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

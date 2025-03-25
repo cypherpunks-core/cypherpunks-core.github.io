@@ -1,0 +1,653 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>過去到現在的Bitcoin性能測試 - 密碼龐克 Cypherpunks Taiwan</title>
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>過去到現在的Bitcoin性能測試 | 密碼龐克 Cypherpunks Taiwan</title>
+<meta name="generator" content="Jekyll v3.9.1" />
+<meta property="og:title" content="過去到現在的Bitcoin性能測試" />
+<meta name="author" content="Cypherpunks Core" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="記錄了節點與網路同步所花費的時間，從而測試了Bitcoin Core的性能" />
+<meta property="og:description" content="記錄了節點與網路同步所花費的時間，從而測試了Bitcoin Core的性能" />
+<meta property="og:site_name" content="密碼龐克 Cypherpunks Taiwan" />
+<meta property="og:image" content="/img/143.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-12-08T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/img/143.png" />
+<meta property="twitter:title" content="過去到現在的Bitcoin性能測試" />
+<script type="application/ld+json">
+{"description":"記錄了節點與網路同步所花費的時間，從而測試了Bitcoin Core的性能","image":"/img/143.png","headline":"過去到現在的Bitcoin性能測試","dateModified":"2019-12-08T00:00:00+00:00","datePublished":"2019-12-08T00:00:00+00:00","url":"/news/2019/12/08/Bitcoin-%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8D%80%E5%A1%8A%E4%B8%8B%E8%BC%89/","mainEntityOfPage":{"@type":"WebPage","@id":"/news/2019/12/08/Bitcoin-%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8D%80%E5%A1%8A%E4%B8%8B%E8%BC%89/"},"author":{"@type":"Person","name":"Cypherpunks Core"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131051587-3"></script>
+<script>
+  window['ga-disable-UA-131051587-3'] = window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1";
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-131051587-3');
+</script><!-- head scripts --></head>
+
+  <body>
+    
+<nav class="navbar is-primary" >
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" class="navbar-item">
+                密碼龐克 Cypherpunks Taiwan
+            </a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="navMenu">
+            <div class="navbar-start">
+                <a href="/" class="navbar-item ">Home</a>
+                
+                
+                    
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a href="/#" class="navbar-link ">資源</a>
+                        <div class="navbar-dropdown">
+                            
+                            <a href="/markdown/resources/resources-bitcoin/" class="navbar-item ">比特幣 | Bitcoin</a>
+                            
+                            <a href="/markdown/resources/resources-ln/" class="navbar-item ">閃電網路 | Lightning network</a>
+                            
+                            <a href="/markdown/resources/resources-blockchain-privacy/" class="navbar-item ">區塊隱私 | Blockchain privacy</a>
+                            
+                            <a href="/markdown/resources/resources-schnorr-signature/" class="navbar-item ">Schnorr 簽名 | Schnorr Signature</a>
+                            
+                            <a href="/markdown/resources/resources-ethereum/" class="navbar-item ">以太坊 | Ethereum</a>
+                            
+                        </div>
+                    </div>
+                    
+                
+                    
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a href="/#" class="navbar-link ">知識庫</a>
+                        <div class="navbar-dropdown">
+                            
+                            <a href="/markdown/knowledge/knowledge-bitcoin/" class="navbar-item ">比特幣 | Bitcoin</a>
+                            
+                            <a href="/markdown/knowledge/knowledge-ethereum/" class="navbar-item ">以太坊 | Ethereum</a>
+                            
+                        </div>
+                    </div>
+                    
+                
+                    
+                    <a href="/markdown/products/" class="navbar-item ">書籍 & 論文</a>
+                    
+                
+                    
+                    <a href="/markdown/SatelliteProject/" class="navbar-item ">衛星計畫</a>
+                    
+                
+                    
+                    <a href="/blog/" class="navbar-item ">Blog</a>
+                    
+                
+                    
+                    <a href="/markdown/about/" class="navbar-item ">關於</a>
+                    
+                
+                    
+                    <a href="/classification" class="navbar-item ">分類</a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+        <section class="hero  is-medium  is-bold is-primary"  style="background: url('/img/hero.png') no-repeat center center; background-size: cover;" >
+    <div class="hero-body">
+        <div class="container">
+            <p class="title is-2">過去到現在的Bitcoin性能測試</p>
+            <p class="subtitle is-3"></p>
+            
+        </div>
+    </div>
+</section>
+    
+    
+
+
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                
+                <div class="column is-8">
+                    
+                    <div class="content">
+
+    <p>Published: Dec 8, 2019 by Cypherpunks Core</p>
+
+    <p><strong>摘要：</strong> 我們成功地進行了 35 次初始區塊下載(Initial Block Download, IBD)，並記錄了節點與網路同步所花費的時間，從而測試了 Bitcoin Core 的性能。我們使用了從 2012 年到 2019 年的軟體版本。結果表明，軟體性能得到了顯著而持續的改善，但差異也很大。即使使用最新的電腦硬體，舊版本的 Bitcoin 仍難以克服 2015 年至 2016 年期間的交易量提升。因此，我們得出結論，如果沒有軟體增強功能，今天的初始同步幾乎是不可能的。<a href="https://blog.bitmex.com/bitcoins-initial-block-download/">2019年11月29日</a>, <a href="https://blog.bitmex.com/author/bitmex-research/">BITMEX Research</a></p>
+
+<div align="center"><img width="700" src="/img/140.png" /></div>
+
+<center><strong>圖1 – Bitcoin 初始區塊下載時間(天) – 3 次嘗試的平均值</strong></center>
+
+<p>(來源：BitMEX Research)
+(注意：同步至區塊 602,707。更多詳細訊息，請參見下面的註釋)</p>
+
+<p><strong>總覽</strong></p>
+
+<p>為了在初始同步期間測試 Bitcoin Core 的性能，我們成功進行了 35 次初始區塊下載(IBD)，並記錄了每次嘗試花費的時間。結果 <em>如圖 1</em> 所示以上內容說明，由於從OpenSSL升級到用於簽名驗證的 <code class="language-plaintext highlighter-rouge">libsecp256k1</code> 的升級，Bitcoin Core 0.12.0 於 2016 年 2 月發佈時，速度有了顯著提高。<code class="language-plaintext highlighter-rouge">Libsecp256k1</code> 專為 Bitcoin 構建。從那時起，速度的改善要慢得多，並且由於 IBD 時間差異很大，因此只有經過多次嘗試才能清楚地看到這些改善。但是，即使在 2016 年 2 月發布了Bitcoin Core 0.12.0 之後，在從 Bitcoin Core 0.13.0 到Bitcoin Core 0.19.0.1 的每個軟體發行之後，性能仍然有逐漸改善的跡象。</p>
+
+<p>當然，IBD 時間只是一種衡量標準，還有許多其他角度和考慮因素可用於評估 Bitcoin Core 的性能和功能。儘管 IBD 時間可能不是衡量整體軟體性能的完美方法，但它佔用大量資源，因此可能是衡量基準的好方法。</p>
+
+<p>該報告來自之前的兩個實驗： </p>
+
+<ul>
+  <li>在 2018 年 11 月，詹姆森·洛普(Jameson Lopp)進行了類似的<a href="https://blog.keys.casa/bitcoin-full-validation-sync-performance/">exercise</a>，但分析的重點是獨立的實現，而該分析的重點是較舊版本的 Bitcoin Core (或簡稱為”Bitcoin”，因為某些較舊的軟體早於名稱”Bitcoin Core” )。 </li>
+  <li>Sjors Provoost 還在 2017 年 7 月進行了此<a href="https://medium.com/provoost-on-crypto/historical-bitcoin-core-client-performance-c5f16e1f8ccb">實驗</a>，儘管 Sjors 提供的資料用於減少同步嘗試。</li>
+</ul>
+
+<p><strong>完整結果和原始資料</strong></p>
+
+<div align="center"><img width="700" src="/img/141.png" /></div>
+
+<center><strong>圖2 – Bitcoin 初始區塊下載時間(天)</strong></center>
+<p>(來源：BitMEX Research)
+(注意：同步至區塊 602,707，更多詳細訊息在下面的註釋中)</p>
+
+<p>系統規格和其他說明</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th><strong>MacBook Pro(64位)</strong></th>
+      <th><strong>Linux VPS(64位)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>作業系統</td>
+      <td>macOS Mojave(10.14)</td>
+      <td>Ubuntu 18.04.3</td>
+    </tr>
+    <tr>
+      <td>處理器</td>
+      <td>6 核心 Intel i9 2.9GHz</td>
+      <td>8 核心 Intel Xeon</td>
+    </tr>
+    <tr>
+      <td>記憶體</td>
+      <td>32 GB</td>
+      <td>32GB</td>
+    </tr>
+    <tr>
+      <td>儲存空間</td>
+      <td>1 TB SSD</td>
+      <td>640 GB SSD</td>
+    </tr>
+    <tr>
+      <td>網路下載頻寬</td>
+      <td>62Mb / 秒</td>
+      <td>2,000Mb / 秒</td>
+    </tr>
+    <tr>
+      <td>網路上傳頻寬</td>
+      <td>20Mb / 秒</td>
+      <td>400Mb / 秒</td>
+    </tr>
+    <tr>
+      <td>IBD在高度結束</td>
+      <td>602,707</td>
+      <td>602,707</td>
+    </tr>
+    <tr>
+      <td>Bitcoin.conf設定</td>
+      <td> </td>
+      <td><i>assumevalid = 0 <br /> dbcache = 24000 <br /> maxmempool = 500</i></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>完整結果表</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Client 端版本</strong></th>
+      <th><strong>Client 端發布日期</strong></th>
+      <th><strong>同步時間(小時)</strong></th>
+      <th><strong>電腦</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Bitcoin Core 0.19.0.1</td>
+      <td>24 / 11 / 2019</td>
+      <td>11.4</td>
+      <td>MacBook Pro</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.18.1</td>
+      <td>20 / 07 / 2019</td>
+      <td>10.4</td>
+      <td>MacBook Pro</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.17.0</td>
+      <td>03 / 10 / 2018</td>
+      <td>17.7</td>
+      <td>MacBook Pro</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.16.0</td>
+      <td>28 / 02 / 2018</td>
+      <td>18.5</td>
+      <td>MacBook Pro</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.15.0</td>
+      <td>14 / 07 / 2017</td>
+      <td>21.1</td>
+      <td>MacBook Pro</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.14.0</td>
+      <td>08 / 03 / 2017</td>
+      <td>16.4</td>
+      <td>MacBook Pro</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.13.0</td>
+      <td>17 / 08 / 2016</td>
+      <td>24.7</td>
+      <td>MacBook Pro</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.12.0</td>
+      <td>17 / 02 / 2016</td>
+      <td>15.8</td>
+      <td>MacBook Pro</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.11.2</td>
+      <td>10 / 11 / 2015</td>
+      <td>53.3</td>
+      <td>MacBook Pro</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.10.0</td>
+      <td>12 / 02 / 2015</td>
+      <td>81.2</td>
+      <td>MacBook Pro</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.9.0</td>
+      <td>18 / 03 / 2014</td>
+      <td>85.1</td>
+      <td>MacBook Pro</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.8.6</td>
+      <td>09 / 12 / 2013</td>
+      <td>Abandoned</td>
+      <td>MacBook Pro</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.19.0.1</td>
+      <td>24 / 11 / 2019</td>
+      <td>13.6</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.18.1</td>
+      <td>20 / 07 / 2019</td>
+      <td>15.9</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.17.0</td>
+      <td>03 / 10 / 2018</td>
+      <td>13.3</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.16.0</td>
+      <td>28 / 02 / 2018</td>
+      <td>18.8</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.15.0</td>
+      <td>14 / 07 / 2017</td>
+      <td>17.9</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.14.0</td>
+      <td>08 / 03 / 2017</td>
+      <td>25.1</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.13.0</td>
+      <td>17 / 08 / 2016</td>
+      <td>15.8</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.12.0</td>
+      <td>17 / 02 / 2016</td>
+      <td>14.8</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.11.2</td>
+      <td>10 / 11 / 2015</td>
+      <td>46.0</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.10.0</td>
+      <td>12 / 02 / 2015</td>
+      <td>77.2</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.9.0</td>
+      <td>18 / 03 / 2014</td>
+      <td>78.9</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.8.6</td>
+      <td>09 / 12 / 2013</td>
+      <td>98.5</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.19.0.1</td>
+      <td>24 / 11 / 2019</td>
+      <td>14.0</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.18.1</td>
+      <td>20 / 07 / 2019</td>
+      <td>13.7</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.17.0</td>
+      <td>03 / 10 / 2018</td>
+      <td>16.0</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.16.0</td>
+      <td>28 / 02 / 2018</td>
+      <td>18.2</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.15.0</td>
+      <td>14 / 07 / 2017</td>
+      <td>17.9</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.14.0</td>
+      <td>08 / 03 / 2017</td>
+      <td>17.0</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.13.0</td>
+      <td>17 / 08 / 2016</td>
+      <td>21.9</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.12.0</td>
+      <td>17 / 02 / 2016</td>
+      <td>17.1</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.11.2</td>
+      <td>10 / 11 / 2015</td>
+      <td>44.1</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.10.0</td>
+      <td>12 / 02 / 2015</td>
+      <td>82.2</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.9.0</td>
+      <td>18 / 03 / 2014</td>
+      <td>82.1</td>
+      <td>Linux</td>
+    </tr>
+    <tr>
+      <td>Bitcoin Core 0.8.6</td>
+      <td>09 / 12 / 2013</td>
+      <td>72.6</td>
+      <td>Linux</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>(來源：BITMEX Research)</p>
+
+<p><strong>結果分析</strong></p>
+
+<p>如上面的 <em>圖2</em> 所示，即使使用相同的軟體和具有相同規格的機器來執行 IBD，報告的時間也存在相當大的差異。 </p>
+
+<div align="center"><img width="700" src="/img/142.png" /></div>
+
+<center><strong>圖3 – IBD 時間與 Client 端發布日期(天)– 3 次嘗試的平均時間</strong></center>
+
+<p>(來源：BitMEX Research)(注意：對於 Bitcoin 0.8.6 Client 端，以上結果平均只有兩次嘗試)</p>
+
+<p>上面的 <em>圖 3</em> 表明，除了 Bitcoin Core 0.12.0 的強大性能外，每個軟體版本的軟體性能都逐步提高。然而，儘管上圖中趨勢明顯，但每次嘗試的 IBD 時間和方差較大可能表明存在很大的不確定性。在從 2016 年以來就性能改進得出強有力的結論之前，可能需要更多的樣本資料。這種變化可能主要是由 Bitcoin P2P 網路或網路連接方面的問題引起的，因此，有待進一步研究的好領域可能是比較<strong>掃描速度</strong>，即已下載完成且完全驗證區塊鏈所花費的時間。</p>
+
+<p>在上述分析中，Bitcoin Core 0.12.0 的性能很好。這可能是因為 Bitcoin Core 0.12.0 已啟用 <code class="language-plaintext highlighter-rouge">libsecp256k</code>，但未驗證 Segregated Witness 的交易 input 的簽名(<a href="https://blog.bitmex.com/the-segwit-transaction-capacity-increase-part-1/?ref=tokendaily">Segregated Witness</a>)。因此，Bitcoin Core 0.12.0 不會在 2017 年 8 月之後驗證區塊鏈中的所有簽名，從而給 Client 帶來一些”不公平的優勢”。儘管此節點似乎不是異常值，但此優勢也可能適用於 Bitcoin Core 0.13.0。<del>當然，Bitcoin Core 0.12.0 之前的所有版本都具有相同的”不公平”優勢，但這與使用 OpenSSL 的缺點相形見。</del></p>
+
+<p><strong>同步Client 端直至其發布日期</strong></p>
+
+<p>下圖( <em>圖4</em> )說明了同步 Client 端所需的時間，直到軟體發布日的區塊高度為止。</p>
+
+<div align="center"><img width="700" src="/img/143.png" /></div>
+
+<center><strong>圖 4 – IBD 到 Client 端發布日期的時間(天)</strong></center>
+
+<p>(來源：BitMEX Research)(注意：僅在 Linux 上執行的節點的資料。Bitcoin Core 0.19.0.1僅同步到高度 602,707)</p>
+
+<p>該圖表顯示從 Bitcoin Core 0.8.6 到 Bitcoin Core 0.14.0 的趨勢基本持平，當時可擴展性的改進無法適應時間的推移和區塊鏈高度增加的影響，圖表顯示了上升趨勢。不幸的是，近年來，軟體改進的速度降低了，這也許是因為已經取得了令人<del>垂涎</del>的成果。較高的交易量也可能導致了這一情況。未來的可擴展性改進可能更具挑戰性，即使維持 400 萬個單位的區塊權重限制，IBD 時間也可能繼續增加，儘管軟體會進一步升級並且硬體性能會適度提高。</p>
+
+<p><strong>IBD嘗試失敗</strong></p>
+
+<p>我們確實成功編譯並執行了 0.8.6 之前的 Bitcoin 版本，但是，2015 年至 2016 年期間時，同步變得很慢。0.8.6 之前的節點(例如 0.7.0)在 2013 年通過<a href="https://bitcoin.org/en/alert/2013-03-15-upgrade-deadline#backports"><del>手動更改鎖定限製</del></a>成功克服了明顯的<a href="https://blog.bitmex.com/bitcoins-consensus-forks/">硬分叉</a>，但是由於交易量增加，2015 年證明具有挑戰性，並且該節點停止了處理區塊。我們嘗試重新啟動該節點，這確實有助於將其向前推進，但隨後又再次卡住了。然後，我們甚至嘗試在具有 64 GB RAM 和 8 個 Intel i9 處理器的全新本地電腦上執行 Bitcoin Core 0.7.0，但是該節點仍無法通過 2016 年。<del>由於涉及許多縮放參數，因此非線性，一個人不能簡單地在這個問題上投入更多的硬體。</del></p>
+
+<p>有時，當節點卡在一個區塊上並重新啟動時，在 4 次重新啟動嘗試後，我們放棄了同步。對於 MacBook Pro 上 的 Bitcoin Core 0.8.6，當領先者在 2016 年時，同步被放棄。儘管這有點令人失望，但其餘 35 個成功的同步不需要重啟。</p>
+
+<p><strong>結論</strong></p>
+
+<p><del>除了在與 MacBook Pro 一起發布 BitMEX Research 時</del>，BitMEX IT 部門應更加謹慎外，該資料還說明了過去七年來已實現的顯著可擴展性增強。向 <code class="language-plaintext highlighter-rouge">libsecp256k</code> 的過渡是最重要的改進。IBD 時間的大幅減少以及舊節點無法完全同步，這表明，如果不進行這些~可伸縮性增強~，那麼即使用戶擁有最高規格的硬體，到現在 Bitcoin 也將基本消失。資料還表明，技術創新不太可能跟上不斷發展的區塊鏈的步伐，IBD 時間將增加。</p>
+
+</div>
+
+<div class="tags">
+    
+</div>
+
+                </div>
+                
+                <div class="column is-4-desktop is-12-tablet">
+                    <p class="title is-4">Latest Posts</p>
+
+<div class="columns is-multiline">
+    
+    <div class="column is-12">
+        <div class="card">
+    
+    <div class="card-image">
+        <img src="/img/147.jpg" alt="MuSig：一個新的多重簽名標準">
+    </div>
+    
+    <div class="card-content">
+        <div class="content">
+            
+            <a class="title is-4" href="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/">MuSig：一個新的多重簽名標準</a>
+            
+            <p><table>
+  <tbody>
+    <tr>
+      <td>2019年2月15日</td>
+      <td>Andrew Poelstra <a href="https://blockstream.com/2019/02/18/en-musig-a-new-multisignature-standard/">轉載blockstream</a></td>
+    </tr>
+  </tbody>
+</table>
+
+</p>
+        </div>
+        <div class="has-text-centered">
+            <a href="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/" class="button is-primary">Read more</a>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <p class="card-footer-item">Published: Mar 11, 2020</p>
+    </footer>
+</div>
+    </div>
+    
+    <div class="column is-12">
+        <div class="card">
+    
+    <div class="card-image">
+        <img src="https://upyun-assets.ethfans.org/uploads/photo/image/5ca7121ac7ae45a4a55cddeae218a5cb.jpg" alt="Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊">
+    </div>
+    
+    <div class="card-content">
+        <div class="content">
+            
+            <a class="title is-4" href="/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/">Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊</a>
+            
+            <p><blockquote>
+  <p>編者注：本文對 Cosmos 網路中區塊鏈和比特幣、以太坊進行了鉅細靡遺的比較。作者先從區塊鏈系統的棧層出發，分析了比特幣、以太坊在不同棧層上的技術要點，最後迴歸到 Cosmos 網路中的區塊鏈，概念解釋尤為清晰，是不可多得的解釋文。</p>
+</blockquote>
+
+</p>
+        </div>
+        <div class="has-text-centered">
+            <a href="/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/" class="button is-primary">Read more</a>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <p class="card-footer-item">Published: Feb 13, 2020</p>
+    </footer>
+</div>
+    </div>
+    
+    <div class="column is-12">
+        <div class="card">
+    
+    <div class="card-image">
+        <img src="/img/panda-33.png" alt="多媒體區塊鏈:分散式且防竄改之媒體交易框架">
+    </div>
+    
+    <div class="card-content">
+        <div class="content">
+            
+            <a class="title is-4" href="/news/2020/01/18/%E5%A4%9A%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88/">多媒體區塊鏈:分散式且防竄改之媒體交易框架</a>
+            
+            <p><blockquote>
+  <p>當前多媒體發佈不會保留可自我檢索的訊息交易或內容修改之歷史記錄，經常對原始媒體進行編輯以獲取創意內容準備或篡改通過社交媒體進行錯誤宣傳，然而現在沒有可信任之機制可以輕鬆檢視交易記錄或修改歷史。</p>
+</blockquote>
+
+</p>
+        </div>
+        <div class="has-text-centered">
+            <a href="/news/2020/01/18/%E5%A4%9A%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88/" class="button is-primary">Read more</a>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <p class="card-footer-item">Published: Jan 18, 2020</p>
+    </footer>
+</div>
+    </div>
+    
+</div>
+
+
+
+
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+        <footer class="footer">
+    <div class="container">
+        
+        
+        <div class="columns is-multiline">
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/" class="link">Home</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/blog/" class="link">Blog</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/markdown/products/" class="link">書架</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/markdown/about/" class="link">關於我們</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="https://github.com/cypherpunks-core" class="link">Github</a>
+                </div>
+            </div>
+            
+        </div>
+        
+
+        <div class="content is-small has-text-centered">
+            <p class=""> Powered by  <a href="https://cypherpunks-core.github.io"> Cypherpunks Core </a></p>
+        </div>
+    </div>
+</footer>
+
+    
+    <script src="/assets/js/app.js" type="text/javascript"></script><!-- footer scripts --></body>
+</html>
+

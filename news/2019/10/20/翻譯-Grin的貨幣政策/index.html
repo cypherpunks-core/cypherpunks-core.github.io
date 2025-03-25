@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Grin 的貨幣政策 - 密碼龐克 Cypherpunks Taiwan</title>
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Grin 的貨幣政策 | 密碼龐克 Cypherpunks Taiwan</title>
+<meta name="generator" content="Jekyll v3.9.1" />
+<meta property="og:title" content="Grin 的貨幣政策" />
+<meta name="author" content="Cypherpunks Core" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="比特幣的價值不在與2100萬的硬頂，而在於透明且去中心的發行政策" />
+<meta property="og:description" content="比特幣的價值不在與2100萬的硬頂，而在於透明且去中心的發行政策" />
+<meta property="og:site_name" content="密碼龐克 Cypherpunks Taiwan" />
+<meta property="og:image" content="/img/84.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-10-20T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/img/84.png" />
+<meta property="twitter:title" content="Grin 的貨幣政策" />
+<script type="application/ld+json">
+{"description":"比特幣的價值不在與2100萬的硬頂，而在於透明且去中心的發行政策","image":"/img/84.png","headline":"Grin 的貨幣政策","dateModified":"2019-10-20T00:00:00+00:00","datePublished":"2019-10-20T00:00:00+00:00","url":"/news/2019/10/20/%E7%BF%BB%E8%AD%AF-Grin%E7%9A%84%E8%B2%A8%E5%B9%A3%E6%94%BF%E7%AD%96/","mainEntityOfPage":{"@type":"WebPage","@id":"/news/2019/10/20/%E7%BF%BB%E8%AD%AF-Grin%E7%9A%84%E8%B2%A8%E5%B9%A3%E6%94%BF%E7%AD%96/"},"author":{"@type":"Person","name":"Cypherpunks Core"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131051587-3"></script>
+<script>
+  window['ga-disable-UA-131051587-3'] = window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1";
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-131051587-3');
+</script><!-- head scripts --></head>
+
+  <body>
+    
+<nav class="navbar is-primary" >
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" class="navbar-item">
+                密碼龐克 Cypherpunks Taiwan
+            </a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="navMenu">
+            <div class="navbar-start">
+                <a href="/" class="navbar-item ">Home</a>
+                
+                
+                    
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a href="/#" class="navbar-link ">資源</a>
+                        <div class="navbar-dropdown">
+                            
+                            <a href="/markdown/resources/resources-bitcoin/" class="navbar-item ">比特幣 | Bitcoin</a>
+                            
+                            <a href="/markdown/resources/resources-ln/" class="navbar-item ">閃電網路 | Lightning network</a>
+                            
+                            <a href="/markdown/resources/resources-blockchain-privacy/" class="navbar-item ">區塊隱私 | Blockchain privacy</a>
+                            
+                            <a href="/markdown/resources/resources-schnorr-signature/" class="navbar-item ">Schnorr 簽名 | Schnorr Signature</a>
+                            
+                            <a href="/markdown/resources/resources-ethereum/" class="navbar-item ">以太坊 | Ethereum</a>
+                            
+                        </div>
+                    </div>
+                    
+                
+                    
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a href="/#" class="navbar-link ">知識庫</a>
+                        <div class="navbar-dropdown">
+                            
+                            <a href="/markdown/knowledge/knowledge-bitcoin/" class="navbar-item ">比特幣 | Bitcoin</a>
+                            
+                            <a href="/markdown/knowledge/knowledge-ethereum/" class="navbar-item ">以太坊 | Ethereum</a>
+                            
+                        </div>
+                    </div>
+                    
+                
+                    
+                    <a href="/markdown/products/" class="navbar-item ">書籍 & 論文</a>
+                    
+                
+                    
+                    <a href="/markdown/SatelliteProject/" class="navbar-item ">衛星計畫</a>
+                    
+                
+                    
+                    <a href="/blog/" class="navbar-item ">Blog</a>
+                    
+                
+                    
+                    <a href="/markdown/about/" class="navbar-item ">關於</a>
+                    
+                
+                    
+                    <a href="/classification" class="navbar-item ">分類</a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+        <section class="hero  is-medium  is-bold is-primary"  style="background: url('/img/hero.png') no-repeat center center; background-size: cover;" >
+    <div class="hero-body">
+        <div class="container">
+            <p class="title is-2">Grin 的貨幣政策</p>
+            <p class="subtitle is-3"></p>
+            
+        </div>
+    </div>
+</section>
+    
+    
+
+
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                
+                <div class="column is-8">
+                    
+                    <div class="content">
+
+    <p>Published: Oct 20, 2019 by Cypherpunks Core</p>
+
+    <blockquote>
+  <p>本篇文章是翻譯自Grin的<a href="https://github.com/mimblewimble/docs/wiki/Monetary-Policy">Gitgub</a>的內容，在說明Grin為什麼採取當前的發行政策，以前其背後對於比特幣等加密貨幣的思想，以及如何將自己的理解變為Grin中的發行政策。譯者認為加密貨幣的發行政策一直是大家鮮少注意到，卻極為重要的一塊，因此翻譯了這篇文章，簡單而言，<strong>Grin的核心貢獻者認為貨幣能有價值不在於有沒有硬頂，而是能不能有透明的發行政策</strong>。 by <a href="https://www.facebook.com/profile.php?id=100000175076210">Williams Lai</a></p>
+</blockquote>
+
+<h1 id="貨幣政策">貨幣政策</h1>
+
+<p>近期，<a href="https://docs.google.com/spreadsheets/d/1hGyC8tSivtZqjlu8aQgjG0pKfKc0L0RO0leMfjPADp0/edit#gid=0">每秒都有新的Grin會被發行</a>，很有可能這樣的方式會永遠一直持續下去，這代表通貨膨脹率會趨近於恆定。為什麼，考慮一下下面幾點吧</p>
+
+<h1 id="在前十年他會很接近比特幣"><strong>在前十年他會很接近比特幣</strong></h1>
+
+<p><a href="https://plot.ly/~Bobby_Digital/1/#/">比特幣前四年的發行率與Grin前四年相同</a>。比特幣在前四年有全額的獎勵，接下來的4年只有一半。所以相對於恆定的供給，八年後的代幣發行總量只減少了33%。
+<em>注：原文有一句「Compare that to daily price fluctuations.」很像是沒有說完的話。</em></p>
+
+<p><img src="/img/84.png" alt="" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>               比特幣、Grin、和過去四十年黃金每年發行率
+</code></pre></div></div>
+
+<p><strong>它更像是以太坊</strong></p>
+
+<p>以太坊的獎勵在2017年末以前是恆定的每個區塊5個Ether。隨後變為每個區塊三個，並打算在君士坦丁堡升級後變成每個區塊給2個ether的獎勵。</p>
+
+<p><strong>它甚至更像黃金</strong></p>
+
+<p>黃金在歷史上已經有線性的發行，像是Grin一樣。看這張比較比特幣、Grin、黃金的發行量的<a href="https://plot.ly/~Bobby_Digital/1/#/">圖表</a>吧</p>
+
+<p><strong>新的供給量在十年後少了10%</strong></p>
+
+<p>年復一年，總稀釋量會越來越小。在過了10年後，供給的通貨膨脹會小於10%。20年後會小於5%，25年後grin會只有4%的通貨膨脹，和從創始塊算起十年後（2018）的比特幣的通膨率是一樣的。</p>
+
+<p><strong>很有可能每年至少有2%的硬幣會丟失</strong></p>
+
+<p>許多研究已經說明有相當數量的代幣，已經在流通的過程中，以無法恢復的方式丟失、燒毀或者逐漸消失。硬幣丟失率保守估計為2%，但可能略高。</p>
+
+<p><strong>長期發行量可能需要趨於穩定</strong></p>
+
+<p>固定供應量的貨幣是非常試驗性的。礦工可能會需要在手續費之外，還有趨於穩定的收入來保證安全性。</p>
+
+<p><strong>健全的貨幣與透明的發行更有關，而不是有上限的供給。</strong></p>
+
+<p>以法定貨幣計價的貨幣通脹的一個陷阱是，政府可以隨心所欲地擴大貨幣供應。在歷史上這樣的濫用已經導致毀滅性的效果。一個無主權、開源、基於共識的貨幣，借由制定一個提前公佈的恆定發行政策，來解決這個問題，並且使其難以被改變。 <strong><em>基於健全性的定義，Grin和比特幣一樣是健全的貨幣</em></strong> 。讓比特幣變的重要的，是去除中央權威任意的控制，而非去除任意數量的供給上限。</p>
+
+<p>Nick Szabo 是這樣評論比特幣的固定供給：<a href="https://twitter.com/NickSzabo4/status/1077317105148547072">許多的供給演算法可能都可以做到，只要他是可以預測的。安全和信任相對而言才是更有價值的。</a></p>
+
+<p>還有許多加密貨幣和比特幣類似，且有更小的發行量，但又有幾個能讓你念出名字呢。</p>
+
+<p><strong>通貨膨脹可能會導致價錢更穩定</strong></p>
+
+<p>作為一個實驗性質的假設，Grin的通貨膨脹率可能會在早期用來阻止囤積，並促進分配。通貨膨脹抑制了「巨鯨」 — 也就是那些對資產的價格有過多的控制的人的行為，應該採取行動來淡化投機泡沫和價格波動。 <strong>早期採用者和後期採用者可以得到一樣的grin</strong> 。這個論點在《<a href="https://www.lesswrong.com/posts/P9jggxRZTMJcjnaPw/bitcoins-are-not-digital-greenbacks">比特幣不是數字美元</a>》中有長足的討論，戴偉自己甚至認為「比特幣的貨幣政策是失敗的」。Grin的目標是在現在和將來為所有用戶提供盡可能平等的訪問和效用。</p>
+
+<p>持續的發行可以為所有類型的用戶提供更強的供給確定性，並允許更透明、更自然的定價。注:比特幣作為一種交換方式與嚴格的價值儲存手段的廣泛使用，取決於「<a href="https://jpkoning.blogspot.com/2018/10/bitcoin-and-bubble-theory-of-money.html">凱恩斯式選美比賽</a>」的概念。這樣的實驗還在持續中。
+<em>譯注：凱恩斯式選美亦即投資者會選擇他認為大家會選擇的產品作為投資標的</em></p>
+
+<p><strong>已經有更好的價值儲存方法或者很快讓人變富的代幣</strong></p>
+
+<p>Grin關注在隱私、擴容與公平。如果團體或個人能夠快速致富，相比於其他人他們就更有力量能夠影響整個grin的經濟。Grin想做的並不是產生技術官僚，而是希望能夠盡可能的為很多人提供隱私的電子現金。囤幣是一個會產生巨大的中心化壓力的事，而grin的發行政策則是希望能夠盡可能的去減輕這個問題。這個想法就有點像讓你像是在用一台自行車一樣的在使用Grin，他可以帶你到處走一走，並且使你的生活更有效率，而不是將它存放在倉庫以期待他能夠升值。</p>
+
+<p><strong>Grin會被分叉成一個「讓人更快致富」的代幣</strong></p>
+
+<p>沒事，但快速致富的關鍵字是「快速」。相對而言，Grin每年供應的溫和變化相對較慢（能致富）。因為Grin並不是為了一夜暴富。</p>
+
+<p><strong>機密資產允許並行的貨幣政策在隨後進行軟分叉</strong></p>
+
+<p>如果最近的貨幣政策會讓你無法繼續為Grin貢獻，那你應該繼續留下來。<a href="https://lists.launchpad.net/mimblewimble/msg00103.html">機密資產</a>是一個由早期的MimbleWimble貢獻者Andrew Poelstra的發明，允許替代資產（有不同的演算法，發行政策，利率，以及更多包涵與其他資產或者區塊鏈掛鈎的代幣）可以被附加在Grin上，並且在隨後進行軟分叉。這些資產對鏈的容量只佔據了極少許，並使所有其他資產（例如原生的grin）變得更加有隱私性，並且可以根據個人的意願選擇要採用或者忽略，並且不影響鏈上的其他資產（grin或其他）。Grin是MimbleWimble一個最小的實現，但他會繼續成長和進化，記得MimbleWimble是敏捷的。</p>
+
+<p><strong>我們正處於加密經濟的早期</strong></p>
+
+<p>關於透明、協作的貨幣政策是非常不成熟的。比特幣只有十歲而其實驗的成果是越來越豐碩的。對於抄襲實驗者而言時機仍尚未成熟，但卻是創新的好時機。</p>
+
+<p>目前只有2800萬個比特幣錢包（許多還不是活躍使用，或者是某些單一用戶的次要錢包）。這代表只有少於0.5%的全球人口擁有自己的錢包。因為你在這裡，就代表你關心加密貨幣的整個前途，所以當事情如此新和不確定時，保持開放的心態是很重要的。</p>
+
+<p>向前進吧！</p>
+
+<hr />
+<p>在翻譯完這篇文章後，我也在想，有其他用途或者其他使用價值的token，相對於硬頂的發行，是不是發行總量趨於穩定的通縮模型，反而是比較好的發行方式，能讓貨幣繼續保持價值存儲，也能在初期避免囤幣而帶來的中心化現象？</p>
+
+<p>另外，之所以能在每次的減半都造成預期的漲跌，是不是透明的發行政策所帶來的預期供需心理？</p>
+
+</div>
+
+<div class="tags">
+    
+</div>
+
+                </div>
+                
+                <div class="column is-4-desktop is-12-tablet">
+                    <p class="title is-4">Latest Posts</p>
+
+<div class="columns is-multiline">
+    
+    <div class="column is-12">
+        <div class="card">
+    
+    <div class="card-image">
+        <img src="/img/147.jpg" alt="MuSig：一個新的多重簽名標準">
+    </div>
+    
+    <div class="card-content">
+        <div class="content">
+            
+            <a class="title is-4" href="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/">MuSig：一個新的多重簽名標準</a>
+            
+            <p><table>
+  <tbody>
+    <tr>
+      <td>2019年2月15日</td>
+      <td>Andrew Poelstra <a href="https://blockstream.com/2019/02/18/en-musig-a-new-multisignature-standard/">轉載blockstream</a></td>
+    </tr>
+  </tbody>
+</table>
+
+</p>
+        </div>
+        <div class="has-text-centered">
+            <a href="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/" class="button is-primary">Read more</a>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <p class="card-footer-item">Published: Mar 11, 2020</p>
+    </footer>
+</div>
+    </div>
+    
+    <div class="column is-12">
+        <div class="card">
+    
+    <div class="card-image">
+        <img src="https://upyun-assets.ethfans.org/uploads/photo/image/5ca7121ac7ae45a4a55cddeae218a5cb.jpg" alt="Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊">
+    </div>
+    
+    <div class="card-content">
+        <div class="content">
+            
+            <a class="title is-4" href="/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/">Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊</a>
+            
+            <p><blockquote>
+  <p>編者注：本文對 Cosmos 網路中區塊鏈和比特幣、以太坊進行了鉅細靡遺的比較。作者先從區塊鏈系統的棧層出發，分析了比特幣、以太坊在不同棧層上的技術要點，最後迴歸到 Cosmos 網路中的區塊鏈，概念解釋尤為清晰，是不可多得的解釋文。</p>
+</blockquote>
+
+</p>
+        </div>
+        <div class="has-text-centered">
+            <a href="/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/" class="button is-primary">Read more</a>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <p class="card-footer-item">Published: Feb 13, 2020</p>
+    </footer>
+</div>
+    </div>
+    
+    <div class="column is-12">
+        <div class="card">
+    
+    <div class="card-image">
+        <img src="/img/panda-33.png" alt="多媒體區塊鏈:分散式且防竄改之媒體交易框架">
+    </div>
+    
+    <div class="card-content">
+        <div class="content">
+            
+            <a class="title is-4" href="/news/2020/01/18/%E5%A4%9A%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88/">多媒體區塊鏈:分散式且防竄改之媒體交易框架</a>
+            
+            <p><blockquote>
+  <p>當前多媒體發佈不會保留可自我檢索的訊息交易或內容修改之歷史記錄，經常對原始媒體進行編輯以獲取創意內容準備或篡改通過社交媒體進行錯誤宣傳，然而現在沒有可信任之機制可以輕鬆檢視交易記錄或修改歷史。</p>
+</blockquote>
+
+</p>
+        </div>
+        <div class="has-text-centered">
+            <a href="/news/2020/01/18/%E5%A4%9A%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88/" class="button is-primary">Read more</a>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <p class="card-footer-item">Published: Jan 18, 2020</p>
+    </footer>
+</div>
+    </div>
+    
+</div>
+
+
+
+
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+        <footer class="footer">
+    <div class="container">
+        
+        
+        <div class="columns is-multiline">
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/" class="link">Home</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/blog/" class="link">Blog</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/markdown/products/" class="link">書架</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="/markdown/about/" class="link">關於我們</a>
+                </div>
+            </div>
+            
+            <div class="column has-text-centered">
+                <div>
+                    <a href="https://github.com/cypherpunks-core" class="link">Github</a>
+                </div>
+            </div>
+            
+        </div>
+        
+
+        <div class="content is-small has-text-centered">
+            <p class=""> Powered by  <a href="https://cypherpunks-core.github.io"> Cypherpunks Core </a></p>
+        </div>
+    </div>
+</footer>
+
+    
+    <script src="/assets/js/app.js" type="text/javascript"></script><!-- footer scripts --></body>
+</html>
+
