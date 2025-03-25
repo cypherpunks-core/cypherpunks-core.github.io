@@ -9,11 +9,11 @@ hero_image: /img/hero.png
 categories: news
 ---
 
-2019年2月15日| Andrew Poelstra [轉載blockstream](https://blockstream.com/2019/02/18/en-musig-a-new-multisignature-standard/)
+2019年2月15日| Andrew Poelstra [轉載blockstream](https://blockstream.com/2019/02/18/en-musig-a-new-multisignature-standard/)，比特幣及[Blockstream的Liquid](https://blockstream.com/liquid/)等相關區塊鏈使用[ECDSA簽名演算法](https://en.bitcoin.it/wiki/Elliptic_Curve_Digital_Signature_Algorithm)來驗證儲存在系統裡的幣的所有權歸屬。業界於2008年決定使用這個演算法是[基於當時廣泛使用且未申請專利的](https://bitcoin.stackexchange.com/questions/73049/why-was-ecdsa-chosen-over-schnorr-signatures-in-the-inital-design)數位簽名系統。但ECDSA存在一些嚴重的技術侷限，尤其是[多重簽名](https://en.bitcoin.it/wiki/Multisignature)和[閾值簽名](https://bitcoinmagazine.com/articles/threshold-signatures-new-standard-wallet-security-1425937098/)這兩種需要多個獨立方而非單一方的簽名非常難以通過ECDSA來實現。ECDSA簽名擁有十分複雜的代數結構，導致他們非常不靈活、難以操作，迫使比特幣開發者不得不用[比特幣指令碼](https://en.bitcoin.it/wiki/Script)來開發[跨鏈原子交換](https://en.bitcoin.it/wiki/Atomic_swap)或[閃電網路](https://en.bitcoin.it/wiki/Lightning_Network)這類應用，如果使用更加現代的簽名方案的話，可以讓這些應用更加小巧且隱私性更好。
 
 ![](/img/147.jpg)
 
-比特幣及[Blockstream的Liquid](https://blockstream.com/liquid/)等相關區塊鏈使用[ECDSA簽名演算法](https://en.bitcoin.it/wiki/Elliptic_Curve_Digital_Signature_Algorithm)來驗證儲存在系統裡的幣的所有權歸屬。業界於2008年決定使用這個演算法是[基於當時廣泛使用且未申請專利的](https://bitcoin.stackexchange.com/questions/73049/why-was-ecdsa-chosen-over-schnorr-signatures-in-the-inital-design)數位簽名系統。但ECDSA存在一些嚴重的技術侷限，尤其是[多重簽名](https://en.bitcoin.it/wiki/Multisignature)和[閾值簽名](https://bitcoinmagazine.com/articles/threshold-signatures-new-standard-wallet-security-1425937098/)這兩種需要多個獨立方而非單一方的簽名非常難以通過ECDSA來實現。ECDSA簽名擁有十分複雜的代數結構，導致他們非常不靈活、難以操作，迫使比特幣開發者不得不用[比特幣指令碼](https://en.bitcoin.it/wiki/Script)來開發[跨鏈原子交換](https://en.bitcoin.it/wiki/Atomic_swap)或[閃電網路](https://en.bitcoin.it/wiki/Lightning_Network)這類應用，如果使用更加現代的簽名方案的話，可以讓這些應用更加小巧且隱私性更好。
+
 
 自2008年以來，數位簽名技術已有了很大的發展，但新出的簽名方案卻忽略了實踐中亟需的幾個重要功能。尤其是方案設計者經常假設簽名者能夠控制金鑰何時以及如何生成、總是能夠獲得一致、可靠、安全的隨機性，以及擁有安全穩定的記憶體。實際上，比特幣使用者並不總是能夠直接接觸到自己的金鑰，對於精確的金鑰生成機制幾乎沒有控制權，對其他使用者如何使用他們產生的地址則完全沒有控制權。為了解決這些問題，我們開始設計一個全新的簽名方案，並通過務實的工程方法來確保它保持穩健不易破壞。
 
