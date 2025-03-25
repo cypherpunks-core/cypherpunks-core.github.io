@@ -9,21 +9,25 @@ hero_image: /img/hero.png
 categories: news
 ---
 
-2019年2月15日| Andrew Poelstra [轉載blockstream](https://blockstream.com/2019/02/18/en-musig-a-new-multisignature-standard/)，比特幣及[Blockstream的Liquid](https://blockstream.com/liquid/)等相關區塊鏈使用[ECDSA簽名演算法](https://en.bitcoin.it/wiki/Elliptic_Curve_Digital_Signature_Algorithm)來驗證儲存在系統裡的幣的所有權歸屬。業界於2008年決定使用這個演算法是[基於當時廣泛使用且未申請專利的](https://bitcoin.stackexchange.com/questions/73049/why-was-ecdsa-chosen-over-schnorr-signatures-in-the-inital-design)數位簽名系統。但ECDSA存在一些嚴重的技術侷限，尤其是[多重簽名](https://en.bitcoin.it/wiki/Multisignature)和[閾值簽名](https://bitcoinmagazine.com/articles/threshold-signatures-new-standard-wallet-security-1425937098/)這兩種需要多個獨立方而非單一方的簽名非常難以通過ECDSA來實現。ECDSA簽名擁有十分複雜的代數結構，導致他們非常不靈活、難以操作，迫使比特幣開發者不得不用[比特幣指令碼](https://en.bitcoin.it/wiki/Script)來開發[跨鏈原子交換](https://en.bitcoin.it/wiki/Atomic_swap)或[閃電網路](https://en.bitcoin.it/wiki/Lightning_Network)這類應用，如果使用更加現代的簽名方案的話，可以讓這些應用更加小巧且隱私性更好。
+2019年2月15日，Andrew Poelstra [轉載blockstream](https://blockstream.com/2019/02/18/en-musig-a-new-multisignature-standard/)。比特幣及[Blockstream的Liquid](https://blockstream.com/liquid/)等相關區塊鏈使用[ECDSA簽名演算法](https://en.bitcoin.it/wiki/Elliptic_Curve_Digital_Signature_Algorithm)來驗證儲存在系統裡的幣的所有權歸屬。業界於2008年決定使用這個演算法是[基於當時廣泛使用且未申請專利的](https://bitcoin.stackexchange.com/questions/73049/why-was-ecdsa-chosen-over-schnorr-signatures-in-the-inital-design)數位簽名系統。但ECDSA存在一些嚴重的技術侷限，尤其是[多重簽名](https://en.bitcoin.it/wiki/Multisignature)和[閾值簽名](https://bitcoinmagazine.com/articles/threshold-signatures-new-standard-wallet-security-1425937098/)這兩種需要多個獨立方而非單一方的簽名非常難以通過ECDSA來實現。ECDSA簽名擁有十分複雜的代數結構，導致它們非常不靈活、難以操作，迫使比特幣開發者不得不用[比特幣指令碼](https://en.bitcoin.it/wiki/Script)來開發[跨鏈原子交換](https://en.bitcoin.it/wiki/Atomic_swap)或[閃電網路](https://en.bitcoin.it/wiki/Lightning_Network)這類應用。如果使用更加現代的簽名方案的話，可以讓這些應用更加小巧且隱私性更好。
 
 ![](/img/147.jpg)
 
+自2008年以來，數位簽名技術已有了很大的發展，但新出的簽名方案卻忽略了實踐中亟需的幾個重要功能。尤其是方案設計者經常假設：
 
+1. 簽名者能夠控制金鑰何時以及如何生成
+2. 總是能夠獲得一致、可靠、安全的隨機性
+3. 擁有安全穩定的記憶體
 
-自2008年以來，數位簽名技術已有了很大的發展，但新出的簽名方案卻忽略了實踐中亟需的幾個重要功能。尤其是方案設計者經常假設簽名者能夠控制金鑰何時以及如何生成、總是能夠獲得一致、可靠、安全的隨機性，以及擁有安全穩定的記憶體。實際上，比特幣使用者並不總是能夠直接接觸到自己的金鑰，對於精確的金鑰生成機制幾乎沒有控制權，對其他使用者如何使用他們產生的地址則完全沒有控制權。為了解決這些問題，我們開始設計一個全新的簽名方案，並通過務實的工程方法來確保它保持穩健不易破壞。
+實際上，比特幣使用者並不總是能夠直接接觸到自己的金鑰，對於精確的金鑰生成機制幾乎沒有控制權，對其他使用者如何使用他們產生的地址則完全沒有控制權。為了解決這些問題，我們開始設計一個全新的簽名方案，並通過務實的工程方法來確保它保持穩健不易破壞。
 
 ## 簡介
 
 去年前半年，Blockstream密碼學家Pieter Wuille和我以及Yannick Seurin、Gregory Maxwell發表了一個[全新的多重簽名方案，叫做MuSig](https://eprint.iacr.org/2018/068)。這個多重簽名方案提供可證明的安全效能，甚至能夠抵禦多名惡意簽名者的勾結，並建立與普通的單一簽名者Schnorr簽名別無二致的簽名。
 
-從那以後，我們就一直致力於將MuSig從一篇學術論文變成可用的程式碼，這周[我們將這段程式碼併入了](https://github.com/ElementsProject/secp256k1-zkp/pull/35)secp256k1-zkp，這是[secp256k1](https://www.github.com/bitcoin-core/secp256k1)的一個分叉，secp256k1是Bitcoin Core使用的一個高保證的加密庫，我們將之擴充套件來為Elements和Liquid提供保密交易功能。
+從那以後，我們就一直致力於將MuSig從一篇學術論文變成可用的程式碼。這周[我們將這段程式碼併入了](https://github.com/ElementsProject/secp256k1-zkp/pull/35)secp256k1-zkp，這是[secp256k1](https://www.github.com/bitcoin-core/secp256k1)的一個分叉。secp256k1是Bitcoin Core使用的一個高保證的加密庫，我們將之擴充套件來為Elements和Liquid提供保密交易功能。
 
-目前比特幣社群還在[探索Schnorr簽名在比特幣中的應用](https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki)，我們希望我們的程式碼最終能夠進入被Bitcoin Core 及許多其他項目使用的上游庫secp256k1。
+目前比特幣社群還在[探索Schnorr簽名在比特幣中的應用](https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki)，我們希望我們的程式碼最終能夠進入被Bitcoin Core及許多其他項目使用的上游庫secp256k1。
 
 我們的程式碼生成的簽名與[BIP-schnorr](https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki)相相容，也可以生成介面卡簽名（adaptor signatures），從而使得[閃電網路在無指令碼指令碼中成為可能](https://bitcoinmagazine.com/articles/scriptless-scripts-how-bitcoin-can-support-smart-contracts-without-smart-contracts/)。
 
@@ -31,16 +35,26 @@ categories: news
 
 正如[我們去年討論過的](https://blockstream.com/2018/01/23/musig-key-aggregation-schnorr-signatures/)，密碼學研究中已有許多多重簽名方案，那麼為什麼我們要開發自己的簽名方案？因為我們有兩個現有方案無法解決的功能需求：
 
-1. **簡短的、體積固定的簽名，不管簽名者集如何，在驗證者看來都是一樣的。** 在區塊鏈系統中，驗證效率是最重要的因素，除非在安全上確實需要，否則就不必要向驗證者提供簽名者組成細節了。此外還有一個好處是MuSig簽名還能夠改進隱私效能，因為它能隱藏具體的簽名者政策。
-2. **在簡單公鑰模型中的可證明的安全性。** 這就意味著簽名者可以使用普通的金鑰配對來參加多重簽名，而不需要提供任何關於這些金鑰生產及控制的具體方式的資訊。在一些比特幣情境中，個人簽名者的金鑰管理政策互不相同且有限制，這時候就很難獲得關於金鑰生成的資訊。此外，對於金鑰生成細節的依賴可能與[Taproot](https://bitcoinmagazine.com/articles/taproot-coming-what-it-and-how-it-will-benefit-bitcoin/)不相容，這是一個預想的比特幣擴充套件，使得公開簽名金鑰可以擁有額外的隱形語義。
+1. **簡短的、體積固定的簽名，不管簽名者集如何，在驗證者看來都是一樣的。**
+   - 在區塊鏈系統中，驗證效率是最重要的因素
+   - 除非在安全上確實需要，否則就不必要向驗證者提供簽名者組成細節
+   - MuSig簽名還能夠改進隱私效能，因為它能隱藏具體的簽名者政策
+
+2. **在簡單公鑰模型中的可證明的安全性。**
+   - 這意味著簽名者可以使用普通的金鑰配對來參加多重簽名
+   - 不需要提供任何關於這些金鑰生產及控制的具體方式的資訊
+   - 在一些比特幣情境中，個人簽名者的金鑰管理政策互不相同且有限制
+   - 對於金鑰生成細節的依賴可能與[Taproot](https://bitcoinmagazine.com/articles/taproot-coming-what-it-and-how-it-will-benefit-bitcoin/)不相容
 
 此外在推出MuSig之後，我們發現許多已經發布的簽名方案，包括一個未公佈的MuSig版本[都是不安全的](https://mobile.twitter.com/gregoryneven/status/1082337250304638976)！我們會在以後的文章中展開講這一點，但目前我們已經開發出了一個適用於比特幣和Liquid的多重簽名方案。
 
 ## 常見誤區與安全API開發
 
-和其他多重簽名協議的學術解釋一樣，MuSig假設參與者在整個簽名過程中都有持續的、易於升級的記憶體，並且攻擊者無法將之“重置”為之前的狀態。同時也假設簽名者能夠獲得隨機性資源。不幸的是，真實的世界並沒有這麼簡單，為了將數學理論應用到現實世界，我們花了很長時間開發一個API，能夠在各種各樣的情景下使用，同時又不會因為未聲明的假設而導致金鑰材料丟失。
+和其他多重簽名協議的學術解釋一樣，MuSig假設參與者在整個簽名過程中都有持續的、易於升級的記憶體，並且攻擊者無法將之"重置"為之前的狀態。同時也假設簽名者能夠獲得隨機性資源。
 
-就和Schnorr簽名或ECDSA一樣，MuSig簽名也使用必須隨機均勻生成的“隨機數（nonce）”。稍微有一點偏差都[可能導致金鑰丟失、財產被盜](https://eprint.iacr.org/2019/023.pdf)。
+不幸的是，真實的世界並沒有這麼簡單。為了將數學理論應用到現實世界，我們花了很長時間開發一個API，能夠在各種各樣的情景下使用，同時又不會因為未聲明的假設而導致金鑰材料丟失。
+
+就和Schnorr簽名或ECDSA一樣，MuSig簽名也使用必須隨機均勻生成的"隨機數（nonce）"。稍微有一點偏差都[可能導致金鑰丟失、財產被盜](https://eprint.iacr.org/2019/023.pdf)。
 
 我們主要的設計目標是建立一個安全的防止誤用的API，即使在受限制的環境中也不會鼓勵脆弱的使用方式。
 
@@ -48,9 +62,11 @@ categories: news
 
 使用單獨的簽名時，要獲得均勻的隨機數的標準做法是：把一些祕密資料以及需要簽名的訊息放到一個密碼學雜湊函數裡，就能得到均勻的隨機數，這些隨機數對於每個要簽名的訊息都是獨立的。
 
-但如果使用的是多重簽名，這個簡單穩健的方法反而會帶來風險。惡意簽名者可能會在同一條訊息中請求兩個多重簽名，在第二次迭代時調整自己對簽名的貢獻，即所謂的平行攻擊。如果第一個簽名者通過在訊息旁邊雜湊一個祕密資料來選擇他的隨機數，他將在兩個非常不同的簽名中使用相同的隨機數，[PS3受到黑客攻擊](https://www.schneier.com/blog/archives/2011/01/sony_ps3_securi.html)也是因為同樣的原因。和只有單一簽名者的情況不同，對於平行攻擊並沒有簡單的解決方案，因為每個簽名者在瞭解所要生成簽名的所有細節之前，就必須選擇隨機數。
+但如果使用的是多重簽名，這個簡單穩健的方法反而會帶來風險。惡意簽名者可能會在同一條訊息中請求兩個多重簽名，在第二次迭代時調整自己對簽名的貢獻，即所謂的平行攻擊。如果第一個簽名者通過在訊息旁邊雜湊一個祕密資料來選擇他的隨機數，他將在兩個非常不同的簽名中使用相同的隨機數，[PS3受到黑客攻擊](https://www.schneier.com/blog/archives/2011/01/sony_ps3_securi.html)也是因為同樣的原因。
 
-在雜湊流行起來之前，這個問題的一個傳統解決方案是使用硬體隨機數生成器。不過這些硬體十分昂貴，容易受到環境或其他外部影響，並且最重要的是，沒有辦法驗證他們是否正確操作。
+和只有單一簽名者的情況不同，對於平行攻擊並沒有簡單的解決方案，因為每個簽名者在瞭解所要生成簽名的所有細節之前，就必須選擇隨機數。
+
+在雜湊流行起來之前，這個問題的一個傳統解決方案是使用硬體隨機數生成器。不過這些硬體十分昂貴，容易受到環境或其他外部影響，並且最重要的是，沒有辦法驗證它們是否正確操作。
 
 後面一個關於驗證的問題有一些較有創意的解決方案，我們會在今後的文章中談到。目前我們選擇的解決方案是要求API使用者為每一次簽名會話提供一個獨特的"會話ID"。隨機數的生成需要對簽名者的祕密資料、簽名者集、需要簽名的訊息以及這個獨特的ID進行雜湊。擁有隨機數生成器的使用者可以使用它來生成這個會話ID，擁有一致記憶體的使用者可以直接使用一個計數器。
 
@@ -58,7 +74,9 @@ categories: news
 
 ## 重放攻擊
 
-即使擁有可靠的隨機源，如果可以在簽名過程中重放一個簽名協議，仍然可以從多重簽名的參與者中提取金鑰。這種攻擊被稱為“重放攻擊”，可以攻擊在可重新啟動的虛擬機器內執行的簽名者，也可以攻擊支援間斷簽名及從可序列化狀態恢復的虛擬機器。即使沒有活躍的攻擊者也可能意外地出現這種情況，例如通過執行從同一狀態克隆的兩個虛擬機器，或者通過在已經不同步的分散式資料庫上執行程式碼。
+即使擁有可靠的隨機源，如果可以在簽名過程中重放一個簽名協議，仍然可以從多重簽名的參與者中提取金鑰。這種攻擊被稱為"重放攻擊"，可以攻擊在可重新啟動的虛擬機器內執行的簽名者，也可以攻擊支援間斷簽名及從可序列化狀態恢復的虛擬機器。
+
+即使沒有活躍的攻擊者也可能意外地出現這種情況，例如通過執行從同一狀態克隆的兩個虛擬機器，或者通過在已經不同步的分散式資料庫上執行程式碼。
 
 具體來說，如果簽名者對多重簽名做出貢獻，並且在選擇隨機數之後簽名過程重新啟動，則可以修改其他簽名者對簽名的貢獻，以進行和上文提到的基本相同的攻擊。
 
@@ -68,7 +86,7 @@ categories: news
 
 一些使用者會將停滯狀態系列化且從這裡重新開始，為了保護這些使用者，我們的API就不支援簽名會話的序列化。
 
-在實際操作中，這意味著使用我們的程式碼的使用者，如果想要支援可以安全度過電源重啟或中斷干擾的簽名會話——這對於硬體錢包來說是很合理的目標——就必須要保證安全一致的記憶體、如果這類錢包想要同時支援多個簽名會話，那麼每個平行的會話都需要額外的一致記憶體。
+在實際操作中，這意味著使用我們的程式碼的使用者，如果想要支援可以安全度過電源重啟或中斷干擾的簽名會話——這對於硬體錢包來說是很合理的目標——就必須要保證安全一致的記憶體。如果這類錢包想要同時支援多個簽名會話，那麼每個平行的會話都需要額外的一致記憶體。
 
 我們認為可以通過我們正在研究的這個方案來解決這個侷限。
 
@@ -80,4 +98,4 @@ categories: news
 
 在未來的文章中我們還會討論一些安全生成隨機數並讓隨機數更易於驗證的技術。尤其是通過一個被稱為[sign-to-contract](https://www.wpsoftware.net/andrew/secrets/slides.pdf)的技術，主計算機可以消除來自不可靠的硬體錢包的隨機數生成器的任何偏差。
 
-讓我們來進一步解釋關於消除隨機性和一致記憶體的研究，我們可以通過[零知識證明](https://en.wikipedia.org/wiki/Zero-knowledge_proof)來消除隨機數偏差或重放攻擊，不再要求一致記憶體，並且將MuSig協議從三輪減少到兩輪。我們對這個反感的可行性非常激動，並期待能夠繼續跟大家分享我們的進展。
+讓我們來進一步解釋關於消除隨機性和一致記憶體的研究，我們可以通過[零知識證明](https://en.wikipedia.org/wiki/Zero-knowledge_proof)來消除隨機數偏差或重放攻擊，不再要求一致記憶體，並且將MuSig協議從三輪減少到兩輪。我們對這個方案的可行性非常激動，並期待能夠繼續跟大家分享我們的進展。
