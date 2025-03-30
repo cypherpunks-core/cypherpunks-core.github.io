@@ -4,27 +4,46 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>使用x-only的Pubkey減少比特幣交易大小 - 密碼龐克 Cypherpunks Taiwan</title>
     <link rel="stylesheet" href="/assets/css/app.css">
     <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <link rel="canonical" href="https://cypherpunks-core.github.io/news/2019/11/07/%E4%BD%BF%E7%94%A8x-only%E7%9A%84Pubkey%E6%B8%9B%E5%B0%91%E6%AF%94%E7%89%B9%E5%B9%A3%E4%BA%A4%E6%98%93%E5%A4%A7%E5%B0%8F/" />
+    <meta name="keywords" content="cypherpunks">
+    <meta name="author" content="Cypherpunks Core">
+    <!-- 添加網站語言標記 -->
+    <meta property="og:locale" content="zh-TW">
+    <!-- 添加結構化資料 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "密碼龐克 Cypherpunks Taiwan",
+      "url": "https://cypherpunks-core.github.io"
+    }
+    </script>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>使用x-only的Pubkey減少比特幣交易大小 | 密碼龐克 Cypherpunks Taiwan</title>
 <meta name="generator" content="Jekyll v3.9.1" />
 <meta property="og:title" content="使用x-only的Pubkey減少比特幣交易大小" />
 <meta name="author" content="Cypherpunks Core" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="如何使用BIP-schnorr安全地為每個output節省四個權重單位" />
-<meta property="og:description" content="如何使用BIP-schnorr安全地為每個output節省四個權重單位" />
+<meta property="og:locale" content="zh_TW" />
+<meta name="description" content="如何使用BIP-schnorr安全地為每個output節省四個權重單位 原文 : Reducing Bitcoin Transaction Sizes with x-only Pubkeys 8 min read By Jonas Nick [圖片描述]/img/110" />
+<meta property="og:description" content="如何使用BIP-schnorr安全地為每個output節省四個權重單位 原文 : Reducing Bitcoin Transaction Sizes with x-only Pubkeys 8 min read By Jonas Nick [圖片描述]/img/110" />
+<link rel="canonical" href="https://cypherpunks-core.github.io/news/2019/11/07/%E4%BD%BF%E7%94%A8x-only%E7%9A%84Pubkey%E6%B8%9B%E5%B0%91%E6%AF%94%E7%89%B9%E5%B9%A3%E4%BA%A4%E6%98%93%E5%A4%A7%E5%B0%8F/" />
+<meta property="og:url" content="https://cypherpunks-core.github.io/news/2019/11/07/%E4%BD%BF%E7%94%A8x-only%E7%9A%84Pubkey%E6%B8%9B%E5%B0%91%E6%AF%94%E7%89%B9%E5%B9%A3%E4%BA%A4%E6%98%93%E5%A4%A7%E5%B0%8F/" />
 <meta property="og:site_name" content="密碼龐克 Cypherpunks Taiwan" />
-<meta property="og:image" content="/img/110.png" />
+<meta property="og:image" content="https://cypherpunks-core.github.io/img/110.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-11-07T00:00:00+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="/img/110.png" />
+<meta property="twitter:image" content="https://cypherpunks-core.github.io/img/110.png" />
 <meta property="twitter:title" content="使用x-only的Pubkey減少比特幣交易大小" />
+<meta name="twitter:site" content="@CypherpunksTW" />
+<meta name="twitter:creator" content="@Cypherpunks Core" />
 <script type="application/ld+json">
-{"description":"如何使用BIP-schnorr安全地為每個output節省四個權重單位","image":"/img/110.png","headline":"使用x-only的Pubkey減少比特幣交易大小","dateModified":"2019-11-07T00:00:00+00:00","datePublished":"2019-11-07T00:00:00+00:00","url":"/news/2019/11/07/%E4%BD%BF%E7%94%A8x-only%E7%9A%84Pubkey%E6%B8%9B%E5%B0%91%E6%AF%94%E7%89%B9%E5%B9%A3%E4%BA%A4%E6%98%93%E5%A4%A7%E5%B0%8F/","mainEntityOfPage":{"@type":"WebPage","@id":"/news/2019/11/07/%E4%BD%BF%E7%94%A8x-only%E7%9A%84Pubkey%E6%B8%9B%E5%B0%91%E6%AF%94%E7%89%B9%E5%B9%A3%E4%BA%A4%E6%98%93%E5%A4%A7%E5%B0%8F/"},"author":{"@type":"Person","name":"Cypherpunks Core"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"description":"如何使用BIP-schnorr安全地為每個output節省四個權重單位 原文 : Reducing Bitcoin Transaction Sizes with x-only Pubkeys 8 min read By Jonas Nick [圖片描述]/img/110","image":"https://cypherpunks-core.github.io/img/110.png","headline":"使用x-only的Pubkey減少比特幣交易大小","dateModified":"2019-11-07T00:00:00+00:00","datePublished":"2019-11-07T00:00:00+00:00","url":"https://cypherpunks-core.github.io/news/2019/11/07/%E4%BD%BF%E7%94%A8x-only%E7%9A%84Pubkey%E6%B8%9B%E5%B0%91%E6%AF%94%E7%89%B9%E5%B9%A3%E4%BA%A4%E6%98%93%E5%A4%A7%E5%B0%8F/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://cypherpunks-core.github.io/img/logo.png"},"name":"Cypherpunks Core"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://cypherpunks-core.github.io/news/2019/11/07/%E4%BD%BF%E7%94%A8x-only%E7%9A%84Pubkey%E6%B8%9B%E5%B0%91%E6%AF%94%E7%89%B9%E5%B9%A3%E4%BA%A4%E6%98%93%E5%A4%A7%E5%B0%8F/"},"author":{"@type":"Person","name":"Cypherpunks Core"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131051587-3"></script>
 <script>
@@ -33,11 +52,67 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'UA-131051587-3');
-</script><!-- head scripts --></head>
+</script><!-- head scripts --><!-- JSON-LD 結構化數據 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "密碼龐克 Cypherpunks Taiwan",
+  "url": "https://cypherpunks-core.github.io",
+  "logo": "https://cypherpunks-core.github.io/favicon.png",
+  "sameAs": [
+    "https://github.com/cypherpunks-core",
+    "https://www.facebook.com/CypherpunksTW/",
+    "https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA"
+  ],
+  "description": "密碼龐克是一個專注於密碼學、比特幣、區塊鏈和隱私技術的台灣社群。我們相信密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.",
+  "founder": {
+    "@type": "Person",
+    "name": "Cypherpunks Taiwan Team"
+  }
+}
+</script>
+
+
+<!-- 文章結構化數據 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "使用x-only的Pubkey減少比特幣交易大小",
+  "description": "如何使用BIP-schnorr安全地為每個output節省四個權重單位 原文 : Reducing Bitcoin Transaction Sizes with x-only Pubkeys 8 min read By Jonas Nick [圖片描述]/img/110",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://cypherpunks-core.github.io/news/2019/11/07/%E4%BD%BF%E7%94%A8x-only%E7%9A%84Pubkey%E6%B8%9B%E5%B0%91%E6%AF%94%E7%89%B9%E5%B9%A3%E4%BA%A4%E6%98%93%E5%A4%A7%E5%B0%8F/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Cypherpunks Core"
+  },
+  "datePublished": "2019-11-07T00:00:00+00:00",
+  "dateModified": "2019-11-07T00:00:00+00:00",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://cypherpunks-core.github.io/img/110.png"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "密碼龐克 Cypherpunks Taiwan",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://cypherpunks-core.github.io/favicon.png"
+    }
+  },
+  "keywords": "cypherpunks",
+  "articleSection": "news"
+}
+</script>
+
+
+</head>
 
   <body>
-    
-<nav class="navbar is-primary" >
+    <nav class="navbar is-primary">
     <div class="container">
         <div class="navbar-brand">
             <a href="/" class="navbar-item">
@@ -51,7 +126,8 @@
         </div>
         <div class="navbar-menu" id="navMenu">
             <div class="navbar-start">
-                <a href="/" class="navbar-item ">Home</a>
+                <a href="/" class="navbar-item ">首頁</a>
+                <a href="/blog/" class="navbar-item ">部落格</a>
                 
                 
                     
@@ -107,6 +183,34 @@
                     
                 
                 
+                <a href="/about/" class="navbar-item ">關於我們</a>
+                <a href="/sitemap/" class="navbar-item ">網站地圖</a>
+            </div>
+            
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <a href="/search/" class="button is-primary is-inverted">
+                        <span class="icon">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <span>搜尋</span>
+                    </a>
+                </div>
+                
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a href="https://github.com/cypherpunks-core" class="button is-white" target="_blank" rel="noopener">
+                            <span class="icon">
+                                <i class="fab fa-github"></i>
+                            </span>
+                        </a>
+                        <a href="https://www.facebook.com/CypherpunksTW/" class="button is-white" target="_blank" rel="noopener">
+                            <span class="icon">
+                                <i class="fab fa-facebook"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -142,7 +246,7 @@
 8 min read   *By Jonas Nick</em></li>
 </ul>
 
-<p><img src="/img/110.png" alt="" /></p>
+<p>![圖片描述]/img/110.png</p>
 
 <h1 id="介紹--introduction">介紹 | Introduction</h1>
 
@@ -164,33 +268,33 @@
 
 <p>首先，讓我們看一下今天壓縮後的public key如何在比特幣中工作。</p>
 
-<p><img src="/img/111.png" alt="" /></p>
+<p>![圖片描述]/img/111.png</p>
 <center><strong>壓縮public key</strong></center>
 
 <p>比特幣中的壓縮public key是byte  <code class="language-plaintext highlighter-rouge">2</code>後跟一個32 byte矩陣，或者是byte  <code class="language-plaintext highlighter-rouge">3</code>後跟一個 32 byte矩陣。 第一個 byte 稱為<em>tie breaker(決勝局)</em>，第二個部分為橢圓曲線上基礎點的X坐標。</p>
 
 <h2 id="tie-breaker的目的是什麼">Tie breaker的目的是什麼？</h2>
 
-<p><img src="/img/112.png" alt="" /></p>
+<p>![圖片描述]/img/112.png</p>
 <center><strong>tie breaker的目的</strong></center>
 
 <p>public key在橢圓曲線上編碼一個點。 僅給出X坐標，曲線上就存在兩個點。 tie breaker的目的是確定兩個點中的哪一個被編碼為<code class="language-plaintext highlighter-rouge">P</code>  or  <code class="language-plaintext highlighter-rouge">-P</code>。</p>
 
 <p>最近，BIP-Schnorr從使用壓縮的public key更改為僅使用<em>x-only public keys</em>。 不同之處在於tie breake不再是public key的一部分。 而是隱式地假設tie breaker為<code class="language-plaintext highlighter-rouge">2</code>。 實際上，在BIP中使用了一個不同的tie breaker，但這對於本文而言並不重要。</p>
 
-<p><img src="/img/113.png" alt="" /></p>
+<p>![圖片描述]/img/113.png</p>
 <center><strong>BIP-schnorr中的x-only pubkeys</strong></center>
 
 <p>那為什麼行得通呢？ 畢竟，<code class="language-plaintext highlighter-rouge">P</code>  and  <code class="language-plaintext highlighter-rouge">-P</code>仍然是不同的點。 由secret key <code class="language-plaintext highlighter-rouge">x</code>生成的public key點<code class="language-plaintext highlighter-rouge">P</code>是group<code class="language-plaintext highlighter-rouge">G</code>的生成者的<code class="language-plaintext highlighter-rouge">x</code>倍。 public key<code class="language-plaintext highlighter-rouge">-P</code>的secret key是<code class="language-plaintext highlighter-rouge">-x</code>。 答案是我們只需要在正確的時間否定public key和secret key即可。 特別是，簽名演算法會檢查您是否在簽名正確的public key，並在必要時取消secret key。</p>
 
 <p>請務必注意，錢包開發人員無需採取任何措施。 它應該由基礎crypto library處理。 BIP32分層確定性錢包生成也像以前一樣工作，只是您丟棄了第一個byte。</p>
 
-<p><img src="/img/114.png" alt="" /></p>
+<p>![圖片描述]/img/114.png</p>
 <center><strong>為什麼我們可以刪除tie breaker?</strong></center>
 
 <h1 id="為什麼引入-x-only-pubkeys">為什麼引入 x-only pubkeys?</h1>
 
-<p><img src="/img/115.png" alt="" /></p>
+<p>![圖片描述]/img/115.png</p>
 <center><strong>為什麼 x-only?</strong></center>
 
 <p>首先，在權重單位方面，scriptPubKey的bytes非常昂貴：x-only 可以在平均完整塊中節省約0.7％的權重單位。 其次，發件人創建scriptPubKey的成本與136個權重單位中的pay-to-witness-script-hash相同。 從理論上講，如果Taproot的價格比舊版隔離見證的價格高，則採用它的速度會更慢。</p>
@@ -208,38 +312,38 @@
 <p>我們知道的是，在隨機預言模型中，如果離散對數問題很困難，那麼Schnorr簽名是安全的。
 這意味著在不知道secret key的情況下無法偽造簽名。</p>
 
-<p><img src="/img/116.png" alt="" /></p>
+<p>![圖片描述]/img/116.png</p>
 
 <p>現在我們要證明的是帶有壓縮public key的Schnorr簽名是否安全，那麼x-only的Schnorr簽名是安全的。 或等效地，如果x-only的Schnorr簽名不安全，則Schnorr簽名不安全。</p>
 
-<p><img src="/img/117.png" alt="" /></p>
+<p>![圖片描述]/img/117.png</p>
 
 <p>因此，我們假設存在一種偽造Schnorr簽名的演算法，如下圖右圖所示。</p>
 
 <p>Schnorr 簽名是一個元組。 第一個元素是稱為的public nonce，它是通過將secret nonce與group generator相乘而生成的。
 第二個元素結合了secret nonce和secret key  <code class="language-plaintext highlighter-rouge">x</code>。 這裡唯一重要的部分是Schnorr簽名涉及一些hash計算。 我們現在假設的是，在某些時候，偽造者必須計算hash值-沒有其他方法可以產生偽造品。 為了在形式證明(formal proof)中正確定義此值，將hash函數替換為稱為<em>Random Oracle</em>的理想設備。 為了方便說明，我們將繼續稱他為hash function。</p>
 
-<p><img src="/img/118.png" alt="" /></p>
+<p>![圖片描述]/img/118.png</p>
 <center><strong>偽造者的Proof sketch模型</strong></center>
 
 <p>現在，我們要做的是構建一種演算法，該演算法響應提供了壓縮public key的挑戰者，並期望獲得Schnorr簽名偽造作為回報。 我們將以某種方式利用x-only的Schnorr簽名偽造者。 這只是一種演算法，如果您願意，我們可以在虛擬機上運行它。 此外，我們可以修補計算hash函數的偽造者程式碼，以返回所需的任何內容。 替換的hash函數必須隨機尋找x-only的Schnorr簽名偽造者，因為否則它可以檢測到它在模擬中並且行為不同。</p>
 
-<p><img src="/img/119.png" alt="" /></p>
+<p>![圖片描述]/img/119.png</p>
 <center><strong>Proof sketch 概述</strong></center>
 
 <p>現在，讓我們看一下第一種情況，即public key的第一個byte為<code class="language-plaintext highlighter-rouge">2</code>，，這與我們隱含地假定為x-only pubkeys相同。 在這種情況下，我們只需要刪除第一個byte，將其傳遞給偽造者，讓它做事情，然後將Schnorr簽名傳遞給挑戰者即可。</p>
 
-<p><img src="/img/120.png" alt="" /></p>
+<p>![圖片描述]/img/120.png</p>
 <center><strong>Proof sketch case 1</strong></center>
 
 <p>在另一種情況下，第一個byte為<code class="language-plaintext highlighter-rouge">3</code>。 同樣，我們將不帶第一個byte的pubkey傳遞給偽造者，但是現在x-only偽造者會將public key解碼為<code class="language-plaintext highlighter-rouge">-P</code>，因此將創建的簽名將用於錯誤的public key。 我們通過對hash函數進行編程來解決此問題，以返回挑戰者使用的hash函數output的負數。 然後，我們僅等待偽造者的答复並將其傳遞給挑戰者。</p>
 
-<p><img src="/img/121.png" alt="" /></p>
+<p>![圖片描述]/img/121.png</p>
 <center><strong>Proof sketch case 2</strong></center>
 
 <p>取反的hash值會為該取反的點生成Schnorr簽名，因此挑戰者將很樂意接受該簽名。</p>
 
-<p><img src="/img/122.png" alt="" /></p>
+<p>![圖片描述]/img/122.png</p>
 <center><strong>Proof sketch resolution</strong></center>
 
 <p>總而言之，我們顯示的是，如果存在x-only Schnorr簽名偽造者，則存在壓縮的pubkey Schnorr簽名偽造者，或者等效地，我們可以假設x-only Schnorr簽名偽造者是安全的。</p>
@@ -274,81 +378,143 @@
 <div class="columns is-multiline">
     
     <div class="column is-12">
-        <div class="card">
+        <div class="card" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="card-image">
-        <img src="/img/150.jpg" alt="Cypherpunks Taiwan 重啟：我們為何再次聚集？">
+        <img src="/img/150.jpg" alt="Cypherpunks Taiwan 重啟：我們為何再次聚集？" itemprop="image">
     </div>
     
     <div class="card-content">
         <div class="content">
             
-            <a class="title is-4" href="/news/community/2025/03/24/Cypherpunks-Taiwan-%E9%87%8D%E5%95%9F-%E6%88%91%E5%80%91%E7%82%BA%E4%BD%95%E5%86%8D%E6%AC%A1%E8%81%9A%E9%9B%86/">Cypherpunks Taiwan 重啟：我們為何再次聚集？</a>
+            <a class="title is-4" href="/news/community/2025/03/24/Cypherpunks-Taiwan-%E9%87%8D%E5%95%9F-%E6%88%91%E5%80%91%E7%82%BA%E4%BD%95%E5%86%8D%E6%AC%A1%E8%81%9A%E9%9B%86/" itemprop="headline">Cypherpunks Taiwan 重啟：我們為何再次聚集？</a>
             
-            <p><p>從 2019 到現在，世界與網路都變了很多，但<strong>我們對隱私的渴望沒有改變</strong>。在數位身份、鏈上足跡與 AI 大模型全面滲透的時代，<strong>Cypherpunks 的核心信念——Privacy is necessary for an open society in the electronic age</strong>，從未如此重要。這些年來，我們見證了比特幣的主流化、Web3 的爆炸成長，也見證了過度中心化平台對個人自由與資訊掌控權的反撲。是時候重新聚集了。</p>
-
-</p>
+            <p itemprop="description">
+                
+                    Cypherpunks Taiwan 重啟，探討在數位身份、鏈上足跡與 AI 大模型全面滲透的時代，如何保護隱私與自由。
+                
+            </p>
+            
+            <!-- 添加文章標籤 -->
+            
+            <div class="tags">
+                
+                <span class="tag is-light"><a href="/tags/cypherpunks">cypherpunks</a></span>
+                
+                <span class="tag is-light"><a href="/tags/privacy">privacy</a></span>
+                
+                <span class="tag is-light"><a href="/tags/decentralization">decentralization</a></span>
+                
+            </div>
+            
         </div>
         <div class="has-text-centered">
-            <a href="/news/community/2025/03/24/Cypherpunks-Taiwan-%E9%87%8D%E5%95%9F-%E6%88%91%E5%80%91%E7%82%BA%E4%BD%95%E5%86%8D%E6%AC%A1%E8%81%9A%E9%9B%86/" class="button is-primary">Read more</a>
+            <a href="/news/community/2025/03/24/Cypherpunks-Taiwan-%E9%87%8D%E5%95%9F-%E6%88%91%E5%80%91%E7%82%BA%E4%BD%95%E5%86%8D%E6%AC%A1%E8%81%9A%E9%9B%86/" class="button is-primary" aria-label="閱讀文章：Cypherpunks Taiwan 重啟：我們為何再次聚集？">閱讀更多</a>
         </div>
     </div>
     <footer class="card-footer">
-        <p class="card-footer-item">Published: Mar 24, 2025</p>
+        <p class="card-footer-item">
+            <time datetime="2025-03-24T00:00:00+00:00" itemprop="datePublished">
+                發布於: 2025年3月24日
+            </time>
+        </p>
+        
+        <p class="card-footer-item" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span itemprop="name">Cypherpunks Core</span>
+        </p>
+        
     </footer>
 </div>
     </div>
     
     <div class="column is-12">
-        <div class="card">
+        <div class="card" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="card-image">
-        <img src="/img/147.jpg" alt="MuSig：一個新的多重簽名標準">
+        <img src="/img/147.jpg" alt="MuSig：一個新的多重簽名標準 | Cypherpunks" itemprop="image">
     </div>
     
     <div class="card-content">
         <div class="content">
             
-            <a class="title is-4" href="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/">MuSig：一個新的多重簽名標準</a>
+            <a class="title is-4" href="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/" itemprop="headline">MuSig：一個新的多重簽名標準 | Cypherpunks</a>
             
-            <p><p>2019年2月15日，Andrew Poelstra <a href="https://blockstream.com/2019/02/18/en-musig-a-new-multisignature-standard/">轉載blockstream</a>。比特幣及<a href="https://blockstream.com/liquid/">Blockstream的Liquid</a>等相關區塊鏈使用<a href="https://en.bitcoin.it/wiki/Elliptic_Curve_Digital_Signature_Algorithm">ECDSA簽名演算法</a>來驗證儲存在系統裡的幣的所有權歸屬。業界於2008年決定使用這個演算法是<a href="https://bitcoin.stackexchange.com/questions/73049/why-was-ecdsa-chosen-over-schnorr-signatures-in-the-inital-design">基於當時廣泛使用且未申請專利的</a>數位簽名系統。但ECDSA存在一些嚴重的技術侷限，尤其是<a href="https://en.bitcoin.it/wiki/Multisignature">多重簽名</a>和<a href="https://bitcoinmagazine.com/articles/threshold-signatures-new-standard-wallet-security-1425937098/">閾值簽名</a>這兩種需要多個獨立方而非單一方的簽名非常難以通過ECDSA來實現。ECDSA簽名擁有十分複雜的代數結構，導致它們非常不靈活、難以操作，迫使比特幣開發者不得不用<a href="https://en.bitcoin.it/wiki/Script">比特幣指令碼</a>來開發<a href="https://en.bitcoin.it/wiki/Atomic_swap">跨鏈原子交換</a>或<a href="https://en.bitcoin.it/wiki/Lightning_Network">閃電網路</a>這類應用。如果使用更加現代的簽名方案的話，可以讓這些應用更加小巧且隱私性更好。</p>
-
-</p>
+            <p itemprop="description">
+                
+                    MuSig提供可證明的安全效能，甚至能夠抵禦多名惡意簽名者的勾結，並建立與普通的單一簽名者Schnorr簽名別無二致的簽名。
+                
+            </p>
+            
+            <!-- 添加文章標籤 -->
+            
+            <div class="tags">
+                
+                <span class="tag is-light"><a href="/tags/cypherpunks">cypherpunks</a></span>
+                
+            </div>
+            
         </div>
         <div class="has-text-centered">
-            <a href="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/" class="button is-primary">Read more</a>
+            <a href="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/" class="button is-primary" aria-label="閱讀文章：MuSig：一個新的多重簽名標準 | Cypherpunks">閱讀更多</a>
         </div>
     </div>
     <footer class="card-footer">
-        <p class="card-footer-item">Published: Mar 11, 2020</p>
+        <p class="card-footer-item">
+            <time datetime="2020-03-11T00:00:00+00:00" itemprop="datePublished">
+                發布於: 2020年3月11日
+            </time>
+        </p>
+        
+        <p class="card-footer-item" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span itemprop="name">Cypherpunks Core</span>
+        </p>
+        
     </footer>
 </div>
     </div>
     
     <div class="column is-12">
-        <div class="card">
+        <div class="card" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="card-image">
-        <img src="/img/149.jpg" alt="Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊">
+        <img src="/img/149.jpg" alt="Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊" itemprop="image">
     </div>
     
     <div class="card-content">
         <div class="content">
             
-            <a class="title is-4" href="/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/">Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊</a>
+            <a class="title is-4" href="/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/" itemprop="headline">Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊</a>
             
-            <p><blockquote>
-  <p>編者注：本文對 Cosmos 網路中區塊鏈和比特幣、以太坊進行了鉅細靡遺的比較。作者先從區塊鏈系統的棧層出發，分析了比特幣、以太坊在不同棧層上的技術要點，最後迴歸到 Cosmos 網路中的區塊鏈，概念解釋尤為清晰，是不可多得的解釋文。</p>
-</blockquote>
-
-</p>
+            <p itemprop="description">
+                
+                    本文對 Cosmos 網路中區塊鏈和比特幣、以太坊進行了鉅細靡遺的比較。作者先從區塊鏈系統的棧層出發，分析了比特幣、以太坊在不同棧層上的技術要點，最後迴歸到 Cosmos 網路中的區塊鏈，概念解釋尤為清晰，是不可多得的解釋文
+                
+            </p>
+            
+            <!-- 添加文章標籤 -->
+            
+            <div class="tags">
+                
+                <span class="tag is-light"><a href="/tags/cosmos">cosmos</a></span>
+                
+            </div>
+            
         </div>
         <div class="has-text-centered">
-            <a href="/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/" class="button is-primary">Read more</a>
+            <a href="/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/" class="button is-primary" aria-label="閱讀文章：Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊">閱讀更多</a>
         </div>
     </div>
     <footer class="card-footer">
-        <p class="card-footer-item">Published: Feb 13, 2020</p>
+        <p class="card-footer-item">
+            <time datetime="2020-02-13T00:00:00+00:00" itemprop="datePublished">
+                發布於: 2020年2月13日
+            </time>
+        </p>
+        
+        <p class="card-footer-item" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span itemprop="name">Cypherpunks Core</span>
+        </p>
+        
     </footer>
 </div>
     </div>

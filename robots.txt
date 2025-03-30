@@ -1,1 +1,8 @@
-Sitemap: /sitemap.xml
+# www.robotstxt.org/
+
+# 允許所有爬蟲訪問
+User-agent: *
+Allow: /
+
+# Sitemap 位置
+Sitemap: https://cypherpunks-core.github.io/sitemap.xml 
