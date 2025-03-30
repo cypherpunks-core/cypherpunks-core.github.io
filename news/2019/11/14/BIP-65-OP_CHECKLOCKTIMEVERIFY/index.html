@@ -141,9 +141,10 @@
 
 <h2 id="概要">概要</h2>
 
-<p><strong>CHECKLOCKTIMEVERIFY 重新定義了現有的 <code class="language-plaintext highlighter-rouge">NOP2</code> OPCode (其實就是 <code class="language-plaintext highlighter-rouge">OP_CHECKLOCKTIMEVERIFY</code> 指令替換了 <code class="language-plaintext highlighter-rouge">OP_NOP2</code> 指令)。執行時，如果以下任何一個條件成立，則 OPCode 直譯器將以錯誤終止：</strong></p>
-
 <ul>
+  <li>
+    <p>*CHECKLOCKTIMEVERIFY 重新定義了現有的 <code class="language-plaintext highlighter-rouge">NOP2</code> OPCode (其實就是 <code class="language-plaintext highlighter-rouge">OP_CHECKLOCKTIMEVERIFY</code> 指令替換了 <code class="language-plaintext highlighter-rouge">OP_NOP2</code> 指令)。執行時，如果以下任何一個條件成立，則 OPCode 直譯器將以錯誤終止：**</p>
+  </li>
   <li>堆棧是空的;</li>
   <li>堆棧中的頂層項目小於0;</li>
   <li>頂層堆棧項的鎖定時間類型（高度vs.時間戳）與 <code class="language-plaintext highlighter-rouge">nLockTime</code> 欄位不同;</li>
@@ -163,13 +164,15 @@
 
 <h2 id="第三方託管">第三方託管</h2>
 
-<p><strong>如果 Alice 和 Bob 聯合經營一家企業，他們可能希望確保所有資金都儲存在需要雙方同時批准的 2-of-2 的多重（多重簽名的交易）交易輸出中。但是，他們發現在特殊情況下，例如任何一個人受到“嚴重的車禍”，他們都需要備用的方法，繼續動用該筆資金。因此，他們任命他們的律師 Lenny 擔任第三方。</strong></p>
+<ul>
+  <li>*如果 Alice 和 Bob 聯合經營一家企業，他們可能希望確保所有資金都儲存在需要雙方同時批准的 2-of-2 的多重（多重簽名的交易）交易輸出中。但是，他們發現在特殊情況下，例如任何一個人受到“嚴重的車禍”，他們都需要備用的方法，繼續動用該筆資金。因此，他們任命他們的律師 Lenny 擔任第三方。**</li>
+</ul>
 
 <p>在任何時候，Lenny 隨時可以同 Alice 或 Bob 一起串謀非法竊取資金。同樣，Lenny 可能更願意不竊取資金，以阻止不良行為者企圖強行從他那裡獲取 secret keys 。</p>
 
 <p>但是，使用 <code class="language-plaintext highlighter-rouge">CHECKLOCKTIMEVERIFY</code> 可以將資金儲存在以下格式的 scriptPubKeys 中：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>IF
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>IF
     &lt;now + 3 months&gt; CHECKLOCKTIMEVERIFY DROP
     &lt;Lenny's pubkey&gt; CHECKSIGVERIFY
     1
@@ -178,12 +181,11 @@ ELSE
 ENDIF
 &lt;Alice's pubkey&gt; &lt;Bob's pubkey&gt; 2 CHECKMULTISIG
 </code></pre></div></div>
-
 <p>在任何時候，資金都可以用下面的 OPCode 來支付：</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 &lt;Alice's signature&gt; &lt;Bob's signature&gt; 0
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 &lt;Alice's signature&gt; &lt;Bob's signature&gt; 0
 </code></pre></div></div>
 <p>Lenny 經過 3 個月後，Alice 或 Bob 中的一個可以用以下 OPCode 支付資金：</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 &lt;Alice/Bob's signature&gt; &lt;Lenny's signature&gt; 1
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 &lt;Alice/Bob's signature&gt; &lt;Lenny's signature&gt; 1
 </code></pre></div></div>
 <h2 id="非交互式定期退款--non-interactive-time-locked-refunds">非交互式定期退款 | Non-interactive time-locked refunds</h2>
 
@@ -195,14 +197,13 @@ ENDIF
 
 <p>問題是，在許多情況下，使用者將不會擁有一些或全部交易輸出的有效簽名。使用 <code class="language-plaintext highlighter-rouge">CHECKLOCKTIMEVERIFY</code> 而不是按需建立退款簽名，而是使用以下形式的 scriptPubKeys ：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>IF
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>IF
     &lt;service pubkey&gt; CHECKSIGVERIFY
 ELSE
     &lt;expiry time&gt; CHECKLOCKTIMEVERIFY DROP
 ENDIF
 &lt;user pubkey&gt; CHECKSIG
 </code></pre></div></div>
-
 <p>現在，用戶總是可以通過等待到期時間來花費他們的資金而無需服務的合作。</p>
 
 <h3 id="支付通道--payment-channels">支付通道 | Payment Channels</h3>
@@ -221,7 +222,7 @@ ENDIF
 
 <p>這個問題可以用退款交易技術互動地解決; 使用 <code class="language-plaintext highlighter-rouge">CHECKLOCKTIMEVERIFY</code> ，可以使用以下形式的scriptPubKeys以非互動方式解決問題：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>IF
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>IF
     HASH160 &lt;Hash160(encryption key)&gt; EQUALVERIFY
     &lt;publisher pubkey&gt; CHECKSIG
 ELSE
@@ -229,8 +230,9 @@ ELSE
     &lt;buyer pubkey&gt; CHECKSIG
 ENDIF
 </code></pre></div></div>
-
-<p><strong>資料的買家現在正在提供一個有效期限的安全報價。如果發行商在到期時間到期之前未能接受報價，買家可以通過消費輸出來取消報價。</strong></p>
+<ul>
+  <li>*資料的買家現在正在提供一個有效期限的安全報價。如果發行商在到期時間到期之前未能接受報價，買家可以通過消費輸出來取消報價。**</li>
+</ul>
 
 <h2 id="證明犧牲礦工的手續費--proving-sacrifice-to-miners-fees">證明犧牲礦工的手續費 | Proving sacrifice to miners’ fees</h2>
 
@@ -245,7 +247,7 @@ ENDIF
 <h2 id="凍結資金--freezing-funds">凍結資金 | Freezing Funds</h2>
 
 <p>除了使用冷儲存，硬體錢包和 P2SH multisig 輸出來控制資金之外，現在資金可以直接在區塊鏈中凍結在 UTXO 中。使用下面的 scriptPubKey ，在提供的失效時間之前，沒有人能夠使用安全輸出。這種可靠地凍結資金的能力在需要減少脅迫或沒收風險的情況下可能會有用。</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;expiry time&gt; CHECKLOCKTIMEVERIFY DROP DUP HASH160 &lt;pubKeyHash&gt; EQUALVERIFY CHECKSIG
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;expiry time&gt; CHECKLOCKTIMEVERIFY DROP DUP HASH160 &lt;pubKeyHash&gt; EQUALVERIFY CHECKSIG
 </code></pre></div></div>
 <h2 id="完全替換nlocktime欄位--replacing-the-nlocktime-field-entirely">完全替換nLockTime欄位 | Replacing the nLockTime field entirely</h2>
 
@@ -254,7 +256,7 @@ ENDIF
 <h2 id="詳細規格--detailed-specification">詳細規格 | Detailed Specification</h2>
 
 <p>參考下面轉載的參考實現，瞭解這些語義的精確語義和詳細基本原理。</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>case OP_NOP2:
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>case OP_NOP2:
 case OP_NOP2:
 {
     // CHECKLOCKTIMEVERIFY
@@ -381,6 +383,8 @@ case OP_NOP2:
 </div>
 
 <div class="tags">
+    
+    <span class="tag is-primary">bip</span>
     
 </div>
 

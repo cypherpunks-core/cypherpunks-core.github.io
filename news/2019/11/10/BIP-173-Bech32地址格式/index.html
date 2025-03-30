@@ -136,7 +136,7 @@
 
     <p>Published: Nov 10, 2019 by Cypherpunks Core</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>BIP: 173 Layer: Applications 
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>BIP: 173 Layer: Applications 
 Title: Base32 address format for native v0-16 witness outputs 
 Author: Pieter Wuille &lt;pieter.wuille@gmail.com&gt; Greg Maxwell &lt;greg@xiph.org&gt; 
 Comments-Summary: No comments yet. 
@@ -147,7 +147,6 @@ Created: 2017-03-20
 License: BSD-2-Clause 
 Replaces: 142
 </code></pre></div></div>
-
 <h2 id="介紹--introduction">介紹 ｜ Introduction</h2>
 
 <h3 id="摘要--abstract">摘要 ｜ Abstract</h3>
@@ -261,7 +260,9 @@ Replaces: 142
   </tbody>
 </table>
 
-<p><strong>Checksum</strong></p>
+<ul>
+  <li>*Checksum**</li>
+</ul>
 
 <p>數據部分的最後六個characters構成一個Checksum，不包含任何訊息。 有效strings必須通過下面的Python3程式碼段指定的有效性標準。 當參數為以下參數時，bech32_verify_checksum函數必須返回true：</p>
 
@@ -270,7 +271,7 @@ Replaces: 142
   <li>data: 數據部分為整數列表，代表使用上表進行轉換後的characters</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def bech32_polymod(values):
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def bech32_polymod(values):
   GEN = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3]
   chk = 1
   for v in values:
@@ -286,22 +287,24 @@ def bech32_hrp_expand(s):
 def bech32_verify_checksum(hrp, data):
   return bech32_polymod(bech32_hrp_expand(hrp) + data) == 1
 </code></pre></div></div>
-
 <p>這實現了一個<a href="https://en.wikipedia.org/wiki/BCH_code">BCH code</a>，該程式碼可確保檢測到最多影響4個characters的任何錯誤，並且在109個失敗的機會中無法檢測到更多的錯誤。 有關屬性的更多詳細信息，請參見”Checksum設計”附件。 可讀部分的處理方法是，首先將每個character的US-ASCII值的higher bits輸入checksum，然後是零，然後是lower bits[<a href="https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-5">5</a>]。</p>
 
 <p>要根據給定的可讀部分和數據部分characters的（非checksum）值構造有效的checksum，可以使用以下程式碼：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def bech32_create_checksum(hrp, data):
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def bech32_create_checksum(hrp, data):
   values = bech32_hrp_expand(hrp) + data
   polymod = bech32_polymod(values + [0,0,0,0,0,0]) + 1
   return [(polymod &gt;&gt; 5 * (5 - i)) &amp; 31 for i in range(6)]
 </code></pre></div></div>
-
-<p><strong>錯誤修正 ｜ Error correction</strong></p>
+<ul>
+  <li>*錯誤修正 ｜ Error correction**</li>
+</ul>
 
 <p>這些BCH程式碼的特性之一是它們可用於錯誤修正。 錯誤修正的一個不幸的副作用是它侵蝕了錯誤檢測：錯誤修正將無效輸入更改為有效輸入，但是如果進行了多個錯誤，則有效輸入可能不是正確輸入。 使用不正確但有效的輸入會導致資金無法挽回流失。 因此，實現方式不應該向用戶暗示在string中可能存在錯誤的位置，而不建議用戶進行更正，而不能進行更正。</p>
 
-<p><strong>大寫小寫 ｜ Uppercase/lowercase</strong></p>
+<ul>
+  <li>*大寫小寫 ｜ Uppercase/lowercase**</li>
+</ul>
 
 <p>在確定用於checksum目的的character值時，使用小寫形式。</p>
 
@@ -319,8 +322,7 @@ def bech32_verify_checksum(hrp, data):
   <li>
     <p>對於mainnet人類可讀部分”bc”[<a href="https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-7">7</a>]，以及用於testnet”tb”[<a href="https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-8">8</a>]。</p>
   </li>
-  <li>
-    <p>數據部分的值：</p>
+  <li>數據部分的值：
     <ul>
       <li>1 byte: witness 版本</li>
       <li>將2-to-40-byte的witness program（由<a href="https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki">BIP141</a>定義）轉換為base32：
@@ -332,9 +334,8 @@ def bech32_verify_checksum(hrp, data):
       </li>
     </ul>
   </li>
+  <li>*解碼 ｜ Decoding**</li>
 </ul>
-
-<p><strong>解碼 ｜ Decoding</strong></p>
 
 <p>軟體解釋 segwit 地址:</p>
 
@@ -417,10 +418,9 @@ def bech32_verify_checksum(hrp, data):
   <li><code class="language-plaintext highlighter-rouge">?1ezyfcl</code> 警告：在轉換為US-ASCII期間，某些編碼器可能會將不可映射的character設置為有效的US-ASCIIcharacter，例如”？”。例如：</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;&gt;&gt; bech32_encode('\x80'.encode('ascii', 'replace').decode('ascii'), [])
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; &gt;&gt; bech32_encode('\x80'.encode('ascii', 'replace').decode('ascii'), [])
 '?1ezyfcl'
 </code></pre></div></div>
-
 <p>以下String不是有效的Bech32（具有無效原因）：</p>
 
 <ul>
@@ -466,13 +466,17 @@ def bech32_verify_checksum(hrp, data):
 
 <h3 id="checksum-設計">Checksum 設計</h3>
 
-<p><strong>設計選擇</strong></p>
+<ul>
+  <li>*設計選擇**</li>
+</ul>
 
 <p>BCH程式碼可以構建在任何prime-power字母上，並且可以選擇在大小和錯誤檢測功能之間進行良好權衡。儘管大多數圍繞BCH程式碼的工作都使用二進製字母，但這不是必要的。這使它們比<a href="https://en.wikipedia.org/wiki/Cyclic_redundancy_check">CRC codes</a>更適合我們的用例。與<a href="https://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction">Reed-Solomon codes</a>不同，它們的長度不限於字母大小的一分之一。儘管它們還支持有效的錯誤糾正，但是僅錯誤檢測的實現非常簡單。</p>
 
 <p>我們選擇6個checksum characters作為地址長度和錯誤檢測功能之間的權衡，因為6個characters是足以保證隨機故障發生率低於十億分之一的最低數字。 對於我們希望保護的數據長度（對於將來可能的40bytes witness program而言，該字段的最大長度為71個bytes），可以構造BCH程式碼以確保檢測到最多4個錯誤。.</p>
 
-<p><strong>選定的屬性 ｜ Selected properties</strong></p>
+<ul>
+  <li>*選定的屬性 ｜ Selected properties**</li>
+</ul>
 
 <p>這些程式碼中的許多程式碼在處理更多錯誤時的性能不佳，但並非全部。因此，我們考慮旨在僅檢測3個錯誤和4個錯誤的程式碼，並分析它們在實踐中的性能。</p>
 
@@ -487,7 +491,9 @@ def bech32_verify_checksum(hrp, data):
 
 <p>由於naive的搜索需要超過6.5 * 1019的Checksum評估，因此使用了衝突搜索(collision-search)方法進行分析。可以在<a href="https://github.com/sipa/ezbase32/">here</a>找到程式碼。</p>
 
-<p><strong>屬性 ｜ Properties</strong></p>
+<ul>
+  <li>*屬性 ｜ Properties**</li>
+</ul>
 
 <p>下表總結了檢測失敗的可能性（109 中的 1 倍）</p>
 
@@ -591,6 +597,8 @@ def bech32_verify_checksum(hrp, data):
 </div>
 
 <div class="tags">
+    
+    <span class="tag is-primary">bip</span>
     
 </div>
 

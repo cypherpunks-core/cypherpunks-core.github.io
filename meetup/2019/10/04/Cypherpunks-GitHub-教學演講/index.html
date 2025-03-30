@@ -138,8 +138,8 @@
 
     <p>GitHub 可以說是現今時代中工程師的一種社交網路, 當你發現原始作者有一些感興趣的專案時，你想為此專案作貢獻，加入原作者專案 Contributor 的行列時。就可以參考本文件一步一步操作。</p>
 
-<p><strong>目錄：</strong></p>
 <ul>
+  <li>*目錄：**</li>
   <li><a href="#%e7%ac%ac%e4%b8%80%e7%ab%a0%e6%a6%82%e5%bf%b5%e4%bb%8b%e7%b4%b9">第一章、概念介紹</a>
     <ul>
       <li><a href="#1-%e6%95%99%e5%ad%b8%e9%81%a9%e7%94%a8%e6%83%85%e5%a2%83">1. 教學適用情境</a></li>
@@ -230,36 +230,31 @@
 
 <h3 id="3自己從自己的-repo-同步一份到電腦--by-git-clone">(3)自己從自己的 repo 同步一份到電腦  … by git clone </h3>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone https://github.com/funprogrammer-byte/milo-education-python
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone https://github.com/funprogrammer-byte/milo-education-python
 </code></pre></div></div>
-
 <h3 id="4-由於別人的專案會持續更新所以我們讓自己的-repo-origin-與遠端-upstream-保持同步">(4)  由於別人的專案會持續更新，所以我們讓自己的 repo origin 與遠端 upstream 保持同步</h3>
 
 <p>« 讓原作者與自己 GitHub 同步,一起同步的手法 » </p>
 
 <h4 id="41-從-upstream-拉下來使電腦端有遠方-upstream-的-repo">4.1 從 upstream 拉下來，使電腦端有遠方 upstream 的 repo </h4>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git remote add upstream https://github.com/milochen0418/milo-education-python
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git remote add upstream https://github.com/milochen0418/milo-education-python
 $ git remote -v
 </code></pre></div></div>
-
 <p>就會看到 upstream 了</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git fetch upstream
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git fetch upstream
 $ git checkout master
 $ git merge upstream/master
 </code></pre></div></div>
-
 <h4 id="42-透過-push-的方式更新至-origin-自己的-repo--此時-upstream-便與-origin-同步">4.2 透過 push 的方式更新至 origin (自己的 repo) … 此時 upstream 便與 origin 同步</h4>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git status
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git status
 </code></pre></div></div>
-
 <p>可以看到自己目前電腦端， 已經與my github account 上的 repo 有不同了</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git push -u origin master
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git push -u origin master
 </code></pre></div></div>
-
 <h3 id="5開始更新並-push-至自己的-origin-by-branch-方式">(5)　開始更新並 push 至自己的 origin  (by branch 方式)</h3>
 
 <p>«開始作自己的更新 »</p>
@@ -268,15 +263,13 @@ $ git merge upstream/master
 
 <h4 id="52-新增一個-branch">5.2 新增一個 branch </h4>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git branch -a ← 查詢 branch 狀況，包含 電腦外的 branch
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git branch -a ← 查詢 branch 狀況，包含 電腦外的 branch
 </code></pre></div></div>
-
 <p>接著就開始新建</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git branch pr-test-0001 
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git branch pr-test-0001 
 $ git checkout pr-test-0001
 </code></pre></div></div>
-
 <p>改一些程式</p>
 
 <h4 id="53-在此-branch-上面作新增與修改然後-git-add--git-commit-最後-push-至自己的">5.3 在此 branch 上面作新增與修改，然後 git add ,  git commit 最後 push 至自己的</h4>
@@ -285,11 +278,10 @@ $ git checkout pr-test-0001
 
 <p><img src="/img/77.png" alt="" /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git add .
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git add .
 $ git commit -m "This is commit test"
 $ git push -u origin pr-test-0001
 </code></pre></div></div>
-
 <p>這時候你可以從自己的 GitHub 上面看到類似這訊息</p>
 
 <p><img src="/img/78.png" alt="" /><img src="/img/79.png" alt="" /></p>
@@ -310,6 +302,8 @@ $ git push -u origin pr-test-0001
 </div>
 
 <div class="tags">
+    
+    <span class="tag is-primary">cypherpunks</span>
     
 </div>
 

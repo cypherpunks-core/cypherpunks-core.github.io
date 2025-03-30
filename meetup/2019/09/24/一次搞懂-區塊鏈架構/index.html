@@ -154,8 +154,10 @@
 
 <p>我們從比特幣一筆交易的一生帶大家來一探究竟區塊鏈是如何運作的：</p>
 
-<p><strong>比特幣交易流程示意圖 :</strong>
-<img src="https://miro.medium.com/max/4608/1*VcLpDWRuh5LkZfE_g2ffgA.png" alt="" /></p>
+<ul>
+  <li>*比特幣交易流程示意圖 :**
+<img src="https://miro.medium.com/max/4608/1*VcLpDWRuh5LkZfE_g2ffgA.png" alt="" /></li>
+</ul>
 
 <h2 id="比特幣交易的一生">比特幣交易的一生</h2>
 
@@ -170,12 +172,18 @@
   <li>若檢查後確認有足額，則該交易會被放入到  <strong>Tx Pool</strong>  中。
 （按造 <strong>手續費給的多寡</strong> 由高至低排序）</li>
   <li>等待出塊的同時，各節點會
-<strong>A. 廣播接收到的交易</strong>
-<strong>B. 接收未在 Tx Pool 內的交易</strong></li>
+    <ul>
+      <li>*A. 廣播接收到的交易**</li>
+      <li>*B. 接收未在 Tx Pool 內的交易**</li>
+    </ul>
+  </li>
   <li>礦工節點們（有在用電腦算力找 nonce 值，拼出塊獎勵的節點）會
-<strong>撈取手續費較高的交易們來運算並打包成新區塊</strong> ，
+    <ul>
+      <li>*撈取手續費較高的交易們來運算並打包成新區塊** ，
 用電腦算力計算 nonce 值。
 ＊註：這邊的  <strong>nonce 值</strong>  跟前面介紹過的  <strong>以太坊地址的 nonce 值</strong>  不同（以太坊有兩個 nonce：一個是挖礦的；一個是地址的交易 <strong>序次</strong> 。）</li>
+    </ul>
+  </li>
   <li>成功找到找到 nonce 值，出塊的礦工會獲得 <strong>出塊獎勵</strong> 及該區塊所有打包交易給的 <strong>手續費</strong> 。</li>
   <li>該礦工節點將新的區塊廣播至全世界的其他節點們。</li>
   <li>其他節點 <strong>同步</strong>  &lt;595266 區塊高度（最新的區塊）&gt;、<UTXO Pool="">、<Tx Pool=""> 資料，繼續 **廣播與接收新交易** 。</Tx></UTXO></li>
@@ -235,7 +243,9 @@
 
 <p><a href="https://anders.com/blockchain/?source=post_page-----daf85e06027e----------------------">Blockchain Demo</a></p>
 
-<p><em>（</em> <a href="https://anders.com/blockchain/"> <em>https://anders.com/blockchain/</em> </a> <em>）</em></p>
+<ul>
+  <li>（* <a href="https://anders.com/blockchain/"> <em>https://anders.com/blockchain/</em> </a> <em>）</em></li>
+</ul>
 
 <p>此外，也跟大家預告一下精彩可期的未來數篇文章：</p>
 
@@ -255,6 +265,8 @@
 </div>
 
 <div class="tags">
+    
+    <span class="tag is-primary">cypherpunks</span>
     
 </div>
 

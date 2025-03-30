@@ -148,14 +148,13 @@
 
 <p>base58.h：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 為什麼 base-58 而不是標準的 base-64 編碼？
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 為什麼 base-58 而不是標準的 base-64 編碼？
 // - 不希望 0OIl 字元在某些字型和字型中看起來相同
 //可以用來建立視覺上相同的賬號。
 // - 具有非字母數字字元的字元串並不像帳號那麼容易被接受。
 // - 如果沒有標點符號，電子郵件通常不會換行。
 // - 如果全部是字母數字，Doubleclicking 會將整個數字選為一個單詞。
 </code></pre></div></div>
-
 <h2 id="base58check的功能">Base58Check的功能</h2>
 
 <p>Base58Check 具有以下功能：</p>
@@ -196,7 +195,9 @@
 
 <h2 id="編碼一個私鑰">編碼一個私鑰</h2>
 
-<p><strong>Base58Check 編碼也用於編碼錢包匯入格式中的<a href="https://en.bitcoin.it/wiki/Private_key">ECDSA 私鑰</a></strong> 。除了 0x80 用於 version/application 位元組，並且有效載荷是 32 位元組而不是 20 （比特幣中的私鑰是單個 32 位元組無符號的大端整數）之外，它與比特幣地址完全相同。對於與未壓縮的公鑰相關的私鑰，這種編碼總是會產生一個以 <code class="language-plaintext highlighter-rouge">5</code> 開頭的 51 個字元的字元串，或者更具體地說<code class="language-plaintext highlighter-rouge">5H</code>，<code class="language-plaintext highlighter-rouge">5J</code>或<code class="language-plaintext highlighter-rouge">5K</code>。</p>
+<ul>
+  <li>*Base58Check 編碼也用於編碼錢包匯入格式中的<a href="https://en.bitcoin.it/wiki/Private_key">ECDSA 私鑰</a>** 。除了 0x80 用於 version/application 位元組，並且有效載荷是 32 位元組而不是 20 （比特幣中的私鑰是單個 32 位元組無符號的大端整數）之外，它與比特幣地址完全相同。對於與未壓縮的公鑰相關的私鑰，這種編碼總是會產生一個以 <code class="language-plaintext highlighter-rouge">5</code> 開頭的 51 個字元的字元串，或者更具體地說<code class="language-plaintext highlighter-rouge">5H</code>，<code class="language-plaintext highlighter-rouge">5J</code>或<code class="language-plaintext highlighter-rouge">5K</code>。</li>
+</ul>
 
 <h2 id="base58-符號圖表">Base58 符號圖表</h2>
 
@@ -371,7 +372,7 @@
 
 <p>編碼 address_byte_string 的演算法（由1-byte_version + hash_or_other_data + 4-byte_check_code組成）是</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>code_string = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>code_string = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 x = convert_bytes_to_big_integer(hash_result)
 
 output_string = ""
@@ -389,7 +390,6 @@ output_string.append(code_string[0]);
 
 output_string.reverse();
 </code></pre></div></div>
-
 <h2 id="版本位元組">版本位元組</h2>
 
 <p>以下是一些常見的版本位元組：</p>
@@ -467,9 +467,14 @@ output_string.reverse();
 
 <p>在之前我們分析過橢圓曲線的知識，對於確定性錢包的知識我們也做了相關地介紹，還有就是分層確定性錢包的知識。</p>
 
-<p><strong>另外 Base58Check 還有一個極大的好處就是可以校驗地址是不是正確的，因為 Base58 生成的時候是加入了校驗碼</strong> 。我覺得比特幣團隊做的真的是很棒不是嗎？詳情可以參考：<a href="http://8btc.com/thread-31201-1-1.html">為什麼以太坊地址中沒有校驗值？</a></p>
-
-<p><strong>對於比特幣地址也要特別注意一下，地址類型也就是 version/appication 欄位其實是自己加入的，和 ecdsa 本身並沒有任何關係。校驗碼也是自己加上去的而已。我們可以看一下下面的圖片.</strong></p>
+<ul>
+  <li>
+    <p>*另外 Base58Check 還有一個極大的好處就是可以校驗地址是不是正確的，因為 Base58 生成的時候是加入了校驗碼** 。我覺得比特幣團隊做的真的是很棒不是嗎？詳情可以參考：<a href="http://8btc.com/thread-31201-1-1.html">為什麼以太坊地址中沒有校驗值？</a></p>
+  </li>
+  <li>
+    <p>*對於比特幣地址也要特別注意一下，地址類型也就是 version/appication 欄位其實是自己加入的，和 ecdsa 本身並沒有任何關係。校驗碼也是自己加上去的而已。我們可以看一下下面的圖片.**</p>
+  </li>
+</ul>
 <div align="center"><img width="600" src="/img/139.png" /></div>
 
 <p>有一段時間我在分析 java 的 ECKey 的程式碼發現 java 底層的橢圓曲線演算法的實現，這裡我就不做更多的說明了。 <strong>關鍵是我們如何實現分層確定性錢包，這個很簡單也很複雜，其實就是找私鑰 \(G\) ，至於這個 \(G\) 怎麼找，我們可以檢視精通比特幣裡面的說明，這裡面只是提到了 HMAC-SHA512。看來這裡面隱藏了很多的細節因素，我們有時間需要研究一下，HMAC-SHA512 的知識了。</strong></p>
@@ -477,6 +482,8 @@ output_string.reverse();
 </div>
 
 <div class="tags">
+    
+    <span class="tag is-primary">bitcoin</span>
     
 </div>
 

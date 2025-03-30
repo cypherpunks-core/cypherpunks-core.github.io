@@ -151,7 +151,7 @@
 
 <p>一個典型的輸出是33位元組（pubkey hash +操作碼），需要輸入148位元組的消耗，所以我們將它們加在一起以找出用於傳輸這個數值的總資料量。請注意，這個公式對於任何不是付費地址輸出的東西都是錯誤的，不幸的是，我們必須遵循比特幣核心的錯誤以確保我們被認為是標準。一個更好的公式可以估計滿足所有不同指令碼類型所需的資料大小，或者只是使用硬編碼33。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 這個是根據實時的資料進行的計算。
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 這個是根據實時的資料進行的計算。
 public Coin getMinNonDustValue(Coin feePerKb) {
     final long size = this.unsafeBitcoinSerialize().length + 148;
     // 計算交易費
@@ -162,7 +162,6 @@ public Coin getMinNonDustValue() {
     return getMinNonDustValue(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.multiply(3));
 }
 </code></pre></div></div>
-
 <p>上面的這段程式碼就是用來計算最小的輸出，如果小於這個輸出值，我們就認為這個輸出是粉塵輸出。</p>
 
 <h2 id="關於小金額的問題">關於小金額的問題</h2>
@@ -176,6 +175,8 @@ public Coin getMinNonDustValue() {
 </div>
 
 <div class="tags">
+    
+    <span class="tag is-primary">cypherpunks</span>
     
 </div>
 

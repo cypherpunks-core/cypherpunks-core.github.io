@@ -195,10 +195,10 @@
 <p>對於比特幣 script 的語言介紹這裡不提太多，比特幣 script 其實就是一種基於堆棧的 script 語言，堆棧是一個非常簡單的資料結構，可以被視為一疊卡片。棧允許兩個操作：push和pop（推送和彈出）。</p>
 
 <p>對於解鎖 script 大概是這樣的：</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 OP_DUP OP_HASH160 &lt;Cafe Public Key Hash&gt; OP_EQUALVERIFY OP_CHECKSIG
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 OP_DUP OP_HASH160 &lt;Cafe Public Key Hash&gt; OP_EQUALVERIFY OP_CHECKSIG
 </code></pre></div></div>
 <p>前面輸出的鎖定 script 是這樣的：</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sig&gt; &lt;pubk&gt;
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;sig&gt; &lt;pubk&gt;
 </code></pre></div></div>
 <p>那麼整體的 script 是這樣的：
 <img src="/img/133.png" alt="" /></p>
@@ -209,22 +209,22 @@
 
 <p>對於解鎖的 script 是</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OP_HASH256 6fe28c0ab6f1b372c1a6a246ae63f74f931e8365e15a089c68d6190000000000 OP_EQUAL
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OP_HASH256 6fe28c0ab6f1b372c1a6a246ae63f74f931e8365e15a089c68d6190000000000 OP_EQUAL
 </code></pre></div></div>
-
 <p>我們可以理解成解數學中的難題，hash(x) = 6fe28c0ab6f1b372c1a6 我們只是提供一個x滿足這個條件，就可以證明我可以花費這筆錢了。這裡 <code class="language-plaintext highlighter-rouge">6fe28c0ab6f1b372c1a6a246ae63f74f931e8365e15a089c68d6190000000000</code> 不是簡單的一個數字的hash，而是一段script的hash(簡稱redeemScript),  <strong>我們可以理解成只要你提供了一段script，它的二進位制hash和目標匹配，那麼你就可以花費這筆錢了，注意這裡是前端 script 執行的輸出是x就行了。</strong> .</p>
 
-<p><strong>請注意，雖然這樣的交易很有趣，但它們並不安全，因為它們不包含任何簽名，因此任何試圖花費它們的交易都可以用將資金髮送到其他地方，用不同的交易來替代</strong> 。</p>
+<ul>
+  <li>*請注意，雖然這樣的交易很有趣，但它們並不安全，因為它們不包含任何簽名，因此任何試圖花費它們的交易都可以用將資金髮送到其他地方，用不同的交易來替代** 。</li>
+</ul>
 
 <h3 id="p2sh地址生成">P2SH地址生成</h3>
 
 <p>可以使用 go-bitcoin-multisig 生成，Github地址：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>go-bitcoin-multisig keys --count 3 --concise
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>go-bitcoin-multisig keys --count 3 --concise
 </code></pre></div></div>
-
 <p>生成結果：</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--------------
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- -------------
 KEY #1
 Private key:
 5JruagvxNLXTnkksyLMfgFgf3CagJ3Ekxu5oGxpTm5mPfTAPez3
@@ -232,8 +232,8 @@ Public key hex:
 04a882d414e478039cd5b52a92ffb13dd5e6bd4515497439dffd691a0f12af9575fa349b5694ed3155b136f09e63975a1700c9f4d4df849323dac06cf3bd6458cd
 Public Bitcoin address:
 1JzVFZSN1kxGLTHG41EVvY5gHxLAX7q1Rh
---------------
---------------
+- -------------
+- -------------
 KEY #2
 Private key:
 5JX3qAwDEEaapvLXRfbXRMSiyRgRSW9WjgxeyJQWwBugbudCwsk
@@ -241,8 +241,8 @@ Public key hex:
 046ce31db9bdd543e72fe3039a1f1c047dab87037c36a669ff90e28da1848f640de68c2fe913d363a51154a0c62d7adea1b822d05035077418267b1a1379790187
 Public Bitcoin address:
 14JfSvgEq8A8S7qcvxeaSCxhn1u1L71vo4
---------------
---------------
+- -------------
+- -------------
 KEY #3
 Private key:
 5JjHVMwJdjPEPQhq34WMUhzLcEd4SD7HgZktEh8WHstWcCLRceV
@@ -250,56 +250,50 @@ Public key hex:
 0411ffd36c70776538d079fbae117dc38effafb33304af83ce4894589747aee1ef992f63280567f52f5ba870678b4ab4ff6c8ea600bd217870a8b4f1f09f3a8e83
 Public Bitcoin address:
 1Kyy7pxzSKG75L9HhahRZgYoer9FePZL4R
---------------
+- -------------
 </code></pre></div></div>
-
 <p>接著我們取出裡面所有的Public key（hex格式）</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Key A:
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Key A:
 04a882d414e478039cd5b52a92ffb13dd5e6bd4515497439dffd691a0f12af9575fa349b5694ed3155b136f09e63975a1700c9f4d4df849323dac06cf3bd6458cd
 Key B:
 046ce31db9bdd543e72fe3039a1f1c047dab87037c36a669ff90e28da1848f640de68c2fe913d363a51154a0c62d7adea1b822d05035077418267b1a1379790187
 Key C:
 0411ffd36c70776538d079fbae117dc38effafb33304af83ce4894589747aee1ef992f63280567f52f5ba870678b4ab4ff6c8ea600bd217870a8b4f1f09f3a8e83
 </code></pre></div></div>
-
 <p>然後就可以使用這三組Public key組合起來（A,B,C）進行多重簽名：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>go-bitcoin-multisig address --m 2 --n 3 --public-keys 04a882d414e478039cd5b52a92ffb13dd5e6bd4515497439dffd691a0f12af9575fa349b5694ed3155b136f09e63975a1700c9f4d4df849323dac06cf3bd6458cd,046ce31db9bdd543e72fe3039a1f1c047dab87037c36a669ff90e28da1848f640de68c2fe913d363a51154a0c62d7adea1b822d05035077418267b1a1379790187,0411ffd36c70776538d079fbae117dc38effafb33304af83ce4894589747aee1ef992f63280567f52f5ba870678b4ab4ff6c8ea600bd217870a8b4f1f09f3a8e83
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>go-bitcoin-multisig address --m 2 --n 3 --public-keys 04a882d414e478039cd5b52a92ffb13dd5e6bd4515497439dffd691a0f12af9575fa349b5694ed3155b136f09e63975a1700c9f4d4df849323dac06cf3bd6458cd,046ce31db9bdd543e72fe3039a1f1c047dab87037c36a669ff90e28da1848f640de68c2fe913d363a51154a0c62d7adea1b822d05035077418267b1a1379790187,0411ffd36c70776538d079fbae117dc38effafb33304af83ce4894589747aee1ef992f63280567f52f5ba870678b4ab4ff6c8ea600bd217870a8b4f1f09f3a8e83
 </code></pre></div></div>
-
 <p>接著就生成了P2SH地址：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- --------------------
 Your *P2SH ADDRESS* is:
 347N1Thc213QqfYCz3PZkjoJpNv5b14kBd
 Give this to sender funding multisig address with Bitcoin.
----------------------
----------------------
+- --------------------
+- --------------------
 Your *REDEEM SCRIPT* is:
 524104a882d414e478039cd5b52a92ffb13dd5e6bd4515497439dffd691a0f12af9575fa349b5694ed3155b136f09e63975a1700c9f4d4df849323dac06cf3bd6458cd41046ce31db9bdd543e72fe3039a1f1c047dab87037c36a669ff90e28da1848f640de68c2fe913d363a51154a0c62d7adea1b822d05035077418267b1a1379790187410411ffd36c70776538d079fbae117dc38effafb33304af83ce4894589747aee1ef992f63280567f52f5ba870678b4ab4ff6c8ea600bd217870a8b4f1f09f3a8e8353ae
 Keep private and provide this to redeem multisig balance later.
----------------------
+- --------------------
 </code></pre></div></div>
-
 <h2 id="多重簽名地址">多重簽名地址</h2>
 
 <p>在bitcoin bips歷史上先有M-of-N Transaction(bip-11),然後才有Pay To Script Hash(bip-16)(簡稱P2SH). 按照這個順序，其實比特幣中實現多重簽名有兩種方法：</p>
 
 <h3 id="原始的方法bip-11">原始的方法(bip-11)</h3>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scriptPubKey : m {pubkey}...{pubkey} n OP_CHECKMULTISIG
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scriptPubKey : m {pubkey}...{pubkey} n OP_CHECKMULTISIG
 scriptSig : OP_0 ...signatures...
 </code></pre></div></div>
-
 <p>可以檢視一下例項：<code class="language-plaintext highlighter-rouge">09dd94f2c85262173da87a745a459007bb1eed6eeb6bfa238a0cd91a16cf7790</code></p>
 
 <h3 id="用p2sh來實現">用P2SH來實現</h3>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scriptSig: [signature] {[pubkey] OP_CHECKSIG}
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scriptSig: [signature] {[pubkey] OP_CHECKSIG}
 scriptPubKey: OP_HASH160 [20-byte-hash of {[pubkey] OP_CHECKSIG} ] OP_EQUAL
 </code></pre></div></div>
-
 <p>這裡<code class="language-plaintext highlighter-rouge">{[pubkey] OP_CHECKSIG}</code>就是我們提到<code class="language-plaintext highlighter-rouge">redeemScript</code>程式碼. 例項：<code class="language-plaintext highlighter-rouge">3c9018e8d5615c306d72397f8f5eef44308c98fb576a88e030c25456b4f3a7ac</code></p>
 
 <h2 id="總結">總結</h2>
@@ -317,6 +311,8 @@ scriptPubKey: OP_HASH160 [20-byte-hash of {[pubkey] OP_CHECKSIG} ] OP_EQUAL
 </div>
 
 <div class="tags">
+    
+    <span class="tag is-primary">cypherpunks</span>
     
 </div>
 

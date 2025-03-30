@@ -146,7 +146,9 @@
 
 <p><img src="/img/136.png" alt="" /></p>
 
-<p><strong>Secp256k1 是 secp256k1 橢圓曲線\(y^2 = x^3 + 7\)在實數上的圖形。請注意，因為 secp256k1 實際上是在欄位\(Zp\)上定義的，所以它的圖形實際上看起來像是隨機分散的點，而不是像圖中這樣是連續的點。</strong></p>
+<ul>
+  <li>*Secp256k1 是 secp256k1 橢圓曲線\(y^2 = x^3 + 7\)在實數上的圖形。請注意，因為 secp256k1 實際上是在欄位\(Zp\)上定義的，所以它的圖形實際上看起來像是隨機分散的點，而不是像圖中這樣是連續的點。**</li>
+</ul>
 
 <h2 id="技術細節">技術細節</h2>
 
@@ -154,32 +156,27 @@
 
 <p>與 Koblitz 曲線 secp256k1 相關聯的\(Fp\)上的橢圓曲線域參數由單元\(T=（p，a，b，G，n，h）\)指定，其中有限域\(Fp\)由下式定義：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE FFFFFC2F
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE FFFFFC2F
 = 2256 - 232 - 29 - 28 - 27 - 26 - 24 - 1
 </code></pre></div></div>
-
 <p>\(Fp\)上的曲線E：\(y^2 = x^3 + ax + b\)由下式定義：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
 b = 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000007
 </code></pre></div></div>
-
 <p>壓縮形式的基點\(G\)是：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>G = 02 79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>G = 02 79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798
 </code></pre></div></div>
-
 <p>而在未壓縮的形式是：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>G = 04 79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798 483ADA77 26A3C465 5DA4FBFC 0E1108A8 FD17B448 A6855419 9C47D08F FB10D4B8
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>G = 04 79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798 483ADA77 26A3C465 5DA4FBFC 0E1108A8 FD17B448 A6855419 9C47D08F FB10D4B8
 </code></pre></div></div>
-
 <p>最後，\(G\)的迴圈因子\(n\)(就是指\(nG=G\))和輔因子\(h\)如下：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>n = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE BAAEDCE6 AF48A03B BFD25E8C D0364141
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>n = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE BAAEDCE6 AF48A03B BFD25E8C D0364141
 h = 01
 </code></pre></div></div>
-
 <h2 id="屬性">屬性</h2>
 
 <ul>
@@ -202,6 +199,8 @@ h = 01
 </div>
 
 <div class="tags">
+    
+    <span class="tag is-primary">cypherpunks</span>
     
 </div>
 
