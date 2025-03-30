@@ -1,12 +1,16 @@
 ---
 layout: post
-title:  "Cypherpunks Taiwan（4）- 區塊鏈世界的隱私未來–Mimblewimble的隱私魔法"
-date:   2019-05-05
-categories: meetup
-description: "區塊鏈世界的隱私未來–Mimblewimble的隱私魔法"
-image: '/img/53.png'
+title: Cypherpunks Taiwan（4）- 區塊鏈世界的隱私未來–Mimblewimble的隱私魔法
+date: 2019-05-05
+categories:
+- meetup
+description: 區塊鏈世界的隱私未來–Mimblewimble的隱私魔法
+image: /img/53.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
+- mimblewimble
 ---
 
 * 時間：2019年5月5日（星期日） 晚上7:00到10:00

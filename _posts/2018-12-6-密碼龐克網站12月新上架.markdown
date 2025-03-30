@@ -1,14 +1,16 @@
 ---
 layout: post
-title:  "Cypherpunks Taiwan 密碼龐克網站12月新上架"
-date:   2018-12-6
-categories: news
-description: "「Cypherpunks Taiwan 密碼龐克」網站 2018年12月新開張。"
-image: "/img/1.jpg"
+title: Cypherpunks Taiwan 密碼龐克網站12月新上架
+date: 2018-12-6
+categories:
+- news
+description: 「Cypherpunks Taiwan 密碼龐克」網站 2018年12月新開張。
+image: /img/1.jpg
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
-
 
 「Cypherpunks Taiwan 密碼龐克」網站 2018年12月新開張。日籍比特幣創業家東晃慈（Koji Higashi）為「Cypherpunks Taiwan 密碼龐克」網站計畫的創辦人。同時也是日本東京區塊鏈共同工作空間 [HashHub](https://www.hashhub.tokyo/) 的共同創辦人東晃慈先生，多年旅居臺北、高雄等城市，深入觀察台灣比特幣社群、以太坊社群，以及區塊鏈新創生態圈的發展態勢，認為台灣區塊鏈技術社群，除了異常熱鬧的臉書社群之外，應可以考慮建立一個網站平台，並且擁有自己的中文技術論壇討論區。
 

@@ -1,12 +1,16 @@
 ---
 layout: post
-title:  "活動-Make Privacy Protected Again | 找出你遺失很久的【隱私】"
-date:   2019-07-05
-categories: meetup
-description: "Maskbook 是適用於 Chrome、Edge、Brave、Vivaldi 和所有基於 Chromium 瀏覽器的免費開源擴充插件，Maskbook 允許使用者在 Facebook 上發佈加密的貼文"
-image: '/img/48.png'
+title: 活動-Make Privacy Protected Again | 找出你遺失很久的【隱私】
+date: 2019-07-05
+categories:
+- meetup
+description: Maskbook 是適用於 Chrome、Edge、Brave、Vivaldi 和所有基於 Chromium 瀏覽器的免費開源擴充插件，Maskbook
+  允許使用者在 Facebook 上發佈加密的貼文
+image: /img/48.png
 published: true
 hero_image: /img/hero.png
+tags:
+- privacy
 ---
 
 - 時間：2019年7月5日（星期五）19:00-22:00

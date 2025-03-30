@@ -1,12 +1,15 @@
 ---
 layout: post
-title: "MuSig：一個新的多重簽名標準"
+title: MuSig：一個新的多重簽名標準
 date: 2020-03-11
 image: /img/147.jpg
-description: "MuSig提供可證明的安全效能，甚至能夠抵禦多名惡意簽名者的勾結，並建立與普通的單一簽名者Schnorr簽名別無二致的簽名。"
+description: MuSig提供可證明的安全效能，甚至能夠抵禦多名惡意簽名者的勾結，並建立與普通的單一簽名者Schnorr簽名別無二致的簽名。
 published: true
 hero_image: /img/hero.png
-categories: news
+categories:
+- news
+tags:
+- cypherpunks
 ---
 
 2019年2月15日，Andrew Poelstra [轉載blockstream](https://blockstream.com/2019/02/18/en-musig-a-new-multisignature-standard/)。比特幣及[Blockstream的Liquid](https://blockstream.com/liquid/)等相關區塊鏈使用[ECDSA簽名演算法](https://en.bitcoin.it/wiki/Elliptic_Curve_Digital_Signature_Algorithm)來驗證儲存在系統裡的幣的所有權歸屬。業界於2008年決定使用這個演算法是[基於當時廣泛使用且未申請專利的](https://bitcoin.stackexchange.com/questions/73049/why-was-ecdsa-chosen-over-schnorr-signatures-in-the-inital-design)數位簽名系統。但ECDSA存在一些嚴重的技術侷限，尤其是[多重簽名](https://en.bitcoin.it/wiki/Multisignature)和[閾值簽名](https://bitcoinmagazine.com/articles/threshold-signatures-new-standard-wallet-security-1425937098/)這兩種需要多個獨立方而非單一方的簽名非常難以通過ECDSA來實現。ECDSA簽名擁有十分複雜的代數結構，導致它們非常不靈活、難以操作，迫使比特幣開發者不得不用[比特幣指令碼](https://en.bitcoin.it/wiki/Script)來開發[跨鏈原子交換](https://en.bitcoin.it/wiki/Atomic_swap)或[閃電網路](https://en.bitcoin.it/wiki/Lightning_Network)這類應用。如果使用更加現代的簽名方案的話，可以讓這些應用更加小巧且隱私性更好。

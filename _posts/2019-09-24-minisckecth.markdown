@@ -1,12 +1,15 @@
 ---
 layout: post
-title: "Minisketch：降低節點頻寬要求"
+title: Minisketch：降低節點頻寬要求
 date: 2019-09-24
 image: /img/minisckecth.jpg
-description: "Minisketch：將能夠減少在分佈式系統中同步數據時所需的頻寬。"
+description: Minisketch：將能夠減少在分佈式系統中同步數據時所需的頻寬。
 published: true
 hero_image: /img/hero.png
-categories: news
+categories:
+- news
+tags:
+- cypherpunks
 ---
 
 Pieter Wuille January 07, 2019 [轉載 blockstream](https://blockstream.com/2019/01/07/en-minisketch-reducing-node-bandwidth-requirements/)
@@ -45,4 +48,4 @@ Minisketch原本是一個項目中的組成部分，這個項目旨在研究如�
 
 SRR協議目前仍在研究初期階段，要真正應用到比特幣網絡上還有很長的路要走，但像Minisketch這樣的成果代表了比特幣全節點普及應用（以及其他分佈式網絡的優化）中的一個非常重要的里程碑。該項目的更多進展，敬請拭目以待！
 
-*要了解更多關於Minisketch的詳情，請查看[Minisketch Github repository](https://github.com/sipa/minisketch)。*
+* 要了解更多關於Minisketch的詳情，請查看[Minisketch Github repository](https://github.com/sipa/minisketch)。*

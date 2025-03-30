@@ -1,17 +1,21 @@
 ---
 layout: post
-title:  "Cypherpunks GitHub 教學演講"
-date:   2019-10-04
-categories: meetup
-description: "GitHub 可以說是現今時代中工程師的一種社交網路, 當你發現原始作者有一些感興趣的專案時，你想為此專案作貢獻，加入原作者專案 Contributor 的行列時。就可以參考本文件一步一步操作。"
-image: '/img/75.png'
+title: Cypherpunks GitHub 教學演講
+date: 2019-10-04
+categories:
+- meetup
+description: GitHub 可以說是現今時代中工程師的一種社交網路, 當你發現原始作者有一些感興趣的專案時，你想為此專案作貢獻，加入原作者專案 Contributor
+  的行列時。就可以參考本文件一步一步操作。
+image: /img/75.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 GitHub 可以說是現今時代中工程師的一種社交網路, 當你發現原始作者有一些感興趣的專案時，你想為此專案作貢獻，加入原作者專案 Contributor 的行列時。就可以參考本文件一步一步操作。
 
-**目錄：**
+* *目錄：**
 - [第一章、概念介紹](#%e7%ac%ac%e4%b8%80%e7%ab%a0%e6%a6%82%e5%bf%b5%e4%bb%8b%e7%b4%b9)
     - [1. 教學適用情境](#1-%e6%95%99%e5%ad%b8%e9%81%a9%e7%94%a8%e6%83%85%e5%a2%83)
     - [2. 三個角色介紹](#2-%e4%b8%89%e5%80%8b%e8%a7%92%e8%89%b2%e4%bb%8b%e7%b4%b9)
@@ -34,8 +38,6 @@ GitHub 可以說是現今時代中工程師的一種社交網路, 當你發現�
 # 第一章、概念介紹
 
 ### 1. 教學適用情境
-
-
 
 > 但真實世界中，原作者不一定總接受提交，但可以多來 [Cypherpunks-core](https://github.com/cypherpunks-core) 的 GitHub 來, 我們比較開放讓大家一同來成為貢獻者。或是 [到我這](https://github.com/milochen0418/milo-education-python) 專案來，該專案裡面有個 GitHub 資料夾，在裡面你可以隨意更新，然後試著更新，然後對我發更新請求(Pull Request), 我可以幫你 merge，讓你成功使用本次的教學。若有操作上不懂之處，或是回家不懂，也可至 [Event Discussion](https://www.facebook.com/events/523580818418580/) 這邊留言討論。
 
@@ -83,41 +85,36 @@ http://github.com/milochen0418/milo-education-python
 
 ### (3)自己從自己的 repo 同步一份到電腦  ... by git clone 
 
-```
+```text
 $ git clone https://github.com/funprogrammer-byte/milo-education-python
 ```
-
 ### (4)  由於別人的專案會持續更新，所以我們讓自己的 repo origin 與遠端 upstream 保持同步
 
 << 讓原作者與自己 GitHub 同步,一起同步的手法 >> 
 
 #### 4.1 從 upstream 拉下來，使電腦端有遠方 upstream 的 repo 
 
-```
+```text
 $ git remote add upstream https://github.com/milochen0418/milo-education-python
 $ git remote -v
 ```
-
 就會看到 upstream 了
 
-```
+```text
 $ git fetch upstream
 $ git checkout master
 $ git merge upstream/master
 ```
-
 #### 4.2 透過 push 的方式更新至 origin (自己的 repo) ... 此時 upstream 便與 origin 同步
 
-```
+```text
 $ git status
 ```
-
 可以看到自己目前電腦端， 已經與my github account 上的 repo 有不同了
 
-```
+```text
 $ git push -u origin master
 ```
-
 ### (5)　開始更新並 push 至自己的 origin  (by branch 方式)
 
 <<開始作自己的更新 >>
@@ -126,17 +123,15 @@ $ git push -u origin master
 
 #### 5.2 新增一個 branch 
 
-```
+```text
 $ git branch -a ← 查詢 branch 狀況，包含 電腦外的 branch
 ```
-
 接著就開始新建
 
-```
+```text
 $ git branch pr-test-0001 
 $ git checkout pr-test-0001
 ```
-
 改一些程式
 
 #### 5.3 在此 branch 上面作新增與修改，然後 git add ,  git commit 最後 push 至自己的
@@ -145,12 +140,11 @@ $ git checkout pr-test-0001
 
 ![](/img/77.png)
 
-```
+```text
 $ git add .
 $ git commit -m "This is commit test"
 $ git push -u origin pr-test-0001
 ```
-
 這時候你可以從自己的 GitHub 上面看到類似這訊息
 
 ![](/img/78.png)![](/img/79.png)

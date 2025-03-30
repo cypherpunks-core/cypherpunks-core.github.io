@@ -1,12 +1,16 @@
 ---
 layout: post
-title:  "麥肯錫報告分析區塊鏈技術發展"
-date:   2019-01-16
-categories: news
-description: "比特幣分析師 Arjun Balaji，同時也是紐約加密資產投資顧問新創公司 Shomei Capital 創辦人，今年 1 月 2 日在 Medium 平台上發表「Crypto Theses for 2019」一文，描寫加密貨幣發展現況，以及預測多個與比特幣及加密貨幣相關的未來成長趨勢。"
-image: '/img/13.png'
+title: 麥肯錫報告分析區塊鏈技術發展
+date: 2019-01-16
+categories:
+- news
+description: 比特幣分析師 Arjun Balaji，同時也是紐約加密資產投資顧問新創公司 Shomei Capital 創辦人，今年 1 月 2 日在
+  Medium 平台上發表「Crypto Theses for 2019」一文，描寫加密貨幣發展現況，以及預測多個與比特幣及加密貨幣相關的未來成長趨勢。
+image: /img/13.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 原文標題： Blockchain’s Occam problem

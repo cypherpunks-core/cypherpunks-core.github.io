@@ -1,13 +1,17 @@
 ---
 layout: post
-title:  "使用區塊鏈和感知雜湊達到去中心化之圖像共享和版權保護"
-date:   2019-11-24
-categories: news
-description: "媒體區塊鏈的範疇越來越發人深省，究竟該如何透過去中心化的機制來達到版權保護呢？一起來閱讀本篇文章吧！"
-image: '/img/panda-28.png'
+title: 使用區塊鏈和感知雜湊達到去中心化之圖像共享和版權保護
+date: 2019-11-24
+categories:
+- news
+description: 媒體區塊鏈的範疇越來越發人深省，究竟該如何透過去中心化的機制來達到版權保護呢？一起來閱讀本篇文章吧！
+image: /img/panda-28.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
+
 > 本篇文章翻譯自 [Decentralised Image Sharing and Copyright Protection using Blockchain and Perceptual Hashes](https://ieeexplore.ieee.org/document/8711440)，媒體區塊鏈的範疇越來越發人深省，究竟該如何透過去中心化的機制來達到版權保護呢？一起來閱讀本篇文章吧！
 
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
@@ -83,7 +87,6 @@ hero_image: /img/hero.png
 ### B. 智能合約和訊息流
 
 訊息流如圖1所示的系統架構圖所示。智能合約是以太坊生態系統的核心。以太坊上的智能合約是區塊鏈中的一小段程式碼。智能合約的概念最早由 Szabo 提出[3]。它們用於管理用戶之間的協議。他們可以持有以太（ETH），將其提供給適當的實體，持有訊息並為其他智能合約提供效用。智能合約用於執行某些計算，儲存一些變量並交易數位商品，同時遵守合約中提到的某些特定條件。因此，人們可以在以太坊網路上以這些合約中指定的自定義條件（function）交易虛擬資產。由於這些特性，它們適用於包括圖像許可和版權保護邏輯[12]。我們使用 solidity [10]撰寫智能合約，這是迄今為止撰寫智能合約最流行的語言。我們遵循創建此類合約的最佳實踐[16]，並使用諸如小波雜湊（WHASH）之類的輕量級算法來提供版權保護，從而需要較少的手續費（Gas Fees）[13]。我們所有的交易都透過智能合約進行。我們使用智能合約來計算感知雜湊，將加密和解密金鑰分配給適當的實體，與 IPFS 連接，檢查是否侵犯版權及是否接受或拒絕圖像。透過計算標準化漢明距離（NHD）量化市場上存在的圖像與新上傳的圖像之間的圖像差異後，智能合約將拒絕 NHD 低於特定閾值的圖像，如表2和圖2所示。這裡 WHASH 能夠識別除 90° 旋轉版本外的經典 barbara 圖像的所有變換。為了確定圖像的接受或拒絕，將 WHASH 的閾值設為在結果部分中計算的 0.379。這表明了感知雜湊的有效性和可靠性水平。如果對圖片的修改不太極端，並且原始圖片與其被篡改版本之間仍具有良好的結構相似性，則感知雜湊能夠檢測到篡改。
-
 
 <div align="center">
     <img src="/img/panda-30.png" style="width:100%">

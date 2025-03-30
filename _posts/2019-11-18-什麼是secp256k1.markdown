@@ -1,12 +1,15 @@
 ---
 layout: post
-title:  "什麼是Secp256k1"
-date:   2019-11-18
-categories: news
-description: "secp256k1是指比特幣中使用的ECDSA曲線的參數"
-image: '/img/137.png'
+title: 什麼是Secp256k1
+date: 2019-11-18
+categories:
+- news
+description: secp256k1是指比特幣中使用的ECDSA曲線的參數
+image: /img/137.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 [[原文]](http://gavinzhang.work/blockchain/比特币/什么是Secp256k1)**secp256k1 是指比特幣中使用的 ECDSA 曲線的參數** ，並且在高效密碼學標準（SEC）（Certicom Research，[文件](http://www.secg.org/sec2-v2.pdf)）中進行了定義。
@@ -19,7 +22,7 @@ hero_image: /img/hero.png
 
 ![](/img/136.png)
 
-**Secp256k1 是 secp256k1 橢圓曲線$$y^2 = x^3 + 7$$在實數上的圖形。請注意，因為 secp256k1 實際上是在欄位$$Zp$$上定義的，所以它的圖形實際上看起來像是隨機分散的點，而不是像圖中這樣是連續的點。**
+* *Secp256k1 是 secp256k1 橢圓曲線$$y^2 = x^3 + 7$$在實數上的圖形。請注意，因為 secp256k1 實際上是在欄位$$Zp$$上定義的，所以它的圖形實際上看起來像是隨機分散的點，而不是像圖中這樣是連續的點。**
 
 ## 技術細節
 
@@ -27,37 +30,32 @@ hero_image: /img/hero.png
 
 與 Koblitz 曲線 secp256k1 相關聯的$$Fp$$上的橢圓曲線域參數由單元$$T=（p，a，b，G，n，h）$$指定，其中有限域$$Fp$$由下式定義：
 
-```
+```text
 p = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE FFFFFC2F
 = 2256 - 232 - 29 - 28 - 27 - 26 - 24 - 1
 ```
-
 $$Fp$$上的曲線E：$$y^2 = x^3 + ax + b$$由下式定義：
 
-```
+```text
 a = 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
 b = 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000007
 ```
-
 壓縮形式的基點$$G$$是：
 
-```
+```text
 G = 02 79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798
 ```
-
 而在未壓縮的形式是：
 
-```
+```text
 G = 04 79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798 483ADA77 26A3C465 5DA4FBFC 0E1108A8 FD17B448 A6855419 9C47D08F FB10D4B8
 ```
-
 最後，$$G$$的迴圈因子$$n$$(就是指$$nG=G$$)和輔因子$$h$$如下：
 
-```
+```text
 n = FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFE BAAEDCE6 AF48A03B BFD25E8C D0364141
 h = 01
 ```
-
 ## 屬性
 
 * secp256k1 具有特徵$$p$$，它的素數域定義為 ℤp。常用的一些其他曲線具有特徵2，並且在二進位制伽羅瓦(Galois)域$$GF(2n)$$上定義，但 secp256k1 不是其中之一。

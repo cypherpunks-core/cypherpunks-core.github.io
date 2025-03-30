@@ -1,12 +1,16 @@
 ---
 layout: post
-title:  "Bitcoin 比特幣中文社團"
-date:   2019-01-10
-description: "“Bitcoin 比特幣中文社團”建立於 2013年4月3日是全台灣最大以比特幣區塊鏈為主題的Facebook社團，統計至2019年1月該社團的人數已經達到四萬三千多人。"
-image: '/img/4.png'
+title: Bitcoin 比特幣中文社團
+date: 2019-01-10
+description: “Bitcoin 比特幣中文社團”建立於 2013年4月3日是全台灣最大以比特幣區塊鏈為主題的Facebook社團，統計至2019年1月該社團的人數已經達到四萬三千多人。
+image: /img/4.png
 published: true
-canonical_url: 
+canonical_url: null
 hero_image: /img/hero.png
+categories:
+- news
+tags:
+- bitcoin
 ---
 
 “Bitcoin 比特幣中文社團”建立於 2013年4月3日是全台灣最大以比特幣區塊鏈為主題的Facebook社團，統計至2019年1月該社團的人數已經達到四萬三千多人。

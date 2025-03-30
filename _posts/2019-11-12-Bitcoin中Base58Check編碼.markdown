@@ -1,12 +1,15 @@
 ---
 layout: post
-title:  "Bitcoin中Base58Check編碼"
-date:   2019-11-19
-categories: news
-description: "Base58二進位制到文字編碼被稱為Base58Check，用於編碼比特幣地址"
-image: '/img/138.png'
+title: Bitcoin中Base58Check編碼
+date: 2019-11-19
+categories:
+- news
+description: Base58二進位制到文字編碼被稱為Base58Check，用於編碼比特幣地址
+image: /img/138.png
 published: true
 hero_image: /img/hero.png
+tags:
+- bitcoin
 ---
 
 [[原文]](http://gavinzhang.work/blockchain/比特币/Bitcoin中Base58Check.html)Base58二進位制到文字編碼被稱為 Base58Check，用於編碼比特幣地址。
@@ -21,7 +24,7 @@ hero_image: /img/hero.png
 
 base58.h：
 
-```
+```text
 // 為什麼 base-58 而不是標準的 base-64 編碼？
 // - 不希望 0OIl 字元在某些字型和字型中看起來相同
 //可以用來建立視覺上相同的賬號。
@@ -29,7 +32,6 @@ base58.h：
 // - 如果沒有標點符號，電子郵件通常不會換行。
 // - 如果全部是字母數字，Doubleclicking 會將整個數字選為一個單詞。
 ```
-
 ## Base58Check的功能
 
 Base58Check 具有以下功能：
@@ -64,7 +66,7 @@ Base58Check 字元串是從 version/application 位元組和 payload 建立的�
 
 ## 編碼一個私鑰
 
-**Base58Check 編碼也用於編碼錢包匯入格式中的[ECDSA 私鑰](https://en.bitcoin.it/wiki/Private_key)** 。除了 0x80 用於 version/application 位元組，並且有效載荷是 32 位元組而不是 20 （比特幣中的私鑰是單個 32 位元組無符號的大端整數）之外，它與比特幣地址完全相同。對於與未壓縮的公鑰相關的私鑰，這種編碼總是會產生一個以 `5` 開頭的 51 個字元的字元串，或者更具體地說`5H`，`5J`或`5K`。
+* *Base58Check 編碼也用於編碼錢包匯入格式中的[ECDSA 私鑰](https://en.bitcoin.it/wiki/Private_key)** 。除了 0x80 用於 version/application 位元組，並且有效載荷是 32 位元組而不是 20 （比特幣中的私鑰是單個 32 位元組無符號的大端整數）之外，它與比特幣地址完全相同。對於與未壓縮的公鑰相關的私鑰，這種編碼總是會產生一個以 `5` 開頭的 51 個字元的字元串，或者更具體地說`5H`，`5J`或`5K`。
 
 ## Base58 符號圖表
 
@@ -90,7 +92,7 @@ Base58Check 字元串是從 version/application 位元組和 payload 建立的�
 
 編碼 address_byte_string 的演算法（由1-byte_version + hash_or_other_data + 4-byte_check_code組成）是
 
-```
+```text
 code_string = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 x = convert_bytes_to_big_integer(hash_result)
 
@@ -109,7 +111,6 @@ output_string.append(code_string[0]);
 
 output_string.reverse();
 ```
-
 ## 版本位元組
 
 以下是一些常見的版本位元組：
@@ -146,9 +147,9 @@ output_string.reverse();
 
 在之前我們分析過橢圓曲線的知識，對於確定性錢包的知識我們也做了相關地介紹，還有就是分層確定性錢包的知識。
 
-**另外 Base58Check 還有一個極大的好處就是可以校驗地址是不是正確的，因為 Base58 生成的時候是加入了校驗碼** 。我覺得比特幣團隊做的真的是很棒不是嗎？詳情可以參考：[為什麼以太坊地址中沒有校驗值？](http://8btc.com/thread-31201-1-1.html)
+* *另外 Base58Check 還有一個極大的好處就是可以校驗地址是不是正確的，因為 Base58 生成的時候是加入了校驗碼** 。我覺得比特幣團隊做的真的是很棒不是嗎？詳情可以參考：[為什麼以太坊地址中沒有校驗值？](http://8btc.com/thread-31201-1-1.html)
 
-**對於比特幣地址也要特別注意一下，地址類型也就是 version/appication 欄位其實是自己加入的，和 ecdsa 本身並沒有任何關係。校驗碼也是自己加上去的而已。我們可以看一下下面的圖片.**
+* *對於比特幣地址也要特別注意一下，地址類型也就是 version/appication 欄位其實是自己加入的，和 ecdsa 本身並沒有任何關係。校驗碼也是自己加上去的而已。我們可以看一下下面的圖片.**
 <div align="center"><img width="600"  src="/img/139.png"/></div>
 
 有一段時間我在分析 java 的 ECKey 的程式碼發現 java 底層的橢圓曲線演算法的實現，這裡我就不做更多的說明了。 **關鍵是我們如何實現分層確定性錢包，這個很簡單也很複雜，其實就是找私鑰 $$G$$ ，至於這個 $$G$$ 怎麼找，我們可以檢視精通比特幣裡面的說明，這裡面只是提到了 HMAC-SHA512。看來這裡面隱藏了很多的細節因素，我們有時間需要研究一下，HMAC-SHA512 的知識了。**

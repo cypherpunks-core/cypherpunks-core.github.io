@@ -1,15 +1,18 @@
 ---
 layout: post
-title:  "比特幣的區塊時間戳保護規則"
-date:   2019-12-08
-categories: news
-description: "記錄了節點與網路同步所花費的時間，從而測試了Bitcoin Core的性能"
-image: '/img/146.png'
+title: 比特幣的區塊時間戳保護規則
+date: 2019-12-08
+categories:
+- news
+description: 記錄了節點與網路同步所花費的時間，從而測試了Bitcoin Core的性能
+image: /img/146.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
-**摘要：** 我們檢查了比特幣鮮為人知的兩個規則，這些規則用於防止不法礦工操縱區塊時間戳以獲得不公平的高額挖礦報酬。我們討論了為什麼可能選擇類似2小時MAX_FUTURE_BLOCK_TIME值之類的常數，以及該值會對比特幣現金有何特定的影響。我們得出的結論是，考慮到實施規則時缺乏功能網路，比特幣的時間保護規則似乎相當有效，令人讚嘆。[6 NOVEMBER 2019](https://blog.bitmex.com/zh_cn-bitcoins-block-timestamp-protection-rules/), [BITMEX RESEARCH](https://blog.bitmex.com/author/bitmex-research/)
+* *摘要：** 我們檢查了比特幣鮮為人知的兩個規則，這些規則用於防止不法礦工操縱區塊時間戳以獲得不公平的高額挖礦報酬。我們討論了為什麼可能選擇類似2小時MAX_FUTURE_BLOCK_TIME值之類的常數，以及該值會對比特幣現金有何特定的影響。我們得出的結論是，考慮到實施規則時缺乏功能網路，比特幣的時間保護規則似乎相當有效，令人讚嘆。[6 NOVEMBER 2019](https://blog.bitmex.com/zh_cn-bitcoins-block-timestamp-protection-rules/), [BITMEX RESEARCH](https://blog.bitmex.com/author/bitmex-research/)
 
 ### 比特幣的時間問題
 
@@ -63,6 +66,6 @@ hero_image: /img/hero.png
 
 比特幣現金的時間保護規則的明顯脆弱性，可能未被利用，顯示出比特幣的時間保護規則的思考是如此完善。據我們所知，這些時間保護規則自2009 年比特幣推出時就已經存在。在設計系統時，中本聰必須至少在三個深度層面進行創新：
 
-***工作系統的驗證→ 難度調整系統→ 完善的時間保護規則***
+* **工作系統的驗證→ 難度調整系統→ 完善的時間保護規則***
 
 雖然這在今天我們看來可能不是特別精巧，但我們對這些系統已經有了10 年經驗。我們認為，中本聰在沒有任何此類網路之前對此進行了全面思考，是非常了不起的。

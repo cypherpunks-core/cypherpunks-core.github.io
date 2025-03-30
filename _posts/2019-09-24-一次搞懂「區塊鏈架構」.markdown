@@ -1,12 +1,15 @@
 ---
 layout: post
-title:  "一次搞懂「區塊鏈架構」"
-date:   2019-09-24
-categories: meetup
-description: "深入且完整地介紹區塊鏈技術架構，並且帶大家認識目前區塊鏈遇到的各種問題及許多專案在嘗試解決的部分！"
-image: '/img/73.png'
+title: 一次搞懂「區塊鏈架構」
+date: 2019-09-24
+categories:
+- meetup
+description: 深入且完整地介紹區塊鏈技術架構，並且帶大家認識目前區塊鏈遇到的各種問題及許多專案在嘗試解決的部分！
+image: /img/73.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 [**轉自Pelith Medium**](https://medium.com/pelith/structure-of-blockchain-daf85e06027e),
@@ -25,9 +28,8 @@ hero_image: /img/hero.png
 
 我們從比特幣一筆交易的一生帶大家來一探究竟區塊鏈是如何運作的：
 
-**比特幣交易流程示意圖 :**
+* *比特幣交易流程示意圖 :**
 ![](https://miro.medium.com/max/4608/1*VcLpDWRuh5LkZfE_g2ffgA.png)
-
 
 ## 比特幣交易的一生
 
@@ -41,10 +43,10 @@ hero_image: /img/hero.png
 6. 若檢查後確認有足額，則該交易會被放入到  **Tx Pool**  中。
 （按造 **手續費給的多寡** 由高至低排序）
 7. 等待出塊的同時，各節點會
-**A. 廣播接收到的交易**
-**B. 接收未在 Tx Pool 內的交易**
+* *A. 廣播接收到的交易**
+* *B. 接收未在 Tx Pool 內的交易**
 8. 礦工節點們（有在用電腦算力找 nonce 值，拼出塊獎勵的節點）會
-**撈取手續費較高的交易們來運算並打包成新區塊** ，
+* *撈取手續費較高的交易們來運算並打包成新區塊** ，
 用電腦算力計算 nonce 值。
 ＊註：這邊的  **nonce 值**  跟前面介紹過的  **以太坊地址的 nonce 值**  不同（以太坊有兩個 nonce：一個是挖礦的；一個是地址的交易 **序次** 。）
 9. 成功找到找到 nonce 值，出塊的礦工會獲得 **出塊獎勵** 及該區塊所有打包交易給的 **手續費** 。
@@ -103,7 +105,7 @@ hero_image: /img/hero.png
 
 [Blockchain Demo](https://anders.com/blockchain/?source=post_page-----daf85e06027e----------------------)
 
-*（* [ *https://anders.com/blockchain/* ](https://anders.com/blockchain/) *）*
+* （* [ *https://anders.com/blockchain/* ](https://anders.com/blockchain/) *）*
 
 此外，也跟大家預告一下精彩可期的未來數篇文章：
 

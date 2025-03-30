@@ -1,12 +1,15 @@
 ---
 layout: post
-title:  "幣虎CoinGecko發表2018加密貨幣市場年度報告"
-date:   2019-01-28
-categories: news
-description: "「CoinGecko Yearly Report for 2018」（幣虎2018加密貨幣市場年度報告）"
-image: '/img/30.png'
+title: 幣虎CoinGecko發表2018加密貨幣市場年度報告
+date: 2019-01-28
+categories:
+- news
+description: 「CoinGecko Yearly Report for 2018」（幣虎2018加密貨幣市場年度報告）
+image: /img/30.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 > 「CoinGecko Yearly Report for 2018」（幣虎2018加密貨幣市場年度報告），下載完整報告 PDF 檔案：[link](https://assets.coingecko.com/reports/2018-Full-Year-Report/2018-CoinGecko-Report.pdf)
@@ -34,4 +37,4 @@ hero_image: /img/hero.png
 
 ![](/img/29.png)
 
-* Masternodes 的部分，儘管價格下跌，Masternode coins 的總市值從去年年初的 125 億美元，下跌到年底的 5.3 億美元，Masternodes 和 Masternode coins 的數量皆呈現顯著增長。（第59頁、第60頁） 
+* Masternodes 的部分，儘管價格下跌，Masternode coins 的總市值從去年年初的 125 億美元，下跌到年底的 5.3 億美元，Masternodes 和 Masternode coins 的數量皆呈現顯著增長。（第59頁、第60頁）

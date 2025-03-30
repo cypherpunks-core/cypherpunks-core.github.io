@@ -1,12 +1,16 @@
 ---
 layout: post
-title:  "變遷中的比特幣錢包"
-date:   2019-01-17
-categories: news
-description: "比特幣硬體錢包 Trezor 共同創辦人 Alena Vranova，同時也是 SatoshiLabs 的共同創辦人，今年 1 月 8 日在 Medium 平台上，以「The Evolution of Bitcoin Key Management」（暫譯：比特幣錢包管理的演進）一文，發表她對比特幣錢包的技術發展及演進的看法。"
-image: '/img/17.png'
+title: 變遷中的比特幣錢包
+date: 2019-01-17
+categories:
+- news
+description: 比特幣硬體錢包 Trezor 共同創辦人 Alena Vranova，同時也是 SatoshiLabs 的共同創辦人，今年 1 月 8 日在
+  Medium 平台上，以「The Evolution of Bitcoin Key Management」（暫譯：比特幣錢包管理的演進）一文，發表她對比特幣錢包的技術發展及演進的看法。
+image: /img/17.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 原文標題： The Evolution of Bitcoin Key Management

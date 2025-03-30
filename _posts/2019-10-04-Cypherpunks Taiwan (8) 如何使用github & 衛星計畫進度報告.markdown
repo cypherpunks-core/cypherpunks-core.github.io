@@ -1,12 +1,15 @@
 ---
 layout: post
-title:  "Cypherpunks Taiwan (8) -如何使用github & 衛星計畫進度"
-date:   2019-10-04
-categories: meetup
-description: "如何使用github & 衛星計畫進度報告"
-image: '/img/50.png'
+title: Cypherpunks Taiwan (8) -如何使用github & 衛星計畫進度
+date: 2019-10-04
+categories:
+- meetup
+description: 如何使用github & 衛星計畫進度報告
+image: /img/50.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 活動影片：
@@ -19,7 +22,6 @@ hero_image: /img/hero.png
 * 時間：19:00-22:00
 * 日期：10月4日
 * 性質：小聚，希望手把手讓大家一起玩起來，不排斥大家帶酒來
-
 
 主題一：
 * 講者： [Milo Chen](https://www.facebook.com/milochen0418)

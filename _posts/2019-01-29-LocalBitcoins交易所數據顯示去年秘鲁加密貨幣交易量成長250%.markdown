@@ -1,12 +1,16 @@
 ---
 layout: post
-title:  "LocalBitcoins交易所數據顯示去年秘鲁加密貨幣交易量成長250%"
-date:   2019-01-29
-categories: news
-description: "Crypto Panda 今年 1 月 16 日在新加坡區塊鏈加速器 LongHash 網站平台上，發表了一篇標題為「Peru’s LocalBitcoins Transaction Volume Grew 250% in 2018」（暫譯：秘魯的 LocalBitcoins 交易量 2018 年成長 250%）的文章，指出拉丁美洲的加密貨幣市場去年表現亮眼，點對點加密貨幣交易量出現飛速成長。"
-image: '/img/35.png'
+title: LocalBitcoins交易所數據顯示去年秘鲁加密貨幣交易量成長250%
+date: 2019-01-29
+categories:
+- news
+description: Crypto Panda 今年 1 月 16 日在新加坡區塊鏈加速器 LongHash 網站平台上，發表了一篇標題為「Peru’s LocalBitcoins
+  Transaction Volume Grew 250% in 2018」（暫譯：秘魯的 LocalBitcoins 交易量 2018 年成長 250%）的文章，指出拉丁美洲的加密貨幣市場去年表現亮眼，點對點加密貨幣交易量出現飛速成長。
+image: /img/35.png
 published: true
 hero_image: /img/hero.png
+tags:
+- bitcoin
 ---
 
 > 原文標題：Peru’s LocalBitcoins Transaction Volume Grew 250% in 2018
@@ -31,4 +35,4 @@ Crypto Panda 今年 1 月 16 日在新加坡區塊鏈加速器 LongHash 網站�
 ![](/img/33.png)
 ![](/img/34.png)
 
-* 透過比較北美洲和南美洲過去的歷史交易紀錄，可以更清楚地看到美國交易量的下降，以及委內瑞拉交易量的增加。 去年，南美洲的交易量增長了 37.1％，而北美洲的交易量則下降了 69.1％。 
+* 透過比較北美洲和南美洲過去的歷史交易紀錄，可以更清楚地看到美國交易量的下降，以及委內瑞拉交易量的增加。 去年，南美洲的交易量增長了 37.1％，而北美洲的交易量則下降了 69.1％。

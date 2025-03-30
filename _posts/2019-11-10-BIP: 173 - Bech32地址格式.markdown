@@ -1,15 +1,18 @@
 ---
 layout: post
-title:  "BIP 173 Bech32 address"
-date:   2019-11-10
-categories: news
-description: "本文件提出了checksum和的base32格式"
-image: '/img/124.png'
+title: BIP 173 Bech32 address
+date: 2019-11-10
+categories:
+- news
+description: 本文件提出了checksum和的base32格式
+image: /img/124.png
 published: true
 hero_image: /img/hero.png
+tags:
+- bip
 ---
 
-```
+```text
 BIP: 173 Layer: Applications 
 Title: Base32 address format for native v0-16 witness outputs 
 Author: Pieter Wuille <pieter.wuille@gmail.com> Greg Maxwell <greg@xiph.org> 
@@ -21,7 +24,6 @@ Created: 2017-03-20
 License: BSD-2-Clause 
 Replaces: 142
 ```
-
 ## 介紹 ｜ Introduction
 
 ### 摘要 ｜ Abstract
@@ -46,7 +48,6 @@ Segregated Witness proposal中包括一類新的輸出（見證程序，witness 
 
 它替代了[BIP142](https://github.com/bitcoin/bips/blob/master/bip-0142.mediawiki)，並在前面進行了討論（在[這裡](https://bitcoincore.org/en/meetings/2016/05/20/#error-correcting-codes-for-future-address-types)進行了概述）。
 
-
 ### 例子 ｜ Examples
 
 所有的例子使用 public key `0279BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798`. P2WSH 的例子使用 key OP_CHECKSIG as script.
@@ -68,7 +69,6 @@ Bech32 [[2](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e06
 * **分隔符(separator)**，始終為" 1"。 如果在人類可讀部分內部允許" 1"，則string中的最後一個是分隔符[[3](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-3)]。
 * **數據部分**至少長6個characters，並且僅由字母數字characters組成，但不包括" 1"，" b"，" i"和" o" [[4](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-4)]。
 
-
 |     | 0   | 1   | 2   | 3   | 4   | 5   | 6   | 7   |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | +0  | q   | p   | z   | r   | y   | 9   | x   | 8   |
@@ -76,15 +76,14 @@ Bech32 [[2](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e06
 | +16 | s   | 3   | j   | n   | 5   | 4   | k   | h   |
 | +24 | c   | e   | 6   | m   | u   | a   | 7   | l   |
 
-**Checksum**
+* *Checksum**
 
 數據部分的最後六個characters構成一個Checksum，不包含任何訊息。 有效strings必須通過下面的Python3程式碼段指定的有效性標準。 當參數為以下參數時，bech32_verify_checksum函數必須返回true：
-
 
 * hrp: string形式的人類可讀部分
 * data: 數據部分為整數列表，代表使用上表進行轉換後的characters
 
-```
+```text
 def bech32_polymod(values):
   GEN = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3]
   chk = 1
@@ -101,23 +100,21 @@ def bech32_hrp_expand(s):
 def bech32_verify_checksum(hrp, data):
   return bech32_polymod(bech32_hrp_expand(hrp) + data) == 1
 ```
-
 這實現了一個[BCH code](https://en.wikipedia.org/wiki/BCH_code)，該程式碼可確保檢測到最多影響4個characters的任何錯誤，並且在109個失敗的機會中無法檢測到更多的錯誤。 有關屬性的更多詳細信息，請參見"Checksum設計"附件。 可讀部分的處理方法是，首先將每個character的US-ASCII值的higher bits輸入checksum，然後是零，然後是lower bits[[5](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6eaece8e061e07611de/bip-0173.mediawiki#cite_note-5)]。
 
 要根據給定的可讀部分和數據部分characters的（非checksum）值構造有效的checksum，可以使用以下程式碼：
 
-```
+```text
 def bech32_create_checksum(hrp, data):
   values = bech32_hrp_expand(hrp) + data
   polymod = bech32_polymod(values + [0,0,0,0,0,0]) + 1
   return [(polymod >> 5 * (5 - i)) & 31 for i in range(6)]
 ```
-
-**錯誤修正 ｜ Error correction**
+* *錯誤修正 ｜ Error correction**
 
 這些BCH程式碼的特性之一是它們可用於錯誤修正。 錯誤修正的一個不幸的副作用是它侵蝕了錯誤檢測：錯誤修正將無效輸入更改為有效輸入，但是如果進行了多個錯誤，則有效輸入可能不是正確輸入。 使用不正確但有效的輸入會導致資金無法挽回流失。 因此，實現方式不應該向用戶暗示在string中可能存在錯誤的位置，而不建議用戶進行更正，而不能進行更正。
 
-**大寫小寫 ｜ Uppercase/lowercase**
+* *大寫小寫 ｜ Uppercase/lowercase**
 
 在確定用於checksum目的的character值時，使用小寫形式。
 
@@ -126,7 +123,6 @@ def bech32_create_checksum(hrp, data):
 解碼器絕不能接受某些characters為大寫而某些characters為小寫的strings（此類strings稱為大小寫混合的strings）。
 
 為了便於演示，通常最好使用小寫字母，但在QR code內部應使用大寫字母，因為那些允許使用字母數字模式([alphanumeric mode](http://www.thonky.com/qr-code-tutorial/alphanumeric-mode-encoding))，比普通[byte mode](http://www.thonky.com/qr-code-tutorial/byte-mode-encoding)簡洁45％。
-
 
 ### Segwit address format(格式)
 
@@ -141,7 +137,7 @@ A segwit 地址[[6](https://github.com/bitcoin/bips/blob/5ecba9af777886120595f6e
     * 將這些bit重新排列為5組，並在需要時在末尾加零。
     * 使用上表將這些bit轉換為characters。
 
-**解碼 ｜ Decoding**
+* *解碼 ｜ Decoding**
 
 軟體解釋 segwit 地址:
 
@@ -207,11 +203,10 @@ SatoshiLabs維護其他密碼貨幣的已註冊的人類可讀部件的完整列
 * `split1checkupstagehandshakeupstreamerranterredcaperred2y9e3w`
 * `?1ezyfcl` 警告：在轉換為US-ASCII期間，某些編碼器可能會將不可映射的character設置為有效的US-ASCIIcharacter，例如"？"。例如：
 
-```
->>> bech32_encode('\x80'.encode('ascii', 'replace').decode('ascii'), [])
+```text
+> >> bech32_encode('\x80'.encode('ascii', 'replace').decode('ascii'), [])
 '?1ezyfcl'
 ```
-
 以下String不是有效的Bech32（具有無效原因）：
 
 * 0x20 + `1nwldj5`: HRP character out of range
@@ -251,13 +246,13 @@ The following list gives valid segwit addresses and the scriptPubKey that they t
 
 ### Checksum 設計
 
-**設計選擇**
+* *設計選擇**
 
 BCH程式碼可以構建在任何prime-power字母上，並且可以選擇在大小和錯誤檢測功能之間進行良好權衡。儘管大多數圍繞BCH程式碼的工作都使用二進製字母，但這不是必要的。這使它們比[CRC codes](https://en.wikipedia.org/wiki/Cyclic_redundancy_check)更適合我們的用例。與[Reed-Solomon codes](https://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction)不同，它們的長度不限於字母大小的一分之一。儘管它們還支持有效的錯誤糾正，但是僅錯誤檢測的實現非常簡單。
 
 我們選擇6個checksum characters作為地址長度和錯誤檢測功能之間的權衡，因為6個characters是足以保證隨機故障發生率低於十億分之一的最低數字。 對於我們希望保護的數據長度（對於將來可能的40bytes witness program而言，該字段的最大長度為71個bytes），可以構造BCH程式碼以確保檢測到最多4個錯誤。.
 
-**選定的屬性 ｜ Selected properties**
+* *選定的屬性 ｜ Selected properties**
 
 這些程式碼中的許多程式碼在處理更多錯誤時的性能不佳，但並非全部。因此，我們考慮旨在僅檢測3個錯誤和4個錯誤的程式碼，並分析它們在實踐中的性能。
 
@@ -270,7 +265,7 @@ BCH程式碼可以構建在任何prime-power字母上，並且可以選擇在大
 
 由於naive的搜索需要超過6.5 * 1019的Checksum評估，因此使用了衝突搜索(collision-search)方法進行分析。可以在[here](https://github.com/sipa/ezbase32/)找到程式碼。
 
-**屬性 ｜ Properties**
+* *屬性 ｜ Properties**
 
 下表總結了檢測失敗的可能性（109 中的 1 倍）
 
@@ -285,7 +280,6 @@ Window length Number of wrong characters
 | 59     | Length for a P2WSH address           | 0   | 0.805 | 0.933 | 0.931 |       |       |
 | 71     | Length for a 40-byte program address | 0   | 0.830 | 0.934 | 0.931 |       |       |
 | 89     | Longest detecting 4 errors           | 0   | 0.867 | 0.933 | 0.931 |       |       |
-
 
 This means that when 5 changed characters occur randomly distributed in the 39 characters of a P2WPKH address, there is a chance of  *0.756 per billion*  that it will go undetected. When those 5 changes occur randomly within a 19-character window, that chance goes down to  *0.093 per billion* . As the number of errors goes up, the chance converges towards  *1 in 230*  =  *0.931 per billion* .
 

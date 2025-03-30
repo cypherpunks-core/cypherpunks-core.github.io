@@ -1,12 +1,16 @@
 ---
 layout: post
-title:  "blockchain.info"
-date:   2019-01-10
-description: "“blockchain.info”是一家相當早期的 **比特幣區塊鏈檢視器** （Blockchain Explorer） 公司，成立於2011年8月30日。"
-image: '/img/10.jpg'
+title: blockchain.info
+date: 2019-01-10
+description: “blockchain.info”是一家相當早期的 **比特幣區塊鏈檢視器** （Blockchain Explorer） 公司，成立於2011年8月30日。
+image: /img/10.jpg
 published: true
-canonical_url: 
+canonical_url: null
 hero_image: /img/hero.png
+categories:
+- news
+tags:
+- blockchain
 ---
 
 “blockchain.info”是一家相當早期的 **比特幣區塊鏈檢視器** （Blockchain Explorer） 公司，成立於2011年8月30日。

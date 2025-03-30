@@ -1,12 +1,15 @@
 ---
 layout: post
-title:  "媒體區塊鏈的調查"
-date:   2019-10-31
-categories: news
-description: "區塊鏈會被定義為媒體區塊鏈且分成兩類。一是內文的安全性，意指將用區塊鏈保障安全性。二則是內文的權利資訊，意指將用區塊鏈追蹤和管理權利上的資訊。我們將會介紹和分析這個媒體區塊鏈。"
-image: '/img/92.png'
+title: 媒體區塊鏈的調查
+date: 2019-10-31
+categories:
+- news
+description: 區塊鏈會被定義為媒體區塊鏈且分成兩類。一是內文的安全性，意指將用區塊鏈保障安全性。二則是內文的權利資訊，意指將用區塊鏈追蹤和管理權利上的資訊。我們將會介紹和分析這個媒體區塊鏈。
+image: /img/92.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 > 本篇文章翻譯自 [IEEE - A blockchain for media: Survey](https://ieeexplore.ieee.org/document/8706434) 的內容，時常我們都在想區塊鏈部署文字上的問題，但都沒有人去思考過「媒體」：圖像、影像...等的發展性，或許現今的區塊鏈並不適合存放大量的資料，但現今可以透過 IPFS .. 等工具幫助部署內容至區塊鏈上，已達到目的性。

@@ -1,14 +1,17 @@
 ---
 layout: post
-title:  "比特幣粉塵和空塊"
-date:   2019-11-11
-categories: news
-description: "簡述空塊攻擊、粉塵攻擊、小金額的問題、廣播攻擊"
-image: '/img/134.jpg'
+title: 比特幣粉塵和空塊
+date: 2019-11-11
+categories:
+- news
+description: 簡述空塊攻擊、粉塵攻擊、小金額的問題、廣播攻擊
+image: /img/134.jpg
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
- 
+
 [原文](http://gavinzhang.work/blockchain/比特币/比特币粉尘和空块.html)：比特币粉尘和空块     
 最近看了bitcoinj的TransactionOutput類發現了裡面的關於粉塵的一些功能。網上搜索關於比特幣粉塵的知識，發現了空塊攻擊和粉塵攻擊的一些說明，但是隻是簡單地進行表述而已。也看到了礦工如何利用各種手段進行作弊，這個可能就是區塊鏈所不能監控的了。所以我覺得區塊鏈的問題還是很多的。
 
@@ -24,7 +27,7 @@ hero_image: /img/hero.png
 
 一個典型的輸出是33位元組（pubkey hash +操作碼），需要輸入148位元組的消耗，所以我們將它們加在一起以找出用於傳輸這個數值的總資料量。請注意，這個公式對於任何不是付費地址輸出的東西都是錯誤的，不幸的是，我們必須遵循比特幣核心的錯誤以確保我們被認為是標準。一個更好的公式可以估計滿足所有不同指令碼類型所需的資料大小，或者只是使用硬編碼33。
 
-```
+```text
 // 這個是根據實時的資料進行的計算。
 public Coin getMinNonDustValue(Coin feePerKb) {
     final long size = this.unsafeBitcoinSerialize().length + 148;
@@ -36,7 +39,6 @@ public Coin getMinNonDustValue() {
     return getMinNonDustValue(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE.multiply(3));
 }
 ```
-
 上面的這段程式碼就是用來計算最小的輸出，如果小於這個輸出值，我們就認為這個輸出是粉塵輸出。
 
 ## 關於小金額的問題

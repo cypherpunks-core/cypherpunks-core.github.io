@@ -1,12 +1,16 @@
 ---
 layout: post
-title:  "基於數位浮水印和區塊鏈的版權管理系統設計方案"
-date:   2019-11-13
-categories: news
-description: "過去，基於數位浮水印的數位版權保護系統主要在改進演算法效率上，而忽略浮水印訊息的生成和儲存空間。在本論文提出一個全新且基於數位浮水印和訊息的區塊鏈版權管理系統之設計機制，它結合數位浮水印、區塊鏈、感知雜湊、QR code 和星際檔案系統（IPFS）。"
-image: '/img/panda-21.png'
+title: 基於數位浮水印和區塊鏈的版權管理系統設計方案
+date: 2019-11-13
+categories:
+- news
+description: 過去，基於數位浮水印的數位版權保護系統主要在改進演算法效率上，而忽略浮水印訊息的生成和儲存空間。在本論文提出一個全新且基於數位浮水印和訊息的區塊鏈版權管理系統之設計機制，它結合數位浮水印、區塊鏈、感知雜湊、QR
+  code 和星際檔案系統（IPFS）。
+image: /img/panda-21.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 > 本篇文章翻譯自 [Design Scheme of Copyright Management System Based on Digital Watermarking and Blockchain](https://ieeexplore-ieee-org.autorpa.lib.nkust.edu.tw/document/8377886/references#references) 的內容，數位浮水印概念我們從圖像、影像..等，已經玩了許久當他結合區塊鏈又會產生什麼火花呢？

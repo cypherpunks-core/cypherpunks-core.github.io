@@ -1,12 +1,16 @@
 ---
 layout: post
-title:  "Cypherpunks Taiwan（3）-AI on blockchain 核心價值"
-date:   2019-04-09
-categories: meetup
-description: "AI on blockchain 核心價值"
-image: '/img/54.png'
+title: Cypherpunks Taiwan（3）-AI on blockchain 核心價值
+date: 2019-04-09
+categories:
+- meetup
+description: AI on blockchain 核心價值
+image: /img/54.png
 published: true
 hero_image: /img/hero.png
+tags:
+- blockchain
+- cypherpunks
 ---
 
 * 時間：2019年4月9日（星期二） 晚上7:00到10:00
@@ -48,7 +52,6 @@ ps. 關於飲料的部分，大家自備環保杯喔
 </div>
 
 這是「Cypherpunks Taiwan 密碼龐克」主題圍繞在 bitcoin是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由。
-
 
 目標：
 * 創造一個 crypto 論壇

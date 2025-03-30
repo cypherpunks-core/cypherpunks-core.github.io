@@ -1,12 +1,16 @@
 ---
 layout: post
-title:  "Dapp.com發表報告回顧 2018 DApp市場"
-date:   2019-01-22
-categories: news
-description: "Dapp.com 平台新創公司今年1月15日在官方網站上，發表了一份 2018 年去中心化應用程式 DApp （Decentralized application，可簡寫為 Dapp、dApp 或 DApp）的市場報告，回顧過去一年，加密貨幣生態系統最活躍的四大公鏈"
-image: '/img/23.png'
+title: Dapp.com發表報告回顧 2018 DApp市場
+date: 2019-01-22
+categories:
+- news
+description: Dapp.com 平台新創公司今年1月15日在官方網站上，發表了一份 2018 年去中心化應用程式 DApp （Decentralized
+  application，可簡寫為 Dapp、dApp 或 DApp）的市場報告，回顧過去一年，加密貨幣生態系統最活躍的四大公鏈
+image: /img/23.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 > 原文標題：Dapp.com 2018 Dapp Market Report

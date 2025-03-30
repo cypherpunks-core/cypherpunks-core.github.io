@@ -1,19 +1,23 @@
 ---
 layout: post
-title: "Miniscript: 簡化 Bitcoin Scripting"
+title: 'Miniscript: 簡化 Bitcoin Scripting'
 date: 2019-09-09
 image: /img/miniscript1.png
-description: "Miniscript 是一種以結構化方式表示Bitcoin  Script 的語言，可實現高效的分析、結構(composition)、一般簽名等"
+description: Miniscript 是一種以結構化方式表示Bitcoin  Script 的語言，可實現高效的分析、結構(composition)、一般簽名等
 published: true
 hero_image: /img/hero.png
-categories: news
+categories:
+- news
+tags:
+- bitcoin
+- miniscript
 ---
 
 [原文](https://medium.com/blockstream/miniscript-bitcoin-scripting-3aeff3853620)*By Pieter Wuille & Andrew Poelstra*
 
 ![](https://miro.medium.com/max/1600/0*S7Kqs5tYkppoJQkV)
 
-**大綱**
+* *大綱**
 - [介紹](#%e4%bb%8b%e7%b4%b9)
   - [Bitcoin Script](#bitcoin-script)
   - [難以驗證 Difficult to Verify](#%e9%9b%a3%e4%bb%a5%e9%a9%97%e8%ad%89-difficult-to-verify)
@@ -45,13 +49,13 @@ Bitcoin 一直有一種機制，可以通過更複雜的 policy 花費coin，而
 如果相反 Bitcoin 應用程式可以與任何 Script 一起使用，而不僅僅是為它們設計的少數 Script，該怎麼辦？我們不會局限於使用一次性設計，並且可以根據使用者指定的要求開始設計構建和使用動態生成 Script 的應用程式。電子錢包開發者還可以引入更多基於 Script 的選項，同時保持與其他錢包的互操作性。
 # Miniscript
 ![](/img/miniscript12.png)
-**Miniscript**，這是一種以結構化方式表示Bitcoin  Script 的語言，可實現高效的分析、結構(composition)、一般簽名等。
+* *Miniscript**，這是一種以結構化方式表示Bitcoin  Script 的語言，可實現高效的分析、結構(composition)、一般簽名等。
 比如Bitcoin Script 表示法
-```
+```text
 <A> OP_CHECKSIG OP_IFDUP OP_NOTIF OP_DUP OP_HASH160 <hash160(B)> OP_EQUALVERIFY OP_CHECKSIGVERIFY <144> OP_CSV OP_ENDIF
 ```
 其中A和B是公鑰，可以轉換為 Miniscript 表示法
-```
+```text
 or_d(c:pk(A),and_v(vc:pk_h(B),older(144)))
 ```
 這種表示法明確指出，Script 的語義允許支付 when either A signs, or when B signs after 144 blocks。 可以用這種方式編寫大部分有意義的 Script。
@@ -61,7 +65,7 @@ or_d(c:pk(A),and_v(vc:pk_h(B),older(144)))
 ## 優化的Script Optimized Script
 ![](/img/miniscript10.png)
 一個這樣的案例是找到實現給定的一組支付條件的最佳 Script。 在Bitcoin Script中，有許多不同的方法來請求簽名、描述連詞或分斷或實施門檻。 即使對於經驗豐富的 Bitcoin Script 開發者，正確的選擇可能取決於滿足的不同條件的相對機率，並且難以計算。 我們的[線上編譯器](http://bitcoin.sipa.be/miniscript/)，也可以[作為C ++原始碼](https://github.com/sipa/miniscript)，或作為[rust- miniscript](http://bitcoin.sipa.be/miniscript/)庫，可以立即找到與給定支付 policy 相對應的Miniscript表達式。
-```
+```text
 or(99@pk(A),1@and(pk(B),older(144)))
 ```
 引言中的例子可以通過編寫policy來獲得，該policy是一種寫作方式，即（A符號）的左側有99％的概率被採取，而右側（144個區塊之後的B符號）具有 被抓住的機率為1％。

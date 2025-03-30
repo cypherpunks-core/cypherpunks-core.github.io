@@ -1,12 +1,16 @@
 ---
 layout: post
-title:  "Cypherpunks Taiwan （6）- Blockstream"
-date:   2019-07-04
-categories: meetup
-description: "比特幣基礎設施公司 Blockstream 首次登台，與 Cypherpunks Taiwan 聯手舉辦線下聚會！一個雇用了大量 Bitcoin Core 開發者的公司，究竟他們開發出的產品，能夠怎樣的影響比特幣及區塊鏈，甚至是整個世界呢？"
-image: '/img/49.png'
+title: Cypherpunks Taiwan （6）- Blockstream
+date: 2019-07-04
+categories:
+- meetup
+description: 比特幣基礎設施公司 Blockstream 首次登台，與 Cypherpunks Taiwan 聯手舉辦線下聚會！一個雇用了大量 Bitcoin
+  Core 開發者的公司，究竟他們開發出的產品，能夠怎樣的影響比特幣及區塊鏈，甚至是整個世界呢？
+image: /img/49.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 比特幣基礎設施公司 Blockstream 首次登台，與 Cypherpunks Taiwan 聯手舉辦線下聚會！一個雇用了大量 Bitcoin Core 開發者的公司，究竟他們開發出的產品，能夠怎樣的影響比特幣及區塊鏈，甚至是整個世界呢？
@@ -47,4 +51,3 @@ Samson Mow 目前於 Blockstream 擔任策略長（CSO）。他是比特幣社�
 <div style="text-align:center">
 <iframe style="width:560px; height:315px;" src="https://www.youtube.com/embed/y2pKAX0qq0c" styleframeborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-

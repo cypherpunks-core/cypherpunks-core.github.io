@@ -1,12 +1,15 @@
 ---
 layout: post
-title:  "Neutrino：一種保護隱私的輕錢包協議"
-date:   2019-11-09
-categories: news
-description: "介紹Neutrino，這是一種新的協議，用於輕型client在保留隱私且不信任中央server的情況下獲取所需的數據。"
-image: '/img/123.png'
+title: Neutrino：一種保護隱私的輕錢包協議
+date: 2019-11-09
+categories:
+- news
+description: 介紹Neutrino，這是一種新的協議，用於輕型client在保留隱私且不信任中央server的情況下獲取所需的數據。
+image: /img/123.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 如今， Lightning 風行一時，儘管這是一個令人興奮的發展，但用戶目前必須運行一個完整的節點才能進行交易。在本文中，將介紹Neutrino，這是一種新的協議，用於輕型client在保留隱私且不信任中央server的情況下獲取所需的數據。[原文](https://bitcoinmagazine.com/articles/neutrino-privacy-preserving-light-wallet-protocol)

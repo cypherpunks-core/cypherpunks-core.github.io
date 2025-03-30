@@ -1,13 +1,17 @@
 ---
 layout: post
-title:  "回顧 2018：數字看比特幣發展趨勢"
-date:   2019-01-07 20:00:07
-categories: news
-description: "比特幣軟體工程師 Jameson Lopp，同時也是知名加密貨幣數據分析網站 Statoshi.info 的創辦人，今年1月1日在Medium平台發表文章「Bitcoin By the Numbers: 2018 Recap」"
-image: '/img/2.png'
+title: 回顧 2018：數字看比特幣發展趨勢
+date: 2019-01-07 20:00:07
+categories:
+- news
+description: '比特幣軟體工程師 Jameson Lopp，同時也是知名加密貨幣數據分析網站 Statoshi.info 的創辦人，今年1月1日在Medium平台發表文章「Bitcoin
+  By the Numbers: 2018 Recap」'
+image: /img/2.png
 published: true
-canonical_url: 
+canonical_url: null
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 > 原文標題：Bitcoin By the Numbers: 2018 Recap 作者：Jameson Lopp

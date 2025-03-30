@@ -1,12 +1,15 @@
 ---
 layout: post
-title:  "Cypherpunks Taiwan (7) -微雷電網路 & 開發者眼中的區塊鏈應用"
-date:   2019-08-15
-categories: meetup
-description: " 微雷電網路 & 開發者眼中的區塊鏈應用"
-image: '/img/47.png'
+title: Cypherpunks Taiwan (7) -微雷電網路 & 開發者眼中的區塊鏈應用
+date: 2019-08-15
+categories:
+- meetup
+description: ' 微雷電網路 & 開發者眼中的區塊鏈應用'
+image: /img/47.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 議程：

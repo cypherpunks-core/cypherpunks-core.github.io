@@ -1,15 +1,18 @@
 ---
 layout: post
-title:  "使用x-only的Pubkey減少比特幣交易大小"
-date:   2019-11-07
-categories: news
-description: "如何使用BIP-schnorr安全地為每個output節省四個權重單位"
-image: '/img/110.png'
+title: 使用x-only的Pubkey減少比特幣交易大小
+date: 2019-11-07
+categories:
+- news
+description: 如何使用BIP-schnorr安全地為每個output節省四個權重單位
+image: /img/110.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
-**如何使用BIP-schnorr安全地為每個output節省四個權重單位     
+* *如何使用BIP-schnorr安全地為每個output節省四個權重單位     
 [原文 : Reducing Bitcoin Transaction Sizes with x-only Pubkeys](https://medium.com/blockstream/reducing-bitcoin-transaction-sizes-with-x-only-pubkeys-f86476af05d7)**    
 8 min read   *By Jonas Nick*
 
@@ -58,7 +61,6 @@ public key在橢圓曲線上編碼一個點。 僅給出X坐標，曲線上就�
 
 ![](/img/114.png)
 <center><strong>為什麼我們可以刪除tie breaker?</strong></center>
-
 
 # 為什麼引入 x-only pubkeys?
 
@@ -126,4 +128,4 @@ Schnorr 簽名是一個元組。 第一個元素是稱為的public nonce，它�
 
 BIP-schnorr和BIP-taproot從草稿狀態到提案狀態正在逐漸成熟。 我們正在尋找反饋，因此可以隨時閱讀，實施BIP或試用BIP-schnorr和BIP-taproot的實施。 Optech Taproot研討會和Taproot評論俱樂部提供的Jupyter筆記本是用於了解有關BIP的很好的資源。
 
-**BIP-schnorr and BIP-taproot are slowly maturing from the draft status to the proposal status. We’re looking for feedback, so feel free to read the BIPs, implement them, or play with implementations of [BIP-schnorr](https://github.com/bitcoin-core/secp256k1/pull/558) and [BIP-taproot](https://github.com/sipa/bitcoin/commits/taproot). Very good resources for learning more about the BIPs are [this Jupyter notebook](https://github.com/bitcoinops/taproot-workshop) from the Optech Taproot workshop and the [Taproot Review Club.](https://github.com/ajtowns/taproot-review)**
+* *BIP-schnorr and BIP-taproot are slowly maturing from the draft status to the proposal status. We’re looking for feedback, so feel free to read the BIPs, implement them, or play with implementations of [BIP-schnorr](https://github.com/bitcoin-core/secp256k1/pull/558) and [BIP-taproot](https://github.com/sipa/bitcoin/commits/taproot). Very good resources for learning more about the BIPs are [this Jupyter notebook](https://github.com/bitcoinops/taproot-workshop) from the Optech Taproot workshop and the [Taproot Review Club.](https://github.com/ajtowns/taproot-review)**

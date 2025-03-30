@@ -1,12 +1,15 @@
 ---
 layout: post
-title:  "Cypherpunks Taiwan Logo 的故事"
-date:   2019-06-28
-categories: news
-description: "Cypherpunks Taiwan Logo 的故事"
-image: '/img/67.png'
+title: Cypherpunks Taiwan Logo 的故事
+date: 2019-06-28
+categories:
+- news
+description: Cypherpunks Taiwan Logo 的故事
+image: /img/67.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 感覺創立Cypherpunks Taiwan 也差不多半年的時間了，可是一直沒有設計出一個適合的Logo，因為本身不是設計出身，所以只能委託各個設計師大大。

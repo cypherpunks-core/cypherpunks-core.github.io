@@ -1,12 +1,15 @@
 ---
 layout: post
-title:  "BIP-65 OP_CHECKLOCKTIMEVERIFY"
-date:   2019-11-14
-categories: news
-description: "該 OPCode 允許交易輸出在未來的某個點之前變得不可花費。"
-image: '/img/135.jpg'
+title: BIP-65 OP_CHECKLOCKTIMEVERIFY
+date: 2019-11-14
+categories:
+- news
+description: 該 OPCode 允許交易輸出在未來的某個點之前變得不可花費。
+image: /img/135.jpg
 published: true
 hero_image: /img/hero.png
+tags:
+- bip
 ---
 
 [原文](http://gavinzhang.work/blockchain/%E6%AF%94%E7%89%B9%E5%B8%81/BIP-65%20OP-CHECKLOCKTIMEVERIFY.html):BIP-65 OP_CHECKLOCKTIMEVERIFY      
@@ -14,7 +17,7 @@ hero_image: /img/hero.png
 
 ## 概要
 
-**CHECKLOCKTIMEVERIFY 重新定義了現有的 `NOP2` OPCode (其實就是 `OP_CHECKLOCKTIMEVERIFY` 指令替換了 `OP_NOP2` 指令)。執行時，如果以下任何一個條件成立，則 OPCode 直譯器將以錯誤終止：**
+* *CHECKLOCKTIMEVERIFY 重新定義了現有的 `NOP2` OPCode (其實就是 `OP_CHECKLOCKTIMEVERIFY` 指令替換了 `OP_NOP2` 指令)。執行時，如果以下任何一個條件成立，則 OPCode 直譯器將以錯誤終止：**
 
 * 堆棧是空的;
 * 堆棧中的頂層項目小於0;
@@ -34,13 +37,13 @@ hero_image: /img/hero.png
 
 ## 第三方託管
 
-**如果 Alice 和 Bob 聯合經營一家企業，他們可能希望確保所有資金都儲存在需要雙方同時批准的 2-of-2 的多重（多重簽名的交易）交易輸出中。但是，他們發現在特殊情況下，例如任何一個人受到“嚴重的車禍”，他們都需要備用的方法，繼續動用該筆資金。因此，他們任命他們的律師 Lenny 擔任第三方。**
+* *如果 Alice 和 Bob 聯合經營一家企業，他們可能希望確保所有資金都儲存在需要雙方同時批准的 2-of-2 的多重（多重簽名的交易）交易輸出中。但是，他們發現在特殊情況下，例如任何一個人受到“嚴重的車禍”，他們都需要備用的方法，繼續動用該筆資金。因此，他們任命他們的律師 Lenny 擔任第三方。**
 
 在任何時候，Lenny 隨時可以同 Alice 或 Bob 一起串謀非法竊取資金。同樣，Lenny 可能更願意不竊取資金，以阻止不良行為者企圖強行從他那裡獲取 secret keys 。
 
 但是，使用 `CHECKLOCKTIMEVERIFY` 可以將資金儲存在以下格式的 scriptPubKeys 中：
 
-```
+```text
 IF
     <now + 3 months> CHECKLOCKTIMEVERIFY DROP
     <Lenny's pubkey> CHECKSIGVERIFY
@@ -50,13 +53,12 @@ ELSE
 ENDIF
 <Alice's pubkey> <Bob's pubkey> 2 CHECKMULTISIG
 ```
-
 在任何時候，資金都可以用下面的 OPCode 來支付：
-```
+```text
 0 <Alice's signature> <Bob's signature> 0
 ```
 Lenny 經過 3 個月後，Alice 或 Bob 中的一個可以用以下 OPCode 支付資金：
-```
+```text
 0 <Alice/Bob's signature> <Lenny's signature> 1
 ```
 ## 非交互式定期退款 | Non-interactive time-locked refunds
@@ -69,7 +71,7 @@ Lenny 經過 3 個月後，Alice 或 Bob 中的一個可以用以下 OPCode 支�
 
 問題是，在許多情況下，使用者將不會擁有一些或全部交易輸出的有效簽名。使用 `CHECKLOCKTIMEVERIFY` 而不是按需建立退款簽名，而是使用以下形式的 scriptPubKeys ：
 
-```
+```text
 IF
     <service pubkey> CHECKSIGVERIFY
 ELSE
@@ -77,7 +79,6 @@ ELSE
 ENDIF
 <user pubkey> CHECKSIG
 ```
-
 現在，用戶總是可以通過等待到期時間來花費他們的資金而無需服務的合作。
 
 ### 支付通道 | Payment Channels
@@ -90,13 +91,13 @@ The PayPub protocol makes it possible to pay for information in a trustless way 
 
 This problem can be solved interactively with the refund transaction technique; with CHECKLOCKTIMEVERIFY the problem can be non-interactively solved using scriptPubKeys of the following form:
 
----
+- --
 
 通過首先證明加密文件包含所需的數據，然後製作用於支付的 scriptPubKeys 以便使它們花費來顯示數據的加密密鑰，PayPub 協議可以以不信任的方式支付信息。但是，現有的實現存在一個重大缺陷：發布者可以無限期地延遲密鑰的發布。
 
 這個問題可以用退款交易技術互動地解決; 使用 `CHECKLOCKTIMEVERIFY` ，可以使用以下形式的scriptPubKeys以非互動方式解決問題：
 
-```
+```text
 IF
     HASH160 <Hash160(encryption key)> EQUALVERIFY
     <publisher pubkey> CHECKSIG
@@ -105,14 +106,13 @@ ELSE
     <buyer pubkey> CHECKSIG
 ENDIF
 ```
-
-**資料的買家現在正在提供一個有效期限的安全報價。如果發行商在到期時間到期之前未能接受報價，買家可以通過消費輸出來取消報價。**
+* *資料的買家現在正在提供一個有效期限的安全報價。如果發行商在到期時間到期之前未能接受報價，買家可以通過消費輸出來取消報價。**
 
 ## 證明犧牲礦工的手續費 | Proving sacrifice to miners' fees
 
 Proving the sacrifice of some limited resource is a common technique in a variety of cryptographic protocols. Proving sacrifices of coins to mining fees has been proposed as a universal public good to which the sacrifice could be directed, rather than simply destroying the coins. However doing so is non-trivial, and even the best existing technqiue - announce-commit sacrifices - could encourage mining centralization. CHECKLOCKTIMEVERIFY can be used to create outputs that are provably spendable by anyone (thus to mining fees assuming miners behave optimally and rationally) but only at a time sufficiently far into the future that large miners can't profitably sell the sacrifices at a discount.
 
----
+- --
 
 證明犧牲一些有限的資源是各種密碼協議中的常用技術。已經提出了證明將硬幣犧牲為採礦費的做法，作為犧牲品可以針對的一種普遍的公共物品，而不是簡單地銷毀硬幣。但是，這樣做並非易事，即使是現有的最佳技術-宣布承諾犧牲-也會鼓勵採礦業的集中化。  `CHECKLOCKTIMEVERIFY` 可用於創建任何人都可證明可使用的輸出（因此，假設礦工的行為合理且合理，則要收取採礦費），但前提是在足夠遠的將來，大型礦工無法以折扣價出售利潤。
 
@@ -121,7 +121,7 @@ Proving the sacrifice of some limited resource is a common technique in a variet
 ## 凍結資金 | Freezing Funds
 
 除了使用冷儲存，硬體錢包和 P2SH multisig 輸出來控制資金之外，現在資金可以直接在區塊鏈中凍結在 UTXO 中。使用下面的 scriptPubKey ，在提供的失效時間之前，沒有人能夠使用安全輸出。這種可靠地凍結資金的能力在需要減少脅迫或沒收風險的情況下可能會有用。
-```
+```text
 <expiry time> CHECKLOCKTIMEVERIFY DROP DUP HASH160 <pubKeyHash> EQUALVERIFY CHECKSIG
 ```
 ## 完全替換nLockTime欄位 | Replacing the nLockTime field entirely
@@ -130,9 +130,8 @@ Proving the sacrifice of some limited resource is a common technique in a variet
 
 ## 詳細規格 | Detailed Specification
 
-
 參考下面轉載的參考實現，瞭解這些語義的精確語義和詳細基本原理。
-```
+```text
 case OP_NOP2:
 case OP_NOP2:
 {

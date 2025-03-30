@@ -1,13 +1,18 @@
 ---
 layout: post
-title:  "美國密碼貨幣學者呼籲保護線上交易隱私性"
-date:   2019-02-26
-categories: news
-description: "針對 Coin Center 密碼貨幣研究機構今年二月最新發布的論文「The Case for Electronic Cash: Why Private Peer-to-Peer Payments are Essential to an Open Society（暫譯：電子現金案例：為什麼點對點支付的隱私保護對於開放社會未來發展至關重要）」，進一步說明並引介最新獨立發表的論文。"
-image: '/img/41.png'
+title: 美國密碼貨幣學者呼籲保護線上交易隱私性
+date: 2019-02-26
+categories:
+- news
+description: '針對 Coin Center 密碼貨幣研究機構今年二月最新發布的論文「The Case for Electronic Cash: Why
+  Private Peer-to-Peer Payments are Essential to an Open Society（暫譯：電子現金案例：為什麼點對點支付的隱私保護對於開放社會未來發展至關重要）」，進一步說明並引介最新獨立發表的論文。'
+image: /img/41.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
+
 原文標題：We must protect our ability to transact privately online
 
 作者：Jerry Brito
@@ -22,4 +27,4 @@ hero_image: /img/hero.png
 * 以下內容節選自論文的第一章「緒論（Introduction）」：在沒有現金的世界（持有人和點對點形式的貨幣）中，所有交易必須由金融機構作為中介。中介交易在本質上受到監督和控制。如果第三方金融機構必須參與所有交易，那麼他們將了解每個人的財務生活私密細節。他們還可以禁止某些交易，甚至可能禁止某些人進行交易。
 * 中介（Intermediation）有很多好處，包括效率和便利性。從金融中介的特權地位收集來的資訊，民眾可以享受更好的信貸服務，能預防詐騙，並且能幫助當局打擊犯罪。但正如本文想闡述的，企業和政府亦有可能大肆濫用中介的特性。如果沒有辦法避免中介，那麼個人就無法保護自己的隱私或自主權。
 * 現金是一項古老的技術，它使我們能夠避免中介，從而保護個人自由和人類尊嚴所必需的價值。雖然現在我們距離無現金和完全中介的實現還有很長的路要走，至少在美國是如此。這篇論文也將表明，世界上其他地區已經有齊心努力消除現金的成功案例。
-* 在網路世界日益蓬勃發展的時代，現金紙幣對許多交易來說是不實際的，我們還必須開發如現金一樣可以保護隱私（privacy-preserving）及無需許可（permissionless）的電子現金。雖然這會帶來成本和收益，但我們認為解決成本問題的方法並不是禁止使用電子現金，而是將其使用方式進行規範，建立一個讓電子現金擁有與現金同等強而有力的制度。 
+* 在網路世界日益蓬勃發展的時代，現金紙幣對許多交易來說是不實際的，我們還必須開發如現金一樣可以保護隱私（privacy-preserving）及無需許可（permissionless）的電子現金。雖然這會帶來成本和收益，但我們認為解決成本問題的方法並不是禁止使用電子現金，而是將其使用方式進行規範，建立一個讓電子現金擁有與現金同等強而有力的制度。

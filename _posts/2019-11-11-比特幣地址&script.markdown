@@ -1,13 +1,17 @@
 ---
 layout: post
-title:  "比特幣地址和 script"
-date:   2019-11-11
-categories: news
-description: "簡單介紹bitcoin address & bitcoin script"
-image: '/img/131.png'
+title: 比特幣地址和 script
+date: 2019-11-11
+categories:
+- news
+description: 簡單介紹bitcoin address & bitcoin script
+image: /img/131.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
+
 [原文](http://gavinzhang.work/blockchain/比特币/比特币地址和脚本.html)：比特币地址和脚本    
 這兩天由於要做多簽名的錢包的問題，所以一直在關注比特幣錢包的知識，當我看到bitcoinj裡面的知識時，發現了ScriptBuilder的類，也發現了bitcoinj文件中有提到怎麼使用多簽名的錢包，這裡就簡單帶過吧，今天的主題還是要說明錢包的地址和 script 的一些知識。
 
@@ -34,11 +38,11 @@ hero_image: /img/hero.png
 對於比特幣 script 的語言介紹這裡不提太多，比特幣 script 其實就是一種基於堆棧的 script 語言，堆棧是一個非常簡單的資料結構，可以被視為一疊卡片。棧允許兩個操作：push和pop（推送和彈出）。
 
 對於解鎖 script 大概是這樣的：
-```
+```text
 1 OP_DUP OP_HASH160 <Cafe Public Key Hash> OP_EQUALVERIFY OP_CHECKSIG
 ```
 前面輸出的鎖定 script 是這樣的：
-```
+```text
 <sig> <pubk>
 ```
 那麼整體的 script 是這樣的：
@@ -50,25 +54,23 @@ Gavin Andresen在bip16提出一種P2SH(pay to Script Hash)方法，主要目的�
 
 對於解鎖的 script 是
 
-```
+```text
 OP_HASH256 6fe28c0ab6f1b372c1a6a246ae63f74f931e8365e15a089c68d6190000000000 OP_EQUAL
 ```
-
 我們可以理解成解數學中的難題，hash(x) = 6fe28c0ab6f1b372c1a6 我們只是提供一個x滿足這個條件，就可以證明我可以花費這筆錢了。這裡 `6fe28c0ab6f1b372c1a6a246ae63f74f931e8365e15a089c68d6190000000000` 不是簡單的一個數字的hash，而是一段script的hash(簡稱redeemScript),  **我們可以理解成只要你提供了一段script，它的二進位制hash和目標匹配，那麼你就可以花費這筆錢了，注意這裡是前端 script 執行的輸出是x就行了。** .
 
-**請注意，雖然這樣的交易很有趣，但它們並不安全，因為它們不包含任何簽名，因此任何試圖花費它們的交易都可以用將資金髮送到其他地方，用不同的交易來替代** 。
+* *請注意，雖然這樣的交易很有趣，但它們並不安全，因為它們不包含任何簽名，因此任何試圖花費它們的交易都可以用將資金髮送到其他地方，用不同的交易來替代** 。
 
 ### P2SH地址生成
 
 可以使用 go-bitcoin-multisig 生成，Github地址：
 
-```
+```text
 go-bitcoin-multisig keys --count 3 --concise
 ```
-
 生成結果：
-```
---------------
+```text
+- -------------
 KEY #1
 Private key:
 5JruagvxNLXTnkksyLMfgFgf3CagJ3Ekxu5oGxpTm5mPfTAPez3
@@ -76,8 +78,8 @@ Public key hex:
 04a882d414e478039cd5b52a92ffb13dd5e6bd4515497439dffd691a0f12af9575fa349b5694ed3155b136f09e63975a1700c9f4d4df849323dac06cf3bd6458cd
 Public Bitcoin address:
 1JzVFZSN1kxGLTHG41EVvY5gHxLAX7q1Rh
---------------
---------------
+- -------------
+- -------------
 KEY #2
 Private key:
 5JX3qAwDEEaapvLXRfbXRMSiyRgRSW9WjgxeyJQWwBugbudCwsk
@@ -85,8 +87,8 @@ Public key hex:
 046ce31db9bdd543e72fe3039a1f1c047dab87037c36a669ff90e28da1848f640de68c2fe913d363a51154a0c62d7adea1b822d05035077418267b1a1379790187
 Public Bitcoin address:
 14JfSvgEq8A8S7qcvxeaSCxhn1u1L71vo4
---------------
---------------
+- -------------
+- -------------
 KEY #3
 Private key:
 5JjHVMwJdjPEPQhq34WMUhzLcEd4SD7HgZktEh8WHstWcCLRceV
@@ -94,12 +96,11 @@ Public key hex:
 0411ffd36c70776538d079fbae117dc38effafb33304af83ce4894589747aee1ef992f63280567f52f5ba870678b4ab4ff6c8ea600bd217870a8b4f1f09f3a8e83
 Public Bitcoin address:
 1Kyy7pxzSKG75L9HhahRZgYoer9FePZL4R
---------------
+- -------------
 ```
-
 接著我們取出裡面所有的Public key（hex格式）
 
-```
+```text
 Key A:
 04a882d414e478039cd5b52a92ffb13dd5e6bd4515497439dffd691a0f12af9575fa349b5694ed3155b136f09e63975a1700c9f4d4df849323dac06cf3bd6458cd
 Key B:
@@ -107,48 +108,43 @@ Key B:
 Key C:
 0411ffd36c70776538d079fbae117dc38effafb33304af83ce4894589747aee1ef992f63280567f52f5ba870678b4ab4ff6c8ea600bd217870a8b4f1f09f3a8e83
 ```
-
 然後就可以使用這三組Public key組合起來（A,B,C）進行多重簽名：
 
-```
+```text
 go-bitcoin-multisig address --m 2 --n 3 --public-keys 04a882d414e478039cd5b52a92ffb13dd5e6bd4515497439dffd691a0f12af9575fa349b5694ed3155b136f09e63975a1700c9f4d4df849323dac06cf3bd6458cd,046ce31db9bdd543e72fe3039a1f1c047dab87037c36a669ff90e28da1848f640de68c2fe913d363a51154a0c62d7adea1b822d05035077418267b1a1379790187,0411ffd36c70776538d079fbae117dc38effafb33304af83ce4894589747aee1ef992f63280567f52f5ba870678b4ab4ff6c8ea600bd217870a8b4f1f09f3a8e83
 ```
-
 接著就生成了P2SH地址：
 
-```
----------------------
+```text
+- --------------------
 Your *P2SH ADDRESS* is:
 347N1Thc213QqfYCz3PZkjoJpNv5b14kBd
 Give this to sender funding multisig address with Bitcoin.
----------------------
----------------------
+- --------------------
+- --------------------
 Your *REDEEM SCRIPT* is:
 524104a882d414e478039cd5b52a92ffb13dd5e6bd4515497439dffd691a0f12af9575fa349b5694ed3155b136f09e63975a1700c9f4d4df849323dac06cf3bd6458cd41046ce31db9bdd543e72fe3039a1f1c047dab87037c36a669ff90e28da1848f640de68c2fe913d363a51154a0c62d7adea1b822d05035077418267b1a1379790187410411ffd36c70776538d079fbae117dc38effafb33304af83ce4894589747aee1ef992f63280567f52f5ba870678b4ab4ff6c8ea600bd217870a8b4f1f09f3a8e8353ae
 Keep private and provide this to redeem multisig balance later.
----------------------
+- --------------------
 ```
-
 ## 多重簽名地址
 
 在bitcoin bips歷史上先有M-of-N Transaction(bip-11),然後才有Pay To Script Hash(bip-16)(簡稱P2SH). 按照這個順序，其實比特幣中實現多重簽名有兩種方法：
 
 ### 原始的方法(bip-11)
 
-```
+```text
 scriptPubKey : m {pubkey}...{pubkey} n OP_CHECKMULTISIG
 scriptSig : OP_0 ...signatures...
 ```
-
 可以檢視一下例項：`09dd94f2c85262173da87a745a459007bb1eed6eeb6bfa238a0cd91a16cf7790`
 
 ### 用P2SH來實現
 
-```
+```text
 scriptSig: [signature] {[pubkey] OP_CHECKSIG}
 scriptPubKey: OP_HASH160 [20-byte-hash of {[pubkey] OP_CHECKSIG} ] OP_EQUAL
 ```
-
 這裡`{[pubkey] OP_CHECKSIG}`就是我們提到`redeemScript`程式碼. 例項：`3c9018e8d5615c306d72397f8f5eef44308c98fb576a88e030c25456b4f3a7ac`
 
 ## 總結

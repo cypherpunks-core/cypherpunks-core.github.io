@@ -1,12 +1,15 @@
 ---
 layout: post
-title:  "Cypherpunks Taiwan (1) "
-date:   2019-01-23
-categories: meetup
-description: "這是“Cypherpunks Taiwan 密碼龐克“第一次舉辦線下聚會，主題圍繞在 bitcoin 是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由。"
-image: '/img/56.png'
+title: 'Cypherpunks Taiwan (1) '
+date: 2019-01-23
+categories:
+- meetup
+description: 這是“Cypherpunks Taiwan 密碼龐克“第一次舉辦線下聚會，主題圍繞在 bitcoin 是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由。
+image: /img/56.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 注意：不要提早到，要到meetup網站報名，限20人

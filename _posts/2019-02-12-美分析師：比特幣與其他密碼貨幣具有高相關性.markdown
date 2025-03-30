@@ -1,12 +1,15 @@
 ---
 layout: post
-title:  "美分析師：比特幣與其他密碼貨幣具有高相關性"
-date:   2019-02-12
-categories: news
-description: "利用 Coin Metrics 製作的圖表，觀察比特幣價格與其他密碼貨幣（Altcoins）價格有極高的相關性，圖表分析顯示比特幣價格與其他密碼貨幣價格呈現正相關。"
-image: '/img/43.png'
+title: 美分析師：比特幣與其他密碼貨幣具有高相關性
+date: 2019-02-12
+categories:
+- news
+description: 利用 Coin Metrics 製作的圖表，觀察比特幣價格與其他密碼貨幣（Altcoins）價格有極高的相關性，圖表分析顯示比特幣價格與其他密碼貨幣價格呈現正相關。
+image: /img/43.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 原文標題：Altcoin Prices Have Never Been More Closely Correlated with Bitcoin
@@ -26,4 +29,4 @@ hero_image: /img/hero.png
 * 當然，目前還沒有太多數據可以做統計分析，因為相關的其他密碼貨幣大概都等到 2015年或之後才出現。
 * 萊特幣（Litecoin）在 2011 年推出後，幾年來一直是與比特幣關係最密切的其他密碼貨幣，其主打的目標是成為繼比特幣出現之後最重要的密碼貨幣；一說法是，如果比特幣是密碼貨幣世界的黃金，萊特幣就是白銀。
 * 萊特幣的重要性已是顯而易見，現在有許多比特幣開發者，將萊特幣看為比特幣開發的測試平台；萊特幣可說是在正式成為比特幣功能前的重要測試網路。
-* 其中一個例子是，擴展解決方案隔離見證 Segregated Witness（SegWit）在比特幣網路上正式啟動前，已經在萊特幣上先行應用。 
+* 其中一個例子是，擴展解決方案隔離見證 Segregated Witness（SegWit）在比特幣網路上正式啟動前，已經在萊特幣上先行應用。

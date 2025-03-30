@@ -1,12 +1,15 @@
 ---
 layout: post
-title:  "如何創建你的Pull Request(PR)給密碼龐克台灣"
-date:   2019-11-18
-categories: news
-description: "PR 即為 Pull Request，在 Github 上必須先複製（Fork）一份原作的專案到你自己的 GitHub 帳號底下。"
-image: '/img/panda-22.png'
+title: 如何創建你的Pull Request(PR)給密碼龐克台灣
+date: 2019-11-18
+categories:
+- news
+description: PR 即為 Pull Request，在 Github 上必須先複製（Fork）一份原作的專案到你自己的 GitHub 帳號底下。
+image: /img/panda-22.png
 published: true
 hero_image: /img/hero.png
+tags:
+- cypherpunks
 ---
 
 > PR 即為 Pull Request，在 Github 上必須先複製（Fork）一份原作的專案到你自己的 GitHub 帳號底下。
@@ -38,7 +41,7 @@ hero_image: /img/hero.png
 1. 可以透過 Download ZIP 至你想要的位置解壓縮它 
 2. 可以透過終端機指令，請先開啟終端機並且輸入底下指令
 
-```
+```text
 $ cd desktop && mkdir cypherpunks-core && cd cypherpunks-core
 
 // 先將位置移動至桌面並且創立 cypherpunks-core 資料夾
@@ -47,12 +50,11 @@ $ git clone https://github.com/{你的github名稱}/cypherpunks-core.github.io.g
 
 // 將專案下載至 cypherpunks-core 資料夾
 ```
-
 ## Step3 - 同步 Cypherpunks-core 專案
 
 > 同步遠端專案 
 
-```
+```text
 $ git remote -v
 
 // origin https://github.com/panda850819/cypherpunks-core.github.io.git (fetch)
@@ -72,7 +74,7 @@ $ git remote -v
 
 完成操作後，本地專案就會同步 Cypherpunk-core 專案中的變化!
 
-```
+```text
 $ git fetch upstream
 
 $ git checkout master 
@@ -80,7 +82,6 @@ $ git checkout master
 $ git merge upstream/master
 
 ```
-
 ## Step4 - 提交 PR 至 Cypherpunks-Core Team
 
 當我們完成修改之後，我們先將修改後的專案推（`push`）到自己的專案中，接下來就是將修改的部分告知 Cypherpunks-Core Team，那就要來提交 PR 拉！
