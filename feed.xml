@@ -1,4 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2025-03-30T14:30:10+00:00</updated><id>/feed.xml</id><title type="html">密碼龐克 Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">Cypherpunks Taiwan 重啟：我們為何再次聚集？</title><link href="/news/community/2025/03/24/Cypherpunks-Taiwan-%E9%87%8D%E5%95%9F-%E6%88%91%E5%80%91%E7%82%BA%E4%BD%95%E5%86%8D%E6%AC%A1%E8%81%9A%E9%9B%86/" rel="alternate" type="text/html" title="Cypherpunks Taiwan 重啟：我們為何再次聚集？" /><published>2025-03-24T00:00:00+00:00</published><updated>2025-03-24T00:00:00+00:00</updated><id>/news/community/2025/03/24/Cypherpunks%20Taiwan%20%E9%87%8D%E5%95%9F:%E6%88%91%E5%80%91%E7%82%BA%E4%BD%95%E5%86%8D%E6%AC%A1%E8%81%9A%E9%9B%86%3F</id><content type="html" xml:base="/news/community/2025/03/24/Cypherpunks-Taiwan-%E9%87%8D%E5%95%9F-%E6%88%91%E5%80%91%E7%82%BA%E4%BD%95%E5%86%8D%E6%AC%A1%E8%81%9A%E9%9B%86/">&lt;p&gt;從 2019 到現在，世界與網路都變了很多，但&lt;strong&gt;我們對隱私的渴望沒有改變&lt;/strong&gt;。在數位身份、鏈上足跡與 AI 大模型全面滲透的時代，&lt;strong&gt;Cypherpunks 的核心信念——Privacy is necessary for an open society in the electronic age&lt;/strong&gt;，從未如此重要。這些年來，我們見證了比特幣的主流化、Web3 的爆炸成長，也見證了過度中心化平台對個人自由與資訊掌控權的反撲。是時候重新聚集了。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2025-04-03T12:57:42+00:00</updated><id>/feed.xml</id><title type="html">密碼龐克 Cypherpunks Taiwan</title><subtitle>密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</subtitle><entry><title type="html">Cypherpunks Taiwan 小聚圓滿落幕｜謝謝每一位參與這場自由技術對話的人</title><link href="/event/community/2025/04/01/Cypherpunks-Taiwan(8)/" rel="alternate" type="text/html" title="Cypherpunks Taiwan 小聚圓滿落幕｜謝謝每一位參與這場自由技術對話的人" /><published>2025-04-01T04:00:00+00:00</published><updated>2025-04-01T04:00:00+00:00</updated><id>/event/community/2025/04/01/Cypherpunks%20Taiwan(8)</id><content type="html" xml:base="/event/community/2025/04/01/Cypherpunks-Taiwan(8)/">&lt;h1 id=&quot;-cypherpunks-taiwan-小聚圓滿落幕&quot;&gt;🎉 Cypherpunks Taiwan 小聚圓滿落幕&lt;/h1&gt;
+
+&lt;p&gt;3/31，我們在 Tempo House 二樓，正式啟動了 Cypherpunks Taiwan 的重啟。&lt;/p&gt;
+
+&lt;p&gt;這是一場關於隱私、制度、自由技術與去中心化未來的對話，也是一場由社群自發發起的集體行動。&lt;/p&gt;
+
+&lt;p&gt;我們想找回一個空間，讓關心這些議題的人可以見面、交流、共振。&lt;/p&gt;
+
+&lt;h2 id=&quot;-感謝每一位講者為現場帶來深刻與真誠的聲音&quot;&gt;🎤 感謝每一位講者，為現場帶來深刻與真誠的聲音：&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Dr. Awesome Doge｜Founder @Cypherpunks Taiwan&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;《Revive Cypherpunk》&lt;/p&gt;
+
+    &lt;p&gt;密碼龐克不只是簡單的技術社群，更是一場持續進行的倫理實踐運動。密碼龐克們堅信：&lt;strong&gt;唯有透過密碼學，我們才能在高度監控的數位社會中奪回自由與主權&lt;/strong&gt;。這場活動讓來自各國的 Cypherpunks 齊聚一堂，交流實踐經驗，並再次強調那句核心信念——&lt;strong&gt;以技術為工具，以自由為核心。&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Max Wu｜ Co-Founder @HackMD&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;《HackMD, the core of community and how it works》&lt;/p&gt;
+
+    &lt;p&gt;&lt;strong&gt;HackMD 是密碼龐克精神在協作領域的實踐。透過簡潔開放的 Markdown 語言，結合 OT 與 CRDT 等底層協定，讓社群能夠自由建構知識、無需仰賴中心化的審查與控制&lt;/strong&gt;。正如密碼龐克們用匿名網路與加密通訊對抗監控資本主義，&lt;strong&gt;Max 也透過工具設計，持續賦能社群，實現技術上的自主與自由。&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;林旅強 Richard｜ Co-Founder @開源社&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;《我（們）與 Cypherpunk 的距離》&lt;/p&gt;
+
+    &lt;p&gt;Richard 在商業領域中的角色，可以被視為一種&lt;strong&gt;實踐密碼龐克原則的努力&lt;/strong&gt;。Richard 善用其在戰略層面的影響力，引導技術與產品的發展方向，使其更貼近密碼龐克對「數位自主」、「抗衡監控」的核心願景。這種實踐展現了密碼龐克精神在現實世界中的另一種可能。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Neil Lee｜執行董事 @EchoX&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;《在監管壓力下，合規與隱私技術的平衡》&lt;/p&gt;
+
+    &lt;p&gt;延續密碼龐克「&lt;strong&gt;我們不指望政府或企業給我們隱私，我們用密碼學捍衛它&lt;/strong&gt;」的理念，Neil 正在監管與技術的灰色地帶中，探索合規框架下的隱私保護。EchoX 尋求在「透明 vs. 隱私」之間找到平衡點，讓個人財務資料仍能在法規下保持應有的自主性與防護力。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;特別嘉賓：寶博士（現任立法委員） &amp;amp; Peter @Plan B Network&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;兩位的臨時對談，從政策現場聊到產業鏈結與資安隱私，精彩內容讓現場氣氛沸騰。&lt;strong&gt;Plan B Network 更大方贊助冷錢包&lt;/strong&gt;，讓與會者除了思想上的收穫，還能實際帶回一份對自身資產的加密保障&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-活動成果&quot;&gt;🙏 活動成果&lt;/h2&gt;
+
+&lt;p&gt;現場超過 60 人參與，從技術人、開源工作者、公職、研究者到圈外人，這場活動證明了：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;關心制度與技術的人還很多，只是缺一個聚在一起的場域。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;📸 講者簡報與活動照片整理中，後續將分享至社群頻道&lt;/li&gt;
+  &lt;li&gt;📬 想參與下一次？歡迎加入 Telegram 群組：&lt;a href=&quot;https://t.me/cypherpunkstw&quot;&gt;https://t.me/cypherpunkstw&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;未來展望&quot;&gt;未來展望&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Cypherpunks write code — and build community.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;我們不只是懷舊，而是試著定義未來的「開源社會基礎建設」。&lt;/p&gt;
+
+&lt;p&gt;這場聚會不是終點，而是一行剛 commit 的程式碼。&lt;/p&gt;
+
+&lt;p&gt;See you next round.&lt;/p&gt;
+
+&lt;p&gt;#CypherpunksTaiwan #Privacy #OpenSource #Web3 #Decentralization #CryptoCulture #TaiwanTechCommunity #HackMD #TONX #Tether #去中心化 #資料主權&lt;/p&gt;
+
+&lt;h2 id=&quot;-活動精選照片&quot;&gt;📸 活動精選照片&lt;/h2&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/151.png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;
+&lt;p&gt;活動開場：Dr. Awesome Doge 分享「Revive Cypherpunk」&lt;/p&gt;
+&lt;/center&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/152.png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;
+&lt;p&gt;與會者專注聆聽講者分享&lt;/p&gt;
+&lt;/center&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/153.png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;
+&lt;p&gt;現場交流討論熱烈&lt;/p&gt;
+&lt;/center&gt;
+
+&lt;center&gt;
+&lt;img src=&quot;/img/154.png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;
+&lt;p&gt;Cypherpunks Taiwan 社群大合照&lt;/p&gt;
+&lt;/center&gt;</content><author><name>Cypherpunks Core</name></author><category term="event" /><category term="community" /><category term="cypherpunks" /><category term="privacy" /><category term="opensource" /><category term="web3" /><category term="decentralization" /><summary type="html">🎉 Cypherpunks Taiwan 小聚圓滿落幕</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://via.placeholder.com/1200x800" /><media:content medium="image" url="https://via.placeholder.com/1200x800" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Cypherpunks Taiwan 重啟：我們為何再次聚集？</title><link href="/news/community/2025/03/24/Cypherpunks-Taiwan-%E9%87%8D%E5%95%9F-%E6%88%91%E5%80%91%E7%82%BA%E4%BD%95%E5%86%8D%E6%AC%A1%E8%81%9A%E9%9B%86/" rel="alternate" type="text/html" title="Cypherpunks Taiwan 重啟：我們為何再次聚集？" /><published>2025-03-24T00:00:00+00:00</published><updated>2025-03-24T00:00:00+00:00</updated><id>/news/community/2025/03/24/Cypherpunks%20Taiwan%20%E9%87%8D%E5%95%9F:%E6%88%91%E5%80%91%E7%82%BA%E4%BD%95%E5%86%8D%E6%AC%A1%E8%81%9A%E9%9B%86%3F</id><content type="html" xml:base="/news/community/2025/03/24/Cypherpunks-Taiwan-%E9%87%8D%E5%95%9F-%E6%88%91%E5%80%91%E7%82%BA%E4%BD%95%E5%86%8D%E6%AC%A1%E8%81%9A%E9%9B%86/">&lt;p&gt;從 2019 到現在，世界與網路都變了很多，但&lt;strong&gt;我們對隱私的渴望沒有改變&lt;/strong&gt;。在數位身份、鏈上足跡與 AI 大模型全面滲透的時代，&lt;strong&gt;Cypherpunks 的核心信念——Privacy is necessary for an open society in the electronic age&lt;/strong&gt;，從未如此重要。這些年來，我們見證了比特幣的主流化、Web3 的爆炸成長，也見證了過度中心化平台對個人自由與資訊掌控權的反撲。是時候重新聚集了。&lt;/p&gt;
 
 &lt;h2 id=&quot;為什麼重啟-cypherpunks-taiwan&quot;&gt;為什麼重啟 Cypherpunks Taiwan？&lt;/h2&gt;
 
@@ -1905,107 +1994,4 @@ h = 01
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://en.bitcoin.it/wiki/Secp256k1&quot;&gt;Secp256k1&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><category term="news" /><category term="cypherpunks" /><summary type="html">[原文]secp256k1 是指比特幣中使用的 ECDSA 曲線的參數 ，並且在高效密碼學標準（SEC）（Certicom Research，文件）中進行了定義。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/img/137.png" /><media:content medium="image" url="/img/137.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">如何創建你的Pull Request(PR)給密碼龐克台灣</title><link href="/news/2019/11/18/%E5%A6%82%E4%BD%95%E5%89%B5%E5%BB%BA%E4%BD%A0%E7%9A%84Pull-Request-%E7%B5%A6%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E7%81%A3/" rel="alternate" type="text/html" title="如何創建你的Pull Request(PR)給密碼龐克台灣" /><published>2019-11-18T00:00:00+00:00</published><updated>2019-11-18T00:00:00+00:00</updated><id>/news/2019/11/18/%E5%A6%82%E4%BD%95%E5%89%B5%E5%BB%BA%E4%BD%A0%E7%9A%84Pull%20Request%20%E7%B5%A6%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E7%81%A3</id><content type="html" xml:base="/news/2019/11/18/%E5%A6%82%E4%BD%95%E5%89%B5%E5%BB%BA%E4%BD%A0%E7%9A%84Pull-Request-%E7%B5%A6%E5%AF%86%E7%A2%BC%E9%BE%90%E5%85%8B%E5%8F%B0%E7%81%A3/">&lt;blockquote&gt;
-  &lt;p&gt;PR 即為 Pull Request，在 Github 上必須先複製（Fork）一份原作的專案到你自己的 GitHub 帳號底下。
-那自己的 Fork 專案想怎麼玩就怎麼玩，之後你就可以推上自己的 Fork 文件上，發個通知給 Cypherpunks-core，讓團隊人員來審視這次的 PR 是否 ok，若是 ok 則會將您發起的 PR 合併進團隊文章裡，若不 ok 將會在底下描述為何沒通過的理由。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;https://github.com/cypherpunks-core/cypherpunks-core.github.io&quot;&gt;密碼龐克台灣 Github&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;750&quot; src=&quot;/img/panda-23.png&quot; /&gt;&lt;/div&gt;
-&lt;center&gt;&lt;strong&gt;圖1 密碼龐克台灣官網&lt;/strong&gt;&lt;/center&gt;
-
-&lt;h2 id=&quot;step1---點擊-fork-將專案複製至自己的遠端儲存庫&quot;&gt;Step1 - 點擊 Fork 將專案複製至自己的遠端儲存庫&lt;/h2&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;750&quot; src=&quot;/img/panda-24.png&quot; /&gt;&lt;/div&gt;
-
-&lt;center&gt;&lt;strong&gt;圖2 點擊畫面右上角之 Fork &lt;/strong&gt;&lt;/center&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;750&quot; src=&quot;/img/panda-25.png&quot; /&gt;&lt;/div&gt;
-
-&lt;center&gt;&lt;strong&gt;圖3 即可在自己的遠端資源庫中看到 cypherpunks-core 的專案 &lt;/strong&gt;&lt;/center&gt;
-
-&lt;p&gt;以我為例 就會看到 panda850819 forked from cypherpunks-core …&lt;/p&gt;
-
-&lt;h2 id=&quot;step2---clone-專案下載專案&quot;&gt;Step2 - Clone 專案/下載專案&lt;/h2&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;750&quot; src=&quot;/img/panda-26.png&quot; /&gt;&lt;/div&gt;
-
-&lt;center&gt;&lt;strong&gt;圖4 在自己的專案中按下 Clone 到自己的資料夾 &lt;/strong&gt;&lt;/center&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;可以透過 Download ZIP 至你想要的位置解壓縮它&lt;/li&gt;
-  &lt;li&gt;可以透過終端機指令，請先開啟終端機並且輸入底下指令&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cd desktop &amp;amp;&amp;amp; mkdir cypherpunks-core &amp;amp;&amp;amp; cd cypherpunks-core
-
-// 先將位置移動至桌面並且創立 cypherpunks-core 資料夾
-
-$ git clone https://github.com/{你的github名稱}/cypherpunks-core.github.io.git
-
-// 將專案下載至 cypherpunks-core 資料夾
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;step3---同步-cypherpunks-core-專案&quot;&gt;Step3 - 同步 Cypherpunks-core 專案&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;同步遠端專案&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git remote -v
-
-// origin https://github.com/panda850819/cypherpunks-core.github.io.git (fetch)
-// origin https://github.com/panda850819/cypherpunks-core.github.io.git (push)
-
-$ git remote add upstream https://github.com/cypherpunks-core/cypherpunks-core.github.io.git
-
-$ git remote -v 
-
-// origin	https://github.com/panda850819/cypherpunks-core.github.io.git (fetch)
-// origin	https://github.com/panda850819/cypherpunks-core.github.io.git (push)
-// upstream	https://github.com/cypherpunks-core/cypherpunks-core.github.io.git (fetch)
-// upstream	https://github.com/cypherpunks-core/cypherpunks-core.github.io.git (push)
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;同步 fork&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;完成操作後，本地專案就會同步 Cypherpunk-core 專案中的變化!&lt;/p&gt;
-
-&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git fetch upstream
-
-$ git checkout master 
-
-$ git merge upstream/master
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;step4---提交-pr-至-cypherpunks-core-team&quot;&gt;Step4 - 提交 PR 至 Cypherpunks-Core Team&lt;/h2&gt;
-
-&lt;p&gt;當我們完成修改之後，我們先將修改後的專案推（&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;push&lt;/code&gt;）到自己的專案中，接下來就是將修改的部分告知 Cypherpunks-Core Team，那就要來提交 PR 拉！&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;記得要先將自己 fork 的專案推上去，才能提交 PR 喔！&lt;/code&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;提交 PR&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;750&quot; src=&quot;/img/panda-27.png&quot; /&gt;&lt;/div&gt;
-&lt;center&gt;&lt;strong&gt;圖5 - 提交 PR 至 Cypherpunk-core&lt;/strong&gt;&lt;/center&gt;
-
-&lt;p&gt;然後可以在上面輸入摘要跟主題，接下來就等著團隊給予回覆囉！&lt;/p&gt;
-
-&lt;h2 id=&quot;小結&quot;&gt;小結&lt;/h2&gt;
-&lt;p&gt;透過幾個小小步驟，我們將了解如何 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Fork&lt;/code&gt; 專案以及 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Clone&lt;/code&gt; 專案，並且繳交自己的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Pull Request&lt;/code&gt; 給 Cypherpunks-Core Team。&lt;/p&gt;
-
-&lt;p&gt;希望大家能一起為這個社群做貢獻，若有任何想要瞭解的也可以至&lt;a href=&quot;https://cypherpunks-core.github.io/&quot;&gt;官方網站&lt;/a&gt;、&lt;a href=&quot;https://www.facebook.com/CypherpunksTW/&quot;&gt;Facebook&lt;/a&gt;觀看我們的文章和我們一起討論，最後 Cypherpunks Taiwan 密碼龐克 為 crypto 文化的聚集地
-主題圍繞在 bitcoin 也是開源項目技術探討聚會，廣義的話圍繞在密碼龐克的隱私、加密傳輸、網路自由，若大家對我們有興趣也請不吝嗇的提交 PR 給我們!&lt;/p&gt;
-
-&lt;h2 id=&quot;參考文獻&quot;&gt;參考文獻&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://gitbook.tw/chapters/github/pull-request.html&quot;&gt;為你自己學Git&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.itread01.com/content/1544771540.html?fbclid=IwAR2s4ATwibiiKRS3DYBnNsaNVuQeedOovTKZyGY9iaVqUukTDZppXzGu35w&quot;&gt;git如何同步fork專案&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><category term="news" /><category term="cypherpunks" /><summary type="html">PR 即為 Pull Request，在 Github 上必須先複製（Fork）一份原作的專案到你自己的 GitHub 帳號底下。 那自己的 Fork 專案想怎麼玩就怎麼玩，之後你就可以推上自己的 Fork 文件上，發個通知給 Cypherpunks-core，讓團隊人員來審視這次的 PR 是否 ok，若是 ok 則會將您發起的 PR 合併進團隊文章裡，若不 ok 將會在底下描述為何沒通過的理由。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/img/panda-22.png" /><media:content medium="image" url="/img/panda-22.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;/ul&gt;</content><author><name>Cypherpunks Core</name></author><category term="news" /><category term="cypherpunks" /><summary type="html">[原文]secp256k1 是指比特幣中使用的 ECDSA 曲線的參數 ，並且在高效密碼學標準（SEC）（Certicom Research，文件）中進行了定義。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/img/137.png" /><media:content medium="image" url="/img/137.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
