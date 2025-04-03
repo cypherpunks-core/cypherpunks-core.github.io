@@ -2,7 +2,7 @@
 layout: post
 title: Cypherpunks Taiwan 重啟：我們為何再次聚集？
 date: 2025-03-24
-image: /img/150.jpg
+image: /img/151.png
 description: Cypherpunks Taiwan 重啟，探討在數位身份、鏈上足跡與 AI 大模型全面滲透的時代，如何保護隱私與自由。
 published: true
 hero_image: /img/hero.png
@@ -17,13 +17,13 @@ tags:
 - community
 ---
 
-從 2019 到現在，世界與網路都變了很多，但**我們對隱私的渴望沒有改變**。在數位身份、鏈上足跡與 AI 大模型全面滲透的時代，**Cypherpunks 的核心信念——Privacy is necessary for an open society in the electronic age**，從未如此重要。這些年來，我們見證了比特幣的主流化、Web3 的爆炸成長，也見證了過度中心化平台對個人自由與資訊掌控權的反撲。是時候重新聚集了。
+從 2019 到現在，世界與網路都變了很多，但**我們對隱私的渴望沒有改變**。在數位身份、鏈上足跡與 AI 大模型全面滲透的時代，**Cypherpunks 的核心信念——Privacy is necessary for an open society in the electronic age**，從未如此重要。這些年來，我們見證了[[比特幣](/tags/bitcoin)](/tags/bitcoin)的主流化、Web3 的爆炸成長，也見證了過度中心化平台對個人自由與資訊掌控權的反撲。是時候重新聚集了。
 
 ## 為什麼重啟 Cypherpunks Taiwan？
 
-Cypherpunks Taiwan 並不是為了「追逐熱點」，我們想建立的，是一個屬於台灣技術社群的節點——一個可以討論密碼學、隱私工具、抗審查機制、去中心化協議的地方，一個能吸引真正關心自由與技術的你加入的社群。
+Cypherpunks Taiwan 並不是為了「追逐熱點」，我們想建立的，是一個屬於台灣技術社群的節點——一個可以討論[[密碼學](/tags/cryptography)](/tags/cryptography)、隱私工具、抗審查機制、去中心化協議的地方，一個能吸引真正關心自由與技術的你加入的社群。
 
-這一次，我們的目標不只是討論技術，更希望拓展邊界、**吸引對抗中心化壓力的潛在同盟者**，不論你是否來自區塊鏈產業，只要你在思考如何用科技解決問題、保護自由，那你就是我們想認識的對象。
+這一次，我們的目標不只是討論技術，更希望拓展邊界、**吸引對抗中心化壓力的潛在同盟者**，不論你是否來自[[區塊鏈](/tags/blockchain)](/tags/blockchain)產業，只要你在思考如何用科技解決問題、保護自由，那你就是我們想認識的對象。
 
 ## 我們想討論的，是這些問題：
 
