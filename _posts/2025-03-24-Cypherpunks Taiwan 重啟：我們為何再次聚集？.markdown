@@ -2,7 +2,7 @@
 layout: post
 title: Cypherpunks Taiwan 重啟：我們為何再次聚集？
 date: 2025-03-24
-image: /img/151.png
+image: /img/150.jpg
 description: Cypherpunks Taiwan 重啟，探討在數位身份、鏈上足跡與 AI 大模型全面滲透的時代，如何保護隱私與自由。
 published: true
 hero_image: /img/hero.png
