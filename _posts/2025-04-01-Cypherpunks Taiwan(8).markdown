@@ -1,9 +1,20 @@
 ---
 layout: post
 title: "Cypherpunks Taiwan 小聚圓滿落幕｜謝謝每一位參與這場自由技術對話的人"
-date: 2025-04-01 12:00:00 +0800
+date: 2025-04-01
 categories: event community
-tags: cypherpunks privacy opensource web3 decentralization
+image: /img/151.png
+published: true
+hero_image: /img/hero.png
+categories:
+- news
+- community
+tags:
+- cypherpunks
+- privacy
+- decentralization
+- technology
+- community
 ---
 
 # 🎉 Cypherpunks Taiwan 小聚圓滿落幕
@@ -68,22 +79,10 @@ See you next round.
 
 ## 📸 活動精選照片
 
-<center>
-<img src="/img/151.png" width="80%" height="80%" />
-<p>活動開場：Dr. Awesome Doge 分享「Revive Cypherpunk」</p>
-</center>
+![活動開場：Dr. Awesome Doge 分享「Revive Cypherpunk」](/img/151.png)
 
-<center>
-<img src="/img/152.png" width="80%" height="80%" />
-<p>與會者專注聆聽講者分享</p>
-</center>
+![與會者專注聆聽講者分享](/img/152.png)
 
-<center>
-<img src="/img/153.png" width="80%" height="80%" />
-<p>現場交流討論熱烈</p>
-</center>
+![現場交流討論熱烈](/img/153.png)
 
-<center>
-<img src="/img/154.png" width="80%" height="80%" />
-<p>Cypherpunks Taiwan 社群大合照</p>
-</center>
+![Cypherpunks Taiwan 社群大合照](/img/154.png)
