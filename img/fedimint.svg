@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#1a1a1a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)"/>
+
+  <!-- Federation circle -->
+  <circle cx="400" cy="180" r="120" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="10,5"/>
+
+  <!-- Guardian nodes -->
+  <g fill="#1a1a1a" stroke="#8b5cf6" stroke-width="2">
+    <circle cx="400" cy="60" r="25"/>
+    <circle cx="504" cy="132" r="25"/>
+    <circle cx="504" cy="228" r="25"/>
+    <circle cx="400" cy="300" r="25"/>
+    <circle cx="296" cy="228" r="25"/>
+    <circle cx="296" cy="132" r="25"/>
+  </g>
+
+  <!-- Guardian labels -->
+  <g font-family="monospace" font-size="10" fill="#8b5cf6" text-anchor="middle">
+    <text x="400" y="64">G1</text>
+    <text x="504" y="136">G2</text>
+    <text x="504" y="232">G3</text>
+    <text x="400" y="304">G4</text>
+    <text x="296" y="232">G5</text>
+    <text x="296" y="136">G6</text>
+  </g>
+
+  <!-- Center - eCash -->
+  <circle cx="400" cy="180" r="40" fill="#1a1a1a" stroke="#4ade80" stroke-width="2"/>
+  <text x="400" y="175" font-family="monospace" font-size="12" fill="#4ade80" text-anchor="middle">eCash</text>
+  <text x="400" y="190" font-family="monospace" font-size="10" fill="#6b7280" text-anchor="middle">Mint</text>
+
+  <!-- Connection to Bitcoin -->
+  <g transform="translate(650, 180)">
+    <circle r="30" fill="#1a1a1a" stroke="#f7931a" stroke-width="2"/>
+    <text y="5" font-family="monospace" font-size="20" fill="#f7931a" text-anchor="middle">₿</text>
+  </g>
+  <line x1="540" y1="180" x2="620" y2="180" stroke="#f7931a" stroke-width="2" stroke-dasharray="5,5"/>
+
+  <!-- Title -->
+  <text x="400" y="370" font-family="monospace" font-size="24" fill="#8b5cf6" text-anchor="middle" opacity="0.8">FEDIMINT</text>
+</svg>

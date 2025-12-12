@@ -6,7 +6,7 @@ categories:
 - bitcoin
 - development
 description: Bitcoin Script 系列最終篇，探討 DLC、Vault、Covenant 等進階應用，以及比特幣腳本未來可能的發展方向。
-image: /img/bitcoin-dev.png
+image: /img/bitcoin-dev.svg
 published: true
 hero_image: /img/hero.png
 series: bitcoin-script

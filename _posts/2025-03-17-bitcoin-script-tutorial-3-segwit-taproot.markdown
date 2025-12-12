@@ -6,7 +6,7 @@ categories:
 - bitcoin
 - development
 description: Bitcoin Script 系列第三篇，深入解析 SegWit 的技術細節、Taproot 升級、Schnorr 簽名，以及 Tapscript 的新操作碼。
-image: /img/bitcoin-dev.png
+image: /img/bitcoin-dev.svg
 published: true
 hero_image: /img/hero.png
 series: bitcoin-script

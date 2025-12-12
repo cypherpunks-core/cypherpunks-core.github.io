@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#1a1a1a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)"/>
+
+  <!-- Code editor frame -->
+  <rect x="100" y="50" width="600" height="300" rx="8" fill="#0d0d0d" stroke="#333" stroke-width="2"/>
+
+  <!-- Editor header -->
+  <rect x="100" y="50" width="600" height="30" rx="8" fill="#1a1a1a"/>
+  <rect x="100" y="70" width="600" height="10" fill="#1a1a1a"/>
+  <circle cx="125" cy="65" r="6" fill="#ff5f56"/>
+  <circle cx="145" cy="65" r="6" fill="#ffbd2e"/>
+  <circle cx="165" cy="65" r="6" fill="#27ca40"/>
+
+  <!-- Code lines -->
+  <g font-family="monospace" font-size="14">
+    <text x="130" y="110" fill="#6b7280">// Bitcoin Script</text>
+    <text x="130" y="135" fill="#f97316">OP_DUP</text>
+    <text x="130" y="160" fill="#f97316">OP_HASH160</text>
+    <text x="130" y="185" fill="#4ade80">&lt;pubkey_hash&gt;</text>
+    <text x="130" y="210" fill="#f97316">OP_EQUALVERIFY</text>
+    <text x="130" y="235" fill="#f97316">OP_CHECKSIG</text>
+    <text x="130" y="275" fill="#6b7280">// P2PKH Standard Script</text>
+  </g>
+
+  <!-- Bitcoin symbol -->
+  <g transform="translate(650, 200)">
+    <circle r="40" fill="none" stroke="#f7931a" stroke-width="3"/>
+    <text y="12" font-family="Arial" font-size="48" font-weight="bold" fill="#f7931a" text-anchor="middle">₿</text>
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="380" font-family="monospace" font-size="20" fill="#4ade80" text-anchor="middle" opacity="0.8">BITCOIN SCRIPT DEVELOPMENT</text>
+</svg>

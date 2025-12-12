@@ -6,7 +6,7 @@ categories:
 - bitcoin
 - development
 description: Bitcoin Script 系列第四篇，深入解析多重簽名的各種實現方式，包括傳統 P2SH、SegWit、Taproot MuSig2，以及閾值簽名方案。
-image: /img/bitcoin-dev.png
+image: /img/bitcoin-dev.svg
 published: true
 hero_image: /img/hero.png
 series: bitcoin-script

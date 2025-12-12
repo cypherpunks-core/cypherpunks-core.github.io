@@ -6,7 +6,7 @@ categories:
 - bitcoin
 - development
 description: Bitcoin Script 系列第五篇，深入解析時間鎖機制，包括 nLocktime、CLTV、nSequence、CSV，以及 HTLC 的實際應用。
-image: /img/bitcoin-dev.png
+image: /img/bitcoin-dev.svg
 published: true
 hero_image: /img/hero.png
 series: bitcoin-script

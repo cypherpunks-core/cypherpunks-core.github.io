@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#1a1a1a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)"/>
+
+  <!-- Block reward chart -->
+  <g transform="translate(100, 300)">
+    <!-- Axis -->
+    <line x1="0" y1="0" x2="600" y2="0" stroke="#333" stroke-width="2"/>
+    <line x1="0" y1="0" x2="0" y2="-250" stroke="#333" stroke-width="2"/>
+
+    <!-- Bars representing halvings -->
+    <rect x="30" y="-200" width="80" height="200" fill="#f7931a" opacity="0.8"/>
+    <text x="70" y="20" font-family="monospace" font-size="10" fill="#6b7280" text-anchor="middle">2009</text>
+    <text x="70" y="-210" font-family="monospace" font-size="12" fill="#f7931a" text-anchor="middle">50</text>
+
+    <rect x="140" y="-100" width="80" height="100" fill="#f7931a" opacity="0.7"/>
+    <text x="180" y="20" font-family="monospace" font-size="10" fill="#6b7280" text-anchor="middle">2012</text>
+    <text x="180" y="-110" font-family="monospace" font-size="12" fill="#f7931a" text-anchor="middle">25</text>
+
+    <rect x="250" y="-50" width="80" height="50" fill="#f7931a" opacity="0.6"/>
+    <text x="290" y="20" font-family="monospace" font-size="10" fill="#6b7280" text-anchor="middle">2016</text>
+    <text x="290" y="-60" font-family="monospace" font-size="12" fill="#f7931a" text-anchor="middle">12.5</text>
+
+    <rect x="360" y="-25" width="80" height="25" fill="#f7931a" opacity="0.5"/>
+    <text x="400" y="20" font-family="monospace" font-size="10" fill="#6b7280" text-anchor="middle">2020</text>
+    <text x="400" y="-35" font-family="monospace" font-size="12" fill="#f7931a" text-anchor="middle">6.25</text>
+
+    <!-- 2024 highlighted -->
+    <rect x="470" y="-12" width="80" height="12" fill="#4ade80" stroke="#4ade80" stroke-width="2"/>
+    <text x="510" y="20" font-family="monospace" font-size="10" fill="#4ade80" text-anchor="middle">2024</text>
+    <text x="510" y="-22" font-family="monospace" font-size="12" fill="#4ade80" text-anchor="middle">3.125</text>
+
+    <!-- Y axis label -->
+    <text x="-20" y="-125" font-family="monospace" font-size="10" fill="#6b7280" text-anchor="middle" transform="rotate(-90, -20, -125)">BTC/Block</text>
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="370" font-family="monospace" font-size="24" fill="#f7931a" text-anchor="middle" opacity="0.8">BITCOIN HALVING 2024</text>
+</svg>
