@@ -52,7 +52,17 @@ jobs:
           bundle install --jobs 4 --retry 3
 
       - name: Build Jekyll site
-        run: bundle exec jekyll build
+        run: |
+          # Check if this is a project page (repo name != owner.github.io)
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          OWNER="${GITHUB_REPOSITORY_OWNER}"
+          if [[ "$REPO_NAME" != "${OWNER}.github.io" ]]; then
+            echo "Building for project page: baseurl=/${REPO_NAME}"
+            bundle exec jekyll build --baseurl "/${REPO_NAME}"
+          else
+            echo "Building for user/org page: no baseurl"
+            bundle exec jekyll build
+          fi
         env:
           JEKYLL_ENV: production
 
