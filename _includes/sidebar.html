@@ -1,0 +1,70 @@
+<!-- Sidebar - Latest Posts -->
+<div class="sidebar bg-cp-dark-100 border border-cp-dark-400 rounded-lg p-6 sticky top-24">
+  <!-- Latest Posts -->
+  <div class="mb-8">
+    <h3 class="sidebar-title text-lg font-bold text-cp-green-500 mb-4 pb-2 border-b border-cp-dark-400 font-mono">
+      <span class="text-cp-dark-600">//</span> 最新文章
+    </h3>
+    <ul class="space-y-4">
+      {% for post in site.posts limit:5 %}
+      <li class="group">
+        <a href="{{ post.url | relative_url }}" class="block">
+          <h4 class="text-sm font-medium text-cp-dark-800 group-hover:text-cp-green-500 transition-colors line-clamp-2">
+            {{ post.title }}
+          </h4>
+          <time class="text-xs text-cp-dark-600 font-mono mt-1 block">
+            {{ post.date | date: "%Y-%m-%d" }}
+          </time>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    <a href="{{ '/blog/' | relative_url }}" class="inline-flex items-center gap-1 text-cp-green-500 text-sm font-mono mt-4 hover:text-cp-green-400 transition-colors">
+      查看全部
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Tags -->
+  {% assign all_tags = site.posts | map: 'tags' | compact | flatten | uniq | sort %}
+  {% if all_tags.size > 0 %}
+  <div class="mb-8">
+    <h3 class="sidebar-title text-lg font-bold text-cp-green-500 mb-4 pb-2 border-b border-cp-dark-400 font-mono">
+      <span class="text-cp-dark-600">//</span> 標籤
+    </h3>
+    <div class="flex flex-wrap gap-2">
+      {% for tag in all_tags limit:15 %}
+      <a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}" class="tag text-xs px-2 py-1 bg-cp-dark-200 text-cp-green-600 border border-cp-dark-400 rounded hover:border-cp-green-500 hover:bg-cp-green-500/10 transition-all font-mono">
+        {{ tag }}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Quick Links -->
+  <div>
+    <h3 class="sidebar-title text-lg font-bold text-cp-green-500 mb-4 pb-2 border-b border-cp-dark-400 font-mono">
+      <span class="text-cp-dark-600">//</span> 資源
+    </h3>
+    <ul class="space-y-2">
+      <li>
+        <a href="{{ '/markdown/resources/resources-bitcoin/' | relative_url }}" class="flex items-center gap-2 text-sm text-cp-dark-700 hover:text-cp-green-500 transition-colors font-mono">
+          <span class="text-cp-green-600">></span> Bitcoin
+        </a>
+      </li>
+      <li>
+        <a href="{{ '/markdown/resources/resources-ln/' | relative_url }}" class="flex items-center gap-2 text-sm text-cp-dark-700 hover:text-cp-green-500 transition-colors font-mono">
+          <span class="text-cp-green-600">></span> Lightning Network
+        </a>
+      </li>
+      <li>
+        <a href="{{ '/markdown/resources/resources-blockchain-privacy/' | relative_url }}" class="flex items-center gap-2 text-sm text-cp-dark-700 hover:text-cp-green-500 transition-colors font-mono">
+          <span class="text-cp-green-600">></span> Blockchain Privacy
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
