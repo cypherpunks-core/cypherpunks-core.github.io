@@ -5,6 +5,7 @@ date: 2025-03-24
 categories: [技術教學, Bitcoin, Rust]
 tags: [Rust, Bitcoin, Script, 簽名, ECDSA, Schnorr, Taproot, Miniscript]
 author: Cypherpunks Taiwan
+image: /img/bitcoin-dev.svg
 math: true
 ---
 

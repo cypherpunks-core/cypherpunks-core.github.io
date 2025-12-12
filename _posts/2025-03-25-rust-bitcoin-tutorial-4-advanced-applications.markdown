@@ -5,6 +5,7 @@ date: 2025-03-25
 categories: [技術教學, Bitcoin, Rust]
 tags: [Rust, Bitcoin, RPC, Electrum, BDK, 錢包開發, 節點互動]
 author: Cypherpunks Taiwan
+image: /img/bitcoin-dev.svg
 math: true
 ---
 

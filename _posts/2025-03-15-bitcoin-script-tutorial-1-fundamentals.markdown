@@ -5,6 +5,7 @@ date: 2025-03-15
 categories: [技術教學, Bitcoin]
 tags: [Bitcoin, Script, 操作碼, 堆疊機, 智能合約]
 author: Cypherpunks Taiwan
+image: /img/bitcoin-dev.svg
 math: true
 ---
 

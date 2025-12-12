@@ -5,6 +5,7 @@ date: 2025-03-23
 categories: [技術教學, Bitcoin, Rust]
 tags: [Rust, Bitcoin, 地址, 交易, HD錢包, BIP32, BIP39, BIP44]
 author: Cypherpunks Taiwan
+image: /img/bitcoin-dev.svg
 math: true
 ---
 

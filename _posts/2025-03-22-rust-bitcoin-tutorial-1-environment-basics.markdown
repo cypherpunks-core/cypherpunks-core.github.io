@@ -5,6 +5,7 @@ date: 2025-03-22
 categories: [技術教學, Bitcoin, Rust]
 tags: [Rust, Bitcoin, rust-bitcoin, 開發環境, 密碼學]
 author: Cypherpunks Taiwan
+image: /img/bitcoin-dev.svg
 math: true
 ---
 

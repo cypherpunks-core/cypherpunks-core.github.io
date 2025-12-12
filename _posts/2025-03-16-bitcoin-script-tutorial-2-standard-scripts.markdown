@@ -5,6 +5,7 @@ date: 2025-03-16
 categories: [技術教學, Bitcoin]
 tags: [Bitcoin, Script, P2PKH, P2SH, SegWit, 地址格式]
 author: Cypherpunks Taiwan
+image: /img/bitcoin-dev.svg
 math: true
 ---
 
