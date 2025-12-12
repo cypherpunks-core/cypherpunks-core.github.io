@@ -52,8 +52,8 @@ hide_hero: true
       <button class="filter-btn px-3 py-1.5 text-xs font-mono border border-cp-dark-400 rounded hover:border-cp-green-500 hover:text-cp-green-500 transition-colors" data-filter="whitepaper">
         白皮書
       </button>
-      <button class="filter-btn px-3 py-1.5 text-xs font-mono border border-cp-dark-400 rounded hover:border-cp-green-500 hover:text-cp-green-500 transition-colors" data-filter="other">
-        其他
+      <button class="filter-btn px-3 py-1.5 text-xs font-mono border border-cp-dark-400 rounded hover:border-cp-green-500 hover:text-cp-green-500 transition-colors" data-filter="ethereum">
+        Ethereum
       </button>
     </div>
 
@@ -175,10 +175,10 @@ hide_hero: true
       {% assign category = "whitepaper" %}
     {% elsif title_lower contains "lightning" or subtitle_lower contains "閃電" %}
       {% assign category = "lightning" %}
+    {% elsif title_lower contains "ethereum" or subtitle_lower contains "以太" %}
+      {% assign category = "ethereum" %}
     {% elsif title_lower contains "bitcoin" or subtitle_lower contains "比特幣" %}
       {% assign category = "bitcoin" %}
-    {% elsif title_lower contains "ethereum" or title_lower contains "monero" or subtitle_lower contains "以太" or subtitle_lower contains "門羅" %}
-      {% assign category = "other" %}
     {% endif %}
 
     {% comment %} Determine language {% endcomment %}
@@ -214,12 +214,14 @@ hide_hero: true
           <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-mono rounded
             {% if category == 'whitepaper' %}bg-purple-900/80 text-purple-300 border border-purple-700/50
             {% elsif category == 'lightning' %}bg-yellow-900/80 text-yellow-300 border border-yellow-700/50
+            {% elsif category == 'ethereum' %}bg-blue-900/80 text-blue-300 border border-blue-700/50
             {% elsif category == 'bitcoin' %}bg-orange-900/80 text-orange-300 border border-orange-700/50
             {% else %}bg-cp-dark/80 text-cp-dark-600 border border-cp-dark-400{% endif %}">
             {% if category == 'whitepaper' %}白皮書
             {% elsif category == 'lightning' %}Lightning
+            {% elsif category == 'ethereum' %}Ethereum
             {% elsif category == 'bitcoin' %}Bitcoin
-            {% else %}其他{% endif %}
+            {% else %}Other{% endif %}
           </span>
 
           <!-- Language Badge -->
