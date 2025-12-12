@@ -1,66 +1,152 @@
+# =============================================
+# Cypherpunks Taiwan V2.0 Site Configuration
+# =============================================
+
 # Site Settings
 title: 密碼龐克 Cypherpunks Taiwan
-tagline: "Cypherpunks Taiwan"
+tagline: "Cypherpunks Write Code"
 email: 01360086@me.mcu.edu.tw
 description: "密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again."
-baseurl: 
-url: 
+baseurl: ""
+url: "https://cypherpunks-core.github.io"
 permalink: pretty
+lang: zh-TW
 
-paginate: 7
-paginate_path: "/blog/page:num"
+# Author
+author:
+  name: Cypherpunks Taiwan
+  email: 01360086@me.mcu.edu.tw
+  twitter: CypherpunksTW
 
+# Social Links
+social:
+  twitter: CypherpunksTW
+  github: cypherpunks-core
+
+# Build Settings
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: highlight
+    block:
+      line_numbers: true
+
+# Pagination
+paginate: 10
+paginate_path: "/blog/page/:num/"
+
+# Plugins
 plugins:
   - jekyll-sitemap
   - jekyll-paginate
   - jekyll-feed
   - jekyll-seo-tag
-  - kramdown
-  - rouge
 
-exclude: 
+# Exclude from build
+exclude:
   - Gemfile
-  - clean-theme.gemspec
   - Gemfile.lock
   - node_modules
-  - vendor/bundle/
-  - vendor/cache/
-  - vendor/gems/
-  - vendor/ruby/
+  - vendor/
+  - package.json
+  - package-lock.json
+  - tailwind.config.js
+  - README.md
+  - LICENSE
+  - V2.0-UPGRADE-PLAN.md
+  - "*.gemspec"
 
+# Include in build
+include:
+  - _pages
+
+# Livereload
 livereload: true
 
+# Sass (保留但不再主要使用)
 sass:
   style: compressed
   source_dir: _sass
 
+# Google Analytics
 google_analytics: UA-131051587-3
 
+# Theme Settings
+theme_settings:
+  default_theme: dark  # dark | light | auto
+  enable_matrix: true
+  enable_scanlines: true
+  enable_typewriter: true
+
+# SEO
+twitter:
+  username: CypherpunksTW
+  card: summary_large_image
+
+# Open Graph
+og_image: /img/og-default.png
+
+# Default Front Matter
 defaults:
-  -
-    scope:
+  # Pages
+  - scope:
       path: ""
       type: "pages"
     values:
+      layout: page
       show_sidebar: true
-  -
-    scope:
+  # Posts
+  - scope:
       path: ""
       type: "posts"
     values:
-      author: "Cypherpunks Core"
       layout: post
-      image: https://via.placeholder.com/1200x800
-      show_sidebar: true
+      author: "Cypherpunks Taiwan"
+      image: /img/default-post.png
+      show_sidebar: false
+      show_toc: true
+      show_comments: true
+      show_share: true
+  # Products (Books)
+  - scope:
+      path: ""
+      type: "products"
+    values:
+      layout: product
+      show_sidebar: false
 
-markdown: kramdown
-highlighter: rouge
+# Collections
+collections:
+  products:
+    output: true
+    permalink: /books/:path/
 
+# Footer Menu
 footer_menu: example_footer_menu
 
-collections:
-  products: 
-    output: true
-    layout: product
-    image: https://via.placeholder.com/800x600
-    show_sidebar: false
+# Reading Time Settings (Chinese ~350 chars/min)
+reading_time:
+  enabled: true
+  words_per_minute: 350
+
+# Comments (Giscus)
+comments:
+  provider: giscus
+  giscus:
+    repo: "cypherpunks-core/cypherpunks-core.github.io"
+    repo_id: ""  # 需要設置
+    category: "Comments"
+    category_id: ""  # 需要設置
+    mapping: pathname
+    reactions_enabled: true
+    emit_metadata: false
+    theme: "dark"
+
+# Search (Pagefind)
+search:
+  enabled: true
+  shortcut: "k"  # Cmd/Ctrl + K
