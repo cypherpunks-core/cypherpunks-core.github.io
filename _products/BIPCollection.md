@@ -4,7 +4,7 @@ subtitle: Bitcoin Improvement Proposals Collection
 description: 比特幣改進提案（BIP）是定義比特幣協議變更的標準化文件。本頁精選最重要的 BIP 並提供中文導讀。
 product_code: R002
 layout: product
-image: /img/bip-collection.png
+image: /img/bip-collection.svg
 price: 繁中/Chinese
 features:
     - label: 精選最重要的 BIP

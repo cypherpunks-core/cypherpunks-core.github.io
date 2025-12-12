@@ -4,7 +4,7 @@ subtitle: 深入淺出比特幣
 description: Kalle Rosenbaum 著作的比特幣入門書籍，以大量圖解和循序漸進的方式解釋比特幣的運作原理。
 product_code: B005
 layout: product
-image: /img/grokking-bitcoin.png
+image: /img/grokking-bitcoin.svg
 price: 英文/English
 features:
     - label: 豐富的圖解說明

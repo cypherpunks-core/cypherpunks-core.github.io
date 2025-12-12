@@ -4,7 +4,7 @@ subtitle: 比特幣標準
 description: Saifedean Ammous 著作的比特幣經濟學經典。從貨幣歷史出發，解釋為什麼比特幣是數位時代的健全貨幣。
 product_code: B004
 layout: product
-image: /img/bitcoin-standard.png
+image: /img/bitcoin-standard.svg
 price: 英文/Chinese
 features:
     - label: 比特幣經濟學必讀經典

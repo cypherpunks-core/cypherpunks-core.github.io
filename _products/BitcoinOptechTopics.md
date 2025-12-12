@@ -4,7 +4,7 @@ subtitle: 比特幣技術主題索引
 description: Bitcoin Optech 是比特幣技術教育的權威資源，提供最新的技術主題、Newsletter 和最佳實踐指南。
 product_code: R001
 layout: product
-image: /img/bitcoin-optech.png
+image: /img/bitcoin-optech.svg
 price: 英文/English
 features:
     - label: 比特幣技術最權威的資源

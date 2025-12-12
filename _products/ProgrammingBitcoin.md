@@ -4,7 +4,7 @@ subtitle: 比特幣編程
 description: Jimmy Song 著作的比特幣開發入門書籍，從零開始學習使用 Python 實現比特幣的核心技術：橢圓曲線密碼學、交易解析、腳本和區塊驗證。
 product_code: B003
 layout: product
-image: /img/programming-bitcoin.png
+image: /img/programming-bitcoin.svg
 price: 英文/English
 features:
     - label: 適合有 Python 基礎的開發者
