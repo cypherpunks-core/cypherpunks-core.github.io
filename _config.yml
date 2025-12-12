@@ -111,6 +111,7 @@ defaults:
       show_toc: true
       show_comments: true
       show_share: true
+      hide_hero: true
   # Products (Books)
   - scope:
       path: ""
