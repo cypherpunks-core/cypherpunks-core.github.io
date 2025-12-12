@@ -1,19 +1,14 @@
 ---
 title: Bitcoin White Paper
 subtitle: 比特幣白皮書
-product_code: B002
+description: 中本聰於 2008 年發表的比特幣白皮書，開啟了加密貨幣的新時代。
+product_code: W001
 layout: product
 image: /img/59.png
-price: 繁中/Chinese
-features:
-    - label: Great addition to any home
-      icon: fa-location-arrow
-    - label: Comes in a range of styles
-      icon: fa-grin-stars
-    - label: Available in multiple sizes
-      icon: fa-fighter-jet
-rating: 5
-hero_image: /img/hero.png
+lang: zh
+author: Satoshi Nakamoto
+difficulty: 2
+read_url: https://github.com/cypherpunks-core/bitcoin_whitepaper_zh
 ---
 倉庫位置：[link](https://github.com/cypherpunks-core/bitcoin_whitepaper_zh)
 

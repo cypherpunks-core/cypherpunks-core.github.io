@@ -1,19 +1,14 @@
 ---
 title: Blockchain Guide
 subtitle: 區塊鏈技術指南
-product_code: B002
+description: 系統性介紹區塊鏈核心技術，涵蓋比特幣、以太坊、超級帳本等主流平台。
+product_code: B004
 layout: product
 image: /img/68.png
-price: 繁中/Chinese
-features:
-    - label: Great addition to any home
-      icon: fa-location-arrow
-    - label: Comes in a range of styles
-      icon: fa-grin-stars
-    - label: Available in multiple sizes
-      icon: fa-fighter-jet
-rating: 4
-hero_image: /img/hero.png
+lang: zh
+author: Baohua Yang
+difficulty: 2
+read_url: https://poweichen.gitbook.io/blockchain-guide-zh/
 ---
 
 **[倉庫位置](https://github.com/cypherpunks-core/blockchain_guide_zh)、[上游倉庫位置](https://github.com/yeasy/blockchain_guide)**

@@ -1,18 +1,14 @@
 ---
 title: Cypherpunks
 subtitle: 密碼龐克
+description: Julian Assange 與密碼龐克社群成員的對談，探討網路自由、隱私與密碼學在社會變革中的角色。
 product_code: C001
 layout: product
 image: /img/46.png
-price: 繁中/Chinese
-features:
-    - label: 適合想了解在國際上的新聞自由
-    - label: 由全世界最有名的匿名爆料組織維基解密創辦人撰寫
-      icon: fa-grin-stars
-    - label: 闡述人們該堅持的言論自由與應有人權
-      icon: fa-fighter-jet
-rating: 2
-hero_image: /img/hero.png
+lang: zh
+author: Julian Assange
+difficulty: 1
+read_url: https://github.com/cypherpunks-core/cyherpunksbook_zh
 ---
 
 ## 什麼是密碼龐克？

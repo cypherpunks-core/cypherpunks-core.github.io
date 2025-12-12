@@ -5,16 +5,10 @@ description: 本書主要面向開發人員，前兩章對比特幣的介紹也�
 product_code: B001
 layout: product
 image: /img/44.png
-price: 繁中/Chinese
-features:
-    - label: Great addition to any home
-      icon: fa-location-arrow
-    - label: Comes in a range of styles
-      icon: fa-grin-stars
-    - label: Available in multiple sizes
-      icon: fa-fighter-jet
-rating: 5
-hero_image: /img/hero.png
+lang: zh
+author: Andreas M. Antonopoulos
+difficulty: 3
+read_url: https://mastering-bitcoin.doge.tg/
 ---
 
 [ **電子書線上看** ](https://mastering-bitcoin.doge.tg/)、 [ **電子書下載** ](https://github.com/cypherpunks-core/bitcoinbook_2nd_zh/releases)、[ **倉庫位置** ](https://github.com/cypherpunks-core/bitcoinbook_2nd_zh)

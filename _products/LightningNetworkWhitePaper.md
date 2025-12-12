@@ -1,19 +1,14 @@
 ---
 title: LN White Paper
 subtitle: 閃電網路白皮書
-product_code: L001
+description: Joseph Poon 與 Thaddeus Dryja 於 2015 年提出的閃電網路白皮書，描述比特幣可擴展的鏈下即時支付方案。
+product_code: W003
 layout: product
 image: /img/58.png
-price: 繁中/Chinese
-features:
-    - label: Great addition to any home
-      icon: fa-location-arrow
-    - label: Comes in a range of styles
-      icon: fa-grin-stars
-    - label: Available in multiple sizes
-      icon: fa-fighter-jet
-rating: 4
-hero_image: /img/hero.png
+lang: zh
+author: Joseph Poon, Thaddeus Dryja
+difficulty: 4
+read_url: https://github.com/cypherpunks-core/lightning_network_whitepaper_zh
 ---
 
 # 比特幣閃電網路：可擴展的 off-chain 即時支付  The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments

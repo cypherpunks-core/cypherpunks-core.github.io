@@ -5,16 +5,10 @@ description: Kalle Rosenbaum 著作的比特幣入門書籍，以大量圖解和
 product_code: B005
 layout: product
 image: /img/grokking-bitcoin.svg
-price: 英文/English
-features:
-    - label: 豐富的圖解說明
-      icon: fa-image
-    - label: 適合完全新手
-      icon: fa-user-graduate
-    - label: 循序漸進的學習路徑
-      icon: fa-road
-rating: 4
-hero_image: /img/hero.png
+lang: en
+author: Kalle Rosenbaum
+difficulty: 1
+read_url: https://github.com/kallerosenbaum/grokkingbitcoin
 ---
 
 **[官方網站](https://www.manning.com/books/grokking-bitcoin)** | **[免費線上版](https://github.com/kallerosenbaum/grokkingbitcoin)**

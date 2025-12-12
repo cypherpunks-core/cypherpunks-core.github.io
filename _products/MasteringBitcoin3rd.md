@@ -5,16 +5,10 @@ description: 比特幣技術聖經的最新版本，由 Andreas M. Antonopoulos 
 product_code: B002
 layout: product
 image: /img/mastering-bitcoin-3rd.svg
-price: 繁中/Chinese
-features:
-    - label: 涵蓋 Taproot 升級
-      icon: fa-leaf
-    - label: Schnorr 簽名詳解
-      icon: fa-signature
-    - label: 2023 年最新版本
-      icon: fa-calendar
-rating: 5
-hero_image: /img/hero.png
+lang: zh
+author: Andreas M. Antonopoulos, David A. Harding
+difficulty: 4
+read_url: https://bitcoinbook-3nd-zh.doge.tg/
 ---
 
 **[電子書線上看](https://bitcoinbook-3nd-zh.doge.tg/)** | **[原書 GitHub](https://github.com/bitcoinbook/bitcoinbook)**

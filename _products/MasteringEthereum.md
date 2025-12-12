@@ -1,19 +1,14 @@
 ---
 title: Mastering Ethereum
 subtitle: 精通以太坊
+description: Andreas M. Antonopoulos 與 Gavin Wood 合著的以太坊技術聖經，涵蓋智能合約、Solidity 與 DApp 開發。
 product_code: E001
 layout: product
 image: /img/45.png
-price: 繁中/Chinese
-features:
-    - label: Great addition to any home
-      icon: fa-location-arrow
-    - label: Comes in a range of styles
-      icon: fa-grin-stars
-    - label: Available in multiple sizes
-      icon: fa-fighter-jet
-rating: 5
-hero_image: /img/hero.png
+lang: zh
+author: Andreas M. Antonopoulos, Gavin Wood
+difficulty: 3
+read_url: https://cypherpunks-core.github.io/ethereumbook_zh/
 ---
 
 [ **電子書線上看** ](https://cypherpunks-core.github.io/ethereumbook_zh/)、[ **電子書下載** ](https://github.com/cypherpunks-core/ethereumbook_zh/releases)、[ **本倉庫位置** ](https://github.com/cypherpunks-core/ethereumbook_zh)

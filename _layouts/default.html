@@ -1,44 +1,73 @@
-{% if page.menubar and page.show_sidebar %} 
-    {% assign content_width = 'is-4' %} 
-{% elsif page.menubar or page.show_sidebar %} 
-    {% assign content_width = 'is-8' %} 
-{% else %} 
-    {% assign content_width = 'is-12' %} 
-{% endif %}
 <!DOCTYPE html>
-<html>
+<html lang="{{ site.lang | default: 'zh-TW' }}" class="dark">
+<head>
   {% include head.html %}
-  <body>
-    {% include header.html %}
-    {% unless page.hide_hero %}
-        {% include hero.html %}
-    {% endunless %}
-    {% include callouts.html %}
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                {% if page.menubar %}
-                <div class="column is-4-desktop is-4-tablet">
-                    {% include menubar.html %}
-                </div>
-                {% endif %}
-                <div class="column {{ content_width }}">
-                    {% include tabs.html %}
-                    {{ content }}
-                </div>
-                {% if site.posts and page.show_sidebar %}
-                <div class="column is-4-desktop is-12-tablet">
-                    {% include latest-posts.html %}
-                </div>
-                {% endif %}
-            </div>
-        </div>
-    </section>
-    {% unless page.hide_footer %}
-        {% include footer.html %}
-    {% endunless %}
-    <script src="{{ site.baseurl }}/assets/js/app.js" type="text/javascript"></script>
-    {%- include footer-scripts.html -%}
-  </body>
-</html>
+</head>
+<body class="min-h-screen flex flex-col bg-cp-dark text-cp-dark-800">
+  <!-- Matrix Rain Background -->
+  {% if site.theme_settings.enable_matrix %}
+  <div id="matrix-rain" class="matrix-rain"></div>
+  {% endif %}
 
+  <!-- Scanlines Effect -->
+  {% if site.theme_settings.enable_scanlines %}
+  <div class="scanlines pointer-events-none fixed inset-0 z-50"></div>
+  {% endif %}
+
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress" class="reading-progress" style="width: 0%;"></div>
+
+  <!-- Skip to Content (a11y) -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-cp-green-600 focus:text-cp-dark focus:rounded">
+    跳至主要內容
+  </a>
+
+  <!-- Header / Navigation -->
+  {% include header.html %}
+
+  <!-- Hero Section -->
+  {% unless page.hide_hero or layout.hide_hero %}
+  {% include hero.html %}
+  {% endunless %}
+
+  <!-- Main Content -->
+  <main id="main-content" class="flex-grow">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+      <div class="flex flex-col lg:flex-row gap-8">
+
+        <!-- Sidebar (Left) - Optional Menu -->
+        {% if page.menubar %}
+        <aside class="lg:w-64 flex-shrink-0" role="navigation" aria-label="側邊選單">
+          {% include menubar.html %}
+        </aside>
+        {% endif %}
+
+        <!-- Main Content Area -->
+        <article class="flex-grow min-w-0 {% if page.show_sidebar %}lg:max-w-4xl{% else %}max-w-4xl mx-auto{% endif %}">
+          {{ content }}
+        </article>
+
+        <!-- Sidebar (Right) - Latest Posts -->
+        {% if page.show_sidebar and site.posts.size > 0 %}
+        <aside class="lg:w-80 flex-shrink-0" role="complementary" aria-label="最新文章">
+          {% include sidebar.html %}
+        </aside>
+        {% endif %}
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  {% unless page.hide_footer %}
+  {% include footer.html %}
+  {% endunless %}
+
+  <!-- Search Modal -->
+  {% include search-modal.html %}
+
+  <!-- Scripts -->
+  <script src="{{ '/assets/js/app.js' | relative_url }}"></script>
+  {% include footer-scripts.html %}
+</body>
+</html>

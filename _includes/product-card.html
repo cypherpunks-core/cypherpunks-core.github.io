@@ -1,0 +1,89 @@
+{% comment %}
+Product Card Component - 翻譯成果展示版
+Usage: {% include product-card.html product=product %}
+Features: 封面、標題、作者、難度進度條、描述
+{% endcomment %}
+
+<a href="{{ site.baseurl }}{{ include.product.url }}" class="group block card p-0 overflow-hidden hover:border-cp-green-500 transition-all duration-300">
+  <!-- Image -->
+  <div class="relative aspect-[4/3] bg-cp-dark-200 overflow-hidden">
+    {% if include.product.image %}
+    <img src="{{ include.product.image }}" alt="{{ include.product.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+    {% else %}
+    <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-cp-dark-200 to-cp-dark-300">
+      <span class="text-4xl text-cp-dark-400">📖</span>
+    </div>
+    {% endif %}
+
+    <!-- Language Badge -->
+    <div class="absolute top-2 right-2">
+      {% if include.product.lang == 'zh' %}
+        <span class="px-2 py-1 text-xs font-bold font-mono bg-cp-orange text-white rounded shadow">繁中</span>
+      {% else %}
+        <span class="px-2 py-1 text-xs font-bold font-mono bg-gray-600 text-white rounded shadow">EN</span>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="p-3">
+    <!-- Title -->
+    <h3 class="font-mono font-bold text-sm text-cp-dark-800 group-hover:text-cp-green-500 transition-colors line-clamp-1 mb-1">
+      {{ include.product.title }}
+    </h3>
+
+    <!-- Subtitle (Chinese name) -->
+    {% if include.product.subtitle %}
+    <p class="text-xs text-cp-green-600 font-mono mb-2 line-clamp-1">
+      {{ include.product.subtitle }}
+    </p>
+    {% endif %}
+
+    <!-- Author -->
+    {% if include.product.author %}
+    <p class="text-xs text-cp-dark-500 mb-2 line-clamp-1">
+      <span class="text-cp-dark-400">by</span> {{ include.product.author }}
+    </p>
+    {% endif %}
+
+    <!-- Difficulty Bar -->
+    {% if include.product.difficulty %}
+    <div class="mb-2">
+      <div class="flex items-center justify-between text-xs mb-1">
+        <span class="text-cp-dark-500 font-mono">難度</span>
+        <span class="text-cp-dark-600 font-mono">
+          {% case include.product.difficulty %}
+            {% when 1 %}入門
+            {% when 2 %}基礎
+            {% when 3 %}中級
+            {% when 4 %}進階
+            {% when 5 %}專家
+          {% endcase %}
+        </span>
+      </div>
+      <div class="h-1.5 bg-cp-dark-300 rounded-full overflow-hidden">
+        {% assign diff_width = include.product.difficulty | times: 20 %}
+        {% if include.product.difficulty <= 2 %}
+          <div class="h-full bg-cp-green-500 rounded-full" style="width: {{ diff_width }}%"></div>
+        {% elsif include.product.difficulty == 3 %}
+          <div class="h-full bg-yellow-500 rounded-full" style="width: {{ diff_width }}%"></div>
+        {% else %}
+          <div class="h-full bg-cp-orange rounded-full" style="width: {{ diff_width }}%"></div>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Read Button -->
+    {% if include.product.read_url %}
+    <div class="pt-2 border-t border-cp-dark-300">
+      <span class="inline-flex items-center text-xs font-mono text-cp-green-500 group-hover:text-cp-green-400">
+        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+        </svg>
+        線上閱讀
+      </span>
+    </div>
+    {% endif %}
+  </div>
+</a>

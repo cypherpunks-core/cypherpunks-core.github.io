@@ -5,16 +5,10 @@ description: Jonathan Bier 撰寫的比特幣歷史著作，完整記錄 2015-20
 product_code: B010
 layout: product
 image: /img/blocksize-war.svg
-price: 繁中/Chinese
-features:
-    - label: 比特幣歷史必讀
-      icon: fa-history
-    - label: 深入治理議題
-      icon: fa-balance-scale
-    - label: 第一手事件記錄
-      icon: fa-newspaper
-rating: 5
-hero_image: /img/hero.png
+lang: zh
+author: Jonathan Bier
+difficulty: 2
+read_url: https://the-blocksize-war.doge.tg/
 ---
 
 **[電子書線上看](https://the-blocksize-war.doge.tg/)** | **[原書購買](https://www.amazon.com/Blocksize-War-controls-Bitcoins-protocol/dp/B08YQMC2WM)**

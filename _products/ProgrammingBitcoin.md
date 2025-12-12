@@ -5,16 +5,10 @@ description: Jimmy Song 著作的比特幣開發入門書籍，從零開始學�
 product_code: B003
 layout: product
 image: /img/programming-bitcoin.svg
-price: 英文/English
-features:
-    - label: 適合有 Python 基礎的開發者
-      icon: fa-code
-    - label: 從零實現比特幣核心功能
-      icon: fa-cogs
-    - label: 理論與實作並重
-      icon: fa-book
-rating: 5
-hero_image: /img/hero.png
+lang: zh
+author: Jimmy Song
+difficulty: 4
+read_url: https://programming-bitcoin-zh.doge.tg/
 ---
 
 **[電子書線上看](https://programming-bitcoin-zh.doge.tg/)** | **[O'Reilly 官方頁面](https://www.oreilly.com/library/view/programming-bitcoin/9781492031482/)** | **[作者 GitHub](https://github.com/jimmysong/programmingbitcoin)**

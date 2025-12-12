@@ -1,61 +1,119 @@
 ---
 layout: default
+hide_hero: true
 ---
 
-<div class="columns is-multiline">
+<article class="book-detail max-w-4xl mx-auto">
+  <!-- Breadcrumb -->
+  <nav class="flex items-center gap-2 text-sm font-mono text-cp-dark-600 mb-8">
+    <a href="{{ '/' | relative_url }}" class="hover:text-cp-green-500 transition-colors">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+      </svg>
+    </a>
+    <span class="text-cp-dark-500">/</span>
+    <a href="{{ '/markdown/products/' | relative_url }}" class="hover:text-cp-green-500 transition-colors">書籍</a>
+    <span class="text-cp-dark-500">/</span>
+    <span class="text-cp-green-500">{{ page.title | truncate: 30 }}</span>
+  </nav>
 
-    <div class="column is-6">
-        <figure class="image is-4by3">
-            <img src="{{ page.image }}" />
-        </figure>
-    </div>
-
-    <div class="column is-6">
-        <p class="title is-3">{{ page.title }}</p>
-        <p class="subtitle is-3">{{ page.subtitle }}</p>
-        <p class="title is-4 has-text-right">{{ page.price }}</p>
-        {% if page.product_code %}
-        <p class="subtitle is-5 has-text-right">{{ page.product_code }}</p>
-        {% endif %}
-        
-        {% if page.rating %}
-            {% include rating.html rating=page.rating %}
-        {% endif %}
-        
-        {% if page.features %}
-        <div class="content">
-            {% for feature in page.features %}
-            <p>
-                <span class="icon">
-                    {% if feature.icon %}
-                    <i class="fas {{ feature.icon }}"></i>
-                    {% else %}
-                    <i class="fas fa-circle fa-xs"></i>
-                    {% endif %}
-                </span> 
-                <span>{{ feature.label }}</span></p>
-            {% endfor %}
+  <!-- Book Header Card -->
+  <header class="card p-6 mb-8">
+    <div class="flex flex-col md:flex-row gap-6">
+      <!-- Cover Image -->
+      {% if page.image %}
+      <div class="flex-shrink-0 mx-auto md:mx-0">
+        <div class="w-36 md:w-44 rounded-lg overflow-hidden shadow-lg border border-cp-dark-400">
+          <img
+            src="{{ page.image | relative_url }}"
+            alt="{{ page.title }}"
+            class="w-full h-auto"
+          >
         </div>
+      </div>
+      {% endif %}
+
+      <!-- Book Info -->
+      <div class="flex-1 text-center md:text-left">
+        <!-- Title -->
+        <h1 class="text-2xl md:text-3xl font-bold font-mono text-cp-green-500 mb-2 leading-tight">
+          {{ page.title }}
+        </h1>
+
+        {% if page.subtitle %}
+        <p class="text-base md:text-lg text-cp-dark-600 font-mono mb-3">
+          {{ page.subtitle }}
+        </p>
         {% endif %}
-    </div>
 
-    <div class="column is-12">
-        <p class="title is-4">描述</p>
-        <div class="content">
-            
-    
-            {{ content }}
+        <!-- Author -->
+        {% if page.author %}
+        <p class="text-sm text-cp-dark-500 mb-4">
+          <svg class="w-4 h-4 inline-block mr-1 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+          </svg>
+          {{ page.author }}
+        </p>
+        {% endif %}
+
+        <!-- Badges -->
+        <div class="flex flex-wrap gap-2 mb-4 justify-center md:justify-start">
+          {% if page.lang == 'zh' %}
+          <span class="px-3 py-1 text-xs font-mono font-bold bg-cp-orange/20 text-cp-orange rounded-full">繁體中文</span>
+          {% elsif page.lang == 'en' %}
+          <span class="px-3 py-1 text-xs font-mono font-bold bg-gray-500/20 text-gray-400 rounded-full">English</span>
+          {% endif %}
+
+          {% if page.difficulty %}
+          <span class="px-3 py-1 text-xs font-mono bg-cp-dark-300 text-cp-dark-600 rounded-full">
+            {% case page.difficulty %}
+              {% when 1 %}入門
+              {% when 2 %}基礎
+              {% when 3 %}中級
+              {% when 4 %}進階
+              {% when 5 %}專家
+            {% endcase %}
+          </span>
+          {% endif %}
+
+          <span class="px-3 py-1 text-xs font-mono font-bold bg-cp-green-500/20 text-cp-green-500 rounded-full">免費</span>
         </div>
+
+        <!-- Description -->
+        {% if page.description %}
+        <p class="text-sm text-cp-dark-700 leading-relaxed mb-5 max-w-2xl">
+          {{ page.description }}
+        </p>
+        {% endif %}
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+          {% if page.read_url %}
+          <a href="{{ page.read_url }}" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-2 px-5 py-2.5 bg-cp-green-500 text-cp-dark font-mono text-sm font-bold rounded-lg hover:bg-cp-green-400 transition-all hover:shadow-glow-green">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+            線上閱讀
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+            </svg>
+          </a>
+          {% endif %}
+          <a href="{{ '/markdown/products/' | relative_url }}"
+             class="inline-flex items-center gap-2 px-5 py-2.5 border border-cp-dark-400 text-cp-dark-700 font-mono text-sm rounded-lg hover:border-cp-green-500 hover:text-cp-green-500 transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+            </svg>
+            所有書籍
+          </a>
+        </div>
+      </div>
     </div>
+  </header>
 
-    {% if site.data.reviews[page.product_code] %}
-    <div class="column is-12">
-        <p class="title is-4">Reviews</p>
-        {% for review in site.data.reviews[page.product_code] %}
-        {% include review.html %}
-        {% endfor %}
-    </div>
-    {% endif %}
-
-</div>
-
+  <!-- Content -->
+  <div class="book-content">
+    {{ content }}
+  </div>
+</article>

@@ -548,6 +548,167 @@
 }
 
 /* ===================================
+   Book Detail Page - 書籍頁面樣式
+   =================================== */
+  .book-detail {
+    /* 書籍頁面容器 */
+  }
+
+  .book-content {
+    @apply text-cp-dark-700 leading-relaxed;
+  }
+
+  /* 書籍內容標題樣式 */
+  .book-content h1 {
+    @apply text-2xl font-bold font-mono text-cp-green-500 mt-10 mb-4 pb-3;
+    @apply border-b-2 border-cp-green-500/30;
+  }
+
+  .book-content h2 {
+    @apply text-xl font-bold font-mono text-cp-green-500 mt-8 mb-4 pb-2;
+    @apply border-b border-cp-dark-400;
+  }
+
+  .book-content h3 {
+    @apply text-lg font-bold font-mono text-cp-dark-800 mt-6 mb-3;
+  }
+
+  .book-content h4 {
+    @apply text-base font-bold font-mono text-cp-dark-700 mt-5 mb-2;
+  }
+
+  /* 段落與清單 */
+  .book-content p {
+    @apply my-4 text-cp-dark-700 leading-relaxed;
+  }
+
+  .book-content ul,
+  .book-content ol {
+    @apply my-4 pl-6 text-cp-dark-700;
+  }
+
+  .book-content ul {
+    @apply list-disc;
+  }
+
+  .book-content ol {
+    @apply list-decimal;
+  }
+
+  .book-content li {
+    @apply my-2 leading-relaxed;
+  }
+
+  .book-content li > ul,
+  .book-content li > ol {
+    @apply my-2;
+  }
+
+  /* 連結 */
+  .book-content a {
+    @apply text-cp-green-500 hover:text-cp-green-400 transition-colors;
+    @apply underline decoration-cp-green-500/30 hover:decoration-cp-green-400;
+    @apply underline-offset-2;
+  }
+
+  /* 強調文字 */
+  .book-content strong {
+    @apply text-cp-dark-800 font-semibold;
+  }
+
+  .book-content em {
+    @apply text-cp-dark-600 italic;
+  }
+
+  /* 引用區塊 */
+  .book-content blockquote {
+    @apply my-6 pl-4 py-2 border-l-4 border-cp-green-500/50;
+    @apply bg-cp-dark-100/50 rounded-r-lg;
+    @apply text-cp-dark-600 italic;
+  }
+
+  .book-content blockquote p {
+    @apply my-2;
+  }
+
+  /* 分隔線 */
+  .book-content hr {
+    @apply my-8 border-0 h-px bg-gradient-to-r from-transparent via-cp-dark-400 to-transparent;
+  }
+
+  /* 表格樣式 */
+  .book-content table {
+    @apply w-full my-6 text-sm;
+    @apply border border-cp-dark-400 rounded-lg overflow-hidden;
+  }
+
+  .book-content thead {
+    @apply bg-cp-dark-200;
+  }
+
+  .book-content th {
+    @apply text-left font-mono font-bold text-cp-dark-600 py-3 px-4;
+    @apply border-b border-cp-dark-400;
+  }
+
+  .book-content td {
+    @apply py-3 px-4 border-b border-cp-dark-300;
+    @apply text-cp-dark-700;
+  }
+
+  .book-content tr:last-child td {
+    @apply border-b-0;
+  }
+
+  .book-content tr:hover {
+    @apply bg-cp-dark-200/30;
+  }
+
+  /* 行內程式碼 */
+  .book-content code:not(pre code) {
+    @apply font-mono text-cp-green-400 bg-cp-dark-200 px-1.5 py-0.5 rounded text-sm;
+    @apply border border-cp-dark-400;
+  }
+
+  /* 程式碼區塊 - 終端機風格 */
+  .book-content pre {
+    @apply my-6 rounded-lg overflow-hidden;
+    @apply border border-cp-dark-400;
+    @apply bg-[#0d1117];
+    position: relative;
+  }
+
+  /* 程式碼區塊標題欄 */
+  .book-content pre::before {
+    content: '';
+    @apply block w-full h-8 bg-cp-dark-200;
+    @apply border-b border-cp-dark-400;
+    @apply flex items-center px-4;
+    background-image: url("data:image/svg+xml,%3Csvg width='54' height='14' viewBox='0 0 54 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='7' cy='7' r='5' fill='%23ff5f56'/%3E%3Ccircle cx='27' cy='7' r='5' fill='%23ffbd2e'/%3E%3Ccircle cx='47' cy='7' r='5' fill='%2327c93f'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 12px center;
+    background-size: 54px 14px;
+  }
+
+  .book-content pre code {
+    @apply block p-4 overflow-x-auto;
+    @apply text-sm leading-relaxed;
+    @apply bg-transparent border-0 text-[#c9d1d9];
+    font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+  }
+
+  /* 圖片 */
+  .book-content img {
+    @apply my-6 rounded-lg border border-cp-dark-400;
+    @apply max-w-full h-auto;
+  }
+
+  /* 圖片標題 */
+  .book-content img + em {
+    @apply block text-center text-sm text-cp-dark-500 mt-2 not-italic;
+  }
+
+/* ===================================
    Utilities Layer - 工具類
    =================================== */
 @layer utilities {
