@@ -1,33 +1,151 @@
-name: Build and deploy Jekyll site to GitHub Pages
+name: Build and Deploy Cypherpunks Taiwan V2.0
 
 on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
+
+# Sets permissions of the GITHUB_TOKEN
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-22.04
-    permissions:
-      contents: write
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Ruby
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Setup Node.js for Tailwind CSS
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Node dependencies
+        run: npm ci || npm install
+
+      - name: Build Tailwind CSS
+        run: npm run css:build
+
+      # Setup Ruby for Jekyll
+      - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0'
+          ruby-version: '3.2'
           bundler-cache: true
-      - name: Install dependencies
+
+      - name: Install Ruby dependencies
         run: |
-          bundle config unset deployment
-          sudo gem install bundler:2.2.15
-          bundle install
-          bundle add kramdown-parser-gfm
-          bundle install
-      - name: Build site
+          bundle config set --local path 'vendor/bundle'
+          bundle install --jobs 4 --retry 3
+
+      - name: Build Jekyll site
         run: bundle exec jekyll build
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        env:
+          JEKYLL_ENV: production
+
+      - name: Build Pagefind search index
+        run: npx pagefind --site _site --output-path _site/pagefind
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
+          path: ./_site
+
+  deploy:
+    if: github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # Quality Checks (run on PRs)
+  quality-check:
+    if: github.event_name == 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: _site
+
+      - name: Extract artifact
+        run: |
+          cd _site
+          tar -xvf artifact.tar
+          rm artifact.tar
+
+      # Link Checker
+      - name: Check links
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: --verbose --no-progress --accept 999 './_site/**/*.html'
+          fail: false
+
+      # HTML Validation
+      - name: Setup Node.js for html-validate
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install html-validate
+        run: npm install -g html-validate
+
+      - name: Validate HTML
+        run: |
+          html-validate --config .htmlvalidate.json "_site/**/*.html" || true
+        continue-on-error: true
+
+      # Accessibility Check
+      - name: Install pa11y
+        run: npm install -g pa11y-ci
+
+      - name: Run accessibility check
+        run: |
+          pa11y-ci --config .pa11yci.json || true
+        continue-on-error: true
+
+  # Image Compression (run on PRs with image changes)
+  compress-images:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compress Images
+        id: compress
+        uses: calibreapp/image-actions@main
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          compressOnly: true
+          ignorePaths: 'node_modules/**,vendor/**,_site/**'
+        continue-on-error: true
+
+      - name: Create image compression summary
+        if: steps.compress.outputs.markdown != ''
+        run: |
+          echo "## Image Compression Results" >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.compress.outputs.markdown }}" >> $GITHUB_STEP_SUMMARY
