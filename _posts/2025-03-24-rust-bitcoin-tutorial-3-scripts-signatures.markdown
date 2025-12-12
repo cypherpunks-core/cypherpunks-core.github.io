@@ -5,6 +5,7 @@ date: 2025-03-24
 categories: [技術教學, Bitcoin, Rust]
 tags: [Rust, Bitcoin, Script, 簽名, ECDSA, Schnorr, Taproot, Miniscript]
 author: Cypherpunks Taiwan
+math: true
 ---
 
 這是 Rust Bitcoin 開發入門系列的第三篇。本篇深入探討 Bitcoin Script 編程和各種簽名機制的 Rust 實現。

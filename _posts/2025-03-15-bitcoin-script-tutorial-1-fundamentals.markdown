@@ -5,6 +5,7 @@ date: 2025-03-15
 categories: [技術教學, Bitcoin]
 tags: [Bitcoin, Script, 操作碼, 堆疊機, 智能合約]
 author: Cypherpunks Taiwan
+math: true
 ---
 
 這是「Bitcoin Script 實戰教學」系列的第一篇。本系列將從零開始，深入探索比特幣的腳本語言，理解交易如何被驗證和執行。

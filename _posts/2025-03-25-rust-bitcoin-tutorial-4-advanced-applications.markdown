@@ -5,6 +5,7 @@ date: 2025-03-25
 categories: [技術教學, Bitcoin, Rust]
 tags: [Rust, Bitcoin, RPC, Electrum, BDK, 錢包開發, 節點互動]
 author: Cypherpunks Taiwan
+math: true
 ---
 
 這是 Rust Bitcoin 開發入門系列的最後一篇。本篇探討如何構建完整的 Bitcoin 應用，包括與節點互動、錢包開發和實際部署考量。

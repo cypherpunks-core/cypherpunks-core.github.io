@@ -5,6 +5,7 @@ date: 2025-03-16
 categories: [技術教學, Bitcoin]
 tags: [Bitcoin, Script, P2PKH, P2SH, SegWit, 地址格式]
 author: Cypherpunks Taiwan
+math: true
 ---
 
 這是「Bitcoin Script 實戰教學」系列的第二篇。本篇將詳細解析各種標準腳本類型，了解它們的結構、用途和演進歷史。

@@ -1,0 +1,1291 @@
+/* Cypherpunks Taiwan V2.0 - Main CSS Entry Point */
+
+/* Tailwind Base */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+/* ===================================
+   Base Layer - 基礎樣式重置
+   =================================== */
+@layer base {
+  :root {
+    /* 淺色模式變數 (備用) */
+    --color-bg: #f8f9fa;
+    --color-text: #1a1a1a;
+    --color-primary: #00cc00;
+  }
+
+  .dark {
+    /* 深色模式變數 (預設) */
+    --color-bg: #0a0a0a;
+    --color-text: #c9d1d9;
+    --color-primary: #4ade80;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-cp-dark text-cp-dark-800 font-mono antialiased;
+    @apply dark:bg-cp-dark dark:text-cp-dark-800;
+    font-feature-settings: "liga" 1, "calt" 1;
+  }
+
+  /* 選擇文字顏色 */
+  ::selection {
+    @apply bg-cp-green-600 text-cp-dark;
+  }
+
+  /* 滾動條樣式 */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-cp-dark-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-cp-green-700 rounded;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-cp-green-600;
+  }
+
+  /* 焦點樣式 (無障礙) */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-cp-green-500;
+  }
+
+  /* 減少動畫 (無障礙 - 尊重用戶設定) */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* 連結基礎樣式 */
+  a {
+    @apply text-cp-green-500 transition-all duration-200;
+  }
+
+  a:hover {
+    @apply text-cp-green-400;
+    text-shadow: 0 0 6px rgba(74, 222, 128, 0.3);
+  }
+
+  a:focus-visible {
+    @apply outline-none ring-2 ring-cp-green-500 ring-offset-2 ring-offset-cp-dark rounded;
+  }
+
+  /* 標題樣式 */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-mono font-bold text-cp-green-500;
+  }
+
+  /* 行內程式碼樣式 */
+  code {
+    @apply font-mono text-cp-green-400 bg-cp-dark-200 px-1.5 py-0.5 rounded text-sm;
+    @apply border border-cp-dark-400;
+  }
+
+  /* 程式碼區塊基礎樣式 */
+  pre {
+    @apply bg-cp-dark-100 border border-cp-dark-400 rounded-lg overflow-x-auto;
+    @apply my-6 text-sm leading-relaxed;
+  }
+
+  pre code {
+    @apply bg-transparent p-0 border-0 text-cp-dark-800;
+    @apply block;
+  }
+}
+
+/* ===================================
+   Components Layer - 組件樣式
+   =================================== */
+@layer components {
+  /* 導航列 */
+  .navbar {
+    @apply fixed top-0 left-0 right-0 z-50;
+    @apply bg-cp-dark/95 backdrop-blur-md;
+    @apply border-b border-cp-dark-400;
+  }
+
+  .navbar-brand {
+    @apply text-cp-green-500 font-bold text-lg;
+    @apply hover:text-cp-green-400;
+  }
+
+  .navbar-item {
+    @apply px-4 py-2 text-cp-dark-800 transition-all duration-200;
+    @apply hover:text-cp-green-500 hover:bg-cp-dark-200;
+  }
+
+  .navbar-item.is-active {
+    @apply text-cp-green-500 border-b-2 border-cp-green-500;
+  }
+
+  /* Hero 區塊 */
+  .hero {
+    @apply relative min-h-[60vh] flex items-center justify-center;
+    @apply bg-transparent overflow-hidden;
+  }
+
+  .hero-title {
+    @apply text-4xl md:text-6xl font-bold text-cp-green-500;
+    @apply animate-glow;
+  }
+
+  .hero-subtitle {
+    @apply text-xl md:text-2xl text-cp-dark-700 mt-4;
+  }
+
+  /* 按鈕 */
+  .btn {
+    @apply inline-flex items-center justify-center;
+    @apply px-6 py-3 font-mono font-medium;
+    @apply transition-all duration-200;
+    @apply border rounded;
+  }
+
+  .btn-primary {
+    @apply bg-cp-green-600 text-cp-dark border-cp-green-500;
+    @apply hover:bg-cp-green-500 hover:shadow-glow-green;
+  }
+
+  .btn-outline {
+    @apply bg-transparent text-cp-green-500 border-cp-green-500;
+    @apply hover:bg-cp-green-500/10 hover:shadow-glow-green;
+  }
+
+  /* 卡片 */
+  .card {
+    @apply bg-cp-dark-100 border border-cp-dark-400 rounded-lg;
+    @apply transition-all duration-300;
+    @apply hover:border-cp-green-600 hover:shadow-glow-green;
+  }
+
+  .card-header {
+    @apply p-4 border-b border-cp-dark-400;
+  }
+
+  .card-body {
+    @apply p-4;
+  }
+
+  .card-footer {
+    @apply p-4 border-t border-cp-dark-400;
+  }
+
+  /* 標籤 */
+  .tag {
+    @apply inline-flex items-center px-3 py-1;
+    @apply text-xs font-mono font-medium;
+    @apply bg-cp-dark-200 text-cp-green-500;
+    @apply border border-cp-green-700 rounded;
+    @apply transition-all duration-200;
+    @apply hover:bg-cp-green-500/10 hover:border-cp-green-500;
+  }
+
+  /* 文章列表 */
+  .post-item {
+    @apply p-4 border-b border-cp-dark-400;
+    @apply transition-all duration-200;
+    @apply hover:bg-cp-dark-100;
+  }
+
+  .post-title {
+    @apply text-xl font-bold text-cp-green-500;
+    @apply hover:text-cp-green-400;
+  }
+
+  .post-meta {
+    @apply text-sm text-cp-dark-600 mt-1;
+  }
+
+  .post-excerpt {
+    @apply text-cp-dark-700 mt-2;
+  }
+
+  /* 側邊欄 */
+  .sidebar {
+    @apply bg-cp-dark-100 border border-cp-dark-400 rounded-lg p-4;
+  }
+
+  .sidebar-title {
+    @apply text-lg font-bold text-cp-green-500 mb-4;
+    @apply border-b border-cp-dark-400 pb-2;
+  }
+
+  /* 頁腳 */
+  .footer {
+    @apply bg-cp-dark-100 border-t border-cp-dark-400;
+    @apply py-8 mt-auto;
+  }
+
+  /* 內容區域 */
+  .content {
+    @apply prose prose-invert max-w-none;
+    @apply prose-headings:text-cp-green-500;
+    @apply prose-a:text-cp-green-500 prose-a:no-underline hover:prose-a:text-cp-green-400;
+    @apply prose-code:text-cp-green-400 prose-code:bg-cp-dark-200;
+    @apply prose-pre:bg-cp-dark-100 prose-pre:border prose-pre:border-cp-dark-400;
+    @apply prose-blockquote:border-l-cp-green-600;
+    @apply prose-strong:text-cp-green-400;
+  }
+
+  /* 分頁 */
+  .pagination {
+    @apply flex items-center justify-center gap-2 mt-8;
+  }
+
+  .pagination-item {
+    @apply px-4 py-2 bg-cp-dark-200 text-cp-dark-800;
+    @apply border border-cp-dark-400 rounded;
+    @apply transition-all duration-200;
+    @apply hover:border-cp-green-500 hover:text-cp-green-500;
+  }
+
+  .pagination-item.is-current {
+    @apply bg-cp-green-600 text-cp-dark border-cp-green-500;
+  }
+
+  /* 表單元素 */
+  .input {
+    @apply w-full px-4 py-2 font-mono;
+    @apply bg-cp-dark-100 text-cp-dark-800;
+    @apply border border-cp-dark-400 rounded;
+    @apply focus:outline-none focus:border-cp-green-500 focus:ring-1 focus:ring-cp-green-500;
+    @apply placeholder:text-cp-dark-600;
+  }
+
+  /* 下拉選單 */
+  .dropdown {
+    @apply relative;
+  }
+
+  .dropdown-menu {
+    @apply absolute top-full left-0 mt-1;
+    @apply bg-cp-dark-100 border border-cp-dark-400 rounded-lg;
+    @apply shadow-lg min-w-[200px];
+    @apply opacity-0 invisible transition-all duration-200;
+  }
+
+  .dropdown:hover .dropdown-menu,
+  .dropdown.is-active .dropdown-menu {
+    @apply opacity-100 visible;
+  }
+
+  .dropdown-item {
+    @apply block px-4 py-2 text-cp-dark-800;
+    @apply hover:bg-cp-dark-200 hover:text-cp-green-500;
+  }
+
+  /* ===================================
+     Admonitions 警告區塊
+     =================================== */
+  .admonition {
+    @apply my-6 p-4 rounded-lg border-l-4;
+    @apply bg-cp-dark-100;
+  }
+
+  .admonition-title {
+    @apply flex items-center gap-2 font-mono font-bold text-sm mb-2;
+  }
+
+  .admonition-content {
+    @apply text-cp-dark-700 text-sm;
+  }
+
+  .admonition-content p:last-child {
+    @apply mb-0;
+  }
+
+  /* Note - 資訊 */
+  .admonition.note {
+    @apply border-l-blue-500 bg-blue-500/5;
+  }
+  .admonition.note .admonition-title {
+    @apply text-blue-400;
+  }
+
+  /* Tip - 提示 */
+  .admonition.tip {
+    @apply border-l-cp-green-500 bg-cp-green-500/5;
+  }
+  .admonition.tip .admonition-title {
+    @apply text-cp-green-400;
+  }
+
+  /* Warning - 警告 */
+  .admonition.warning {
+    @apply border-l-amber-500 bg-amber-500/5;
+  }
+  .admonition.warning .admonition-title {
+    @apply text-amber-400;
+  }
+
+  /* Danger - 危險 */
+  .admonition.danger {
+    @apply border-l-red-500 bg-red-500/5;
+  }
+  .admonition.danger .admonition-title {
+    @apply text-red-400;
+  }
+
+  /* Info - 資訊 (別名) */
+  .admonition.info {
+    @apply border-l-cyan-500 bg-cyan-500/5;
+  }
+  .admonition.info .admonition-title {
+    @apply text-cyan-400;
+  }
+
+  /* ===================================
+     KaTeX 數學公式樣式
+     =================================== */
+  .katex-display {
+    @apply my-8 py-6 px-4 overflow-x-auto;
+    @apply bg-cp-dark-100/50 border border-cp-dark-400 rounded-lg;
+  }
+
+  .katex-display > .katex {
+    @apply text-lg;
+  }
+
+  .katex {
+    @apply text-cp-dark-800;
+    font-size: 1.1em;
+  }
+
+  /* 行內數學公式 */
+  .katex:not(.katex-display .katex) {
+    @apply px-1;
+  }
+
+  /* KaTeX 顏色調整 */
+  .katex .mord,
+  .katex .mbin,
+  .katex .mrel,
+  .katex .mopen,
+  .katex .mclose,
+  .katex .mpunct,
+  .katex .minner {
+    color: #e5e7eb;
+  }
+
+  .katex .mathnormal {
+    color: #a5d6ff;
+  }
+
+  .katex .mop {
+    color: #79c0ff;
+  }
+
+  /* ===================================
+     Mermaid 圖表樣式
+     =================================== */
+  .mermaid {
+    @apply my-6 flex justify-center;
+  }
+
+  pre.mermaid {
+    @apply bg-transparent border-0 p-0;
+  }
+
+  /* ===================================
+     程式碼區塊進階樣式
+     =================================== */
+  /* 程式碼區塊容器 - 終端機風格 */
+  .highlight,
+  div.highlighter-rouge {
+    @apply my-6 rounded-lg overflow-hidden;
+    @apply border border-cp-dark-400;
+    @apply bg-cp-dark-100;
+    position: relative;
+  }
+
+  /* 語言標籤 */
+  .highlight::before,
+  div.highlighter-rouge::before {
+    content: attr(data-lang);
+    @apply absolute top-0 right-0;
+    @apply px-3 py-1 text-xs font-mono;
+    @apply text-cp-dark-600 bg-cp-dark-200;
+    @apply rounded-bl border-l border-b border-cp-dark-400;
+  }
+
+  /* Rouge 語法高亮區塊 */
+  .highlight pre,
+  div.highlighter-rouge pre {
+    @apply m-0 p-4 pt-8 border-0 rounded-none;
+    @apply bg-transparent;
+  }
+
+  .highlight pre code,
+  div.highlighter-rouge pre code {
+    @apply text-sm leading-relaxed;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+  }
+
+  /* 行號樣式 */
+  .highlight .lineno,
+  .highlight .gl {
+    @apply text-cp-dark-600 select-none pr-4 mr-4;
+    @apply border-r border-cp-dark-400;
+    min-width: 2.5em;
+    display: inline-block;
+    text-align: right;
+  }
+
+  /* Rouge 語法高亮主題 - GitHub Dark 風格 */
+  .highlight .c,
+  .highlight .c1,
+  .highlight .cm,
+  .highlight .cs { color: #8b949e; font-style: italic; } /* 註解 */
+  .highlight .cp { color: #f85149; } /* 預處理器 */
+  .highlight .k,
+  .highlight .kd,
+  .highlight .kn,
+  .highlight .kp,
+  .highlight .kr,
+  .highlight .kt { color: #ff7b72; } /* 關鍵字 */
+  .highlight .kc { color: #79c0ff; } /* 常量關鍵字 */
+  .highlight .s,
+  .highlight .s1,
+  .highlight .s2,
+  .highlight .sb,
+  .highlight .sc,
+  .highlight .sd,
+  .highlight .se,
+  .highlight .sh,
+  .highlight .si,
+  .highlight .sx { color: #a5d6ff; } /* 字串 */
+  .highlight .sr { color: #7ee787; } /* 正則表達式 */
+  .highlight .ss { color: #a5d6ff; } /* Symbol */
+  .highlight .n { color: #c9d1d9; } /* 名稱 */
+  .highlight .na { color: #79c0ff; } /* 屬性名 */
+  .highlight .nb { color: #ffa657; } /* 內建名稱 */
+  .highlight .nc { color: #ffa657; } /* 類名 */
+  .highlight .nd { color: #d2a8ff; } /* 裝飾器 */
+  .highlight .nf,
+  .highlight .fm { color: #d2a8ff; } /* 函數名 */
+  .highlight .ni { color: #c9d1d9; } /* 實體 */
+  .highlight .nn { color: #ffa657; } /* 命名空間 */
+  .highlight .no { color: #79c0ff; } /* 常量 */
+  .highlight .nv,
+  .highlight .vi,
+  .highlight .vg { color: #ffa657; } /* 變數 */
+  .highlight .o,
+  .highlight .ow { color: #ff7b72; } /* 運算子 */
+  .highlight .p { color: #c9d1d9; } /* 標點 */
+  .highlight .m,
+  .highlight .mi,
+  .highlight .mf,
+  .highlight .mh,
+  .highlight .mo { color: #79c0ff; } /* 數字 */
+  .highlight .gh { color: #79c0ff; font-weight: bold; } /* Generic Heading */
+  .highlight .gu { color: #79c0ff; font-weight: bold; } /* Generic Subheading */
+  .highlight .gd { color: #ffa198; background: rgba(248, 81, 73, 0.15); } /* Deleted */
+  .highlight .gi { color: #7ee787; background: rgba(46, 160, 67, 0.15); } /* Inserted */
+  .highlight .ge { font-style: italic; } /* Emphasis */
+  .highlight .gs { font-weight: bold; } /* Strong */
+  .highlight .err { color: #f85149; } /* 錯誤 */
+
+  /* 特定語言標籤 */
+  .language-rust .highlight::before,
+  .highlighter-rouge.language-rust::before { content: 'rust'; }
+  .language-javascript .highlight::before,
+  .highlighter-rouge.language-javascript::before,
+  .language-js .highlight::before,
+  .highlighter-rouge.language-js::before { content: 'javascript'; }
+  .language-typescript .highlight::before,
+  .highlighter-rouge.language-typescript::before,
+  .language-ts .highlight::before,
+  .highlighter-rouge.language-ts::before { content: 'typescript'; }
+  .language-python .highlight::before,
+  .highlighter-rouge.language-python::before,
+  .language-py .highlight::before,
+  .highlighter-rouge.language-py::before { content: 'python'; }
+  .language-bash .highlight::before,
+  .highlighter-rouge.language-bash::before,
+  .language-shell .highlight::before,
+  .highlighter-rouge.language-shell::before,
+  .language-sh .highlight::before,
+  .highlighter-rouge.language-sh::before { content: 'bash'; }
+  .language-toml .highlight::before,
+  .highlighter-rouge.language-toml::before { content: 'toml'; }
+  .language-json .highlight::before,
+  .highlighter-rouge.language-json::before { content: 'json'; }
+  .language-yaml .highlight::before,
+  .highlighter-rouge.language-yaml::before,
+  .language-yml .highlight::before,
+  .highlighter-rouge.language-yml::before { content: 'yaml'; }
+  .language-html .highlight::before,
+  .highlighter-rouge.language-html::before { content: 'html'; }
+  .language-css .highlight::before,
+  .highlighter-rouge.language-css::before { content: 'css'; }
+  .language-sql .highlight::before,
+  .highlighter-rouge.language-sql::before { content: 'sql'; }
+  .language-go .highlight::before,
+  .highlighter-rouge.language-go::before { content: 'go'; }
+  .language-c .highlight::before,
+  .highlighter-rouge.language-c::before { content: 'c'; }
+  .language-cpp .highlight::before,
+  .highlighter-rouge.language-cpp::before { content: 'c++'; }
+}
+
+/* ===================================
+   Utilities Layer - 工具類
+   =================================== */
+@layer utilities {
+  /* 文字發光效果 - 柔和版 */
+  .text-glow {
+    text-shadow: 0 0 6px rgba(74, 222, 128, 0.3),
+                 0 0 12px rgba(74, 222, 128, 0.15);
+  }
+
+  .text-glow-sm {
+    text-shadow: 0 0 4px rgba(74, 222, 128, 0.25);
+  }
+
+  /* 邊框發光 - 柔和版 */
+  .border-glow {
+    box-shadow: 0 0 6px rgba(74, 222, 128, 0.2),
+                inset 0 0 6px rgba(74, 222, 128, 0.05);
+  }
+
+  /* CRT 掃描線效果 */
+  .scanlines {
+    position: relative;
+  }
+
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.1) 2px,
+      rgba(0, 0, 0, 0.1) 4px
+    );
+    pointer-events: none;
+  }
+
+  /* 網格背景 */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(74, 222, 128, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74, 222, 128, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* 終端機風格游標 */
+  .cursor-blink::after {
+    content: '_';
+    animation: cursor-blink 1s step-end infinite;
+  }
+
+  /* 打字機效果容器 */
+  .typewriter {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typewriter 3s steps(40) 1s forwards;
+  }
+
+  /* 漸層文字 */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-cp-green-400 to-cp-green-600;
+  }
+
+  /* 玻璃效果 */
+  .glass {
+    @apply bg-cp-dark/80 backdrop-blur-md;
+  }
+
+  /* 隱藏滾動條但保持滾動功能 */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ===================================
+   特效動畫
+   =================================== */
+
+/* Matrix 數字雨效果 - 將在 JS 中控制 */
+.matrix-rain,
+#matrix-rain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  background: transparent !important;
+}
+
+#matrix-rain canvas {
+  background: transparent !important;
+}
+
+/* ASCII Art 預格式化 */
+.ascii-art {
+  @apply font-mono text-cp-green-500 text-xs leading-none whitespace-pre;
+  @apply text-glow;
+}
+
+/* 程式碼區塊複製按鈕 */
+.code-block {
+  @apply relative;
+}
+
+.code-copy-btn {
+  @apply absolute top-2 right-2 z-10;
+  @apply px-3 py-1.5 text-xs font-mono;
+  @apply bg-cp-dark-200 text-cp-dark-600;
+  @apply border border-cp-dark-400 rounded;
+  @apply opacity-0 transition-all duration-200;
+  @apply hover:bg-cp-green-500/20 hover:text-cp-green-500 hover:border-cp-green-600;
+  @apply cursor-pointer;
+}
+
+.code-copy-btn.copied {
+  @apply bg-cp-green-500/20 text-cp-green-500 border-cp-green-500;
+}
+
+.code-block:hover .code-copy-btn {
+  @apply opacity-100;
+}
+
+/* 閱讀進度條 */
+.reading-progress {
+  @apply fixed top-0 left-0 h-0.5 bg-cp-green-500 z-50;
+  @apply transition-all duration-100;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+/* TOC 高亮 */
+.toc-item.is-active {
+  @apply text-cp-green-500 border-l-2 border-cp-green-500 pl-2 -ml-2;
+}
+
+/* 搜尋高亮 */
+mark, .search-highlight {
+  @apply bg-cp-green-500/30 text-cp-green-400 px-0.5 rounded;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+  .hero-title {
+    @apply text-3xl;
+  }
+
+  .hero-subtitle {
+    @apply text-lg;
+  }
+
+  .ascii-art {
+    @apply text-[0.5rem];
+  }
+}
+
+/* ===================================
+   Admonitions / Callouts 提示框
+   =================================== */
+.admonition, .callout {
+  @apply my-6 p-4 border-l-4 rounded-r-lg;
+  @apply bg-cp-dark-100;
+}
+
+.admonition-title, .callout-title {
+  @apply flex items-center gap-2 font-mono font-bold mb-2;
+}
+
+.admonition-content, .callout-content {
+  @apply text-cp-dark-700;
+}
+
+/* Note / Info */
+.admonition.note, .admonition.info,
+.callout.note, .callout.info,
+blockquote.note, blockquote.info {
+  @apply border-l-blue-500 bg-blue-500/5;
+}
+.admonition.note .admonition-title,
+.admonition.info .admonition-title,
+.callout.note .callout-title,
+.callout.info .callout-title {
+  @apply text-blue-400;
+}
+
+/* Tip / Success */
+.admonition.tip, .admonition.success,
+.callout.tip, .callout.success,
+blockquote.tip, blockquote.success {
+  @apply border-l-cp-green-500 bg-cp-green-500/5;
+}
+.admonition.tip .admonition-title,
+.admonition.success .admonition-title,
+.callout.tip .callout-title,
+.callout.success .callout-title {
+  @apply text-cp-green-400;
+}
+
+/* Warning / Caution */
+.admonition.warning, .admonition.caution,
+.callout.warning, .callout.caution,
+blockquote.warning, blockquote.caution {
+  @apply border-l-yellow-500 bg-yellow-500/5;
+}
+.admonition.warning .admonition-title,
+.admonition.caution .admonition-title,
+.callout.warning .callout-title,
+.callout.caution .callout-title {
+  @apply text-yellow-400;
+}
+
+/* Danger / Error */
+.admonition.danger, .admonition.error,
+.callout.danger, .callout.error,
+blockquote.danger, blockquote.error {
+  @apply border-l-red-500 bg-red-500/5;
+}
+.admonition.danger .admonition-title,
+.admonition.error .admonition-title,
+.callout.danger .callout-title,
+.callout.error .callout-title {
+  @apply text-red-400;
+}
+
+/* Example */
+.admonition.example,
+.callout.example,
+blockquote.example {
+  @apply border-l-purple-500 bg-purple-500/5;
+}
+.admonition.example .admonition-title,
+.callout.example .callout-title {
+  @apply text-purple-400;
+}
+
+/* Quote */
+.admonition.quote,
+.callout.quote,
+blockquote.quote {
+  @apply border-l-cp-dark-600 bg-cp-dark-200/50 italic;
+}
+
+/* Kramdown styled blockquotes */
+blockquote {
+  @apply border-l-4 border-l-cp-green-600 pl-4 my-4;
+  @apply bg-cp-dark-100/50 py-2 pr-2 rounded-r;
+  @apply text-cp-dark-700 italic;
+}
+
+blockquote p:first-child {
+  @apply mt-0;
+}
+
+blockquote p:last-child {
+  @apply mb-0;
+}
+
+/* KaTeX Styling */
+.katex-display {
+  @apply overflow-x-auto py-4;
+}
+
+.katex {
+  @apply text-cp-dark-800;
+}
+
+/* Mermaid Diagram Container */
+.mermaid {
+  @apply my-6 p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg;
+  @apply flex justify-center;
+}
+
+/* ===================================
+   V2.2 Enhanced Animations
+   =================================== */
+
+/* Glitch Effect */
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text.glitching {
+  animation: glitch-shake 0.15s ease-in-out;
+}
+
+@keyframes glitch-shake {
+  0%, 100% { transform: translateX(0); }
+  10% { transform: translateX(-2px); }
+  20% { transform: translateX(2px); }
+  30% { transform: translateX(-2px); }
+  40% { transform: translateX(2px); }
+  50% { transform: translateX(-2px); }
+  60% { transform: translateX(2px); }
+  70% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+  90% { transform: translateX(-2px); }
+}
+
+/* Subtle Glitch for text */
+.glitch-text-subtle {
+  position: relative;
+}
+
+.glitch-text-subtle::before,
+.glitch-text-subtle::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.glitch-text-subtle:hover::before {
+  animation: glitch-1 0.3s linear infinite;
+  color: #ff0000;
+  opacity: 0.5;
+}
+
+.glitch-text-subtle:hover::after {
+  animation: glitch-2 0.3s linear infinite;
+  color: #00ffff;
+  opacity: 0.5;
+}
+
+@keyframes glitch-1 {
+  0%, 100% { clip-path: inset(20% 0 30% 0); transform: translateX(-3px); }
+  50% { clip-path: inset(50% 0 10% 0); transform: translateX(3px); }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { clip-path: inset(60% 0 10% 0); transform: translateX(3px); }
+  50% { clip-path: inset(10% 0 70% 0); transform: translateX(-3px); }
+}
+
+/* Typewriter Cursor - Enhanced */
+.typewriter-cursor {
+  @apply text-cp-green-500;
+  display: inline-block;
+  text-shadow:
+    0 0 5px rgba(74, 222, 128, 0.8),
+    0 0 10px rgba(74, 222, 128, 0.5);
+}
+
+.typewriter-cursor.blink {
+  animation: cursor-blink-glow 0.8s ease-in-out infinite;
+}
+
+@keyframes cursor-blink-glow {
+  0%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 5px rgba(74, 222, 128, 0.8),
+      0 0 10px rgba(74, 222, 128, 0.5),
+      0 0 20px rgba(74, 222, 128, 0.3);
+  }
+  50% {
+    opacity: 0;
+    text-shadow: none;
+  }
+}
+
+/* Typewriter 輸入中的游標 (非 blink) */
+.typewriter-cursor:not(.blink) {
+  animation: cursor-pulse 0.4s ease-in-out infinite;
+}
+
+@keyframes cursor-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Glow Border */
+.glow-border {
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3),
+              inset 0 0 10px rgba(0, 255, 0, 0.1);
+}
+
+.glow-border:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.5),
+              inset 0 0 15px rgba(0, 255, 0, 0.2);
+}
+
+/* Glow Dot for Timeline */
+.glow-dot {
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.8),
+              0 0 20px rgba(0, 255, 0, 0.4);
+}
+
+.glow-dot-orange {
+  box-shadow: 0 0 10px rgba(247, 147, 26, 0.8),
+              0 0 20px rgba(247, 147, 26, 0.4);
+}
+
+/* Scroll Reveal Animation */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-hidden.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade In Up Animation */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease-out forwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card 3D Effect - Simplified */
+.card-3d {
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, border-color 0.3s ease;
+}
+
+.card-3d:hover {
+  box-shadow: 0 10px 30px -10px rgba(74, 222, 128, 0.2);
+  border-color: rgba(74, 222, 128, 0.5);
+}
+
+/* Terminal Styles */
+.terminal-window {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', monospace;
+  box-shadow:
+    0 0 0 1px rgba(74, 222, 128, 0.1),
+    0 10px 40px -10px rgba(0, 0, 0, 0.5),
+    0 0 30px -5px rgba(74, 222, 128, 0.1);
+}
+
+.terminal-window:hover {
+  box-shadow:
+    0 0 0 1px rgba(74, 222, 128, 0.2),
+    0 10px 50px -10px rgba(0, 0, 0, 0.6),
+    0 0 40px -5px rgba(74, 222, 128, 0.15);
+}
+
+.terminal-body {
+  scrollbar-width: thin;
+  scrollbar-color: #00ff00 #1a1a1a;
+}
+
+.terminal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.terminal-body::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+  background: #00ff00;
+  border-radius: 3px;
+}
+
+.terminal-line {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Terminal Cursor Blink */
+.terminal-cursor-blink {
+  animation: terminal-cursor-blink 1s step-end infinite;
+  text-shadow:
+    0 0 5px rgba(74, 222, 128, 0.8),
+    0 0 10px rgba(74, 222, 128, 0.5);
+}
+
+@keyframes terminal-cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Terminal Header Dots Animation */
+.terminal-header span {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.terminal-header span:hover {
+  transform: scale(1.2);
+}
+
+.terminal-header span:first-child:hover {
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.8);
+}
+
+.terminal-header span:nth-child(2):hover {
+  box-shadow: 0 0 10px rgba(234, 179, 8, 0.8);
+}
+
+.terminal-header span:nth-child(3):hover {
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+}
+
+/* Terminal Input Focus Effect */
+.terminal-input-area:focus-within {
+  background: rgba(30, 30, 30, 1);
+}
+
+.terminal-input-area:focus-within .terminal-cursor-blink {
+  text-shadow:
+    0 0 8px rgba(74, 222, 128, 1),
+    0 0 15px rgba(74, 222, 128, 0.7);
+}
+
+/* Bitcoin Orange Color */
+.text-bitcoin-orange {
+  color: #f7931a;
+}
+
+.bg-bitcoin-orange {
+  background-color: #f7931a;
+}
+
+.border-bitcoin-orange {
+  border-color: #f7931a;
+}
+
+/* Timeline Styles */
+.timeline {
+  position: relative;
+}
+
+/* Timeline Line - Static gradient */
+.timeline-line {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(74, 222, 128, 0.3) 10%,
+    rgba(74, 222, 128, 0.4) 50%,
+    rgba(74, 222, 128, 0.3) 90%,
+    transparent 100%
+  );
+}
+
+.timeline-content {
+  transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateX(5px);
+}
+
+/* Timeline Dot - Simple glow, no animation */
+.timeline-dot {
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .timeline-item:nth-child(odd) .timeline-content:hover {
+    transform: translateX(-5px);
+  }
+
+  .timeline-item:nth-child(even) .timeline-content:hover {
+    transform: translateX(5px);
+  }
+}
+
+/* Social Button Hover */
+.social-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.social-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.social-btn:hover::before {
+  left: 100%;
+}
+
+/* Stat Item Animation */
+.stat-item {
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.stat-item:hover {
+  transform: scale(1.1);
+}
+
+.stat-item:hover .stat-number {
+  text-shadow:
+    0 0 10px rgba(74, 222, 128, 0.8),
+    0 0 20px rgba(74, 222, 128, 0.5),
+    0 0 30px rgba(74, 222, 128, 0.3);
+}
+
+.stat-number {
+  transition: text-shadow 0.3s ease;
+}
+
+/* Counter Complete Animation */
+.counter-complete {
+  animation: counter-pop 0.4s ease-out;
+}
+
+@keyframes counter-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Stat Divider Glow */
+.stat-divider {
+  transition: all 0.3s ease;
+  background: linear-gradient(to bottom, transparent, rgba(74, 222, 128, 0.3), transparent);
+}
+
+/* Pulse Animation for Scroll Indicator */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+/* Shadow Glow Classes */
+.shadow-glow-green {
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+/* 列印樣式 */
+@media print {
+  body {
+    @apply bg-white text-black;
+  }
+
+  .navbar,
+  .footer,
+  .sidebar,
+  .matrix-rain,
+  .reading-progress,
+  #particles-bg,
+  #matrix-rain {
+    @apply hidden;
+  }
+
+  a {
+    @apply text-black underline;
+  }
+
+  .glitch-text,
+  .glitch-text-subtle,
+  .card-3d,
+  .scroll-reveal {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Reduced Motion - Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .glitch-text,
+  .glitch-text-subtle,
+  .typewriter-cursor,
+  .glow-border,
+  .fade-in-up,
+  .reveal-hidden,
+  .card-3d,
+  .animate-bounce {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .reveal-hidden {
+    opacity: 1;
+    transform: none;
+  }
+
+  #matrix-rain,
+  #particles-bg {
+    display: none !important;
+  }
+}
+
+/* ===================================
+   Hero ASCII Logo - 強制覆蓋 pre 樣式
+   =================================== */
+pre#ascii-logo,
+#ascii-logo {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-width: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  /* Static Glow Effect */
+  text-shadow:
+    0 0 5px rgba(74, 222, 128, 0.6),
+    0 0 10px rgba(74, 222, 128, 0.4),
+    0 0 20px rgba(74, 222, 128, 0.2);
+}
+
+/* ASCII Logo glitch effect */
+#ascii-logo.glitching {
+  animation: glitch-shake 0.15s ease-in-out;
+}
+

@@ -5,6 +5,7 @@ date: 2025-03-22
 categories: [技術教學, Bitcoin, Rust]
 tags: [Rust, Bitcoin, rust-bitcoin, 開發環境, 密碼學]
 author: Cypherpunks Taiwan
+math: true
 ---
 
 這是 Rust Bitcoin 開發入門系列的第一篇。本系列將帶你從零開始使用 Rust 語言開發 Bitcoin 應用，從基礎設置到進階應用。

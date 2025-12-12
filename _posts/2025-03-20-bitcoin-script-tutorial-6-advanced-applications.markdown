@@ -16,6 +16,7 @@ tags:
 - dlc
 - vault
 - covenant
+math: true
 ---
 
 ## 系列導言

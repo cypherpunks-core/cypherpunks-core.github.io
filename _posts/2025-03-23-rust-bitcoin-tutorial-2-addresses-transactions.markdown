@@ -5,6 +5,7 @@ date: 2025-03-23
 categories: [技術教學, Bitcoin, Rust]
 tags: [Rust, Bitcoin, 地址, 交易, HD錢包, BIP32, BIP39, BIP44]
 author: Cypherpunks Taiwan
+math: true
 ---
 
 這是 Rust Bitcoin 開發入門系列的第二篇。本篇深入探討 Bitcoin 地址的生成機制和交易的構建過程。
