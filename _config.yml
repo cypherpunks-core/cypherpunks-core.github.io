@@ -99,6 +99,7 @@ defaults:
     values:
       layout: page
       show_sidebar: true
+      hide_hero: true
   # Posts
   - scope:
       path: ""

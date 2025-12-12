@@ -17,7 +17,7 @@ rating: 5
 hero_image: /img/hero.png
 ---
 
-[ **電子書線上看** ](https://cypherpunks-core.github.io/bitcoinbook_2nd_zh/)、 [ **電子書下載** ](https://github.com/cypherpunks-core/bitcoinbook_2nd_zh/releases)、[ **倉庫位置** ](https://github.com/cypherpunks-core/bitcoinbook_2nd_zh)
+[ **電子書線上看** ](https://mastering-bitcoin.doge.tg/)、 [ **電子書下載** ](https://github.com/cypherpunks-core/bitcoinbook_2nd_zh/releases)、[ **倉庫位置** ](https://github.com/cypherpunks-core/bitcoinbook_2nd_zh)
 
 # Mastering Bitcoin 2nd Edition - 繁中
 

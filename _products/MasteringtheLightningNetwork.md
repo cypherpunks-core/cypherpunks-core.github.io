@@ -17,7 +17,7 @@ rating: 3
 hero_image: /img/hero.png
 ---
 
-**[原始倉庫](https://github.com/lnbook/lnbook)**
+**[電子書線上看](https://lnbook-zh.doge.tg/)** | **[原始倉庫](https://github.com/lnbook/lnbook)**
 
 # Mastering the Lightning Network
 
