@@ -1,0 +1,74 @@
+{% comment %}
+Responsive & Optimized Image Include
+
+Usage:
+{% include image.html src="/img/example.jpg" alt="Description" %}
+{% include image.html src="/img/example.jpg" alt="Description" caption="Optional caption" %}
+{% include image.html src="/img/example.jpg" alt="Description" size="full" %}
+
+Parameters:
+  - src: Image path (required)
+  - alt: Alt text for accessibility (required)
+  - caption: Optional caption below image
+  - class: Additional CSS classes
+  - width: Optional width attribute
+  - height: Optional height attribute
+  - lazy: Whether to lazy load (default: true, set false for above-fold images)
+  - size: Image size preset (small | medium | large | full) - default: full
+  - link: Optional link URL to wrap the image
+  - ratio: Aspect ratio class (aspect-video | aspect-square | aspect-auto)
+{% endcomment %}
+
+{% assign img_src = include.src | relative_url %}
+{% assign img_alt = include.alt | default: "Image" %}
+{% assign img_caption = include.caption %}
+{% assign img_class = include.class | default: "" %}
+{% assign img_width = include.width %}
+{% assign img_height = include.height %}
+{% assign img_lazy = include.lazy | default: true %}
+{% assign img_size = include.size | default: "full" %}
+{% assign img_link = include.link %}
+{% assign img_ratio = include.ratio %}
+
+{% comment %} Size presets {% endcomment %}
+{% case img_size %}
+  {% when "small" %}
+    {% assign size_class = "max-w-sm mx-auto" %}
+  {% when "medium" %}
+    {% assign size_class = "max-w-lg mx-auto" %}
+  {% when "large" %}
+    {% assign size_class = "max-w-2xl mx-auto" %}
+  {% else %}
+    {% assign size_class = "w-full" %}
+{% endcase %}
+
+{% comment %} Check for WebP version {% endcomment %}
+{% assign img_ext = img_src | split: "." | last %}
+{% assign img_base = img_src | replace: img_ext, "" %}
+{% assign img_webp = img_base | append: "webp" %}
+
+<figure class="image-figure my-6 {{ size_class }} {{ img_class }}">
+  <div class="relative overflow-hidden rounded-lg border border-cp-dark-400 bg-cp-dark-100 {% if img_ratio %}{{ img_ratio }}{% endif %}">
+    {% if img_link %}<a href="{{ img_link }}" target="_blank" rel="noopener noreferrer">{% endif %}
+    <picture>
+      {% comment %} WebP source if available {% endcomment %}
+      <source srcset="{{ img_webp }}" type="image/webp">
+      {% comment %} Original format fallback {% endcomment %}
+      <img
+        src="{{ img_src }}"
+        alt="{{ img_alt }}"
+        {% if img_width %}width="{{ img_width }}"{% endif %}
+        {% if img_height %}height="{{ img_height }}"{% endif %}
+        {% if img_lazy %}loading="lazy" decoding="async"{% else %}fetchpriority="high"{% endif %}
+        class="w-full h-auto object-cover transition-all duration-300 hover:scale-[1.02]"
+        onerror="this.onerror=null; this.parentElement.innerHTML='<img src=\'{{ '/img/placeholder.svg' | relative_url }}\' alt=\'Image not available\' class=\'w-full h-auto opacity-50\'>';"
+      >
+    </picture>
+    {% if img_link %}</a>{% endif %}
+  </div>
+  {% if img_caption %}
+  <figcaption class="mt-3 text-center text-sm text-cp-dark-600 font-mono">
+    <span class="text-cp-dark-500">//</span> {{ img_caption }}
+  </figcaption>
+  {% endif %}
+</figure>

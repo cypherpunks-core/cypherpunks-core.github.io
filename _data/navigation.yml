@@ -1,31 +1,51 @@
-- name: '資源'
+# V2.1 簡化導航 - 2025年更新
+# 完整的資源頁面導航，包含所有新增內容
+
+- name: 'Blog'
+  link: /blog/
+
+- name: '學習資源'
   link: /#
   dropdown:
-    - name: 比特幣 | Bitcoin
+    - name: Bitcoin 比特幣
       link: /markdown/resources/resources-bitcoin/
-    - name: 閃電網路 | Lightning network
+    - name: Lightning Network 閃電網路
       link: /markdown/resources/resources-ln/
-    - name: 區塊隱私 | Blockchain privacy
-      link: /markdown/resources/resources-blockchain-privacy/
-    - name: Schnorr 簽名 | Schnorr Signature
+    - name: Bitcoin Layer 2
+      link: /markdown/resources/resources-bitcoin-layer2/
+    - name: Schnorr & Taproot
       link: /markdown/resources/resources-schnorr-signature/
-    - name: 以太坊 | Ethereum
-      link: /markdown/resources/resources-ethereum/
-    
+    - name: 隱私技術
+      link: /markdown/resources/resources-blockchain-privacy/
+    - name: Nostr 協議
+      link: /markdown/resources/resources-nostr/
+    - name: 自託管工具
+      link: /markdown/resources/resources-self-custody/
+    - name: 開發者工具箱
+      link: /markdown/resources/resources-developer-tools/
+    - name: 書籍 & 論文
+      link: /markdown/products/
+
 - name: '知識庫'
   link: /#
   dropdown:
-    - name: 比特幣 | Bitcoin
+    - name: 術語詞彙表
+      link: /markdown/knowledge/glossary/
+    - name: 密碼龐克歷史
+      link: /markdown/resources/resources-cypherpunk-history/
+    - name: Bitcoin 知識庫
       link: /markdown/knowledge/knowledge-bitcoin/
-    - name: 以太坊 | Ethereum
+    - name: Ethereum 知識庫
       link: /markdown/knowledge/knowledge-ethereum/
-- name: '書籍 & 論文'
-  link: /markdown/products/
-- name: 衛星計畫
-  link: /markdown/SatelliteProject/
-- name: Blog
-  link: /blog/
+
+- name: '專案'
+  link: /#
+  dropdown:
+    - name: 衛星計畫
+      link: /markdown/SatelliteProject/
+    - name: GitHub
+      link: https://github.com/cypherpunks-core
+      external: true
+
 - name: '關於'
   link: /markdown/about/
-- name: '分類'
-  link: /classification
