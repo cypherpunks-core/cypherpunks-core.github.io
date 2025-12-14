@@ -1,51 +1,57 @@
-# V2.1 簡化導航 - 2025年更新
-# 完整的資源頁面導航，包含所有新增內容
+# V2.2 導航優化版 - 精簡分組設計
+# 使用 section 屬性實現視覺分組
 
 - name: 'Blog'
   link: /blog/
 
-- name: '學習資源'
-  link: /#
+- name: '資源中心'
+  link: /resources/
   dropdown:
+    - name: '核心技術'
+      section: true
     - name: Bitcoin 比特幣
       link: /markdown/resources/resources-bitcoin/
-    - name: Lightning Network 閃電網路
+    - name: Lightning Network
       link: /markdown/resources/resources-ln/
-    - name: Bitcoin Layer 2
-      link: /markdown/resources/resources-bitcoin-layer2/
-    - name: Schnorr & Taproot
+    - name: Taproot & Schnorr
       link: /markdown/resources/resources-schnorr-signature/
+    - name: '進階主題'
+      section: true
+    - name: Layer 2 技術
+      link: /markdown/resources/resources-bitcoin-layer2/
     - name: 隱私技術
       link: /markdown/resources/resources-blockchain-privacy/
     - name: Nostr 協議
       link: /markdown/resources/resources-nostr/
-    - name: 自託管工具
-      link: /markdown/resources/resources-self-custody/
+    - name: '開發者'
+      section: true
     - name: 開發者工具箱
       link: /markdown/resources/resources-developer-tools/
-    - name: 書籍 & 論文
-      link: /markdown/products/
+    - name: 自託管指南
+      link: /markdown/resources/resources-self-custody/
+
+- name: '書籍'
+  link: /markdown/products/
 
 - name: '知識庫'
-  link: /#
+  link: /markdown/knowledge/glossary/
   dropdown:
     - name: 術語詞彙表
       link: /markdown/knowledge/glossary/
-    - name: 密碼龐克歷史
+    - name: Cypherpunk 歷史
       link: /markdown/resources/resources-cypherpunk-history/
-    - name: Bitcoin 知識庫
+    - name: Bitcoin 百科
       link: /markdown/knowledge/knowledge-bitcoin/
-    - name: Ethereum 知識庫
+    - name: Ethereum 百科
       link: /markdown/knowledge/knowledge-ethereum/
 
-- name: '專案'
-  link: /#
+- name: '社群'
+  link: /markdown/about/
   dropdown:
+    - name: 關於我們
+      link: /markdown/about/
     - name: 衛星計畫
       link: /markdown/SatelliteProject/
     - name: GitHub
       link: https://github.com/cypherpunks-core
       external: true
-
-- name: '關於'
-  link: /markdown/about/
