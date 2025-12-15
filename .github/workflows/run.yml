@@ -100,7 +100,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
           publish_branch: gh-pages
-          force_orphan: true
 
   # Quality Checks (run on PRs)
   quality-check:
