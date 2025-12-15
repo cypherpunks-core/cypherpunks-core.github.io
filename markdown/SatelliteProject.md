@@ -31,7 +31,7 @@ hero_height: 0
 
 * 小耳朵固定
 > 需要找時間到Taipei hackerspace 釘死在地上 有機會的話，可以裝馬達，讓小耳朵可以自由旋轉，自動校正瞄準位置
-**硬體組裝示意圖：**  [![](https://raw.githubusercontent.com/wiki/Blockstream/satellite/img/hardware_connections.png)](https://raw.githubusercontent.com/wiki/Blockstream/satellite/img/hardware_connections.png)
+**硬體組裝示意圖：** 請參考 [Blockstream Satellite 官方文件](https://blockstream.github.io/satellite/doc/hardware.html)
 
 ### 軟體
 
@@ -59,7 +59,7 @@ hero_height: 0
 * 開啟另一台電腦解碼  `blocksat-rx-upper -i [Server IP] -p [Server Port]`
 * FIBRE [link](http://bitcoinfibre.org/)
 
-**衛星訊號覆蓋分佈圖：**  [![](https://camo.githubusercontent.com/e9770d8ba524cf47a7d3f15f19cf0dc2ab12f036/68747470733a2f2f692e6962622e636f2f71575674374b622f53637265656e73686f742d66726f6d2d323031392d30362d31372d31342d31352d34322e706e67)](https://camo.githubusercontent.com/e9770d8ba524cf47a7d3f15f19cf0dc2ab12f036/68747470733a2f2f692e6962622e636f2f71575674374b622f53637265656e73686f742d66726f6d2d323031392d30362d31372d31342d31352d34322e706e67)
+**衛星訊號覆蓋分佈圖：** 請參考 [Blockstream 衛星覆蓋地圖](https://blockstream.com/satellite/#satellite_network-coverage)
 
 # 文章參考
 
@@ -83,7 +83,7 @@ hero_height: 0
 
 # 工作原理
 
-[![](https://github.com/Blockstream/satellite/raw/master/doc/api_architecture.png?raw=true)](https://github.com/Blockstream/satellite/raw/master/doc/api_architecture.png?raw=true)
+請參考 [Blockstream Satellite API 文件](https://blockstream.github.io/satellite/doc/api.html)
 
 1. Blockstream衛星在地面的站點被稱為「基站（teleport）」，它們參與比特幣網路並將區塊傳送至地球同步衛星。
 2. 在35,786公里（22,236英里）高空軌道運行的地球同步衛星接收來自Blockstream衛星基站的訊號，並將其廣播到地球的大部分地區。
