@@ -75,7 +75,7 @@ jobs:
           path: ./_site
 
   deploy:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push' && github.repository == 'cypherpunks-core/cypherpunks-core.github.io'
     needs: build
     runs-on: ubuntu-latest
     environment:
