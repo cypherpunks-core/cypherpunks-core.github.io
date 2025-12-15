@@ -1,0 +1,8 @@
+# =============================================
+# Test Environment Configuration Override
+# For deployment to: awesome-doge.github.io/cypherpunks-core.github.io
+# =============================================
+
+# Override baseurl for project page deployment
+baseurl: "/cypherpunks-core.github.io"
+url: "https://awesome-doge.github.io"

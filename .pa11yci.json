@@ -1,0 +1,18 @@
+{
+  "defaults": {
+    "timeout": 30000,
+    "wait": 500,
+    "standard": "WCAG2AA",
+    "runners": ["axe"],
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox", "--disable-setuid-sandbox"]
+    }
+  },
+  "urls": [
+    "http://localhost:4000/",
+    "http://localhost:4000/blog/",
+    "http://localhost:4000/tags/",
+    "http://localhost:4000/categories/",
+    "http://localhost:4000/archive/"
+  ]
+}

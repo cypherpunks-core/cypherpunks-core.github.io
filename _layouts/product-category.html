@@ -4,271 +4,93 @@ hide_hero: true
 ---
 
 <div class="max-w-7xl mx-auto">
-  <!-- Compact Header Section -->
+  <!-- Header - 簡單標題 -->
   <header class="mb-8 pb-6 border-b border-cp-dark-400">
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-      <div>
-        <h1 class="text-2xl md:text-3xl font-bold font-mono text-cp-green-500 mb-2">
-          {{ page.title }}
-        </h1>
-        {% if page.subtitle %}
-        <p class="text-base text-cp-dark-600 font-mono">
-          {{ page.subtitle }}
-        </p>
-        {% endif %}
-        {% if content != "" %}
-        <div class="mt-3 text-cp-dark-700 text-sm">
-          {{ content }}
-        </div>
-        {% endif %}
-      </div>
-      <!-- Quick Stats -->
-      <div class="flex items-center gap-6 text-sm font-mono">
-        <div class="text-center">
-          <div class="text-xl font-bold text-cp-green-400">{{ site.products.size }}</div>
-          <div class="text-xs text-cp-dark-600">項目</div>
-        </div>
-        <div class="text-center">
-          <div class="text-xl font-bold text-cp-green-400">FREE</div>
-          <div class="text-xs text-cp-dark-600">開源</div>
-        </div>
-      </div>
-    </div>
+    <h1 class="text-2xl md:text-3xl font-bold font-mono text-cp-green-500 mb-2">
+      {{ page.title }}
+    </h1>
+    {% if page.subtitle %}
+    <p class="text-base text-cp-dark-600 font-mono">{{ page.subtitle }}</p>
+    {% endif %}
+    {% if content != "" %}
+    <div class="mt-3 text-cp-dark-700 text-sm">{{ content }}</div>
+    {% endif %}
   </header>
 
-  <!-- Filter Bar -->
-  <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 p-4 card">
-    <div class="flex flex-wrap items-center gap-2">
-      <span class="text-sm text-cp-dark-600 font-mono mr-2">分類：</span>
-      <button class="filter-btn active px-3 py-1.5 text-xs font-mono border border-cp-green-500 text-cp-green-500 rounded transition-colors" data-filter="all">
-        全部
-      </button>
-      <button class="filter-btn px-3 py-1.5 text-xs font-mono border border-cp-dark-400 rounded hover:border-cp-green-500 hover:text-cp-green-500 transition-colors" data-filter="bitcoin">
-        Bitcoin
-      </button>
-      <button class="filter-btn px-3 py-1.5 text-xs font-mono border border-cp-dark-400 rounded hover:border-cp-green-500 hover:text-cp-green-500 transition-colors" data-filter="lightning">
-        Lightning
-      </button>
-      <button class="filter-btn px-3 py-1.5 text-xs font-mono border border-cp-dark-400 rounded hover:border-cp-green-500 hover:text-cp-green-500 transition-colors" data-filter="whitepaper">
-        白皮書
-      </button>
-      <button class="filter-btn px-3 py-1.5 text-xs font-mono border border-cp-dark-400 rounded hover:border-cp-green-500 hover:text-cp-green-500 transition-colors" data-filter="ethereum">
-        Ethereum
-      </button>
+  {% assign all_products = site.products %}
+  {% assign zh_products = all_products | where: "lang", "zh" %}
+  {% assign en_products = all_products | where: "lang", "en" %}
+
+  <!-- Section 1: 繁體中文翻譯（突出展示） -->
+  <section class="mb-12">
+    <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center gap-3">
+        <div class="w-1 h-8 bg-cp-orange rounded"></div>
+        <div>
+          <h2 class="text-xl font-bold font-mono text-cp-dark-800">繁體中文翻譯</h2>
+          <p class="text-xs text-cp-dark-500 font-mono">Cypherpunks Taiwan 翻譯成果</p>
+        </div>
+      </div>
+      <span class="px-3 py-1 text-sm font-mono bg-cp-orange/20 text-cp-orange rounded">
+        {{ zh_products.size }} 本
+      </span>
     </div>
 
-    <!-- Language Filter -->
-    <div class="flex items-center gap-2">
-      <span class="text-sm text-cp-dark-600 font-mono mr-2">語言：</span>
-      <button class="lang-btn active px-3 py-1.5 text-xs font-mono border border-cp-green-500 text-cp-green-500 rounded transition-colors" data-lang="all">
-        全部
-      </button>
-      <button class="lang-btn px-3 py-1.5 text-xs font-mono border border-cp-dark-400 rounded hover:border-cp-green-500 hover:text-cp-green-500 transition-colors" data-lang="zh">
-        繁中
-      </button>
-      <button class="lang-btn px-3 py-1.5 text-xs font-mono border border-cp-dark-400 rounded hover:border-cp-green-500 hover:text-cp-green-500 transition-colors" data-lang="en">
-        英文
-      </button>
+    <!-- 繁中翻譯卡片 Grid - 一行 3-4 個 -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+      {% for product in zh_products %}
+        {% include product-card.html product=product %}
+      {% endfor %}
     </div>
-  </div>
+  </section>
 
-  <!-- Featured Section: 翻譯書籍 -->
-  <div class="mb-10">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="w-1 h-6 bg-cp-green-500 rounded"></div>
-      <h2 class="text-lg font-bold font-mono text-cp-dark-800">繁體中文翻譯</h2>
-      <span class="px-2 py-0.5 text-xs font-mono bg-cp-green-900/30 text-cp-green-400 rounded">我們翻譯的</span>
+  <!-- Section 2: 英文原版參考 -->
+  <section class="mb-12">
+    <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center gap-3">
+        <div class="w-1 h-8 bg-gray-500 rounded"></div>
+        <div>
+          <h2 class="text-xl font-bold font-mono text-cp-dark-800">英文原版參考</h2>
+          <p class="text-xs text-cp-dark-500 font-mono">推薦的英文學習資源</p>
+        </div>
+      </div>
+      <span class="px-3 py-1 text-sm font-mono bg-gray-500/20 text-gray-400 rounded">
+        {{ en_products.size }} 本
+      </span>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-      <a href="https://mastering-bitcoin.doge.tg/" target="_blank" class="card p-4 hover:border-cp-green-500 transition-colors group">
-        <div class="flex items-start gap-3">
-          <div class="w-10 h-10 rounded bg-cp-green-900/30 flex items-center justify-center text-cp-green-500 shrink-0">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="font-mono font-bold text-cp-dark-800 group-hover:text-cp-green-500 transition-colors">Mastering Bitcoin</h3>
-            <p class="text-xs text-cp-dark-600">精通比特幣 2nd</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="https://bitcoinbook-3nd-zh.doge.tg/" target="_blank" class="card p-4 hover:border-cp-green-500 transition-colors group">
-        <div class="flex items-start gap-3">
-          <div class="w-10 h-10 rounded bg-cp-green-900/30 flex items-center justify-center text-cp-green-500 shrink-0">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="font-mono font-bold text-cp-dark-800 group-hover:text-cp-green-500 transition-colors">Mastering Bitcoin 3rd</h3>
-            <p class="text-xs text-cp-dark-600">精通比特幣 3rd ⭐</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="https://programming-bitcoin-zh.doge.tg/" target="_blank" class="card p-4 hover:border-cp-green-500 transition-colors group">
-        <div class="flex items-start gap-3">
-          <div class="w-10 h-10 rounded bg-cp-green-900/30 flex items-center justify-center text-cp-green-500 shrink-0">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="font-mono font-bold text-cp-dark-800 group-hover:text-cp-green-500 transition-colors">Programming Bitcoin</h3>
-            <p class="text-xs text-cp-dark-600">比特幣編程</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="https://lnbook-zh.doge.tg/" target="_blank" class="card p-4 hover:border-cp-green-500 transition-colors group">
-        <div class="flex items-start gap-3">
-          <div class="w-10 h-10 rounded bg-yellow-900/30 flex items-center justify-center text-yellow-500 shrink-0">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="font-mono font-bold text-cp-dark-800 group-hover:text-cp-green-500 transition-colors">Mastering Lightning</h3>
-            <p class="text-xs text-cp-dark-600">精通閃電網路</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="https://the-blocksize-war.doge.tg/" target="_blank" class="card p-4 hover:border-cp-green-500 transition-colors group">
-        <div class="flex items-start gap-3">
-          <div class="w-10 h-10 rounded bg-red-900/30 flex items-center justify-center text-red-500 shrink-0">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="font-mono font-bold text-cp-dark-800 group-hover:text-cp-green-500 transition-colors">The Blocksize War</h3>
-            <p class="text-xs text-cp-dark-600">區塊大小之戰</p>
-          </div>
-        </div>
-      </a>
+    <!-- 英文版卡片 Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+      {% for product in en_products %}
+        {% include product-card.html product=product %}
+      {% endfor %}
     </div>
-  </div>
+  </section>
 
-  <!-- All Products Grid -->
-  <div class="mb-6">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="w-1 h-6 bg-cp-dark-500 rounded"></div>
-      <h2 class="text-lg font-bold font-mono text-cp-dark-800">所有資源</h2>
+  <!-- 快速連結區 -->
+  <section class="mb-12 p-6 card bg-gradient-to-r from-cp-dark-100 to-cp-dark">
+    <h3 class="text-lg font-bold font-mono text-cp-green-500 mb-4">繁體中文翻譯 - 直接閱讀</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      {% for product in zh_products %}
+        {% if product.read_url %}
+        <a href="{{ product.read_url }}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded bg-cp-dark-200/50 hover:bg-cp-dark-200 transition-colors group">
+          <span class="text-cp-green-500 group-hover:translate-x-1 transition-transform">→</span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-mono text-cp-dark-700 truncate">{{ product.subtitle }}</div>
+            <div class="text-xs text-cp-dark-500 truncate">{{ product.author }}</div>
+          </div>
+          <svg class="w-4 h-4 text-cp-dark-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+          </svg>
+        </a>
+        {% endif %}
+      {% endfor %}
     </div>
-  </div>
-
-  {% assign sorted_products = site.products | sort: page.sort %}
-
-  <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-    {% for product in sorted_products %}
-
-    {% comment %} Determine category {% endcomment %}
-    {% assign category = "other" %}
-    {% assign title_lower = product.title | downcase %}
-    {% assign subtitle_lower = product.subtitle | downcase %}
-
-    {% if title_lower contains "white paper" or title_lower contains "whitepaper" or subtitle_lower contains "白皮書" %}
-      {% assign category = "whitepaper" %}
-    {% elsif title_lower contains "lightning" or subtitle_lower contains "閃電" %}
-      {% assign category = "lightning" %}
-    {% elsif title_lower contains "ethereum" or subtitle_lower contains "以太" %}
-      {% assign category = "ethereum" %}
-    {% elsif title_lower contains "bitcoin" or subtitle_lower contains "比特幣" %}
-      {% assign category = "bitcoin" %}
-    {% endif %}
-
-    {% comment %} Determine language {% endcomment %}
-    {% assign lang = "en" %}
-    {% if product.price contains "繁中" or product.price contains "Chinese" %}
-      {% assign lang = "zh" %}
-    {% endif %}
-
-    <article class="card group overflow-hidden product-card transition-all duration-300 hover:translate-y-[-2px] hover:border-cp-green-500/50"
-             data-category="{{ category }}"
-             data-lang="{{ lang }}">
-      <a href="{{ product.url | relative_url }}" class="block h-full">
-        <!-- Image Container -->
-        <div class="relative overflow-hidden bg-cp-dark-200">
-          {% if product.image %}
-          <div class="aspect-[4/3] flex items-center justify-center p-4 bg-gradient-to-b from-cp-dark-100 to-cp-dark-200">
-            <img
-              src="{{ product.image | relative_url }}"
-              alt="{{ product.title }}"
-              class="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105"
-              loading="lazy"
-            >
-          </div>
-          {% else %}
-          <div class="aspect-[4/3] flex items-center justify-center bg-cp-dark-200">
-            <svg class="w-16 h-16 text-cp-dark-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-            </svg>
-          </div>
-          {% endif %}
-
-          <!-- Category Badge -->
-          <span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-mono rounded
-            {% if category == 'whitepaper' %}bg-purple-900/80 text-purple-300 border border-purple-700/50
-            {% elsif category == 'lightning' %}bg-yellow-900/80 text-yellow-300 border border-yellow-700/50
-            {% elsif category == 'ethereum' %}bg-blue-900/80 text-blue-300 border border-blue-700/50
-            {% elsif category == 'bitcoin' %}bg-orange-900/80 text-orange-300 border border-orange-700/50
-            {% else %}bg-cp-dark/80 text-cp-dark-600 border border-cp-dark-400{% endif %}">
-            {% if category == 'whitepaper' %}白皮書
-            {% elsif category == 'lightning' %}Lightning
-            {% elsif category == 'ethereum' %}Ethereum
-            {% elsif category == 'bitcoin' %}Bitcoin
-            {% else %}Other{% endif %}
-          </span>
-
-          <!-- Language Badge -->
-          <span class="absolute top-2 right-2 px-2 py-0.5 text-[10px] font-mono bg-cp-dark/80 text-cp-dark-600 border border-cp-dark-400 rounded">
-            {% if lang == 'zh' %}繁中{% else %}EN{% endif %}
-          </span>
-        </div>
-
-        <!-- Content -->
-        <div class="p-4">
-          <h2 class="text-sm font-bold font-mono text-cp-dark-800 group-hover:text-cp-green-500 transition-colors mb-1 line-clamp-1">
-            {{ product.title }}
-          </h2>
-
-          {% if product.subtitle %}
-          <p class="text-xs text-cp-dark-600 line-clamp-1 mb-2">
-            {{ product.subtitle }}
-          </p>
-          {% endif %}
-
-          {% if product.description %}
-          <p class="text-xs text-cp-dark-500 line-clamp-2">
-            {{ product.description | truncate: 60 }}
-          </p>
-          {% endif %}
-        </div>
-      </a>
-    </article>
-    {% endfor %}
-  </div>
-
-  <!-- Empty State -->
-  <div id="empty-state" class="hidden text-center py-16">
-    <svg class="w-16 h-16 text-cp-dark-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-    </svg>
-    <p class="text-cp-dark-600 font-mono">沒有符合條件的資源</p>
-    <button onclick="resetFilters()" class="mt-4 text-cp-green-500 hover:underline font-mono text-sm">
-      清除篩選
-    </button>
-  </div>
+  </section>
 
   <!-- CTA -->
-  <div class="mt-12 text-center p-6 card">
-    <p class="text-cp-dark-600 font-mono mb-4">
-      想要貢獻翻譯或回報問題？
-    </p>
+  <div class="text-center p-6 card">
+    <p class="text-cp-dark-600 font-mono mb-4">想要貢獻翻譯或回報問題？</p>
     <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-green-500 hover:text-cp-green-400 font-mono text-sm">
       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
@@ -277,101 +99,3 @@ hide_hero: true
     </a>
   </div>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const langBtns = document.querySelectorAll('.lang-btn');
-  const cards = document.querySelectorAll('.product-card');
-  const emptyState = document.getElementById('empty-state');
-  const container = document.getElementById('products-container');
-
-  let currentCategory = 'all';
-  let currentLang = 'all';
-
-  function updateDisplay() {
-    let visibleCount = 0;
-
-    cards.forEach(card => {
-      const cardCategory = card.dataset.category;
-      const cardLang = card.dataset.lang;
-
-      const categoryMatch = currentCategory === 'all' || cardCategory === currentCategory;
-      const langMatch = currentLang === 'all' || cardLang === currentLang;
-
-      if (categoryMatch && langMatch) {
-        card.style.display = '';
-        visibleCount++;
-      } else {
-        card.style.display = 'none';
-      }
-    });
-
-    if (visibleCount === 0) {
-      emptyState.classList.remove('hidden');
-      container.classList.add('hidden');
-    } else {
-      emptyState.classList.add('hidden');
-      container.classList.remove('hidden');
-    }
-  }
-
-  // Category filter
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-      currentCategory = this.dataset.filter;
-
-      filterBtns.forEach(b => {
-        b.classList.remove('border-cp-green-500', 'text-cp-green-500', 'active');
-        b.classList.add('border-cp-dark-400');
-      });
-      this.classList.add('border-cp-green-500', 'text-cp-green-500', 'active');
-      this.classList.remove('border-cp-dark-400');
-
-      updateDisplay();
-    });
-  });
-
-  // Language filter
-  langBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-      currentLang = this.dataset.lang;
-
-      langBtns.forEach(b => {
-        b.classList.remove('border-cp-green-500', 'text-cp-green-500', 'active');
-        b.classList.add('border-cp-dark-400');
-      });
-      this.classList.add('border-cp-green-500', 'text-cp-green-500', 'active');
-      this.classList.remove('border-cp-dark-400');
-
-      updateDisplay();
-    });
-  });
-
-  // Reset filters function
-  window.resetFilters = function() {
-    currentCategory = 'all';
-    currentLang = 'all';
-
-    filterBtns.forEach(b => {
-      b.classList.remove('border-cp-green-500', 'text-cp-green-500', 'active');
-      b.classList.add('border-cp-dark-400');
-      if (b.dataset.filter === 'all') {
-        b.classList.add('border-cp-green-500', 'text-cp-green-500', 'active');
-        b.classList.remove('border-cp-dark-400');
-      }
-    });
-
-    langBtns.forEach(b => {
-      b.classList.remove('border-cp-green-500', 'text-cp-green-500', 'active');
-      b.classList.add('border-cp-dark-400');
-      if (b.dataset.lang === 'all') {
-        b.classList.add('border-cp-green-500', 'text-cp-green-500', 'active');
-        b.classList.remove('border-cp-dark-400');
-      }
-    });
-
-    updateDisplay();
-  };
-});
-</script>

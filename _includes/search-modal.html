@@ -1,0 +1,110 @@
+<!-- Search Modal -->
+<div id="search-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="search-title">
+  <!-- Backdrop -->
+  <div class="search-backdrop absolute inset-0 bg-cp-dark/80 backdrop-blur-sm"></div>
+
+  <!-- Modal Content -->
+  <div class="relative flex items-start justify-center pt-[15vh] px-4">
+    <div class="search-container w-full max-w-2xl bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-2xl overflow-hidden">
+
+      <!-- Search Header -->
+      <div class="p-4 border-b border-cp-dark-400">
+        <div class="flex items-center gap-3">
+          <!-- Search Icon -->
+          <svg class="w-5 h-5 text-cp-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+
+          <!-- Search Input -->
+          <input
+            type="text"
+            id="search-input"
+            class="flex-grow bg-transparent text-cp-dark-800 placeholder-cp-dark-600 font-mono focus:outline-none"
+            placeholder="搜尋文章..."
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+          >
+
+          <!-- Close Button -->
+          <button id="search-close" class="text-cp-dark-600 hover:text-cp-green-500 transition-colors" aria-label="關閉搜尋">
+            <kbd class="px-2 py-1 text-xs bg-cp-dark-200 border border-cp-dark-400 rounded font-mono">ESC</kbd>
+          </button>
+        </div>
+      </div>
+
+      <!-- Search Results -->
+      <div id="search-results" class="max-h-[60vh] overflow-y-auto">
+        <!-- Empty State -->
+        <div id="search-empty" class="p-8 text-center">
+          <div class="text-cp-green-600 font-mono text-4xl mb-4">&gt;_</div>
+          <p class="text-cp-dark-600 font-mono text-sm">輸入關鍵字開始搜尋</p>
+          <p class="text-cp-dark-500 font-mono text-xs mt-2">支援標題、內容、標籤搜尋</p>
+        </div>
+
+        <!-- Results List (populated by JS) -->
+        <div id="search-results-list" class="hidden divide-y divide-cp-dark-400">
+          <!-- Results will be injected here -->
+        </div>
+
+        <!-- No Results -->
+        <div id="search-no-results" class="hidden p-8 text-center">
+          <div class="text-cp-accent-red font-mono text-4xl mb-4">:(</div>
+          <p class="text-cp-dark-600 font-mono text-sm">找不到相關結果</p>
+          <p class="text-cp-dark-500 font-mono text-xs mt-2">試試其他關鍵字</p>
+        </div>
+
+        <!-- Loading State -->
+        <div id="search-loading" class="hidden p-8 text-center">
+          <div class="inline-block animate-spin text-cp-green-500">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+          </div>
+          <p class="text-cp-dark-600 font-mono text-sm mt-4">搜尋中...</p>
+        </div>
+      </div>
+
+      <!-- Search Footer -->
+      <div class="p-3 border-t border-cp-dark-400 bg-cp-dark-200/50">
+        <div class="flex items-center justify-between text-xs text-cp-dark-600 font-mono">
+          <div class="flex items-center gap-4">
+            <span class="flex items-center gap-1">
+              <kbd class="px-1.5 py-0.5 bg-cp-dark-300 border border-cp-dark-400 rounded text-[0.65rem]">↑</kbd>
+              <kbd class="px-1.5 py-0.5 bg-cp-dark-300 border border-cp-dark-400 rounded text-[0.65rem]">↓</kbd>
+              <span>導航</span>
+            </span>
+            <span class="flex items-center gap-1">
+              <kbd class="px-1.5 py-0.5 bg-cp-dark-300 border border-cp-dark-400 rounded text-[0.65rem]">↵</kbd>
+              <span>開啟</span>
+            </span>
+          </div>
+          <span id="search-count" class="text-cp-green-600"></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Search Result Template -->
+<template id="search-result-template">
+  <a href="" class="search-result block p-4 hover:bg-cp-dark-200 transition-colors focus:bg-cp-dark-200 focus:outline-none">
+    <div class="flex items-start gap-3">
+      <div class="flex-shrink-0 w-8 h-8 rounded bg-cp-dark-200 flex items-center justify-center">
+        <svg class="w-4 h-4 text-cp-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+      </div>
+      <div class="flex-grow min-w-0">
+        <h4 class="search-result-title text-cp-dark-800 font-medium truncate"></h4>
+        <p class="search-result-excerpt text-cp-dark-600 text-sm mt-1 line-clamp-2"></p>
+        <div class="search-result-meta flex items-center gap-2 mt-2 text-xs text-cp-dark-500">
+          <time class="search-result-date"></time>
+          <span class="search-result-tags"></span>
+        </div>
+      </div>
+    </div>
+  </a>
+</template>

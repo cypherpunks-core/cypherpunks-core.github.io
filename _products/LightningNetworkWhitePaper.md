@@ -13,7 +13,6 @@ read_url: https://github.com/cypherpunks-core/lightning_network_whitepaper_zh
 
 # 比特幣閃電網路：可擴展的 off-chain 即時支付  The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments
 
-[![https://github.com/ChenPoWei](https://camo.githubusercontent.com/68b6076a9df0d967e2523fe2ae4b5f25e61b0511/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5472616e736c61746f722d4368656e253230506f2532305765692d626c75652e737667)](https://camo.githubusercontent.com/68b6076a9df0d967e2523fe2ae4b5f25e61b0511/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5472616e736c61746f722d4368656e253230506f2532305765692d626c75652e737667)
 
 Joseph Poon [joseph@lightning.network](mailto:joseph@lightning.network)
 

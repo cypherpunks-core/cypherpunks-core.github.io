@@ -1,11 +1,87 @@
-<section class="hero {% if page.hero_height %} {{ page.hero_height }} {% else %} is-medium {% endif %} is-bold is-primary" {% if page.hero_image %} style="background: url('{{ page.hero_image }}') no-repeat center center; background-size: cover;" {% endif %}>
-    <div class="hero-body">
-        <div class="container">
-            <p class="title is-2">{{ page.title }}</p>
-            <p class="subtitle is-3">{{ page.subtitle }}</p>
-            {% if page.hero_link %}
-                <a href="{{ page.hero_link | prepend: site.baseurl  }}" class="button is-info is-large">{{ page.hero_link_text }}</a>
-            {% endif %}
-        </div>
+<!-- Compact Hero Section - V2.1 -->
+<section class="hero relative py-8 md:py-12 overflow-hidden bg-cp-dark border-b border-cp-dark-400"
+  {% if page.hero_image %}style="background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.95)), url('{{ page.hero_image }}') no-repeat center center; background-size: cover;"{% endif %}>
+
+  <!-- Subtle Grid Background -->
+  <div class="absolute inset-0 bg-grid opacity-10"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-cp-dark via-cp-dark to-cp-dark-100"></div>
+
+  <!-- Hero Content -->
+  <div class="relative z-10 container mx-auto px-4 max-w-4xl">
+    <!-- Breadcrumb (optional) -->
+    {% if page.category or page.categories.size > 0 %}
+    <div class="mb-4 text-xs font-mono text-cp-dark-600">
+      <a href="/" class="hover:text-cp-green-500 transition-colors">Home</a>
+      <span class="mx-2">/</span>
+      {% if page.categories.size > 0 %}
+      <span class="text-cp-dark-700">{{ page.categories | first }}</span>
+      {% elsif page.category %}
+      <span class="text-cp-dark-700">{{ page.category }}</span>
+      {% endif %}
     </div>
+    {% endif %}
+
+    <!-- Main Title -->
+    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold font-mono text-cp-dark-800 mb-3">
+      {% if page.title %}
+        {{ page.title }}
+      {% else %}
+        {{ site.title }}
+      {% endif %}
+    </h1>
+
+    <!-- Subtitle / Description -->
+    {% if page.subtitle or page.description %}
+    <p class="text-base md:text-lg text-cp-dark-600 max-w-2xl font-mono">
+      {{ page.subtitle | default: page.description }}
+    </p>
+    {% endif %}
+
+    <!-- Meta info for posts -->
+    {% if page.date %}
+    <div class="mt-4 flex flex-wrap items-center gap-4 text-xs font-mono text-cp-dark-600">
+      <time datetime="{{ page.date | date_to_xmlschema }}" class="flex items-center gap-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        {{ page.date | date: "%Y-%m-%d" }}
+      </time>
+      {% if page.author %}
+      <span class="flex items-center gap-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+        </svg>
+        {{ page.author }}
+      </span>
+      {% endif %}
+      {% if page.tags.size > 0 %}
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+        </svg>
+        {% for tag in page.tags limit:3 %}
+        <span class="px-2 py-0.5 bg-cp-dark-200 rounded text-cp-dark-700">{{ tag }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <!-- CTA Buttons (optional) -->
+    {% if page.hero_link %}
+    <div class="mt-6 flex flex-wrap items-center gap-3">
+      <a href="{{ page.hero_link | relative_url }}" class="btn btn-primary">
+        {{ page.hero_link_text | default: "了解更多" }}
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+        </svg>
+      </a>
+      {% if page.hero_link_secondary %}
+      <a href="{{ page.hero_link_secondary | relative_url }}" class="btn btn-outline">
+        {{ page.hero_link_secondary_text | default: "瀏覽文章" }}
+      </a>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
 </section>

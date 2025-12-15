@@ -1,0 +1,52 @@
+<!-- Comments Section - Giscus -->
+{% if site.comments.provider == 'giscus' %}
+<div id="giscus-comments" class="giscus-container">
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="{{ site.comments.giscus.repo }}"
+    data-repo-id="{{ site.comments.giscus.repo_id }}"
+    data-category="{{ site.comments.giscus.category }}"
+    data-category-id="{{ site.comments.giscus.category_id }}"
+    data-mapping="{{ site.comments.giscus.mapping | default: 'pathname' }}"
+    data-strict="0"
+    data-reactions-enabled="{{ site.comments.giscus.reactions_enabled | default: true }}"
+    data-emit-metadata="{{ site.comments.giscus.emit_metadata | default: false }}"
+    data-input-position="top"
+    data-theme="dark"
+    data-lang="zh-TW"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+<noscript>
+  <div class="p-4 bg-cp-dark-200 border border-cp-dark-400 rounded-lg text-center">
+    <p class="text-cp-dark-600 font-mono text-sm">
+      請啟用 JavaScript 來查看留言
+    </p>
+  </div>
+</noscript>
+
+<style>
+  /* Giscus 樣式覆蓋 */
+  .giscus-container {
+    margin-top: 1rem;
+  }
+
+  .giscus-frame {
+    border: 1px solid #30363d !important;
+    border-radius: 0.5rem !important;
+  }
+</style>
+{% else %}
+<!-- Placeholder when comments are not configured -->
+<div class="p-4 bg-cp-dark-200 border border-cp-dark-400 rounded-lg text-center">
+  <p class="text-cp-dark-600 font-mono text-sm">
+    留言系統尚未設置
+  </p>
+  <p class="text-cp-dark-500 font-mono text-xs mt-2">
+    請在 _config.yml 中配置 Giscus
+  </p>
+</div>
+{% endif %}

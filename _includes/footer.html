@@ -1,20 +1,177 @@
-<footer class="footer">
-    <div class="container">
-        
-        {% if site.footer_menu %}
-        <div class="columns is-multiline">
-            {% for item in site.data[site.footer_menu] %}
-            <div class="column has-text-centered">
-                <div>
-                    <a href="{{ item.link | prepend: site.baseurl }}" class="link">{{ item.name }}</a>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% endif %}
+<!-- Footer -->
+<footer class="footer bg-cp-dark-100 border-t border-cp-dark-400 mt-auto" role="contentinfo" aria-label="網站頁尾">
+  <div class="container mx-auto px-4 py-12 max-w-7xl">
 
-        <div class="content is-small has-text-centered">
-            <p class=""> Powered by  <a href="https://cypherpunks-core.github.io"> Cypherpunks Core </a></p>
+    <!-- Main Footer Content -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
+
+      <!-- About -->
+      <div class="lg:col-span-2">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="font-mono text-lg font-bold text-cp-green-500">
+            <span class="text-cp-green-500">[</span>CP<span class="text-cp-green-500">]</span>
+          </span>
+          <span class="font-mono text-sm text-cp-dark-700">Cypherpunks Taiwan</span>
         </div>
+        <p class="text-cp-dark-600 text-sm font-mono mb-4 max-w-md">
+          {{ site.description }}
+        </p>
+        <!-- ASCII Art -->
+        <pre class="text-cp-green-600/40 text-[0.5rem] leading-tight font-mono hidden md:block">
+ "Privacy is necessary for an open society
+  in the electronic age." - Eric Hughes
+        </pre>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 快速連結
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="{{ '/blog/' | relative_url }}" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > Blog
+            </a>
+          </li>
+          <li>
+            <a href="{{ '/markdown/about/' | relative_url }}" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 關於我們
+            </a>
+          </li>
+          <li>
+            <a href="{{ '/markdown/products/' | relative_url }}" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 書籍 & 論文
+            </a>
+          </li>
+          <li>
+            <a href="{{ '/feed.xml' | relative_url }}" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > RSS Feed
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 資源
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="{{ '/resources/' | relative_url }}" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 資源中心
+            </a>
+          </li>
+          <li>
+            <a href="{{ '/markdown/resources/resources-bitcoin/' | relative_url }}" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > Bitcoin
+            </a>
+          </li>
+          <li>
+            <a href="{{ '/markdown/resources/resources-ln/' | relative_url }}" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > Lightning
+            </a>
+          </li>
+          <li>
+            <a href="{{ '/markdown/knowledge/glossary/' | relative_url }}" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 詞彙表
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Explore -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 探索
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="{{ '/tags/' | relative_url }}" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 標籤
+            </a>
+          </li>
+          <li>
+            <a href="{{ '/categories/' | relative_url }}" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 分類
+            </a>
+          </li>
+          <li>
+            <a href="{{ '/archive/' | relative_url }}" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 歸檔
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social & Contact -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 聯繫
+        </h4>
+        <ul class="space-y-2">
+          {% if site.social.github %}
+          <li>
+            <a href="https://github.com/{{ site.social.github }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+              </svg>
+              GitHub
+            </a>
+          </li>
+          {% endif %}
+          {% if site.social.twitter %}
+          <li>
+            <a href="https://twitter.com/{{ site.social.twitter }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              Twitter
+            </a>
+          </li>
+          {% endif %}
+          {% if site.email %}
+          <li>
+            <a href="mailto:{{ site.email }}" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              Email
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+
     </div>
+
+    <!-- Divider -->
+    <div class="border-t border-cp-dark-400 my-8"></div>
+
+    <!-- Bottom Footer -->
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <!-- Copyright -->
+      <div class="text-cp-dark-600 text-xs font-mono">
+        <span class="text-cp-green-600">&copy;</span> {{ 'now' | date: "%Y" }} {{ site.title }}.
+        <span class="text-cp-dark-500">Cypherpunks write code.</span>
+      </div>
+
+      <!-- Tech Stack -->
+      <div class="flex items-center gap-4 text-cp-dark-600 text-xs font-mono">
+        <span>Built with</span>
+        <a href="https://jekyllrb.com" target="_blank" rel="noopener noreferrer" class="hover:text-cp-green-500 transition-colors">Jekyll</a>
+        <span>&</span>
+        <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="hover:text-cp-green-500 transition-colors">Tailwind CSS</a>
+      </div>
+
+      <!-- Back to Top -->
+      <button id="back-to-top" class="p-2 bg-cp-dark-200 text-cp-dark-600 hover:text-cp-green-500 hover:bg-cp-dark-300 rounded transition-all opacity-0 invisible" aria-label="回到頂部">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
 </footer>

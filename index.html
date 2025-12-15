@@ -1,0 +1,459 @@
+---
+title: Cypherpunks Taiwan
+subtitle: 密碼學使自由和隱私再次偉大
+layout: default
+hide_hero: true
+show_sidebar: false
+description: 密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.
+---
+
+<!-- Hero Section - V2.2 Matrix Hacker Style -->
+<section class="hero relative py-16 md:py-24 overflow-hidden -mt-8 -mx-4 md:-mx-8 border-b border-cp-dark-400 bg-transparent">
+  <!-- Matrix Rain Background -->
+  <div id="matrix-rain" class="absolute inset-0 z-0"></div>
+
+  <!-- Hero Content -->
+  <div class="relative z-10 container mx-auto px-4 max-w-5xl">
+
+    <!-- ASCII Art Logo with Glitch Effect -->
+    <div class="text-center mb-8 bg-transparent" data-parallax="0.3">
+      <pre id="ascii-logo" class="glitch-text inline-block text-[0.35rem] sm:text-[0.45rem] md:text-[0.55rem] lg:text-xs leading-tight text-cp-green-500 font-mono !bg-transparent !border-none !p-0 !rounded-none !shadow-none !m-0" data-text="CYPHERPUNKS">
+ ██████╗██╗   ██╗██████╗ ██╗  ██╗███████╗██████╗ ██████╗ ██╗   ██╗███╗   ██╗██╗  ██╗███████╗
+██╔════╝╚██╗ ██╔╝██╔══██╗██║  ██║██╔════╝██╔══██╗██╔══██╗██║   ██║████╗  ██║██║ ██╔╝██╔════╝
+██║      ╚████╔╝ ██████╔╝███████║█████╗  ██████╔╝██████╔╝██║   ██║██╔██╗ ██║█████╔╝ ███████╗
+██║       ╚██╔╝  ██╔═══╝ ██╔══██║██╔══╝  ██╔══██╗██╔═══╝ ██║   ██║██║╚██╗██║██╔═██╗ ╚════██║
+╚██████╗   ██║   ██║     ██║  ██║███████╗██║  ██║██║     ╚██████╔╝██║ ╚████║██║  ██╗███████║
+ ╚═════╝   ╚═╝   ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝</pre>
+    </div>
+
+    <!-- Taiwan Badge with Glow -->
+    <div class="text-center mb-8" data-parallax="0.2">
+      <span class="inline-block px-6 py-2 border border-cp-green-500 text-cp-green-500 font-mono text-sm tracking-[0.3em] glow-border hover:bg-cp-green-500/10 transition-all duration-300">
+        TAIWAN
+      </span>
+    </div>
+
+    <!-- Tagline with Typewriter Effect -->
+    <div class="text-center mb-10" data-parallax="0.1">
+      <p id="typewriter-zh" class="text-cp-dark-700 font-mono text-lg md:text-xl mb-3 h-8">
+        <span class="typewriter-cursor">_</span>
+      </p>
+      <p id="typewriter-en" class="text-cp-dark-600 font-mono text-sm md:text-base h-6">
+        <span class="typewriter-cursor">_</span>
+      </p>
+    </div>
+
+    <!-- CTA + Stats -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-8 fade-in-up" data-delay="1500">
+      <!-- CTA Buttons -->
+      <div class="flex items-center gap-4">
+        <a href="{{ '/blog/' | relative_url }}" class="btn btn-primary group">
+          <span>瀏覽文章</span>
+          <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </a>
+        <a href="{{ '/markdown/products/' | relative_url }}" class="btn btn-outline">
+          書籍資源
+        </a>
+      </div>
+
+      <!-- Divider -->
+      <div class="hidden sm:block w-px h-10 bg-cp-green-500/30"></div>
+
+      <!-- Quick Stats with Counter Animation -->
+      <div class="flex items-center gap-6 text-center font-mono">
+        <div class="stat-item group">
+          <div class="text-2xl font-bold text-cp-green-500 stat-number">
+            <span class="counter" data-target="{{ site.posts.size }}" data-suffix="+">0</span>
+          </div>
+          <div class="text-xs text-cp-dark-600 tracking-wider uppercase">文章</div>
+        </div>
+        <div class="stat-divider w-px h-8 bg-cp-dark-400"></div>
+        <div class="stat-item group">
+          <div class="text-2xl font-bold text-cp-green-500 stat-number">
+            <span class="counter" data-target="{{ site.products.size }}" data-suffix="+">0</span>
+          </div>
+          <div class="text-xs text-cp-dark-600 tracking-wider uppercase">書籍</div>
+        </div>
+        <div class="stat-divider w-px h-8 bg-cp-dark-400"></div>
+        <div class="stat-item group">
+          <div class="text-2xl font-bold text-cp-green-500 stat-number">
+            <span class="counter" data-target="2019" data-prefix="Since ">0</span>
+          </div>
+          <div class="text-xs text-cp-dark-600 tracking-wider uppercase">成立</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+    <svg class="w-6 h-6 text-cp-green-500/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+    </svg>
+  </div>
+</section>
+
+<!-- Terminal Interactive Section - Bitcoin Core Style -->
+<section class="py-20 border-b border-cp-dark-400 scroll-reveal">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-2xl font-bold font-mono text-cp-green-500 mb-10 text-center">
+      <span class="text-cp-dark-600">//</span> Interactive Terminal
+    </h2>
+
+    <div class="terminal-window bg-cp-dark-100 rounded-lg border border-cp-dark-400 overflow-hidden shadow-2xl">
+      <!-- Terminal Header -->
+      <div class="terminal-header flex items-center gap-2 px-4 py-3 bg-cp-dark-200 border-b border-cp-dark-400">
+        <div class="flex gap-2">
+          <span class="w-3 h-3 rounded-full bg-red-500"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+          <span class="w-3 h-3 rounded-full bg-green-500"></span>
+        </div>
+        <span class="ml-4 text-cp-dark-600 font-mono text-sm">bitcoin-cli — cypherpunks@taiwan</span>
+      </div>
+
+      <!-- Terminal Body -->
+      <div id="terminal-output" class="terminal-body p-4 font-mono text-sm h-64 overflow-y-auto">
+        <div class="terminal-line text-cp-dark-600">
+          Welcome to Cypherpunks Taiwan Terminal v2.2
+        </div>
+        <div class="terminal-line text-cp-dark-600">
+          Type <span class="text-cp-green-500">help</span> to see available commands.
+        </div>
+        <div class="terminal-line text-cp-dark-600 mb-4">
+          ───────────────────────────────────────────
+        </div>
+      </div>
+
+      <!-- Terminal Input -->
+      <div class="terminal-input-area flex items-center px-4 py-3 bg-cp-dark-200 border-t border-cp-dark-400">
+        <span class="text-bitcoin-orange font-mono mr-2">bitcoin-cli&gt;</span>
+        <div class="flex-1 relative flex items-center">
+          <input
+            type="text"
+            id="terminal-input"
+            class="flex-1 bg-transparent text-cp-green-500 font-mono outline-none placeholder-cp-dark-500 caret-transparent"
+            placeholder="Enter command..."
+            autocomplete="off"
+          >
+          <span id="terminal-cursor" class="terminal-cursor-blink absolute text-cp-green-500 font-mono pointer-events-none">▋</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-center text-cp-dark-600 font-mono text-xs mt-4">
+      試試輸入: <code class="text-cp-green-500">help</code>, <code class="text-cp-green-500">about</code>, <code class="text-cp-green-500">btc</code>, <code class="text-cp-green-500">manifesto</code>
+    </p>
+  </div>
+</section>
+
+<!-- Cypherpunk History Timeline -->
+<section class="py-20 border-b border-cp-dark-400 scroll-reveal">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-2xl font-bold font-mono text-cp-green-500 mb-14 text-center">
+      <span class="text-cp-dark-600">//</span> Cypherpunk 歷史
+    </h2>
+
+    <div class="timeline relative">
+      <!-- Timeline Line with Animation -->
+      <div class="timeline-line absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 md:-translate-x-1/2"></div>
+
+      <!-- Timeline Items -->
+      <div class="timeline-item mb-12 relative pl-12 md:pl-0 md:w-1/2 md:pr-12 scroll-reveal" data-delay="100">
+        <div class="timeline-dot absolute left-3 md:left-auto md:right-0 w-3 h-3 bg-cp-green-500 rounded-full md:translate-x-1/2 glow-dot"></div>
+        <div class="timeline-content p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-500/50 transition-colors">
+          <span class="text-cp-green-500 font-mono text-sm">1992</span>
+          <h3 class="text-cp-dark-800 font-bold mt-1">Cypherpunks 郵件列表成立</h3>
+          <p class="text-cp-dark-600 text-sm mt-2">Eric Hughes, Timothy C. May, John Gilmore 創立了 Cypherpunks 郵件列表，開啟了密碼龐克運動。</p>
+        </div>
+      </div>
+
+      <div class="timeline-item mb-12 relative pl-12 md:pl-0 md:w-1/2 md:ml-auto md:pl-12 scroll-reveal" data-delay="200">
+        <div class="timeline-dot absolute left-3 md:left-0 w-3 h-3 bg-cp-green-500 rounded-full md:-translate-x-1/2 glow-dot"></div>
+        <div class="timeline-content p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-500/50 transition-colors">
+          <span class="text-cp-green-500 font-mono text-sm">1993</span>
+          <h3 class="text-cp-dark-800 font-bold mt-1">A Cypherpunk's Manifesto</h3>
+          <p class="text-cp-dark-600 text-sm mt-2">Eric Hughes 發表《密碼龐克宣言》，宣告「隱私對於電子時代的開放社會是必要的」。</p>
+        </div>
+      </div>
+
+      <div class="timeline-item mb-12 relative pl-12 md:pl-0 md:w-1/2 md:pr-12 scroll-reveal" data-delay="300">
+        <div class="timeline-dot absolute left-3 md:left-auto md:right-0 w-3 h-3 bg-cp-green-500 rounded-full md:translate-x-1/2 glow-dot"></div>
+        <div class="timeline-content p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-500/50 transition-colors">
+          <span class="text-cp-green-500 font-mono text-sm">1997</span>
+          <h3 class="text-cp-dark-800 font-bold mt-1">HashCash 提出</h3>
+          <p class="text-cp-dark-600 text-sm mt-2">Adam Back 提出 HashCash，工作量證明 (PoW) 概念首次出現，後成為比特幣的基礎。</p>
+        </div>
+      </div>
+
+      <div class="timeline-item mb-12 relative pl-12 md:pl-0 md:w-1/2 md:ml-auto md:pl-12 scroll-reveal" data-delay="400">
+        <div class="timeline-dot absolute left-3 md:left-0 w-3 h-3 bg-cp-green-500 rounded-full md:-translate-x-1/2 glow-dot"></div>
+        <div class="timeline-content p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-500/50 transition-colors">
+          <span class="text-cp-green-500 font-mono text-sm">1998</span>
+          <h3 class="text-cp-dark-800 font-bold mt-1">B-Money & Bit Gold</h3>
+          <p class="text-cp-dark-600 text-sm mt-2">Wei Dai 提出 b-money，Nick Szabo 提出 Bit Gold，這些概念深深影響了比特幣的設計。</p>
+        </div>
+      </div>
+
+      <div class="timeline-item mb-12 relative pl-12 md:pl-0 md:w-1/2 md:pr-12 scroll-reveal" data-delay="500">
+        <div class="timeline-dot absolute left-3 md:left-auto md:right-0 w-3 h-3 bg-bitcoin-orange rounded-full md:translate-x-1/2 glow-dot-orange"></div>
+        <div class="timeline-content p-4 bg-cp-dark-100 border border-bitcoin-orange/50 rounded-lg hover:border-bitcoin-orange transition-colors">
+          <span class="text-bitcoin-orange font-mono text-sm">2008</span>
+          <h3 class="text-cp-dark-800 font-bold mt-1">Bitcoin 白皮書發布</h3>
+          <p class="text-cp-dark-600 text-sm mt-2">Satoshi Nakamoto 發布《Bitcoin: A Peer-to-Peer Electronic Cash System》，密碼龐克的夢想開始實現。</p>
+        </div>
+      </div>
+
+      <div class="timeline-item mb-12 relative pl-12 md:pl-0 md:w-1/2 md:ml-auto md:pl-12 scroll-reveal" data-delay="600">
+        <div class="timeline-dot absolute left-3 md:left-0 w-3 h-3 bg-bitcoin-orange rounded-full md:-translate-x-1/2 glow-dot-orange"></div>
+        <div class="timeline-content p-4 bg-cp-dark-100 border border-bitcoin-orange/50 rounded-lg hover:border-bitcoin-orange transition-colors">
+          <span class="text-bitcoin-orange font-mono text-sm">2009</span>
+          <h3 class="text-cp-dark-800 font-bold mt-1">Bitcoin 創世區塊</h3>
+          <p class="text-cp-dark-600 text-sm mt-2">比特幣創世區塊被挖出，區塊包含訊息：「The Times 03/Jan/2009 Chancellor on brink of second bailout for banks」</p>
+        </div>
+      </div>
+
+      <div class="timeline-item relative pl-12 md:pl-0 md:w-1/2 md:pr-12 scroll-reveal" data-delay="700">
+        <div class="timeline-dot absolute left-3 md:left-auto md:right-0 w-3 h-3 bg-cp-green-500 rounded-full md:translate-x-1/2 glow-dot"></div>
+        <div class="timeline-content p-4 bg-cp-dark-100 border border-cp-green-500/50 rounded-lg hover:border-cp-green-500 transition-colors">
+          <span class="text-cp-green-500 font-mono text-sm">2019</span>
+          <h3 class="text-cp-dark-800 font-bold mt-1">Cypherpunks Taiwan 成立</h3>
+          <p class="text-cp-dark-600 text-sm mt-2">致力於推廣密碼學與隱私技術，連結全球 Cypherpunk 社群與台灣開發者。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Manifesto Section with Parallax -->
+<section class="py-20 border-b border-cp-dark-400 scroll-reveal">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-10">
+      <h2 class="text-2xl md:text-3xl font-bold font-mono text-cp-green-500 mb-4">
+        <span class="text-cp-dark-600">//</span> Cypherpunk's Manifesto
+      </h2>
+      <p class="text-cp-dark-600 font-mono text-sm">Eric Hughes, 1993</p>
+    </div>
+
+    <blockquote class="relative p-8 md:p-10 bg-cp-dark-100 border-l-4 border-cp-green-500 rounded-r-lg hover:bg-cp-dark-200/50 transition-colors">
+      <div class="absolute top-4 left-4 text-7xl text-cp-green-500/10 font-serif">"</div>
+      <p class="text-cp-dark-700 font-mono text-base md:text-lg leading-relaxed pl-8 typing-quote">
+        Privacy is necessary for an open society in the electronic age. Privacy is not secrecy.
+        A private matter is something one doesn't want the whole world to know, but a secret matter
+        is something one doesn't want anybody to know. Privacy is the power to selectively reveal
+        oneself to the world.
+      </p>
+      <footer class="mt-6 pl-8 text-cp-dark-600 font-mono text-sm">
+        — A Cypherpunk's Manifesto
+      </footer>
+    </blockquote>
+
+    <div class="mt-10 text-center">
+      <p class="text-cp-green-500 font-mono font-bold text-xl glitch-text-subtle" data-text="Cypherpunks write code.">
+        "Cypherpunks write code."
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Latest Posts Section -->
+<section class="py-20 border-b border-cp-dark-400">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex items-center justify-between mb-12 scroll-reveal">
+      <h2 class="text-2xl font-bold font-mono text-cp-green-500">
+        <span class="text-cp-dark-600">//</span> 最新文章
+      </h2>
+      <a href="{{ '/blog/' | relative_url }}" class="text-cp-green-500 font-mono text-sm hover:text-cp-green-400 transition-colors flex items-center gap-2 group">
+        查看全部
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for post in site.posts limit:6 %}
+      <article class="card group card-3d scroll-reveal" data-delay="{{ forloop.index | times: 100 }}">
+        <a href="{{ post.url | relative_url }}" class="block p-5">
+          {% if post.image %}
+          <div class="mb-4 overflow-hidden rounded-lg border border-cp-dark-400">
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="w-full h-40 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+          </div>
+          {% endif %}
+
+          <h3 class="text-lg font-bold font-mono text-cp-dark-800 group-hover:text-cp-green-500 transition-colors mb-2 line-clamp-2">
+            {{ post.title }}
+          </h3>
+
+          <p class="text-cp-dark-600 text-sm line-clamp-2 mb-3">
+            {{ post.excerpt | strip_html | truncate: 100 }}
+          </p>
+
+          <div class="flex items-center justify-between text-xs text-cp-dark-600 font-mono">
+            <time datetime="{{ post.date | date_to_xmlschema }}">
+              {{ post.date | date: "%Y-%m-%d" }}
+            </time>
+            {% if post.tags.size > 0 %}
+            <span class="px-2 py-0.5 bg-cp-dark-200 rounded">{{ post.tags | first }}</span>
+            {% endif %}
+          </div>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Resources Section -->
+<section class="py-20 border-b border-cp-dark-400">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-2xl font-bold font-mono text-cp-green-500 mb-12 text-center scroll-reveal">
+      <span class="text-cp-dark-600">//</span> 資源庫
+    </h2>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Bitcoin -->
+      <a href="{{ '/markdown/resources/resources-bitcoin/' | relative_url }}" class="card p-6 group card-3d scroll-reveal" data-delay="100">
+        <div class="w-14 h-14 bg-bitcoin-orange/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-bitcoin-orange/20 transition-colors group-hover:scale-110 duration-300">
+          <span class="text-3xl text-bitcoin-orange">₿</span>
+        </div>
+        <h3 class="text-lg font-bold font-mono text-cp-dark-800 group-hover:text-cp-green-500 transition-colors mb-2">
+          Bitcoin 比特幣
+        </h3>
+        <p class="text-cp-dark-600 text-sm">
+          比特幣核心技術、協議、開發資源
+        </p>
+      </a>
+
+      <!-- Lightning Network -->
+      <a href="{{ '/markdown/resources/resources-ln/' | relative_url }}" class="card p-6 group card-3d scroll-reveal" data-delay="200">
+        <div class="w-14 h-14 bg-cp-green-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cp-green-500/20 transition-colors group-hover:scale-110 duration-300">
+          <span class="text-3xl">⚡</span>
+        </div>
+        <h3 class="text-lg font-bold font-mono text-cp-dark-800 group-hover:text-cp-green-500 transition-colors mb-2">
+          Lightning Network
+        </h3>
+        <p class="text-cp-dark-600 text-sm">
+          閃電網路技術、節點、錢包資源
+        </p>
+      </a>
+
+      <!-- Privacy -->
+      <a href="{{ '/markdown/resources/resources-blockchain-privacy/' | relative_url }}" class="card p-6 group card-3d scroll-reveal" data-delay="300">
+        <div class="w-14 h-14 bg-cp-green-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cp-green-500/20 transition-colors group-hover:scale-110 duration-300">
+          <span class="text-3xl">🔒</span>
+        </div>
+        <h3 class="text-lg font-bold font-mono text-cp-dark-800 group-hover:text-cp-green-500 transition-colors mb-2">
+          Blockchain Privacy
+        </h3>
+        <p class="text-cp-dark-600 text-sm">
+          區塊鏈隱私技術、混幣、零知識證明
+        </p>
+      </a>
+
+      <!-- Schnorr -->
+      <a href="{{ '/markdown/resources/resources-schnorr-signature/' | relative_url }}" class="card p-6 group card-3d scroll-reveal" data-delay="400">
+        <div class="w-14 h-14 bg-cp-green-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cp-green-500/20 transition-colors group-hover:scale-110 duration-300">
+          <span class="text-3xl font-mono text-cp-green-500">σ</span>
+        </div>
+        <h3 class="text-lg font-bold font-mono text-cp-dark-800 group-hover:text-cp-green-500 transition-colors mb-2">
+          Schnorr Signature
+        </h3>
+        <p class="text-cp-dark-600 text-sm">
+          Schnorr 簽名、Taproot、MuSig
+        </p>
+      </a>
+
+      <!-- Ethereum -->
+      <a href="{{ '/markdown/resources/resources-ethereum/' | relative_url }}" class="card p-6 group card-3d scroll-reveal" data-delay="500">
+        <div class="w-14 h-14 bg-cp-green-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cp-green-500/20 transition-colors group-hover:scale-110 duration-300">
+          <span class="text-3xl">Ξ</span>
+        </div>
+        <h3 class="text-lg font-bold font-mono text-cp-dark-800 group-hover:text-cp-green-500 transition-colors mb-2">
+          Ethereum 以太坊
+        </h3>
+        <p class="text-cp-dark-600 text-sm">
+          以太坊智能合約、DeFi、Layer 2
+        </p>
+      </a>
+
+      <!-- Books -->
+      <a href="{{ '/markdown/products/' | relative_url }}" class="card p-6 group card-3d scroll-reveal" data-delay="600">
+        <div class="w-14 h-14 bg-cp-green-500/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cp-green-500/20 transition-colors group-hover:scale-110 duration-300">
+          <span class="text-3xl">📚</span>
+        </div>
+        <h3 class="text-lg font-bold font-mono text-cp-dark-800 group-hover:text-cp-green-500 transition-colors mb-2">
+          書籍 & 論文
+        </h3>
+        <p class="text-cp-dark-600 text-sm">
+          密碼學、區塊鏈相關書籍與論文
+        </p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Partners Section -->
+<section class="py-20 border-b border-cp-dark-400">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-2xl font-bold font-mono text-cp-green-500 mb-12 text-center scroll-reveal">
+      <span class="text-cp-dark-600">//</span> 合作夥伴
+    </h2>
+
+    <div class="flex flex-wrap items-center justify-center gap-10 scroll-reveal">
+      <a href="https://taipeihack.org/" target="_blank" rel="noopener noreferrer" class="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all duration-300 hover:scale-110">
+        <img src="{{ '/img/logo-taipeihackerspace.jpg' | relative_url }}" alt="Taipei Hackerspace" class="h-14 md:h-16 w-auto rounded">
+      </a>
+      <a href="https://blockstream.com" target="_blank" rel="noopener noreferrer" class="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all duration-300 hover:scale-110">
+        <img src="{{ '/img/logo-blockstream.png' | relative_url }}" alt="Blockstream" class="h-10 md:h-12 w-auto">
+      </a>
+      <a href="https://www.blocktempo.com" target="_blank" rel="noopener noreferrer" class="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all duration-300 hover:scale-110">
+        <img src="{{ '/img/logo-blocktempo.jpg' | relative_url }}" alt="BlockTempo" class="h-14 md:h-16 w-auto rounded">
+      </a>
+      <a href="https://nayuta.co" target="_blank" rel="noopener noreferrer" class="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all duration-300 hover:scale-110">
+        <img src="{{ '/img/logo-nayuta.jpg' | relative_url }}" alt="Nayuta" class="h-14 md:h-16 w-auto rounded">
+      </a>
+      <a href="https://moztw.org/space/" target="_blank" rel="noopener noreferrer" class="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all duration-300 hover:scale-110">
+        <img src="{{ '/img/logo-mozilla.png' | relative_url }}" alt="Mozilla" class="h-14 md:h-16 w-auto">
+      </a>
+      <a href="https://pelith.com" target="_blank" rel="noopener noreferrer" class="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all duration-300 hover:scale-110">
+        <img src="{{ '/img/logo-pelith.png' | relative_url }}" alt="Pelith" class="h-12 md:h-14 w-auto">
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- Social Links Section -->
+<section class="py-20 bg-cp-dark-100 -mx-4 md:-mx-8 px-4 md:px-8">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-2xl font-bold font-mono text-cp-green-500 mb-12 scroll-reveal">
+      <span class="text-cp-dark-600">//</span> 加入我們
+    </h2>
+
+    <div class="flex flex-wrap items-center justify-center gap-6 scroll-reveal">
+      <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="social-btn flex items-center gap-3 px-8 py-4 bg-cp-dark-200 border border-cp-dark-400 rounded-lg hover:border-cp-green-500 hover:text-cp-green-500 transition-all font-mono group">
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+        </svg>
+        GitHub
+      </a>
+
+      <a href="https://www.facebook.com/CypherpunksTW/" target="_blank" rel="noopener noreferrer" class="social-btn flex items-center gap-3 px-8 py-4 bg-cp-dark-200 border border-cp-dark-400 rounded-lg hover:border-cp-green-500 hover:text-cp-green-500 transition-all font-mono group">
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        Facebook
+      </a>
+
+      <a href="https://www.youtube.com/channel/UCBRErExyxjRSuPLBjfL2GVA" target="_blank" rel="noopener noreferrer" class="social-btn flex items-center gap-3 px-8 py-4 bg-cp-dark-200 border border-cp-dark-400 rounded-lg hover:border-cp-green-500 hover:text-cp-green-500 transition-all font-mono group">
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+        YouTube
+      </a>
+    </div>
+  </div>
+</section>

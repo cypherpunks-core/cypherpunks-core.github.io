@@ -1,0 +1,116 @@
+---
+layout: default
+title: 分類
+permalink: /categories/
+---
+
+<div class="max-w-6xl mx-auto">
+  <!-- Page Header -->
+  <header class="mb-12 text-center">
+    <h1 class="text-4xl md:text-5xl font-bold font-mono text-cp-green-500 mb-4">
+      <span class="text-cp-dark-500">/</span> 分類
+    </h1>
+    <p class="text-lg text-cp-dark-600 font-mono">
+      依主題分類瀏覽文章
+    </p>
+  </header>
+
+  <!-- Categories Overview -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+    {% assign sorted_categories = site.categories | sort %}
+    {% for category in sorted_categories %}
+      {% assign cat_name = category[0] %}
+      {% assign cat_posts = category[1] %}
+
+      <a href="#{{ cat_name | slugify }}" class="card p-6 group hover:border-cp-green-500 transition-colors">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-12 h-12 rounded-lg bg-cp-green-500/10 flex items-center justify-center text-cp-green-500 group-hover:bg-cp-green-500 group-hover:text-cp-dark-100 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+            </svg>
+          </div>
+          <span class="text-2xl font-bold text-cp-green-500 font-mono">{{ cat_posts.size }}</span>
+        </div>
+        <h2 class="text-xl font-bold font-mono text-cp-dark-800 group-hover:text-cp-green-500 transition-colors mb-2">
+          {{ cat_name }}
+        </h2>
+        <p class="text-sm text-cp-dark-600 font-mono">
+          {{ cat_posts.size }} 篇文章
+        </p>
+      </a>
+    {% endfor %}
+  </div>
+
+  <!-- Posts by Category -->
+  <div class="space-y-12">
+    {% for category in sorted_categories %}
+      {% assign cat_name = category[0] %}
+      {% assign cat_posts = category[1] %}
+
+      <section id="{{ cat_name | slugify }}" class="scroll-mt-24">
+        <!-- Category Header -->
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-10 h-10 rounded-lg bg-cp-green-500/10 flex items-center justify-center text-cp-green-500">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold font-mono text-cp-green-500">
+            {{ cat_name }}
+          </h2>
+          <div class="flex-grow h-px bg-cp-dark-300"></div>
+          <span class="text-sm text-cp-dark-500 font-mono">{{ cat_posts.size }} 篇文章</span>
+        </div>
+
+        <!-- Posts Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {% for post in cat_posts limit:6 %}
+          <article class="card group overflow-hidden">
+            <a href="{{ post.url | relative_url }}" class="flex gap-4 p-4">
+              {% if post.image %}
+              <div class="w-24 h-24 flex-shrink-0 rounded overflow-hidden">
+                <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="w-full h-full object-cover">
+              </div>
+              {% endif %}
+              <div class="flex-grow min-w-0">
+                <time datetime="{{ post.date | date_to_xmlschema }}" class="text-xs font-mono text-cp-dark-500">
+                  {{ post.date | date: "%Y-%m-%d" }}
+                </time>
+                <h3 class="font-mono font-bold text-cp-dark-800 group-hover:text-cp-green-500 transition-colors line-clamp-2 mt-1">
+                  {{ post.title }}
+                </h3>
+                {% if post.tags.size > 0 %}
+                <div class="flex flex-wrap gap-1 mt-2">
+                  {% for tag in post.tags limit:2 %}
+                  <span class="text-xs font-mono text-cp-dark-500">#{{ tag }}</span>
+                  {% endfor %}
+                </div>
+                {% endif %}
+              </div>
+            </a>
+          </article>
+          {% endfor %}
+        </div>
+
+        <!-- View All Link -->
+        {% if cat_posts.size > 6 %}
+        <div class="mt-4 text-center">
+          <span class="text-sm text-cp-dark-500 font-mono">
+            還有 {{ cat_posts.size | minus: 6 }} 篇文章...
+          </span>
+        </div>
+        {% endif %}
+      </section>
+    {% endfor %}
+  </div>
+
+  <!-- Back to Top -->
+  <div class="text-center mt-12">
+    <a href="#" class="inline-flex items-center gap-2 text-cp-dark-600 hover:text-cp-green-500 font-mono transition-colors">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+      </svg>
+      返回頂部
+    </a>
+  </div>
+</div>

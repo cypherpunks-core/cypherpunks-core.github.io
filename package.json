@@ -1,15 +1,26 @@
 {
-  "name": "bulma-clean-theme",
-  "description": "This is a clean and simple Jekyll Theme built with the Bulma framework, providing a modern looking site to start with.",
-  "version": "1.0.0",
-  "main": "index.js",
-  "devDependencies": {},
+  "name": "cypherpunks-taiwan",
+  "version": "2.0.0",
+  "description": "Cypherpunks Taiwan - Cryptography makes freedom and privacy great again",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "css:build": "tailwindcss -i ./assets/css/main.css -o ./assets/css/app.css --minify",
+    "css:watch": "tailwindcss -i ./assets/css/main.css -o ./assets/css/app.css --watch",
+    "search:index": "pagefind --site _site --output-path _site/pagefind",
+    "build": "npm run css:build",
+    "postbuild": "npm run search:index",
+    "dev": "npm run css:watch"
   },
-  "author": "chrisrhymes",
-  "license": "MIT",
-  "dependencies": {
-    "bulma": "^0.7.4"
-  }
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "@tailwindcss/typography": "^0.5.10",
+    "pagefind": "^1.0.0"
+  },
+  "keywords": [
+    "cypherpunk",
+    "bitcoin",
+    "privacy",
+    "cryptography"
+  ],
+  "author": "Cypherpunks Taiwan",
+  "license": "MIT"
 }

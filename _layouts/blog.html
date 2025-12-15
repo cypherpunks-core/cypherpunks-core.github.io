@@ -1,19 +1,138 @@
 ---
 layout: default
+hide_hero: true
 ---
 
-{{ content }}
+<div class="max-w-4xl mx-auto">
+  <!-- Page Header -->
+  <header class="mb-8">
+    {{ content }}
+  </header>
 
-<div class="columns is-multiline">
-    <div class="column is-12">
-        {% include pagination.html %}
-    </div>
+  <!-- Posts List -->
+  <div class="space-y-6">
     {% for post in paginator.posts %}
-    <div class="column is-12">
-        {% include post-card.html %}
-    </div>
+    <article class="card group">
+      <a href="{{ post.url | relative_url }}" class="block p-6">
+        <div class="flex flex-col md:flex-row gap-6">
+          <!-- Thumbnail -->
+          {% if post.image %}
+          <div class="md:w-48 flex-shrink-0">
+            <img
+              src="{{ post.image | relative_url }}"
+              alt="{{ post.title }}"
+              class="w-full h-32 md:h-full object-cover rounded-lg border border-cp-dark-400"
+              loading="lazy"
+            >
+          </div>
+          {% endif %}
+
+          <!-- Content -->
+          <div class="flex-grow min-w-0">
+            <!-- Category Badge -->
+            {% if post.category %}
+            <span class="inline-block px-2 py-0.5 text-xs font-mono bg-cp-green-500/10 text-cp-green-500 border border-cp-green-700 rounded mb-2">
+              {{ post.category }}
+            </span>
+            {% endif %}
+
+            <!-- Title -->
+            <h2 class="text-xl font-bold font-mono text-cp-dark-800 group-hover:text-cp-green-500 transition-colors mb-2">
+              {{ post.title }}
+            </h2>
+
+            <!-- Excerpt -->
+            <p class="text-cp-dark-600 text-sm line-clamp-2 mb-3">
+              {{ post.excerpt | strip_html | truncate: 150 }}
+            </p>
+
+            <!-- Meta -->
+            <div class="flex flex-wrap items-center gap-4 text-xs text-cp-dark-600 font-mono">
+              <!-- Date -->
+              <time datetime="{{ post.date | date_to_xmlschema }}">
+                {{ post.date | date: "%Y-%m-%d" }}
+              </time>
+
+              <!-- Author -->
+              <span>{{ post.author | default: site.author.name }}</span>
+
+              <!-- Reading Time -->
+              {% if site.reading_time.enabled %}
+              {% assign words = post.content | number_of_words %}
+              {% assign reading_time = words | divided_by: site.reading_time.words_per_minute %}
+              {% if reading_time < 1 %}{% assign reading_time = 1 %}{% endif %}
+              <span>{{ reading_time }} 分鐘</span>
+              {% endif %}
+            </div>
+
+            <!-- Tags -->
+            {% if post.tags.size > 0 %}
+            <div class="flex flex-wrap gap-1 mt-3">
+              {% for tag in post.tags limit:3 %}
+              <span class="px-2 py-0.5 text-xs font-mono bg-cp-dark-200 text-cp-dark-600 rounded">
+                {{ tag }}
+              </span>
+              {% endfor %}
+              {% if post.tags.size > 3 %}
+              <span class="text-xs text-cp-dark-500 font-mono">+{{ post.tags.size | minus: 3 }}</span>
+              {% endif %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </a>
+    </article>
     {% endfor %}
-    <div class="column is-12">
-            {% include pagination.html %}
-    </div>
+  </div>
+
+  <!-- Pagination -->
+  {% if paginator.total_pages > 1 %}
+  <nav class="pagination flex items-center justify-center gap-2 mt-12" aria-label="分頁導航">
+    <!-- Previous -->
+    {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | relative_url }}" class="pagination-item" aria-label="上一頁">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+    </a>
+    {% else %}
+    <span class="pagination-item opacity-50 cursor-not-allowed">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+    </span>
+    {% endif %}
+
+    <!-- Page Numbers -->
+    {% for page in (1..paginator.total_pages) %}
+      {% if page == paginator.page %}
+      <span class="pagination-item is-current">{{ page }}</span>
+      {% elsif page == 1 %}
+      <a href="{{ '/blog/' | relative_url }}" class="pagination-item">{{ page }}</a>
+      {% else %}
+      <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}" class="pagination-item">{{ page }}</a>
+      {% endif %}
+    {% endfor %}
+
+    <!-- Next -->
+    {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | relative_url }}" class="pagination-item" aria-label="下一頁">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </a>
+    {% else %}
+    <span class="pagination-item opacity-50 cursor-not-allowed">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </span>
+    {% endif %}
+  </nav>
+
+  <!-- Page Info -->
+  <p class="text-center text-cp-dark-600 text-sm font-mono mt-4">
+    第 {{ paginator.page }} / {{ paginator.total_pages }} 頁，共 {{ site.posts.size }} 篇文章
+  </p>
+  {% endif %}
 </div>

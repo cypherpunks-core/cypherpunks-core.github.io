@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgDevGuide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="300" fill="url(#bgDevGuide)"/>
+
+  <!-- Terminal window -->
+  <rect x="60" y="50" width="280" height="180" rx="8" fill="#0d1117" stroke="#f7931a" stroke-width="2"/>
+
+  <!-- Window header -->
+  <rect x="60" y="50" width="280" height="30" rx="8" fill="#161b22"/>
+  <circle cx="80" cy="65" r="5" fill="#ff5f57"/>
+  <circle cx="100" cy="65" r="5" fill="#ffbd2e"/>
+  <circle cx="120" cy="65" r="5" fill="#28ca42"/>
+  <text x="200" y="70" font-family="monospace" font-size="12" fill="#8b949e" text-anchor="middle">developer.bitcoin.org</text>
+
+  <!-- Code content -->
+  <text x="75" y="105" font-family="monospace" font-size="11" fill="#7ee787">$ bitcoin-cli</text>
+  <text x="75" y="125" font-family="monospace" font-size="10" fill="#8b949e">getblockchaininfo</text>
+  <text x="75" y="145" font-family="monospace" font-size="10" fill="#f7931a">{</text>
+  <text x="85" y="160" font-family="monospace" font-size="9" fill="#79c0ff">"chain"</text>
+  <text x="135" y="160" font-family="monospace" font-size="9" fill="#8b949e">:</text>
+  <text x="145" y="160" font-family="monospace" font-size="9" fill="#a5d6ff">"main"</text>
+  <text x="85" y="175" font-family="monospace" font-size="9" fill="#79c0ff">"blocks"</text>
+  <text x="145" y="175" font-family="monospace" font-size="9" fill="#8b949e">:</text>
+  <text x="155" y="175" font-family="monospace" font-size="9" fill="#f7931a">820000</text>
+  <text x="85" y="190" font-family="monospace" font-size="9" fill="#79c0ff">"headers"</text>
+  <text x="155" y="190" font-family="monospace" font-size="9" fill="#8b949e">:</text>
+  <text x="165" y="190" font-family="monospace" font-size="9" fill="#f7931a">820000</text>
+  <text x="75" y="210" font-family="monospace" font-size="10" fill="#f7931a">}</text>
+
+  <!-- Title -->
+  <text x="200" y="260" font-family="Arial" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">BITCOIN</text>
+  <text x="200" y="280" font-family="Arial" font-size="14" fill="#f7931a" text-anchor="middle">Developer Guide</text>
+</svg>

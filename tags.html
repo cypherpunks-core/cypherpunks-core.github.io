@@ -1,0 +1,101 @@
+---
+layout: default
+title: 標籤
+permalink: /tags/
+---
+
+<div class="max-w-6xl mx-auto">
+  <!-- Page Header -->
+  <header class="mb-12 text-center">
+    <h1 class="text-4xl md:text-5xl font-bold font-mono text-cp-green-500 mb-4">
+      <span class="text-cp-dark-500">#</span> 標籤
+    </h1>
+    <p class="text-lg text-cp-dark-600 font-mono">
+      依標籤瀏覽所有文章
+    </p>
+  </header>
+
+  <!-- Tags Cloud -->
+  <div class="card p-8 mb-12">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-1 h-6 bg-cp-green-500"></div>
+      <h2 class="text-xl font-bold font-mono text-cp-green-500">所有標籤</h2>
+      <span class="text-sm text-cp-dark-500 font-mono">({{ site.tags | size }})</span>
+    </div>
+
+    <div class="flex flex-wrap gap-3">
+      {% assign sorted_tags = site.tags | sort %}
+      {% for tag in sorted_tags %}
+        {% assign tag_name = tag[0] %}
+        {% assign tag_posts = tag[1] %}
+        {% assign tag_size = tag_posts.size %}
+
+        {% if tag_size > 10 %}
+          {% assign size_class = "text-xl" %}
+        {% elsif tag_size > 5 %}
+          {% assign size_class = "text-lg" %}
+        {% elsif tag_size > 2 %}
+          {% assign size_class = "text-base" %}
+        {% else %}
+          {% assign size_class = "text-sm" %}
+        {% endif %}
+
+        <a href="#{{ tag_name | slugify }}"
+           class="px-3 py-1.5 font-mono {{ size_class }} bg-cp-dark-200 text-cp-dark-700 hover:bg-cp-green-500/20 hover:text-cp-green-500 border border-cp-dark-300 hover:border-cp-green-500 rounded transition-all">
+          <span class="text-cp-green-500">#</span>{{ tag_name }}
+          <span class="text-cp-dark-500 text-xs ml-1">({{ tag_size }})</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Posts by Tag -->
+  <div class="space-y-12">
+    {% for tag in sorted_tags %}
+      {% assign tag_name = tag[0] %}
+      {% assign tag_posts = tag[1] %}
+
+      <section id="{{ tag_name | slugify }}" class="scroll-mt-24">
+        <!-- Tag Header -->
+        <div class="flex items-center gap-4 mb-6">
+          <h2 class="text-2xl font-bold font-mono text-cp-green-500">
+            <span class="text-cp-dark-500">#</span>{{ tag_name }}
+          </h2>
+          <div class="flex-grow h-px bg-cp-dark-300"></div>
+          <span class="text-sm text-cp-dark-500 font-mono">{{ tag_posts.size }} 篇文章</span>
+        </div>
+
+        <!-- Posts List -->
+        <div class="space-y-4">
+          {% for post in tag_posts %}
+          <article class="card p-4 group">
+            <a href="{{ post.url | relative_url }}" class="flex flex-col sm:flex-row sm:items-center gap-3">
+              <time datetime="{{ post.date | date_to_xmlschema }}" class="text-sm font-mono text-cp-dark-500 sm:w-28 flex-shrink-0">
+                {{ post.date | date: "%Y-%m-%d" }}
+              </time>
+              <h3 class="font-mono text-cp-dark-800 group-hover:text-cp-green-500 transition-colors flex-grow">
+                {{ post.title }}
+              </h3>
+              {% if post.category %}
+              <span class="text-xs font-mono text-cp-green-600 bg-cp-green-500/10 px-2 py-0.5 rounded flex-shrink-0">
+                {{ post.category }}
+              </span>
+              {% endif %}
+            </a>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+    {% endfor %}
+  </div>
+
+  <!-- Back to Top -->
+  <div class="text-center mt-12">
+    <a href="#" class="inline-flex items-center gap-2 text-cp-dark-600 hover:text-cp-green-500 font-mono transition-colors">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+      </svg>
+      返回頂部
+    </a>
+  </div>
+</div>

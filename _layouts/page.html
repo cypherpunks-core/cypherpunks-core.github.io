@@ -1,7 +1,25 @@
 ---
 layout: default
+hide_hero: true
 ---
 
-<div class="content">
+<article class="page">
+  <!-- Page Header -->
+  {% unless page.hide_title %}
+  <header class="mb-8">
+    <h1 class="text-3xl md:text-4xl font-bold font-mono text-cp-green-500 mb-4">
+      {{ page.title }}
+    </h1>
+    {% if page.subtitle %}
+    <p class="text-lg text-cp-dark-600 font-mono">
+      {{ page.subtitle }}
+    </p>
+    {% endif %}
+  </header>
+  {% endunless %}
+
+  <!-- Page Content -->
+  <div class="content prose prose-invert max-w-none">
     {{ content }}
-</div>
+  </div>
+</article>

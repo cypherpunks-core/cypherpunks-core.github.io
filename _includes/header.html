@@ -1,36 +1,153 @@
+<!-- Navigation Header -->
+<nav class="navbar fixed top-0 left-0 right-0 z-40 bg-cp-dark/95 backdrop-blur-md border-b border-cp-dark-400" role="navigation" aria-label="主要導航">
+  <div class="container mx-auto px-4 max-w-7xl">
+    <div class="flex items-center justify-between h-16">
 
-<nav class="navbar is-primary" >
-    <div class="container">
-        <div class="navbar-brand">
-            <a href="{{ site.baseurl }}/" class="navbar-item">
-                {{ site.title }}
-            </a>
-            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
-        <div class="navbar-menu" id="navMenu">
-            <div class="navbar-start">
-                <a href="{{ site.baseurl }}/" class="navbar-item {% if page.url == "/" %}is-active{% endif %}">Home</a>
-                {% if site.data.navigation %}
-                {% for item in site.data.navigation %}
-                    {% if item.dropdown %}
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a href="{{ item.link | prepend: site.baseurl }}" class="navbar-link {% if item.link == page.url %}is-active{% endif %}">{{ item.name }}</a>
-                        <div class="navbar-dropdown">
-                            {% for subitem in item.dropdown %}
-                            <a href="{{ subitem.link | prepend: site.baseurl }}" class="navbar-item {% if subitem.link == page.url %}is-active{% endif %}">{{ subitem.name }}</a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {% else %}
-                    <a href="{{ item.link | prepend: site.baseurl }}" class="navbar-item {% if item.link == page.url %}is-active{% endif %}">{{ item.name }}</a>
-                    {% endif %}
-                {% endfor %}
+      <!-- Logo / Brand -->
+      <div class="flex items-center">
+        <a href="{{ '/' | relative_url }}" class="flex items-center gap-3 text-cp-green-500 hover:text-cp-green-400 transition-all duration-200 group">
+          <!-- ASCII Logo (簡化版) -->
+          <span class="font-mono text-lg font-bold tracking-tight">
+            <span class="text-cp-green-500 group-hover:text-glow">[</span>
+            <span class="text-cp-green-400">CP</span>
+            <span class="text-cp-green-500 group-hover:text-glow">]</span>
+          </span>
+          <span class="hidden sm:block font-mono text-sm text-cp-dark-700 group-hover:text-cp-dark-800">
+            {{ site.title }}
+          </span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center gap-1">
+        <!-- Navigation Items (Home 已移除，Logo 連結首頁即可) -->
+        {% if site.data.navigation %}
+        {% for item in site.data.navigation %}
+          {% if item.dropdown %}
+          <!-- Dropdown Menu -->
+          <div class="dropdown relative group">
+            <button class="navbar-item flex items-center gap-1" aria-haspopup="true">
+              {{ item.name }}
+              <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute top-full left-0 mt-1 py-2 bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-lg min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              {% for subitem in item.dropdown %}
+                {% if subitem.section %}
+                <!-- Section Divider -->
+                <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider border-t border-cp-dark-300 mt-1 first:mt-0 first:border-t-0">
+                  {{ subitem.name }}
+                </div>
+                {% elsif subitem.external %}
+                <a href="{{ subitem.link }}" target="_blank" rel="noopener noreferrer" class="dropdown-item flex items-center justify-between px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  {{ subitem.name }}
+                  <svg class="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </a>
+                {% else %}
+                <a href="{{ subitem.link | relative_url }}" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  {{ subitem.name }}
+                </a>
                 {% endif %}
+              {% endfor %}
             </div>
-        </div>
+          </div>
+          {% else %}
+          <!-- Regular Link -->
+          <a href="{{ item.link | relative_url }}" class="navbar-item {% if item.link == page.url %}is-active{% endif %}">
+            {{ item.name }}
+          </a>
+          {% endif %}
+        {% endfor %}
+        {% endif %}
+      </div>
+
+      <!-- Right Side Actions -->
+      <div class="flex items-center gap-2">
+        <!-- Search Button -->
+        <button id="search-btn" class="p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="搜尋" title="搜尋 (⌘K)">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="切換主題">
+          <!-- Sun Icon (Dark Mode) -->
+          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          <!-- Moon Icon (Light Mode) -->
+          <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+        </button>
+
+        <!-- GitHub Link -->
+        <a href="https://github.com/{{ site.social.github }}" target="_blank" rel="noopener noreferrer" class="p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="GitHub">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+          </svg>
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="lg:hidden p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="開啟選單" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
     </div>
+  </div>
+
+  <!-- Mobile Navigation Menu -->
+  <div id="mobile-menu" class="lg:hidden hidden bg-cp-dark-100 border-t border-cp-dark-400">
+    <div class="container mx-auto px-4 py-4 space-y-2">
+      {% if site.data.navigation %}
+      {% for item in site.data.navigation %}
+        {% if item.dropdown %}
+        <!-- Mobile Dropdown -->
+        <div class="mobile-dropdown">
+          <button class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+            {{ item.name }}
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="mobile-dropdown-menu hidden pl-4 mt-1 space-y-1">
+            {% for subitem in item.dropdown %}
+              {% if subitem.section %}
+              <!-- Section Divider -->
+              <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider">
+                {{ subitem.name }}
+              </div>
+              {% elsif subitem.external %}
+              <a href="{{ subitem.link }}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                {{ subitem.name }}
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </a>
+              {% else %}
+              <a href="{{ subitem.link | relative_url }}" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                {{ subitem.name }}
+              </a>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        {% else %}
+        <a href="{{ item.link | relative_url }}" class="block px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+          {{ item.name }}
+        </a>
+        {% endif %}
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
 </nav>
+
+<!-- Spacer for fixed navbar -->
+<div class="h-16"></div>
