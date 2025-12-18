@@ -1,6 +1,32 @@
-.sass-cache
-.jekyll-cache
+# Jekyll
+.sass-cache/
+.jekyll-cache/
 .jekyll-metadata
-node_modules
+_site/
+
+# Node
+node_modules/
+package-lock.json
+
+# Ruby
+vendor/
+.bundle/
+Gemfile.lock
+
+# OS
 .DS_Store
-_site
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary
+*.tmp
+*.temp
