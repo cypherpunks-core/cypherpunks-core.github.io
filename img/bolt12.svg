@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#1a1a1a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)"/>
+
+  <!-- Offer box -->
+  <g transform="translate(200, 180)">
+    <rect x="-80" y="-60" width="160" height="120" rx="8" fill="#1a1a1a" stroke="#fbbf24" stroke-width="2"/>
+    <text y="-30" font-family="monospace" font-size="14" fill="#fbbf24" text-anchor="middle">OFFER</text>
+    <text y="-5" font-family="monospace" font-size="9" fill="#6b7280" text-anchor="middle">lno1...</text>
+    <line x1="-60" y1="10" x2="60" y2="10" stroke="#333" stroke-width="1"/>
+    <text y="35" font-family="monospace" font-size="10" fill="#6b7280" text-anchor="middle">Reusable</text>
+    <text y="50" font-family="monospace" font-size="10" fill="#6b7280" text-anchor="middle">Static QR</text>
+  </g>
+
+  <!-- Arrow -->
+  <g stroke="#fbbf24" stroke-width="2" filter="url(#glow)">
+    <line x1="290" y1="180" x2="360" y2="180"/>
+    <polygon points="360,180 350,175 350,185" fill="#fbbf24"/>
+  </g>
+
+  <!-- Invoice request/response -->
+  <g transform="translate(450, 180)">
+    <rect x="-60" y="-40" width="120" height="80" rx="4" fill="#1a1a1a" stroke="#4ade80" stroke-width="1"/>
+    <text y="-15" font-family="monospace" font-size="10" fill="#4ade80" text-anchor="middle">Invoice</text>
+    <text y="5" font-family="monospace" font-size="10" fill="#4ade80" text-anchor="middle">Request</text>
+    <text y="25" font-family="monospace" font-size="9" fill="#6b7280" text-anchor="middle">→ Invoice</text>
+  </g>
+
+  <!-- Arrow -->
+  <g stroke="#4ade80" stroke-width="2">
+    <line x1="520" y1="180" x2="580" y2="180"/>
+    <polygon points="580,180 570,175 570,185" fill="#4ade80"/>
+  </g>
+
+  <!-- Payment -->
+  <g transform="translate(650, 180)">
+    <circle r="40" fill="#1a1a1a" stroke="#fbbf24" stroke-width="2"/>
+    <text y="-5" font-family="monospace" font-size="20" fill="#fbbf24" text-anchor="middle">⚡</text>
+    <text y="15" font-family="monospace" font-size="10" fill="#fbbf24" text-anchor="middle">PAY</text>
+  </g>
+
+  <!-- Features at bottom -->
+  <g font-family="monospace" font-size="10" fill="#6b7280" text-anchor="middle">
+    <text x="200" y="300">No server needed</text>
+    <text x="400" y="300">Onion messages</text>
+    <text x="600" y="300">Payer privacy</text>
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="370" font-family="monospace" font-size="24" fill="#fbbf24" text-anchor="middle" opacity="0.8">BOLT12 OFFERS</text>
+</svg>

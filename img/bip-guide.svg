@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgBipGuide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="300" fill="url(#bgBipGuide)"/>
+
+  <!-- BIP cards -->
+  <!-- BIP 32 -->
+  <rect x="50" y="60" width="90" height="60" rx="4" fill="#2d2d44" stroke="#f7931a" stroke-width="2"/>
+  <text x="95" y="85" font-family="monospace" font-size="14" font-weight="bold" fill="#f7931a" text-anchor="middle">BIP 32</text>
+  <text x="95" y="105" font-family="monospace" font-size="9" fill="#888" text-anchor="middle">HD Wallets</text>
+
+  <!-- BIP 39 -->
+  <rect x="155" y="60" width="90" height="60" rx="4" fill="#2d2d44" stroke="#00d4aa" stroke-width="2"/>
+  <text x="200" y="85" font-family="monospace" font-size="14" font-weight="bold" fill="#00d4aa" text-anchor="middle">BIP 39</text>
+  <text x="200" y="105" font-family="monospace" font-size="9" fill="#888" text-anchor="middle">Mnemonic</text>
+
+  <!-- BIP 141 -->
+  <rect x="260" y="60" width="90" height="60" rx="4" fill="#2d2d44" stroke="#9945ff" stroke-width="2"/>
+  <text x="305" y="85" font-family="monospace" font-size="14" font-weight="bold" fill="#9945ff" text-anchor="middle">BIP 141</text>
+  <text x="305" y="105" font-family="monospace" font-size="9" fill="#888" text-anchor="middle">SegWit</text>
+
+  <!-- BIP 340 -->
+  <rect x="50" y="140" width="90" height="60" rx="4" fill="#2d2d44" stroke="#ff6b6b" stroke-width="2"/>
+  <text x="95" y="165" font-family="monospace" font-size="14" font-weight="bold" fill="#ff6b6b" text-anchor="middle">BIP 340</text>
+  <text x="95" y="185" font-family="monospace" font-size="9" fill="#888" text-anchor="middle">Schnorr</text>
+
+  <!-- BIP 341 -->
+  <rect x="155" y="140" width="90" height="60" rx="4" fill="#2d2d44" stroke="#4ecdc4" stroke-width="2"/>
+  <text x="200" y="165" font-family="monospace" font-size="14" font-weight="bold" fill="#4ecdc4" text-anchor="middle">BIP 341</text>
+  <text x="200" y="185" font-family="monospace" font-size="9" fill="#888" text-anchor="middle">Taproot</text>
+
+  <!-- BIP 342 -->
+  <rect x="260" y="140" width="90" height="60" rx="4" fill="#2d2d44" stroke="#ffe66d" stroke-width="2"/>
+  <text x="305" y="165" font-family="monospace" font-size="14" font-weight="bold" fill="#ffe66d" text-anchor="middle">BIP 342</text>
+  <text x="305" y="185" font-family="monospace" font-size="9" fill="#888" text-anchor="middle">Tapscript</text>
+
+  <!-- Chinese label -->
+  <rect x="140" y="220" width="120" height="30" rx="4" fill="#f7931a" opacity="0.2"/>
+  <text x="200" y="240" font-family="Arial" font-size="12" fill="#f7931a" text-anchor="middle">中文導讀</text>
+
+  <!-- Title -->
+  <text x="200" y="280" font-family="Arial" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">BIP 精選導讀</text>
+</svg>

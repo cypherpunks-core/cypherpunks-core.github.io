@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgOptech" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#0f0f1a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="300" fill="url(#bgOptech)"/>
+
+  <!-- Grid pattern -->
+  <g stroke="#333" stroke-width="0.5" opacity="0.5">
+    <line x1="50" y1="50" x2="50" y2="250"/>
+    <line x1="100" y1="50" x2="100" y2="250"/>
+    <line x1="150" y1="50" x2="150" y2="250"/>
+    <line x1="200" y1="50" x2="200" y2="250"/>
+    <line x1="250" y1="50" x2="250" y2="250"/>
+    <line x1="300" y1="50" x2="300" y2="250"/>
+    <line x1="350" y1="50" x2="350" y2="250"/>
+    <line x1="50" y1="100" x2="350" y2="100"/>
+    <line x1="50" y1="150" x2="350" y2="150"/>
+    <line x1="50" y1="200" x2="350" y2="200"/>
+  </g>
+
+  <!-- Data visualization lines -->
+  <polyline points="80,180 120,160 160,170 200,120 240,140 280,100 320,110"
+            fill="none" stroke="#f7931a" stroke-width="3" stroke-linecap="round"/>
+  <polyline points="80,200 120,190 160,195 200,170 240,180 280,150 320,160"
+            fill="none" stroke="#00d4aa" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Data points -->
+  <circle cx="200" cy="120" r="6" fill="#f7931a"/>
+  <circle cx="280" cy="100" r="6" fill="#f7931a"/>
+  <circle cx="320" cy="110" r="5" fill="#f7931a"/>
+
+  <!-- Title -->
+  <text x="200" y="45" font-family="monospace" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">BITCOIN OPTECH</text>
+  <text x="200" y="275" font-family="monospace" font-size="11" fill="#666" text-anchor="middle">Technical Topics Index</text>
+
+  <!-- Magnifying glass icon -->
+  <circle cx="340" cy="70" r="15" fill="none" stroke="#f7931a" stroke-width="2"/>
+  <line x1="350" y1="80" x2="360" y2="90" stroke="#f7931a" stroke-width="3" stroke-linecap="round"/>
+</svg>

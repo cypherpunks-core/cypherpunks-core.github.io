@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgGrok" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="300" fill="url(#bgGrok)"/>
+
+  <!-- Brain outline -->
+  <path d="M200 80
+           C160 80 130 100 130 140
+           C130 160 140 175 140 190
+           C140 210 155 230 200 230
+           C245 230 260 210 260 190
+           C260 175 270 160 270 140
+           C270 100 240 80 200 80"
+        fill="none" stroke="#f7931a" stroke-width="3"/>
+
+  <!-- Brain inner lines -->
+  <path d="M170 120 Q200 100 230 120" fill="none" stroke="#f7931a" stroke-width="2" opacity="0.7"/>
+  <path d="M160 150 Q200 130 240 150" fill="none" stroke="#f7931a" stroke-width="2" opacity="0.7"/>
+  <path d="M165 180 Q200 160 235 180" fill="none" stroke="#f7931a" stroke-width="2" opacity="0.7"/>
+
+  <!-- Bitcoin symbol in brain -->
+  <circle cx="200" cy="155" r="25" fill="#f7931a" opacity="0.2"/>
+  <text x="200" y="165" font-family="Arial" font-size="28" font-weight="bold" fill="#f7931a" text-anchor="middle">₿</text>
+
+  <!-- Light bulb rays -->
+  <line x1="200" y1="55" x2="200" y2="45" stroke="#ffdd00" stroke-width="2"/>
+  <line x1="175" y1="62" x2="168" y2="52" stroke="#ffdd00" stroke-width="2"/>
+  <line x1="225" y1="62" x2="232" y2="52" stroke="#ffdd00" stroke-width="2"/>
+  <line x1="155" y1="80" x2="145" y2="75" stroke="#ffdd00" stroke-width="2"/>
+  <line x1="245" y1="80" x2="255" y2="75" stroke="#ffdd00" stroke-width="2"/>
+
+  <!-- Title -->
+  <text x="200" y="260" font-family="Arial" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">GROKKING</text>
+  <text x="200" y="282" font-family="Arial" font-size="16" fill="#f7931a" text-anchor="middle">Bitcoin</text>
+</svg>

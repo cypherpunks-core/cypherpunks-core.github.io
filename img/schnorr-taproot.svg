@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgSchnorr" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="300" fill="url(#bgSchnorr)"/>
+
+  <!-- Taproot tree structure -->
+  <!-- Root -->
+  <circle cx="200" cy="70" r="25" fill="#f7931a" opacity="0.9"/>
+  <text x="200" y="75" font-family="monospace" font-size="10" fill="#1a1a2e" text-anchor="middle">Root</text>
+
+  <!-- Branches -->
+  <line x1="185" y1="90" x2="130" y2="130" stroke="#00d4aa" stroke-width="2"/>
+  <line x1="215" y1="90" x2="270" y2="130" stroke="#00d4aa" stroke-width="2"/>
+
+  <!-- Left node (Key Path) -->
+  <circle cx="130" cy="145" r="20" fill="#00d4aa" opacity="0.8"/>
+  <text x="130" y="150" font-family="monospace" font-size="8" fill="#1a1a2e" text-anchor="middle">Key</text>
+
+  <!-- Right node (Script Path) -->
+  <circle cx="270" cy="145" r="20" fill="#9945ff" opacity="0.8"/>
+  <text x="270" y="150" font-family="monospace" font-size="8" fill="#ffffff" text-anchor="middle">Script</text>
+
+  <!-- Script leaves -->
+  <line x1="255" y1="160" x2="220" y2="190" stroke="#9945ff" stroke-width="1.5"/>
+  <line x1="270" y1="165" x2="270" y2="195" stroke="#9945ff" stroke-width="1.5"/>
+  <line x1="285" y1="160" x2="320" y2="190" stroke="#9945ff" stroke-width="1.5"/>
+
+  <rect x="200" y="190" width="40" height="25" rx="3" fill="#9945ff" opacity="0.6"/>
+  <rect x="250" y="195" width="40" height="25" rx="3" fill="#9945ff" opacity="0.6"/>
+  <rect x="300" y="190" width="40" height="25" rx="3" fill="#9945ff" opacity="0.6"/>
+
+  <text x="220" y="207" font-family="monospace" font-size="7" fill="#fff" text-anchor="middle">2-of-3</text>
+  <text x="270" y="212" font-family="monospace" font-size="7" fill="#fff" text-anchor="middle">HTLC</text>
+  <text x="320" y="207" font-family="monospace" font-size="7" fill="#fff" text-anchor="middle">Time</text>
+
+  <!-- Schnorr signature formula -->
+  <text x="200" y="250" font-family="monospace" font-size="12" fill="#f7931a" text-anchor="middle">s = k + e·x</text>
+  <text x="200" y="270" font-family="monospace" font-size="10" fill="#666" text-anchor="middle">Schnorr Signature</text>
+
+  <!-- Title -->
+  <text x="60" y="40" font-family="Arial" font-size="14" font-weight="bold" fill="#ffffff">Schnorr</text>
+  <text x="60" y="58" font-family="Arial" font-size="14" font-weight="bold" fill="#00d4aa">&amp; Taproot</text>
+</svg>
