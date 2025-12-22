@@ -3,6 +3,7 @@ layout: post
 title: "Bitcoin Script 實戰教學（五）：時間鎖機制完全指南"
 date: 2025-03-19
 categories:
+- 技術教學
 - bitcoin
 - development
 description: Bitcoin Script 系列第五篇，深入解析時間鎖機制，包括 nLocktime、CLTV、nSequence、CSV，以及 HTLC 的實際應用。

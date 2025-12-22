@@ -3,6 +3,7 @@ layout: post
 title: '從零開始的比特幣全節點（五）：進階功能與生態整合'
 date: 2025-03-05
 categories:
+- 技術教學
 - bitcoin
 - tutorial
 description: 比特幣全節點教程系列最終篇，詳細講解閃電網路整合、Electrum 伺服器、mempool 區塊瀏覽器、BTCPay Server 等進階應用。

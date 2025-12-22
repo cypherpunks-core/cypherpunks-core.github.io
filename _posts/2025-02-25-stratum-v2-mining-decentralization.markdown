@@ -3,6 +3,7 @@ layout: post
 title: 'Stratum V2：礦池協議的去中心化革命'
 date: 2025-02-25
 categories:
+- 技術教學
 - bitcoin
 - mining
 description: 深入解析 Stratum V2 協議的技術架構，如何通過工作選擇和加密通訊實現礦池去中心化，以及對比特幣網路安全的重要意義。

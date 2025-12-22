@@ -3,6 +3,7 @@ layout: post
 title: 'Bitcoin Script 實戰教學（四）：多重簽名完全指南'
 date: 2025-03-18
 categories:
+- 技術教學
 - bitcoin
 - development
 description: Bitcoin Script 系列第四篇，深入解析多重簽名的各種實現方式，包括傳統 P2SH、SegWit、Taproot MuSig2，以及閾值簽名方案。

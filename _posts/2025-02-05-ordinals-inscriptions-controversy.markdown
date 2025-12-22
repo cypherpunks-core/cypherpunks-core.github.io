@@ -3,6 +3,7 @@ layout: post
 title: 'Ordinals 與 Inscriptions：爭議與技術實現'
 date: 2025-02-05
 categories:
+- 技術教學
 - bitcoin
 - ordinals
 description: 深入解析 Ordinals 協議和 Inscriptions 的技術原理、生態發展，以及社區圍繞它們的爭議討論。

@@ -3,6 +3,7 @@ layout: post
 title: 'BitVM：將圖靈完備計算帶入比特幣'
 date: 2025-01-25
 categories:
+- 技術教學
 - bitcoin
 - bitvm
 description: 深入解析 BitVM，一個不需要軟分叉就能在比特幣上實現任意計算驗證的突破性方案。

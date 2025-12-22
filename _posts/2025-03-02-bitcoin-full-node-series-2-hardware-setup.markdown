@@ -3,6 +3,7 @@ layout: post
 title: '從零開始的比特幣全節點（二）：硬體選擇與環境準備'
 date: 2025-03-02
 categories:
+- 技術教學
 - bitcoin
 - tutorial
 description: 比特幣全節點教程系列第二篇，詳細介紹硬體選擇、儲存設備比較、作業系統準備，以及網路環境配置。

@@ -3,6 +3,7 @@ layout: post
 title: 'Bitcoin Script 實戰教學（三）：SegWit 與 Taproot 深入解析'
 date: 2025-03-17
 categories:
+- 技術教學
 - bitcoin
 - development
 description: Bitcoin Script 系列第三篇，深入解析 SegWit 的技術細節、Taproot 升級、Schnorr 簽名，以及 Tapscript 的新操作碼。

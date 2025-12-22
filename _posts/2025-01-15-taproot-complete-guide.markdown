@@ -3,6 +3,7 @@ layout: post
 title: 'Taproot 完整指南：從 Schnorr 簽名到實際應用'
 date: 2025-01-15
 categories:
+- 技術教學
 - bitcoin
 - taproot
 description: 深入解析比特幣 2021 年最重要的升級 Taproot，包括 Schnorr 簽名、MAST、Tapscript 的技術原理與實際應用。

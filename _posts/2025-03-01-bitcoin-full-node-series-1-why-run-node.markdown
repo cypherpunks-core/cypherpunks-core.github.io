@@ -3,6 +3,7 @@ layout: post
 title: '從零開始的比特幣全節點（一）：為什麼要運行全節點？'
 date: 2025-03-01
 categories:
+- 技術教學
 - bitcoin
 - tutorial
 description: 比特幣全節點教程系列第一篇，深入探討運行全節點的意義、對網路安全的貢獻，以及個人隱私與主權的重要性。

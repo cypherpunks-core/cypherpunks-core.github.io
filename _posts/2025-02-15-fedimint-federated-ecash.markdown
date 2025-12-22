@@ -3,6 +3,7 @@ layout: post
 title: 'Fedimint：聯邦化的比特幣銀行'
 date: 2025-02-15
 categories:
+- 技術教學
 - bitcoin
 - fedimint
 description: 深入解析 Fedimint，一個結合 Chaumian eCash 和聯邦託管的比特幣擴展方案，為社區提供隱私支付和共享託管。

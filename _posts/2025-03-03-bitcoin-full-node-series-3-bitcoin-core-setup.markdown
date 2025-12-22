@@ -3,6 +3,7 @@ layout: post
 title: '從零開始的比特幣全節點（三）：Bitcoin Core 安裝與配置'
 date: 2025-03-03
 categories:
+- 技術教學
 - bitcoin
 - tutorial
 description: 比特幣全節點教程系列第三篇，詳細講解 Bitcoin Core 的下載驗證、安裝配置、初始同步，以及 systemd 服務設定。

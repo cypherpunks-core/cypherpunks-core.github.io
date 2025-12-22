@@ -3,6 +3,7 @@ layout: post
 title: '從零開始的比特幣全節點（四）：節點安全與日常維護'
 date: 2025-03-04
 categories:
+- 技術教學
 - bitcoin
 - tutorial
 description: 比特幣全節點教程系列第四篇，詳細講解節點安全強化、防火牆配置、Tor 隱藏服務、備份恢復策略，以及日常維護任務。

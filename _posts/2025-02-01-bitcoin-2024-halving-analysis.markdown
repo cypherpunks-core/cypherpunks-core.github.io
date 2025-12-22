@@ -3,6 +3,7 @@ layout: post
 title: '比特幣 2024 減半：影響分析與歷史回顧'
 date: 2025-02-01
 categories:
+- 技術教學
 - bitcoin
 - economics
 description: 分析比特幣 2024 年第四次減半的影響，回顧歷史減半週期，探討對礦工、價格和生態系統的長期影響。

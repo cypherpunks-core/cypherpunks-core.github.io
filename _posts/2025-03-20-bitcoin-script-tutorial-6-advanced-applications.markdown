@@ -3,6 +3,7 @@ layout: post
 title: "Bitcoin Script 實戰教學（六）：進階應用與未來展望"
 date: 2025-03-20
 categories:
+- 技術教學
 - bitcoin
 - development
 description: Bitcoin Script 系列最終篇，探討 DLC、Vault、Covenant 等進階應用，以及比特幣腳本未來可能的發展方向。

@@ -3,6 +3,7 @@ layout: post
 title: 'Silent Payments：比特幣的下一代隱私方案'
 date: 2025-01-20
 categories:
+- 技術教學
 - bitcoin
 - privacy
 description: 深入解析 BIP 352 Silent Payments，一種無需交互即可接收隱私支付的革命性方案。
