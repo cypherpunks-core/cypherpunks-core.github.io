@@ -78,28 +78,16 @@ jobs:
     if: github.ref == 'refs/heads/master' && github.event_name == 'push' && github.repository == 'cypherpunks-core/cypherpunks-core.github.io'
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: github-pages
-          path: _site
-
-      - name: Extract artifact
-        run: |
-          cd _site
-          tar -xvf artifact.tar
-          rm artifact.tar
-
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
-          publish_branch: gh-pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
   # Quality Checks (run on PRs)
   quality-check:
