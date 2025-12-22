@@ -52,6 +52,9 @@
       link: /markdown/about/
     - name: 衛星計畫
       link: /markdown/SatelliteProject/
+    - name: 討論區
+      link: https://github.com/cypherpunks-core/cypherpunks-core.github.io/discussions
+      external: true
     - name: GitHub
       link: https://github.com/cypherpunks-core
       external: true
