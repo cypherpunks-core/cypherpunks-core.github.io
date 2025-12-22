@@ -70,25 +70,21 @@ jobs:
       - name: Build Pagefind search index
         run: npx pagefind --site _site --output-path _site/pagefind
 
-      - name: Upload artifact
+      - name: Upload artifact for PR checks
+        if: github.event_name == 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./_site
 
-  deploy:
-    if: github.ref == 'refs/heads/master' && github.event_name == 'push' && github.repository == 'cypherpunks-core/cypherpunks-core.github.io'
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request' && github.repository == 'cypherpunks-core/cypherpunks-core.github.io'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
 
   # Quality Checks (run on PRs)
   quality-check:
