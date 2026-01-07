@@ -5,17 +5,21 @@
   <!-- Title -->
   <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
 
+  <!-- DNS Prefetch for Performance -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
   <!-- Preconnect for Performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Critical CSS - Preload -->
-  <link rel="preload" href="{{ '/assets/css/app.css' | relative_url }}" as="style">
+  <!-- Critical CSS -->
   <link rel="stylesheet" href="{{ '/assets/css/app.css' | relative_url }}">
 
-  <!-- Fonts - Optimized (reduced weights, async loading) -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap"></noscript>
+  <!-- Fonts - Minimal (single weight, deferred) -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Noto+Sans+TC:wght@400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Noto+Sans+TC:wght@400&display=swap"></noscript>
 
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/png" href="{{ '/favicon.png' | relative_url }}">
