@@ -30,3 +30,14 @@ npm-debug.log*
 # Temporary
 *.tmp
 *.temp
+
+# AI tool directories
+.claude/
+.cursor/
+
+# Planning documents (internal use only)
+*-PLAN.md
+*-UPGRADE-PLAN.md
+
+# Backup files
+*.bak

@@ -57,7 +57,6 @@ exclude:
   - tailwind.config.js
   - README.md
   - LICENSE
-  - V2.0-UPGRADE-PLAN.md
   - "*.gemspec"
 
 # Include in build
