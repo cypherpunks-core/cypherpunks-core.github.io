@@ -71,8 +71,8 @@ sass:
   style: compressed
   source_dir: _sass
 
-# Google Analytics
-google_analytics: UA-131051587-3
+# Google Analytics (GA4)
+google_analytics: G-ENDDT5D0CR
 
 # Theme Settings
 theme_settings:
