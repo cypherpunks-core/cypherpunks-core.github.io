@@ -87,7 +87,7 @@ twitter:
   card: summary_large_image
 
 # Open Graph
-og_image: /img/og-default.png
+og_image: /img/hero.png
 
 # Default Front Matter
 defaults:
