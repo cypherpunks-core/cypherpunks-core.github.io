@@ -1,0 +1,2037 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Title -->
+  <title>使用區塊鏈和感知雜湊達到去中心化之圖像共享和版權保護 | 密碼龐克 Cypherpunks Taiwan</title>
+
+  <!-- DNS Prefetch for Performance -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+  <!-- Preconnect for Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Critical CSS -->
+  <link rel="stylesheet" href="/assets/css/app.css">
+
+  <!-- Fonts - Minimal (single weight, swap for better UX) -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Noto+Sans+TC:wght@400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Noto+Sans+TC:wght@400&display=swap"></noscript>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="msapplication-TileColor" content="#0a0a0a">
+
+  <!-- Google Search Console Verification -->
+  <meta name="google-site-verification" content="NKf2WplkJcEPUejYK5B-wwvCLtHokxnALBswOe0XheM" />
+
+  <!-- SEO -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>使用區塊鏈和感知雜湊達到去中心化之圖像共享和版權保護 | 密碼龐克 Cypherpunks Taiwan</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="使用區塊鏈和感知雜湊達到去中心化之圖像共享和版權保護" />
+<meta name="author" content="Cypherpunks Taiwan" />
+<meta property="og:locale" content="zh_TW" />
+<meta name="description" content="媒體區塊鏈的範疇越來越發人深省，究竟該如何透過去中心化的機制來達到版權保護呢？一起來閱讀本篇文章吧！" />
+<meta property="og:description" content="媒體區塊鏈的範疇越來越發人深省，究竟該如何透過去中心化的機制來達到版權保護呢？一起來閱讀本篇文章吧！" />
+<link rel="canonical" href="https://cypherpunks-core.github.io/news/2019/11/24/%E4%BD%BF%E7%94%A8%E5%8D%80%E5%A1%8A%E9%8F%88%E5%92%8C%E6%84%9F%E7%9F%A5%E9%9B%9C%E6%B9%8A%E9%81%94%E5%88%B0%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B9%8B%E5%9C%96%E5%83%8F%E5%85%B1%E4%BA%AB%E5%92%8C%E7%89%88%E6%AC%8A%E4%BF%9D%E8%AD%B7/" />
+<meta property="og:url" content="https://cypherpunks-core.github.io/news/2019/11/24/%E4%BD%BF%E7%94%A8%E5%8D%80%E5%A1%8A%E9%8F%88%E5%92%8C%E6%84%9F%E7%9F%A5%E9%9B%9C%E6%B9%8A%E9%81%94%E5%88%B0%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B9%8B%E5%9C%96%E5%83%8F%E5%85%B1%E4%BA%AB%E5%92%8C%E7%89%88%E6%AC%8A%E4%BF%9D%E8%AD%B7/" />
+<meta property="og:site_name" content="密碼龐克 Cypherpunks Taiwan" />
+<meta property="og:image" content="https://cypherpunks-core.github.io/img/panda-28.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-11-24T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://cypherpunks-core.github.io/img/panda-28.png" />
+<meta property="twitter:title" content="使用區塊鏈和感知雜湊達到去中心化之圖像共享和版權保護" />
+<meta name="twitter:site" content="@CypherpunksTW" />
+<meta name="twitter:creator" content="@Cypherpunks Taiwan" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Cypherpunks Taiwan"},"dateModified":"2019-11-24T00:00:00+00:00","datePublished":"2019-11-24T00:00:00+00:00","description":"媒體區塊鏈的範疇越來越發人深省，究竟該如何透過去中心化的機制來達到版權保護呢？一起來閱讀本篇文章吧！","headline":"使用區塊鏈和感知雜湊達到去中心化之圖像共享和版權保護","image":"https://cypherpunks-core.github.io/img/panda-28.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://cypherpunks-core.github.io/news/2019/11/24/%E4%BD%BF%E7%94%A8%E5%8D%80%E5%A1%8A%E9%8F%88%E5%92%8C%E6%84%9F%E7%9F%A5%E9%9B%9C%E6%B9%8A%E9%81%94%E5%88%B0%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B9%8B%E5%9C%96%E5%83%8F%E5%85%B1%E4%BA%AB%E5%92%8C%E7%89%88%E6%AC%8A%E4%BF%9D%E8%AD%B7/"},"url":"https://cypherpunks-core.github.io/news/2019/11/24/%E4%BD%BF%E7%94%A8%E5%8D%80%E5%A1%8A%E9%8F%88%E5%92%8C%E6%84%9F%E7%9F%A5%E9%9B%9C%E6%B9%8A%E9%81%94%E5%88%B0%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B9%8B%E5%9C%96%E5%83%8F%E5%85%B1%E4%BA%AB%E5%92%8C%E7%89%88%E6%AC%8A%E4%BF%9D%E8%AD%B7/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- Open Graph Enhanced -->
+  <meta property="og:locale" content="zh_TW">
+  
+  <meta property="og:image" content="https://cypherpunks-core.github.io/img/panda-28.png">
+  
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:site" content="@CypherpunksTW">
+  <meta name="twitter:creator" content="@CypherpunksTW">
+  
+
+  <!-- JSON-LD Structured Data - WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "密碼龐克 Cypherpunks Taiwan",
+    "url": "https://cypherpunks-core.github.io",
+    "description": "密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://cypherpunks-core.github.io/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data - Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "密碼龐克 Cypherpunks Taiwan",
+    "url": "https://cypherpunks-core.github.io",
+    "logo": "https://cypherpunks-core.github.io/favicon.png",
+    "sameAs": [
+      "https://twitter.com/CypherpunksTW",
+      "https://github.com/cypherpunks-core"
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data - Page/Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "使用區塊鏈和感知雜湊達到去中心化之圖像共享和版權保護",
+    "description": "媒體區塊鏈的範疇越來越發人深省，究竟該如何透過去中心化的機制來達到版權保護呢？一起來閱讀本篇文章吧！",
+    
+    "datePublished": "2019-11-24T00:00:00+00:00",
+    "dateModified": "2019-11-24T00:00:00+00:00",
+    
+    "author": {
+      "@type": "Organization",
+      "name": "Cypherpunks Taiwan"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "密碼龐克 Cypherpunks Taiwan",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://cypherpunks-core.github.io/favicon.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://cypherpunks-core.github.io/news/2019/11/24/%E4%BD%BF%E7%94%A8%E5%8D%80%E5%A1%8A%E9%8F%88%E5%92%8C%E6%84%9F%E7%9F%A5%E9%9B%9C%E6%B9%8A%E9%81%94%E5%88%B0%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B9%8B%E5%9C%96%E5%83%8F%E5%85%B1%E4%BA%AB%E5%92%8C%E7%89%88%E6%AC%8A%E4%BF%9D%E8%AD%B7/"
+    }
+    ,
+    "image": "https://cypherpunks-core.github.io/img/panda-28.png"
+    
+    ,
+    "keywords": "cypherpunks"
+    
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data - BreadcrumbList -->
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "首頁",
+        "item": "https://cypherpunks-core.github.io"
+      }
+      
+      
+      
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 3,
+            "name": "News",
+            "item": "https://cypherpunks-core.github.io/news"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 4,
+            "name": "2019",
+            "item": "https://cypherpunks-core.github.io/news/2019"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 5,
+            "name": "11",
+            "item": "https://cypherpunks-core.github.io/news/2019/11"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 6,
+            "name": "24",
+            "item": "https://cypherpunks-core.github.io/news/2019/11/24"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 7,
+            "name": "使用區塊鏈和感知雜湊達到去中心化之圖像共享和版權保護",
+            "item": "https://cypherpunks-core.github.io/news/2019/11/24/%E4%BD%BF%E7%94%A8%E5%8D%80%E5%A1%8A%E9%8F%88%E5%92%8C%E6%84%9F%E7%9F%A5%E9%9B%9C%E6%B9%8A%E9%81%94%E5%88%B0%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B9%8B%E5%9C%96%E5%83%8F%E5%85%B1%E4%BA%AB%E5%92%8C%E7%89%88%E6%AC%8A%E4%BF%9D%E8%AD%B7"
+          }
+        
+      
+    ]
+  }
+  </script>
+  
+
+  <!-- KaTeX for Math Rendering -->
+  
+
+  <!-- Mermaid for Diagrams -->
+  
+
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="密碼龐克 Cypherpunks Taiwan" href="/feed.xml">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://cypherpunks-core.github.io/news/2019/11/24/%E4%BD%BF%E7%94%A8%E5%8D%80%E5%A1%8A%E9%8F%88%E5%92%8C%E6%84%9F%E7%9F%A5%E9%9B%9C%E6%B9%8A%E9%81%94%E5%88%B0%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B9%8B%E5%9C%96%E5%83%8F%E5%85%B1%E4%BA%AB%E5%92%8C%E7%89%88%E6%AC%8A%E4%BF%9D%E8%AD%B7/">
+
+  <!-- Google Analytics -->
+  
+  <!-- Google Analytics - Deferred Loading for Performance -->
+<script>
+  // Defer GA loading until after page is interactive
+  window.addEventListener('load', function() {
+    // Respect Do Not Track
+    if (window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1") {
+      window['ga-disable-G-ENDDT5D0CR'] = true;
+      return;
+    }
+
+    // Load GA after a short delay to prioritize page content
+    setTimeout(function() {
+      var script = document.createElement('script');
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-ENDDT5D0CR';
+      script.async = true;
+      document.head.appendChild(script);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-ENDDT5D0CR');
+    }, 2000);
+  });
+</script>
+
+  
+
+  <!-- Dark Mode Script (防止閃爍) -->
+  <script>
+    // 立即設置主題，防止閃爍
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const defaultTheme = 'dark';
+
+      let theme;
+      if (savedTheme) {
+        theme = savedTheme;
+      } else if (defaultTheme === 'auto') {
+        theme = prefersDark ? 'dark' : 'light';
+      } else {
+        theme = defaultTheme;
+      }
+
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+      document.documentElement.classList.toggle('light', theme === 'light');
+    })();
+  </script>
+
+  <!-- Custom Head Scripts -->
+  <!-- head scripts -->
+
+</head>
+<body class="min-h-screen flex flex-col bg-cp-dark text-cp-dark-800">
+  <!-- Matrix Rain Background -->
+  
+
+  <!-- Scanlines Effect -->
+  
+
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress" class="reading-progress" style="width: 0%;"></div>
+
+  <!-- Skip to Content (a11y) -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-cp-green-600 focus:text-cp-dark focus:rounded">
+    跳至主要內容
+  </a>
+
+  <!-- Header / Navigation -->
+  <!-- Navigation Header -->
+<nav class="navbar fixed top-0 left-0 right-0 z-40 bg-cp-dark/95 backdrop-blur-md border-b border-cp-dark-400" role="navigation" aria-label="主要導航">
+  <div class="container mx-auto px-4 max-w-7xl">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo / Brand -->
+      <div class="flex items-center">
+        <a href="/" class="flex items-center gap-3 text-cp-green-500 hover:text-cp-green-400 transition-all duration-200 group">
+          <!-- ASCII Logo (簡化版) -->
+          <span class="font-mono text-lg font-bold tracking-tight">
+            <span class="text-cp-green-500 group-hover:text-glow">[</span>
+            <span class="text-cp-green-400">CP</span>
+            <span class="text-cp-green-500 group-hover:text-glow">]</span>
+          </span>
+          <span class="hidden sm:block font-mono text-sm text-cp-dark-700 group-hover:text-cp-dark-800">
+            密碼龐克 Cypherpunks Taiwan
+          </span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center gap-1">
+        <!-- Navigation Items (Home 已移除，Logo 連結首頁即可) -->
+        
+        
+          
+          <!-- Regular Link -->
+          <a href="/blog/" class="navbar-item ">
+            Blog
+          </a>
+          
+        
+          
+          <!-- Dropdown Menu -->
+          <div class="dropdown relative group">
+            <button class="navbar-item flex items-center gap-1" aria-haspopup="true">
+              資源中心
+              <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute top-full left-0 mt-1 py-2 bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-lg min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              
+                
+                <!-- Section Divider -->
+                <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider border-t border-cp-dark-300 mt-1 first:mt-0 first:border-t-0">
+                  核心技術
+                </div>
+                
+              
+                
+                <a href="/markdown/resources/resources-bitcoin/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Bitcoin 比特幣
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-ln/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Lightning Network
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-schnorr-signature/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Taproot & Schnorr
+                </a>
+                
+              
+                
+                <!-- Section Divider -->
+                <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider border-t border-cp-dark-300 mt-1 first:mt-0 first:border-t-0">
+                  進階主題
+                </div>
+                
+              
+                
+                <a href="/markdown/resources/resources-bitcoin-layer2/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Layer 2 技術
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-blockchain-privacy/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  隱私技術
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-nostr/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Nostr 協議
+                </a>
+                
+              
+                
+                <!-- Section Divider -->
+                <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider border-t border-cp-dark-300 mt-1 first:mt-0 first:border-t-0">
+                  開發者
+                </div>
+                
+              
+                
+                <a href="/markdown/resources/resources-developer-tools/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  開發者工具箱
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-self-custody/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  自託管指南
+                </a>
+                
+              
+            </div>
+          </div>
+          
+        
+          
+          <!-- Regular Link -->
+          <a href="/markdown/products/" class="navbar-item ">
+            書籍
+          </a>
+          
+        
+          
+          <!-- Dropdown Menu -->
+          <div class="dropdown relative group">
+            <button class="navbar-item flex items-center gap-1" aria-haspopup="true">
+              知識庫
+              <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute top-full left-0 mt-1 py-2 bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-lg min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              
+                
+                <a href="/markdown/knowledge/glossary/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  術語詞彙表
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-cypherpunk-history/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Cypherpunk 歷史
+                </a>
+                
+              
+                
+                <a href="/markdown/knowledge/knowledge-bitcoin/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Bitcoin 百科
+                </a>
+                
+              
+                
+                <a href="/markdown/knowledge/knowledge-ethereum/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Ethereum 百科
+                </a>
+                
+              
+            </div>
+          </div>
+          
+        
+          
+          <!-- Dropdown Menu -->
+          <div class="dropdown relative group">
+            <button class="navbar-item flex items-center gap-1" aria-haspopup="true">
+              社群
+              <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute top-full left-0 mt-1 py-2 bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-lg min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              
+                
+                <a href="/markdown/about/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  關於我們
+                </a>
+                
+              
+                
+                <a href="/markdown/SatelliteProject/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  衛星計畫
+                </a>
+                
+              
+                
+                <a href="https://github.com/cypherpunks-core/cypherpunks-core.github.io/discussions" target="_blank" rel="noopener noreferrer" class="dropdown-item flex items-center justify-between px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  討論區
+                  <svg class="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </a>
+                
+              
+                
+                <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="dropdown-item flex items-center justify-between px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  GitHub
+                  <svg class="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </a>
+                
+              
+            </div>
+          </div>
+          
+        
+        
+      </div>
+
+      <!-- Right Side Actions -->
+      <div class="flex items-center gap-2">
+        <!-- Search Button -->
+        <button id="search-btn" class="p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="搜尋" title="搜尋 (⌘K)">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="切換主題">
+          <!-- Sun Icon (Dark Mode) -->
+          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          <!-- Moon Icon (Light Mode) -->
+          <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+        </button>
+
+        <!-- GitHub Link -->
+        <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="GitHub">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+          </svg>
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="lg:hidden p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="開啟選單" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Menu -->
+  <div id="mobile-menu" class="lg:hidden hidden bg-cp-dark-100 border-t border-cp-dark-400">
+    <div class="container mx-auto px-4 py-4 space-y-2">
+      
+      
+        
+        <a href="/blog/" class="block px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+          Blog
+        </a>
+        
+      
+        
+        <!-- Mobile Dropdown -->
+        <div class="mobile-dropdown">
+          <button class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+            資源中心
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="mobile-dropdown-menu hidden pl-4 mt-1 space-y-1">
+            
+              
+              <!-- Section Divider -->
+              <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider">
+                核心技術
+              </div>
+              
+            
+              
+              <a href="/markdown/resources/resources-bitcoin/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Bitcoin 比特幣
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-ln/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Lightning Network
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-schnorr-signature/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Taproot & Schnorr
+              </a>
+              
+            
+              
+              <!-- Section Divider -->
+              <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider">
+                進階主題
+              </div>
+              
+            
+              
+              <a href="/markdown/resources/resources-bitcoin-layer2/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Layer 2 技術
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-blockchain-privacy/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                隱私技術
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-nostr/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Nostr 協議
+              </a>
+              
+            
+              
+              <!-- Section Divider -->
+              <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider">
+                開發者
+              </div>
+              
+            
+              
+              <a href="/markdown/resources/resources-developer-tools/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                開發者工具箱
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-self-custody/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                自託管指南
+              </a>
+              
+            
+          </div>
+        </div>
+        
+      
+        
+        <a href="/markdown/products/" class="block px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+          書籍
+        </a>
+        
+      
+        
+        <!-- Mobile Dropdown -->
+        <div class="mobile-dropdown">
+          <button class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+            知識庫
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="mobile-dropdown-menu hidden pl-4 mt-1 space-y-1">
+            
+              
+              <a href="/markdown/knowledge/glossary/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                術語詞彙表
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-cypherpunk-history/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Cypherpunk 歷史
+              </a>
+              
+            
+              
+              <a href="/markdown/knowledge/knowledge-bitcoin/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Bitcoin 百科
+              </a>
+              
+            
+              
+              <a href="/markdown/knowledge/knowledge-ethereum/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Ethereum 百科
+              </a>
+              
+            
+          </div>
+        </div>
+        
+      
+        
+        <!-- Mobile Dropdown -->
+        <div class="mobile-dropdown">
+          <button class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+            社群
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="mobile-dropdown-menu hidden pl-4 mt-1 space-y-1">
+            
+              
+              <a href="/markdown/about/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                關於我們
+              </a>
+              
+            
+              
+              <a href="/markdown/SatelliteProject/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                衛星計畫
+              </a>
+              
+            
+              
+              <a href="https://github.com/cypherpunks-core/cypherpunks-core.github.io/discussions" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                討論區
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </a>
+              
+            
+              
+              <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                GitHub
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </a>
+              
+            
+          </div>
+        </div>
+        
+      
+      
+    </div>
+  </div>
+</nav>
+
+<!-- Spacer for fixed navbar -->
+<div class="h-16"></div>
+
+
+  <!-- Hero Section -->
+  
+
+  <!-- Main Content -->
+  <main id="main-content" class="flex-grow">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+      <div class="flex flex-col lg:flex-row gap-8">
+
+        <!-- Sidebar (Left) - Optional Menu -->
+        
+
+        <!-- Main Content Area -->
+        <article class="flex-grow min-w-0 max-w-4xl mx-auto">
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <!-- Post Header -->
+  <header class="mb-8">
+    <!-- Category Badge -->
+    
+
+    <!-- Title -->
+    <h1 class="text-3xl md:text-4xl font-bold font-mono text-cp-green-500 mb-4 text-glow-sm" itemprop="headline">
+      使用區塊鏈和感知雜湊達到去中心化之圖像共享和版權保護
+    </h1>
+
+    <!-- Meta Info -->
+    <div class="flex flex-wrap items-center gap-4 text-sm text-cp-dark-600 font-mono">
+      <!-- Date -->
+      <time datetime="2019-11-24T00:00:00+00:00" itemprop="datePublished" class="flex items-center gap-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        2019-11-24
+      </time>
+
+      <!-- Author -->
+      <span class="flex items-center gap-1" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+        </svg>
+        <span itemprop="name">Cypherpunks Taiwan</span>
+      </span>
+
+      <!-- Reading Time -->
+      
+      
+      
+      
+      <span class="flex items-center gap-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        1 分鐘閱讀
+      </span>
+      
+    </div>
+  </header>
+
+  <!-- Featured Image -->
+  
+  <figure class="mb-8 rounded-lg overflow-hidden border border-cp-dark-400">
+    <img
+      src="/img/panda-28.png"
+      alt="使用區塊鏈和感知雜湊達到去中心化之圖像共享和版權保護"
+      class="w-full h-auto"
+      loading="lazy"
+      itemprop="image"
+    >
+  </figure>
+  
+
+  <!-- Post Content with TOC -->
+  <div class="flex flex-col lg:flex-row gap-8">
+    <!-- Main Content -->
+    <div class="flex-grow min-w-0">
+      <div class="content prose prose-invert max-w-none" itemprop="articleBody">
+        <blockquote>
+  <p>本篇文章翻譯自 <a href="https://ieeexplore.ieee.org/document/8711440">Decentralised Image Sharing and Copyright Protection using Blockchain and Perceptual Hashes</a>，媒體區塊鏈的範疇越來越發人深省，究竟該如何透過去中心化的機制來達到版權保護呢？一起來閱讀本篇文章吧！</p>
+</blockquote>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<h2 id="摘要">摘要</h2>
+
+<p>在本文中，我們旨在解決照片上傳到正版圖片網站和圖像共享市場上之圖像來源問題，以確保原創攝影師的作品得到正確認可。</p>
+
+<p>現在，每週在正版圖片網站上共享數百萬 <strong>Royalty Free</strong> （RF,免權利金）之圖像。在這樣的網站上分享圖像的攝影師和圖形設計師之間存在著很大的不滿，因為這種行為存在廣泛的弊端，其他人試圖從原作者的作品中獲得榮譽並從中受益。</p>
+
+<blockquote>
+  <p>Royalty Free : 網站對使用者的一種圖片素材授權方式概稱，其意義指使用者一旦購買產品，可以無限次數地使用，每一次使用時，並不需另外就使用的媒體、數量、年限、地域等，付費取得授權。在著作權的相關法律中並無就此詞的規範，但在多媒體出版業界，尤其是數位影像業界中廣泛被使用。</p>
+</blockquote>
+
+<p>當除原作者外的其他人上傳與市場上已經共享的相同圖像，或使用圖像處理方法（例如旋轉、裁剪、灰階轉換等）然後上傳篡改圖像以避免版權侵犯檢測時，就會發生這種情況。為了解決這些問題，我們建議在以太坊測試鏈的基礎上建立一個去中心化的點對點照片共享市場，並展示它是如何公平，值得信賴和實用的。</p>
+
+<p>我們的分散式應用程序利用以太坊的感知雜湊和強大的智能合約來自動檢測和拒絕在感知雜湊上與市場上已有的圖像或相似的篡改圖像。由於區塊鏈的固有特性，我們的市場沒有中央機構對其進行控制，沒有任何第三方干擾、沒有單點故障、零審查並保留了在線用戶隱私。</p>
+
+<p>據我們所知，這是第一項提供實用解決方案的工作，可在分散的圖像共享平台上自動檢測和拒絕在感知上相似的圖像，從而保護正版圖像作者的版權。</p>
+
+<h2 id="第一章節---介紹">第一章節 - 介紹</h2>
+
+<p>在當前的互聯網時代，許多攝影師現在通常是透過正版照片公司通過線上出售圖像來賺取收入。這些網站上的免版稅和微圖庫之商業模式已導致攝影師之間的激烈競爭，每個人都在努力上傳更多圖像並獲得更多作品下載。</p>
+
+<p>最近這種行為導致了廣泛的圖像來源欺詐，其中一些非作者違反了版權法並在心理和經濟上影響了合法圖像所有者，從而獲得了其他供圖者者圖像的信譽。他們通過從正版照片網站訪問原始作者的圖像並按原樣或在修改了正版照片網站上的某些圖像特徵後上傳由此獲得的圖像來實現此目的。儘管一些圖片網站確實通過使用密碼雜湊來檢查要上傳的新圖像是否已經存在於市場上，但它們無法識別原始圖像的可操縱版本。發生這種情況是因為密碼雜湊易於產生雪崩效應，這種現像是輸入值的微小變化導致輸出值的急劇變化。我們通過創建一個基於以太坊的圖像共享解決方案並選擇感知雜湊來解決這些問題[6]。感知雜湊避免雪崩效應，並且不易受到圖像感知變化的影響，例如旋轉，裁剪，調整大小，轉換為灰階、胡椒鹽攻擊，曝光或飽和度變化等。本文展示如何使用區塊鏈網路結合使用感知雜湊和適當的智能合約邏輯提供比當前系統更好的版權侵權檢測機制，以及區塊鏈的許多好處，例如永久性的交易記錄、透明度、信任、不變性、高可用性、信息安全和節省成本。</p>
+
+<blockquote>
+  <p>microstock : 在圖庫網上，有人有需求購買圖像/影片/音樂素材，自然就會有「供圖者 Contributor」。每個人都可以在這些圖庫網站上註冊申請成為供圖者。但因應每家的規則要求，在正式成為可上架素材產品賺取佣金的供圖者前，有的網站會有一些小考試（像是要先上傳幾張圖供站方審合是否符合他們的要求水準）。不過這個倒不用擔心，現在這些測試門檻都很低，基本上只要符合各類素材的一些格式設定大多會通過。</p>
+</blockquote>
+
+<blockquote>
+  <p>cryptographic hash : 可以將任意大小的數據（通常稱為「消息」）映射到固定大小的位字符串（「雜湊值」、「雜湊」或「消息摘要」），並且是單向的函數，即實際上不可行的函數。[1] 理想情況下，查找產生給定的消息的唯一方法是嘗試暴力搜尋，以查看它們是否產生匹配項，或使用匹配雜湊表的Rainbow 表。</p>
+</blockquote>
+
+<h3 id="a-動機">A. 動機</h3>
+
+<p>提出去中心化圖像共享市場的基本動機是糾正圖像來源並為原始圖像作者提供應有的信譽，這是在正版圖片網站上共享圖像的攝影師主要關注點。我們旨在建立強大且快速的版權侵犯檢測機制。當與基於區塊鏈的架構優勢結合時，可以將權力交還給圖像貢獻者。正版照片網站上的佣金率（可能高達 55％）也是攝影界普遍關注的問題。我們的目標是完全擺脫這些繁重的佣金，並創建一種架構，使用戶僅需支付與區塊鏈網路處理交易相關的交易費用。</p>
+
+<h3 id="b-新穎性">B. 新穎性</h3>
+
+<p>此專案新穎的貢獻包括使用可以編程的以太坊區塊鏈[1]，[4]創建一個去中心化的圖像共享應用，並以新穎的方式使用感知雜湊、以太坊上強大的智能合約[12]，[15]進行版權之侵犯檢測。網路上的照片通過 IPFS 以分散方式保存。我們最後也提供計算之結果，顯示我們方法的有效性和限制。</p>
+
+<h2 id="第二章節---系統環境及建置">第二章節 - 系統環境及建置</h2>
+
+<p>我們使用以下工具和技術來建置我們的系統。關於它們的詳細信息可以在各自的網站和相應的 Github 中找到。</p>
+
+<ul>
+  <li>Metamask : Metamask 是用於瀏覽器的插件，可進行以太坊交易。它允許運行以太坊 Dapps（去中心化應用程序），而無需運行完整的以太坊節點，管理身份和簽署區塊鏈交易。</li>
+  <li>Ganache：Ganache 是一個以太坊區塊鏈模擬器。Ganache 是一個以太坊測試節點，可以在本地測試所有 Componet 組件。它還允許用戶部署合約，開發應用程序並運行測試。</li>
+  <li>Geth : Geth（以太坊）是一個終端機（Command Line）界面，可讓用戶運行和操作以太坊全節點。它在 Go（Golang）中實現，並允許挖掘區塊以生成以太幣、創建智能合約，發送交易以在以太坊地址之間轉移資金，檢查區塊歷史以及許多其他功能。</li>
+  <li>Turffle：Truffle 用於編譯，測試，構建智能合約，並提供開發框架以提高開發過程的速度。</li>
+</ul>
+
+<p>圖1中詳細顯示了系統架構。下面描述了該圖中顯示的各種模組：</p>
+
+<ul>
+  <li>買方模組：它提供了搜索工具，可在分散式應用程序上顯示的所有圖像中找到購買者正在尋找的圖像類別。</li>
+  <li>賣方模組：它提供了在區塊鏈上上傳圖像的簡單方法。賣方上傳圖像，以及圖像名稱和描述以幫助搜索過程。</li>
+  <li>錢包模組：該客戶端加密模組允許創建新的以太坊地址或導入現有地址，請參閱錢包餘額和交易。用戶也可以使用 Metamask 來管理帳戶和錢包。</li>
+</ul>
+
+<p>從圖1可以看出，以太坊與 Web 客戶端連接並允許訪問以太坊系統。Web 客戶端包括買方，賣方和錢包模組。交易模組用於指定圖像售價，圖像上傳模組用於上傳新圖像。本地端資料庫儲存數據，並且在以太坊網路批准交易後，經過適當的加密後將數據和圖像將傳輸到 IPFS。我們使用公開金鑰加密技術進行加密。由於 IPFS 是內容可尋址的，因此此加密步驟對於訊息保護至關重要。以太坊由 Geth、奇偶校驗和 JSON-RPC（遠程過程調用）協議組成。以太坊提供對以太坊主網路的訪問，該網路由所有用戶節點、礦工、智能合約和交易區塊組成。所有模組之間的數據流如圖所示。下一部分將說明用於訊息儲存的 IPFS 和以太坊網路。
+<br /></p>
+<div align="center">
+    <img src="/img/panda-29.png" style="width:100%" />
+</div>
+<p><br /></p>
+<center><strong>圖1 系統架構</strong> </center>
+
+<h2 id="第三章節---方法">第三章節 - 方法</h2>
+
+<p>我們提出了兩種不同的體系結構，它們儲存數據的方式不同。</p>
+
+<ol>
+  <li>以太坊儲存：在這種架構中，圖像和雜湊值儲存在以太坊鏈本身上。圖像和感知雜湊被放置在區塊鏈交易中。這種方法的問題在於，隨著越來越多的圖像上傳，由於所有內容都儲存在測試鏈中，因此區塊鏈的儲存大小將迅速增加。每當新節點到達時，他們都必須下載包含所有圖像的整個鏈。該解決方案絕對不可擴展，特別是因為圖像大小可能會達到數兆字元。</li>
+  <li>IPFS 儲存：在這種體系結構中，圖像和雜湊值儲存在 IPFS 中，這是一種分散的超媒體分佈協議。 IPFS [5]的內容是可透過地址搜尋的，並使用加密雜湊為文件內的區塊提供唯一的指紋，消除了網路上的冗餘，並將這些唯一的雜湊用於訊息檢索。通過使用 IPFS 協議儲存圖像和可感知的雜湊，我們在以太坊測試鏈的大小上節省了很多。可以使用任何標準加密方案對儲存在IPFS 上的數據進行加密並進行檢索。加密私鑰將僅通過智能合約與適當的買方共享。這種方法是可擴展的，是我們實施中使用的一種方法。</li>
+</ol>
+
+<h3 id="a-侵犯版權和電腦視覺">A. 侵犯版權和電腦視覺</h3>
+
+<p>感知雜湊是多媒體指紋算法，它考慮了多媒體的各種功能。對於線上多媒體市場來說，<strong>確保每個作品只能上傳一次非常重要</strong>。通過將新的圖像雜湊值與區塊鏈上所有圖像的雜湊值進行比較並檢查，諸如 MD5 和 SHA 之類的密碼雜湊函數可以有效地完成此任務。但是我們走得更遠，還嘗試找出似乎是區塊鏈上已經存在的原始作品的修改作品，並且在感覺上與這些原始作品相似。例如，如果有人嘗試上傳稍微旋轉的圖片（例如逆時針說12°），則由於雪崩效應，諸如SHA之類的雜湊將具有完全不同的最終雜湊值。相反，如果我們使用感知雜湊，則最終雜湊中的某些位元或沒有位元更改。我們可以使用感知雜湊的此屬性來找到圖像之間的相似性。實現此目的的方式是通過計算原始圖像和測試圖像之間的差異。為了量化差異，找到兩個圖像的感知雜湊值並計算由此獲得的雜湊值之間的漢明距離。標準化 0 到 1 之間的漢明距離。這是原始圖像與測試圖像之間差異的量度，稱為 NHD。如果這種差異在某個閾值內，則測試圖像將被拒絕。但有時，兩個不同的原始圖像也可能具有近似相似的感知雜湊，從而導致較小的相異值。因此，此處的關鍵任務是找到閾值，以便我們可以盡可能正確地識別兩個不同的圖像和兩個感知相似的圖像。我們在結果部分描述獲取閾值的方法。</p>
+
+<p>感知雜湊算法很多，但是我們使用了四種最受歡迎的算法，分別是phash（DCT 雜湊），差分雜湊，平均雜湊和小波雜湊。這些算法包含在python 的 ImageHash 庫中，其中提供了有關這些算法的詳細文檔。因此，如果有人上傳了市場上存在的原始圖像的篡改版本，智能合約將計算其感知雜湊，計算此雜湊的漢明距離以及儲存在分散的 PERC HASH 資料庫中的雜湊，和閾值進行比較後將拒絕此類圖像。因此，不僅欺詐者無法上傳此類圖像，而且他們還將支付與在以太坊網路上處理該交易相關的交易費用，這可視為罰款。因此，這種經濟處罰將阻止欺詐行為。</p>
+
+<h3 id="b-智能合約和訊息流">B. 智能合約和訊息流</h3>
+
+<p>訊息流如圖1所示的系統架構圖所示。智能合約是以太坊生態系統的核心。以太坊上的智能合約是區塊鏈中的一小段程式碼。智能合約的概念最早由 Szabo 提出[3]。它們用於管理用戶之間的協議。他們可以持有以太（ETH），將其提供給適當的實體，持有訊息並為其他智能合約提供效用。智能合約用於執行某些計算，儲存一些變量並交易數位商品，同時遵守合約中提到的某些特定條件。因此，人們可以在以太坊網路上以這些合約中指定的自定義條件（function）交易虛擬資產。由於這些特性，它們適用於包括圖像許可和版權保護邏輯[12]。我們使用 solidity [10]撰寫智能合約，這是迄今為止撰寫智能合約最流行的語言。我們遵循創建此類合約的最佳實踐[16]，並使用諸如小波雜湊（WHASH）之類的輕量級算法來提供版權保護，從而需要較少的手續費（Gas Fees）[13]。我們所有的交易都透過智能合約進行。我們使用智能合約來計算感知雜湊，將加密和解密金鑰分配給適當的實體，與 IPFS 連接，檢查是否侵犯版權及是否接受或拒絕圖像。透過計算標準化漢明距離（NHD）量化市場上存在的圖像與新上傳的圖像之間的圖像差異後，智能合約將拒絕 NHD 低於特定閾值的圖像，如表2和圖2所示。這裡 WHASH 能夠識別除 90° 旋轉版本外的經典 barbara 圖像的所有變換。為了確定圖像的接受或拒絕，將 WHASH 的閾值設為在結果部分中計算的 0.379。這表明了感知雜湊的有效性和可靠性水平。如果對圖片的修改不太極端，並且原始圖片與其被篡改版本之間仍具有良好的結構相似性，則感知雜湊能夠檢測到篡改。</p>
+
+<div align="center">
+    <img src="/img/panda-30.png" style="width:100%" />
+</div>
+
+<center><strong>圖2 從左到右的圖像：經典圖像barbara，barbara 旋轉 5 度，barbara 旋轉 25 度，barbara 旋轉 90 度，barbara 亮度 -50，barbara sat +50。</strong></center>
+
+<p><br /></p>
+
+<div align="center">
+    <img src="/img/panda-31.png" style="width:100%" />
+</div>
+<center><strong>表2 根據 Bsds-500 資料集計算的各種感知雜湊的有效性比較</strong></center>
+
+<h2 id="第四章節---結果">第四章節 - 結果</h2>
+
+<p>我們在原始圖像和圖像的變換的資料集上測試模型，以評估感知雜湊在檢測版權侵權中的有效性。我們使用 Berkeley 分割資料集（BSDS）[7]，它是500 個原始圖像的資料集。現實生活中有效的雜湊算法將是一種可以區分兩個真實圖像和同一圖像轉換的算法。</p>
+
+<p>我們對 BSDS-500 資料集中的每個圖像執行以下轉換：</p>
+<ul>
+  <li>旋轉(度數)：5 度 , 10 度 , 15 度 , 20 度, 25度（順時針）</li>
+  <li>Gamma 校正：0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5</li>
+  <li>胡椒和鹽的雜訊：0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00</li>
+  <li>裁切（固定縱橫比模式）：5%, 10%, 15%, 20%, 25%</li>
+  <li>調整大小（尺寸縮小 - 固定寬高比模式）：5％, 10％, 15％, 20％, 25％</li>
+</ul>
+
+<p>經過這些轉換，我們最終得到了 21500 張圖像（500 張原始圖像和每個原始圖像 42 張轉換）。為了評估雜湊算法的有效性，我們創建了兩種情況：</p>
+
+<p>正面（陽性）的情況：在這種情況下抓到的圖像是市場上原始圖像的操縱版本。我們期望雜湊算法能夠檢測到此類欺詐圖像，而智能合約應立即將其拒絕。</p>
+
+<p>負面（陰性）的情況：這種情況下的圖像是資料集中的兩個不同的原始圖像。網路應允許新上傳的獨特圖像添加到要出售的市場上。</p>
+
+<p>漢明碼距離是兩個雜湊間不同位元數量。因此，漢明碼距離帶有隱含的不相似感。我們計算新圖像與區塊鏈上傳的所有先前圖像之間的漢明碼距離，將距離值標準化並將其與閾值進行比較，以決定是否接受或拒絕新圖像。這樣，將對照市場上正在交易的所有圖像檢查新圖像。我們計算標準化漢明碼距離（NHD）如下：</p>
+
+<div align="center">
+    <img src="/img/panda-32.png" style="width:100%" />
+</div>
+
+<center><strong>圖3 特定知覺雜湊對正確分類正面和負面案例的有效性。X軸表示NHD，Y軸表示全部圖像的一部分。</strong></center>
+
+<p><br /></p>
+
+<blockquote>
+  <p>NHD 計算方式</p>
+</blockquote>
+
+\[NHD = HammingDistance / HashBitsCount\]
+
+<p>我們考慮的所有四種雜湊算法都返回 64 位元雜湊。 以下指標用於評估感知雜湊函數的質量：</p>
+
+<p><a href="https://www.twblogs.net/a/5b7d17972b71770a43ddde64">Earth Mover’s Distance（EMD)</a>是對區域內兩個概率分佈之間的距離的度量。 EMD 基於將一種分配轉換為另一種分配所必須支付的最低成本[9]。需要更大的 EMD 值。</p>
+
+<p>Intersection-Over-Union：Intersection-Over-Union（IoU）是一種評估指標，用於測量特定數據集上對象檢測器的準確性。希望 IoU 值較小。</p>
+
+<p>閾值：閾值是規格值，如果未超過標準化漢明距離（NHD），則圖像將被拒絕。因此，如果 NHD 大於閾值，則相異性會超過所需值，並且圖像會在市場上被接受。要選擇最佳閾值，請專注於圖3。當負向案例數值首次與正向案例交叉時，將相應的縮放距離值將作為閾值。</p>
+
+<p>圖3分別顯示了 phash、dhash、平均雜湊和小波雜湊的圖形比較。在此，X 軸表示在 0 到 1 之間縮放的漢明碼距離，而 Y 軸表示圖像出現正向或負向情況的概率。我們希望使用感知雜湊算法，該算法在正向分佈和負向分佈之間提供最小的重疊。可以使用 IOU 度量標準來計算。我們更希望在正負向分佈之間具有最高 EMD 的算法。</p>
+
+<p>從表2中可以看出，所有四種雜湊算法在度量標準上都給出了可比較的值。平均雜湊和 Dhash 具有較高的 EMD 值，平均雜湊具有最小的 IoU 值。平均雜湊的閾值為0.304。這意味著，如果新圖像的平均雜湊值與市場上現有圖像的平均雜湊值相似的位元率超過 30.4％，則新圖像將被網路批准並添加到市場中。</p>
+
+<p>雜湊平均時間的比較如下：</p>
+
+<ul>
+  <li>PHASH: 33.97 ms</li>
+  <li>DHASH: 29.93 ms</li>
+  <li>平均雜湊 AVG HASH: 29.81 ms</li>
+  <li>WHASH: 60.99 ms</li>
+</ul>
+
+<p>驗證新圖像所需的時間與在市場上傳的圖像數量成正比。換句話說，新圖像驗證的時間複雜度是呈線性的。</p>
+
+<h2 id="第五章節---結論">第五章節 - 結論</h2>
+
+<p>我們得出的結論是，針對線上正版圖片市場且基於區塊鏈的解決方案比傳統市場具有許多優勢，例如高安全性、永久性交易記錄、自定義許可證、圖像的自定義銷售價格，更高的貢獻者收入以及允許使用 IPFS 的幫助。由於缺乏中央權威，因此市場不受審查和干擾。經過全面評估，我們得出結論，感知雜湊是一種有效且高效的版權侵權檢測工具。區塊鏈交易僅包含用於檢索圖像的 IPFS 雜湊。通過預先選擇加密方案對智能合約中的內容進行加密，然後將數據傳輸到 IPFS，可以增強訊息安全性。智能合約僅將解密金鑰發布給適當的買方。此外，我們的實現是具擴展性。因此，本文舉例說明了一種經過驗證的技術的新穎用例，可幫助應對照片世界中根深蒂固的惡意行為。</p>
+
+<h2 id="第六章節---限制和未來展望">第六章節 - 限制和未來展望</h2>
+
+<p>我們的系統可以在合理範圍內檢測到在外觀上與原始圖像相似的假圖像。儘管感知雜湊在檢測許多轉換中非常有效，但是在某些情況下，如表1中 90 度旋轉的 barbara 圖像所示，雜湊算法無法識別欺詐圖像，總結來說，感知雜湊在準確性和時間複雜度上提供一個很好的運作。</p>
+
+<p>我們打算將來進行以下任務：
+為了解決諸如圖2和表1所述的漏洞，我們需要研究和採用比感知雜湊（如果有）更健壯和高效的電腦視覺技術。 
+將此分散式應用程序（DApp）轉變為成熟的分佈式自治組織（DAO），該組織還可以提供索賠協助，對索賠進行分散式投票，獎勵管理以及針對侵犯版權的報酬。</p>
+
+<h2 id="參考文獻">參考文獻</h2>
+<ol>
+  <li>G. Wood, “Ethereum: A secure decentralised generalised transaction ledger”, Ethereum Project Yellow Paper, 2014.</li>
+  <li>S. Nakamoto, Bitcoin: A peer-to-peer electronic cash system, White paper, 2008.</li>
+  <li>Nick Szabo, The idea of smart contracts, 1997.</li>
+  <li>V Buterin, A next-generation smart contract and decentralized application platform, White Paper, 2014.</li>
+  <li>Juan Benet, IPFS -Content Addressed Versioned P2P File System (DRAFT 3), 2017, [online] Available: https://github.com/ipfs/papers.</li>
+  <li>C. Zaunerm, Implementation and benchmarking of perceptual image hash functions, 2010.</li>
+  <li>P. Arbelaez, M. Maire, C. Fowlkes, J. Malik, “Contour Detection and Hierarchical Image Segmentation”, IEEE TPAMI, vol. 33, no. 5, pp. 898-916, May 2011.</li>
+  <li>V. Monga, B. L. Evans, “Perceptual image hashing via feature points: performance evaluation and tradeoffs”, Image Processing IEEE Transactions on, vol. 15, no. 11, pp. 34523465, 2006.</li>
+  <li>Y. R Ubner, C. Tomasi, L. J. Andguibas, “The earth movers distance as a metric for image retrieval”, Int. J. Comput. Vision 40 99121, 2000.</li>
+  <li>Solidity, 2015.</li>
+  <li>V. Buterin, On public and private blockchains, 2015, [online] Available: https://blog.ethereum.org/2015/08/07/on-public-and-privateblockchains.</li>
+  <li>V. Morabito, “Smart contracts and licensing”, Business Innovation Through Blockchain, pp. 101-124, 2017.</li>
+  <li>T. Chen, X. Li, X. Luo, X. Zhang, “Under-optimized smart contracts devour your money”, 2017 IEEE 24th International Conference on Software Analysis Evolution and Reengineering (SANER), pp. 442-446, 2017.</li>
+  <li>A. Bogner, M. Chanson, A. Meeuw, “A decentralised sharing app running a smart contract on the ethereum blockchain”, Proceedings of the 6th International Conference on the Internet of Things, pp. 177-178, 2016.</li>
+  <li>L. Luu, D.-H. Chu, H. Olickel, P. Saxena, A. Hobor, “Making smart contracts smarter”, Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security CCS ’16, pp. 254-269, 2016.</li>
+  <li>K. Delmolino, M. Arnett, A. Kosba, A. Miller, E. Shi, “Step by step towards creating a safe smart contract: Lessons and insights from a cryptocurrency lab”, International Conference on Financial Cryptography and Data Security, pp. 79-94, 2016.</li>
+</ol>
+
+      </div>
+
+      <!-- Tags -->
+      
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <h3 class="text-sm font-mono text-cp-dark-600 mb-3">
+          <span class="text-cp-green-600">#</span> 標籤
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          
+          <a href="/tags/#cypherpunks" class="tag text-xs px-3 py-1 bg-cp-dark-200 text-cp-green-500 border border-cp-dark-400 rounded font-mono hover:border-cp-green-500 hover:bg-cp-green-500/10 transition-all">
+            cypherpunks
+          </a>
+          
+        </div>
+      </div>
+      
+
+      <!-- Share Buttons -->
+      
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <h3 class="text-sm font-mono text-cp-dark-600 mb-3">
+          <span class="text-cp-green-600">//</span> 分享
+        </h3>
+        <!-- Share Buttons -->
+<div class="flex flex-wrap items-center gap-2">
+  <!-- Twitter/X -->
+  <a
+    href="https://twitter.com/intent/tweet?text=%E4%BD%BF%E7%94%A8%E5%8D%80%E5%A1%8A%E9%8F%88%E5%92%8C%E6%84%9F%E7%9F%A5%E9%9B%9C%E6%B9%8A%E9%81%94%E5%88%B0%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B9%8B%E5%9C%96%E5%83%8F%E5%85%B1%E4%BA%AB%E5%92%8C%E7%89%88%E6%AC%8A%E4%BF%9D%E8%AD%B7&url=https://cypherpunks-core.github.io/news/2019/11/24/%E4%BD%BF%E7%94%A8%E5%8D%80%E5%A1%8A%E9%8F%88%E5%92%8C%E6%84%9F%E7%9F%A5%E9%9B%9C%E6%B9%8A%E9%81%94%E5%88%B0%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B9%8B%E5%9C%96%E5%83%8F%E5%85%B1%E4%BA%AB%E5%92%8C%E7%89%88%E6%AC%8A%E4%BF%9D%E8%AD%B7/&via=CypherpunksTW"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex items-center gap-2 px-3 py-2 bg-cp-dark-200 text-cp-dark-700 border border-cp-dark-400 rounded-lg hover:border-cp-green-500 hover:text-cp-green-500 transition-all font-mono text-sm"
+    aria-label="分享到 Twitter"
+  >
+    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    </svg>
+    <span class="hidden sm:inline">Twitter</span>
+  </a>
+
+  <!-- Facebook -->
+  <a
+    href="https://www.facebook.com/sharer/sharer.php?u=https://cypherpunks-core.github.io/news/2019/11/24/%E4%BD%BF%E7%94%A8%E5%8D%80%E5%A1%8A%E9%8F%88%E5%92%8C%E6%84%9F%E7%9F%A5%E9%9B%9C%E6%B9%8A%E9%81%94%E5%88%B0%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B9%8B%E5%9C%96%E5%83%8F%E5%85%B1%E4%BA%AB%E5%92%8C%E7%89%88%E6%AC%8A%E4%BF%9D%E8%AD%B7/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex items-center gap-2 px-3 py-2 bg-cp-dark-200 text-cp-dark-700 border border-cp-dark-400 rounded-lg hover:border-cp-green-500 hover:text-cp-green-500 transition-all font-mono text-sm"
+    aria-label="分享到 Facebook"
+  >
+    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    </svg>
+    <span class="hidden sm:inline">Facebook</span>
+  </a>
+
+  <!-- Copy Link -->
+  <button
+    id="copy-link-btn"
+    class="inline-flex items-center gap-2 px-3 py-2 bg-cp-dark-200 text-cp-dark-700 border border-cp-dark-400 rounded-lg hover:border-cp-green-500 hover:text-cp-green-500 transition-all font-mono text-sm"
+    data-url="https://cypherpunks-core.github.io/news/2019/11/24/%E4%BD%BF%E7%94%A8%E5%8D%80%E5%A1%8A%E9%8F%88%E5%92%8C%E6%84%9F%E7%9F%A5%E9%9B%9C%E6%B9%8A%E9%81%94%E5%88%B0%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B9%8B%E5%9C%96%E5%83%8F%E5%85%B1%E4%BA%AB%E5%92%8C%E7%89%88%E6%AC%8A%E4%BF%9D%E8%AD%B7/"
+    aria-label="複製連結"
+  >
+    <svg class="w-4 h-4 copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+    </svg>
+    <svg class="w-4 h-4 check-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+    </svg>
+    <span class="btn-text">複製連結</span>
+  </button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const copyBtn = document.getElementById('copy-link-btn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async function() {
+      const url = this.dataset.url;
+      const copyIcon = this.querySelector('.copy-icon');
+      const checkIcon = this.querySelector('.check-icon');
+      const btnText = this.querySelector('.btn-text');
+
+      try {
+        await navigator.clipboard.writeText(url);
+        copyIcon.classList.add('hidden');
+        checkIcon.classList.remove('hidden');
+        btnText.textContent = '已複製!';
+
+        setTimeout(() => {
+          copyIcon.classList.remove('hidden');
+          checkIcon.classList.add('hidden');
+          btnText.textContent = '複製連結';
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+    });
+  }
+});
+</script>
+
+      </div>
+      
+
+      <!-- Author Bio -->
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <div class="flex items-center gap-4 p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg">
+          <div class="w-12 h-12 rounded-full bg-cp-green-500/20 flex items-center justify-center text-cp-green-500 font-mono font-bold">
+            CP
+          </div>
+          <div>
+            <h4 class="font-mono font-medium text-cp-dark-800">Cypherpunks Taiwan</h4>
+            <p class="text-sm text-cp-dark-600">密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Posts -->
+      
+      
+      
+      
+        
+          
+            
+            
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+      
+
+      
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <h3 class="text-lg font-mono font-bold text-cp-green-500 mb-4">
+          <span class="text-cp-dark-600">//</span> 相關文章
+        </h3>
+        <div class="grid gap-4">
+          
+          <a href="/news/community/2025/04/01/Cypherpunks-Taiwan(8)/" class="block p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-600 hover:bg-cp-dark-200 transition-all group">
+            <h4 class="font-medium text-cp-dark-800 group-hover:text-cp-green-500 transition-colors">
+              Cypherpunks Taiwan 小聚圓滿落幕｜謝謝每一位參與這場自由技術對話的人
+            </h4>
+            <time class="text-xs text-cp-dark-600 font-mono mt-1 block">
+              2025-04-01
+            </time>
+          </a>
+          
+          <a href="/news/community/2025/03/24/Cypherpunks-Taiwan-%E9%87%8D%E5%95%9F-%E6%88%91%E5%80%91%E7%82%BA%E4%BD%95%E5%86%8D%E6%AC%A1%E8%81%9A%E9%9B%86/" class="block p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-600 hover:bg-cp-dark-200 transition-all group">
+            <h4 class="font-medium text-cp-dark-800 group-hover:text-cp-green-500 transition-colors">
+              Cypherpunks Taiwan 重啟：我們為何再次聚集？
+            </h4>
+            <time class="text-xs text-cp-dark-600 font-mono mt-1 block">
+              2025-03-24
+            </time>
+          </a>
+          
+          <a href="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/" class="block p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-600 hover:bg-cp-dark-200 transition-all group">
+            <h4 class="font-medium text-cp-dark-800 group-hover:text-cp-green-500 transition-colors">
+              MuSig：一個新的多重簽名標準
+            </h4>
+            <time class="text-xs text-cp-dark-600 font-mono mt-1 block">
+              2020-03-11
+            </time>
+          </a>
+          
+        </div>
+      </div>
+      
+      
+
+      <!-- Comments -->
+      
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <h3 class="text-lg font-mono font-bold text-cp-green-500 mb-4">
+          <span class="text-cp-dark-600">//</span> 留言
+        </h3>
+        <!-- Comments Section - Giscus -->
+
+<div id="giscus-comments" class="giscus-container">
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="cypherpunks-core/cypherpunks-core.github.io"
+    data-repo-id=""
+    data-category="Comments"
+    data-category-id=""
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="true"
+    data-emit-metadata="false"
+    data-input-position="top"
+    data-theme="dark"
+    data-lang="zh-TW"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+<noscript>
+  <div class="p-4 bg-cp-dark-200 border border-cp-dark-400 rounded-lg text-center">
+    <p class="text-cp-dark-600 font-mono text-sm">
+      請啟用 JavaScript 來查看留言
+    </p>
+  </div>
+</noscript>
+
+<style>
+  /* Giscus 樣式覆蓋 */
+  .giscus-container {
+    margin-top: 1rem;
+  }
+
+  .giscus-frame {
+    border: 1px solid #30363d !important;
+    border-radius: 0.5rem !important;
+  }
+</style>
+
+
+      </div>
+      
+    </div>
+
+    <!-- TOC Sidebar -->
+    
+    <aside class="hidden xl:block w-64 flex-shrink-0">
+      <div class="sticky top-24">
+        <!-- Table of Contents -->
+<nav class="toc bg-cp-dark-100 border border-cp-dark-400 rounded-lg p-4" aria-label="目錄">
+  <h3 class="text-sm font-mono font-bold text-cp-green-500 mb-3 pb-2 border-b border-cp-dark-400">
+    <span class="text-cp-dark-600">//</span> 目錄
+  </h3>
+
+  <div id="toc-content" class="text-sm space-y-1">
+    <!-- TOC will be generated by JavaScript -->
+    <p class="text-cp-dark-600 font-mono text-xs">載入中...</p>
+  </div>
+</nav>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tocContainer = document.getElementById('toc-content');
+  const article = document.querySelector('.content');
+
+  if (!tocContainer || !article) return;
+
+  // Get all headings
+  const headings = article.querySelectorAll('h2, h3, h4');
+
+  if (headings.length === 0) {
+    tocContainer.innerHTML = '<p class="text-cp-dark-600 font-mono text-xs">此文章無目錄</p>';
+    return;
+  }
+
+  // Build TOC
+  let tocHTML = '<ul class="space-y-1">';
+  let lastLevel = 2;
+
+  headings.forEach((heading, index) => {
+    // Create ID if not exists
+    if (!heading.id) {
+      heading.id = 'heading-' + index;
+    }
+
+    const level = parseInt(heading.tagName.charAt(1));
+    const indent = (level - 2) * 12;
+
+    tocHTML += `
+      <li style="padding-left: ${indent}px;">
+        <a href="#${heading.id}"
+           class="toc-link block py-1 text-cp-dark-700 hover:text-cp-green-500 transition-colors truncate font-mono"
+           data-target="${heading.id}">
+          ${heading.textContent}
+        </a>
+      </li>
+    `;
+  });
+
+  tocHTML += '</ul>';
+  tocContainer.innerHTML = tocHTML;
+
+  // Active state tracking
+  const tocLinks = tocContainer.querySelectorAll('.toc-link');
+
+  const observerOptions = {
+    rootMargin: '-80px 0px -80% 0px',
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Remove active from all
+        tocLinks.forEach(link => {
+          link.classList.remove('text-cp-green-500', 'border-l-2', 'border-cp-green-500', 'pl-2', '-ml-2');
+          link.classList.add('text-cp-dark-700');
+        });
+
+        // Add active to current
+        const activeLink = tocContainer.querySelector(`[data-target="${entry.target.id}"]`);
+        if (activeLink) {
+          activeLink.classList.remove('text-cp-dark-700');
+          activeLink.classList.add('text-cp-green-500', 'border-l-2', 'border-cp-green-500', 'pl-2', '-ml-2');
+        }
+      }
+    });
+  }, observerOptions);
+
+  headings.forEach(heading => observer.observe(heading));
+
+  // Smooth scroll on click
+  tocLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('data-target');
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const offset = 100;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+});
+</script>
+
+      </div>
+    </aside>
+    
+  </div>
+
+  <!-- Post Navigation -->
+  <nav class="mt-12 pt-8 border-t border-cp-dark-400">
+    <div class="flex flex-col sm:flex-row justify-between gap-4">
+      
+      <a href="/news/2019/11/19/Bitcoin%E4%B8%ADBase58Check%E7%B7%A8%E7%A2%BC/" class="flex-1 p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-600 transition-all group">
+        <span class="text-xs text-cp-dark-600 font-mono block mb-1">← 上一篇</span>
+        <span class="text-cp-dark-800 group-hover:text-cp-green-500 transition-colors line-clamp-1">Bitcoin中Base58Check編碼</span>
+      </a>
+      
+
+      
+      <a href="/news/2019/12/08/Bitcoin-%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8D%80%E5%A1%8A%E4%B8%8B%E8%BC%89/" class="flex-1 p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-600 transition-all group text-right">
+        <span class="text-xs text-cp-dark-600 font-mono block mb-1">下一篇 →</span>
+        <span class="text-cp-dark-800 group-hover:text-cp-green-500 transition-colors line-clamp-1">過去到現在的Bitcoin性能測試</span>
+      </a>
+      
+    </div>
+  </nav>
+</article>
+
+        </article>
+
+        <!-- Sidebar (Right) - Latest Posts -->
+        
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  
+  <!-- Footer -->
+<footer class="footer bg-cp-dark-100 border-t border-cp-dark-400 mt-auto" role="contentinfo" aria-label="網站頁尾">
+  <div class="container mx-auto px-4 py-12 max-w-7xl">
+
+    <!-- Main Footer Content -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
+
+      <!-- About -->
+      <div class="lg:col-span-2">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="font-mono text-lg font-bold text-cp-green-500">
+            <span class="text-cp-green-500">[</span>CP<span class="text-cp-green-500">]</span>
+          </span>
+          <span class="font-mono text-sm text-cp-dark-700">Cypherpunks Taiwan</span>
+        </div>
+        <p class="text-cp-dark-600 text-sm font-mono mb-4 max-w-md">
+          密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.
+        </p>
+        <!-- ASCII Art -->
+        <pre class="text-cp-green-600/40 text-[0.5rem] leading-tight font-mono hidden md:block">
+ "Privacy is necessary for an open society
+  in the electronic age." - Eric Hughes
+        </pre>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 快速連結
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="/blog/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > Blog
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/about/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 關於我們
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/products/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 書籍 & 論文
+            </a>
+          </li>
+          <li>
+            <a href="/feed.xml" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > RSS Feed
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 資源
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="/resources/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 資源中心
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/resources/resources-bitcoin/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > Bitcoin
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/resources/resources-ln/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > Lightning
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/knowledge/glossary/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 詞彙表
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Explore -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 探索
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="/tags/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 標籤
+            </a>
+          </li>
+          <li>
+            <a href="/categories/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 分類
+            </a>
+          </li>
+          <li>
+            <a href="/archive/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 歸檔
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social & Contact -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 聯繫
+        </h4>
+        <ul class="space-y-2">
+          
+          <li>
+            <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+              </svg>
+              GitHub
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="https://twitter.com/CypherpunksTW" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              Twitter
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="mailto:01360086@me.mcu.edu.tw" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              Email
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://signal.group/#CjQKIJkrnL-dvsydyzn9Xl4HYZI9-Paf14vYkCq4eh5LhZeyEhALctkOeMMDuSOmYtgvj9QU" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+              </svg>
+              Signal
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/cypherpunks-core/cypherpunks-core.github.io/discussions" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M1.5 4.25c0-.966.784-1.75 1.75-1.75h17.5c.966 0 1.75.784 1.75 1.75v12.5a1.75 1.75 0 01-1.75 1.75h-9.69l-3.573 3.573A1.458 1.458 0 015 21.043V18.5H3.25a1.75 1.75 0 01-1.75-1.75V4.25zM3.25 4a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h2.5a.75.75 0 01.75.75v3.19l3.72-3.72a.749.749 0 01.53-.22h10a.25.25 0 00.25-.25V4.25a.25.25 0 00-.25-.25H3.25z"/>
+              </svg>
+              討論區
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Divider -->
+    <div class="border-t border-cp-dark-400 my-8"></div>
+
+    <!-- Bottom Footer -->
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <!-- Copyright -->
+      <div class="text-cp-dark-600 text-xs font-mono">
+        <span class="text-cp-green-600">&copy;</span> 2026 密碼龐克 Cypherpunks Taiwan.
+        <span class="text-cp-dark-500">Cypherpunks write code.</span>
+      </div>
+
+      <!-- Tech Stack -->
+      <div class="flex items-center gap-4 text-cp-dark-600 text-xs font-mono">
+        <span>Built with</span>
+        <a href="https://jekyllrb.com" target="_blank" rel="noopener noreferrer" class="hover:text-cp-green-500 transition-colors">Jekyll</a>
+        <span>&</span>
+        <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="hover:text-cp-green-500 transition-colors">Tailwind CSS</a>
+      </div>
+
+      <!-- Back to Top -->
+      <button id="back-to-top" class="p-2 bg-cp-dark-200 text-cp-dark-600 hover:text-cp-green-500 hover:bg-cp-dark-300 rounded transition-all opacity-0 invisible" aria-label="回到頂部">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</footer>
+<!-- cache bust 1766382259 -->
+
+  
+
+  <!-- Search Modal -->
+  <!-- Search Modal -->
+<div id="search-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="search-title">
+  <!-- Backdrop -->
+  <div class="search-backdrop absolute inset-0 bg-cp-dark/80 backdrop-blur-sm"></div>
+
+  <!-- Modal Content -->
+  <div class="relative flex items-start justify-center pt-[15vh] px-4">
+    <div class="search-container w-full max-w-2xl bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-2xl overflow-hidden">
+
+      <!-- Search Header -->
+      <div class="p-4 border-b border-cp-dark-400">
+        <div class="flex items-center gap-3">
+          <!-- Search Icon -->
+          <svg class="w-5 h-5 text-cp-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+
+          <!-- Search Input -->
+          <input
+            type="text"
+            id="search-input"
+            class="flex-grow bg-transparent text-cp-dark-800 placeholder-cp-dark-600 font-mono focus:outline-none"
+            placeholder="搜尋文章..."
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+          >
+
+          <!-- Close Button -->
+          <button id="search-close" class="text-cp-dark-600 hover:text-cp-green-500 transition-colors" aria-label="關閉搜尋">
+            <kbd class="px-2 py-1 text-xs bg-cp-dark-200 border border-cp-dark-400 rounded font-mono">ESC</kbd>
+          </button>
+        </div>
+      </div>
+
+      <!-- Search Results -->
+      <div id="search-results" class="max-h-[60vh] overflow-y-auto">
+        <!-- Empty State -->
+        <div id="search-empty" class="p-8 text-center">
+          <div class="text-cp-green-600 font-mono text-4xl mb-4">&gt;_</div>
+          <p class="text-cp-dark-600 font-mono text-sm">輸入關鍵字開始搜尋</p>
+          <p class="text-cp-dark-500 font-mono text-xs mt-2">支援標題、內容、標籤搜尋</p>
+        </div>
+
+        <!-- Results List (populated by JS) -->
+        <div id="search-results-list" class="hidden divide-y divide-cp-dark-400">
+          <!-- Results will be injected here -->
+        </div>
+
+        <!-- No Results -->
+        <div id="search-no-results" class="hidden p-8 text-center">
+          <div class="text-cp-accent-red font-mono text-4xl mb-4">:(</div>
+          <p class="text-cp-dark-600 font-mono text-sm">找不到相關結果</p>
+          <p class="text-cp-dark-500 font-mono text-xs mt-2">試試其他關鍵字</p>
+        </div>
+
+        <!-- Loading State -->
+        <div id="search-loading" class="hidden p-8 text-center">
+          <div class="inline-block animate-spin text-cp-green-500">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+          </div>
+          <p class="text-cp-dark-600 font-mono text-sm mt-4">搜尋中...</p>
+        </div>
+      </div>
+
+      <!-- Search Footer -->
+      <div class="p-3 border-t border-cp-dark-400 bg-cp-dark-200/50">
+        <div class="flex items-center justify-between text-xs text-cp-dark-600 font-mono">
+          <div class="flex items-center gap-4">
+            <span class="flex items-center gap-1">
+              <kbd class="px-1.5 py-0.5 bg-cp-dark-300 border border-cp-dark-400 rounded text-[0.65rem]">↑</kbd>
+              <kbd class="px-1.5 py-0.5 bg-cp-dark-300 border border-cp-dark-400 rounded text-[0.65rem]">↓</kbd>
+              <span>導航</span>
+            </span>
+            <span class="flex items-center gap-1">
+              <kbd class="px-1.5 py-0.5 bg-cp-dark-300 border border-cp-dark-400 rounded text-[0.65rem]">↵</kbd>
+              <span>開啟</span>
+            </span>
+          </div>
+          <span id="search-count" class="text-cp-green-600"></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Search Result Template -->
+<template id="search-result-template">
+  <a href="" class="search-result block p-4 hover:bg-cp-dark-200 transition-colors focus:bg-cp-dark-200 focus:outline-none">
+    <div class="flex items-start gap-3">
+      <div class="flex-shrink-0 w-8 h-8 rounded bg-cp-dark-200 flex items-center justify-center">
+        <svg class="w-4 h-4 text-cp-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+      </div>
+      <div class="flex-grow min-w-0">
+        <h4 class="search-result-title text-cp-dark-800 font-medium truncate"></h4>
+        <p class="search-result-excerpt text-cp-dark-600 text-sm mt-1 line-clamp-2"></p>
+        <div class="search-result-meta flex items-center gap-2 mt-2 text-xs text-cp-dark-500">
+          <time class="search-result-date"></time>
+          <span class="search-result-tags"></span>
+        </div>
+      </div>
+    </div>
+  </a>
+</template>
+
+
+  <!-- Scripts - Deferred for Performance -->
+  <script src="/assets/js/app.js" defer></script>
+  <!-- footer scripts -->
+</body>
+</html>

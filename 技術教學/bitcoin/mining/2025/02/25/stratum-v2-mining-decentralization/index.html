@@ -1,0 +1,3357 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Title -->
+  <title>Stratum V2：礦池協議的去中心化革命 | 密碼龐克 Cypherpunks Taiwan</title>
+
+  <!-- DNS Prefetch for Performance -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+  <!-- Preconnect for Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Critical CSS -->
+  <link rel="stylesheet" href="/assets/css/app.css">
+
+  <!-- Fonts - Minimal (single weight, swap for better UX) -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Noto+Sans+TC:wght@400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Noto+Sans+TC:wght@400&display=swap"></noscript>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="msapplication-TileColor" content="#0a0a0a">
+
+  <!-- Google Search Console Verification -->
+  <meta name="google-site-verification" content="NKf2WplkJcEPUejYK5B-wwvCLtHokxnALBswOe0XheM" />
+
+  <!-- SEO -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Stratum V2：礦池協議的去中心化革命 | 密碼龐克 Cypherpunks Taiwan</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Stratum V2：礦池協議的去中心化革命" />
+<meta name="author" content="Cypherpunks Taiwan" />
+<meta property="og:locale" content="zh_TW" />
+<meta name="description" content="深入解析 Stratum V2 協議的技術架構，如何通過工作選擇和加密通訊實現礦池去中心化，以及對比特幣網路安全的重要意義。" />
+<meta property="og:description" content="深入解析 Stratum V2 協議的技術架構，如何通過工作選擇和加密通訊實現礦池去中心化，以及對比特幣網路安全的重要意義。" />
+<link rel="canonical" href="https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/mining/2025/02/25/stratum-v2-mining-decentralization/" />
+<meta property="og:url" content="https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/mining/2025/02/25/stratum-v2-mining-decentralization/" />
+<meta property="og:site_name" content="密碼龐克 Cypherpunks Taiwan" />
+<meta property="og:image" content="https://cypherpunks-core.github.io/img/stratum-v2.svg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-02-25T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://cypherpunks-core.github.io/img/stratum-v2.svg" />
+<meta property="twitter:title" content="Stratum V2：礦池協議的去中心化革命" />
+<meta name="twitter:site" content="@CypherpunksTW" />
+<meta name="twitter:creator" content="@Cypherpunks Taiwan" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Cypherpunks Taiwan"},"dateModified":"2025-02-25T00:00:00+00:00","datePublished":"2025-02-25T00:00:00+00:00","description":"深入解析 Stratum V2 協議的技術架構，如何通過工作選擇和加密通訊實現礦池去中心化，以及對比特幣網路安全的重要意義。","headline":"Stratum V2：礦池協議的去中心化革命","image":"https://cypherpunks-core.github.io/img/stratum-v2.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/mining/2025/02/25/stratum-v2-mining-decentralization/"},"url":"https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/mining/2025/02/25/stratum-v2-mining-decentralization/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- Open Graph Enhanced -->
+  <meta property="og:locale" content="zh_TW">
+  
+  <meta property="og:image" content="https://cypherpunks-core.github.io/img/stratum-v2.svg">
+  
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:site" content="@CypherpunksTW">
+  <meta name="twitter:creator" content="@CypherpunksTW">
+  
+
+  <!-- JSON-LD Structured Data - WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "密碼龐克 Cypherpunks Taiwan",
+    "url": "https://cypherpunks-core.github.io",
+    "description": "密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://cypherpunks-core.github.io/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data - Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "密碼龐克 Cypherpunks Taiwan",
+    "url": "https://cypherpunks-core.github.io",
+    "logo": "https://cypherpunks-core.github.io/favicon.png",
+    "sameAs": [
+      "https://twitter.com/CypherpunksTW",
+      "https://github.com/cypherpunks-core"
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data - Page/Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Stratum V2：礦池協議的去中心化革命",
+    "description": "深入解析 Stratum V2 協議的技術架構，如何通過工作選擇和加密通訊實現礦池去中心化，以及對比特幣網路安全的重要意義。",
+    
+    "datePublished": "2025-02-25T00:00:00+00:00",
+    "dateModified": "2025-02-25T00:00:00+00:00",
+    
+    "author": {
+      "@type": "Organization",
+      "name": "Cypherpunks Taiwan"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "密碼龐克 Cypherpunks Taiwan",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://cypherpunks-core.github.io/favicon.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/mining/2025/02/25/stratum-v2-mining-decentralization/"
+    }
+    ,
+    "image": "https://cypherpunks-core.github.io/img/stratum-v2.svg"
+    
+    ,
+    "keywords": "bitcoin, mining, stratum, decentralization, pool"
+    
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data - BreadcrumbList -->
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "首頁",
+        "item": "https://cypherpunks-core.github.io"
+      }
+      
+      
+      
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 3,
+            "name": "%e6%8a%80%e8%a1%93%e6%95%99%e5%ad%b8",
+            "item": "https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Bitcoin",
+            "item": "https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 5,
+            "name": "Mining",
+            "item": "https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/mining"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 6,
+            "name": "2025",
+            "item": "https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/mining/2025"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 7,
+            "name": "02",
+            "item": "https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/mining/2025/02"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 8,
+            "name": "25",
+            "item": "https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/mining/2025/02/25"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 9,
+            "name": "Stratum V2：礦池協議的去中心化革命",
+            "item": "https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/mining/2025/02/25/stratum-v2-mining-decentralization"
+          }
+        
+      
+    ]
+  }
+  </script>
+  
+
+  <!-- KaTeX for Math Rendering -->
+  
+
+  <!-- Mermaid for Diagrams -->
+  
+
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="密碼龐克 Cypherpunks Taiwan" href="/feed.xml">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/mining/2025/02/25/stratum-v2-mining-decentralization/">
+
+  <!-- Google Analytics -->
+  
+  <!-- Google Analytics - Deferred Loading for Performance -->
+<script>
+  // Defer GA loading until after page is interactive
+  window.addEventListener('load', function() {
+    // Respect Do Not Track
+    if (window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1") {
+      window['ga-disable-G-ENDDT5D0CR'] = true;
+      return;
+    }
+
+    // Load GA after a short delay to prioritize page content
+    setTimeout(function() {
+      var script = document.createElement('script');
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-ENDDT5D0CR';
+      script.async = true;
+      document.head.appendChild(script);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-ENDDT5D0CR');
+    }, 2000);
+  });
+</script>
+
+  
+
+  <!-- Dark Mode Script (防止閃爍) -->
+  <script>
+    // 立即設置主題，防止閃爍
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const defaultTheme = 'dark';
+
+      let theme;
+      if (savedTheme) {
+        theme = savedTheme;
+      } else if (defaultTheme === 'auto') {
+        theme = prefersDark ? 'dark' : 'light';
+      } else {
+        theme = defaultTheme;
+      }
+
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+      document.documentElement.classList.toggle('light', theme === 'light');
+    })();
+  </script>
+
+  <!-- Custom Head Scripts -->
+  <!-- head scripts -->
+
+</head>
+<body class="min-h-screen flex flex-col bg-cp-dark text-cp-dark-800">
+  <!-- Matrix Rain Background -->
+  
+
+  <!-- Scanlines Effect -->
+  
+
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress" class="reading-progress" style="width: 0%;"></div>
+
+  <!-- Skip to Content (a11y) -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-cp-green-600 focus:text-cp-dark focus:rounded">
+    跳至主要內容
+  </a>
+
+  <!-- Header / Navigation -->
+  <!-- Navigation Header -->
+<nav class="navbar fixed top-0 left-0 right-0 z-40 bg-cp-dark/95 backdrop-blur-md border-b border-cp-dark-400" role="navigation" aria-label="主要導航">
+  <div class="container mx-auto px-4 max-w-7xl">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo / Brand -->
+      <div class="flex items-center">
+        <a href="/" class="flex items-center gap-3 text-cp-green-500 hover:text-cp-green-400 transition-all duration-200 group">
+          <!-- ASCII Logo (簡化版) -->
+          <span class="font-mono text-lg font-bold tracking-tight">
+            <span class="text-cp-green-500 group-hover:text-glow">[</span>
+            <span class="text-cp-green-400">CP</span>
+            <span class="text-cp-green-500 group-hover:text-glow">]</span>
+          </span>
+          <span class="hidden sm:block font-mono text-sm text-cp-dark-700 group-hover:text-cp-dark-800">
+            密碼龐克 Cypherpunks Taiwan
+          </span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center gap-1">
+        <!-- Navigation Items (Home 已移除，Logo 連結首頁即可) -->
+        
+        
+          
+          <!-- Regular Link -->
+          <a href="/blog/" class="navbar-item ">
+            Blog
+          </a>
+          
+        
+          
+          <!-- Dropdown Menu -->
+          <div class="dropdown relative group">
+            <button class="navbar-item flex items-center gap-1" aria-haspopup="true">
+              資源中心
+              <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute top-full left-0 mt-1 py-2 bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-lg min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              
+                
+                <!-- Section Divider -->
+                <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider border-t border-cp-dark-300 mt-1 first:mt-0 first:border-t-0">
+                  核心技術
+                </div>
+                
+              
+                
+                <a href="/markdown/resources/resources-bitcoin/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Bitcoin 比特幣
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-ln/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Lightning Network
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-schnorr-signature/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Taproot & Schnorr
+                </a>
+                
+              
+                
+                <!-- Section Divider -->
+                <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider border-t border-cp-dark-300 mt-1 first:mt-0 first:border-t-0">
+                  進階主題
+                </div>
+                
+              
+                
+                <a href="/markdown/resources/resources-bitcoin-layer2/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Layer 2 技術
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-blockchain-privacy/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  隱私技術
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-nostr/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Nostr 協議
+                </a>
+                
+              
+                
+                <!-- Section Divider -->
+                <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider border-t border-cp-dark-300 mt-1 first:mt-0 first:border-t-0">
+                  開發者
+                </div>
+                
+              
+                
+                <a href="/markdown/resources/resources-developer-tools/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  開發者工具箱
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-self-custody/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  自託管指南
+                </a>
+                
+              
+            </div>
+          </div>
+          
+        
+          
+          <!-- Regular Link -->
+          <a href="/markdown/products/" class="navbar-item ">
+            書籍
+          </a>
+          
+        
+          
+          <!-- Dropdown Menu -->
+          <div class="dropdown relative group">
+            <button class="navbar-item flex items-center gap-1" aria-haspopup="true">
+              知識庫
+              <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute top-full left-0 mt-1 py-2 bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-lg min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              
+                
+                <a href="/markdown/knowledge/glossary/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  術語詞彙表
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-cypherpunk-history/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Cypherpunk 歷史
+                </a>
+                
+              
+                
+                <a href="/markdown/knowledge/knowledge-bitcoin/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Bitcoin 百科
+                </a>
+                
+              
+                
+                <a href="/markdown/knowledge/knowledge-ethereum/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Ethereum 百科
+                </a>
+                
+              
+            </div>
+          </div>
+          
+        
+          
+          <!-- Dropdown Menu -->
+          <div class="dropdown relative group">
+            <button class="navbar-item flex items-center gap-1" aria-haspopup="true">
+              社群
+              <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute top-full left-0 mt-1 py-2 bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-lg min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              
+                
+                <a href="/markdown/about/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  關於我們
+                </a>
+                
+              
+                
+                <a href="/markdown/SatelliteProject/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  衛星計畫
+                </a>
+                
+              
+                
+                <a href="https://github.com/cypherpunks-core/cypherpunks-core.github.io/discussions" target="_blank" rel="noopener noreferrer" class="dropdown-item flex items-center justify-between px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  討論區
+                  <svg class="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </a>
+                
+              
+                
+                <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="dropdown-item flex items-center justify-between px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  GitHub
+                  <svg class="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </a>
+                
+              
+            </div>
+          </div>
+          
+        
+        
+      </div>
+
+      <!-- Right Side Actions -->
+      <div class="flex items-center gap-2">
+        <!-- Search Button -->
+        <button id="search-btn" class="p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="搜尋" title="搜尋 (⌘K)">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="切換主題">
+          <!-- Sun Icon (Dark Mode) -->
+          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          <!-- Moon Icon (Light Mode) -->
+          <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+        </button>
+
+        <!-- GitHub Link -->
+        <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="GitHub">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+          </svg>
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="lg:hidden p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="開啟選單" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Menu -->
+  <div id="mobile-menu" class="lg:hidden hidden bg-cp-dark-100 border-t border-cp-dark-400">
+    <div class="container mx-auto px-4 py-4 space-y-2">
+      
+      
+        
+        <a href="/blog/" class="block px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+          Blog
+        </a>
+        
+      
+        
+        <!-- Mobile Dropdown -->
+        <div class="mobile-dropdown">
+          <button class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+            資源中心
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="mobile-dropdown-menu hidden pl-4 mt-1 space-y-1">
+            
+              
+              <!-- Section Divider -->
+              <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider">
+                核心技術
+              </div>
+              
+            
+              
+              <a href="/markdown/resources/resources-bitcoin/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Bitcoin 比特幣
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-ln/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Lightning Network
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-schnorr-signature/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Taproot & Schnorr
+              </a>
+              
+            
+              
+              <!-- Section Divider -->
+              <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider">
+                進階主題
+              </div>
+              
+            
+              
+              <a href="/markdown/resources/resources-bitcoin-layer2/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Layer 2 技術
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-blockchain-privacy/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                隱私技術
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-nostr/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Nostr 協議
+              </a>
+              
+            
+              
+              <!-- Section Divider -->
+              <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider">
+                開發者
+              </div>
+              
+            
+              
+              <a href="/markdown/resources/resources-developer-tools/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                開發者工具箱
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-self-custody/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                自託管指南
+              </a>
+              
+            
+          </div>
+        </div>
+        
+      
+        
+        <a href="/markdown/products/" class="block px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+          書籍
+        </a>
+        
+      
+        
+        <!-- Mobile Dropdown -->
+        <div class="mobile-dropdown">
+          <button class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+            知識庫
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="mobile-dropdown-menu hidden pl-4 mt-1 space-y-1">
+            
+              
+              <a href="/markdown/knowledge/glossary/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                術語詞彙表
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-cypherpunk-history/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Cypherpunk 歷史
+              </a>
+              
+            
+              
+              <a href="/markdown/knowledge/knowledge-bitcoin/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Bitcoin 百科
+              </a>
+              
+            
+              
+              <a href="/markdown/knowledge/knowledge-ethereum/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Ethereum 百科
+              </a>
+              
+            
+          </div>
+        </div>
+        
+      
+        
+        <!-- Mobile Dropdown -->
+        <div class="mobile-dropdown">
+          <button class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+            社群
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="mobile-dropdown-menu hidden pl-4 mt-1 space-y-1">
+            
+              
+              <a href="/markdown/about/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                關於我們
+              </a>
+              
+            
+              
+              <a href="/markdown/SatelliteProject/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                衛星計畫
+              </a>
+              
+            
+              
+              <a href="https://github.com/cypherpunks-core/cypherpunks-core.github.io/discussions" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                討論區
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </a>
+              
+            
+              
+              <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                GitHub
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </a>
+              
+            
+          </div>
+        </div>
+        
+      
+      
+    </div>
+  </div>
+</nav>
+
+<!-- Spacer for fixed navbar -->
+<div class="h-16"></div>
+
+
+  <!-- Hero Section -->
+  
+
+  <!-- Main Content -->
+  <main id="main-content" class="flex-grow">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+      <div class="flex flex-col lg:flex-row gap-8">
+
+        <!-- Sidebar (Left) - Optional Menu -->
+        
+
+        <!-- Main Content Area -->
+        <article class="flex-grow min-w-0 max-w-4xl mx-auto">
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <!-- Post Header -->
+  <header class="mb-8">
+    <!-- Category Badge -->
+    
+
+    <!-- Title -->
+    <h1 class="text-3xl md:text-4xl font-bold font-mono text-cp-green-500 mb-4 text-glow-sm" itemprop="headline">
+      Stratum V2：礦池協議的去中心化革命
+    </h1>
+
+    <!-- Meta Info -->
+    <div class="flex flex-wrap items-center gap-4 text-sm text-cp-dark-600 font-mono">
+      <!-- Date -->
+      <time datetime="2025-02-25T00:00:00+00:00" itemprop="datePublished" class="flex items-center gap-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        2025-02-25
+      </time>
+
+      <!-- Author -->
+      <span class="flex items-center gap-1" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+        </svg>
+        <span itemprop="name">Cypherpunks Taiwan</span>
+      </span>
+
+      <!-- Reading Time -->
+      
+      
+      
+      
+      <span class="flex items-center gap-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        5 分鐘閱讀
+      </span>
+      
+    </div>
+  </header>
+
+  <!-- Featured Image -->
+  
+  <figure class="mb-8 rounded-lg overflow-hidden border border-cp-dark-400">
+    <img
+      src="/img/stratum-v2.svg"
+      alt="Stratum V2：礦池協議的去中心化革命"
+      class="w-full h-auto"
+      loading="lazy"
+      itemprop="image"
+    >
+  </figure>
+  
+
+  <!-- Post Content with TOC -->
+  <div class="flex flex-col lg:flex-row gap-8">
+    <!-- Main Content -->
+    <div class="flex-grow min-w-0">
+      <div class="content prose prose-invert max-w-none" itemprop="articleBody">
+        <h2 id="前言">前言</h2>
+
+<p>比特幣挖礦的中心化問題一直是社區關注的焦點。目前大多數算力通過少數幾個大型礦池控制，這些礦池決定區塊內容，礦工只是提供算力。<strong>Stratum V2</strong> 是一個革命性的協議升級，旨在將區塊構建的權力歸還給礦工。</p>
+
+<hr />
+
+<h2 id="一stratum-協議背景">一、Stratum 協議背景</h2>
+
+<h3 id="什麼是-stratum">什麼是 Stratum？</h3>
+
+<p>Stratum 是礦工和礦池之間的通訊協議：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>礦工 ←──Stratum──→ 礦池
+
+作用：
+1. 礦池發送工作（區塊模板）
+2. 礦工提交份額（shares）
+3. 礦池驗證並支付
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="stratum-v1-的問題">Stratum V1 的問題</h3>
+
+<p>2012 年由 Slush Pool 創建的 Stratum V1 存在嚴重缺陷：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>問題</th>
+      <th>說明</th>
+      <th>影響</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>明文傳輸</strong></td>
+      <td>無加密</td>
+      <td>可被監聽/劫持</td>
+    </tr>
+    <tr>
+      <td><strong>無認證</strong></td>
+      <td>無法驗證礦池身份</td>
+      <td>中間人攻擊</td>
+    </tr>
+    <tr>
+      <td><strong>集中控制</strong></td>
+      <td>礦池決定交易</td>
+      <td>審查風險</td>
+    </tr>
+    <tr>
+      <td><strong>效率低</strong></td>
+      <td>JSON 格式臃腫</td>
+      <td>帶寬浪費</td>
+    </tr>
+    <tr>
+      <td><strong>無標準</strong></td>
+      <td>各礦池自行擴展</td>
+      <td>互操作性差</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="為什麼需要改變">為什麼需要改變？</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>當前挖礦中心化問題：
+
+前 4 大礦池控制 &gt; 50% 算力
+        │
+        ↓
+礦池可以：
+  - 審查特定交易
+  - 實施空區塊攻擊
+  - 被政府施壓
+  - 協調 51% 攻擊
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h2 id="二stratum-v2-概述">二、Stratum V2 概述</h2>
+
+<h3 id="核心目標">核心目標</h3>
+
+<ol>
+  <li><strong>去中心化</strong> - 礦工選擇交易</li>
+  <li><strong>安全性</strong> - 加密通訊</li>
+  <li><strong>效率</strong> - 二進制協議</li>
+  <li><strong>標準化</strong> - 開放規範</li>
+</ol>
+
+<h3 id="關鍵創新">關鍵創新</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>Stratum V1             Stratum V2
+─────────              ─────────
+JSON 明文    →    二進制加密
+礦池選交易   →    礦工選交易
+無認證       →    Noise 協議認證
+單一連接     →    多通道
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="三個子協議">三個子協議</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>子協議</th>
+      <th>功能</th>
+      <th>必需</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Mining Protocol</strong></td>
+      <td>核心挖礦通訊</td>
+      <td>是</td>
+    </tr>
+    <tr>
+      <td><strong>Job Declaration</strong></td>
+      <td>工作聲明（礦工選交易）</td>
+      <td>否</td>
+    </tr>
+    <tr>
+      <td><strong>Template Distribution</strong></td>
+      <td>模板分發</td>
+      <td>否</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="三技術架構">三、技術架構</h2>
+
+<h3 id="協議層次">協議層次</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre>┌─────────────────────────────────────────┐
+│           Application Layer              │
+│    (Mining, Job Declaration, Template)   │
+├─────────────────────────────────────────┤
+│           Framing Layer                  │
+│    (消息分幀和序列化)                     │
+├─────────────────────────────────────────┤
+│           Noise Protocol                 │
+│    (加密和認證)                          │
+├─────────────────────────────────────────┤
+│           TCP/IP                         │
+└─────────────────────────────────────────┘
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="noise-協議加密">Noise 協議加密</h3>
+
+<p>Stratum V2 使用 Noise Protocol Framework：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre>握手模式：Noise_NX_secp256k1_ChaChaPoly_SHA256
+
+特性：
+- 前向保密
+- 身份認證
+- 防止中間人攻擊
+
+握手流程：
+1. 礦工 → 礦池：臨時公鑰
+2. 礦池 → 礦工：臨時公鑰 + 靜態公鑰 + 簽名
+3. 建立加密通道
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="消息格式">消息格式</h3>
+
+<p><strong>V1（JSON）：</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mining.submit"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"worker"</span><span class="p">,</span><span class="w"> </span><span class="s2">"job_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"extranonce2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ntime"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nonce"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>V2（二進制）：</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>┌──────┬──────┬──────────────────┐
+│ Type │ Size │ Payload          │
+│ 2B   │ 3B   │ Variable         │
+└──────┴──────┴──────────────────┘
+
+優勢：
+- 減少 ~50% 帶寬
+- 解析更快
+- 無歧義
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h2 id="四工作選擇job-declaration">四、工作選擇（Job Declaration）</h2>
+
+<h3 id="核心概念">核心概念</h3>
+
+<p>Job Declaration 協議允許礦工選擇區塊內的交易：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>傳統模式（V1）：
+礦池 → 完整區塊模板 → 礦工
+       ↓
+       礦工只能接受或斷開
+
+新模式（V2 + Job Declaration）：
+礦工 → 本地構建區塊模板 → 提交給礦池驗證
+       ↓
+       礦工控制交易選擇
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="技術流程">技術流程</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre>┌─────────────┐         ┌─────────────┐
+│   礦工       │         │    礦池     │
+└──────┬──────┘         └──────┬──────┘
+       │                        │
+       │  1. 聲明自定義工作      │
+       │ ───────────────────→  │
+       │    (merkle root)       │
+       │                        │
+       │  2. 驗證基本有效性      │
+       │ ←─────────────────── │
+       │    (接受/拒絕)         │
+       │                        │
+       │  3. 提交份額           │
+       │ ───────────────────→  │
+       │                        │
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="驗證規則">驗證規則</h3>
+
+<p>礦池仍然可以執行基本驗證：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>礦池驗證內容：
+✅ 區塊頭格式正確
+✅ 難度目標正確
+✅ 時間戳合理
+✅ coinbase 輸出正確
+
+礦池不關心：
+❌ 具體包含哪些交易
+❌ 交易順序
+❌ 費用最優化
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="防止惡意行為">防止惡意行為</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>如果礦工提交無效區塊：
+
+1. 礦池不會廣播無效區塊
+2. 礦工浪費自己的算力
+3. 經濟激勵保持誠實
+
+結果：
+- 礦工有動力構建有效區塊
+- 但可以選擇自己的交易優先順序
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h2 id="五實際部署架構">五、實際部署架構</h2>
+
+<h3 id="場景一簡單升級">場景一：簡單升級</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>┌──────────────┐      ┌──────────────┐
+│  ASIC 礦機   │ ──→  │  SV2 Proxy   │ ──→ 礦池
+│  (Stratum V1) │      │  (翻譯層)    │     (SV2)
+└──────────────┘      └──────────────┘
+
+優點：
+- 不需要更換礦機
+- 立即獲得加密好處
+- 漸進式升級
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="場景二完整部署">場景二：完整部署</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="rouge-code"><pre>┌──────────────┐
+│  ASIC 礦機   │
+│  (原生 SV2)  │
+└──────┬───────┘
+       │ 加密連接
+       ↓
+┌──────────────┐      ┌──────────────┐
+│ Job          │ ──→  │   礦池       │
+│ Declarator   │      │   (SV2)      │
+└──────────────┘      └──────────────┘
+       │
+       ↓
+┌──────────────┐
+│ Bitcoin Core │
+│ (模板來源)   │
+└──────────────┘
+
+優點：
+- 完整的工作選擇能力
+- 最大化去中心化
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="場景三獨立挖礦">場景三：獨立挖礦</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre>┌──────────────┐
+│  ASIC 礦機   │
+│  (原生 SV2)  │
+└──────┬───────┘
+       │
+       ↓
+┌──────────────┐      ┌──────────────┐
+│ Template     │ ←──  │ Bitcoin Core │
+│ Provider     │      │ (節點)       │
+└──────┬───────┘      └──────────────┘
+       │
+       ↓
+   直接提交區塊
+
+適用：
+- 大型礦場
+- 追求完全自主
+- 足夠算力保證收益
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h2 id="六與礦池的關係">六、與礦池的關係</h2>
+
+<h3 id="礦池的新角色">礦池的新角色</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre>傳統礦池職責：
+1. 構建區塊模板
+2. 分發工作
+3. 驗證份額
+4. 支付礦工
+
+Stratum V2 後：
+1. （可選）構建區塊模板
+2. 分發工作/接受礦工工作
+3. 驗證份額
+4. 支付礦工
+5. 提供保險性收入平滑
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="礦池適應策略">礦池適應策略</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>策略</th>
+      <th>說明</th>
+      <th>例子</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>完全支援</strong></td>
+      <td>允許礦工選擇交易</td>
+      <td>Braiins Pool</td>
+    </tr>
+    <tr>
+      <td><strong>部分支援</strong></td>
+      <td>加密通訊但不支援 JD</td>
+      <td>待定</td>
+    </tr>
+    <tr>
+      <td><strong>抵制</strong></td>
+      <td>繼續使用 V1</td>
+      <td>部分中國礦池</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="經濟激勵">經濟激勵</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre>為什麼礦池會支援？
+
+1. 競爭壓力
+   - 如果其他礦池支援，不支援會失去礦工
+
+2. 減少責任
+   - 不再為區塊內容負責
+   - 降低監管風險
+
+3. 效率提升
+   - 二進制協議節省資源
+   - 加密防止算力劫持
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h2 id="七安全性分析">七、安全性分析</h2>
+
+<h3 id="防止的攻擊">防止的攻擊</h3>
+
+<p><strong>1. 算力劫持</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>V1 風險：
+攻擊者 ──監聽──→ 礦工連接 ──替換──→ 發送假工作
+                                    ↓
+                              算力被盜用
+
+V2 解決：
+加密通道 → 無法監聽或篡改
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>2. 中間人攻擊</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>V1 風險：
+礦工 ←──?──→ 攻擊者 ←──?──→ 真實礦池
+
+V2 解決：
+- Noise 協議認證
+- 礦池公鑰驗證
+- 無法偽造身份
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>3. 選擇性審查</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>V1 風險：
+礦池決定區塊內容 → 可排除特定交易
+
+V2 + Job Declaration：
+礦工決定區塊內容 → 審查需要全網礦工配合
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="殘餘風險">殘餘風險</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>風險</th>
+      <th>說明</th>
+      <th>緩解</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>礦池拒絕工作</td>
+      <td>礦池可以拒絕特定交易</td>
+      <td>礦工可以換礦池</td>
+    </tr>
+    <tr>
+      <td>51% 攻擊</td>
+      <td>仍然可能</td>
+      <td>不是協議層問題</td>
+    </tr>
+    <tr>
+      <td>礦工合謀</td>
+      <td>礦工可能串通</td>
+      <td>經濟激勵對抗</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="八實現狀態">八、實現狀態</h2>
+
+<h3 id="核心開發">核心開發</h3>
+
+<p><strong>Stratum Reference Implementation (SRI)：</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="c"># 安裝 SRI</span>
+git clone https://github.com/stratum-mining/stratum
+<span class="nb">cd </span>stratum
+cargo build <span class="nt">--release</span>
+
+<span class="c"># 運行翻譯代理</span>
+./target/release/translator_proxy <span class="se">\</span>
+  <span class="nt">--upstream-address</span> pool.example.com:3333 <span class="se">\</span>
+  <span class="nt">--downstream-port</span> 3334
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="礦池支援">礦池支援</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>礦池</th>
+      <th>狀態</th>
+      <th>備註</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Braiins Pool</strong></td>
+      <td>✅ 生產環境</td>
+      <td>首個支援</td>
+    </tr>
+    <tr>
+      <td><strong>DEMAND</strong></td>
+      <td>✅ 支援</td>
+      <td>完整 JD</td>
+    </tr>
+    <tr>
+      <td><strong>Ocean</strong></td>
+      <td>✅ 支援</td>
+      <td>Luke Dashjr 項目</td>
+    </tr>
+    <tr>
+      <td><strong>Foundry</strong></td>
+      <td>🚧 測試中</td>
+      <td>計劃支援</td>
+    </tr>
+    <tr>
+      <td><strong>F2Pool</strong></td>
+      <td>🚧 評估中</td>
+      <td>待定</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="硬體支援">硬體支援</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>製造商</th>
+      <th>狀態</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Bitmain</strong></td>
+      <td>🚧 討論中</td>
+    </tr>
+    <tr>
+      <td><strong>MicroBT</strong></td>
+      <td>🚧 討論中</td>
+    </tr>
+    <tr>
+      <td><strong>Intel (Blockscale)</strong></td>
+      <td>✅ 原生支援</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="軟體生態">軟體生態</h3>
+
+<ul>
+  <li><strong>SRI Proxy</strong> - 翻譯代理（V1 → V2）</li>
+  <li><strong>BraiinsOS</strong> - 支援 SV2 的礦機固件</li>
+  <li><strong>Bitcoin Core</strong> - 模板提供整合（進行中）</li>
+</ul>
+
+<hr />
+
+<h2 id="九對比特幣的意義">九、對比特幣的意義</h2>
+
+<h3 id="網路安全影響">網路安全影響</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre>當前狀況：
+4 個礦池 &gt; 50% 算力
+        │
+        ↓
+理論上可以協調審查
+
+Stratum V2 後：
+4 個礦池 &gt; 50% 算力
+        │
+        但是
+        ↓
+每個礦工獨立選擇交易
+        │
+        ↓
+審查需要協調所有礦工（不可能）
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="去中心化指標">去中心化指標</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>指標</th>
+      <th>V1</th>
+      <th>V2 + JD</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>區塊構建者</td>
+      <td>~10 礦池</td>
+      <td>~100,000+ 礦工</td>
+    </tr>
+    <tr>
+      <td>審查門檻</td>
+      <td>協調 4 礦池</td>
+      <td>協調大多數礦工</td>
+    </tr>
+    <tr>
+      <td>交易包含決定</td>
+      <td>中心化</td>
+      <td>去中心化</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="與比特幣精神一致">與比特幣精神一致</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>中本聰的願景：
+"一 CPU 一票"
+
+現實：
+"一礦池一票"
+
+Stratum V2：
+"回歸一礦工一票（在區塊構建上）"
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h2 id="十挑戰與展望">十、挑戰與展望</h2>
+
+<h3 id="採用挑戰">採用挑戰</h3>
+
+<p><strong>1. 硬體升級</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>問題：現有 ASIC 不支援原生 SV2
+解決：翻譯代理允許漸進升級
+時間線：3-5 年完全過渡
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>2. 礦池激勵</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>問題：礦池失去控制權
+解決：效率提升 + 競爭壓力
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>3. 教育和意識</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>問題：礦工不了解好處
+解決：社區教育 + 實際演示
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="未來發展">未來發展</h3>
+
+<ol>
+  <li><strong>Bitcoin Core 整合</strong>
+    <ul>
+      <li>內建模板分發</li>
+      <li>簡化獨立挖礦</li>
+    </ul>
+  </li>
+  <li><strong>更多硬體支援</strong>
+    <ul>
+      <li>主要 ASIC 製造商</li>
+      <li>原生 SV2 芯片</li>
+    </ul>
+  </li>
+  <li><strong>新功能</strong>
+    <ul>
+      <li>更好的份額驗證</li>
+      <li>跨池失效轉移</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="路線圖">路線圖</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre>2023-2024：
+  - SRI 穩定版本
+  - 主要礦池測試
+
+2024-2025：
+  - 硬體製造商整合
+  - 更多礦池生產部署
+
+2025+：
+  - 原生 SV2 礦機普及
+  - Job Declaration 廣泛使用
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h2 id="開發者指南">開發者指南</h2>
+
+<h3 id="設置翻譯代理">設置翻譯代理</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="c"># 配置文件 proxy-config.toml</span>
+<span class="o">[</span>upstream]
+address <span class="o">=</span> <span class="s2">"pool.example.com:3333"</span>
+authority_pubkey <span class="o">=</span> <span class="s2">"abc123..."</span>
+
+<span class="o">[</span>downstream]
+listen_address <span class="o">=</span> <span class="s2">"0.0.0.0:3334"</span>
+
+<span class="c"># 啟動代理</span>
+./sv2-translator-proxy <span class="nt">--config</span> proxy-config.toml
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="實現自定義-job-declarator">實現自定義 Job Declarator</h3>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="rouge-code"><pre><span class="k">use</span> <span class="nn">stratum_v2</span><span class="p">::</span><span class="nn">job_declaration</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+<span class="k">async</span> <span class="k">fn</span> <span class="nf">declare_job</span><span class="p">(</span>
+    <span class="n">template</span><span class="p">:</span> <span class="n">BlockTemplate</span><span class="p">,</span>
+    <span class="n">declarator</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">JobDeclarator</span>
+<span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Result</span><span class="o">&lt;</span><span class="n">JobId</span><span class="p">,</span> <span class="n">Error</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// 從 Bitcoin Core 獲取交易</span>
+    <span class="k">let</span> <span class="n">transactions</span> <span class="o">=</span> <span class="nf">get_mempool_transactions</span><span class="p">()</span><span class="k">.await</span><span class="o">?</span><span class="p">;</span>
+
+    <span class="c1">// 構建 merkle tree</span>
+    <span class="k">let</span> <span class="n">merkle_root</span> <span class="o">=</span> <span class="nf">build_merkle_root</span><span class="p">(</span><span class="o">&amp;</span><span class="n">transactions</span><span class="p">);</span>
+
+    <span class="c1">// 聲明工作</span>
+    <span class="k">let</span> <span class="n">job</span> <span class="o">=</span> <span class="n">declarator</span><span class="nf">.declare_mining_job</span><span class="p">(</span>
+        <span class="n">merkle_root</span><span class="p">,</span>
+        <span class="n">template</span><span class="py">.version</span><span class="p">,</span>
+        <span class="n">template</span><span class="py">.prev_block_hash</span><span class="p">,</span>
+    <span class="p">)</span><span class="k">.await</span><span class="o">?</span><span class="p">;</span>
+
+    <span class="nf">Ok</span><span class="p">(</span><span class="n">job</span><span class="py">.id</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="監控和調試">監控和調試</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="c"># 查看連接狀態</span>
+sv2-cli status
+
+<span class="c"># 輸出示例</span>
+Connection: Encrypted <span class="o">(</span>Noise_NX<span class="o">)</span>
+Pool: pool.example.com
+Upstream Version: SV2
+Jobs Declared: 1,234
+Shares Submitted: 56,789
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h2 id="結論">結論</h2>
+
+<p>Stratum V2 代表了比特幣挖礦基礎設施的重大進步：</p>
+
+<ol>
+  <li><strong>安全性提升</strong> - 加密通訊防止劫持和監聽</li>
+  <li><strong>效率改進</strong> - 二進制協議減少帶寬和延遲</li>
+  <li><strong>去中心化</strong> - 礦工選擇交易，分散區塊構建權力</li>
+  <li><strong>標準化</strong> - 開放協議促進生態系統發展</li>
+</ol>
+
+<p>對於比特幣的長期安全，Stratum V2 的 Job Declaration 功能尤為重要。它將區塊構建的權力從少數礦池分散到成千上萬的獨立礦工，使得審查攻擊變得極其困難。</p>
+
+<p><strong>行動建議：</strong></p>
+<ul>
+  <li>✅ 礦工：聯繫礦池詢問 SV2 支援</li>
+  <li>✅ 礦池：開始 SV2 整合測試</li>
+  <li>✅ 開發者：參與 SRI 開發</li>
+  <li>✅ 社區：推廣 SV2 意識</li>
+</ul>
+
+<hr />
+
+<h2 id="參考資料">參考資料</h2>
+
+<ul>
+  <li><a href="https://stratumprotocol.org/">Stratum V2 官方網站</a></li>
+  <li><a href="https://github.com/stratum-mining/stratum">Stratum Reference Implementation</a></li>
+  <li><a href="https://braiins.com/stratum-v2">Braiins Stratum V2 文檔</a></li>
+  <li><a href="https://bitcoinops.org/en/topics/stratum-v2/">Bitcoin Optech: Stratum V2</a></li>
+  <li><a href="https://github.com/stratum-mining/sv2-spec">BIP: Stratum V2</a></li>
+</ul>
+
+      </div>
+
+      <!-- Tags -->
+      
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <h3 class="text-sm font-mono text-cp-dark-600 mb-3">
+          <span class="text-cp-green-600">#</span> 標籤
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          
+          <a href="/tags/#bitcoin" class="tag text-xs px-3 py-1 bg-cp-dark-200 text-cp-green-500 border border-cp-dark-400 rounded font-mono hover:border-cp-green-500 hover:bg-cp-green-500/10 transition-all">
+            bitcoin
+          </a>
+          
+          <a href="/tags/#mining" class="tag text-xs px-3 py-1 bg-cp-dark-200 text-cp-green-500 border border-cp-dark-400 rounded font-mono hover:border-cp-green-500 hover:bg-cp-green-500/10 transition-all">
+            mining
+          </a>
+          
+          <a href="/tags/#stratum" class="tag text-xs px-3 py-1 bg-cp-dark-200 text-cp-green-500 border border-cp-dark-400 rounded font-mono hover:border-cp-green-500 hover:bg-cp-green-500/10 transition-all">
+            stratum
+          </a>
+          
+          <a href="/tags/#decentralization" class="tag text-xs px-3 py-1 bg-cp-dark-200 text-cp-green-500 border border-cp-dark-400 rounded font-mono hover:border-cp-green-500 hover:bg-cp-green-500/10 transition-all">
+            decentralization
+          </a>
+          
+          <a href="/tags/#pool" class="tag text-xs px-3 py-1 bg-cp-dark-200 text-cp-green-500 border border-cp-dark-400 rounded font-mono hover:border-cp-green-500 hover:bg-cp-green-500/10 transition-all">
+            pool
+          </a>
+          
+        </div>
+      </div>
+      
+
+      <!-- Share Buttons -->
+      
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <h3 class="text-sm font-mono text-cp-dark-600 mb-3">
+          <span class="text-cp-green-600">//</span> 分享
+        </h3>
+        <!-- Share Buttons -->
+<div class="flex flex-wrap items-center gap-2">
+  <!-- Twitter/X -->
+  <a
+    href="https://twitter.com/intent/tweet?text=Stratum%20V2%EF%BC%9A%E7%A4%A6%E6%B1%A0%E5%8D%94%E8%AD%B0%E7%9A%84%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E9%9D%A9%E5%91%BD&url=https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/mining/2025/02/25/stratum-v2-mining-decentralization/&via=CypherpunksTW"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex items-center gap-2 px-3 py-2 bg-cp-dark-200 text-cp-dark-700 border border-cp-dark-400 rounded-lg hover:border-cp-green-500 hover:text-cp-green-500 transition-all font-mono text-sm"
+    aria-label="分享到 Twitter"
+  >
+    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    </svg>
+    <span class="hidden sm:inline">Twitter</span>
+  </a>
+
+  <!-- Facebook -->
+  <a
+    href="https://www.facebook.com/sharer/sharer.php?u=https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/mining/2025/02/25/stratum-v2-mining-decentralization/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex items-center gap-2 px-3 py-2 bg-cp-dark-200 text-cp-dark-700 border border-cp-dark-400 rounded-lg hover:border-cp-green-500 hover:text-cp-green-500 transition-all font-mono text-sm"
+    aria-label="分享到 Facebook"
+  >
+    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    </svg>
+    <span class="hidden sm:inline">Facebook</span>
+  </a>
+
+  <!-- Copy Link -->
+  <button
+    id="copy-link-btn"
+    class="inline-flex items-center gap-2 px-3 py-2 bg-cp-dark-200 text-cp-dark-700 border border-cp-dark-400 rounded-lg hover:border-cp-green-500 hover:text-cp-green-500 transition-all font-mono text-sm"
+    data-url="https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/mining/2025/02/25/stratum-v2-mining-decentralization/"
+    aria-label="複製連結"
+  >
+    <svg class="w-4 h-4 copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+    </svg>
+    <svg class="w-4 h-4 check-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+    </svg>
+    <span class="btn-text">複製連結</span>
+  </button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const copyBtn = document.getElementById('copy-link-btn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async function() {
+      const url = this.dataset.url;
+      const copyIcon = this.querySelector('.copy-icon');
+      const checkIcon = this.querySelector('.check-icon');
+      const btnText = this.querySelector('.btn-text');
+
+      try {
+        await navigator.clipboard.writeText(url);
+        copyIcon.classList.add('hidden');
+        checkIcon.classList.remove('hidden');
+        btnText.textContent = '已複製!';
+
+        setTimeout(() => {
+          copyIcon.classList.remove('hidden');
+          checkIcon.classList.add('hidden');
+          btnText.textContent = '複製連結';
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+    });
+  }
+});
+</script>
+
+      </div>
+      
+
+      <!-- Author Bio -->
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <div class="flex items-center gap-4 p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg">
+          <div class="w-12 h-12 rounded-full bg-cp-green-500/20 flex items-center justify-center text-cp-green-500 font-mono font-bold">
+            CP
+          </div>
+          <div>
+            <h4 class="font-mono font-medium text-cp-dark-800">Cypherpunks Taiwan</h4>
+            <p class="text-sm text-cp-dark-600">密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Posts -->
+      
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+            
+            
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+            
+            
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+        
+          
+        
+          
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+
+      
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <h3 class="text-lg font-mono font-bold text-cp-green-500 mb-4">
+          <span class="text-cp-dark-600">//</span> 相關文章
+        </h3>
+        <div class="grid gap-4">
+          
+          <a href="/news/community/2025/04/01/Cypherpunks-Taiwan(8)/" class="block p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-600 hover:bg-cp-dark-200 transition-all group">
+            <h4 class="font-medium text-cp-dark-800 group-hover:text-cp-green-500 transition-colors">
+              Cypherpunks Taiwan 小聚圓滿落幕｜謝謝每一位參與這場自由技術對話的人
+            </h4>
+            <time class="text-xs text-cp-dark-600 font-mono mt-1 block">
+              2025-04-01
+            </time>
+          </a>
+          
+          <a href="/news/community/2025/03/24/Cypherpunks-Taiwan-%E9%87%8D%E5%95%9F-%E6%88%91%E5%80%91%E7%82%BA%E4%BD%95%E5%86%8D%E6%AC%A1%E8%81%9A%E9%9B%86/" class="block p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-600 hover:bg-cp-dark-200 transition-all group">
+            <h4 class="font-medium text-cp-dark-800 group-hover:text-cp-green-500 transition-colors">
+              Cypherpunks Taiwan 重啟：我們為何再次聚集？
+            </h4>
+            <time class="text-xs text-cp-dark-600 font-mono mt-1 block">
+              2025-03-24
+            </time>
+          </a>
+          
+          <a href="/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/development/2025/03/20/bitcoin-script-tutorial-6-advanced-applications/" class="block p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-600 hover:bg-cp-dark-200 transition-all group">
+            <h4 class="font-medium text-cp-dark-800 group-hover:text-cp-green-500 transition-colors">
+              Bitcoin Script 實戰教學（六）：進階應用與未來展望
+            </h4>
+            <time class="text-xs text-cp-dark-600 font-mono mt-1 block">
+              2025-03-20
+            </time>
+          </a>
+          
+        </div>
+      </div>
+      
+      
+
+      <!-- Comments -->
+      
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <h3 class="text-lg font-mono font-bold text-cp-green-500 mb-4">
+          <span class="text-cp-dark-600">//</span> 留言
+        </h3>
+        <!-- Comments Section - Giscus -->
+
+<div id="giscus-comments" class="giscus-container">
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="cypherpunks-core/cypherpunks-core.github.io"
+    data-repo-id=""
+    data-category="Comments"
+    data-category-id=""
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="true"
+    data-emit-metadata="false"
+    data-input-position="top"
+    data-theme="dark"
+    data-lang="zh-TW"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+<noscript>
+  <div class="p-4 bg-cp-dark-200 border border-cp-dark-400 rounded-lg text-center">
+    <p class="text-cp-dark-600 font-mono text-sm">
+      請啟用 JavaScript 來查看留言
+    </p>
+  </div>
+</noscript>
+
+<style>
+  /* Giscus 樣式覆蓋 */
+  .giscus-container {
+    margin-top: 1rem;
+  }
+
+  .giscus-frame {
+    border: 1px solid #30363d !important;
+    border-radius: 0.5rem !important;
+  }
+</style>
+
+
+      </div>
+      
+    </div>
+
+    <!-- TOC Sidebar -->
+    
+    <aside class="hidden xl:block w-64 flex-shrink-0">
+      <div class="sticky top-24">
+        <!-- Table of Contents -->
+<nav class="toc bg-cp-dark-100 border border-cp-dark-400 rounded-lg p-4" aria-label="目錄">
+  <h3 class="text-sm font-mono font-bold text-cp-green-500 mb-3 pb-2 border-b border-cp-dark-400">
+    <span class="text-cp-dark-600">//</span> 目錄
+  </h3>
+
+  <div id="toc-content" class="text-sm space-y-1">
+    <!-- TOC will be generated by JavaScript -->
+    <p class="text-cp-dark-600 font-mono text-xs">載入中...</p>
+  </div>
+</nav>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tocContainer = document.getElementById('toc-content');
+  const article = document.querySelector('.content');
+
+  if (!tocContainer || !article) return;
+
+  // Get all headings
+  const headings = article.querySelectorAll('h2, h3, h4');
+
+  if (headings.length === 0) {
+    tocContainer.innerHTML = '<p class="text-cp-dark-600 font-mono text-xs">此文章無目錄</p>';
+    return;
+  }
+
+  // Build TOC
+  let tocHTML = '<ul class="space-y-1">';
+  let lastLevel = 2;
+
+  headings.forEach((heading, index) => {
+    // Create ID if not exists
+    if (!heading.id) {
+      heading.id = 'heading-' + index;
+    }
+
+    const level = parseInt(heading.tagName.charAt(1));
+    const indent = (level - 2) * 12;
+
+    tocHTML += `
+      <li style="padding-left: ${indent}px;">
+        <a href="#${heading.id}"
+           class="toc-link block py-1 text-cp-dark-700 hover:text-cp-green-500 transition-colors truncate font-mono"
+           data-target="${heading.id}">
+          ${heading.textContent}
+        </a>
+      </li>
+    `;
+  });
+
+  tocHTML += '</ul>';
+  tocContainer.innerHTML = tocHTML;
+
+  // Active state tracking
+  const tocLinks = tocContainer.querySelectorAll('.toc-link');
+
+  const observerOptions = {
+    rootMargin: '-80px 0px -80% 0px',
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Remove active from all
+        tocLinks.forEach(link => {
+          link.classList.remove('text-cp-green-500', 'border-l-2', 'border-cp-green-500', 'pl-2', '-ml-2');
+          link.classList.add('text-cp-dark-700');
+        });
+
+        // Add active to current
+        const activeLink = tocContainer.querySelector(`[data-target="${entry.target.id}"]`);
+        if (activeLink) {
+          activeLink.classList.remove('text-cp-dark-700');
+          activeLink.classList.add('text-cp-green-500', 'border-l-2', 'border-cp-green-500', 'pl-2', '-ml-2');
+        }
+      }
+    });
+  }, observerOptions);
+
+  headings.forEach(heading => observer.observe(heading));
+
+  // Smooth scroll on click
+  tocLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('data-target');
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const offset = 100;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+});
+</script>
+
+      </div>
+    </aside>
+    
+  </div>
+
+  <!-- Post Navigation -->
+  <nav class="mt-12 pt-8 border-t border-cp-dark-400">
+    <div class="flex flex-col sm:flex-row justify-between gap-4">
+      
+      <a href="/nostr/decentralization/2025/02/20/nostr-protocol-deep-dive/" class="flex-1 p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-600 transition-all group">
+        <span class="text-xs text-cp-dark-600 font-mono block mb-1">← 上一篇</span>
+        <span class="text-cp-dark-800 group-hover:text-cp-green-500 transition-colors line-clamp-1">Nostr 協議深度解析：去中心化社交網路的未來</span>
+      </a>
+      
+
+      
+      <a href="/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/tutorial/2025/03/01/bitcoin-full-node-series-1-why-run-node/" class="flex-1 p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-600 transition-all group text-right">
+        <span class="text-xs text-cp-dark-600 font-mono block mb-1">下一篇 →</span>
+        <span class="text-cp-dark-800 group-hover:text-cp-green-500 transition-colors line-clamp-1">從零開始的比特幣全節點（一）：為什麼要運行全節點？</span>
+      </a>
+      
+    </div>
+  </nav>
+</article>
+
+        </article>
+
+        <!-- Sidebar (Right) - Latest Posts -->
+        
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  
+  <!-- Footer -->
+<footer class="footer bg-cp-dark-100 border-t border-cp-dark-400 mt-auto" role="contentinfo" aria-label="網站頁尾">
+  <div class="container mx-auto px-4 py-12 max-w-7xl">
+
+    <!-- Main Footer Content -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
+
+      <!-- About -->
+      <div class="lg:col-span-2">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="font-mono text-lg font-bold text-cp-green-500">
+            <span class="text-cp-green-500">[</span>CP<span class="text-cp-green-500">]</span>
+          </span>
+          <span class="font-mono text-sm text-cp-dark-700">Cypherpunks Taiwan</span>
+        </div>
+        <p class="text-cp-dark-600 text-sm font-mono mb-4 max-w-md">
+          密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.
+        </p>
+        <!-- ASCII Art -->
+        <pre class="text-cp-green-600/40 text-[0.5rem] leading-tight font-mono hidden md:block">
+ "Privacy is necessary for an open society
+  in the electronic age." - Eric Hughes
+        </pre>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 快速連結
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="/blog/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > Blog
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/about/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 關於我們
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/products/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 書籍 & 論文
+            </a>
+          </li>
+          <li>
+            <a href="/feed.xml" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > RSS Feed
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 資源
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="/resources/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 資源中心
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/resources/resources-bitcoin/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > Bitcoin
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/resources/resources-ln/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > Lightning
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/knowledge/glossary/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 詞彙表
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Explore -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 探索
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="/tags/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 標籤
+            </a>
+          </li>
+          <li>
+            <a href="/categories/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 分類
+            </a>
+          </li>
+          <li>
+            <a href="/archive/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 歸檔
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social & Contact -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 聯繫
+        </h4>
+        <ul class="space-y-2">
+          
+          <li>
+            <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+              </svg>
+              GitHub
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="https://twitter.com/CypherpunksTW" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              Twitter
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="mailto:01360086@me.mcu.edu.tw" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              Email
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://signal.group/#CjQKIJkrnL-dvsydyzn9Xl4HYZI9-Paf14vYkCq4eh5LhZeyEhALctkOeMMDuSOmYtgvj9QU" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+              </svg>
+              Signal
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/cypherpunks-core/cypherpunks-core.github.io/discussions" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M1.5 4.25c0-.966.784-1.75 1.75-1.75h17.5c.966 0 1.75.784 1.75 1.75v12.5a1.75 1.75 0 01-1.75 1.75h-9.69l-3.573 3.573A1.458 1.458 0 015 21.043V18.5H3.25a1.75 1.75 0 01-1.75-1.75V4.25zM3.25 4a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h2.5a.75.75 0 01.75.75v3.19l3.72-3.72a.749.749 0 01.53-.22h10a.25.25 0 00.25-.25V4.25a.25.25 0 00-.25-.25H3.25z"/>
+              </svg>
+              討論區
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Divider -->
+    <div class="border-t border-cp-dark-400 my-8"></div>
+
+    <!-- Bottom Footer -->
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <!-- Copyright -->
+      <div class="text-cp-dark-600 text-xs font-mono">
+        <span class="text-cp-green-600">&copy;</span> 2026 密碼龐克 Cypherpunks Taiwan.
+        <span class="text-cp-dark-500">Cypherpunks write code.</span>
+      </div>
+
+      <!-- Tech Stack -->
+      <div class="flex items-center gap-4 text-cp-dark-600 text-xs font-mono">
+        <span>Built with</span>
+        <a href="https://jekyllrb.com" target="_blank" rel="noopener noreferrer" class="hover:text-cp-green-500 transition-colors">Jekyll</a>
+        <span>&</span>
+        <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="hover:text-cp-green-500 transition-colors">Tailwind CSS</a>
+      </div>
+
+      <!-- Back to Top -->
+      <button id="back-to-top" class="p-2 bg-cp-dark-200 text-cp-dark-600 hover:text-cp-green-500 hover:bg-cp-dark-300 rounded transition-all opacity-0 invisible" aria-label="回到頂部">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</footer>
+<!-- cache bust 1766382259 -->
+
+  
+
+  <!-- Search Modal -->
+  <!-- Search Modal -->
+<div id="search-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="search-title">
+  <!-- Backdrop -->
+  <div class="search-backdrop absolute inset-0 bg-cp-dark/80 backdrop-blur-sm"></div>
+
+  <!-- Modal Content -->
+  <div class="relative flex items-start justify-center pt-[15vh] px-4">
+    <div class="search-container w-full max-w-2xl bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-2xl overflow-hidden">
+
+      <!-- Search Header -->
+      <div class="p-4 border-b border-cp-dark-400">
+        <div class="flex items-center gap-3">
+          <!-- Search Icon -->
+          <svg class="w-5 h-5 text-cp-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+
+          <!-- Search Input -->
+          <input
+            type="text"
+            id="search-input"
+            class="flex-grow bg-transparent text-cp-dark-800 placeholder-cp-dark-600 font-mono focus:outline-none"
+            placeholder="搜尋文章..."
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+          >
+
+          <!-- Close Button -->
+          <button id="search-close" class="text-cp-dark-600 hover:text-cp-green-500 transition-colors" aria-label="關閉搜尋">
+            <kbd class="px-2 py-1 text-xs bg-cp-dark-200 border border-cp-dark-400 rounded font-mono">ESC</kbd>
+          </button>
+        </div>
+      </div>
+
+      <!-- Search Results -->
+      <div id="search-results" class="max-h-[60vh] overflow-y-auto">
+        <!-- Empty State -->
+        <div id="search-empty" class="p-8 text-center">
+          <div class="text-cp-green-600 font-mono text-4xl mb-4">&gt;_</div>
+          <p class="text-cp-dark-600 font-mono text-sm">輸入關鍵字開始搜尋</p>
+          <p class="text-cp-dark-500 font-mono text-xs mt-2">支援標題、內容、標籤搜尋</p>
+        </div>
+
+        <!-- Results List (populated by JS) -->
+        <div id="search-results-list" class="hidden divide-y divide-cp-dark-400">
+          <!-- Results will be injected here -->
+        </div>
+
+        <!-- No Results -->
+        <div id="search-no-results" class="hidden p-8 text-center">
+          <div class="text-cp-accent-red font-mono text-4xl mb-4">:(</div>
+          <p class="text-cp-dark-600 font-mono text-sm">找不到相關結果</p>
+          <p class="text-cp-dark-500 font-mono text-xs mt-2">試試其他關鍵字</p>
+        </div>
+
+        <!-- Loading State -->
+        <div id="search-loading" class="hidden p-8 text-center">
+          <div class="inline-block animate-spin text-cp-green-500">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+          </div>
+          <p class="text-cp-dark-600 font-mono text-sm mt-4">搜尋中...</p>
+        </div>
+      </div>
+
+      <!-- Search Footer -->
+      <div class="p-3 border-t border-cp-dark-400 bg-cp-dark-200/50">
+        <div class="flex items-center justify-between text-xs text-cp-dark-600 font-mono">
+          <div class="flex items-center gap-4">
+            <span class="flex items-center gap-1">
+              <kbd class="px-1.5 py-0.5 bg-cp-dark-300 border border-cp-dark-400 rounded text-[0.65rem]">↑</kbd>
+              <kbd class="px-1.5 py-0.5 bg-cp-dark-300 border border-cp-dark-400 rounded text-[0.65rem]">↓</kbd>
+              <span>導航</span>
+            </span>
+            <span class="flex items-center gap-1">
+              <kbd class="px-1.5 py-0.5 bg-cp-dark-300 border border-cp-dark-400 rounded text-[0.65rem]">↵</kbd>
+              <span>開啟</span>
+            </span>
+          </div>
+          <span id="search-count" class="text-cp-green-600"></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Search Result Template -->
+<template id="search-result-template">
+  <a href="" class="search-result block p-4 hover:bg-cp-dark-200 transition-colors focus:bg-cp-dark-200 focus:outline-none">
+    <div class="flex items-start gap-3">
+      <div class="flex-shrink-0 w-8 h-8 rounded bg-cp-dark-200 flex items-center justify-center">
+        <svg class="w-4 h-4 text-cp-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+      </div>
+      <div class="flex-grow min-w-0">
+        <h4 class="search-result-title text-cp-dark-800 font-medium truncate"></h4>
+        <p class="search-result-excerpt text-cp-dark-600 text-sm mt-1 line-clamp-2"></p>
+        <div class="search-result-meta flex items-center gap-2 mt-2 text-xs text-cp-dark-500">
+          <time class="search-result-date"></time>
+          <span class="search-result-tags"></span>
+        </div>
+      </div>
+    </div>
+  </a>
+</template>
+
+
+  <!-- Scripts - Deferred for Performance -->
+  <script src="/assets/js/app.js" defer></script>
+  <!-- footer scripts -->
+</body>
+</html>

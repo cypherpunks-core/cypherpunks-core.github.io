@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#0d0d0d"/>
+  <rect x="1" y="1" width="398" height="298" fill="none" stroke="#333" stroke-width="2"/>
+  <g fill="#00ff00" opacity="0.3">
+    <text x="200" y="130" font-family="monospace" font-size="48" text-anchor="middle">[?]</text>
+    <text x="200" y="180" font-family="monospace" font-size="14" text-anchor="middle">IMAGE NOT FOUND</text>
+  </g>
+</svg>

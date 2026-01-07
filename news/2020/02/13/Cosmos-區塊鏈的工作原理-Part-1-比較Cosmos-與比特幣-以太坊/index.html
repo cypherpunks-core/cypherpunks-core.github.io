@@ -1,0 +1,2303 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Title -->
+  <title>Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊 | 密碼龐克 Cypherpunks Taiwan</title>
+
+  <!-- DNS Prefetch for Performance -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+  <!-- Preconnect for Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Critical CSS -->
+  <link rel="stylesheet" href="/assets/css/app.css">
+
+  <!-- Fonts - Minimal (single weight, swap for better UX) -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Noto+Sans+TC:wght@400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Noto+Sans+TC:wght@400&display=swap"></noscript>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="msapplication-TileColor" content="#0a0a0a">
+
+  <!-- Google Search Console Verification -->
+  <meta name="google-site-verification" content="NKf2WplkJcEPUejYK5B-wwvCLtHokxnALBswOe0XheM" />
+
+  <!-- SEO -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊 | 密碼龐克 Cypherpunks Taiwan</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊" />
+<meta name="author" content="Cypherpunks Taiwan" />
+<meta property="og:locale" content="zh_TW" />
+<meta name="description" content="本文對 Cosmos 網路中區塊鏈和比特幣、以太坊進行了鉅細靡遺的比較。作者先從區塊鏈系統的棧層出發，分析了比特幣、以太坊在不同棧層上的技術要點，最後迴歸到 Cosmos 網路中的區塊鏈，概念解釋尤為清晰，是不可多得的解釋文" />
+<meta property="og:description" content="本文對 Cosmos 網路中區塊鏈和比特幣、以太坊進行了鉅細靡遺的比較。作者先從區塊鏈系統的棧層出發，分析了比特幣、以太坊在不同棧層上的技術要點，最後迴歸到 Cosmos 網路中的區塊鏈，概念解釋尤為清晰，是不可多得的解釋文" />
+<link rel="canonical" href="https://cypherpunks-core.github.io/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/" />
+<meta property="og:url" content="https://cypherpunks-core.github.io/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/" />
+<meta property="og:site_name" content="密碼龐克 Cypherpunks Taiwan" />
+<meta property="og:image" content="https://cypherpunks-core.github.io/img/149.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-13T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://cypherpunks-core.github.io/img/149.jpg" />
+<meta property="twitter:title" content="Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊" />
+<meta name="twitter:site" content="@CypherpunksTW" />
+<meta name="twitter:creator" content="@Cypherpunks Taiwan" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Cypherpunks Taiwan"},"dateModified":"2020-02-13T00:00:00+00:00","datePublished":"2020-02-13T00:00:00+00:00","description":"本文對 Cosmos 網路中區塊鏈和比特幣、以太坊進行了鉅細靡遺的比較。作者先從區塊鏈系統的棧層出發，分析了比特幣、以太坊在不同棧層上的技術要點，最後迴歸到 Cosmos 網路中的區塊鏈，概念解釋尤為清晰，是不可多得的解釋文","headline":"Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊","image":"https://cypherpunks-core.github.io/img/149.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://cypherpunks-core.github.io/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/"},"url":"https://cypherpunks-core.github.io/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- Open Graph Enhanced -->
+  <meta property="og:locale" content="zh_TW">
+  
+  <meta property="og:image" content="https://cypherpunks-core.github.io/img/149.jpg">
+  
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:site" content="@CypherpunksTW">
+  <meta name="twitter:creator" content="@CypherpunksTW">
+  
+
+  <!-- JSON-LD Structured Data - WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "密碼龐克 Cypherpunks Taiwan",
+    "url": "https://cypherpunks-core.github.io",
+    "description": "密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://cypherpunks-core.github.io/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data - Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "密碼龐克 Cypherpunks Taiwan",
+    "url": "https://cypherpunks-core.github.io",
+    "logo": "https://cypherpunks-core.github.io/favicon.png",
+    "sameAs": [
+      "https://twitter.com/CypherpunksTW",
+      "https://github.com/cypherpunks-core"
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data - Page/Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊",
+    "description": "本文對 Cosmos 網路中區塊鏈和比特幣、以太坊進行了鉅細靡遺的比較。作者先從區塊鏈系統的棧層出發，分析了比特幣、以太坊在不同棧層上的技術要點，最後迴歸到 Cosmos 網路中的區塊鏈，概念解釋尤為清晰，是不可多得的解釋文",
+    
+    "datePublished": "2020-02-13T00:00:00+00:00",
+    "dateModified": "2020-02-13T00:00:00+00:00",
+    
+    "author": {
+      "@type": "Organization",
+      "name": "Cypherpunks Taiwan"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "密碼龐克 Cypherpunks Taiwan",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://cypherpunks-core.github.io/favicon.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://cypherpunks-core.github.io/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/"
+    }
+    ,
+    "image": "https://cypherpunks-core.github.io/img/149.jpg"
+    
+    ,
+    "keywords": "cosmos"
+    
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data - BreadcrumbList -->
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "首頁",
+        "item": "https://cypherpunks-core.github.io"
+      }
+      
+      
+      
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 3,
+            "name": "News",
+            "item": "https://cypherpunks-core.github.io/news"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 4,
+            "name": "2020",
+            "item": "https://cypherpunks-core.github.io/news/2020"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 5,
+            "name": "02",
+            "item": "https://cypherpunks-core.github.io/news/2020/02"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 6,
+            "name": "13",
+            "item": "https://cypherpunks-core.github.io/news/2020/02/13"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 7,
+            "name": "Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊",
+            "item": "https://cypherpunks-core.github.io/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A"
+          }
+        
+      
+    ]
+  }
+  </script>
+  
+
+  <!-- KaTeX for Math Rendering -->
+  
+
+  <!-- Mermaid for Diagrams -->
+  
+
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="密碼龐克 Cypherpunks Taiwan" href="/feed.xml">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://cypherpunks-core.github.io/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/">
+
+  <!-- Google Analytics -->
+  
+  <!-- Google Analytics - Deferred Loading for Performance -->
+<script>
+  // Defer GA loading until after page is interactive
+  window.addEventListener('load', function() {
+    // Respect Do Not Track
+    if (window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1") {
+      window['ga-disable-G-ENDDT5D0CR'] = true;
+      return;
+    }
+
+    // Load GA after a short delay to prioritize page content
+    setTimeout(function() {
+      var script = document.createElement('script');
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-ENDDT5D0CR';
+      script.async = true;
+      document.head.appendChild(script);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-ENDDT5D0CR');
+    }, 2000);
+  });
+</script>
+
+  
+
+  <!-- Dark Mode Script (防止閃爍) -->
+  <script>
+    // 立即設置主題，防止閃爍
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const defaultTheme = 'dark';
+
+      let theme;
+      if (savedTheme) {
+        theme = savedTheme;
+      } else if (defaultTheme === 'auto') {
+        theme = prefersDark ? 'dark' : 'light';
+      } else {
+        theme = defaultTheme;
+      }
+
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+      document.documentElement.classList.toggle('light', theme === 'light');
+    })();
+  </script>
+
+  <!-- Custom Head Scripts -->
+  <!-- head scripts -->
+
+</head>
+<body class="min-h-screen flex flex-col bg-cp-dark text-cp-dark-800">
+  <!-- Matrix Rain Background -->
+  
+
+  <!-- Scanlines Effect -->
+  
+
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress" class="reading-progress" style="width: 0%;"></div>
+
+  <!-- Skip to Content (a11y) -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-cp-green-600 focus:text-cp-dark focus:rounded">
+    跳至主要內容
+  </a>
+
+  <!-- Header / Navigation -->
+  <!-- Navigation Header -->
+<nav class="navbar fixed top-0 left-0 right-0 z-40 bg-cp-dark/95 backdrop-blur-md border-b border-cp-dark-400" role="navigation" aria-label="主要導航">
+  <div class="container mx-auto px-4 max-w-7xl">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo / Brand -->
+      <div class="flex items-center">
+        <a href="/" class="flex items-center gap-3 text-cp-green-500 hover:text-cp-green-400 transition-all duration-200 group">
+          <!-- ASCII Logo (簡化版) -->
+          <span class="font-mono text-lg font-bold tracking-tight">
+            <span class="text-cp-green-500 group-hover:text-glow">[</span>
+            <span class="text-cp-green-400">CP</span>
+            <span class="text-cp-green-500 group-hover:text-glow">]</span>
+          </span>
+          <span class="hidden sm:block font-mono text-sm text-cp-dark-700 group-hover:text-cp-dark-800">
+            密碼龐克 Cypherpunks Taiwan
+          </span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center gap-1">
+        <!-- Navigation Items (Home 已移除，Logo 連結首頁即可) -->
+        
+        
+          
+          <!-- Regular Link -->
+          <a href="/blog/" class="navbar-item ">
+            Blog
+          </a>
+          
+        
+          
+          <!-- Dropdown Menu -->
+          <div class="dropdown relative group">
+            <button class="navbar-item flex items-center gap-1" aria-haspopup="true">
+              資源中心
+              <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute top-full left-0 mt-1 py-2 bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-lg min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              
+                
+                <!-- Section Divider -->
+                <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider border-t border-cp-dark-300 mt-1 first:mt-0 first:border-t-0">
+                  核心技術
+                </div>
+                
+              
+                
+                <a href="/markdown/resources/resources-bitcoin/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Bitcoin 比特幣
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-ln/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Lightning Network
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-schnorr-signature/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Taproot & Schnorr
+                </a>
+                
+              
+                
+                <!-- Section Divider -->
+                <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider border-t border-cp-dark-300 mt-1 first:mt-0 first:border-t-0">
+                  進階主題
+                </div>
+                
+              
+                
+                <a href="/markdown/resources/resources-bitcoin-layer2/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Layer 2 技術
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-blockchain-privacy/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  隱私技術
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-nostr/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Nostr 協議
+                </a>
+                
+              
+                
+                <!-- Section Divider -->
+                <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider border-t border-cp-dark-300 mt-1 first:mt-0 first:border-t-0">
+                  開發者
+                </div>
+                
+              
+                
+                <a href="/markdown/resources/resources-developer-tools/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  開發者工具箱
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-self-custody/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  自託管指南
+                </a>
+                
+              
+            </div>
+          </div>
+          
+        
+          
+          <!-- Regular Link -->
+          <a href="/markdown/products/" class="navbar-item ">
+            書籍
+          </a>
+          
+        
+          
+          <!-- Dropdown Menu -->
+          <div class="dropdown relative group">
+            <button class="navbar-item flex items-center gap-1" aria-haspopup="true">
+              知識庫
+              <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute top-full left-0 mt-1 py-2 bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-lg min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              
+                
+                <a href="/markdown/knowledge/glossary/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  術語詞彙表
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-cypherpunk-history/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Cypherpunk 歷史
+                </a>
+                
+              
+                
+                <a href="/markdown/knowledge/knowledge-bitcoin/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Bitcoin 百科
+                </a>
+                
+              
+                
+                <a href="/markdown/knowledge/knowledge-ethereum/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Ethereum 百科
+                </a>
+                
+              
+            </div>
+          </div>
+          
+        
+          
+          <!-- Dropdown Menu -->
+          <div class="dropdown relative group">
+            <button class="navbar-item flex items-center gap-1" aria-haspopup="true">
+              社群
+              <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute top-full left-0 mt-1 py-2 bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-lg min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              
+                
+                <a href="/markdown/about/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  關於我們
+                </a>
+                
+              
+                
+                <a href="/markdown/SatelliteProject/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  衛星計畫
+                </a>
+                
+              
+                
+                <a href="https://github.com/cypherpunks-core/cypherpunks-core.github.io/discussions" target="_blank" rel="noopener noreferrer" class="dropdown-item flex items-center justify-between px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  討論區
+                  <svg class="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </a>
+                
+              
+                
+                <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="dropdown-item flex items-center justify-between px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  GitHub
+                  <svg class="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </a>
+                
+              
+            </div>
+          </div>
+          
+        
+        
+      </div>
+
+      <!-- Right Side Actions -->
+      <div class="flex items-center gap-2">
+        <!-- Search Button -->
+        <button id="search-btn" class="p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="搜尋" title="搜尋 (⌘K)">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="切換主題">
+          <!-- Sun Icon (Dark Mode) -->
+          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          <!-- Moon Icon (Light Mode) -->
+          <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+        </button>
+
+        <!-- GitHub Link -->
+        <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="GitHub">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+          </svg>
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="lg:hidden p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="開啟選單" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Menu -->
+  <div id="mobile-menu" class="lg:hidden hidden bg-cp-dark-100 border-t border-cp-dark-400">
+    <div class="container mx-auto px-4 py-4 space-y-2">
+      
+      
+        
+        <a href="/blog/" class="block px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+          Blog
+        </a>
+        
+      
+        
+        <!-- Mobile Dropdown -->
+        <div class="mobile-dropdown">
+          <button class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+            資源中心
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="mobile-dropdown-menu hidden pl-4 mt-1 space-y-1">
+            
+              
+              <!-- Section Divider -->
+              <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider">
+                核心技術
+              </div>
+              
+            
+              
+              <a href="/markdown/resources/resources-bitcoin/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Bitcoin 比特幣
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-ln/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Lightning Network
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-schnorr-signature/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Taproot & Schnorr
+              </a>
+              
+            
+              
+              <!-- Section Divider -->
+              <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider">
+                進階主題
+              </div>
+              
+            
+              
+              <a href="/markdown/resources/resources-bitcoin-layer2/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Layer 2 技術
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-blockchain-privacy/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                隱私技術
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-nostr/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Nostr 協議
+              </a>
+              
+            
+              
+              <!-- Section Divider -->
+              <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider">
+                開發者
+              </div>
+              
+            
+              
+              <a href="/markdown/resources/resources-developer-tools/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                開發者工具箱
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-self-custody/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                自託管指南
+              </a>
+              
+            
+          </div>
+        </div>
+        
+      
+        
+        <a href="/markdown/products/" class="block px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+          書籍
+        </a>
+        
+      
+        
+        <!-- Mobile Dropdown -->
+        <div class="mobile-dropdown">
+          <button class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+            知識庫
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="mobile-dropdown-menu hidden pl-4 mt-1 space-y-1">
+            
+              
+              <a href="/markdown/knowledge/glossary/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                術語詞彙表
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-cypherpunk-history/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Cypherpunk 歷史
+              </a>
+              
+            
+              
+              <a href="/markdown/knowledge/knowledge-bitcoin/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Bitcoin 百科
+              </a>
+              
+            
+              
+              <a href="/markdown/knowledge/knowledge-ethereum/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Ethereum 百科
+              </a>
+              
+            
+          </div>
+        </div>
+        
+      
+        
+        <!-- Mobile Dropdown -->
+        <div class="mobile-dropdown">
+          <button class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+            社群
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="mobile-dropdown-menu hidden pl-4 mt-1 space-y-1">
+            
+              
+              <a href="/markdown/about/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                關於我們
+              </a>
+              
+            
+              
+              <a href="/markdown/SatelliteProject/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                衛星計畫
+              </a>
+              
+            
+              
+              <a href="https://github.com/cypherpunks-core/cypherpunks-core.github.io/discussions" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                討論區
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </a>
+              
+            
+              
+              <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                GitHub
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </a>
+              
+            
+          </div>
+        </div>
+        
+      
+      
+    </div>
+  </div>
+</nav>
+
+<!-- Spacer for fixed navbar -->
+<div class="h-16"></div>
+
+
+  <!-- Hero Section -->
+  
+
+  <!-- Main Content -->
+  <main id="main-content" class="flex-grow">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+      <div class="flex flex-col lg:flex-row gap-8">
+
+        <!-- Sidebar (Left) - Optional Menu -->
+        
+
+        <!-- Main Content Area -->
+        <article class="flex-grow min-w-0 max-w-4xl mx-auto">
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <!-- Post Header -->
+  <header class="mb-8">
+    <!-- Category Badge -->
+    
+
+    <!-- Title -->
+    <h1 class="text-3xl md:text-4xl font-bold font-mono text-cp-green-500 mb-4 text-glow-sm" itemprop="headline">
+      Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊
+    </h1>
+
+    <!-- Meta Info -->
+    <div class="flex flex-wrap items-center gap-4 text-sm text-cp-dark-600 font-mono">
+      <!-- Date -->
+      <time datetime="2020-02-13T00:00:00+00:00" itemprop="datePublished" class="flex items-center gap-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        2020-02-13
+      </time>
+
+      <!-- Author -->
+      <span class="flex items-center gap-1" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+        </svg>
+        <span itemprop="name">Cypherpunks Taiwan</span>
+      </span>
+
+      <!-- Reading Time -->
+      
+      
+      
+      
+      <span class="flex items-center gap-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        2 分鐘閱讀
+      </span>
+      
+    </div>
+  </header>
+
+  <!-- Featured Image -->
+  
+  <figure class="mb-8 rounded-lg overflow-hidden border border-cp-dark-400">
+    <img
+      src="/img/149.jpg"
+      alt="Cosmos 區塊鏈的工作原理，Part-1：比較Cosmos 與比特幣、以太坊"
+      class="w-full h-auto"
+      loading="lazy"
+      itemprop="image"
+    >
+  </figure>
+  
+
+  <!-- Post Content with TOC -->
+  <div class="flex flex-col lg:flex-row gap-8">
+    <!-- Main Content -->
+    <div class="flex-grow min-w-0">
+      <div class="content prose prose-invert max-w-none" itemprop="articleBody">
+        <blockquote>
+  <p>編者注：本文對 Cosmos 網路中區塊鏈和比特幣、以太坊進行了鉅細靡遺的比較。作者先從區塊鏈系統的棧層出發，分析了比特幣、以太坊在不同棧層上的技術要點，最後迴歸到 Cosmos 網路中的區塊鏈，概念解釋尤為清晰，是不可多得的解釋文。</p>
+</blockquote>
+
+<p>本文來自：<a href="https://ethfans.org/posts/how-does-cosmos-work-part1">ethfans</a> <br />
+鑑於文章實在太長，我們在文首附上了目錄。</p>
+
+<ul>
+  <li><a href="#cosmos-%e6%98%af%e4%bb%80%e9%ba%bc">Cosmos 是什麼？</a>
+    <ul>
+      <li><a href="#%e7%8d%a8%e7%ab%8b%e5%b9%b3%e8%a1%8c%e5%8d%80%e5%a1%8a%e9%8f%88%e7%9a%84%e5%8e%bb%e4%b8%ad%e5%bf%83%e5%8c%96%e7%b6%b2%e8%b7%af">獨立平行區塊鏈的去中心化網路</a></li>
+      <li><a href="#%e6%af%8f%e6%a2%9d%e5%8d%80%e5%a1%8a%e9%8f%88%e9%83%bd%e6%8e%a1%e7%94%a8-bft-%e5%85%b1%e8%ad%98%e7%ae%97%e6%b3%95">“每條區塊鏈都採用 BFT 共識算法”</a></li>
+      <li><a href="#tendermint-%e5%85%b1%e8%ad%98%e7%ae%97%e6%b3%95">“Tendermint 共識算法”</a></li>
+    </ul>
+  </li>
+  <li><a href="#%e5%8d%80%e5%a1%8a%e9%8f%88%e7%b5%90%e6%a7%8b%e7%b0%a1%e4%bb%8b">區塊鏈結構簡介</a>
+    <ul>
+      <li><a href="#%e6%af%94%e7%89%b9%e5%b9%a3%e6%a3%a7%e5%b1%a4%e7%b5%90%e6%a7%8b">比特幣棧層結構</a></li>
+      <li><a href="#%e4%bb%a5%e5%a4%aa%e5%9d%8a%e6%a3%a7%e5%b1%a4%e7%b5%90%e6%a7%8b">以太坊棧層結構</a></li>
+    </ul>
+  </li>
+  <li><a href="#%e5%9f%ba%e6%96%bc%e6%af%94%e7%89%b9%e5%b9%a3%e8%88%87%e4%bb%a5%e5%a4%aa%e5%9d%8a%e6%a7%8b%e5%bb%ba%e6%87%89%e7%94%a8%e7%a8%8b%e5%bc%8f">基於比特幣與以太坊構建應用程式</a>
+    <ul>
+      <li><a href="#%e6%af%94%e7%89%b9%e5%b9%a3%e4%be%b7%e9%99%90%e6%80%a7%e7%9a%84%e4%b8%80%e5%80%8b%e4%be%8b%e5%ad%90">比特幣侷限性的一個例子</a></li>
+      <li><a href="#%e4%bb%a5%e5%a4%aa%e5%9d%8a%e4%be%b7%e9%99%90%e6%80%a7%e7%9a%84%e4%b8%80%e5%80%8b%e4%be%8b%e5%ad%90">以太坊侷限性的一個例子</a></li>
+    </ul>
+  </li>
+  <li><a href="#cosmos-%e5%8d%80%e5%a1%8a%e9%8f%88%e7%b5%90%e6%a7%8b">Cosmos 區塊鏈結構</a>
+    <ul>
+      <li><a href="#cosmos-%e5%85%b1%e8%ad%98%e5%b1%a4">Cosmos 共識層</a></li>
+      <li><a href="#tendermint-%e5%85%b1%e8%ad%98%e6%98%af%e5%a6%82%e4%bd%95%e9%81%8b%e4%bd%9c%e7%9a%84">Tendermint 共識是如何運作的？</a></li>
+      <li><a href="#cosmos-%e7%b6%b2%e8%b7%af%e5%b1%a4">Cosmos 網路層</a></li>
+      <li><a href="#cosmos-%e6%87%89%e7%94%a8%e5%b1%a4">Cosmos 應用層</a></li>
+    </ul>
+  </li>
+  <li><a href="#%e7%b5%90%e8%ab%96">結論</a></li>
+</ul>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/5ca7121ac7ae45a4a55cddeae218a5cb.jpg" alt="1.jpg" /></p>
+
+<p>密碼學貨幣產業從未停下腳步。</p>
+
+<p>一切都始於2010年比特幣的問世。比特幣剛問世時，所有人都認為它是數字貨幣的聖盃。曾經被認為不可能的事情現在變成了現實：第一個點對點（peer-to-peer，P2P）支付網路出現了。</p>
+
+<p>即便在今天，對事物的信任仍然是最難以琢磨並且最珍貴的資產。比特幣通過創建第一個“免信任型”系統，繞過了這一問題。但這僅僅是一個開始。</p>
+
+<p>從那之後，比特幣就成為了催生更廣泛密碼學創新的催化劑，這些創新也導致了一系列新型去中心化系統與金融基礎設施的出現：以太坊（Ethereum）、閃電網路（Lighting Network）、EOS、Tezos、Maker…… 這個名單還在不斷延長。</p>
+
+<ul>
+  <li>*但是有一個項目與眾不同：Cosmos** 。</li>
+</ul>
+
+<p>在區塊鏈領域，<a href="https://cosmos.network/">Cosmos</a> 是一個“新生兒”。雖然它的理念已經出現有一段時間了，但其開發團隊一直在背後慢慢地開發以確保 Cosmos 設計及實現的正確性。這也使得 Cosmos 最近才公開推出。</p>
+
+<p>因此，有很多人看過 Cosmos 項目之後卻不理解它也就不足為奇了。簡單瀏覽 Cosmos 相關資料並不會讓他們能夠直觀地瞭解 Cosmos，反而會讓他們有更多疑問：</p>
+
+<ul>
+  <li>
+    <p>*什麼是 Cosmos？**</p>
+  </li>
+  <li>
+    <p>*Cosmos 的工作原理是什麼？**</p>
+  </li>
+  <li>
+    <p>*與比特幣、以太坊相比 Cosmos 有什麼不同？**</p>
+  </li>
+  <li>
+    <p>*Cosmos 的特點是什麼？**</p>
+  </li>
+</ul>
+
+<p>我已經知道 Cosmos 團隊快兩年了。老實說，當我第一次聽說他們在做什麼的時候，我和其他人一樣對它的概念一無所知。</p>
+
+<p>但當我更深入地瞭解 Cosmos 之後，我開始非常欣賞它。我這麼說不僅是為了引人注目，是真正地發自內心。</p>
+
+<p>我對 Cosmos 非常著迷，所以我們決定將 TruStory 應用構建為一個 Cosmos 區塊鏈應用。 <em>（插播：我將在之後的文章中更詳細地闡述我們為什麼會做出這個決定）</em></p>
+
+<p>儘管如此，關於 Cosmos 仍然有很多困惑。所以我決定專門為此寫一篇文章。我想讓讀者對 Cosmos 是什麼以及它在區塊鏈世界中的定位有一個更深層次的理解。</p>
+
+<p>你準備好開始了麼？理清思緒，帶上你的思考帽，繫好安全帶。我們要開車啦！</p>
+
+<h2 id="cosmos-是什麼">Cosmos 是什麼？</h2>
+
+<p>Cosmos 是這樣定義自己的：</p>
+
+<ul>
+  <li>*“一個由多條獨立平行區塊鏈組成的去中心化網路，每條平行區塊鏈均採用 BFT 共識算法（例如：Tendermint 共識）。”**</li>
+</ul>
+
+<p>哇，好拗口啊！讓我們把這個定義拆分成幾個容易理解的部分。</p>
+
+<h3 id="獨立平行區塊鏈的去中心化網路">獨立平行區塊鏈的去中心化網路</h3>
+
+<p>我在這裡假設讀者已經對區塊鏈非常瞭解了！不過，我還是快速回顧一下：</p>
+
+<p>簡單來說，區塊鏈是一個分佈在許多計算機上的數據庫，每臺計算機上的數據庫都保持相同的狀態。換句話說，每臺計算機上的數據庫所包含的數據都完全相同。這些計算機共同組成了所謂的“區塊鏈網路”。</p>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/2e3b581e3cd74baeb1bb1bc26e31db14.png" alt="2.png" /></p>
+
+<p>比特幣和以太坊都是區塊鏈，而 Cosmos 是由許多這樣並行運行的區塊鏈組成的區塊鏈網路。</p>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/c1bd73967e4c4a77a034c9498ebc90c6.png" alt="3.png" /></p>
+
+<p>如果你不能完全理解剛才說的，那麼在進一步瞭解 Cosmos 工作原理之前，你最好再多讀一些關於<a href="https://hackernoon.com/wtf-is-the-blockchain-1da89ba19348">區塊鏈的基礎知識</a>。（編者注：中譯本見文末超鏈接《區塊鏈是什麼鬼》）</p>
+
+<h3 id="每條區塊鏈都採用-bft-共識算法">“每條區塊鏈都採用 BFT 共識算法”</h3>
+
+<p>BFT 是 “Byzantine Fault-Tolerant（拜占庭容錯）”的縮寫。一條拜占庭容錯的區塊鏈能夠在網路中部分節點宕機 以及/或者 作惡（即所謂“拜占庭式節點”）的情況下，保證網路依舊具備“安全性”與“活性”等性質。安全性與活性能夠確保區塊鏈網路中每個節點維護相同的狀態。</p>
+
+<p>插播：如果你想要更深入地瞭解什麼是安全性（Safety）與活性（Liveness），請閱讀我的這篇有關<a href="https://www.preethikasireddy.com/posts/lets-take-a-crack-at-understanding-distributed-consensus/">分佈式共識的文章</a>。（編者注：中譯本見文末超鏈接《分佈式共識的工作原理，Part-2》）</p>
+
+<p>因此，一種 “BFT 共識算法” 乃是定義了計算機間通信與協調、使得區塊鏈具有拜占庭容錯能力的算法。Cosmos 網路中的所有區塊鏈都採用某種 BFT 共識算法。</p>
+
+<p>比特幣和以太坊的共識算法不是典型的 BFT 算法。所以它們不符合 Cosmos 網路中區塊鏈的定義。（值得注意的是，雖然它們不是拜占庭容錯的，但仍然可以讓比特幣和以太坊等區塊鏈加入 Cosmos 網路，僅僅需要一些額外的步驟。如果你覺得費解，不用擔心——我們將稍後對此進行更深入的研究。）</p>
+
+<p>插播：如果你還是不清楚什麼是 BFT，我在<a href="https://www.preethikasireddy.com/posts/lets-take-a-crack-at-understanding-distributed-consensus/">這篇文章</a>中寫得蠻清楚了。（編者注：中譯本見文末超鏈接《分佈式共識的工作原理，Part-3》）</p>
+
+<h3 id="tendermint-共識算法">“Tendermint 共識算法”</h3>
+
+<p>Tendermint 是由 Cosmos 開發者提出並構建的一種 BFT 共識算法。Cosmos 網路中的區塊鏈可以使用 Tendermint 共識或任何其他 BFT 共識算法。稍後我們將在本文了解更多關於 Tendermint 的內容。</p>
+
+<p>簡單來說，Cosmos 網路是一個由多條並行運行的獨立拜占庭容錯區塊鏈組成的生態系統。這些區塊鏈是  <em>獨立運行的</em> ，並且能夠與其他區塊鏈進行  <em>互操作</em> 。</p>
+
+<p>現在你可能會想， <em>“為什麼區塊鏈之間要進行互操作呢？”</em></p>
+
+<p>好問題！我們很快就會講到。但首先我們要回顧一下區塊鏈的結構。</p>
+
+<h2 id="區塊鏈結構簡介">區塊鏈結構簡介</h2>
+
+<p>在深入研究 Cosmos 生態系統中區塊鏈是如何工作和互操作的之前，讓我們先回顧一下區塊鏈結構的基礎知識。</p>
+
+<p>正如我們前面所討論的，區塊鏈是一個多機複製數據庫，並且在每臺計算機上維護相同的數據。這種類型的分佈式系統也被稱為“複製狀態機”。</p>
+
+<p>複製狀態機是一種多機複製的確定性狀態機，但因為網路中每臺計算機都維護著相同的狀態，因此在功能上看起來就像一臺單機。</p>
+
+<p>聽起來很熟悉，對吧？回顧上文區塊鏈的定義，這裡的定義僅僅是將“數據庫”替換為“狀態機”、“數據”替換為“狀態”，相信你能明白我的意思。</p>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/8621dc23daed4911b746a343c7a7ac50.png" alt="4.png" /></p>
+
+<ul>
+  <li>*“確定性”**  可以簡單地理解為，給定一個確定的輸入，狀態機將始終產生相同的輸出。在區塊鏈系統中，“確定性”意味著如果你從一個給定狀態開始執行相同的交易序列，你總是會得到相同的最終狀態。</li>
+</ul>
+
+<p>複製狀態機從某個狀態啟動。每筆有效交易都將導致系統狀態轉變到下一個狀態（這與數據庫中條目更新相同：如果你更新某個條目，數據庫將遷移到包含該更新後數據條目的新狀態）。</p>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/aa88e909d5f34339af4aabc42e5a751f.png" alt="5.png" /></p>
+
+<p>複製狀態機在概念上有三個棧層：</p>
+
+<ul>
+  <li>*1）應用層**</li>
+</ul>
+
+<p>應用層負責定義狀態變遷，並在交易發生後更新狀態機狀態。</p>
+
+<ul>
+  <li>*2）網路層**</li>
+</ul>
+
+<p>網路層負責將在某一個狀態機上執行的交易傳播到網路中其他所有狀態機上。</p>
+
+<ul>
+  <li>*3）共識層**</li>
+</ul>
+
+<p>共識層由算法組成，負責確保在交易執行後每一臺狀態機都存儲相同的狀態（即，某一狀態機無法偽造不存在的交易）。</p>
+
+<ul>
+  <li>*3a）抗女巫攻擊層**</li>
+</ul>
+
+<p>試圖在去中心化公網運行的複製狀態機還需要第四層（“抗女巫攻擊層”），確保任何一臺狀態機都不能破壞網路。如果沒有這一層，狀態機可以通過創建許多假身份來篡改狀態，從而獲得與其投入不成比例的影響或收益（即，發起<a href="https://en.wikipedia.org/wiki/Sybil_attack">女巫攻擊</a>）。</p>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/9b3e9316caae4284885bdf4029c027cb.png" alt="6.png" /></p>
+
+<p>總之，應用層負責定義狀態與管理狀態遷移。網路與共識層負責保持每臺機器上狀態一致（即，確保網路中每個數據庫數據一致）。抗女巫攻擊層（顯然）負責避免女巫攻擊。</p>
+
+<p>現在，讓我們看看在比特幣區塊鏈和以太坊區塊鏈中是如何定義與實現這些棧層的。</p>
+
+<h3 id="比特幣棧層結構">比特幣棧層結構</h3>
+
+<ul>
+  <li>*1）應用層**</li>
+</ul>
+
+<p>比特幣的主要應用是 P2P 交易。比特幣使用 <a href="https://en.bitcoin.it/wiki/Script">Script</a>（一種堆棧式非圖靈完備的語言）來定義與執行交易。當發送方通過交易發送比特幣時，發送方將使用腳本來編碼指定誰才能掌控這筆資金。Script 包含一組操作碼或者說命令，發送方可以使用這些操作碼來指定要花費一筆比特幣所需滿足的條件。</p>
+
+<ul>
+  <li>*2）網路層**</li>
+</ul>
+
+<p>當發送方向接收方發送比特幣時，該轉賬交易必須被廣播到網路中，才能使礦工將其打包進區塊中。比特幣使用一種“Gossip 協議”來確保每個節點都會將其接收的所有新區塊或交易發送至鄰居節點（peer）。Gossip 協議是確保消息在全部節點間傳播的 P2P 協議。比特幣網路中所有節點都會將其新接收的有效交易立即發送給其鄰居節點，從而使得待打包交易能夠在幾秒鐘內通過點對點網路傳播到大多數節點。</p>
+
+<ul>
+  <li>*3）共識層**</li>
+</ul>
+
+<p>在交易被轉播到網路中後，還需要將其添加到區塊鏈中才能完成轉賬（即讓網路中的計算機都來執行這個交易）。驗證交易並將其打包到區塊中的過程稱為“中本聰共識（Nakamoto Consensus）”。中本聰共識的運行原理可以在其他論壇或文章找到。如果你想深入瞭解，<a href="https://blockonomi.com/nakamoto-consensus/">這篇文章</a>是一個很好的入門文章。</p>
+
+<ul>
+  <li>*3a）抗女巫攻擊層**</li>
+</ul>
+
+<p>中本聰共識依賴於“工作量證明（Proof-of-Work）”來防止女巫攻擊。基本上，產生一個新區塊所需的算力使得比特幣共識協議自身能夠抵抗女巫攻擊。由於礦工需要大量的算力來產生下一個區塊，使得他們無法在不增加大量算力（與資金）投入的情況下“偽造”多個身份。</p>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/f37cf734318646859dc80dde991db92d.png" alt="7.png" /></p>
+
+<h3 id="以太坊棧層結構">以太坊棧層結構</h3>
+
+<ul>
+  <li>*1）應用層**</li>
+</ul>
+
+<p>與比特幣不同，以太坊的設計初衷是構建一個能夠運行去中心化應用的平臺。以太坊包含一種高級語言（即，Solidity），使得開發者能夠通過編寫智能合約定義去中心化應用的具體功能。EVM（以太坊虛擬機，Ethereum Virtual Machine）是以太坊應用層的核心。EVM 使用 EVM 編譯器將智能合約程式碼編譯成字節碼，用戶可以通過交易的形式，將該字節碼上傳到區塊鏈之後，EVM 就可以執行這些字節碼，從而改變去中心化應用的狀態（即，更新以太坊節點存儲的該智能合約相關狀態）。由於以太坊網路中所有節點均運行 EVM，這也保證所有節點的狀態一致。</p>
+
+<ul>
+  <li>*2）網路層**</li>
+</ul>
+
+<p>與比特幣相似，以太坊也使用 Gossip 協議，使得節點能夠與其鄰居節點通信。</p>
+
+<ul>
+  <li>*3）共識層**</li>
+</ul>
+
+<p>為了達成共識，以太坊使用了與中本聰共識相似的“<a href="https://en.wikipedia.org/wiki/Ethash">Ethash</a>”，但 Ethash 與中本聰共識有一些關鍵區別。如果你需要了解以太坊共識算法的工作原理，請閱讀<a href="https://www.preethikasireddy.com/posts/how-does-ethereum-work-anyway/">我之前的一篇文章</a>。（編者注：中譯本見文末超鏈接《以太坊的工作原理》)</p>
+
+<ul>
+  <li>*3a）抗女巫攻擊層**</li>
+</ul>
+
+<p>與比特幣一樣，Ethash 依賴於工作量證明（目前為止，譯者注：未來以太坊 2.0 將切換到 PoS 共識機制）來抵禦女巫攻擊。</p>
+
+<h2 id="基於比特幣與以太坊構建應用程式">基於比特幣與以太坊構建應用程式</h2>
+
+<p>我希望以上內容讓你對區塊鏈結構有了一定了解。當我們討論 “比特幣” 或 “以太坊”時，這些名字指的是相關的所有棧層。因為比特幣和以太坊是由這些棧層組成的整體。</p>
+
+<p>你無法將以太坊智能合約與其底層 Ethhash 共識層分開，也因此單獨討論這兩個主題都沒有意義。比特幣也是如此，不使用中本聰共識與工作量證明你就無法進行比特幣交易。</p>
+
+<ul>
+  <li>*另一方面，Cosmos 採用了一種稍微不同的模式：它將應用層與共識層和網路層分開。**</li>
+</ul>
+
+<p>因為 Cosmos 的目標是建立一個區塊鏈網路，所以這樣設計是有意義的。在這個區塊鏈網路中，每條區塊鏈是獨立的，並且有它自己的需要和要求（即，它自己的應用）。在這種情況下，想要提出一種一刀切的、適合所有區塊鏈的應用層，是行不通的。讓我們用幾個例子來研究一下原因。</p>
+
+<h3 id="比特幣侷限性的一個例子">比特幣侷限性的一個例子</h3>
+
+<p>假設我們準備構建一個貨幣應用程式。在這種情況下，像 Bitcoin Scrypt 這種簡單的基於堆棧的腳本語言是最佳選擇。比特幣腳本語言不僅可以很好地實現從一個地址到另一個地址的價值轉移，並且非常簡單、不是圖靈完備的。</p>
+
+<p>因此，它不太容易受到各種類型安全漏洞的影響，而這些安全漏洞可能會嚴重影響圖靈完備的編程語言。這正是我們在處理貨幣與價值存儲時想要的。但是這種簡單也有其侷限性。</p>
+
+<p>使用 Scrypt 做任何更復雜的事情（例如：去中心化預測市場）都非常困難。比特幣腳本語言不僅受其可執行程式碼複雜性限制，對於開發者來說也十分不友好。更糟糕的是，比特幣區塊鏈交易的處理速度很慢（大約每秒 7 筆交易）。 <strong>因此，直接在比特幣區塊鏈上構建需要高交易吞吐量的應用是不現實的。</strong></p>
+
+<h3 id="以太坊侷限性的一個例子">以太坊侷限性的一個例子</h3>
+
+<p>與比特幣相反，以太坊的 EVM 與智能合約語言（Solidity）是為了支持更靈活的應用程式而設計的。Solidity 是一種圖靈完備的編程語言，因此理論上它可以執行任意算法複雜度的程式碼。</p>
+
+<p>在實際應用中，由於 Solidity 易出錯並易受到安全攻擊，所以使用 Solidity 開發任意複雜度的程序是相當困難的。這種特性與處理價值轉移的應用程式背道而馳，在後者這個場景種，安全性是最重要的。</p>
+
+<p>此外，智能合約也非常難以升級，從而使得迭代開發非常困難。合約一旦部署上鏈，你所能做的就只有祈禱它能夠平穩運行！與比特幣一樣，以太坊交易處理速率也非常低（大約每秒能夠處理 15 筆交易），因此在以太坊區塊鏈上構建需要高交易吞吐量的應用也是不現實的。</p>
+
+<p>Cosmos 的提出就是為了滿足這種實際業務需要，儘管它為此做了一些較大的犧牲。接下來我們將深入研究具體的細節。但在那之前，我們還必須理解 Cosmos 中區塊鏈的三個棧層是什麼樣的。</p>
+
+<h2 id="cosmos-區塊鏈結構">Cosmos 區塊鏈結構</h2>
+
+<p>首先，我們將從共識層開始瞭解 Cosmos，以便更好地理解在 Cosmos 上開發應用城市與使用比特幣或以太坊有何不同。</p>
+
+<h3 id="cosmos-共識層">Cosmos 共識層</h3>
+
+<p>Cosmos 網路中區塊鏈使用 Tendermint 共識算法。Tendermint 是一個 2014 年誕生的開源項目， <em>“旨在解決比特幣工作量證明（Proof-of-Work, PoW）共識算法的速度、可擴展性與環境問題”</em> 。</p>
+
+<p>Tendermint 共識算法是一個  <em>“</em> <em>無視應用層（application-agnostic）</em> <em>的共識引擎”</em> 。從本質上講，這意味著任何區塊鏈都可以使用 Tendermint 共識算法，它是拜占庭容錯的，並且使用 PoS 算法來抵禦女巫攻擊。</p>
+
+<p>又是 <em>一大堆術語</em> ！我們好好說道說道。</p>
+
+<h3 id="tendermint-共識是如何運作的">Tendermint 共識是如何運作的？</h3>
+
+<p>回顧一下，共識算法的存在是為了保證交易執行後，狀態機中保存的狀態一致；而 Tendermint 共識算法定義了一種“能讓所有節點對下個區塊達成共識”的規則。</p>
+
+<p>讓我們看看相關因素及規則是如何運作的吧！</p>
+
+<ul>
+  <li>*驗證者**</li>
+</ul>
+
+<p>負責達成狀態一致的節點稱為“驗證者”。任何願意協助整個網路達成共識的參與節點都能成為驗證者；作為回報，驗證者會獲得交易手續費和區塊獎勵。Tendermint 整合這些驗證者的投票結果，確定下一個區塊的正確狀態。</p>
+
+<ul>
+  <li>*通過質押對抗女巫攻擊**</li>
+</ul>
+
+<p>每個驗證者的票都有自己的投票權重，投票權重通常是在創世塊產生時確定，或是在開始運行後根據應用層開發者所設計的某些邏輯來決定。一般來說，由驗證者鎖在系統中的代幣量（作為質押品）決定投票權重的大小，這種質押物也被稱為“保證金”。</p>
+
+<ul>
+  <li>*Consensus**   <strong>共識</strong></li>
+</ul>
+
+<p>按照規則，驗證者要按輪次（round）對每一個區塊達成共識。每一輪都包含三個基本步驟： <strong>提議階段</strong> （Propose）、 <strong>預投票階段</strong> （Prevote）、 <strong>預提交階段</strong> （Precommit），以及兩個後續步驟： <strong>提交階段</strong> （Commit）、 <strong>新高度階段</strong> （NewHeight）。從抽象角度來看，驗證者按照以下協議規則共同決定下一高度要使用什麼區塊：</p>
+
+<ol>
+  <li>首先是 <strong>提議</strong> 階段，由指定的驗證者提出一個區塊——每一輪中的提議者都是從有序的列表中按照投票權重的比例，確定性地選擇出來的。</li>
+  <li>接著進入 <strong>預投票</strong> 階段——每一位驗證者廣播他們各自的預投票。</li>
+  <li>當該輪次中某一區塊收到超過 2/3 的預投票，我們就稱其為 “ <strong>polka</strong> ”。一旦出現 “ <strong>polka</strong> ”，就進入下一個階段。</li>
+  <li>進入 <strong>預提交</strong> 階段，由每一個驗證者廣播他們的預提交的投票。
+    <ul>
+      <li>如果某一特定區塊收到超過 2/3 的預投票，就進入 <strong>提交</strong> 階段，這個階段會將區塊加入區塊鏈，並 <strong>增加區塊高度</strong> 。每當有新的區塊加入區塊鏈，所在區塊鏈的區塊高度就 +1。</li>
+      <li>如果失敗，則要麼返回預投票階段，要麼回到預提交階段。</li>
+    </ul>
+  </li>
+</ol>
+
+<p>要注意的是，在任何高度上，都有可能需要一輪以上的投票才能提交一個區塊。因為可能出現以下情況：</p>
+
+<ul>
+  <li>被指定的“提議者”在應該提出區塊時掉線</li>
+  <li>提議者所提出的區塊違反一些預先定義的規則</li>
+  <li>Tendermint 依靠超時機制確保區塊鏈出塊不會遇到延宕。如果在超時前，提議區塊沒有收到超過 2/3 的預投票，則由新的提議者再次進行提出區塊流程。</li>
+</ul>
+
+<p>協議細節詳見<a href="https://github.com/tendermint/tendermint/wiki/Byzantine-Consensus-Algorithm">此處</a>。</p>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/ce64233727e040cb9849dc10df850583.png" alt="8.png" /></p>
+
+<p>總的來說，Tendermint 選擇了與比特幣的中本聰共識、以太坊 Ethash 不同的路線， 讓我們做一些重點對比：</p>
+
+<ul>
+  <li>*確定性與機率性**</li>
+</ul>
+
+<p>與中本聰共識和 Ethash 這類機率性共識不同， Tendermint 是確定共識——這意味著 Tendermint 每個區塊都是最終確定的，而不像比特幣的區塊只是處於“很可能”被確定的狀態。</p>
+
+<p>我們回顧一下中本聰共識，區塊總是處於“未確定”狀態——只有確定某個區塊在“<a href="https://blockonomi.com/nakamoto-consensus/">最長鏈</a>”上，才能有把握認為該塊 <strong>正在</strong> 被最終確定，這也是為什麼比特幣交易需要等“<a href="https://en.bitcoin.it/wiki/Confirmation">6 個區塊確認</a>”。</p>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/a19427f81a1746169c446a700f5a58a0.png" alt="9.png" /></p>
+
+<p>而在 Tendermint 中，驗證者成功投票及提交後，區塊就立即被確認了。</p>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/405798e0a07a49f9835ffd57975e6132.png" alt="10.png" /></p>
+
+<ul>
+  <li>*固定驗證者 vs. 可變驗證者**</li>
+</ul>
+
+<p>中本聰共識及 Ethash 允許礦工隨時選擇加入或退出，並不需要其他礦工提前知曉。相反地，Tendermint 共識要求維護一個事先知曉且固定的驗證者集合，驗證者身份是靠他們的公鑰來辨認的。</p>
+
+<ul>
+  <li>*領導 vs. 無領導**</li>
+</ul>
+
+<p>中本聰共識及 Ethash 沒有指定領導者來提議下一個區塊（i.e. 任何礦工都有可能挖到下一個區塊）。另一方面，Tendermint 選擇領導者，或稱為提議者，負責提出下一個區塊。</p>
+
+<ul>
+  <li>*明確的 vs. 模糊的超時機制**</li>
+</ul>
+
+<p>中本聰共識和 Ethash 沒有使用超時機制來確保礦工一定能出塊，而 Tendermint 有明確的超時機制保證區塊鏈的出塊過程不會遭遇延宕。</p>
+
+<ul>
+  <li>*100 個驗證者 vs. 1000 個驗證者**</li>
+</ul>
+
+<p>Tendermint 遵循傳統的一致性共識算法，每個驗證者之間都要進行通信。考慮到通信開銷，Tendermint 無法像比特幣或以太坊那樣可以無限增加驗證者。Tendermint 共識安排了 100 個驗證者。</p>
+
+<p>因此 Tendermint 的缺點之一就是，它要求事先知曉所有驗證者，而且不允許驗證者隨時加入或退出；這與比特幣或以太坊不同。</p>
+
+<p>除此之外，Tendermint 還要求整個系統維持統一時鐘；雖然在實踐中 Tendermint 已經證明通過整合每個節點的時間戳就能維護統一時鐘，但大家都知道同步時間是個非常複雜的理論問題。</p>
+
+<p>Tendermint 的驗證者少於比特幣，而且要求事先知道驗證者集合，因此可能會有人提出 Tendermint 共識協議“不夠去中心化”的質疑。</p>
+
+<p>但是，去中心化是見仁見智的。Okay，先不抖機靈，我想說的是去中心化是為了達到某種目標的手段，而不是目標本身；我不喜歡在瞭解去中心化的目標前就妄下評論。</p>
+
+<p>我認為在許多案例（甚至是大部分情況）下，只要破壞系統的代價夠大，並且有針對攻擊者的防禦及懲罰機制，則 Tendermint 要求固定且事先知曉驗證者集合的保守方法是可行的。</p>
+
+<p>如果我們回顧預測市場的例子，我會說去中心化預測市場應用，根本不需要像健全貨幣或是價值存儲應用一樣具備這麼高級別的去中心化程度，有 10 、20 或 100 個驗證者足矣。</p>
+
+<p>以 <a href="https://www.trustory.io/">TruStory </a>為例，我們使用 Cosmos SDK 構建後端應用邏輯，將應用的狀態和邏輯存在區塊鏈上，而前端某種程度上是私有的——Cosmos SDK 允許我們建立用來賞善罰惡的激勵系統、透明化展示數據層、允許用戶分享網路的所有權及治理權，還可以共同決議未來的交易、踢出惡意使用者，並按照個人喜好針對用戶層或基礎層設計網路。對於開發者來說，他們也能基於後端區塊鏈邏輯構建自己的開發工具及服務。因此有 10 個或 100 個執行並驗證交易的驗證者，就能夠保障使用者和開發者對於透明性、所有權、責任歸屬的需求。</p>
+
+<p>如果你能明白 Tendermint 以“選擇固定且事先知曉的驗證者集合”作為犧牲，所帶來的利益，你會對這些原本不可能實現的神奇特性充滿讚歎：</p>
+
+<ul>
+  <li>*安全性及活躍度**</li>
+</ul>
+
+<p>Tendermint 的協議保證安全性及活躍度。假設超過 2/3 的驗證者投票權重沒有掌握在拜占庭驗證者手中（也就超過 2/3 驗證者是遵守協議的），換句話說少於 1/3的投票是惡意的 ，則協議就能保證網路的安全性及活躍度（i.e. 驗證者永遠不會在相同的塊高度提出衝突區塊，區塊鏈永遠會正常出塊）。</p>
+
+<ul>
+  <li>*高性能**</li>
+</ul>
+
+<p>Tendermint 共識的出塊時間可以低至 1 秒，達到每秒處理數千筆交易的速度，讓 Tendermint 更適合需要頻繁交易的應用。</p>
+
+<ul>
+  <li>*即時確認**</li>
+</ul>
+
+<p>在區塊鏈世界中，最終確定性（Finality）意味著一旦區塊被提交上鏈，我們就能確定直至該區塊之前的整個區塊鏈的狀態。</p>
+
+<p>如我們前面提到的，中本聰共識有其機率性，所以沒有辦法保證最終確定性。你只能基於大多數礦工可能還在該分叉中挖礦的機率，保證你的交易所在的分叉鏈是共識鏈。</p>
+
+<p>但是，Tendermint 要求驗證者對每個區塊進行投票及最終確認。所以我們可以說，在少於 1/3 惡意驗證者的情況下，交易能夠被“即時確認”——當區塊被創建出來，使用者就知道他們的交易已經被確認了。</p>
+
+<ul>
+  <li>*責任制**</li>
+</ul>
+
+<p>Tendermint 使用 PoS 作為抗女巫攻擊機制——要求驗證者質押代幣（i.e. 他們的“保證金”），以確保節點不會通過創建多個虛假賬戶來欺騙系統。</p>
+
+<p>PoS 比 PoW（PoW 的證明來自礦工解出下個區塊哈希所耗費的算力）更節能，但是它固有的“<a href="https://discourse.trustory.io/t/best-trustories-of-the-week-6/455/2?u=preethi">無利害關係</a>”缺陷導致驗證者能輕易作弊。</p>
+
+<p>Tendermint 通過罰沒保證金來處罰違反協議規則（e.g. 替衝突區塊投票，及廣播未驗明的投票）的驗證者，避免發生無利害關係問題。說得更具體點，協議存在“鎖定規則”，規範了每個驗證者在投票給特定區塊時能做的行為。舉例來說，一旦驗證者預提交投票後，它就被“鎖定”在該區塊；只有在下一輪中要讓一個不同的區塊成為 polka 時，該驗證者才能解鎖並預提交另一個區塊。如果違反鎖定規則，驗證者會被罰沒保證金。</p>
+
+<ul>
+  <li>*更簡單的輕客戶端**</li>
+</ul>
+
+<p>輕客戶端比全節點“更輕巧”，因為它們不存儲區塊鏈的所有狀態，只存儲區塊頭。除非是負責驗證和出塊的挖礦節點，或驗證者節點，不然大部分節點其實不需要存儲區塊鏈全狀態。</p>
+
+<p>輕客戶端下載從創世區塊開始到當前區塊的區塊頭，而不去下載和存儲整條鏈。相比於全節點，輕客戶端只需要存儲少量數據，因為區塊頭就足以驗證某些特定交易的有效性。</p>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/e124f8005aca4f43b4357b2dfac4eda6.png" alt="11.png" /></p>
+
+<p>最酷的事情在於，基於 Tendermint 的區塊鏈的輕客戶端甚至無需同步所有區塊頭，只要週期性的下載區塊頭就行。</p>
+
+<p>就像我們前面討論的，Tendermint 與比特幣、以太坊不同，其所有區塊都要經過投票及最終確認；因為每個區塊都經過最終確認，所以輕客戶端只要注意驗證者集合的變化——只要知道最新的驗證者集合，輕客戶端就能下載最新的區塊頭，並驗證這些區塊都有大於 2/3 的驗證者投票。</p>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/94fa42b4e6f945afb4021084b881f167.png" alt="12.png" /></p>
+
+<h3 id="cosmos-網路層">Cosmos 網路層</h3>
+
+<p>如我們上面所說的，Tendermint 的共識依靠驗證者在每一輪進行投票來完成。因此，節點間必須能溝通及傳遞訊息，確保網路中所有參與者都能看到相同數據。</p>
+
+<p>與比特幣和以太坊一樣，Tendermint 使用 gossip 協議快速傳播最新的區塊鏈狀態。</p>
+
+<p>網路中的節點不一定要成為驗證者才能在網路共識過程中發揮作用。舉例來說，節點可以是輕節點或是全節點，而不是驗證者；這類節點也被稱為 “非驗證者節點”。</p>
+
+<p>驗證者及非驗證者節點都要肩負傳遞數據的責任（例如提案數據、區塊數據和投票數據），以確保所有節點都能收到系統正在產生的信息和交易。</p>
+
+<h3 id="cosmos-應用層">Cosmos 應用層</h3>
+
+<p>目前，我們已經瞭解 Tendermint 網路層及共識層的核心組成部分；網路層負責網路中所有計算機之間交易的傳遞，Tendermint 共識算法確保狀態機的一致性（即所有節點中的區塊鏈都是一致的）。</p>
+
+<p>但我們傳遞和驗證的到底是什麼交易？這裡就引出了應用層。</p>
+
+<p>Cosmos 應用層負責：</p>
+
+<ul>
+  <li>定義和提交需要被記錄進區塊鏈的交易</li>
+  <li>在交易通過共識層提交後，持續更新區塊鏈狀態</li>
+</ul>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/aa7e6cb46c64477daa2e79f8382d3bce.png" alt="13.png" /></p>
+
+<ul>
+  <li>*使用 Cosmos SDK 構建應用程式**</li>
+</ul>
+
+<p><a href="https://github.com/cosmos/cosmos-sdk">Cosmos SDK </a>提供一套構建應用層的框架，就像是區塊鏈界的 Ruby-on-Rails （Ruby-on-Rails 是一種讓開發者輕鬆通過默認設置構建網頁端應用的框架），Cosmos SDK 也為開發者提供了一種基於 Tendermint 內核構建安全的區塊鏈應用的框架。</p>
+
+<p>要記住，區塊鏈就是一個在所有節點將狀態做相同備份的狀態機，而 Cosmos SDK 讓你可以構建能在多個節點間進行復制的實際狀態機。SDK 讓你自定義應用的狀態、交易類型，及狀態-轉變函數所需的功能和工具。</p>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/3973fe68376b41edbe07b51fa7ce4f1b.png" alt="14.png" /></p>
+
+<ul>
+  <li>*Cosmos 應用如何運行（抽象視角)**</li>
+</ul>
+
+<p>Cosmos SDK 提供一種“multistore”機制來定義及維護應用層狀態機的狀態。Multistore 將應用層的狀態劃分到不同組件，通過各自的“模塊”進行管理。</p>
+
+<p>Cosmos SDK 的強大之處就是它獨特的模塊化設計，每個模塊定義及維護一個狀態子集，這些狀態子集構成完整的區塊鏈。舉例來說：</p>
+
+<ul>
+  <li><strong>銀行模塊</strong> ：允許你在應用中持有代幣，及進行代幣轉賬</li>
+  <li><strong>權限模塊</strong> ：允許你創建及管理賬戶和簽名</li>
+  <li>
+    <p><strong>質押與罰沒模塊</strong> ：允許你通過編碼構建 PoS 共識機制</p>
+  </li>
+  <li>*每個模塊都是個小狀態機，可以相互聚合生成總體狀態機** 。</li>
+</ul>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/b809a510fa1c4d78b0d8d6b3419cf5a5.png" alt="15.png" /></p>
+
+<p>應用開發者按照每個模塊和修改狀態的慣用邏輯來定義子集，除了 Cosmos SDK 提供的模塊，開發者還能調用第三方模塊。</p>
+
+<p>這種用於構建區塊鏈應用的插件模塊非常強大，因為它賦予開發者使用 SDK 或外部模塊的靈活性。</p>
+
+<ul>
+  <li>*應用層如何與共識層交互？**</li>
+</ul>
+
+<p>發生在應用層的交易通過<a href="https://github.com/tendermint/tendermint/tree/master/abci">區塊鏈應用交互</a><a href="https://github.com/tendermint/tendermint/tree/master/abci">界面</a>（ABCI, Application Blockchain Interface）與 Tendermint 共識及網路層通信。</p>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/f12e6715643e40ce9e9cbbd119029491.png" alt="16.png" /></p>
+
+<p>ABCI 是 Socket 通信協議，連接 Tendermint 核心（共識 + 網路）與應用。它可以兼容任何編程語言，也就是說使用 Cosmos SDK 構建的區塊鏈應用理論上能以任何語言編寫，而不僅僅是 Tendermint 底層共識和網路層所用的編程語言。</p>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/802bbdb7bcbd4098b8e52412d2aec042.png" alt="17.png" /></p>
+
+<ul>
+  <li>注意：當前版本的 Cosmos 主要支持 Golang，後續會加入更多語言。*</li>
+</ul>
+
+<p>總而言之，Cosmos SDK 允許開發者基於 Tendermint 內核構建去中心化應用，這個應用理論上能用任何語言開發，並通過 ABCI 連接 Tendermint 共識引擎。</p>
+
+<p>將應用層（Cosnos SDK、ABCI）與網路層、共識層（Tendermint 內核）剝離，能讓開發者在開發各種類型應用的時候有更大的靈活性，再加上 Cosmos SDK 允許這些應用以任何語言開發（e.g. Golang），讓區塊鏈 App 開發過程更像平常的應用開發的樣子。</p>
+
+<p>這與在以太坊上開發應用形成鮮明對比，因為後者要求開發者學習新語言 Solidity ，還要克服 Solidity 的諸多限制和<a href="https://hackernoon.com/solidity-pitfalls-and-how-to-avoid-them-24ba87735c7a">缺陷</a>，而且 Golang 比 Solidity 具備更多的開發工具，開發體驗好上 10 倍。</p>
+
+<p>除此之外，全部的以太坊 App 都基於單一網路進行操作，這麼做的優勢是這些 App 能夠共享以太坊的標準，以及相應而生的<a href="https://www.preethikasireddy.com/posts/the-synergies-gained-from-building-on-ethereums-decentralized-app-ecosystem/">規模效應</a>；缺點是所有這些 App 都共享以太坊共識層，會受到新加入的應用體量大小的影響。 此外， <strong>整個網路必須作為一個巨大的單元來管理，會被治理理念和意識形態分歧所束縛，使得擴展難以進行</strong> 。</p>
+
+<p>Cosmos 區塊鏈應用不會受到這些限制， <strong>每個應用都有獨立的網路、自己的共識層及治理層</strong> 。</p>
+
+<p>開發者有很大的自主性來決定它們的共識層權限，還能選擇基於代幣質押數量推舉公開的驗證者集合，或是通過預授權設置私密驗證者集合。這種自由選擇驗證者集合的規則，意味著區塊鏈對於自己的鏈有更大的自主性。</p>
+
+<ul>
+  <li>*當然，這樣的好處伴隨某些犧牲：Cosmos 網路中的每個區塊鏈應用都必須導入自己的驗證者、社群，及經濟體系；無法像以太坊一般，直接蹭用所有驗證者、強大的社群，及已有的經濟體系** 。</li>
+</ul>
+
+<p><img src="https://upyun-assets.ethfans.org/uploads/photo/image/69cf0583a75c44a9bc5576bb983fbe82.png" alt="18.png" /></p>
+
+<h2 id="結論">結論</h2>
+
+<p>在這第一篇文章裡，我們對比了 Cosmos 網路中的區塊鏈架構與比特幣、以太坊的不同。這種架構賦予區塊鏈應用對於自己的鏈更大的自主性。</p>
+
+<p>在<a href="https://www.preethikasireddy.com/posts/how-does-cosmos-work-part2">第二部分</a>，我們要深入討論 Cosmos 中相互獨立的區塊鏈如何進行交互；更重要的是回答 <em>“為什麼區塊鏈需要互相進行交互</em> ”。</p>
+
+<p><a href="https://ethfans.org/posts/how-does-cosmos-work-part2">Cosmos 區塊鏈的工作原理，Part-2：如何跨鏈，為何要跨鏈</a></p>
+
+<ul>
+  <li>*原文鏈接:**  https://www.preethikasireddy.com/posts/how-does-cosmos-work-part1</li>
+  <li>*作者:**  Preethi Kasireddy</li>
+  <li>*翻譯&amp;校對:**  stormpang, IAN LIU &amp; 阿劍</li>
+</ul>
+
+<p>本文由作者授權 EthFans 翻譯及再出版。</p>
+
+      </div>
+
+      <!-- Tags -->
+      
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <h3 class="text-sm font-mono text-cp-dark-600 mb-3">
+          <span class="text-cp-green-600">#</span> 標籤
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          
+          <a href="/tags/#cosmos" class="tag text-xs px-3 py-1 bg-cp-dark-200 text-cp-green-500 border border-cp-dark-400 rounded font-mono hover:border-cp-green-500 hover:bg-cp-green-500/10 transition-all">
+            cosmos
+          </a>
+          
+        </div>
+      </div>
+      
+
+      <!-- Share Buttons -->
+      
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <h3 class="text-sm font-mono text-cp-dark-600 mb-3">
+          <span class="text-cp-green-600">//</span> 分享
+        </h3>
+        <!-- Share Buttons -->
+<div class="flex flex-wrap items-center gap-2">
+  <!-- Twitter/X -->
+  <a
+    href="https://twitter.com/intent/tweet?text=Cosmos%20%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%8CPart-1%EF%BC%9A%E6%AF%94%E8%BC%83Cosmos%20%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3%E3%80%81%E4%BB%A5%E5%A4%AA%E5%9D%8A&url=https://cypherpunks-core.github.io/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/&via=CypherpunksTW"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex items-center gap-2 px-3 py-2 bg-cp-dark-200 text-cp-dark-700 border border-cp-dark-400 rounded-lg hover:border-cp-green-500 hover:text-cp-green-500 transition-all font-mono text-sm"
+    aria-label="分享到 Twitter"
+  >
+    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    </svg>
+    <span class="hidden sm:inline">Twitter</span>
+  </a>
+
+  <!-- Facebook -->
+  <a
+    href="https://www.facebook.com/sharer/sharer.php?u=https://cypherpunks-core.github.io/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex items-center gap-2 px-3 py-2 bg-cp-dark-200 text-cp-dark-700 border border-cp-dark-400 rounded-lg hover:border-cp-green-500 hover:text-cp-green-500 transition-all font-mono text-sm"
+    aria-label="分享到 Facebook"
+  >
+    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    </svg>
+    <span class="hidden sm:inline">Facebook</span>
+  </a>
+
+  <!-- Copy Link -->
+  <button
+    id="copy-link-btn"
+    class="inline-flex items-center gap-2 px-3 py-2 bg-cp-dark-200 text-cp-dark-700 border border-cp-dark-400 rounded-lg hover:border-cp-green-500 hover:text-cp-green-500 transition-all font-mono text-sm"
+    data-url="https://cypherpunks-core.github.io/news/2020/02/13/Cosmos-%E5%8D%80%E5%A1%8A%E9%8F%88%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86-Part-1-%E6%AF%94%E8%BC%83Cosmos-%E8%88%87%E6%AF%94%E7%89%B9%E5%B9%A3-%E4%BB%A5%E5%A4%AA%E5%9D%8A/"
+    aria-label="複製連結"
+  >
+    <svg class="w-4 h-4 copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+    </svg>
+    <svg class="w-4 h-4 check-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+    </svg>
+    <span class="btn-text">複製連結</span>
+  </button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const copyBtn = document.getElementById('copy-link-btn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async function() {
+      const url = this.dataset.url;
+      const copyIcon = this.querySelector('.copy-icon');
+      const checkIcon = this.querySelector('.check-icon');
+      const btnText = this.querySelector('.btn-text');
+
+      try {
+        await navigator.clipboard.writeText(url);
+        copyIcon.classList.add('hidden');
+        checkIcon.classList.remove('hidden');
+        btnText.textContent = '已複製!';
+
+        setTimeout(() => {
+          copyIcon.classList.remove('hidden');
+          checkIcon.classList.add('hidden');
+          btnText.textContent = '複製連結';
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+    });
+  }
+});
+</script>
+
+      </div>
+      
+
+      <!-- Author Bio -->
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <div class="flex items-center gap-4 p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg">
+          <div class="w-12 h-12 rounded-full bg-cp-green-500/20 flex items-center justify-center text-cp-green-500 font-mono font-bold">
+            CP
+          </div>
+          <div>
+            <h4 class="font-mono font-medium text-cp-dark-800">Cypherpunks Taiwan</h4>
+            <p class="text-sm text-cp-dark-600">密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Posts -->
+      
+      
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+      
+
+      
+      
+
+      <!-- Comments -->
+      
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <h3 class="text-lg font-mono font-bold text-cp-green-500 mb-4">
+          <span class="text-cp-dark-600">//</span> 留言
+        </h3>
+        <!-- Comments Section - Giscus -->
+
+<div id="giscus-comments" class="giscus-container">
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="cypherpunks-core/cypherpunks-core.github.io"
+    data-repo-id=""
+    data-category="Comments"
+    data-category-id=""
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="true"
+    data-emit-metadata="false"
+    data-input-position="top"
+    data-theme="dark"
+    data-lang="zh-TW"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+<noscript>
+  <div class="p-4 bg-cp-dark-200 border border-cp-dark-400 rounded-lg text-center">
+    <p class="text-cp-dark-600 font-mono text-sm">
+      請啟用 JavaScript 來查看留言
+    </p>
+  </div>
+</noscript>
+
+<style>
+  /* Giscus 樣式覆蓋 */
+  .giscus-container {
+    margin-top: 1rem;
+  }
+
+  .giscus-frame {
+    border: 1px solid #30363d !important;
+    border-radius: 0.5rem !important;
+  }
+</style>
+
+
+      </div>
+      
+    </div>
+
+    <!-- TOC Sidebar -->
+    
+    <aside class="hidden xl:block w-64 flex-shrink-0">
+      <div class="sticky top-24">
+        <!-- Table of Contents -->
+<nav class="toc bg-cp-dark-100 border border-cp-dark-400 rounded-lg p-4" aria-label="目錄">
+  <h3 class="text-sm font-mono font-bold text-cp-green-500 mb-3 pb-2 border-b border-cp-dark-400">
+    <span class="text-cp-dark-600">//</span> 目錄
+  </h3>
+
+  <div id="toc-content" class="text-sm space-y-1">
+    <!-- TOC will be generated by JavaScript -->
+    <p class="text-cp-dark-600 font-mono text-xs">載入中...</p>
+  </div>
+</nav>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tocContainer = document.getElementById('toc-content');
+  const article = document.querySelector('.content');
+
+  if (!tocContainer || !article) return;
+
+  // Get all headings
+  const headings = article.querySelectorAll('h2, h3, h4');
+
+  if (headings.length === 0) {
+    tocContainer.innerHTML = '<p class="text-cp-dark-600 font-mono text-xs">此文章無目錄</p>';
+    return;
+  }
+
+  // Build TOC
+  let tocHTML = '<ul class="space-y-1">';
+  let lastLevel = 2;
+
+  headings.forEach((heading, index) => {
+    // Create ID if not exists
+    if (!heading.id) {
+      heading.id = 'heading-' + index;
+    }
+
+    const level = parseInt(heading.tagName.charAt(1));
+    const indent = (level - 2) * 12;
+
+    tocHTML += `
+      <li style="padding-left: ${indent}px;">
+        <a href="#${heading.id}"
+           class="toc-link block py-1 text-cp-dark-700 hover:text-cp-green-500 transition-colors truncate font-mono"
+           data-target="${heading.id}">
+          ${heading.textContent}
+        </a>
+      </li>
+    `;
+  });
+
+  tocHTML += '</ul>';
+  tocContainer.innerHTML = tocHTML;
+
+  // Active state tracking
+  const tocLinks = tocContainer.querySelectorAll('.toc-link');
+
+  const observerOptions = {
+    rootMargin: '-80px 0px -80% 0px',
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Remove active from all
+        tocLinks.forEach(link => {
+          link.classList.remove('text-cp-green-500', 'border-l-2', 'border-cp-green-500', 'pl-2', '-ml-2');
+          link.classList.add('text-cp-dark-700');
+        });
+
+        // Add active to current
+        const activeLink = tocContainer.querySelector(`[data-target="${entry.target.id}"]`);
+        if (activeLink) {
+          activeLink.classList.remove('text-cp-dark-700');
+          activeLink.classList.add('text-cp-green-500', 'border-l-2', 'border-cp-green-500', 'pl-2', '-ml-2');
+        }
+      }
+    });
+  }, observerOptions);
+
+  headings.forEach(heading => observer.observe(heading));
+
+  // Smooth scroll on click
+  tocLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('data-target');
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const offset = 100;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+});
+</script>
+
+      </div>
+    </aside>
+    
+  </div>
+
+  <!-- Post Navigation -->
+  <nav class="mt-12 pt-8 border-t border-cp-dark-400">
+    <div class="flex flex-col sm:flex-row justify-between gap-4">
+      
+      <a href="/news/2020/01/18/%E5%A4%9A%E5%AA%92%E9%AB%94%E5%8D%80%E5%A1%8A%E9%8F%88/" class="flex-1 p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-600 transition-all group">
+        <span class="text-xs text-cp-dark-600 font-mono block mb-1">← 上一篇</span>
+        <span class="text-cp-dark-800 group-hover:text-cp-green-500 transition-colors line-clamp-1">多媒體區塊鏈:分散式且防竄改之媒體交易框架</span>
+      </a>
+      
+
+      
+      <a href="/news/2020/03/11/MuSig-%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E5%A4%9A%E9%87%8D%E7%B0%BD%E5%90%8D%E6%A8%99%E6%BA%96/" class="flex-1 p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-600 transition-all group text-right">
+        <span class="text-xs text-cp-dark-600 font-mono block mb-1">下一篇 →</span>
+        <span class="text-cp-dark-800 group-hover:text-cp-green-500 transition-colors line-clamp-1">MuSig：一個新的多重簽名標準</span>
+      </a>
+      
+    </div>
+  </nav>
+</article>
+
+        </article>
+
+        <!-- Sidebar (Right) - Latest Posts -->
+        
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  
+  <!-- Footer -->
+<footer class="footer bg-cp-dark-100 border-t border-cp-dark-400 mt-auto" role="contentinfo" aria-label="網站頁尾">
+  <div class="container mx-auto px-4 py-12 max-w-7xl">
+
+    <!-- Main Footer Content -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
+
+      <!-- About -->
+      <div class="lg:col-span-2">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="font-mono text-lg font-bold text-cp-green-500">
+            <span class="text-cp-green-500">[</span>CP<span class="text-cp-green-500">]</span>
+          </span>
+          <span class="font-mono text-sm text-cp-dark-700">Cypherpunks Taiwan</span>
+        </div>
+        <p class="text-cp-dark-600 text-sm font-mono mb-4 max-w-md">
+          密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.
+        </p>
+        <!-- ASCII Art -->
+        <pre class="text-cp-green-600/40 text-[0.5rem] leading-tight font-mono hidden md:block">
+ "Privacy is necessary for an open society
+  in the electronic age." - Eric Hughes
+        </pre>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 快速連結
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="/blog/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > Blog
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/about/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 關於我們
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/products/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 書籍 & 論文
+            </a>
+          </li>
+          <li>
+            <a href="/feed.xml" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > RSS Feed
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 資源
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="/resources/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 資源中心
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/resources/resources-bitcoin/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > Bitcoin
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/resources/resources-ln/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > Lightning
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/knowledge/glossary/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 詞彙表
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Explore -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 探索
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="/tags/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 標籤
+            </a>
+          </li>
+          <li>
+            <a href="/categories/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 分類
+            </a>
+          </li>
+          <li>
+            <a href="/archive/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 歸檔
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social & Contact -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 聯繫
+        </h4>
+        <ul class="space-y-2">
+          
+          <li>
+            <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+              </svg>
+              GitHub
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="https://twitter.com/CypherpunksTW" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              Twitter
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="mailto:01360086@me.mcu.edu.tw" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              Email
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://signal.group/#CjQKIJkrnL-dvsydyzn9Xl4HYZI9-Paf14vYkCq4eh5LhZeyEhALctkOeMMDuSOmYtgvj9QU" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+              </svg>
+              Signal
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/cypherpunks-core/cypherpunks-core.github.io/discussions" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M1.5 4.25c0-.966.784-1.75 1.75-1.75h17.5c.966 0 1.75.784 1.75 1.75v12.5a1.75 1.75 0 01-1.75 1.75h-9.69l-3.573 3.573A1.458 1.458 0 015 21.043V18.5H3.25a1.75 1.75 0 01-1.75-1.75V4.25zM3.25 4a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h2.5a.75.75 0 01.75.75v3.19l3.72-3.72a.749.749 0 01.53-.22h10a.25.25 0 00.25-.25V4.25a.25.25 0 00-.25-.25H3.25z"/>
+              </svg>
+              討論區
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Divider -->
+    <div class="border-t border-cp-dark-400 my-8"></div>
+
+    <!-- Bottom Footer -->
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <!-- Copyright -->
+      <div class="text-cp-dark-600 text-xs font-mono">
+        <span class="text-cp-green-600">&copy;</span> 2026 密碼龐克 Cypherpunks Taiwan.
+        <span class="text-cp-dark-500">Cypherpunks write code.</span>
+      </div>
+
+      <!-- Tech Stack -->
+      <div class="flex items-center gap-4 text-cp-dark-600 text-xs font-mono">
+        <span>Built with</span>
+        <a href="https://jekyllrb.com" target="_blank" rel="noopener noreferrer" class="hover:text-cp-green-500 transition-colors">Jekyll</a>
+        <span>&</span>
+        <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="hover:text-cp-green-500 transition-colors">Tailwind CSS</a>
+      </div>
+
+      <!-- Back to Top -->
+      <button id="back-to-top" class="p-2 bg-cp-dark-200 text-cp-dark-600 hover:text-cp-green-500 hover:bg-cp-dark-300 rounded transition-all opacity-0 invisible" aria-label="回到頂部">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</footer>
+<!-- cache bust 1766382259 -->
+
+  
+
+  <!-- Search Modal -->
+  <!-- Search Modal -->
+<div id="search-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="search-title">
+  <!-- Backdrop -->
+  <div class="search-backdrop absolute inset-0 bg-cp-dark/80 backdrop-blur-sm"></div>
+
+  <!-- Modal Content -->
+  <div class="relative flex items-start justify-center pt-[15vh] px-4">
+    <div class="search-container w-full max-w-2xl bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-2xl overflow-hidden">
+
+      <!-- Search Header -->
+      <div class="p-4 border-b border-cp-dark-400">
+        <div class="flex items-center gap-3">
+          <!-- Search Icon -->
+          <svg class="w-5 h-5 text-cp-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+
+          <!-- Search Input -->
+          <input
+            type="text"
+            id="search-input"
+            class="flex-grow bg-transparent text-cp-dark-800 placeholder-cp-dark-600 font-mono focus:outline-none"
+            placeholder="搜尋文章..."
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+          >
+
+          <!-- Close Button -->
+          <button id="search-close" class="text-cp-dark-600 hover:text-cp-green-500 transition-colors" aria-label="關閉搜尋">
+            <kbd class="px-2 py-1 text-xs bg-cp-dark-200 border border-cp-dark-400 rounded font-mono">ESC</kbd>
+          </button>
+        </div>
+      </div>
+
+      <!-- Search Results -->
+      <div id="search-results" class="max-h-[60vh] overflow-y-auto">
+        <!-- Empty State -->
+        <div id="search-empty" class="p-8 text-center">
+          <div class="text-cp-green-600 font-mono text-4xl mb-4">&gt;_</div>
+          <p class="text-cp-dark-600 font-mono text-sm">輸入關鍵字開始搜尋</p>
+          <p class="text-cp-dark-500 font-mono text-xs mt-2">支援標題、內容、標籤搜尋</p>
+        </div>
+
+        <!-- Results List (populated by JS) -->
+        <div id="search-results-list" class="hidden divide-y divide-cp-dark-400">
+          <!-- Results will be injected here -->
+        </div>
+
+        <!-- No Results -->
+        <div id="search-no-results" class="hidden p-8 text-center">
+          <div class="text-cp-accent-red font-mono text-4xl mb-4">:(</div>
+          <p class="text-cp-dark-600 font-mono text-sm">找不到相關結果</p>
+          <p class="text-cp-dark-500 font-mono text-xs mt-2">試試其他關鍵字</p>
+        </div>
+
+        <!-- Loading State -->
+        <div id="search-loading" class="hidden p-8 text-center">
+          <div class="inline-block animate-spin text-cp-green-500">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+          </div>
+          <p class="text-cp-dark-600 font-mono text-sm mt-4">搜尋中...</p>
+        </div>
+      </div>
+
+      <!-- Search Footer -->
+      <div class="p-3 border-t border-cp-dark-400 bg-cp-dark-200/50">
+        <div class="flex items-center justify-between text-xs text-cp-dark-600 font-mono">
+          <div class="flex items-center gap-4">
+            <span class="flex items-center gap-1">
+              <kbd class="px-1.5 py-0.5 bg-cp-dark-300 border border-cp-dark-400 rounded text-[0.65rem]">↑</kbd>
+              <kbd class="px-1.5 py-0.5 bg-cp-dark-300 border border-cp-dark-400 rounded text-[0.65rem]">↓</kbd>
+              <span>導航</span>
+            </span>
+            <span class="flex items-center gap-1">
+              <kbd class="px-1.5 py-0.5 bg-cp-dark-300 border border-cp-dark-400 rounded text-[0.65rem]">↵</kbd>
+              <span>開啟</span>
+            </span>
+          </div>
+          <span id="search-count" class="text-cp-green-600"></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Search Result Template -->
+<template id="search-result-template">
+  <a href="" class="search-result block p-4 hover:bg-cp-dark-200 transition-colors focus:bg-cp-dark-200 focus:outline-none">
+    <div class="flex items-start gap-3">
+      <div class="flex-shrink-0 w-8 h-8 rounded bg-cp-dark-200 flex items-center justify-center">
+        <svg class="w-4 h-4 text-cp-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+      </div>
+      <div class="flex-grow min-w-0">
+        <h4 class="search-result-title text-cp-dark-800 font-medium truncate"></h4>
+        <p class="search-result-excerpt text-cp-dark-600 text-sm mt-1 line-clamp-2"></p>
+        <div class="search-result-meta flex items-center gap-2 mt-2 text-xs text-cp-dark-500">
+          <time class="search-result-date"></time>
+          <span class="search-result-tags"></span>
+        </div>
+      </div>
+    </div>
+  </a>
+</template>
+
+
+  <!-- Scripts - Deferred for Performance -->
+  <script src="/assets/js/app.js" defer></script>
+  <!-- footer scripts -->
+</body>
+</html>

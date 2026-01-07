@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#1a1a1a"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1a3a1a" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)"/>
+  <rect width="800" height="400" fill="url(#grid)" opacity="0.3"/>
+
+  <!-- Cypherpunks logo area -->
+  <g transform="translate(400, 180)">
+    <!-- Lock symbol -->
+    <g stroke="#4ade80" stroke-width="3" fill="none">
+      <rect x="-40" y="-10" width="80" height="60" rx="8"/>
+      <path d="M-25,-10 L-25,-30 Q-25,-50 0,-50 Q25,-50 25,-30 L25,-10"/>
+    </g>
+    <circle cx="0" cy="20" r="8" fill="#4ade80"/>
+    <line x1="0" y1="28" x2="0" y2="40" stroke="#4ade80" stroke-width="4"/>
+  </g>
+
+  <!-- Binary decoration -->
+  <g font-family="monospace" font-size="12" fill="#4ade80" opacity="0.2">
+    <text x="50" y="50">01001000</text>
+    <text x="650" y="50">10110101</text>
+    <text x="50" y="380">11010010</text>
+    <text x="650" y="380">01101001</text>
+  </g>
+
+  <!-- Tagline -->
+  <text x="400" y="300" font-family="monospace" font-size="14" fill="#4ade80" text-anchor="middle" opacity="0.6">CYPHERPUNKS WRITE CODE</text>
+
+  <!-- Title -->
+  <text x="400" y="350" font-family="monospace" font-size="18" fill="#4ade80" text-anchor="middle" opacity="0.8">密碼龐克 CYPHERPUNKS TAIWAN</text>
+</svg>

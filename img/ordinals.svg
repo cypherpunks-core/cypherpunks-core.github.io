@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#1a1a1a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)"/>
+
+  <!-- Satoshi units visualization -->
+  <g transform="translate(400, 200)">
+    <!-- Grid of sats -->
+    <g fill="#f7931a" opacity="0.3">
+      <rect x="-150" y="-80" width="30" height="30" rx="2"/>
+      <rect x="-110" y="-80" width="30" height="30" rx="2"/>
+      <rect x="-70" y="-80" width="30" height="30" rx="2"/>
+      <rect x="-30" y="-80" width="30" height="30" rx="2"/>
+      <rect x="10" y="-80" width="30" height="30" rx="2"/>
+      <rect x="50" y="-80" width="30" height="30" rx="2"/>
+      <rect x="90" y="-80" width="30" height="30" rx="2"/>
+
+      <rect x="-150" y="-40" width="30" height="30" rx="2"/>
+      <rect x="-110" y="-40" width="30" height="30" rx="2"/>
+      <rect x="-70" y="-40" width="30" height="30" rx="2"/>
+      <rect x="-30" y="-40" width="30" height="30" rx="2"/>
+      <rect x="10" y="-40" width="30" height="30" rx="2"/>
+      <rect x="50" y="-40" width="30" height="30" rx="2"/>
+      <rect x="90" y="-40" width="30" height="30" rx="2"/>
+    </g>
+
+    <!-- Highlighted inscribed sat -->
+    <rect x="-30" y="10" width="60" height="60" rx="4" fill="#1a1a1a" stroke="#f7931a" stroke-width="3"/>
+    <text x="0" y="50" font-family="monospace" font-size="24" fill="#f7931a" text-anchor="middle">#1</text>
+
+    <!-- Inscription indicator -->
+    <text x="0" y="100" font-family="monospace" font-size="12" fill="#6b7280" text-anchor="middle">INSCRIPTION</text>
+  </g>
+
+  <!-- Numbering -->
+  <g font-family="monospace" font-size="10" fill="#4ade80" opacity="0.5">
+    <text x="260" y="135">0</text>
+    <text x="300" y="135">1</text>
+    <text x="340" y="135">2</text>
+    <text x="380" y="135">...</text>
+    <text x="420" y="135">n</text>
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="360" font-family="monospace" font-size="24" fill="#f7931a" text-anchor="middle" opacity="0.8">ORDINALS &amp; INSCRIPTIONS</text>
+</svg>

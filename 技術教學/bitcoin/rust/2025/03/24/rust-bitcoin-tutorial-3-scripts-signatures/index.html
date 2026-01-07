@@ -1,0 +1,4030 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Title -->
+  <title>Rust Bitcoin 開發入門（三）：腳本與簽名 | 密碼龐克 Cypherpunks Taiwan</title>
+
+  <!-- DNS Prefetch for Performance -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+  <!-- Preconnect for Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Critical CSS -->
+  <link rel="stylesheet" href="/assets/css/app.css">
+
+  <!-- Fonts - Minimal (single weight, swap for better UX) -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Noto+Sans+TC:wght@400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Noto+Sans+TC:wght@400&display=swap"></noscript>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="msapplication-TileColor" content="#0a0a0a">
+
+  <!-- Google Search Console Verification -->
+  <meta name="google-site-verification" content="NKf2WplkJcEPUejYK5B-wwvCLtHokxnALBswOe0XheM" />
+
+  <!-- SEO -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Rust Bitcoin 開發入門（三）：腳本與簽名 | 密碼龐克 Cypherpunks Taiwan</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Rust Bitcoin 開發入門（三）：腳本與簽名" />
+<meta name="author" content="Cypherpunks Taiwan" />
+<meta property="og:locale" content="zh_TW" />
+<meta name="description" content="這是 Rust Bitcoin 開發入門系列的第三篇。本篇深入探討 Bitcoin Script 編程和各種簽名機制的 Rust 實現。" />
+<meta property="og:description" content="這是 Rust Bitcoin 開發入門系列的第三篇。本篇深入探討 Bitcoin Script 編程和各種簽名機制的 Rust 實現。" />
+<link rel="canonical" href="https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust/2025/03/24/rust-bitcoin-tutorial-3-scripts-signatures/" />
+<meta property="og:url" content="https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust/2025/03/24/rust-bitcoin-tutorial-3-scripts-signatures/" />
+<meta property="og:site_name" content="密碼龐克 Cypherpunks Taiwan" />
+<meta property="og:image" content="https://cypherpunks-core.github.io/img/bitcoin-dev.svg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-03-24T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://cypherpunks-core.github.io/img/bitcoin-dev.svg" />
+<meta property="twitter:title" content="Rust Bitcoin 開發入門（三）：腳本與簽名" />
+<meta name="twitter:site" content="@CypherpunksTW" />
+<meta name="twitter:creator" content="@Cypherpunks Taiwan" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Cypherpunks Taiwan"},"dateModified":"2025-03-24T00:00:00+00:00","datePublished":"2025-03-24T00:00:00+00:00","description":"這是 Rust Bitcoin 開發入門系列的第三篇。本篇深入探討 Bitcoin Script 編程和各種簽名機制的 Rust 實現。","headline":"Rust Bitcoin 開發入門（三）：腳本與簽名","image":"https://cypherpunks-core.github.io/img/bitcoin-dev.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust/2025/03/24/rust-bitcoin-tutorial-3-scripts-signatures/"},"url":"https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust/2025/03/24/rust-bitcoin-tutorial-3-scripts-signatures/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- Open Graph Enhanced -->
+  <meta property="og:locale" content="zh_TW">
+  
+  <meta property="og:image" content="https://cypherpunks-core.github.io/img/bitcoin-dev.svg">
+  
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:site" content="@CypherpunksTW">
+  <meta name="twitter:creator" content="@CypherpunksTW">
+  
+
+  <!-- JSON-LD Structured Data - WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "密碼龐克 Cypherpunks Taiwan",
+    "url": "https://cypherpunks-core.github.io",
+    "description": "密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://cypherpunks-core.github.io/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data - Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "密碼龐克 Cypherpunks Taiwan",
+    "url": "https://cypherpunks-core.github.io",
+    "logo": "https://cypherpunks-core.github.io/favicon.png",
+    "sameAs": [
+      "https://twitter.com/CypherpunksTW",
+      "https://github.com/cypherpunks-core"
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data - Page/Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Rust Bitcoin 開發入門（三）：腳本與簽名",
+    "description": "這是 Rust Bitcoin 開發入門系列的第三篇。本篇深入探討 Bitcoin Script 編程和各種簽名機制的 Rust 實現。
+",
+    
+    "datePublished": "2025-03-24T00:00:00+00:00",
+    "dateModified": "2025-03-24T00:00:00+00:00",
+    
+    "author": {
+      "@type": "Organization",
+      "name": "Cypherpunks Taiwan"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "密碼龐克 Cypherpunks Taiwan",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://cypherpunks-core.github.io/favicon.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust/2025/03/24/rust-bitcoin-tutorial-3-scripts-signatures/"
+    }
+    ,
+    "image": "https://cypherpunks-core.github.io/img/bitcoin-dev.svg"
+    
+    ,
+    "keywords": "Rust, Bitcoin, Script, 簽名, ECDSA, Schnorr, Taproot, Miniscript"
+    
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data - BreadcrumbList -->
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "首頁",
+        "item": "https://cypherpunks-core.github.io"
+      }
+      
+      
+      
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 3,
+            "name": "%e6%8a%80%e8%a1%93%e6%95%99%e5%ad%b8",
+            "item": "https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Bitcoin",
+            "item": "https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 5,
+            "name": "Rust",
+            "item": "https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 6,
+            "name": "2025",
+            "item": "https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust/2025"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 7,
+            "name": "03",
+            "item": "https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust/2025/03"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 8,
+            "name": "24",
+            "item": "https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust/2025/03/24"
+          }
+        
+      
+        
+          
+          ,{
+            "@type": "ListItem",
+            "position": 9,
+            "name": "Rust Bitcoin 開發入門（三）：腳本與簽名",
+            "item": "https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust/2025/03/24/rust-bitcoin-tutorial-3-scripts-signatures"
+          }
+        
+      
+    ]
+  }
+  </script>
+  
+
+  <!-- KaTeX for Math Rendering -->
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false},
+        {left: '\\[', right: '\\]', display: true},
+        {left: '\\(', right: '\\)', display: false}
+      ],
+      throwOnError: false
+    });"></script>
+  
+
+  <!-- Mermaid for Diagrams -->
+  
+
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="密碼龐克 Cypherpunks Taiwan" href="/feed.xml">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust/2025/03/24/rust-bitcoin-tutorial-3-scripts-signatures/">
+
+  <!-- Google Analytics -->
+  
+  <!-- Google Analytics - Deferred Loading for Performance -->
+<script>
+  // Defer GA loading until after page is interactive
+  window.addEventListener('load', function() {
+    // Respect Do Not Track
+    if (window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1") {
+      window['ga-disable-G-ENDDT5D0CR'] = true;
+      return;
+    }
+
+    // Load GA after a short delay to prioritize page content
+    setTimeout(function() {
+      var script = document.createElement('script');
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-ENDDT5D0CR';
+      script.async = true;
+      document.head.appendChild(script);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-ENDDT5D0CR');
+    }, 2000);
+  });
+</script>
+
+  
+
+  <!-- Dark Mode Script (防止閃爍) -->
+  <script>
+    // 立即設置主題，防止閃爍
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const defaultTheme = 'dark';
+
+      let theme;
+      if (savedTheme) {
+        theme = savedTheme;
+      } else if (defaultTheme === 'auto') {
+        theme = prefersDark ? 'dark' : 'light';
+      } else {
+        theme = defaultTheme;
+      }
+
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+      document.documentElement.classList.toggle('light', theme === 'light');
+    })();
+  </script>
+
+  <!-- Custom Head Scripts -->
+  <!-- head scripts -->
+
+</head>
+<body class="min-h-screen flex flex-col bg-cp-dark text-cp-dark-800">
+  <!-- Matrix Rain Background -->
+  
+
+  <!-- Scanlines Effect -->
+  
+
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress" class="reading-progress" style="width: 0%;"></div>
+
+  <!-- Skip to Content (a11y) -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-cp-green-600 focus:text-cp-dark focus:rounded">
+    跳至主要內容
+  </a>
+
+  <!-- Header / Navigation -->
+  <!-- Navigation Header -->
+<nav class="navbar fixed top-0 left-0 right-0 z-40 bg-cp-dark/95 backdrop-blur-md border-b border-cp-dark-400" role="navigation" aria-label="主要導航">
+  <div class="container mx-auto px-4 max-w-7xl">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo / Brand -->
+      <div class="flex items-center">
+        <a href="/" class="flex items-center gap-3 text-cp-green-500 hover:text-cp-green-400 transition-all duration-200 group">
+          <!-- ASCII Logo (簡化版) -->
+          <span class="font-mono text-lg font-bold tracking-tight">
+            <span class="text-cp-green-500 group-hover:text-glow">[</span>
+            <span class="text-cp-green-400">CP</span>
+            <span class="text-cp-green-500 group-hover:text-glow">]</span>
+          </span>
+          <span class="hidden sm:block font-mono text-sm text-cp-dark-700 group-hover:text-cp-dark-800">
+            密碼龐克 Cypherpunks Taiwan
+          </span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center gap-1">
+        <!-- Navigation Items (Home 已移除，Logo 連結首頁即可) -->
+        
+        
+          
+          <!-- Regular Link -->
+          <a href="/blog/" class="navbar-item ">
+            Blog
+          </a>
+          
+        
+          
+          <!-- Dropdown Menu -->
+          <div class="dropdown relative group">
+            <button class="navbar-item flex items-center gap-1" aria-haspopup="true">
+              資源中心
+              <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute top-full left-0 mt-1 py-2 bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-lg min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              
+                
+                <!-- Section Divider -->
+                <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider border-t border-cp-dark-300 mt-1 first:mt-0 first:border-t-0">
+                  核心技術
+                </div>
+                
+              
+                
+                <a href="/markdown/resources/resources-bitcoin/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Bitcoin 比特幣
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-ln/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Lightning Network
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-schnorr-signature/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Taproot & Schnorr
+                </a>
+                
+              
+                
+                <!-- Section Divider -->
+                <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider border-t border-cp-dark-300 mt-1 first:mt-0 first:border-t-0">
+                  進階主題
+                </div>
+                
+              
+                
+                <a href="/markdown/resources/resources-bitcoin-layer2/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Layer 2 技術
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-blockchain-privacy/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  隱私技術
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-nostr/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Nostr 協議
+                </a>
+                
+              
+                
+                <!-- Section Divider -->
+                <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider border-t border-cp-dark-300 mt-1 first:mt-0 first:border-t-0">
+                  開發者
+                </div>
+                
+              
+                
+                <a href="/markdown/resources/resources-developer-tools/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  開發者工具箱
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-self-custody/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  自託管指南
+                </a>
+                
+              
+            </div>
+          </div>
+          
+        
+          
+          <!-- Regular Link -->
+          <a href="/markdown/products/" class="navbar-item ">
+            書籍
+          </a>
+          
+        
+          
+          <!-- Dropdown Menu -->
+          <div class="dropdown relative group">
+            <button class="navbar-item flex items-center gap-1" aria-haspopup="true">
+              知識庫
+              <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute top-full left-0 mt-1 py-2 bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-lg min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              
+                
+                <a href="/markdown/knowledge/glossary/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  術語詞彙表
+                </a>
+                
+              
+                
+                <a href="/markdown/resources/resources-cypherpunk-history/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Cypherpunk 歷史
+                </a>
+                
+              
+                
+                <a href="/markdown/knowledge/knowledge-bitcoin/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Bitcoin 百科
+                </a>
+                
+              
+                
+                <a href="/markdown/knowledge/knowledge-ethereum/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  Ethereum 百科
+                </a>
+                
+              
+            </div>
+          </div>
+          
+        
+          
+          <!-- Dropdown Menu -->
+          <div class="dropdown relative group">
+            <button class="navbar-item flex items-center gap-1" aria-haspopup="true">
+              社群
+              <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute top-full left-0 mt-1 py-2 bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-lg min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              
+                
+                <a href="/markdown/about/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  關於我們
+                </a>
+                
+              
+                
+                <a href="/markdown/SatelliteProject/" class="dropdown-item block px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  衛星計畫
+                </a>
+                
+              
+                
+                <a href="https://github.com/cypherpunks-core/cypherpunks-core.github.io/discussions" target="_blank" rel="noopener noreferrer" class="dropdown-item flex items-center justify-between px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  討論區
+                  <svg class="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </a>
+                
+              
+                
+                <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="dropdown-item flex items-center justify-between px-4 py-2 text-sm text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 transition-colors">
+                  GitHub
+                  <svg class="w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </a>
+                
+              
+            </div>
+          </div>
+          
+        
+        
+      </div>
+
+      <!-- Right Side Actions -->
+      <div class="flex items-center gap-2">
+        <!-- Search Button -->
+        <button id="search-btn" class="p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="搜尋" title="搜尋 (⌘K)">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="切換主題">
+          <!-- Sun Icon (Dark Mode) -->
+          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          <!-- Moon Icon (Light Mode) -->
+          <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+        </button>
+
+        <!-- GitHub Link -->
+        <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="GitHub">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+          </svg>
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="lg:hidden p-2 text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-all" aria-label="開啟選單" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Menu -->
+  <div id="mobile-menu" class="lg:hidden hidden bg-cp-dark-100 border-t border-cp-dark-400">
+    <div class="container mx-auto px-4 py-4 space-y-2">
+      
+      
+        
+        <a href="/blog/" class="block px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+          Blog
+        </a>
+        
+      
+        
+        <!-- Mobile Dropdown -->
+        <div class="mobile-dropdown">
+          <button class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+            資源中心
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="mobile-dropdown-menu hidden pl-4 mt-1 space-y-1">
+            
+              
+              <!-- Section Divider -->
+              <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider">
+                核心技術
+              </div>
+              
+            
+              
+              <a href="/markdown/resources/resources-bitcoin/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Bitcoin 比特幣
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-ln/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Lightning Network
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-schnorr-signature/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Taproot & Schnorr
+              </a>
+              
+            
+              
+              <!-- Section Divider -->
+              <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider">
+                進階主題
+              </div>
+              
+            
+              
+              <a href="/markdown/resources/resources-bitcoin-layer2/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Layer 2 技術
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-blockchain-privacy/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                隱私技術
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-nostr/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Nostr 協議
+              </a>
+              
+            
+              
+              <!-- Section Divider -->
+              <div class="px-4 py-2 text-xs text-cp-dark-500 font-mono uppercase tracking-wider">
+                開發者
+              </div>
+              
+            
+              
+              <a href="/markdown/resources/resources-developer-tools/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                開發者工具箱
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-self-custody/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                自託管指南
+              </a>
+              
+            
+          </div>
+        </div>
+        
+      
+        
+        <a href="/markdown/products/" class="block px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+          書籍
+        </a>
+        
+      
+        
+        <!-- Mobile Dropdown -->
+        <div class="mobile-dropdown">
+          <button class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+            知識庫
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="mobile-dropdown-menu hidden pl-4 mt-1 space-y-1">
+            
+              
+              <a href="/markdown/knowledge/glossary/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                術語詞彙表
+              </a>
+              
+            
+              
+              <a href="/markdown/resources/resources-cypherpunk-history/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Cypherpunk 歷史
+              </a>
+              
+            
+              
+              <a href="/markdown/knowledge/knowledge-bitcoin/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Bitcoin 百科
+              </a>
+              
+            
+              
+              <a href="/markdown/knowledge/knowledge-ethereum/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                Ethereum 百科
+              </a>
+              
+            
+          </div>
+        </div>
+        
+      
+        
+        <!-- Mobile Dropdown -->
+        <div class="mobile-dropdown">
+          <button class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-2 text-cp-dark-800 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+            社群
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="mobile-dropdown-menu hidden pl-4 mt-1 space-y-1">
+            
+              
+              <a href="/markdown/about/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                關於我們
+              </a>
+              
+            
+              
+              <a href="/markdown/SatelliteProject/" class="block px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                衛星計畫
+              </a>
+              
+            
+              
+              <a href="https://github.com/cypherpunks-core/cypherpunks-core.github.io/discussions" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                討論區
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </a>
+              
+            
+              
+              <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-4 py-2 text-sm text-cp-dark-700 hover:text-cp-green-500 hover:bg-cp-dark-200 rounded-lg transition-colors">
+                GitHub
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </a>
+              
+            
+          </div>
+        </div>
+        
+      
+      
+    </div>
+  </div>
+</nav>
+
+<!-- Spacer for fixed navbar -->
+<div class="h-16"></div>
+
+
+  <!-- Hero Section -->
+  
+
+  <!-- Main Content -->
+  <main id="main-content" class="flex-grow">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+      <div class="flex flex-col lg:flex-row gap-8">
+
+        <!-- Sidebar (Left) - Optional Menu -->
+        
+
+        <!-- Main Content Area -->
+        <article class="flex-grow min-w-0 max-w-4xl mx-auto">
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <!-- Post Header -->
+  <header class="mb-8">
+    <!-- Category Badge -->
+    
+
+    <!-- Title -->
+    <h1 class="text-3xl md:text-4xl font-bold font-mono text-cp-green-500 mb-4 text-glow-sm" itemprop="headline">
+      Rust Bitcoin 開發入門（三）：腳本與簽名
+    </h1>
+
+    <!-- Meta Info -->
+    <div class="flex flex-wrap items-center gap-4 text-sm text-cp-dark-600 font-mono">
+      <!-- Date -->
+      <time datetime="2025-03-24T00:00:00+00:00" itemprop="datePublished" class="flex items-center gap-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        2025-03-24
+      </time>
+
+      <!-- Author -->
+      <span class="flex items-center gap-1" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+        </svg>
+        <span itemprop="name">Cypherpunks Taiwan</span>
+      </span>
+
+      <!-- Reading Time -->
+      
+      
+      
+      
+      <span class="flex items-center gap-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        10 分鐘閱讀
+      </span>
+      
+    </div>
+  </header>
+
+  <!-- Featured Image -->
+  
+  <figure class="mb-8 rounded-lg overflow-hidden border border-cp-dark-400">
+    <img
+      src="/img/bitcoin-dev.svg"
+      alt="Rust Bitcoin 開發入門（三）：腳本與簽名"
+      class="w-full h-auto"
+      loading="lazy"
+      itemprop="image"
+    >
+  </figure>
+  
+
+  <!-- Post Content with TOC -->
+  <div class="flex flex-col lg:flex-row gap-8">
+    <!-- Main Content -->
+    <div class="flex-grow min-w-0">
+      <div class="content prose prose-invert max-w-none" itemprop="articleBody">
+        <p>這是 Rust Bitcoin 開發入門系列的第三篇。本篇深入探討 Bitcoin Script 編程和各種簽名機制的 Rust 實現。</p>
+
+<p><strong>系列文章導航：</strong></p>
+<ul>
+  <li><a href="/2025/03/22/rust-bitcoin-tutorial-1-environment-basics/">第一篇：環境設置與基礎概念</a></li>
+  <li><a href="/2025/03/23/rust-bitcoin-tutorial-2-addresses-transactions/">第二篇：地址生成與交易構建</a></li>
+  <li><strong>第三篇：腳本與簽名</strong>（本篇）</li>
+  <li><a href="/2025/03/25/rust-bitcoin-tutorial-4-advanced-applications/">第四篇：進階應用與整合</a></li>
+</ul>
+
+<hr />
+
+<h2 id="1-理解-bitcoin-script">1. 理解 Bitcoin Script</h2>
+
+<h3 id="11-什麼是-bitcoin-script">1.1 什麼是 Bitcoin Script</h3>
+
+<p>Bitcoin Script 是 Bitcoin 的程式語言，用於定義資金的花費條件。每一筆 Bitcoin 輸出都被一個腳本「鎖定」，而花費這筆輸出需要提供一個能夠「解鎖」它的腳本。</p>
+
+<p>Script 的設計有幾個重要特點。首先，它是基於堆疊（stack）的語言，類似於 Forth。操作數被推入堆疊，操作碼則從堆疊中取出操作數並將結果推回。其次，它故意不是圖靈完備的——沒有循環結構，執行時間是可預測的。這確保了節點可以快速驗證交易，不會被惡意的無限循環攻擊。</p>
+
+<p>理解 Script 對於 Bitcoin 開發很重要，因為它是所有智能合約功能的基礎。從簡單的單簽名支付到複雜的多重簽名、時間鎖和條件支付，都是透過 Script 實現的。</p>
+
+<h3 id="12-腳本執行模型">1.2 腳本執行模型</h3>
+
+<p>當驗證一筆交易時，節點會執行以下過程：</p>
+
+<ol>
+  <li>將花費者提供的解鎖腳本（scriptSig 或 witness）執行，結果留在堆疊上</li>
+  <li>然後執行被花費輸出的鎖定腳本（scriptPubKey）</li>
+  <li>如果執行完成後堆疊頂部是「真」（非零值），且沒有發生錯誤，則驗證通過</li>
+</ol>
+
+<p>這種「先解鎖，後驗證」的模型讓花費者可以提供滿足條件的數據（如簽名），然後由鎖定腳本驗證這些數據是否正確。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="k">use</span> <span class="nn">bitcoin</span><span class="p">::</span><span class="nn">script</span><span class="p">::{</span><span class="n">Script</span><span class="p">,</span> <span class="n">ScriptBuf</span><span class="p">,</span> <span class="n">Builder</span><span class="p">};</span>
+<span class="k">use</span> <span class="nn">bitcoin</span><span class="p">::</span><span class="nn">opcodes</span><span class="p">::</span><span class="nn">all</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">script_execution_demo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// P2PKH 的鎖定腳本：</span>
+    <span class="c1">// OP_DUP OP_HASH160 &lt;pubkey_hash&gt; OP_EQUALVERIFY OP_CHECKSIG</span>
+
+    <span class="c1">// 執行過程：</span>
+    <span class="c1">// 1. 解鎖腳本推入：&lt;signature&gt; &lt;pubkey&gt;</span>
+    <span class="c1">// 2. OP_DUP：複製堆疊頂部的 pubkey</span>
+    <span class="c1">// 3. OP_HASH160：對複製的 pubkey 計算 hash</span>
+    <span class="c1">// 4. 推入 pubkey_hash</span>
+    <span class="c1">// 5. OP_EQUALVERIFY：比較兩個 hash，不相等則失敗</span>
+    <span class="c1">// 6. OP_CHECKSIG：使用 signature 和 pubkey 驗證簽名</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="13-使用-rust-構建腳本">1.3 使用 Rust 構建腳本</h3>
+
+<p>rust-bitcoin 提供了多種構建腳本的方式。<code class="language-plaintext highlighter-rouge">Builder</code> 類型讓你可以逐步添加操作碼和數據：</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre></td><td class="rouge-code"><pre><span class="k">use</span> <span class="nn">bitcoin</span><span class="p">::</span><span class="nn">script</span><span class="p">::{</span><span class="n">Script</span><span class="p">,</span> <span class="n">ScriptBuf</span><span class="p">,</span> <span class="n">Builder</span><span class="p">};</span>
+<span class="k">use</span> <span class="nn">bitcoin</span><span class="p">::</span><span class="nn">opcodes</span><span class="p">::</span><span class="nn">all</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">build_scripts</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="nn">anyhow</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// 使用 Builder 構建 P2PKH 腳本</span>
+    <span class="k">let</span> <span class="n">pubkey_hash</span> <span class="o">=</span> <span class="nn">hex</span><span class="p">::</span><span class="nf">decode</span><span class="p">(</span><span class="s">"89abcdefabbaabbaabbaabbaabbaabbaabbaabba"</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+
+    <span class="k">let</span> <span class="n">p2pkh_script</span> <span class="o">=</span> <span class="nn">Builder</span><span class="p">::</span><span class="nf">new</span><span class="p">()</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_DUP</span><span class="p">)</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_HASH160</span><span class="p">)</span>
+        <span class="nf">.push_slice</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pubkey_hash</span><span class="p">)</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_EQUALVERIFY</span><span class="p">)</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_CHECKSIG</span><span class="p">)</span>
+        <span class="nf">.into_script</span><span class="p">();</span>
+
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"Script: {}"</span><span class="p">,</span> <span class="n">p2pkh_script</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"ASM: {}"</span><span class="p">,</span> <span class="n">p2pkh_script</span><span class="nf">.to_asm_string</span><span class="p">());</span>
+
+    <span class="c1">// 也可以使用便捷函數</span>
+    <span class="k">let</span> <span class="n">pubkey_hash</span> <span class="o">=</span> <span class="nn">bitcoin</span><span class="p">::</span><span class="nn">PubkeyHash</span><span class="p">::</span><span class="nf">from_str</span><span class="p">(</span>
+        <span class="s">"89abcdefabbaabbaabbaabbaabbaabbaabbaabba"</span>
+    <span class="p">)</span><span class="o">?</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">p2pkh_shortcut</span> <span class="o">=</span> <span class="nn">ScriptBuf</span><span class="p">::</span><span class="nf">new_p2pkh</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pubkey_hash</span><span class="p">);</span>
+
+    <span class="c1">// 兩種方式產生相同的腳本</span>
+    <span class="nd">assert_eq!</span><span class="p">(</span><span class="n">p2pkh_script</span><span class="p">,</span> <span class="n">p2pkh_shortcut</span><span class="p">);</span>
+
+    <span class="nf">Ok</span><span class="p">(())</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>你也可以解析腳本來檢查其結構：</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">parse_script</span><span class="p">(</span><span class="n">script</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">Script</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">instruction</span> <span class="k">in</span> <span class="n">script</span><span class="nf">.instructions</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">match</span> <span class="n">instruction</span> <span class="p">{</span>
+            <span class="nf">Ok</span><span class="p">(</span><span class="nn">bitcoin</span><span class="p">::</span><span class="nn">script</span><span class="p">::</span><span class="nn">Instruction</span><span class="p">::</span><span class="nf">Op</span><span class="p">(</span><span class="n">op</span><span class="p">))</span> <span class="k">=&gt;</span> <span class="p">{</span>
+                <span class="nd">println!</span><span class="p">(</span><span class="s">"操作碼: {:?}"</span><span class="p">,</span> <span class="n">op</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="nf">Ok</span><span class="p">(</span><span class="nn">bitcoin</span><span class="p">::</span><span class="nn">script</span><span class="p">::</span><span class="nn">Instruction</span><span class="p">::</span><span class="nf">PushBytes</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="k">=&gt;</span> <span class="p">{</span>
+                <span class="nd">println!</span><span class="p">(</span><span class="s">"數據: {}"</span><span class="p">,</span> <span class="nn">hex</span><span class="p">::</span><span class="nf">encode</span><span class="p">(</span><span class="n">data</span><span class="nf">.as_bytes</span><span class="p">()));</span>
+            <span class="p">}</span>
+            <span class="nf">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="nd">println!</span><span class="p">(</span><span class="s">"解析錯誤: {}"</span><span class="p">,</span> <span class="n">e</span><span class="p">),</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h2 id="2-標準腳本類型">2. 標準腳本類型</h2>
+
+<h3 id="21-p2pk-和-p2pkh">2.1 P2PK 和 P2PKH</h3>
+
+<p><strong>P2PK（Pay-to-Public-Key）</strong>是最早的腳本類型，直接將公鑰嵌入腳本中。解鎖只需要提供簽名。這種格式現在已經不常用，因為它暴露了公鑰，而且腳本較長。</p>
+
+<p><strong>P2PKH（Pay-to-Public-Key-Hash）</strong>改進了這個設計，只在腳本中存儲公鑰的雜湊值。解鎖時需要同時提供公鑰和簽名。這有兩個好處：腳本更短，而且在資金被花費之前，公鑰不會暴露。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">standard_scripts</span><span class="p">(</span><span class="n">pubkey</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">PublicKey</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">anyhow</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// P2PK：&lt;pubkey&gt; OP_CHECKSIG</span>
+    <span class="k">let</span> <span class="n">p2pk</span> <span class="o">=</span> <span class="nn">Builder</span><span class="p">::</span><span class="nf">new</span><span class="p">()</span>
+        <span class="nf">.push_key</span><span class="p">(</span><span class="n">pubkey</span><span class="p">)</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_CHECKSIG</span><span class="p">)</span>
+        <span class="nf">.into_script</span><span class="p">();</span>
+
+    <span class="c1">// P2PKH：OP_DUP OP_HASH160 &lt;pubkey_hash&gt; OP_EQUALVERIFY OP_CHECKSIG</span>
+    <span class="k">let</span> <span class="n">p2pkh</span> <span class="o">=</span> <span class="nn">ScriptBuf</span><span class="p">::</span><span class="nf">new_p2pkh</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pubkey</span><span class="nf">.pubkey_hash</span><span class="p">());</span>
+
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"P2PK 大小: {} bytes"</span><span class="p">,</span> <span class="n">p2pk</span><span class="nf">.len</span><span class="p">());</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"P2PKH 大小: {} bytes"</span><span class="p">,</span> <span class="n">p2pkh</span><span class="nf">.len</span><span class="p">());</span>
+    <span class="c1">// P2PKH 較短，因為 pubkey_hash 只有 20 bytes，而公鑰有 33 bytes</span>
+
+    <span class="nf">Ok</span><span class="p">(())</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="22-p2sh">2.2 P2SH</h3>
+
+<p><strong>P2SH（Pay-to-Script-Hash）</strong>是一個強大的抽象，允許支付到任意腳本的雜湊值。發送者不需要知道腳本的內容——他們只需支付到一個以 3 開頭的地址。只有在花費時，完整的腳本才會被揭示。</p>
+
+<p>這種設計有幾個優點。首先，複雜的腳本（如多重簽名）可以用短小的地址表示，減少發送者的負擔。其次，腳本的複雜性成本由花費者承擔，而不是發送者。第三，它為腳本升級提供了靈活性——只要雜湊值相同，底層腳本可以改變。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">p2sh_demo</span><span class="p">(</span><span class="n">inner_script</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">Script</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// P2SH：OP_HASH160 &lt;script_hash&gt; OP_EQUAL</span>
+    <span class="k">let</span> <span class="n">p2sh</span> <span class="o">=</span> <span class="nn">ScriptBuf</span><span class="p">::</span><span class="nf">new_p2sh</span><span class="p">(</span><span class="o">&amp;</span><span class="n">inner_script</span><span class="nf">.script_hash</span><span class="p">());</span>
+
+    <span class="c1">// 解鎖 P2SH 需要：</span>
+    <span class="c1">// 1. 滿足內部腳本的數據</span>
+    <span class="c1">// 2. 內部腳本本身</span>
+
+    <span class="c1">// 例如，對於包裝的 P2PKH：</span>
+    <span class="c1">// scriptSig: &lt;sig&gt; &lt;pubkey&gt; &lt;serialized_p2pkh_script&gt;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="23-segwit-腳本p2wpkh-和-p2wsh">2.3 SegWit 腳本（P2WPKH 和 P2WSH）</h3>
+
+<p>SegWit（Segregated Witness）升級引入了新的腳本類型，將簽名數據移到交易的「見證」部分。這解決了交易可延展性問題，並降低了費用。</p>
+
+<p><strong>P2WPKH</strong> 是 P2PKH 的 SegWit 版本。鎖定腳本非常簡短：<code class="language-plaintext highlighter-rouge">OP_0 &lt;20-byte-pubkey-hash&gt;</code>。<code class="language-plaintext highlighter-rouge">OP_0</code> 表示見證版本 0。解鎖數據（簽名和公鑰）放在 witness 欄位中。</p>
+
+<p><strong>P2WSH</strong> 是 P2SH 的 SegWit 版本，使用 32-byte 的腳本雜湊：<code class="language-plaintext highlighter-rouge">OP_0 &lt;32-byte-script-hash&gt;</code>。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">segwit_scripts</span><span class="p">(</span><span class="n">pubkey</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">PublicKey</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">anyhow</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// P2WPKH</span>
+    <span class="k">let</span> <span class="n">wpkh</span> <span class="o">=</span> <span class="n">pubkey</span><span class="nf">.wpubkey_hash</span><span class="p">()</span><span class="o">?</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">p2wpkh</span> <span class="o">=</span> <span class="nn">ScriptBuf</span><span class="p">::</span><span class="nf">new_p2wpkh</span><span class="p">(</span><span class="o">&amp;</span><span class="n">wpkh</span><span class="p">);</span>
+
+    <span class="c1">// P2WSH（包裝多簽腳本）</span>
+    <span class="k">let</span> <span class="n">multisig_script</span> <span class="o">=</span> <span class="nf">create_multisig_script</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">[</span><span class="n">pubkey1</span><span class="p">,</span> <span class="n">pubkey2</span><span class="p">,</span> <span class="n">pubkey3</span><span class="p">]);</span>
+    <span class="k">let</span> <span class="n">wsh</span> <span class="o">=</span> <span class="n">multisig_script</span><span class="nf">.wscript_hash</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">p2wsh</span> <span class="o">=</span> <span class="nn">ScriptBuf</span><span class="p">::</span><span class="nf">new_p2wsh</span><span class="p">(</span><span class="o">&amp;</span><span class="n">wsh</span><span class="p">);</span>
+
+    <span class="c1">// SegWit 腳本的特點是非常簡短</span>
+    <span class="c1">// 複雜度在 witness 中，費用較低</span>
+
+    <span class="nf">Ok</span><span class="p">(())</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="24-taprootp2tr">2.4 Taproot（P2TR）</h3>
+
+<p>Taproot 是 Bitcoin 腳本能力的最新重大升級。P2TR 腳本的格式是 <code class="language-plaintext highlighter-rouge">OP_1 &lt;32-byte-tweaked-pubkey&gt;</code>，其中 <code class="language-plaintext highlighter-rouge">OP_1</code> 表示見證版本 1。</p>
+
+<p>Taproot 的核心創新是「tweaked key」。輸出公鑰是內部公鑰加上一個調整值（tweak），這個調整值可以承諾（commit）到一棵腳本樹。這意味著：</p>
+
+<ul>
+  <li>如果所有參與者同意，可以使用密鑰路徑（key path）花費——只需一個簽名</li>
+  <li>如果需要使用特定條件，可以使用腳本路徑（script path）——揭示並執行該腳本</li>
+  <li>未使用的腳本永遠不會暴露，保護了隱私</li>
+</ul>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">taproot_scripts</span><span class="p">(</span><span class="n">secp</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">Secp256k1</span><span class="o">&lt;</span><span class="nn">secp256k1</span><span class="p">::</span><span class="n">All</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">anyhow</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">internal_key</span> <span class="o">=</span> <span class="nn">XOnlyPublicKey</span><span class="p">::</span><span class="nf">from_str</span><span class="p">(</span><span class="s">"..."</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+
+    <span class="c1">// 簡單的 P2TR（無腳本樹）</span>
+    <span class="k">let</span> <span class="n">p2tr</span> <span class="o">=</span> <span class="nn">ScriptBuf</span><span class="p">::</span><span class="nf">new_p2tr</span><span class="p">(</span><span class="n">secp</span><span class="p">,</span> <span class="n">internal_key</span><span class="p">,</span> <span class="nb">None</span><span class="p">);</span>
+
+    <span class="c1">// 帶腳本樹的 P2TR</span>
+    <span class="k">let</span> <span class="n">script_a</span> <span class="o">=</span> <span class="nn">Builder</span><span class="p">::</span><span class="nf">new</span><span class="p">()</span>
+        <span class="nf">.push_x_only_key</span><span class="p">(</span><span class="o">&amp;</span><span class="n">internal_key</span><span class="p">)</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_CHECKSIG</span><span class="p">)</span>
+        <span class="nf">.into_script</span><span class="p">();</span>
+
+    <span class="k">let</span> <span class="n">taproot</span> <span class="o">=</span> <span class="nn">TaprootBuilder</span><span class="p">::</span><span class="nf">new</span><span class="p">()</span>
+        <span class="nf">.add_leaf</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">script_a</span><span class="p">)</span><span class="o">?</span>
+        <span class="nf">.finalize</span><span class="p">(</span><span class="n">secp</span><span class="p">,</span> <span class="n">internal_key</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+
+    <span class="k">let</span> <span class="n">tweaked_key</span> <span class="o">=</span> <span class="n">taproot</span><span class="nf">.output_key</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">p2tr_with_scripts</span> <span class="o">=</span> <span class="nn">ScriptBuf</span><span class="p">::</span><span class="nf">new_p2tr_tweaked</span><span class="p">(</span><span class="n">tweaked_key</span><span class="p">);</span>
+
+    <span class="nf">Ok</span><span class="p">(())</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h2 id="3-多重簽名">3. 多重簽名</h2>
+
+<h3 id="31-理解多重簽名">3.1 理解多重簽名</h3>
+
+<p>多重簽名（multisig）是 Bitcoin 最重要的腳本功能之一，要求多個密鑰中的一部分來授權交易。常見的配置包括 2-of-3（三個密鑰中任意兩個）和 3-of-5。</p>
+
+<p>多重簽名有許多應用場景。對於個人用戶，它提供了備份和安全性——即使丟失一個密鑰，資金仍然可以取回；即使一個密鑰被盜，攻擊者也無法單獨花費資金。對於組織，它實現了共同控制——需要多人同意才能移動資金。</p>
+
+<p>傳統的多簽使用 <code class="language-plaintext highlighter-rouge">OP_CHECKMULTISIG</code> 操作碼，但這有一些缺點：公鑰數量和門檻在腳本中可見，費用隨公鑰數量線性增加。Taproot 時代的多簽有更好的選擇，我們稍後會討論。</p>
+
+<h3 id="32-構建傳統多簽腳本">3.2 構建傳統多簽腳本</h3>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">create_multisig_script</span><span class="p">(</span><span class="n">m</span><span class="p">:</span> <span class="nb">u8</span><span class="p">,</span> <span class="n">pubkeys</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">[</span><span class="n">PublicKey</span><span class="p">])</span> <span class="k">-&gt;</span> <span class="n">ScriptBuf</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">n</span> <span class="o">=</span> <span class="n">pubkeys</span><span class="nf">.len</span><span class="p">()</span> <span class="k">as</span> <span class="nb">u8</span><span class="p">;</span>
+    <span class="nd">assert!</span><span class="p">(</span><span class="n">m</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">,</span> <span class="s">"無效的 M-of-N 參數"</span><span class="p">);</span>
+
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">builder</span> <span class="o">=</span> <span class="nn">Builder</span><span class="p">::</span><span class="nf">new</span><span class="p">()</span><span class="nf">.push_int</span><span class="p">(</span><span class="n">m</span> <span class="k">as</span> <span class="nb">i64</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="n">pubkey</span> <span class="k">in</span> <span class="n">pubkeys</span> <span class="p">{</span>
+        <span class="n">builder</span> <span class="o">=</span> <span class="n">builder</span><span class="nf">.push_key</span><span class="p">(</span><span class="n">pubkey</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">builder</span>
+        <span class="nf">.push_int</span><span class="p">(</span><span class="n">n</span> <span class="k">as</span> <span class="nb">i64</span><span class="p">)</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_CHECKMULTISIG</span><span class="p">)</span>
+        <span class="nf">.into_script</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">multisig_demo</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="nn">anyhow</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// 創建三個公鑰</span>
+    <span class="k">let</span> <span class="n">pubkeys</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">PublicKey</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nd">vec!</span><span class="p">[</span>
+        <span class="nn">PublicKey</span><span class="p">::</span><span class="nf">from_str</span><span class="p">(</span><span class="s">"02..."</span><span class="p">)</span><span class="o">?</span><span class="p">,</span>
+        <span class="nn">PublicKey</span><span class="p">::</span><span class="nf">from_str</span><span class="p">(</span><span class="s">"02..."</span><span class="p">)</span><span class="o">?</span><span class="p">,</span>
+        <span class="nn">PublicKey</span><span class="p">::</span><span class="nf">from_str</span><span class="p">(</span><span class="s">"02..."</span><span class="p">)</span><span class="o">?</span><span class="p">,</span>
+    <span class="p">];</span>
+
+    <span class="c1">// 2-of-3 多簽</span>
+    <span class="k">let</span> <span class="n">multisig</span> <span class="o">=</span> <span class="nf">create_multisig_script</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pubkeys</span><span class="p">);</span>
+
+    <span class="c1">// 通常包裝在 P2WSH 中以節省費用</span>
+    <span class="k">let</span> <span class="n">p2wsh</span> <span class="o">=</span> <span class="nn">ScriptBuf</span><span class="p">::</span><span class="nf">new_p2wsh</span><span class="p">(</span><span class="o">&amp;</span><span class="n">multisig</span><span class="nf">.wscript_hash</span><span class="p">());</span>
+
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"多簽腳本: {}"</span><span class="p">,</span> <span class="n">multisig</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"P2WSH 腳本: {}"</span><span class="p">,</span> <span class="n">p2wsh</span><span class="p">);</span>
+
+    <span class="nf">Ok</span><span class="p">(())</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="33-花費多簽">3.3 花費多簽</h3>
+
+<p>花費多簽交易需要提供足夠數量的有效簽名。對於傳統的 <code class="language-plaintext highlighter-rouge">OP_CHECKMULTISIG</code>，還需要注意一個著名的 bug：操作碼會額外消耗一個堆疊元素（通常使用 <code class="language-plaintext highlighter-rouge">OP_0</code> 佔位）。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">spend_multisig</span><span class="p">(</span>
+    <span class="n">tx</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">Transaction</span><span class="p">,</span>
+    <span class="n">input_index</span><span class="p">:</span> <span class="nb">usize</span><span class="p">,</span>
+    <span class="n">multisig_script</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">Script</span><span class="p">,</span>
+    <span class="n">signatures</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;&gt;</span><span class="p">,</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 傳統多簽的解鎖腳本：</span>
+    <span class="c1">// OP_0 &lt;sig1&gt; &lt;sig2&gt; ... &lt;redeemScript&gt;</span>
+
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">witness</span> <span class="o">=</span> <span class="nn">Witness</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+
+    <span class="c1">// OP_0（CHECKMULTISIG bug 的佔位符）</span>
+    <span class="n">witness</span><span class="nf">.push</span><span class="p">(</span><span class="o">&amp;</span><span class="p">[]);</span>
+
+    <span class="c1">// 添加簽名</span>
+    <span class="k">for</span> <span class="n">sig</span> <span class="k">in</span> <span class="n">signatures</span> <span class="p">{</span>
+        <span class="n">witness</span><span class="nf">.push</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sig</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 對於 P2WSH，需要添加腳本</span>
+    <span class="n">witness</span><span class="nf">.push</span><span class="p">(</span><span class="n">multisig_script</span><span class="nf">.as_bytes</span><span class="p">());</span>
+
+    <span class="n">tx</span><span class="py">.input</span><span class="p">[</span><span class="n">input_index</span><span class="p">]</span><span class="py">.witness</span> <span class="o">=</span> <span class="n">witness</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h2 id="4-簽名機制詳解">4. 簽名機制詳解</h2>
+
+<h3 id="41-ecdsa-簽名">4.1 ECDSA 簽名</h3>
+
+<p>ECDSA（Elliptic Curve Digital Signature Algorithm）是 Bitcoin 最初使用的簽名演算法。簽名過程包括：</p>
+
+<ol>
+  <li>計算要簽名的消息（交易數據的特定哈希）</li>
+  <li>使用私鑰和隨機數生成簽名</li>
+  <li>簽名由兩個數值 (r, s) 組成，以 DER 格式編碼</li>
+</ol>
+
+<p>簽名哈希（sighash）的計算方式取決於腳本類型。傳統腳本使用原始的 sighash 演算法，而 SegWit 使用 BIP143 定義的新演算法，後者包含了被花費 UTXO 的金額，防止了某些類型的攻擊。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+</pre></td><td class="rouge-code"><pre><span class="k">use</span> <span class="nn">bitcoin</span><span class="p">::</span><span class="nn">sighash</span><span class="p">::{</span><span class="n">SighashCache</span><span class="p">,</span> <span class="n">EcdsaSighashType</span><span class="p">};</span>
+
+<span class="k">fn</span> <span class="nf">ecdsa_signing</span><span class="p">(</span>
+    <span class="n">tx</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">Transaction</span><span class="p">,</span>
+    <span class="n">input_index</span><span class="p">:</span> <span class="nb">usize</span><span class="p">,</span>
+    <span class="n">utxo_script</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">Script</span><span class="p">,</span>
+    <span class="n">utxo_amount</span><span class="p">:</span> <span class="n">Amount</span><span class="p">,</span>
+    <span class="n">private_key</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">PrivateKey</span><span class="p">,</span>
+<span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">anyhow</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">secp</span> <span class="o">=</span> <span class="nn">Secp256k1</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">public_key</span> <span class="o">=</span> <span class="n">private_key</span><span class="nf">.public_key</span><span class="p">(</span><span class="o">&amp;</span><span class="n">secp</span><span class="p">);</span>
+
+    <span class="c1">// 對於 P2WPKH，scriptCode 是對應的 P2PKH 腳本</span>
+    <span class="k">let</span> <span class="n">script_code</span> <span class="o">=</span> <span class="nn">ScriptBuf</span><span class="p">::</span><span class="nf">new_p2pkh</span><span class="p">(</span><span class="o">&amp;</span><span class="n">public_key</span><span class="nf">.pubkey_hash</span><span class="p">());</span>
+
+    <span class="c1">// 計算 BIP143 sighash</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">sighash_cache</span> <span class="o">=</span> <span class="nn">SighashCache</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">tx</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">sighash</span> <span class="o">=</span> <span class="n">sighash_cache</span><span class="nf">.p2wpkh_signature_hash</span><span class="p">(</span>
+        <span class="n">input_index</span><span class="p">,</span>
+        <span class="o">&amp;</span><span class="n">script_code</span><span class="p">,</span>
+        <span class="n">utxo_amount</span><span class="p">,</span>
+        <span class="nn">EcdsaSighashType</span><span class="p">::</span><span class="n">All</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">?</span><span class="p">;</span>
+
+    <span class="c1">// 創建簽名</span>
+    <span class="k">let</span> <span class="n">message</span> <span class="o">=</span> <span class="nn">Message</span><span class="p">::</span><span class="nf">from_digest_slice</span><span class="p">(</span><span class="n">sighash</span><span class="nf">.as_byte_array</span><span class="p">())</span><span class="o">?</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">signature</span> <span class="o">=</span> <span class="n">secp</span><span class="nf">.sign_ecdsa</span><span class="p">(</span><span class="o">&amp;</span><span class="n">message</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">private_key</span><span class="py">.inner</span><span class="p">);</span>
+
+    <span class="c1">// DER 編碼 + sighash type</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">sig_bytes</span> <span class="o">=</span> <span class="n">signature</span><span class="nf">.serialize_der</span><span class="p">()</span><span class="nf">.to_vec</span><span class="p">();</span>
+    <span class="n">sig_bytes</span><span class="nf">.push</span><span class="p">(</span><span class="nn">EcdsaSighashType</span><span class="p">::</span><span class="n">All</span><span class="nf">.to_u32</span><span class="p">()</span> <span class="k">as</span> <span class="nb">u8</span><span class="p">);</span>
+
+    <span class="nf">Ok</span><span class="p">(</span><span class="n">sig_bytes</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="42-sighash-類型">4.2 Sighash 類型</h3>
+
+<p>Sighash 類型控制簽名涵蓋交易的哪些部分，提供了靈活的簽名選項：</p>
+
+<p><strong>SIGHASH_ALL（0x01）</strong>：最常見，簽名涵蓋所有輸入和輸出。任何改變都會使簽名無效。</p>
+
+<p><strong>SIGHASH_NONE（0x02）</strong>：只簽名輸入，不簽輸出。簽名者同意花費這些輸入，但不關心資金去向。這很危險，因為任何人都可以修改輸出。</p>
+
+<p><strong>SIGHASH_SINGLE（0x03）</strong>：簽名所有輸入和同一索引的輸出。用於某些特殊的多方協議。</p>
+
+<p><strong>ANYONECANPAY（0x80）</strong>：可以與上述任何類型組合。只簽名當前輸入，允許其他人添加更多輸入。這可以用於眾籌——多人可以各自添加輸入到同一筆交易。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">sighash_types_demo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 不同 sighash 類型的用例</span>
+
+    <span class="c1">// ALL：標準支付</span>
+    <span class="c1">// "我同意花費這些輸入，將資金發送到這些輸出"</span>
+
+    <span class="c1">// NONE：簽名授權</span>
+    <span class="c1">// "我授權花費這些輸入，任何人可以決定去向"</span>
+
+    <span class="c1">// SINGLE：交換</span>
+    <span class="c1">// "我願意用我的輸入換取這個特定的輸出"</span>
+
+    <span class="c1">// ALL|ANYONECANPAY：眾籌</span>
+    <span class="c1">// "如果達成這個輸出，我願意貢獻我的輸入"</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="43-schnorr-簽名">4.3 Schnorr 簽名</h3>
+
+<p>Taproot 引入了 Schnorr 簽名（BIP340），它比 ECDSA 有多個優點：</p>
+
+<p><strong>更小的簽名</strong>：64 bytes，而 ECDSA 是 71-72 bytes。</p>
+
+<p><strong>線性性</strong>：多個簽名可以聚合成一個。這意味著 n-of-n 多簽可以表現得像單簽，大大提高隱私和效率。</p>
+
+<p><strong>批量驗證</strong>：多個簽名可以同時驗證，比逐個驗證更快。</p>
+
+<p><strong>更簡單的安全證明</strong>：Schnorr 的數學結構更簡潔。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td><td class="rouge-code"><pre><span class="k">use</span> <span class="nn">bitcoin</span><span class="p">::</span><span class="nn">secp256k1</span><span class="p">::{</span><span class="n">Keypair</span><span class="p">,</span> <span class="n">XOnlyPublicKey</span><span class="p">};</span>
+
+<span class="k">fn</span> <span class="nf">schnorr_signing</span><span class="p">(</span>
+    <span class="n">tx</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">Transaction</span><span class="p">,</span>
+    <span class="n">input_index</span><span class="p">:</span> <span class="nb">usize</span><span class="p">,</span>
+    <span class="n">prevouts</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">[</span><span class="n">TxOut</span><span class="p">],</span>
+    <span class="n">keypair</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">Keypair</span><span class="p">,</span>
+<span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">anyhow</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">secp</span> <span class="o">=</span> <span class="nn">Secp256k1</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+
+    <span class="c1">// 計算 Taproot sighash</span>
+    <span class="k">let</span> <span class="n">prevouts</span> <span class="o">=</span> <span class="nn">Prevouts</span><span class="p">::</span><span class="nf">All</span><span class="p">(</span><span class="n">prevouts</span><span class="p">);</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">sighash_cache</span> <span class="o">=</span> <span class="nn">SighashCache</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">tx</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">sighash</span> <span class="o">=</span> <span class="n">sighash_cache</span><span class="nf">.taproot_key_spend_signature_hash</span><span class="p">(</span>
+        <span class="n">input_index</span><span class="p">,</span>
+        <span class="o">&amp;</span><span class="n">prevouts</span><span class="p">,</span>
+        <span class="nn">TapSighashType</span><span class="p">::</span><span class="nb">Default</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">?</span><span class="p">;</span>
+
+    <span class="c1">// Schnorr 簽名</span>
+    <span class="k">let</span> <span class="n">msg</span> <span class="o">=</span> <span class="nn">Message</span><span class="p">::</span><span class="nf">from_digest_slice</span><span class="p">(</span><span class="n">sighash</span><span class="nf">.as_byte_array</span><span class="p">())</span><span class="o">?</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">signature</span> <span class="o">=</span> <span class="n">secp</span><span class="nf">.sign_schnorr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">,</span> <span class="n">keypair</span><span class="p">);</span>
+
+    <span class="c1">// Schnorr 簽名固定 64 bytes</span>
+    <span class="nf">Ok</span><span class="p">(</span><span class="n">signature</span><span class="nf">.as_ref</span><span class="p">()</span><span class="nf">.to_vec</span><span class="p">())</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="44-taproot-簽名的兩種路徑">4.4 Taproot 簽名的兩種路徑</h3>
+
+<p>Taproot 交易可以通過兩種方式花費：</p>
+
+<p><strong>密鑰路徑（Key Path）</strong>：如果你控制內部密鑰（或聚合密鑰），只需提供一個 Schnorr 簽名。這是最有效率的方式，witness 只包含一個 64-byte 簽名。</p>
+
+<p><strong>腳本路徑（Script Path）</strong>：揭示並執行腳本樹中的一個腳本。witness 包含：</p>
+<ol>
+  <li>滿足腳本的數據（如簽名）</li>
+  <li>腳本本身</li>
+  <li>Control block（包含內部公鑰和 Merkle 證明）</li>
+</ol>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">taproot_spending_demo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Key path spending</span>
+    <span class="c1">// witness: [schnorr_signature]</span>
+    <span class="c1">// 最簡潔，64 bytes</span>
+
+    <span class="c1">// Script path spending</span>
+    <span class="c1">// witness: [script_args...] [script] [control_block]</span>
+    <span class="c1">// 較大，但允許複雜條件</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h2 id="5-miniscript">5. Miniscript</h2>
+
+<h3 id="51-為什麼需要-miniscript">5.1 為什麼需要 Miniscript</h3>
+
+<p>直接編寫 Bitcoin Script 是容易出錯的。腳本可能看起來正確但有微妙的 bug——例如，忘記了 <code class="language-plaintext highlighter-rouge">OP_CHECKMULTISIG</code> 的佔位 bug，或者條件分支不完整。更糟糕的是，很難分析一個腳本的所有可能花費方式。</p>
+
+<p>Miniscript 解決了這些問題。它是 Bitcoin Script 的一個子集，具有以下特點：</p>
+
+<p><strong>可組合性</strong>：你可以安全地組合不同的條件，而不用擔心它們之間的交互。</p>
+
+<p><strong>可分析性</strong>：給定一個 Miniscript，你可以自動分析：所有可能的花費方式、每種方式的 witness 大小、涉及的公鑰和時間鎖。</p>
+
+<p><strong>編譯優化</strong>：從高階策略語言編譯為最優的 Script。</p>
+
+<h3 id="52-策略語言">5.2 策略語言</h3>
+
+<p>Miniscript 使用一種簡潔的策略語言來描述花費條件：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">pk(KEY)</code> - 需要 KEY 的簽名</li>
+  <li><code class="language-plaintext highlighter-rouge">older(N)</code> - 相對時間鎖，N 個區塊後</li>
+  <li><code class="language-plaintext highlighter-rouge">after(N)</code> - 絕對時間鎖</li>
+  <li><code class="language-plaintext highlighter-rouge">sha256(H)</code> - 需要 SHA256 原像</li>
+  <li><code class="language-plaintext highlighter-rouge">and(A, B)</code> - 需要 A 和 B 同時滿足</li>
+  <li><code class="language-plaintext highlighter-rouge">or(A, B)</code> - A 或 B 其中之一</li>
+  <li><code class="language-plaintext highlighter-rouge">thresh(k, A, B, C...)</code> - k-of-n 條件</li>
+</ul>
+
+<p>例如，<code class="language-plaintext highlighter-rouge">or(pk(Alice), and(pk(Bob), older(144)))</code> 表示：Alice 可以立即花費，或者 Bob 在 144 個區塊（約 1 天）後可以花費。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="rouge-code"><pre><span class="k">use</span> <span class="nn">miniscript</span><span class="p">::</span><span class="nn">policy</span><span class="p">::</span><span class="n">Concrete</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">miniscript</span><span class="p">::</span><span class="n">Segwitv0</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">miniscript_demo</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="nn">anyhow</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">alice</span> <span class="o">=</span> <span class="s">"02alice..."</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">bob</span> <span class="o">=</span> <span class="s">"02bob..."</span><span class="p">;</span>
+
+    <span class="c1">// 定義策略</span>
+    <span class="k">let</span> <span class="n">policy_str</span> <span class="o">=</span> <span class="nd">format!</span><span class="p">(</span>
+        <span class="s">"or(pk({}),and(pk({}),older(144)))"</span><span class="p">,</span>
+        <span class="n">alice</span><span class="p">,</span> <span class="n">bob</span>
+    <span class="p">);</span>
+
+    <span class="c1">// 解析策略</span>
+    <span class="k">let</span> <span class="n">policy</span> <span class="o">=</span> <span class="nn">Concrete</span><span class="p">::</span><span class="o">&lt;</span><span class="n">PublicKey</span><span class="o">&gt;</span><span class="p">::</span><span class="nf">from_str</span><span class="p">(</span><span class="o">&amp;</span><span class="n">policy_str</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+
+    <span class="c1">// 編譯為 Miniscript</span>
+    <span class="k">let</span> <span class="n">miniscript</span> <span class="o">=</span> <span class="n">policy</span><span class="py">.compile</span><span class="p">::</span><span class="o">&lt;</span><span class="n">Segwitv0</span><span class="o">&gt;</span><span class="p">()</span><span class="o">?</span><span class="p">;</span>
+
+    <span class="c1">// 獲取 Script</span>
+    <span class="k">let</span> <span class="n">script</span> <span class="o">=</span> <span class="n">miniscript</span><span class="nf">.encode</span><span class="p">();</span>
+
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"策略: {}"</span><span class="p">,</span> <span class="n">policy</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"Miniscript: {}"</span><span class="p">,</span> <span class="n">miniscript</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"Script 大小: {} bytes"</span><span class="p">,</span> <span class="n">script</span><span class="nf">.len</span><span class="p">());</span>
+
+    <span class="nf">Ok</span><span class="p">(())</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="53-描述符descriptors">5.3 描述符（Descriptors）</h3>
+
+<p>描述符是錢包軟體用來描述地址生成方式的標準格式。它們結合了腳本類型和密鑰資訊：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">pkh(KEY)</code> - P2PKH 地址</li>
+  <li><code class="language-plaintext highlighter-rouge">wpkh(KEY)</code> - P2WPKH 地址</li>
+  <li><code class="language-plaintext highlighter-rouge">sh(wpkh(KEY))</code> - P2SH-P2WPKH</li>
+  <li><code class="language-plaintext highlighter-rouge">tr(KEY)</code> - 簡單 P2TR</li>
+  <li><code class="language-plaintext highlighter-rouge">wsh(multi(2,KEY1,KEY2,KEY3))</code> - 2-of-3 P2WSH 多簽</li>
+</ul>
+
+<p>描述符可以包含 HD 派生路徑，允許錢包批量生成地址：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>wpkh([fingerprint/84'/0'/0']xpub.../0/*)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>這表示：使用 BIP84 路徑派生的擴展公鑰，生成接收地址（/0/*）。</p>
+
+<hr />
+
+<h2 id="6-進階腳本技巧">6. 進階腳本技巧</h2>
+
+<h3 id="61-時間鎖">6.1 時間鎖</h3>
+
+<p>時間鎖是 Bitcoin 腳本的重要功能，允許資金只能在特定時間後被花費。</p>
+
+<p><strong>CHECKLOCKTIMEVERIFY（CLTV）</strong>實現絕對時間鎖。值小於 5 億被解釋為區塊高度，大於等於 5 億被解釋為 Unix 時間戳。</p>
+
+<p><strong>CHECKSEQUENCEVERIFY（CSV）</strong>實現相對時間鎖，從 UTXO 被創建開始計算。這對於閃電網路等協議至關重要。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">timelock_script</span><span class="p">(</span><span class="n">pubkey</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">PublicKey</span><span class="p">,</span> <span class="n">blocks</span><span class="p">:</span> <span class="nb">i64</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">ScriptBuf</span> <span class="p">{</span>
+    <span class="c1">// &lt;blocks&gt; OP_CSV OP_DROP &lt;pubkey&gt; OP_CHECKSIG</span>
+    <span class="nn">Builder</span><span class="p">::</span><span class="nf">new</span><span class="p">()</span>
+        <span class="nf">.push_int</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_CSV</span><span class="p">)</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_DROP</span><span class="p">)</span>
+        <span class="nf">.push_key</span><span class="p">(</span><span class="n">pubkey</span><span class="p">)</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_CHECKSIG</span><span class="p">)</span>
+        <span class="nf">.into_script</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="62-htlc哈希時間鎖合約">6.2 HTLC（哈希時間鎖合約）</h3>
+
+<p>HTLC 是閃電網路和原子交換的基礎。它允許有條件的支付：如果接收者在時限內揭示原像（preimage），可以領取資金；否則發送者可以取回。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">htlc_script</span><span class="p">(</span>
+    <span class="n">recipient_pubkey</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">XOnlyPublicKey</span><span class="p">,</span>
+    <span class="n">sender_pubkey</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">XOnlyPublicKey</span><span class="p">,</span>
+    <span class="n">payment_hash</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">[</span><span class="nb">u8</span><span class="p">],</span>
+    <span class="n">timeout</span><span class="p">:</span> <span class="nb">i64</span><span class="p">,</span>
+<span class="p">)</span> <span class="k">-&gt;</span> <span class="n">ScriptBuf</span> <span class="p">{</span>
+    <span class="c1">// IF</span>
+    <span class="c1">//   OP_SHA256 &lt;hash&gt; OP_EQUALVERIFY &lt;recipient&gt; OP_CHECKSIG</span>
+    <span class="c1">// ELSE</span>
+    <span class="c1">//   &lt;timeout&gt; OP_CLTV OP_DROP &lt;sender&gt; OP_CHECKSIG</span>
+    <span class="c1">// ENDIF</span>
+
+    <span class="nn">Builder</span><span class="p">::</span><span class="nf">new</span><span class="p">()</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_IF</span><span class="p">)</span>
+            <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_SHA256</span><span class="p">)</span>
+            <span class="nf">.push_slice</span><span class="p">(</span><span class="n">payment_hash</span><span class="p">)</span>
+            <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_EQUALVERIFY</span><span class="p">)</span>
+            <span class="nf">.push_x_only_key</span><span class="p">(</span><span class="n">recipient_pubkey</span><span class="p">)</span>
+            <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_CHECKSIG</span><span class="p">)</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_ELSE</span><span class="p">)</span>
+            <span class="nf">.push_int</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+            <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_CLTV</span><span class="p">)</span>
+            <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_DROP</span><span class="p">)</span>
+            <span class="nf">.push_x_only_key</span><span class="p">(</span><span class="n">sender_pubkey</span><span class="p">)</span>
+            <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_CHECKSIG</span><span class="p">)</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_ENDIF</span><span class="p">)</span>
+        <span class="nf">.into_script</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="63-taproot-腳本樹">6.3 Taproot 腳本樹</h3>
+
+<p>Taproot 允許將多個腳本組織成 Merkle 樹。每個葉子是一個獨立的花費條件。當使用某個腳本花費時，只需揭示該腳本和 Merkle 證明，其他腳本保持隱藏。</p>
+
+<p>這種設計特別適合有多個備用花費方式的場景。例如，一個「金庫」可能有：</p>
+<ul>
+  <li>密鑰路徑：擁有者的正常花費</li>
+  <li>腳本 A：緊急恢復密鑰</li>
+  <li>腳本 B：延遲後的繼承人</li>
+</ul>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">taproot_tree_demo</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="nn">anyhow</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">secp</span> <span class="o">=</span> <span class="nn">Secp256k1</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">internal_key</span> <span class="o">=</span> <span class="nn">XOnlyPublicKey</span><span class="p">::</span><span class="nf">from_str</span><span class="p">(</span><span class="s">"..."</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+
+    <span class="c1">// 創建腳本</span>
+    <span class="k">let</span> <span class="n">emergency_script</span> <span class="o">=</span> <span class="nf">create_emergency_script</span><span class="p">(</span><span class="o">&amp;</span><span class="n">emergency_key</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">inheritance_script</span> <span class="o">=</span> <span class="nf">create_inheritance_script</span><span class="p">(</span><span class="o">&amp;</span><span class="n">heir_key</span><span class="p">,</span> <span class="mi">52560</span><span class="p">);</span> <span class="c1">// ~1年</span>
+
+    <span class="c1">// 構建樹</span>
+    <span class="k">let</span> <span class="n">taproot</span> <span class="o">=</span> <span class="nn">TaprootBuilder</span><span class="p">::</span><span class="nf">new</span><span class="p">()</span>
+        <span class="nf">.add_leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">emergency_script</span><span class="p">)</span><span class="o">?</span>
+        <span class="nf">.add_leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">inheritance_script</span><span class="p">)</span><span class="o">?</span>
+        <span class="nf">.finalize</span><span class="p">(</span><span class="o">&amp;</span><span class="n">secp</span><span class="p">,</span> <span class="n">internal_key</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+
+    <span class="c1">// 正常使用：key path（單簽名）</span>
+    <span class="c1">// 緊急情況：script path A</span>
+    <span class="c1">// 繼承：script path B（需要等待）</span>
+
+    <span class="nf">Ok</span><span class="p">(())</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h2 id="7-實戰完整的-htlc-交易">7. 實戰：完整的 HTLC 交易</h2>
+
+<p>讓我們將所有概念結合起來，實現一個完整的 HTLC 交易流程。</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">htlc_transaction_flow</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="nn">anyhow</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">secp</span> <span class="o">=</span> <span class="nn">Secp256k1</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+
+    <span class="c1">// 參與者</span>
+    <span class="k">let</span> <span class="n">sender</span> <span class="o">=</span> <span class="nn">Keypair</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">secp</span><span class="p">,</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="nn">rand</span><span class="p">::</span><span class="nf">thread_rng</span><span class="p">());</span>
+    <span class="k">let</span> <span class="n">recipient</span> <span class="o">=</span> <span class="nn">Keypair</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">secp</span><span class="p">,</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="nn">rand</span><span class="p">::</span><span class="nf">thread_rng</span><span class="p">());</span>
+
+    <span class="c1">// 創建 preimage 和 hash</span>
+    <span class="k">let</span> <span class="n">preimage</span> <span class="o">=</span> <span class="s">b"this is the secret"</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">payment_hash</span> <span class="o">=</span> <span class="nn">sha256</span><span class="p">::</span><span class="nn">Hash</span><span class="p">::</span><span class="nf">hash</span><span class="p">(</span><span class="n">preimage</span><span class="p">);</span>
+
+    <span class="c1">// 構建 HTLC Taproot</span>
+
+    <span class="c1">// 成功路徑</span>
+    <span class="k">let</span> <span class="n">success_script</span> <span class="o">=</span> <span class="nn">Builder</span><span class="p">::</span><span class="nf">new</span><span class="p">()</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_SHA256</span><span class="p">)</span>
+        <span class="nf">.push_slice</span><span class="p">(</span><span class="n">payment_hash</span><span class="nf">.as_byte_array</span><span class="p">())</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_EQUALVERIFY</span><span class="p">)</span>
+        <span class="nf">.push_x_only_key</span><span class="p">(</span><span class="o">&amp;</span><span class="n">recipient</span><span class="nf">.x_only_public_key</span><span class="p">()</span><span class="na">.0</span><span class="p">)</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_CHECKSIG</span><span class="p">)</span>
+        <span class="nf">.into_script</span><span class="p">();</span>
+
+    <span class="c1">// 退款路徑（100 區塊後）</span>
+    <span class="k">let</span> <span class="n">refund_script</span> <span class="o">=</span> <span class="nn">Builder</span><span class="p">::</span><span class="nf">new</span><span class="p">()</span>
+        <span class="nf">.push_int</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_CSV</span><span class="p">)</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_DROP</span><span class="p">)</span>
+        <span class="nf">.push_x_only_key</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sender</span><span class="nf">.x_only_public_key</span><span class="p">()</span><span class="na">.0</span><span class="p">)</span>
+        <span class="nf">.push_opcode</span><span class="p">(</span><span class="n">OP_CHECKSIG</span><span class="p">)</span>
+        <span class="nf">.into_script</span><span class="p">();</span>
+
+    <span class="c1">// 構建 Taproot（sender 作為內部密鑰）</span>
+    <span class="k">let</span> <span class="n">taproot</span> <span class="o">=</span> <span class="nn">TaprootBuilder</span><span class="p">::</span><span class="nf">new</span><span class="p">()</span>
+        <span class="nf">.add_leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">success_script</span><span class="nf">.clone</span><span class="p">())</span><span class="o">?</span>
+        <span class="nf">.add_leaf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">refund_script</span><span class="nf">.clone</span><span class="p">())</span><span class="o">?</span>
+        <span class="nf">.finalize</span><span class="p">(</span><span class="o">&amp;</span><span class="n">secp</span><span class="p">,</span> <span class="n">sender</span><span class="nf">.x_only_public_key</span><span class="p">()</span><span class="na">.0</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+
+    <span class="k">let</span> <span class="n">htlc_address</span> <span class="o">=</span> <span class="nn">Address</span><span class="p">::</span><span class="nf">p2tr_tweaked</span><span class="p">(</span>
+        <span class="n">taproot</span><span class="nf">.output_key</span><span class="p">(),</span>
+        <span class="nn">Network</span><span class="p">::</span><span class="n">Testnet</span>
+    <span class="p">);</span>
+
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"HTLC 地址: {}"</span><span class="p">,</span> <span class="n">htlc_address</span><span class="p">);</span>
+
+    <span class="c1">// ... 創建資金交易 ...</span>
+
+    <span class="c1">// 成功花費（知道 preimage）</span>
+    <span class="c1">// witness: [signature] [preimage] [script] [control_block]</span>
+
+    <span class="c1">// 退款花費（超時後）</span>
+    <span class="c1">// witness: [signature] [script] [control_block]</span>
+    <span class="c1">// 並且 nSequence &gt;= 100</span>
+
+    <span class="nf">Ok</span><span class="p">(())</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h2 id="8-總結">8. 總結</h2>
+
+<p>本篇深入探討了 Bitcoin Script 和簽名機制。我們學習了：</p>
+
+<ul>
+  <li><strong>Script 基礎</strong>：堆疊執行模型、操作碼、腳本構建</li>
+  <li><strong>標準腳本類型</strong>：從 P2PKH 到 Taproot 的演進</li>
+  <li><strong>多重簽名</strong>：傳統多簽和 Taproot 時代的選擇</li>
+  <li><strong>簽名機制</strong>：ECDSA、Schnorr 和各種 sighash 類型</li>
+  <li><strong>Miniscript</strong>：安全、可分析的腳本開發</li>
+  <li><strong>進階技巧</strong>：時間鎖、HTLC、Taproot 腳本樹</li>
+</ul>
+
+<p>關鍵要點：</p>
+<ul>
+  <li>Script 定義了資金的花費條件</li>
+  <li>Schnorr 簽名提供了更小的簽名和聚合能力</li>
+  <li>Taproot 結合了效率和靈活性</li>
+  <li>Miniscript 使腳本開發更安全</li>
+</ul>
+
+<p>下一篇將探討進階應用，包括與 Bitcoin 節點互動、完整的錢包開發和實際部署考量。</p>
+
+<hr />
+
+<h2 id="參考資源">參考資源</h2>
+
+<h3 id="bip-文檔">BIP 文檔</h3>
+<ul>
+  <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki">BIP 340: Schnorr Signatures</a></li>
+  <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki">BIP 341: Taproot</a></li>
+  <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki">BIP 342: Tapscript</a></li>
+  <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0380.mediawiki">BIP 380-386: Descriptors</a></li>
+</ul>
+
+<h3 id="miniscript-資源">Miniscript 資源</h3>
+<ul>
+  <li><a href="https://bitcoin.sipa.be/miniscript/">Miniscript 官網</a></li>
+  <li><a href="https://github.com/rust-bitcoin/rust-miniscript">rust-miniscript</a></li>
+</ul>
+
+      </div>
+
+      <!-- Tags -->
+      
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <h3 class="text-sm font-mono text-cp-dark-600 mb-3">
+          <span class="text-cp-green-600">#</span> 標籤
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          
+          <a href="/tags/#rust" class="tag text-xs px-3 py-1 bg-cp-dark-200 text-cp-green-500 border border-cp-dark-400 rounded font-mono hover:border-cp-green-500 hover:bg-cp-green-500/10 transition-all">
+            Rust
+          </a>
+          
+          <a href="/tags/#bitcoin" class="tag text-xs px-3 py-1 bg-cp-dark-200 text-cp-green-500 border border-cp-dark-400 rounded font-mono hover:border-cp-green-500 hover:bg-cp-green-500/10 transition-all">
+            Bitcoin
+          </a>
+          
+          <a href="/tags/#script" class="tag text-xs px-3 py-1 bg-cp-dark-200 text-cp-green-500 border border-cp-dark-400 rounded font-mono hover:border-cp-green-500 hover:bg-cp-green-500/10 transition-all">
+            Script
+          </a>
+          
+          <a href="/tags/#簽名" class="tag text-xs px-3 py-1 bg-cp-dark-200 text-cp-green-500 border border-cp-dark-400 rounded font-mono hover:border-cp-green-500 hover:bg-cp-green-500/10 transition-all">
+            簽名
+          </a>
+          
+          <a href="/tags/#ecdsa" class="tag text-xs px-3 py-1 bg-cp-dark-200 text-cp-green-500 border border-cp-dark-400 rounded font-mono hover:border-cp-green-500 hover:bg-cp-green-500/10 transition-all">
+            ECDSA
+          </a>
+          
+          <a href="/tags/#schnorr" class="tag text-xs px-3 py-1 bg-cp-dark-200 text-cp-green-500 border border-cp-dark-400 rounded font-mono hover:border-cp-green-500 hover:bg-cp-green-500/10 transition-all">
+            Schnorr
+          </a>
+          
+          <a href="/tags/#taproot" class="tag text-xs px-3 py-1 bg-cp-dark-200 text-cp-green-500 border border-cp-dark-400 rounded font-mono hover:border-cp-green-500 hover:bg-cp-green-500/10 transition-all">
+            Taproot
+          </a>
+          
+          <a href="/tags/#miniscript" class="tag text-xs px-3 py-1 bg-cp-dark-200 text-cp-green-500 border border-cp-dark-400 rounded font-mono hover:border-cp-green-500 hover:bg-cp-green-500/10 transition-all">
+            Miniscript
+          </a>
+          
+        </div>
+      </div>
+      
+
+      <!-- Share Buttons -->
+      
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <h3 class="text-sm font-mono text-cp-dark-600 mb-3">
+          <span class="text-cp-green-600">//</span> 分享
+        </h3>
+        <!-- Share Buttons -->
+<div class="flex flex-wrap items-center gap-2">
+  <!-- Twitter/X -->
+  <a
+    href="https://twitter.com/intent/tweet?text=Rust%20Bitcoin%20%E9%96%8B%E7%99%BC%E5%85%A5%E9%96%80%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E8%85%B3%E6%9C%AC%E8%88%87%E7%B0%BD%E5%90%8D&url=https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust/2025/03/24/rust-bitcoin-tutorial-3-scripts-signatures/&via=CypherpunksTW"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex items-center gap-2 px-3 py-2 bg-cp-dark-200 text-cp-dark-700 border border-cp-dark-400 rounded-lg hover:border-cp-green-500 hover:text-cp-green-500 transition-all font-mono text-sm"
+    aria-label="分享到 Twitter"
+  >
+    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    </svg>
+    <span class="hidden sm:inline">Twitter</span>
+  </a>
+
+  <!-- Facebook -->
+  <a
+    href="https://www.facebook.com/sharer/sharer.php?u=https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust/2025/03/24/rust-bitcoin-tutorial-3-scripts-signatures/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex items-center gap-2 px-3 py-2 bg-cp-dark-200 text-cp-dark-700 border border-cp-dark-400 rounded-lg hover:border-cp-green-500 hover:text-cp-green-500 transition-all font-mono text-sm"
+    aria-label="分享到 Facebook"
+  >
+    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    </svg>
+    <span class="hidden sm:inline">Facebook</span>
+  </a>
+
+  <!-- Copy Link -->
+  <button
+    id="copy-link-btn"
+    class="inline-flex items-center gap-2 px-3 py-2 bg-cp-dark-200 text-cp-dark-700 border border-cp-dark-400 rounded-lg hover:border-cp-green-500 hover:text-cp-green-500 transition-all font-mono text-sm"
+    data-url="https://cypherpunks-core.github.io/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust/2025/03/24/rust-bitcoin-tutorial-3-scripts-signatures/"
+    aria-label="複製連結"
+  >
+    <svg class="w-4 h-4 copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+    </svg>
+    <svg class="w-4 h-4 check-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+    </svg>
+    <span class="btn-text">複製連結</span>
+  </button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const copyBtn = document.getElementById('copy-link-btn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async function() {
+      const url = this.dataset.url;
+      const copyIcon = this.querySelector('.copy-icon');
+      const checkIcon = this.querySelector('.check-icon');
+      const btnText = this.querySelector('.btn-text');
+
+      try {
+        await navigator.clipboard.writeText(url);
+        copyIcon.classList.add('hidden');
+        checkIcon.classList.remove('hidden');
+        btnText.textContent = '已複製!';
+
+        setTimeout(() => {
+          copyIcon.classList.remove('hidden');
+          checkIcon.classList.add('hidden');
+          btnText.textContent = '複製連結';
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+    });
+  }
+});
+</script>
+
+      </div>
+      
+
+      <!-- Author Bio -->
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <div class="flex items-center gap-4 p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg">
+          <div class="w-12 h-12 rounded-full bg-cp-green-500/20 flex items-center justify-center text-cp-green-500 font-mono font-bold">
+            CP
+          </div>
+          <div>
+            <h4 class="font-mono font-medium text-cp-dark-800">Cypherpunks Taiwan</h4>
+            <p class="text-sm text-cp-dark-600">密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Posts -->
+      
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+            
+            
+      
+        
+          
+            
+            
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+            
+            
+      
+        
+          
+        
+          
+            
+            
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+
+      
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <h3 class="text-lg font-mono font-bold text-cp-green-500 mb-4">
+          <span class="text-cp-dark-600">//</span> 相關文章
+        </h3>
+        <div class="grid gap-4">
+          
+          <a href="/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust/2025/03/25/rust-bitcoin-tutorial-4-advanced-applications/" class="block p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-600 hover:bg-cp-dark-200 transition-all group">
+            <h4 class="font-medium text-cp-dark-800 group-hover:text-cp-green-500 transition-colors">
+              Rust Bitcoin 開發入門（四）：進階應用與整合
+            </h4>
+            <time class="text-xs text-cp-dark-600 font-mono mt-1 block">
+              2025-03-25
+            </time>
+          </a>
+          
+          <a href="/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust/2025/03/23/rust-bitcoin-tutorial-2-addresses-transactions/" class="block p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-600 hover:bg-cp-dark-200 transition-all group">
+            <h4 class="font-medium text-cp-dark-800 group-hover:text-cp-green-500 transition-colors">
+              Rust Bitcoin 開發入門（二）：地址生成與交易構建
+            </h4>
+            <time class="text-xs text-cp-dark-600 font-mono mt-1 block">
+              2025-03-23
+            </time>
+          </a>
+          
+          <a href="/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust/2025/03/22/rust-bitcoin-tutorial-1-environment-basics/" class="block p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-600 hover:bg-cp-dark-200 transition-all group">
+            <h4 class="font-medium text-cp-dark-800 group-hover:text-cp-green-500 transition-colors">
+              Rust Bitcoin 開發入門（一）：環境設置與基礎概念
+            </h4>
+            <time class="text-xs text-cp-dark-600 font-mono mt-1 block">
+              2025-03-22
+            </time>
+          </a>
+          
+        </div>
+      </div>
+      
+      
+
+      <!-- Comments -->
+      
+      <div class="mt-8 pt-8 border-t border-cp-dark-400">
+        <h3 class="text-lg font-mono font-bold text-cp-green-500 mb-4">
+          <span class="text-cp-dark-600">//</span> 留言
+        </h3>
+        <!-- Comments Section - Giscus -->
+
+<div id="giscus-comments" class="giscus-container">
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="cypherpunks-core/cypherpunks-core.github.io"
+    data-repo-id=""
+    data-category="Comments"
+    data-category-id=""
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="true"
+    data-emit-metadata="false"
+    data-input-position="top"
+    data-theme="dark"
+    data-lang="zh-TW"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+<noscript>
+  <div class="p-4 bg-cp-dark-200 border border-cp-dark-400 rounded-lg text-center">
+    <p class="text-cp-dark-600 font-mono text-sm">
+      請啟用 JavaScript 來查看留言
+    </p>
+  </div>
+</noscript>
+
+<style>
+  /* Giscus 樣式覆蓋 */
+  .giscus-container {
+    margin-top: 1rem;
+  }
+
+  .giscus-frame {
+    border: 1px solid #30363d !important;
+    border-radius: 0.5rem !important;
+  }
+</style>
+
+
+      </div>
+      
+    </div>
+
+    <!-- TOC Sidebar -->
+    
+    <aside class="hidden xl:block w-64 flex-shrink-0">
+      <div class="sticky top-24">
+        <!-- Table of Contents -->
+<nav class="toc bg-cp-dark-100 border border-cp-dark-400 rounded-lg p-4" aria-label="目錄">
+  <h3 class="text-sm font-mono font-bold text-cp-green-500 mb-3 pb-2 border-b border-cp-dark-400">
+    <span class="text-cp-dark-600">//</span> 目錄
+  </h3>
+
+  <div id="toc-content" class="text-sm space-y-1">
+    <!-- TOC will be generated by JavaScript -->
+    <p class="text-cp-dark-600 font-mono text-xs">載入中...</p>
+  </div>
+</nav>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tocContainer = document.getElementById('toc-content');
+  const article = document.querySelector('.content');
+
+  if (!tocContainer || !article) return;
+
+  // Get all headings
+  const headings = article.querySelectorAll('h2, h3, h4');
+
+  if (headings.length === 0) {
+    tocContainer.innerHTML = '<p class="text-cp-dark-600 font-mono text-xs">此文章無目錄</p>';
+    return;
+  }
+
+  // Build TOC
+  let tocHTML = '<ul class="space-y-1">';
+  let lastLevel = 2;
+
+  headings.forEach((heading, index) => {
+    // Create ID if not exists
+    if (!heading.id) {
+      heading.id = 'heading-' + index;
+    }
+
+    const level = parseInt(heading.tagName.charAt(1));
+    const indent = (level - 2) * 12;
+
+    tocHTML += `
+      <li style="padding-left: ${indent}px;">
+        <a href="#${heading.id}"
+           class="toc-link block py-1 text-cp-dark-700 hover:text-cp-green-500 transition-colors truncate font-mono"
+           data-target="${heading.id}">
+          ${heading.textContent}
+        </a>
+      </li>
+    `;
+  });
+
+  tocHTML += '</ul>';
+  tocContainer.innerHTML = tocHTML;
+
+  // Active state tracking
+  const tocLinks = tocContainer.querySelectorAll('.toc-link');
+
+  const observerOptions = {
+    rootMargin: '-80px 0px -80% 0px',
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Remove active from all
+        tocLinks.forEach(link => {
+          link.classList.remove('text-cp-green-500', 'border-l-2', 'border-cp-green-500', 'pl-2', '-ml-2');
+          link.classList.add('text-cp-dark-700');
+        });
+
+        // Add active to current
+        const activeLink = tocContainer.querySelector(`[data-target="${entry.target.id}"]`);
+        if (activeLink) {
+          activeLink.classList.remove('text-cp-dark-700');
+          activeLink.classList.add('text-cp-green-500', 'border-l-2', 'border-cp-green-500', 'pl-2', '-ml-2');
+        }
+      }
+    });
+  }, observerOptions);
+
+  headings.forEach(heading => observer.observe(heading));
+
+  // Smooth scroll on click
+  tocLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('data-target');
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const offset = 100;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+});
+</script>
+
+      </div>
+    </aside>
+    
+  </div>
+
+  <!-- Post Navigation -->
+  <nav class="mt-12 pt-8 border-t border-cp-dark-400">
+    <div class="flex flex-col sm:flex-row justify-between gap-4">
+      
+      <a href="/news/community/2025/03/24/Cypherpunks-Taiwan-%E9%87%8D%E5%95%9F-%E6%88%91%E5%80%91%E7%82%BA%E4%BD%95%E5%86%8D%E6%AC%A1%E8%81%9A%E9%9B%86/" class="flex-1 p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-600 transition-all group">
+        <span class="text-xs text-cp-dark-600 font-mono block mb-1">← 上一篇</span>
+        <span class="text-cp-dark-800 group-hover:text-cp-green-500 transition-colors line-clamp-1">Cypherpunks Taiwan 重啟：我們為何再次聚集？</span>
+      </a>
+      
+
+      
+      <a href="/%E6%8A%80%E8%A1%93%E6%95%99%E5%AD%B8/bitcoin/rust/2025/03/25/rust-bitcoin-tutorial-4-advanced-applications/" class="flex-1 p-4 bg-cp-dark-100 border border-cp-dark-400 rounded-lg hover:border-cp-green-600 transition-all group text-right">
+        <span class="text-xs text-cp-dark-600 font-mono block mb-1">下一篇 →</span>
+        <span class="text-cp-dark-800 group-hover:text-cp-green-500 transition-colors line-clamp-1">Rust Bitcoin 開發入門（四）：進階應用與整合</span>
+      </a>
+      
+    </div>
+  </nav>
+</article>
+
+        </article>
+
+        <!-- Sidebar (Right) - Latest Posts -->
+        
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  
+  <!-- Footer -->
+<footer class="footer bg-cp-dark-100 border-t border-cp-dark-400 mt-auto" role="contentinfo" aria-label="網站頁尾">
+  <div class="container mx-auto px-4 py-12 max-w-7xl">
+
+    <!-- Main Footer Content -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
+
+      <!-- About -->
+      <div class="lg:col-span-2">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="font-mono text-lg font-bold text-cp-green-500">
+            <span class="text-cp-green-500">[</span>CP<span class="text-cp-green-500">]</span>
+          </span>
+          <span class="font-mono text-sm text-cp-dark-700">Cypherpunks Taiwan</span>
+        </div>
+        <p class="text-cp-dark-600 text-sm font-mono mb-4 max-w-md">
+          密碼學使自由和隱私再次偉大。Cryptography makes freedom and privacy great again.
+        </p>
+        <!-- ASCII Art -->
+        <pre class="text-cp-green-600/40 text-[0.5rem] leading-tight font-mono hidden md:block">
+ "Privacy is necessary for an open society
+  in the electronic age." - Eric Hughes
+        </pre>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 快速連結
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="/blog/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > Blog
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/about/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 關於我們
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/products/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 書籍 & 論文
+            </a>
+          </li>
+          <li>
+            <a href="/feed.xml" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > RSS Feed
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 資源
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="/resources/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 資源中心
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/resources/resources-bitcoin/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > Bitcoin
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/resources/resources-ln/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > Lightning
+            </a>
+          </li>
+          <li>
+            <a href="/markdown/knowledge/glossary/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 詞彙表
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Explore -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 探索
+        </h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="/tags/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 標籤
+            </a>
+          </li>
+          <li>
+            <a href="/categories/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 分類
+            </a>
+          </li>
+          <li>
+            <a href="/archive/" class="text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              > 歸檔
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social & Contact -->
+      <div>
+        <h4 class="text-cp-green-500 font-mono font-bold mb-4 text-sm uppercase tracking-wider">
+          <span class="text-cp-dark-600">//</span> 聯繫
+        </h4>
+        <ul class="space-y-2">
+          
+          <li>
+            <a href="https://github.com/cypherpunks-core" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+              </svg>
+              GitHub
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="https://twitter.com/CypherpunksTW" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              Twitter
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="mailto:01360086@me.mcu.edu.tw" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              Email
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://signal.group/#CjQKIJkrnL-dvsydyzn9Xl4HYZI9-Paf14vYkCq4eh5LhZeyEhALctkOeMMDuSOmYtgvj9QU" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+              </svg>
+              Signal
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/cypherpunks-core/cypherpunks-core.github.io/discussions" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-cp-dark-700 hover:text-cp-green-500 text-sm font-mono transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M1.5 4.25c0-.966.784-1.75 1.75-1.75h17.5c.966 0 1.75.784 1.75 1.75v12.5a1.75 1.75 0 01-1.75 1.75h-9.69l-3.573 3.573A1.458 1.458 0 015 21.043V18.5H3.25a1.75 1.75 0 01-1.75-1.75V4.25zM3.25 4a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h2.5a.75.75 0 01.75.75v3.19l3.72-3.72a.749.749 0 01.53-.22h10a.25.25 0 00.25-.25V4.25a.25.25 0 00-.25-.25H3.25z"/>
+              </svg>
+              討論區
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Divider -->
+    <div class="border-t border-cp-dark-400 my-8"></div>
+
+    <!-- Bottom Footer -->
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <!-- Copyright -->
+      <div class="text-cp-dark-600 text-xs font-mono">
+        <span class="text-cp-green-600">&copy;</span> 2026 密碼龐克 Cypherpunks Taiwan.
+        <span class="text-cp-dark-500">Cypherpunks write code.</span>
+      </div>
+
+      <!-- Tech Stack -->
+      <div class="flex items-center gap-4 text-cp-dark-600 text-xs font-mono">
+        <span>Built with</span>
+        <a href="https://jekyllrb.com" target="_blank" rel="noopener noreferrer" class="hover:text-cp-green-500 transition-colors">Jekyll</a>
+        <span>&</span>
+        <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="hover:text-cp-green-500 transition-colors">Tailwind CSS</a>
+      </div>
+
+      <!-- Back to Top -->
+      <button id="back-to-top" class="p-2 bg-cp-dark-200 text-cp-dark-600 hover:text-cp-green-500 hover:bg-cp-dark-300 rounded transition-all opacity-0 invisible" aria-label="回到頂部">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</footer>
+<!-- cache bust 1766382259 -->
+
+  
+
+  <!-- Search Modal -->
+  <!-- Search Modal -->
+<div id="search-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="search-title">
+  <!-- Backdrop -->
+  <div class="search-backdrop absolute inset-0 bg-cp-dark/80 backdrop-blur-sm"></div>
+
+  <!-- Modal Content -->
+  <div class="relative flex items-start justify-center pt-[15vh] px-4">
+    <div class="search-container w-full max-w-2xl bg-cp-dark-100 border border-cp-dark-400 rounded-lg shadow-2xl overflow-hidden">
+
+      <!-- Search Header -->
+      <div class="p-4 border-b border-cp-dark-400">
+        <div class="flex items-center gap-3">
+          <!-- Search Icon -->
+          <svg class="w-5 h-5 text-cp-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+
+          <!-- Search Input -->
+          <input
+            type="text"
+            id="search-input"
+            class="flex-grow bg-transparent text-cp-dark-800 placeholder-cp-dark-600 font-mono focus:outline-none"
+            placeholder="搜尋文章..."
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+          >
+
+          <!-- Close Button -->
+          <button id="search-close" class="text-cp-dark-600 hover:text-cp-green-500 transition-colors" aria-label="關閉搜尋">
+            <kbd class="px-2 py-1 text-xs bg-cp-dark-200 border border-cp-dark-400 rounded font-mono">ESC</kbd>
+          </button>
+        </div>
+      </div>
+
+      <!-- Search Results -->
+      <div id="search-results" class="max-h-[60vh] overflow-y-auto">
+        <!-- Empty State -->
+        <div id="search-empty" class="p-8 text-center">
+          <div class="text-cp-green-600 font-mono text-4xl mb-4">&gt;_</div>
+          <p class="text-cp-dark-600 font-mono text-sm">輸入關鍵字開始搜尋</p>
+          <p class="text-cp-dark-500 font-mono text-xs mt-2">支援標題、內容、標籤搜尋</p>
+        </div>
+
+        <!-- Results List (populated by JS) -->
+        <div id="search-results-list" class="hidden divide-y divide-cp-dark-400">
+          <!-- Results will be injected here -->
+        </div>
+
+        <!-- No Results -->
+        <div id="search-no-results" class="hidden p-8 text-center">
+          <div class="text-cp-accent-red font-mono text-4xl mb-4">:(</div>
+          <p class="text-cp-dark-600 font-mono text-sm">找不到相關結果</p>
+          <p class="text-cp-dark-500 font-mono text-xs mt-2">試試其他關鍵字</p>
+        </div>
+
+        <!-- Loading State -->
+        <div id="search-loading" class="hidden p-8 text-center">
+          <div class="inline-block animate-spin text-cp-green-500">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+          </div>
+          <p class="text-cp-dark-600 font-mono text-sm mt-4">搜尋中...</p>
+        </div>
+      </div>
+
+      <!-- Search Footer -->
+      <div class="p-3 border-t border-cp-dark-400 bg-cp-dark-200/50">
+        <div class="flex items-center justify-between text-xs text-cp-dark-600 font-mono">
+          <div class="flex items-center gap-4">
+            <span class="flex items-center gap-1">
+              <kbd class="px-1.5 py-0.5 bg-cp-dark-300 border border-cp-dark-400 rounded text-[0.65rem]">↑</kbd>
+              <kbd class="px-1.5 py-0.5 bg-cp-dark-300 border border-cp-dark-400 rounded text-[0.65rem]">↓</kbd>
+              <span>導航</span>
+            </span>
+            <span class="flex items-center gap-1">
+              <kbd class="px-1.5 py-0.5 bg-cp-dark-300 border border-cp-dark-400 rounded text-[0.65rem]">↵</kbd>
+              <span>開啟</span>
+            </span>
+          </div>
+          <span id="search-count" class="text-cp-green-600"></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Search Result Template -->
+<template id="search-result-template">
+  <a href="" class="search-result block p-4 hover:bg-cp-dark-200 transition-colors focus:bg-cp-dark-200 focus:outline-none">
+    <div class="flex items-start gap-3">
+      <div class="flex-shrink-0 w-8 h-8 rounded bg-cp-dark-200 flex items-center justify-center">
+        <svg class="w-4 h-4 text-cp-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+      </div>
+      <div class="flex-grow min-w-0">
+        <h4 class="search-result-title text-cp-dark-800 font-medium truncate"></h4>
+        <p class="search-result-excerpt text-cp-dark-600 text-sm mt-1 line-clamp-2"></p>
+        <div class="search-result-meta flex items-center gap-2 mt-2 text-xs text-cp-dark-500">
+          <time class="search-result-date"></time>
+          <span class="search-result-tags"></span>
+        </div>
+      </div>
+    </div>
+  </a>
+</template>
+
+
+  <!-- Scripts - Deferred for Performance -->
+  <script src="/assets/js/app.js" defer></script>
+  <!-- footer scripts -->
+</body>
+</html>

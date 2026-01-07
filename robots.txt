@@ -1,0 +1,12 @@
+# Robots.txt for Cypherpunks Taiwan
+# https://cypherpunks-core.github.io
+
+User-agent: *
+Allow: /
+
+# Disallow admin/private paths
+Disallow: /assets/
+Disallow: /_site/
+
+# Sitemap location
+Sitemap: https://cypherpunks-core.github.io/sitemap.xml

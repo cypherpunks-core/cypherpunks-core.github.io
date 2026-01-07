@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bg3rd" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f7931a"/>
+      <stop offset="100%" style="stop-color:#ffcd00"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bg3rd)"/>
+
+  <!-- Book shape -->
+  <rect x="100" y="40" width="200" height="220" rx="5" fill="#2d2d44" stroke="#f7931a" stroke-width="2"/>
+  <rect x="105" y="45" width="190" height="210" rx="3" fill="#1a1a2e"/>
+
+  <!-- Bitcoin symbol -->
+  <circle cx="200" cy="120" r="40" fill="none" stroke="url(#gold)" stroke-width="3"/>
+  <text x="200" y="135" font-family="Arial, sans-serif" font-size="45" font-weight="bold" fill="url(#gold)" text-anchor="middle">₿</text>
+
+  <!-- Title -->
+  <text x="200" y="185" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">MASTERING</text>
+  <text x="200" y="205" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#f7931a" text-anchor="middle">BITCOIN</text>
+
+  <!-- 3rd Edition badge -->
+  <circle cx="280" cy="70" r="25" fill="#f7931a"/>
+  <text x="280" y="68" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#1a1a2e" text-anchor="middle">3rd</text>
+  <text x="280" y="80" font-family="Arial, sans-serif" font-size="8" fill="#1a1a2e" text-anchor="middle">Edition</text>
+
+  <!-- Taproot leaf symbol -->
+  <path d="M200 225 Q210 235 200 250 Q190 235 200 225" fill="#00d4aa" opacity="0.8"/>
+  <text x="200" y="268" font-family="Arial, sans-serif" font-size="10" fill="#00d4aa" text-anchor="middle">Taproot Edition</text>
+</svg>
