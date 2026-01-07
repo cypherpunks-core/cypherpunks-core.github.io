@@ -50,10 +50,10 @@ module.exports = {
           purple: '#bf00ff',
         },
       },
-      // 字體
+      // 字體 - 優化：使用系統字體作為備選
       fontFamily: {
-        'mono': ['JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', 'monospace'],
-        'sans': ['Inter', 'Noto Sans TC', 'system-ui', 'sans-serif'],
+        'mono': ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Monaco', 'Consolas', 'monospace'],
+        'sans': ['Noto Sans TC', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       // 動畫
       animation: {

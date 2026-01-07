@@ -8,7 +8,7 @@ Features: 封面、標題、作者、難度進度條、描述
   <!-- Image -->
   <div class="relative aspect-[4/3] bg-cp-dark-200 overflow-hidden">
     {% if include.product.image %}
-    <img src="{{ include.product.image }}" alt="{{ include.product.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+    <img src="{{ include.product.image }}" alt="{{ include.product.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
     {% else %}
     <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-cp-dark-200 to-cp-dark-300">
       <span class="text-4xl text-cp-dark-400">📖</span>

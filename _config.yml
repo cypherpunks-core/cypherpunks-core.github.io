@@ -77,8 +77,8 @@ google_analytics: G-ENDDT5D0CR
 # Theme Settings
 theme_settings:
   default_theme: dark  # dark | light | auto
-  enable_matrix: true
-  enable_scanlines: true
+  enable_matrix: false      # 關閉以提升效能
+  enable_scanlines: false   # 關閉以提升效能
   enable_typewriter: true
 
 # SEO

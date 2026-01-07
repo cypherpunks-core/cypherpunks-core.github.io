@@ -66,8 +66,8 @@
   <!-- Search Modal -->
   {% include search-modal.html %}
 
-  <!-- Scripts -->
-  <script src="{{ '/assets/js/app.js' | relative_url }}"></script>
+  <!-- Scripts - Deferred for Performance -->
+  <script src="{{ '/assets/js/app.js' | relative_url }}" defer></script>
   {% include footer-scripts.html %}
 </body>
 </html>
