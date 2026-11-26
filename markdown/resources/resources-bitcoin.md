@@ -145,6 +145,7 @@ Taproot 是比特幣自 SegWit 以來最重大的升級，包含三個 BIP：
 * **[Bitcoin Signet](https://en.bitcoin.it/wiki/Signet)** - 受控的測試網路，適合開發測試
 * **[Testnet4](https://github.com/bitcoin/bips/blob/master/bip-0094.mediawiki)** - 最新測試網路（BIP 94）
 * **[Regtest](https://developer.bitcoin.org/examples/testing.html)** - 本地回歸測試模式
+* **[PSBT 離線簽名測試向量（BitTool Signer）](https://bittool.com/docs/reference/test-vectors/)** - 包含有找零的 P2WPKH 交易與 Taproot 金鑰路徑交易，可用來練習解析 PSBT 與驗證簽名。範例使用公開測試金鑰，請勿轉入資金或廣播範例交易。
 
 ### 學習資源
 
